@@ -1,5 +1,5 @@
-import { LocaleList } from "@components/locales";
+import { LocaleList } from "@/components/locales";
 
 export default function LocaleListPage() {
-    return <LocaleList />;
-};
+  return <LocaleList />;
+}

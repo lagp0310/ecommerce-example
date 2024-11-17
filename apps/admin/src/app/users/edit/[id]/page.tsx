@@ -1,5 +1,5 @@
-import { UserEdit } from "@components/users";
+import { UserEdit } from "@/components/users";
 
 export default function UserEditPage() {
-    return <UserEdit />;
-};
+  return <UserEdit />;
+}

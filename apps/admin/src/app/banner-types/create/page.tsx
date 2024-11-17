@@ -1,5 +1,5 @@
-import { BannerTypeCreate } from "@components/banner-types";
+import { BannerTypeCreate } from "@/components/banner-types";
 
 export default function BannerTypeCreatePage() {
-    return <BannerTypeCreate />;
-};
+  return <BannerTypeCreate />;
+}

@@ -1,5 +1,5 @@
-import { StoreFeatureEdit } from "@components/store-features";
+import { StoreFeatureEdit } from "@/components/store-features";
 
 export default function StoreFeatureEditPage() {
-    return <StoreFeatureEdit />;
-};
+  return <StoreFeatureEdit />;
+}

@@ -1,5 +1,5 @@
-import { BannerTypeList } from "@components/banner-types";
+import { BannerTypeList } from "@/components/banner-types";
 
 export default function BannerTypeListPage() {
-    return <BannerTypeList />;
-};
+  return <BannerTypeList />;
+}

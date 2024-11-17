@@ -1,5 +1,5 @@
-import { CategoryEdit } from "@components/categories";
+import { CategoryEdit } from "@/components/categories";
 
 export default function CategoryEditPage() {
-    return <CategoryEdit />;
-};
+  return <CategoryEdit />;
+}

@@ -1,5 +1,5 @@
-import { StoreBannerCreate } from "@components/store-banners";
+import { StoreBannerCreate } from "@/components/store-banners";
 
 export default function StoreBannerCreatePage() {
-    return <StoreBannerCreate />;
-};
+  return <StoreBannerCreate />;
+}

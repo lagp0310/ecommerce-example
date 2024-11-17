@@ -1,5 +1,5 @@
-import { BusinessList } from "@components/businesses";
+import { BusinessList } from "@/components/businesses";
 
 export default function BusinessListPage() {
-    return <BusinessList />;
-};
+  return <BusinessList />;
+}

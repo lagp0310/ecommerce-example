@@ -1,5 +1,5 @@
-import { CurrencyEdit } from "@components/currencies";
+import { CurrencyEdit } from "@/components/currencies";
 
 export default function CurrencyEditPage() {
-    return <CurrencyEdit />;
-};
+  return <CurrencyEdit />;
+}

@@ -1,5 +1,5 @@
-import { BusinessEdit } from "@components/businesses";
+import { BusinessEdit } from "@/components/businesses";
 
 export default function BusinessEditPage() {
-    return <BusinessEdit />;
-};
+  return <BusinessEdit />;
+}

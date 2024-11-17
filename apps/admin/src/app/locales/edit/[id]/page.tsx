@@ -1,5 +1,5 @@
-import { LocaleEdit } from "@components/locales";
+import { LocaleEdit } from "@/components/locales";
 
 export default function LocaleEditPage() {
-    return <LocaleEdit />;
-};
+  return <LocaleEdit />;
+}

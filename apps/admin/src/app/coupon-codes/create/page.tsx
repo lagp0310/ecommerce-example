@@ -1,5 +1,5 @@
-import { CouponCodesCreate } from "@components/coupon-codes";
+import { CouponCodesCreate } from "@/components/coupon-codes";
 
 export default function CouponCodesCreatePage() {
-    return <CouponCodesCreate />;
-};
+  return <CouponCodesCreate />;
+}

@@ -1,5 +1,5 @@
-import { StoreFeatureCreate } from "@components/store-features";
+import { StoreFeatureCreate } from "@/components/store-features";
 
 export default function StoreFeatureCreatePage() {
-    return <StoreFeatureCreate />;
-};
+  return <StoreFeatureCreate />;
+}

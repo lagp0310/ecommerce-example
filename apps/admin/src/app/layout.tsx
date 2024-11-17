@@ -14,6 +14,7 @@ import {
 import { App as AntdApp, ConfigProvider } from "antd";
 import "@refinedev/antd/dist/reset.css";
 import { QueryClientProvider } from "@/components/utils/QueryClientProvider";
+import { refineResources } from "@/app/constants/constants";
 
 const poppins = Poppins({ weight: ["300", "400", "500", "600", "700"] });
 
@@ -34,7 +35,13 @@ export default function RootLayout({
           <QueryClientProvider>
             <ConfigProvider theme={RefineThemes.Blue}>
               <AntdApp>
-                <ThemedLayoutV2>
+                <ThemedLayoutV2
+                  // Title={}
+                  // Footer={}
+                  // Header={}
+                  // Sider={}
+                  initialSiderCollapsed={false}
+                >
                   <Refine
                     routerProvider={routerProvider}
                     options={{
@@ -46,15 +53,7 @@ export default function RootLayout({
                     dataProvider={dataProviderClient}
                     authProvider={authProviderClient}
                     notificationProvider={useNotificationProvider}
-                    resources={[
-                      {
-                        name: "customers",
-                        list: "/customers",
-                        create: "/customers/create",
-                        edit: "/customers/edit/:id",
-                        meta: { canDelete: true },
-                      },
-                    ]}
+                    resources={refineResources}
                   >
                     {children}
                   </Refine>

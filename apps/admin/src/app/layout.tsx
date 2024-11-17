@@ -35,29 +35,29 @@ export default function RootLayout({
           <QueryClientProvider>
             <ConfigProvider theme={RefineThemes.Blue}>
               <AntdApp>
-                <ThemedLayoutV2
-                  // Title={}
-                  // Footer={}
-                  // Header={}
-                  // Sider={}
-                  initialSiderCollapsed={false}
+                <Refine
+                  routerProvider={routerProvider}
+                  options={{
+                    warnWhenUnsavedChanges: true,
+                    disableTelemetry: true,
+                    title: { icon: null, text: "Ecommerce Admin" },
+                    syncWithLocation: true,
+                  }}
+                  dataProvider={dataProviderClient}
+                  authProvider={authProviderClient}
+                  notificationProvider={useNotificationProvider}
+                  resources={refineResources}
                 >
-                  <Refine
-                    routerProvider={routerProvider}
-                    options={{
-                      warnWhenUnsavedChanges: true,
-                      disableTelemetry: true,
-                      title: { icon: null, text: "Ecommerce Admin" },
-                      syncWithLocation: true,
-                    }}
-                    dataProvider={dataProviderClient}
-                    authProvider={authProviderClient}
-                    notificationProvider={useNotificationProvider}
-                    resources={refineResources}
+                  <ThemedLayoutV2
+                    // Title={}
+                    // Footer={}
+                    // Header={}
+                    // Sider={}
+                    initialSiderCollapsed={false}
                   >
                     {children}
-                  </Refine>
-                </ThemedLayoutV2>
+                  </ThemedLayoutV2>
+                </Refine>
               </AntdApp>
             </ConfigProvider>
           </QueryClientProvider>

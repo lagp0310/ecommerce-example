@@ -46,7 +46,7 @@ export default function RootLayout({
                   dataProvider={dataProviderClient}
                   authProvider={authProviderClient}
                   notificationProvider={useNotificationProvider}
-                  resources={refineResources}
+                  resources={[...refineResources]}
                 >
                   <ThemedLayoutV2
                     // Title={}

@@ -1,7 +1,43 @@
 "use client";
 
-import { AntdInferencer } from "@refinedev/inferencer/antd";
+import React from "react";
+import { BaseRecord } from "@refinedev/core";
+import {
+  useTable,
+  List,
+  EditButton,
+  DeleteButton,
+  DateField,
+} from "@refinedev/antd";
+import { Table, Space } from "antd";
 
 export const UserList = () => {
-    return <AntdInferencer />;
+  const { tableProps } = useTable({
+    syncWithLocation: true,
+  });
+
+  return (
+    <List>
+      <Table {...tableProps} rowKey="id">
+        <Table.Column dataIndex="id" title="ID" />
+        <Table.Column dataIndex="first_name" title="First Name" />
+        <Table.Column dataIndex="last_name" title="Last Name" />
+        <Table.Column
+          dataIndex={["created_at"]}
+          title="Created At"
+          render={(value: any) => <DateField value={value} />}
+        />
+        <Table.Column
+          title="Actions"
+          dataIndex="actions"
+          render={(_, record: BaseRecord) => (
+            <Space>
+              <EditButton hideText size="small" recordItemId={record.id} />
+              <DeleteButton hideText size="small" recordItemId={record.id} />
+            </Space>
+          )}
+        />
+      </Table>
+    </List>
+  );
 };

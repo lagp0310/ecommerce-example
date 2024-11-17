@@ -56,8 +56,7 @@ export const refineResources = [
   {
     name: "locales",
     list: "/locales",
-    create: "/locales/create",
-    edit: "/locales/edit/:id",
+    meta: { canDelete: false },
   },
   {
     name: "store_features",

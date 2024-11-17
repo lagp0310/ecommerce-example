@@ -74,10 +74,24 @@ export const refineResources = [
     meta: { canDelete: true },
   },
   {
-    name: "store_banners",
-    list: "/store-banners",
-    create: "/store-banners/create",
-    edit: "/store-banners/edit/:id",
+    name: "header_banners",
+    list: "/store-header-banners",
+    create: "/store-header-banners/create",
+    edit: "/store-header-banners/edit/:id",
+    meta: { canDelete: true },
+  },
+  {
+    name: "offer_banners",
+    list: "/store-offer-banners",
+    create: "/store-offer-banners/create",
+    edit: "/store-offer-banners/edit/:id",
+    meta: { canDelete: true },
+  },
+  {
+    name: "image_banners",
+    list: "/store-image-banners",
+    create: "/store-image-banners/create",
+    edit: "/store-image-banners/edit/:id",
     meta: { canDelete: true },
   },
 ];

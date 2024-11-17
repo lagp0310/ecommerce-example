@@ -6,6 +6,14 @@ import { authProviderClient } from "@/app/providers/auth/authProvider.client";
 import { Refine } from "@refinedev/core";
 import routerProvider from "@refinedev/nextjs-router";
 import { Poppins } from "next/font/google";
+import {
+  RefineThemes,
+  ThemedLayoutV2,
+  useNotificationProvider,
+} from "@refinedev/antd";
+import { App as AntdApp, ConfigProvider } from "antd";
+import "@refinedev/antd/dist/reset.css";
+import { QueryClientProvider } from "@/components/utils/QueryClientProvider";
 
 const poppins = Poppins({ weight: ["300", "400", "500", "600", "700"] });
 
@@ -23,26 +31,37 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${poppins.className} antialiased`}>
         <Suspense>
-          <Refine
-            routerProvider={routerProvider}
-            options={{
-              disableTelemetry: true,
-              title: { icon: null, text: "Ecommerce Admin" },
-            }}
-            dataProvider={dataProviderClient}
-            authProvider={authProviderClient}
-            resources={[
-              {
-                name: "customers",
-                list: "/customers",
-                create: "/customers/create",
-                edit: "/customers/edit/:id",
-                meta: { canDelete: true },
-              },
-            ]}
-          >
-            {children}
-          </Refine>
+          <QueryClientProvider>
+            <ConfigProvider theme={RefineThemes.Blue}>
+              <AntdApp>
+                <ThemedLayoutV2>
+                  <Refine
+                    routerProvider={routerProvider}
+                    options={{
+                      warnWhenUnsavedChanges: true,
+                      disableTelemetry: true,
+                      title: { icon: null, text: "Ecommerce Admin" },
+                      syncWithLocation: true,
+                    }}
+                    dataProvider={dataProviderClient}
+                    authProvider={authProviderClient}
+                    notificationProvider={useNotificationProvider}
+                    resources={[
+                      {
+                        name: "customers",
+                        list: "/customers",
+                        create: "/customers/create",
+                        edit: "/customers/edit/:id",
+                        meta: { canDelete: true },
+                      },
+                    ]}
+                  >
+                    {children}
+                  </Refine>
+                </ThemedLayoutV2>
+              </AntdApp>
+            </ConfigProvider>
+          </QueryClientProvider>
         </Suspense>
       </body>
     </html>

@@ -16,7 +16,10 @@ import "@refinedev/antd/dist/reset.css";
 import { QueryClientProvider } from "@/components/utils/QueryClientProvider";
 import { refineResources } from "@/app/constants/constants";
 
-const poppins = Poppins({ weight: ["300", "400", "500", "600", "700"] });
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+});
 
 export const metadata: Metadata = {
   title: "Ecommerce Admin",

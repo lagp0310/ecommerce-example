@@ -25,31 +25,31 @@ importers:
         version: link:../../packages/ui
       '@refinedev/antd':
         specifier: ^5.44.0
-        version: 5.44.0(@refinedev/core@4.56.0(@tanstack/react-query@5.60.5(react@19.0.0-rc-66855b96-20241106))(@types/react-dom@18.3.1)(@types/react@18.3.0)(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(@types/react-dom@18.3.1)(@types/react@18.3.0)(antd@5.22.1(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(dayjs@1.11.13)(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)
+        version: 5.44.0(@refinedev/core@4.56.0(@tanstack/react-query@4.36.1(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(@types/react-dom@18.3.1)(@types/react@18.3.0)(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(@types/react-dom@18.3.1)(@types/react@18.3.0)(antd@5.22.1(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(dayjs@1.11.13)(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)
       '@refinedev/cli':
         specifier: ^2.16.39
         version: 2.16.39(@types/react-dom@18.3.1)(@types/react@18.3.0)(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)
       '@refinedev/core':
         specifier: ^4.56.0
-        version: 4.56.0(@tanstack/react-query@5.60.5(react@19.0.0-rc-66855b96-20241106))(@types/react-dom@18.3.1)(@types/react@18.3.0)(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)
+        version: 4.56.0(@tanstack/react-query@4.36.1(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(@types/react-dom@18.3.1)(@types/react@18.3.0)(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)
       '@refinedev/inferencer':
         specifier: ^4.7.1
-        version: 4.7.1(nokzfhxhgle3v3zrxhp3wkavcm)
+        version: 4.7.1(xdcj23ls2vn343efsroftuhfcm)
       '@refinedev/nextjs-router':
         specifier: ^6.1.0
-        version: 6.1.0(@refinedev/core@4.56.0(@tanstack/react-query@5.60.5(react@19.0.0-rc-66855b96-20241106))(@types/react-dom@18.3.1)(@types/react@18.3.0)(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(@types/react-dom@18.3.1)(@types/react@18.3.0)(next@15.0.3(@babel/core@7.25.2)(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)
+        version: 6.1.0(@refinedev/core@4.56.0(@tanstack/react-query@4.36.1(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(@types/react-dom@18.3.1)(@types/react@18.3.0)(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(@types/react-dom@18.3.1)(@types/react@18.3.0)(next@15.0.3(@babel/core@7.25.2)(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)
       '@refinedev/react-hook-form':
         specifier: ^4.9.1
-        version: 4.9.1(@refinedev/core@4.56.0(@tanstack/react-query@5.60.5(react@19.0.0-rc-66855b96-20241106))(@types/react-dom@18.3.1)(@types/react@18.3.0)(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(@types/react-dom@18.3.1)(@types/react@18.3.0)(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react-hook-form@7.53.2(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)
+        version: 4.9.1(@refinedev/core@4.56.0(@tanstack/react-query@4.36.1(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(@types/react-dom@18.3.1)(@types/react@18.3.0)(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(@types/react-dom@18.3.1)(@types/react@18.3.0)(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react-hook-form@7.53.2(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)
       '@refinedev/react-table':
         specifier: ^5.6.13
-        version: 5.6.13(@refinedev/core@4.56.0(@tanstack/react-query@5.60.5(react@19.0.0-rc-66855b96-20241106))(@types/react-dom@18.3.1)(@types/react@18.3.0)(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(@tanstack/react-table@8.20.5(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)
+        version: 5.6.13(@refinedev/core@4.56.0(@tanstack/react-query@4.36.1(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(@types/react-dom@18.3.1)(@types/react@18.3.0)(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(@tanstack/react-table@8.20.5(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)
       '@refinedev/supabase':
         specifier: ^5.9.4
-        version: 5.9.4(@refinedev/core@4.56.0(@tanstack/react-query@5.60.5(react@19.0.0-rc-66855b96-20241106))(@types/react-dom@18.3.1)(@types/react@18.3.0)(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(@supabase/supabase-js@2.46.1)
+        version: 5.9.4(@refinedev/core@4.56.0(@tanstack/react-query@4.36.1(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(@types/react-dom@18.3.1)(@types/react@18.3.0)(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(@supabase/supabase-js@2.46.1)
       '@tanstack/react-query':
-        specifier: ^5.60.5
-        version: 5.60.5(react@19.0.0-rc-66855b96-20241106)
+        specifier: ^4.36.1
+        version: 4.36.1(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)
       antd:
         specifier: ^5.22.1
         version: 5.22.1(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)
@@ -1035,9 +1035,6 @@ packages:
   '@tanstack/query-core@4.36.1':
     resolution: {integrity: sha512-DJSilV5+ytBP1FbFcEJovv4rnnm/CokuVvrBEtW/Va9DvuJ3HksbXUJEpI0aV1KtuL4ZoO9AVE6PyNLzF7tLeA==}
 
-  '@tanstack/query-core@5.60.5':
-    resolution: {integrity: sha512-jiS1aC3XI3BJp83ZiTuDLerTmn9P3U95r6p+6/SNauLJaYxfIC4dMuWygwnBHIZxjn2zJqEpj3nysmPieoxfPQ==}
-
   '@tanstack/react-query@4.36.1':
     resolution: {integrity: sha512-y7ySVHFyyQblPl3J3eQBWpXZkliroki3ARnBKsdJchlgt7yJLRDUcf4B8soufgiYt3pEQIkBWBx1N9/ZPIeUWw==}
     peerDependencies:
@@ -1049,11 +1046,6 @@ packages:
         optional: true
       react-native:
         optional: true
-
-  '@tanstack/react-query@5.60.5':
-    resolution: {integrity: sha512-M77bOsPwj1wYE56gk7iJvxGAr4IC12NWdIDhT+Eo8ldkWRHMvIR8I/rufIvT1OXoV/bl7EECwuRuMlxxWtvW2Q==}
-    peerDependencies:
-      react: ^18 || ^19
 
   '@tanstack/react-table@8.20.5':
     resolution: {integrity: sha512-WEHopKw3znbUZ61s9i0+i9g8drmDo6asTWbrQh8Us63DAk/M0FkmIqERew6P71HI75ksZ2Pxyuf4vvKh9rAkiA==}
@@ -5555,12 +5547,12 @@ snapshots:
       react: 19.0.0-rc-66855b96-20241106
       react-dom: 19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106)
 
-  '@refinedev/antd@5.44.0(@refinedev/core@4.56.0(@tanstack/react-query@5.60.5(react@19.0.0-rc-66855b96-20241106))(@types/react-dom@18.3.1)(@types/react@18.3.0)(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(@types/react-dom@18.3.1)(@types/react@18.3.0)(antd@5.22.1(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(dayjs@1.11.13)(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)':
+  '@refinedev/antd@5.44.0(@refinedev/core@4.56.0(@tanstack/react-query@4.36.1(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(@types/react-dom@18.3.1)(@types/react@18.3.0)(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(@types/react-dom@18.3.1)(@types/react@18.3.0)(antd@5.22.1(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(dayjs@1.11.13)(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)':
     dependencies:
       '@ant-design/icons': 5.5.1(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)
       '@ant-design/pro-layout': 7.21.2(antd@5.22.1(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)
-      '@refinedev/core': 4.56.0(@tanstack/react-query@5.60.5(react@19.0.0-rc-66855b96-20241106))(@types/react-dom@18.3.1)(@types/react@18.3.0)(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)
-      '@refinedev/ui-types': 1.22.9(@refinedev/core@4.56.0(@tanstack/react-query@5.60.5(react@19.0.0-rc-66855b96-20241106))(@types/react-dom@18.3.1)(@types/react@18.3.0)(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)
+      '@refinedev/core': 4.56.0(@tanstack/react-query@4.36.1(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(@types/react-dom@18.3.1)(@types/react@18.3.0)(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)
+      '@refinedev/ui-types': 1.22.9(@refinedev/core@4.56.0(@tanstack/react-query@4.36.1(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(@types/react-dom@18.3.1)(@types/react@18.3.0)(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)
       '@tanstack/react-query': 4.36.1(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)
       '@types/react': 18.3.0
       '@types/react-dom': 18.3.1
@@ -5627,10 +5619,10 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  '@refinedev/core@4.56.0(@tanstack/react-query@5.60.5(react@19.0.0-rc-66855b96-20241106))(@types/react-dom@18.3.1)(@types/react@18.3.0)(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)':
+  '@refinedev/core@4.56.0(@tanstack/react-query@4.36.1(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(@types/react-dom@18.3.1)(@types/react@18.3.0)(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)':
     dependencies:
       '@refinedev/devtools-internal': 1.1.14(@types/react-dom@18.3.1)(@types/react@18.3.0)(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)
-      '@tanstack/react-query': 5.60.5(react@19.0.0-rc-66855b96-20241106)
+      '@tanstack/react-query': 4.36.1(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)
       '@types/react': 18.3.0
       '@types/react-dom': 18.3.1
       lodash: 4.17.21
@@ -5703,11 +5695,11 @@ snapshots:
     transitivePeerDependencies:
       - react-native
 
-  '@refinedev/inferencer@4.7.1(nokzfhxhgle3v3zrxhp3wkavcm)':
+  '@refinedev/inferencer@4.7.1(xdcj23ls2vn343efsroftuhfcm)':
     dependencies:
       '@aliemir/react-live': 4.0.0(react@19.0.0-rc-66855b96-20241106)
       '@ant-design/icons': 5.5.1(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)
-      '@refinedev/core': 4.56.0(@tanstack/react-query@5.60.5(react@19.0.0-rc-66855b96-20241106))(@types/react-dom@18.3.1)(@types/react@18.3.0)(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)
+      '@refinedev/core': 4.56.0(@tanstack/react-query@4.36.1(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(@types/react-dom@18.3.1)(@types/react@18.3.0)(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)
       '@tabler/icons-react': 3.22.0(react@19.0.0-rc-66855b96-20241106)
       '@types/react': 18.3.0
       '@types/react-dom': 18.3.1
@@ -5724,9 +5716,9 @@ snapshots:
       remark-gfm: 1.0.0
       tslib: 2.7.0
     optionalDependencies:
-      '@refinedev/antd': 5.44.0(@refinedev/core@4.56.0(@tanstack/react-query@5.60.5(react@19.0.0-rc-66855b96-20241106))(@types/react-dom@18.3.1)(@types/react@18.3.0)(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(@types/react-dom@18.3.1)(@types/react@18.3.0)(antd@5.22.1(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(dayjs@1.11.13)(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)
-      '@refinedev/react-hook-form': 4.9.1(@refinedev/core@4.56.0(@tanstack/react-query@5.60.5(react@19.0.0-rc-66855b96-20241106))(@types/react-dom@18.3.1)(@types/react@18.3.0)(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(@types/react-dom@18.3.1)(@types/react@18.3.0)(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react-hook-form@7.53.2(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)
-      '@refinedev/react-table': 5.6.13(@refinedev/core@4.56.0(@tanstack/react-query@5.60.5(react@19.0.0-rc-66855b96-20241106))(@types/react-dom@18.3.1)(@types/react@18.3.0)(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(@tanstack/react-table@8.20.5(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)
+      '@refinedev/antd': 5.44.0(@refinedev/core@4.56.0(@tanstack/react-query@4.36.1(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(@types/react-dom@18.3.1)(@types/react@18.3.0)(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(@types/react-dom@18.3.1)(@types/react@18.3.0)(antd@5.22.1(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(dayjs@1.11.13)(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)
+      '@refinedev/react-hook-form': 4.9.1(@refinedev/core@4.56.0(@tanstack/react-query@4.36.1(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(@types/react-dom@18.3.1)(@types/react@18.3.0)(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(@types/react-dom@18.3.1)(@types/react@18.3.0)(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react-hook-form@7.53.2(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)
+      '@refinedev/react-table': 5.6.13(@refinedev/core@4.56.0(@tanstack/react-query@4.36.1(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(@types/react-dom@18.3.1)(@types/react@18.3.0)(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(@tanstack/react-table@8.20.5(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)
       '@tanstack/react-table': 8.20.5(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)
       antd: 5.22.1(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)
       dayjs: 1.11.13
@@ -5734,9 +5726,9 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@refinedev/nextjs-router@6.1.0(@refinedev/core@4.56.0(@tanstack/react-query@5.60.5(react@19.0.0-rc-66855b96-20241106))(@types/react-dom@18.3.1)(@types/react@18.3.0)(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(@types/react-dom@18.3.1)(@types/react@18.3.0)(next@15.0.3(@babel/core@7.25.2)(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)':
+  '@refinedev/nextjs-router@6.1.0(@refinedev/core@4.56.0(@tanstack/react-query@4.36.1(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(@types/react-dom@18.3.1)(@types/react@18.3.0)(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(@types/react-dom@18.3.1)(@types/react@18.3.0)(next@15.0.3(@babel/core@7.25.2)(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)':
     dependencies:
-      '@refinedev/core': 4.56.0(@tanstack/react-query@5.60.5(react@19.0.0-rc-66855b96-20241106))(@types/react-dom@18.3.1)(@types/react@18.3.0)(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)
+      '@refinedev/core': 4.56.0(@tanstack/react-query@4.36.1(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(@types/react-dom@18.3.1)(@types/react@18.3.0)(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)
       '@types/react': 18.3.0
       '@types/react-dom': 18.3.1
       next: 15.0.3(@babel/core@7.25.2)(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)
@@ -5745,9 +5737,9 @@ snapshots:
       react-dom: 19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106)
       warn-once: 0.1.1
 
-  '@refinedev/react-hook-form@4.9.1(@refinedev/core@4.56.0(@tanstack/react-query@5.60.5(react@19.0.0-rc-66855b96-20241106))(@types/react-dom@18.3.1)(@types/react@18.3.0)(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(@types/react-dom@18.3.1)(@types/react@18.3.0)(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react-hook-form@7.53.2(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)':
+  '@refinedev/react-hook-form@4.9.1(@refinedev/core@4.56.0(@tanstack/react-query@4.36.1(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(@types/react-dom@18.3.1)(@types/react@18.3.0)(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(@types/react-dom@18.3.1)(@types/react@18.3.0)(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react-hook-form@7.53.2(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)':
     dependencies:
-      '@refinedev/core': 4.56.0(@tanstack/react-query@5.60.5(react@19.0.0-rc-66855b96-20241106))(@types/react-dom@18.3.1)(@types/react@18.3.0)(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)
+      '@refinedev/core': 4.56.0(@tanstack/react-query@4.36.1(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(@types/react-dom@18.3.1)(@types/react@18.3.0)(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)
       '@types/react': 18.3.0
       '@types/react-dom': 18.3.1
       lodash: 4.17.21
@@ -5756,21 +5748,21 @@ snapshots:
       react-dom: 19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106)
       react-hook-form: 7.53.2(react@19.0.0-rc-66855b96-20241106)
 
-  '@refinedev/react-table@5.6.13(@refinedev/core@4.56.0(@tanstack/react-query@5.60.5(react@19.0.0-rc-66855b96-20241106))(@types/react-dom@18.3.1)(@types/react@18.3.0)(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(@tanstack/react-table@8.20.5(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)':
+  '@refinedev/react-table@5.6.13(@refinedev/core@4.56.0(@tanstack/react-query@4.36.1(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(@types/react-dom@18.3.1)(@types/react@18.3.0)(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(@tanstack/react-table@8.20.5(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)':
     dependencies:
-      '@refinedev/core': 4.56.0(@tanstack/react-query@5.60.5(react@19.0.0-rc-66855b96-20241106))(@types/react-dom@18.3.1)(@types/react@18.3.0)(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)
+      '@refinedev/core': 4.56.0(@tanstack/react-query@4.36.1(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(@types/react-dom@18.3.1)(@types/react@18.3.0)(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)
       '@tanstack/react-table': 8.20.5(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)
       react: 19.0.0-rc-66855b96-20241106
       react-dom: 19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106)
 
-  '@refinedev/supabase@5.9.4(@refinedev/core@4.56.0(@tanstack/react-query@5.60.5(react@19.0.0-rc-66855b96-20241106))(@types/react-dom@18.3.1)(@types/react@18.3.0)(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(@supabase/supabase-js@2.46.1)':
+  '@refinedev/supabase@5.9.4(@refinedev/core@4.56.0(@tanstack/react-query@4.36.1(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(@types/react-dom@18.3.1)(@types/react@18.3.0)(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(@supabase/supabase-js@2.46.1)':
     dependencies:
-      '@refinedev/core': 4.56.0(@tanstack/react-query@5.60.5(react@19.0.0-rc-66855b96-20241106))(@types/react-dom@18.3.1)(@types/react@18.3.0)(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)
+      '@refinedev/core': 4.56.0(@tanstack/react-query@4.36.1(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(@types/react-dom@18.3.1)(@types/react@18.3.0)(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)
       '@supabase/supabase-js': 2.46.1
 
-  '@refinedev/ui-types@1.22.9(@refinedev/core@4.56.0(@tanstack/react-query@5.60.5(react@19.0.0-rc-66855b96-20241106))(@types/react-dom@18.3.1)(@types/react@18.3.0)(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)':
+  '@refinedev/ui-types@1.22.9(@refinedev/core@4.56.0(@tanstack/react-query@4.36.1(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(@types/react-dom@18.3.1)(@types/react@18.3.0)(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)':
     dependencies:
-      '@refinedev/core': 4.56.0(@tanstack/react-query@5.60.5(react@19.0.0-rc-66855b96-20241106))(@types/react-dom@18.3.1)(@types/react@18.3.0)(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)
+      '@refinedev/core': 4.56.0(@tanstack/react-query@4.36.1(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(@types/react-dom@18.3.1)(@types/react@18.3.0)(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)
       dayjs: 1.11.13
       react: 19.0.0-rc-66855b96-20241106
       react-dom: 19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106)
@@ -5839,8 +5831,6 @@ snapshots:
 
   '@tanstack/query-core@4.36.1': {}
 
-  '@tanstack/query-core@5.60.5': {}
-
   '@tanstack/react-query@4.36.1(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)':
     dependencies:
       '@tanstack/query-core': 4.36.1
@@ -5848,11 +5838,6 @@ snapshots:
       use-sync-external-store: 1.2.2(react@19.0.0-rc-66855b96-20241106)
     optionalDependencies:
       react-dom: 19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106)
-
-  '@tanstack/react-query@5.60.5(react@19.0.0-rc-66855b96-20241106)':
-    dependencies:
-      '@tanstack/query-core': 5.60.5
-      react: 19.0.0-rc-66855b96-20241106
 
   '@tanstack/react-table@8.20.5(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)':
     dependencies:

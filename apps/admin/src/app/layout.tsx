@@ -6,18 +6,16 @@ import { authProviderClient } from "@/app/providers/auth/authProvider.client";
 import { Refine } from "@refinedev/core";
 import routerProvider from "@refinedev/nextjs-router";
 import { Poppins } from "next/font/google";
-import {
-  RefineThemes,
-  ThemedLayoutV2,
-  useNotificationProvider,
-} from "@refinedev/antd";
+import { RefineThemes, useNotificationProvider } from "@refinedev/antd";
 import { App as AntdApp, ConfigProvider } from "antd";
 import "@refinedev/antd/dist/reset.css";
-import { QueryClientProvider } from "@/components/utils/QueryClientProvider";
+import { QueryClientProvider } from "@/components/utils/queryClientProvider";
 import {
   formValidationMessages,
   refineResources,
 } from "@/app/constants/constants";
+import { ThemedLayoutClient } from "@/components/utils/themedLayoutClient";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -57,15 +55,12 @@ export default function RootLayout({
                   notificationProvider={useNotificationProvider}
                   resources={[...refineResources]}
                 >
-                  <ThemedLayoutV2
-                    // Title={}
-                    // Footer={}
-                    // Header={}
-                    // Sider={}
-                    initialSiderCollapsed={false}
-                  >
-                    {children}
-                  </ThemedLayoutV2>
+                  <SidebarProvider>
+                    <ThemedLayoutClient>
+                      <SidebarTrigger />
+                      {children}
+                    </ThemedLayoutClient>
+                  </SidebarProvider>
                 </Refine>
               </AntdApp>
             </ConfigProvider>

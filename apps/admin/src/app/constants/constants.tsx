@@ -1,15 +1,10 @@
 import {
-  BeakerIcon,
-  CurrencyDollarIcon,
-  UsersIcon,
   UserGroupIcon,
   BuildingStorefrontIcon,
-  BuildingOfficeIcon,
   TagIcon,
-  LanguageIcon,
   PhotoIcon,
-  PercentBadgeIcon,
   ShoppingBagIcon,
+  Cog6ToothIcon,
 } from "@heroicons/react/24/solid";
 
 export const refineResources = [
@@ -20,7 +15,8 @@ export const refineResources = [
     edit: "/banner-types/edit/:id",
     meta: {
       canDelete: true,
-      icon: <PhotoIcon className="h-4 w-4" />,
+      label: "Banner Types",
+      groupName: "banners",
     },
   },
   {
@@ -29,7 +25,8 @@ export const refineResources = [
     create: "/businesses/create",
     edit: "/businesses/edit/:id",
     meta: {
-      icon: <BuildingOfficeIcon className="h-4 w-4" />,
+      label: "Businesses",
+      groupName: "admin",
     },
   },
   {
@@ -39,7 +36,8 @@ export const refineResources = [
     edit: "/categories/edit/:id",
     meta: {
       canDelete: true,
-      icon: <TagIcon className="h-4 w-4" />,
+      label: "Categories",
+      groupName: "categories",
     },
   },
   {
@@ -49,7 +47,8 @@ export const refineResources = [
     edit: "/coupon-codes/edit/:id",
     meta: {
       canDelete: true,
-      icon: <PercentBadgeIcon className="h-4 w-4" />,
+      label: "Coupon Codes",
+      groupName: "stores",
     },
   },
   {
@@ -58,7 +57,8 @@ export const refineResources = [
     create: "/currencies/create",
     edit: "/currencies/edit/:id",
     meta: {
-      icon: <CurrencyDollarIcon className="h-4 w-4" />,
+      label: "Currencies",
+      groupName: "admin",
     },
   },
   {
@@ -68,7 +68,8 @@ export const refineResources = [
     edit: "/customers/edit/:id",
     meta: {
       canDelete: true,
-      icon: <UserGroupIcon className="h-4 w-4" />,
+      label: "Customers",
+      groupName: "customers",
     },
   },
   {
@@ -78,7 +79,8 @@ export const refineResources = [
     edit: "/store-header-banners/edit/:id",
     meta: {
       canDelete: true,
-      icon: <PhotoIcon className="h-4 w-4" />,
+      label: "Store Header Banners",
+      groupName: "banners",
     },
   },
   {
@@ -88,7 +90,8 @@ export const refineResources = [
     edit: "/store-image-banners/edit/:id",
     meta: {
       canDelete: true,
-      icon: <PhotoIcon className="h-4 w-4" />,
+      label: "Store Image Banners",
+      groupName: "banners",
     },
   },
   {
@@ -96,7 +99,8 @@ export const refineResources = [
     list: "/locales",
     meta: {
       canDelete: false,
-      icon: <LanguageIcon className="h-4 w-4" />,
+      label: "Locales",
+      groupName: "admin",
     },
   },
   {
@@ -106,7 +110,8 @@ export const refineResources = [
     edit: "/store-offer-banners/edit/:id",
     meta: {
       canDelete: true,
-      icon: <PhotoIcon className="h-4 w-4" />,
+      label: "Store Offer Banners",
+      groupName: "banners",
     },
   },
   {
@@ -116,7 +121,8 @@ export const refineResources = [
     edit: "/products/edit/:id",
     meta: {
       canDelete: true,
-      icon: <ShoppingBagIcon className="h-4 w-4" />,
+      label: "Products",
+      groupName: "products",
     },
   },
   {
@@ -126,7 +132,8 @@ export const refineResources = [
     edit: "/stores/edit/:id",
     meta: {
       canDelete: true,
-      icon: <BuildingStorefrontIcon className="h-4 w-4" />,
+      label: "Stores",
+      groupName: "stores",
     },
   },
   {
@@ -136,7 +143,8 @@ export const refineResources = [
     edit: "/store-features/edit/:id",
     meta: {
       canDelete: true,
-      icon: <BuildingStorefrontIcon className="h-4 w-4" />,
+      label: "Store Features",
+      groupName: "stores",
     },
   },
   {
@@ -146,7 +154,8 @@ export const refineResources = [
     edit: "/users/edit/:id",
     meta: {
       canDelete: true,
-      icon: <UsersIcon className="h-4 w-4" />,
+      label: "Users",
+      groupName: "admin",
     },
   },
 ];
@@ -158,3 +167,55 @@ export const formValidationMessages = {
     mismatch: "${label} does not match the required pattern",
   },
 };
+
+export const sidebarItems = [
+  {
+    groupName: "banners",
+    groupLabel: "Banners",
+    groupIcon: <PhotoIcon className="h-4 w-4" />,
+    isDefaultGroup: true,
+    items: refineResources.filter(
+      ({ meta: { groupName } }) => groupName === "banners"
+    ),
+  },
+  {
+    groupName: "categories",
+    groupLabel: "Categories",
+    groupIcon: <TagIcon className="h-4 w-4" />,
+    items: refineResources.filter(
+      ({ meta: { groupName } }) => groupName === "categories"
+    ),
+  },
+  {
+    groupName: "customers",
+    groupLabel: "Customers",
+    groupIcon: <UserGroupIcon className="h-4 w-4" />,
+    items: refineResources.filter(
+      ({ meta: { groupName } }) => groupName === "customers"
+    ),
+  },
+  {
+    groupName: "stores",
+    groupLabel: "Stores",
+    groupIcon: <BuildingStorefrontIcon className="h-4 w-4" />,
+    items: refineResources.filter(
+      ({ meta: { groupName } }) => groupName === "stores"
+    ),
+  },
+  {
+    groupName: "products",
+    groupLabel: "Products",
+    groupIcon: <ShoppingBagIcon className="h-4 w-4" />,
+    items: refineResources.filter(
+      ({ meta: { groupName } }) => groupName === "products"
+    ),
+  },
+  {
+    groupName: "admin",
+    groupLabel: "Administration",
+    groupIcon: <Cog6ToothIcon className="h-4 w-4" />,
+    items: refineResources.filter(
+      ({ meta: { groupName } }) => groupName === "admin"
+    ),
+  },
+];

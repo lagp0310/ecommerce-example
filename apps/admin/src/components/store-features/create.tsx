@@ -4,6 +4,7 @@ import React from "react";
 import { Create, useForm, useSelect, getValueFromEvent } from "@refinedev/antd";
 import { Form, Input, Upload, Select } from "antd";
 import isUUID from "validator/es/lib/isUUID";
+import { FolderArrowDownIcon } from "@heroicons/react/24/solid";
 
 export const StoreFeatureCreate = () => {
   const { formProps, saveButtonProps } = useForm();
@@ -14,7 +15,12 @@ export const StoreFeatureCreate = () => {
   });
 
   return (
-    <Create saveButtonProps={saveButtonProps}>
+    <Create
+      saveButtonProps={{
+        ...saveButtonProps,
+        icon: <FolderArrowDownIcon className="h-4 w-4 text-white" />,
+      }}
+    >
       <Form {...formProps} layout="vertical">
         <Form.Item
           label="Title"

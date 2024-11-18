@@ -129,6 +129,8 @@ export const UserEdit = () => {
             {
               required: false,
               validator: (_rule, value, callback) => {
+                if (!value) return;
+
                 const isValid = dayjs(value).isValid();
                 if (!isValid) callback("Date is not valid");
               },

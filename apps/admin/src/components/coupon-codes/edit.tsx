@@ -5,6 +5,7 @@ import { Edit, useForm, useSelect } from "@refinedev/antd";
 import { Form, Input, Select } from "antd";
 import isUUID from "validator/es/lib/isUUID";
 import { NumericFormat } from "react-number-format";
+import { FolderArrowDownIcon } from "@heroicons/react/24/solid";
 
 export const CouponCodesEdit = () => {
   const { formProps, saveButtonProps, query } = useForm();
@@ -18,7 +19,12 @@ export const CouponCodesEdit = () => {
   });
 
   return (
-    <Edit saveButtonProps={saveButtonProps}>
+    <Edit
+      saveButtonProps={{
+        ...saveButtonProps,
+        icon: <FolderArrowDownIcon className="h-4 w-4 text-white" />,
+      }}
+    >
       <Form {...formProps} layout="vertical">
         <Form.Item
           label="ID"

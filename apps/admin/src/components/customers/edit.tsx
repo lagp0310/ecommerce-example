@@ -6,6 +6,7 @@ import { Form, Input, DatePicker } from "antd";
 import { useUpdate } from "@refinedev/core";
 import { PatternFormat } from "react-number-format";
 import dayjs from "dayjs";
+import { FolderArrowDownIcon } from "@heroicons/react/24/solid";
 
 export const CustomerEdit = () => {
   const {
@@ -139,6 +140,8 @@ export const CustomerEdit = () => {
             {
               required: false,
               validator: (_rule, value, callback) => {
+                if (!value) return;
+
                 const isValid = dayjs(value).isValid();
                 if (!isValid) callback("Date is not valid");
               },
@@ -148,7 +151,11 @@ export const CustomerEdit = () => {
           <DatePicker format="MM-DD-YYYY" />
         </Form.Item>
         <div className="flex flex-1 flex-row w-full justify-end">
-          <SaveButton {...saveButtonProps} onClick={updateCustomer} />
+          <SaveButton
+            {...saveButtonProps}
+            onClick={updateCustomer}
+            icon={<FolderArrowDownIcon className="h-4 w-4 text-white" />}
+          />
         </div>
       </Form>
     </Edit>

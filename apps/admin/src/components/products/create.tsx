@@ -6,6 +6,7 @@ import { DatePicker, Form, Input, Select, Upload } from "antd";
 import isUUID from "validator/es/lib/isUUID";
 import { NumericFormat } from "react-number-format";
 import dayjs from "dayjs";
+import { FolderArrowDownIcon } from "@heroicons/react/24/solid";
 
 export const ProductCreate = () => {
   const { formProps, saveButtonProps } = useForm();
@@ -21,7 +22,12 @@ export const ProductCreate = () => {
   });
 
   return (
-    <Create saveButtonProps={saveButtonProps}>
+    <Create
+      saveButtonProps={{
+        ...saveButtonProps,
+        icon: <FolderArrowDownIcon className="h-4 w-4 text-white" />,
+      }}
+    >
       <Form {...formProps} layout="vertical">
         <Form.Item
           label="Name"
@@ -108,6 +114,8 @@ export const ProductCreate = () => {
             {
               required: false,
               validator: (_rule, value, callback) => {
+                if (!value) return;
+
                 const isValid = dayjs(value).isValid();
                 if (!isValid) callback("Date is not valid");
               },

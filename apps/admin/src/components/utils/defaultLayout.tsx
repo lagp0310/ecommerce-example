@@ -15,7 +15,7 @@ import "@refinedev/antd/dist/reset.css";
 import { QueryClientProvider } from "@/components/utils/queryClientProvider";
 import {
   formValidationMessages,
-  hiddenSidebarPartialPathnames,
+  nonProtectedPathnames,
   refineResources,
 } from "@/app/constants/constants";
 import { ThemedLayoutClient } from "@/components/utils/themedLayoutClient";
@@ -28,7 +28,7 @@ export function DefaultLayout({ children }: Props) {
   const pathname = usePathname();
   const shouldShowSidebar = React.useMemo(
     () =>
-      hiddenSidebarPartialPathnames.some(
+      nonProtectedPathnames.some(
         (partialPath) => !pathname.startsWith(partialPath)
       ),
     [pathname]

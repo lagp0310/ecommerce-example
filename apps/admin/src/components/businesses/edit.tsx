@@ -29,6 +29,7 @@ export const BusinessEdit = () => {
           rules={[
             {
               required: true,
+              len: 50,
             },
           ]}
         >
@@ -40,6 +41,7 @@ export const BusinessEdit = () => {
           rules={[
             {
               required: true,
+              len: 500,
             },
           ]}
         >

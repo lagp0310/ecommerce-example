@@ -29,6 +29,7 @@ export const BannerTypeEdit = () => {
           rules={[
             {
               required: true,
+              len: 50,
             },
           ]}
         >

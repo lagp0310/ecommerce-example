@@ -3,6 +3,8 @@
 import React from "react";
 import { Create, getValueFromEvent, useForm, useSelect } from "@refinedev/antd";
 import { Form, Input, Select, Upload } from "antd";
+import isUUID from "validator/es/lib/isUUID";
+import { NumericFormat } from "react-number-format";
 
 export const ProductCreate = () => {
   const { formProps, saveButtonProps } = useForm();
@@ -26,6 +28,7 @@ export const ProductCreate = () => {
           rules={[
             {
               required: true,
+              len: 50,
             },
           ]}
         >
@@ -37,6 +40,7 @@ export const ProductCreate = () => {
           rules={[
             {
               required: true,
+              len: 500,
             },
           ]}
         >
@@ -48,6 +52,7 @@ export const ProductCreate = () => {
           rules={[
             {
               required: true,
+              len: 50,
             },
           ]}
         >
@@ -59,10 +64,20 @@ export const ProductCreate = () => {
           rules={[
             {
               required: true,
+              min: 0,
             },
           ]}
         >
-          <Input />
+          <NumericFormat
+            allowLeadingZeros={false}
+            allowNegative={false}
+            allowedDecimalSeparators={["."]}
+            decimalSeparator="."
+            customInput={Input}
+            decimalScale={2}
+            fixedDecimalScale
+            thousandSeparator=","
+          />
         </Form.Item>
         <Form.Item
           label="Currency"
@@ -70,6 +85,9 @@ export const ProductCreate = () => {
           rules={[
             {
               required: true,
+              validator(_rule, value, callback) {
+                if (!isUUID(value)) callback("Currency should be an UUID");
+              },
             },
           ]}
         >
@@ -81,6 +99,8 @@ export const ProductCreate = () => {
           rules={[
             {
               required: true,
+              min: 1,
+              max: 5,
             },
           ]}
         >
@@ -92,6 +112,9 @@ export const ProductCreate = () => {
           rules={[
             {
               required: true,
+              validator(_rule, value, callback) {
+                if (!isUUID(value)) callback("Store should be an UUID");
+              },
             },
           ]}
         >

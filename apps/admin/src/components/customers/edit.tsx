@@ -4,6 +4,8 @@ import React from "react";
 import { Edit, SaveButton, useForm } from "@refinedev/antd";
 import { Form, Input, DatePicker } from "antd";
 import { useUpdate } from "@refinedev/core";
+import { PatternFormat } from "react-number-format";
+import dayjs from "dayjs";
 
 export const CustomerEdit = () => {
   const {
@@ -71,6 +73,8 @@ export const CustomerEdit = () => {
             rules={[
               {
                 required: true,
+                pattern: new RegExp(/^[a-zA-Z]+$/),
+                len: 50,
               },
             ]}
             className="flex-1"
@@ -83,6 +87,8 @@ export const CustomerEdit = () => {
             rules={[
               {
                 required: true,
+                pattern: new RegExp(/^[a-zA-Z]+$/),
+                len: 50,
               },
             ]}
             className="flex-1"
@@ -97,6 +103,8 @@ export const CustomerEdit = () => {
             rules={[
               {
                 required: true,
+                pattern: new RegExp(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/),
+                len: 50,
               },
             ]}
             className="flex-1"
@@ -109,11 +117,19 @@ export const CustomerEdit = () => {
             rules={[
               {
                 required: true,
+                pattern: new RegExp(/[0-9]{3}\-[0-9]{3}\-[0-9]{4}/),
+                len: 12,
               },
             ]}
             className="flex-1"
           >
-            <Input disabled readOnly />
+            <PatternFormat
+              format="###-###-####"
+              valueIsNumericString
+              customInput={Input}
+              disabled
+              readOnly
+            />
           </Form.Item>
         </div>
         <Form.Item
@@ -122,10 +138,14 @@ export const CustomerEdit = () => {
           rules={[
             {
               required: false,
+              validator: (_rule, value, callback) => {
+                const isValid = dayjs(value).isValid();
+                if (!isValid) callback("Date is not valid");
+              },
             },
           ]}
         >
-          <DatePicker />
+          <DatePicker format="MM-DD-YYYY" />
         </Form.Item>
         <div className="flex flex-1 flex-row w-full justify-end">
           <SaveButton {...saveButtonProps} onClick={updateCustomer} />

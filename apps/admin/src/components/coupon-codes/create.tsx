@@ -3,6 +3,8 @@
 import React from "react";
 import { Create, useForm, useSelect } from "@refinedev/antd";
 import { Form, Input, Select } from "antd";
+import isUUID from "validator/es/lib/isUUID";
+import { NumericFormat } from "react-number-format";
 
 export const CouponCodesCreate = () => {
   const { formProps, saveButtonProps } = useForm();
@@ -21,6 +23,7 @@ export const CouponCodesCreate = () => {
           rules={[
             {
               required: true,
+              len: 20,
             },
           ]}
         >
@@ -32,6 +35,9 @@ export const CouponCodesCreate = () => {
           rules={[
             {
               required: true,
+              validator(_rule, value, callback) {
+                if (!isUUID(value)) callback("Store should be an UUID");
+              },
             },
           ]}
         >
@@ -42,11 +48,43 @@ export const CouponCodesCreate = () => {
           name={["percentage"]}
           rules={[
             {
-              required: true,
+              required: false,
+              min: 0,
+              max: 100,
             },
           ]}
         >
-          <Input />
+          <NumericFormat
+            allowLeadingZeros={false}
+            allowNegative={false}
+            allowedDecimalSeparators={["."]}
+            decimalSeparator="."
+            customInput={Input}
+            decimalScale={2}
+            fixedDecimalScale
+            thousandSeparator=","
+          />
+        </Form.Item>
+        <Form.Item
+          label="Amount"
+          name={["amount"]}
+          rules={[
+            {
+              required: false,
+              min: 0,
+            },
+          ]}
+        >
+          <NumericFormat
+            allowLeadingZeros={false}
+            allowNegative={false}
+            allowedDecimalSeparators={["."]}
+            decimalSeparator="."
+            customInput={Input}
+            decimalScale={2}
+            fixedDecimalScale
+            thousandSeparator=","
+          />
         </Form.Item>
       </Form>
     </Create>

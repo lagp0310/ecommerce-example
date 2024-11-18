@@ -3,6 +3,7 @@
 import React from "react";
 import { Create, useForm, useSelect } from "@refinedev/antd";
 import { Form, Input, Select } from "antd";
+import isUUID from "validator/es/lib/isUUID";
 
 export const StoreCreate = () => {
   const { formProps, saveButtonProps } = useForm();
@@ -21,6 +22,7 @@ export const StoreCreate = () => {
           rules={[
             {
               required: true,
+              len: 50,
             },
           ]}
         >
@@ -32,6 +34,7 @@ export const StoreCreate = () => {
           rules={[
             {
               required: true,
+              len: 500,
             },
           ]}
         >
@@ -43,6 +46,9 @@ export const StoreCreate = () => {
           rules={[
             {
               required: true,
+              validator(_rule, value, callback) {
+                if (!isUUID(value)) callback("Business should be an UUID");
+              },
             },
           ]}
         >

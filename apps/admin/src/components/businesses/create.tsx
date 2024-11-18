@@ -15,6 +15,7 @@ export const BusinessCreate = () => {
           rules={[
             {
               required: true,
+              len: 50,
             },
           ]}
         >
@@ -26,6 +27,7 @@ export const BusinessCreate = () => {
           rules={[
             {
               required: true,
+              len: 500,
             },
           ]}
         >

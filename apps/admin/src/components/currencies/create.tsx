@@ -16,6 +16,7 @@ export const CurrencyCreate = () => {
           rules={[
             {
               required: true,
+              len: 50,
             },
           ]}
         >
@@ -27,6 +28,8 @@ export const CurrencyCreate = () => {
           rules={[
             {
               required: true,
+              len: 3,
+              pattern: new RegExp(/[A-Z]{3}/),
             },
           ]}
         >

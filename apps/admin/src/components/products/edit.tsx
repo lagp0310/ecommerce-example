@@ -3,6 +3,8 @@
 import React from "react";
 import { Edit, getValueFromEvent, useForm, useSelect } from "@refinedev/antd";
 import { Form, Input, Select, Upload } from "antd";
+import isUUID from "validator/es/lib/isUUID";
+import { NumericFormat } from "react-number-format";
 
 export const ProductEdit = () => {
   const { formProps, saveButtonProps, query } = useForm();
@@ -41,6 +43,7 @@ export const ProductEdit = () => {
           rules={[
             {
               required: true,
+              len: 50,
             },
           ]}
         >
@@ -52,6 +55,7 @@ export const ProductEdit = () => {
           rules={[
             {
               required: true,
+              len: 500,
             },
           ]}
         >
@@ -63,6 +67,7 @@ export const ProductEdit = () => {
           rules={[
             {
               required: true,
+              len: 50,
             },
           ]}
         >
@@ -77,7 +82,16 @@ export const ProductEdit = () => {
             },
           ]}
         >
-          <Input />
+          <NumericFormat
+            allowLeadingZeros={false}
+            allowNegative={false}
+            allowedDecimalSeparators={["."]}
+            decimalSeparator="."
+            customInput={Input}
+            decimalScale={2}
+            fixedDecimalScale
+            thousandSeparator=","
+          />
         </Form.Item>
         <Form.Item
           label="Currency"
@@ -85,10 +99,26 @@ export const ProductEdit = () => {
           rules={[
             {
               required: true,
+              validator(_rule, value, callback) {
+                if (!isUUID(value)) callback("Currency should be an UUID");
+              },
             },
           ]}
         >
           <Select {...currencySelectProps} />
+        </Form.Item>
+        <Form.Item
+          label="Rating"
+          name={["rating"]}
+          rules={[
+            {
+              required: true,
+              min: 1,
+              max: 5,
+            },
+          ]}
+        >
+          <Input />
         </Form.Item>
         <Form.Item
           label="Store"
@@ -96,6 +126,9 @@ export const ProductEdit = () => {
           rules={[
             {
               required: true,
+              validator(_rule, value, callback) {
+                if (!isUUID(value)) callback("Store should be an UUID");
+              },
             },
           ]}
         >

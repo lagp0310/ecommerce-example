@@ -3,6 +3,7 @@
 import React from "react";
 import { Edit, useForm, useSelect } from "@refinedev/antd";
 import { Form, Input, Select } from "antd";
+import isUUID from "validator/es/lib/isUUID";
 
 export const StoreImageBannerEdit = () => {
   const { formProps, saveButtonProps, query } = useForm();
@@ -35,6 +36,7 @@ export const StoreImageBannerEdit = () => {
           rules={[
             {
               required: true,
+              len: 50,
             },
           ]}
         >
@@ -46,6 +48,7 @@ export const StoreImageBannerEdit = () => {
           rules={[
             {
               required: true,
+              len: 50,
             },
           ]}
         >
@@ -57,6 +60,9 @@ export const StoreImageBannerEdit = () => {
           rules={[
             {
               required: true,
+              validator(_rule, value, callback) {
+                if (!isUUID(value)) callback("Banner Type should be an UUID");
+              },
             },
           ]}
         >

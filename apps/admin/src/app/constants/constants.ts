@@ -94,3 +94,11 @@ export const refineResources = [
     meta: { canDelete: true },
   },
 ];
+
+export const formValidationMessages = {
+  default: "There's an error in ${label}",
+  required: "${label} is required",
+  pattern: {
+    mismatch: "${label} does not match the required pattern",
+  },
+};

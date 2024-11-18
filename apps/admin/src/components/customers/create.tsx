@@ -4,6 +4,8 @@ import React from "react";
 import { Create, SaveButton, useForm } from "@refinedev/antd";
 import { Form, Input, DatePicker } from "antd";
 import { useCreate } from "@refinedev/core";
+import { PatternFormat } from "react-number-format";
+import dayjs from "dayjs";
 
 export const CustomerCreate = () => {
   const {
@@ -60,6 +62,8 @@ export const CustomerCreate = () => {
             rules={[
               {
                 required: true,
+                pattern: new RegExp(/^[a-zA-Z]+$/),
+                len: 50,
               },
             ]}
             className="flex-1"
@@ -72,6 +76,8 @@ export const CustomerCreate = () => {
             rules={[
               {
                 required: true,
+                pattern: new RegExp(/^[a-zA-Z]+$/),
+                len: 50,
               },
             ]}
             className="flex-1"
@@ -86,6 +92,8 @@ export const CustomerCreate = () => {
             rules={[
               {
                 required: true,
+                pattern: new RegExp(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/),
+                len: 50,
               },
             ]}
             className="flex-1"
@@ -98,11 +106,17 @@ export const CustomerCreate = () => {
             rules={[
               {
                 required: true,
+                pattern: new RegExp(/[0-9]{3}\-[0-9]{3}\-[0-9]{4}/),
+                len: 12,
               },
             ]}
             className="flex-1"
           >
-            <Input />
+            <PatternFormat
+              format="###-###-####"
+              valueIsNumericString
+              customInput={Input}
+            />
           </Form.Item>
         </div>
         <Form.Item
@@ -111,10 +125,14 @@ export const CustomerCreate = () => {
           rules={[
             {
               required: false,
+              validator: (_rule, value, callback) => {
+                const isValid = dayjs(value).isValid();
+                if (!isValid) callback("Date is not valid");
+              },
             },
           ]}
         >
-          <DatePicker />
+          <DatePicker format="MM-DD-YYYY" />
         </Form.Item>
         <div className="flex flex-1 flex-row w-full justify-end">
           <SaveButton {...saveButtonProps} onClick={createCustomer} />

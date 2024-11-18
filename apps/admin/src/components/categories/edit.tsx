@@ -2,6 +2,7 @@
 import React from "react";
 import { Edit, useForm, useSelect, getValueFromEvent } from "@refinedev/antd";
 import { Form, Input, Select, Upload } from "antd";
+import isUUID from "validator/es/lib/isUUID";
 
 export const CategoryEdit = () => {
   const { formProps, saveButtonProps, query } = useForm();
@@ -34,6 +35,7 @@ export const CategoryEdit = () => {
           rules={[
             {
               required: true,
+              len: 50,
             },
           ]}
         >
@@ -45,6 +47,7 @@ export const CategoryEdit = () => {
           rules={[
             {
               required: true,
+              len: 500,
             },
           ]}
         >
@@ -56,6 +59,9 @@ export const CategoryEdit = () => {
           rules={[
             {
               required: true,
+              validator(_rule, value, callback) {
+                if (!isUUID(value)) callback("Store should be an UUID");
+              },
             },
           ]}
         >

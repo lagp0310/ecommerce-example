@@ -16,6 +16,7 @@ export const BannerTypeCreate = () => {
           rules={[
             {
               required: true,
+              len: 50,
             },
           ]}
         >

@@ -14,7 +14,10 @@ import {
 import { App as AntdApp, ConfigProvider } from "antd";
 import "@refinedev/antd/dist/reset.css";
 import { QueryClientProvider } from "@/components/utils/QueryClientProvider";
-import { refineResources } from "@/app/constants/constants";
+import {
+  formValidationMessages,
+  refineResources,
+} from "@/app/constants/constants";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -36,7 +39,10 @@ export default function RootLayout({
       <body className={`${poppins.className} antialiased`}>
         <Suspense>
           <QueryClientProvider>
-            <ConfigProvider theme={RefineThemes.Blue}>
+            <ConfigProvider
+              theme={RefineThemes.Blue}
+              form={{ validateMessages: formValidationMessages }}
+            >
               <AntdApp>
                 <Refine
                   routerProvider={routerProvider}

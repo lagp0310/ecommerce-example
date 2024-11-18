@@ -4,7 +4,7 @@ import React from "react";
 import { Edit, useForm, useSelect } from "@refinedev/antd";
 import { Form, Input, Select } from "antd";
 
-export const CouponCodeEdit = () => {
+export const CouponCodesEdit = () => {
   const { formProps, saveButtonProps, query } = useForm();
 
   const couponCodesData = query?.data?.data;

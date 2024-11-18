@@ -11,7 +11,7 @@ import {
 } from "@refinedev/antd";
 import { Table, Space } from "antd";
 
-export const CouponCodeList = () => {
+export const CouponCodesList = () => {
   const { tableProps } = useTable({
     syncWithLocation: true,
   });

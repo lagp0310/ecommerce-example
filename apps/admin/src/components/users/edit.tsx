@@ -124,7 +124,9 @@ export const UserEdit = () => {
         >
           <DatePicker />
         </Form.Item>
-        <SaveButton {...saveButtonProps} onClick={updateUser} />
+        <div className="flex flex-1 flex-row w-full justify-end">
+          <SaveButton {...saveButtonProps} onClick={updateUser} />
+        </div>
       </Form>
     </Edit>
   );

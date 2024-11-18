@@ -116,7 +116,9 @@ export const CustomerCreate = () => {
         >
           <DatePicker />
         </Form.Item>
-        <SaveButton {...saveButtonProps} onClick={createCustomer} />
+        <div className="flex flex-1 flex-row w-full justify-end">
+          <SaveButton {...saveButtonProps} onClick={createCustomer} />
+        </div>
       </Form>
     </Create>
   );

@@ -9,7 +9,7 @@ export const UserCreate = () => {
   const {
     formProps,
     saveButtonProps,
-    form: { getFieldsValue },
+    form: { getFieldsValue, validateFields },
   } = useForm();
   const { mutate: mutateUser } = useCreate({
     resource: "users",
@@ -35,12 +35,17 @@ export const UserCreate = () => {
 
   const createUser = React.useCallback(async () => {
     try {
+      const { errorFields } = await validateFields();
+
+      if (Array.isArray(errorFields) && errorFields.length > 0)
+        throw new Error("Form is invalid");
+
       const { email, phone_number, ...rest } = getFieldsValue();
       mutateUser({ values: { ...rest } });
     } catch (error) {
       console.error(error);
     }
-  }, [getFieldsValue, mutateUser]);
+  }, [getFieldsValue, mutateUser, validateFields]);
 
   return (
     <Create footerButtons={[]}>

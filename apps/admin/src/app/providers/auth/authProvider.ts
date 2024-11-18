@@ -1,12 +1,11 @@
 import { AuthProvider } from "@refinedev/core";
-import { dataProviderClient } from "@/app/providers/data/dataProvider.client";
+import { baseSupabaseClient } from "@/app/providers/data/dataProvider";
 
 export const baseAuthProvider: AuthProvider = {
   login: async ({ email, password, providerName }) => {
-    // sign in with oauth
     try {
       if (providerName) {
-        const { data, error } = await dataProviderClient.auth.signInWithOAuth({
+        const { data, error } = await baseSupabaseClient.auth.signInWithOAuth({
           provider: providerName,
         });
 
@@ -24,8 +23,7 @@ export const baseAuthProvider: AuthProvider = {
         }
       }
 
-      // sign in with email and password
-      const { data, error } = await dataProviderClient.auth.signInWithPassword({
+      const { data, error } = await baseSupabaseClient.auth.signInWithPassword({
         email,
         password,
       });
@@ -57,115 +55,17 @@ export const baseAuthProvider: AuthProvider = {
       },
     };
   },
-  register: async ({ email, password }) => {
-    try {
-      const { data, error } = await dataProviderClient.auth.signUp({
-        email,
-        password,
-      });
-
-      if (error) {
-        return {
-          success: false,
-          error,
-        };
-      }
-
-      if (data) {
-        return {
-          success: true,
-        };
-      }
-    } catch (error: any) {
-      return {
-        success: false,
-        error,
-      };
-    }
-
-    return {
-      success: false,
-      error: {
-        message: "Register failed",
-        name: "Invalid email or password",
-      },
-    };
+  register: async () => {
+    throw new Error("Not implemented");
   },
-  forgotPassword: async ({ email }) => {
-    try {
-      const { data, error } =
-        await dataProviderClient.auth.resetPasswordForEmail(email, {
-          redirectTo: `${window.location.origin}/update-password`,
-        });
-
-      if (error) {
-        return {
-          success: false,
-          error,
-        };
-      }
-
-      if (data) {
-        notification.open({
-          type: "success",
-          message: "Success",
-          description:
-            "Please check your email for a link to reset your password. If it doesn't appear within a few minutes, check your spam folder.",
-        });
-        return {
-          success: true,
-        };
-      }
-    } catch (error: any) {
-      return {
-        success: false,
-        error,
-      };
-    }
-
-    return {
-      success: false,
-      error: {
-        message: "Forgot password failed",
-        name: "Invalid email",
-      },
-    };
+  forgotPassword: async () => {
+    throw new Error("Not implemented");
   },
-  updatePassword: async ({ password }) => {
-    try {
-      const { data, error } = await dataProviderClient.auth.updateUser({
-        password,
-      });
-
-      if (error) {
-        return {
-          success: false,
-          error,
-        };
-      }
-
-      if (data) {
-        return {
-          success: true,
-          redirectTo: "/",
-        };
-      }
-    } catch (error: any) {
-      return {
-        success: false,
-        error,
-      };
-    }
-    return {
-      success: false,
-      error: {
-        message: "Update password failed",
-        name: "Invalid password",
-      },
-    };
+  updatePassword: async () => {
+    throw new Error("Not implemented");
   },
   logout: async () => {
-    const { error } = await dataProviderClient.auth.signOut();
+    const { error } = await baseSupabaseClient.auth.signOut();
 
     if (error) {
       return {
@@ -185,7 +85,7 @@ export const baseAuthProvider: AuthProvider = {
   },
   check: async () => {
     try {
-      const { data } = await dataProviderClient.auth.getSession();
+      const { data } = await baseSupabaseClient.auth.getSession();
       const { session } = data;
 
       if (!session) {
@@ -216,22 +116,10 @@ export const baseAuthProvider: AuthProvider = {
     };
   },
   getPermissions: async () => {
-    const user = await dataProviderClient.auth.getUser();
+    const user = await baseSupabaseClient.auth.getUser();
 
     if (user) {
       return user.data.user?.role;
-    }
-
-    return null;
-  },
-  getUserIdentity: async () => {
-    const { data } = await dataProviderClient.auth.getUser();
-
-    if (data?.user) {
-      return {
-        ...data.user,
-        name: data.user.email,
-      };
     }
 
     return null;

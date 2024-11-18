@@ -1,15 +1,50 @@
 "use client";
 
 import React from "react";
-import { Create, useForm } from "@refinedev/antd";
+import { Create, SaveButton, useForm } from "@refinedev/antd";
 import { Form, Input, DatePicker } from "antd";
+import { useCreate } from "@refinedev/core";
 
 export const CustomerCreate = () => {
-  const { formProps, saveButtonProps } = useForm();
+  const {
+    formProps,
+    saveButtonProps,
+    form: { getFieldsValue },
+  } = useForm();
+  const { mutate: mutateCustomer } = useCreate({
+    resource: "customers",
+    mutationOptions: {
+      onSuccess: ({ data }) => {
+        try {
+          const { email, phone_number } = getFieldsValue();
+
+          mutateEmail({ values: { email, customer: data.id } });
+          mutatePhoneNumber({
+            values: { phone_number, customer: data.id },
+          });
+        } catch (error) {
+          console.error(error);
+        }
+      },
+    },
+  });
+  const { mutate: mutateEmail } = useCreate({ resource: "emails" });
+  const { mutate: mutatePhoneNumber } = useCreate({
+    resource: "phone_numbers",
+  });
+
+  const createCustomer = React.useCallback(async () => {
+    try {
+      const { email, phone_number, ...rest } = getFieldsValue();
+      mutateCustomer({ values: { ...rest } });
+    } catch (error) {
+      console.error(error);
+    }
+  }, [getFieldsValue, mutateCustomer]);
 
   return (
-    <Create saveButtonProps={saveButtonProps}>
-      <Form {...formProps} layout="vertical">
+    <Create footerButtons={[]}>
+      <Form {...formProps} layout="vertical" onSubmitCapture={createCustomer}>
         <div className="flex flex-1 flex-row gap-x-4 w-full">
           <Form.Item
             label="First Name"
@@ -73,6 +108,7 @@ export const CustomerCreate = () => {
         >
           <DatePicker />
         </Form.Item>
+        <SaveButton {...saveButtonProps} onClick={createCustomer} />
       </Form>
     </Create>
   );

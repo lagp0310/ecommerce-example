@@ -9,6 +9,7 @@ export const UserCreate = () => {
   const {
     formProps,
     saveButtonProps,
+    redirect,
     form: { getFieldsValue, validateFields },
   } = useForm();
   const { mutate: mutateUser } = useCreate({
@@ -42,10 +43,12 @@ export const UserCreate = () => {
 
       const { email, phone_number, ...rest } = getFieldsValue();
       mutateUser({ values: { ...rest } });
+
+      redirect("list");
     } catch (error) {
       console.error(error);
     }
-  }, [getFieldsValue, mutateUser, validateFields]);
+  }, [getFieldsValue, mutateUser, redirect, validateFields]);
 
   return (
     <Create footerButtons={[]}>

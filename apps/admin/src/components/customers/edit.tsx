@@ -1,16 +1,57 @@
 "use client";
 
 import React from "react";
-import { Edit, useForm } from "@refinedev/antd";
+import { Edit, SaveButton, useForm } from "@refinedev/antd";
 import { Form, Input, DatePicker } from "antd";
+import { useUpdate } from "@refinedev/core";
 
 export const CustomerEdit = () => {
-  const { formProps, saveButtonProps, query } = useForm();
+  const {
+    formProps,
+    saveButtonProps,
+    redirect,
+    query,
+    form: { getFieldsValue, setFieldValue, validateFields },
+  } = useForm({
+    queryMeta: { select: "*, emails(email), phone_numbers(phone_number)" },
+  });
 
-  const customersData = query?.data?.data;
+  const customersData = React.useMemo(
+    () => query?.data?.data,
+    [query?.data?.data]
+  );
+  React.useEffect(() => {
+    if (!!customersData) {
+      setFieldValue("email", customersData?.emails?.at(0)?.email);
+      setFieldValue(
+        "phone_number",
+        customersData?.phone_numbers?.at(0)?.phone_number
+      );
+    }
+  }, [customersData, setFieldValue]);
+
+  const { mutate: mutateCustomer } = useUpdate({
+    resource: "customers",
+  });
+
+  const updateCustomer = React.useCallback(async () => {
+    try {
+      const { errorFields } = await validateFields();
+
+      if (Array.isArray(errorFields) && errorFields.length > 0)
+        throw new Error("Form is invalid");
+
+      const { email, phone_number, ...rest } = getFieldsValue();
+      mutateCustomer({ values: { ...rest } });
+
+      redirect("list");
+    } catch (error) {
+      console.error(error);
+    }
+  }, [getFieldsValue, mutateCustomer, redirect, validateFields]);
 
   return (
-    <Edit saveButtonProps={saveButtonProps}>
+    <Edit footerButtons={[]}>
       <Form {...formProps} layout="vertical">
         <Form.Item
           label="ID"
@@ -60,7 +101,7 @@ export const CustomerEdit = () => {
             ]}
             className="flex-1"
           >
-            <Input />
+            <Input disabled readOnly />
           </Form.Item>
           <Form.Item
             label="Phone Number"
@@ -72,7 +113,7 @@ export const CustomerEdit = () => {
             ]}
             className="flex-1"
           >
-            <Input />
+            <Input disabled readOnly />
           </Form.Item>
         </div>
         <Form.Item
@@ -86,6 +127,7 @@ export const CustomerEdit = () => {
         >
           <DatePicker />
         </Form.Item>
+        <SaveButton {...saveButtonProps} onClick={updateCustomer} />
       </Form>
     </Edit>
   );

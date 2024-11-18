@@ -219,3 +219,5 @@ export const sidebarItems = [
     ),
   },
 ];
+
+export const hiddenSidebarPartialPathnames = ["/auth/*"];

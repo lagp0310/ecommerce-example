@@ -1,21 +1,8 @@
-import React, { Suspense } from "react";
+import React from "react";
 import type { Metadata } from "next";
 import "./globals.css";
-import { dataProviderClient } from "@/app/providers/data/dataProvider.client";
-import { authProviderClient } from "@/app/providers/auth/authProvider.client";
-import { Refine } from "@refinedev/core";
-import routerProvider from "@refinedev/nextjs-router";
 import { Poppins } from "next/font/google";
-import { RefineThemes, useNotificationProvider } from "@refinedev/antd";
-import { App as AntdApp, ConfigProvider } from "antd";
-import "@refinedev/antd/dist/reset.css";
-import { QueryClientProvider } from "@/components/utils/queryClientProvider";
-import {
-  formValidationMessages,
-  refineResources,
-} from "@/app/constants/constants";
-import { ThemedLayoutClient } from "@/components/utils/themedLayoutClient";
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { DefaultLayout } from "@/components/utils/defaultLayout";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -27,7 +14,7 @@ export const metadata: Metadata = {
   description: "Ecommerce Admin generated using Refine",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -35,37 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${poppins.className} antialiased`}>
-        <Suspense>
-          <QueryClientProvider>
-            <ConfigProvider
-              theme={RefineThemes.Blue}
-              form={{ validateMessages: formValidationMessages }}
-            >
-              <AntdApp>
-                <Refine
-                  routerProvider={routerProvider}
-                  options={{
-                    warnWhenUnsavedChanges: true,
-                    disableTelemetry: true,
-                    title: { icon: null, text: "Ecommerce Admin" },
-                    syncWithLocation: true,
-                  }}
-                  dataProvider={dataProviderClient}
-                  authProvider={authProviderClient}
-                  notificationProvider={useNotificationProvider}
-                  resources={[...refineResources]}
-                >
-                  <SidebarProvider>
-                    <ThemedLayoutClient>
-                      <SidebarTrigger />
-                      {children}
-                    </ThemedLayoutClient>
-                  </SidebarProvider>
-                </Refine>
-              </AntdApp>
-            </ConfigProvider>
-          </QueryClientProvider>
-        </Suspense>
+        <DefaultLayout>{children}</DefaultLayout>
       </body>
     </html>
   );

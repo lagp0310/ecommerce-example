@@ -8,6 +8,7 @@ import {
   EditButton,
   DeleteButton,
   DateField,
+  ImageField,
 } from "@refinedev/antd";
 import { Table, Space } from "antd";
 
@@ -68,6 +69,13 @@ export const ProductList = () => {
           }
         />
         <Table.Column dataIndex="description" title="Description" />
+        <Table.Column
+          dataIndex={["image_url"]}
+          title="Image"
+          render={(value: any) => (
+            <ImageField style={{ maxWidth: "100px" }} value={value} />
+          )}
+        />
         <Table.Column
           title="Actions"
           dataIndex="actions"

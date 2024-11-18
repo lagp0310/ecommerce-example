@@ -1,8 +1,8 @@
 "use client";
 
 import React from "react";
-import { Edit, useForm, useSelect } from "@refinedev/antd";
-import { Form, Input, Select } from "antd";
+import { Edit, getValueFromEvent, useForm, useSelect } from "@refinedev/antd";
+import { Form, Input, Select, Upload } from "antd";
 
 export const ProductEdit = () => {
   const { formProps, saveButtonProps, query } = useForm();
@@ -100,6 +100,25 @@ export const ProductEdit = () => {
           ]}
         >
           <Select {...storeSelectProps} />
+        </Form.Item>
+        <Form.Item label="Image">
+          <Form.Item
+            name="image_url"
+            getValueProps={(value) => ({
+              fileList: [{ url: value, name: value, uid: value }],
+            })}
+            getValueFromEvent={getValueFromEvent}
+            noStyle
+            rules={[
+              {
+                required: true,
+              },
+            ]}
+          >
+            <Upload.Dragger listType="picture" beforeUpload={() => false}>
+              <p className="ant-upload-text">Drag & drop a file in this area</p>
+            </Upload.Dragger>
+          </Form.Item>
         </Form.Item>
       </Form>
     </Edit>

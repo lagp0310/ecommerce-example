@@ -11,6 +11,7 @@ export const StoreHeaderBannerEdit = () => {
 
   const { selectProps: bannerTypeSelectProps } = useSelect({
     resource: "banner_types",
+    optionLabel: "type",
     defaultValue: headerBannersData?.banner_type,
   });
 

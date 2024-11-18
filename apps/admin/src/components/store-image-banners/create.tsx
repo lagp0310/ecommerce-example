@@ -9,6 +9,7 @@ export const StoreImageBannerCreate = () => {
 
   const { selectProps: bannerTypeSelectProps } = useSelect({
     resource: "banner_types",
+    optionLabel: "type",
   });
 
   return (

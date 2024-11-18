@@ -40,11 +40,13 @@ export const StoreOfferBannerList = () => {
         <Table.Column
           dataIndex={["banner_type"]}
           title="Banner Type"
-          render={(value) => (
-            <span title="Inferencer failed to render this field (Cannot find key)">
-              Cannot Render
-            </span>
-          )}
+          render={(value) =>
+            bannerTypeIsLoading ? (
+              <>Loading...</>
+            ) : (
+              bannerTypeData?.data?.at(0)?.type
+            )
+          }
         />
         <Table.Column
           dataIndex={["created_at"]}

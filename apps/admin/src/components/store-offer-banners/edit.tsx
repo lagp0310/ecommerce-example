@@ -92,6 +92,30 @@ export const StoreOfferBannerEdit = () => {
         >
           <Select {...bannerTypeSelectProps} />
         </Form.Item>
+        <Form.Item
+          label="Subtitle"
+          name={["subtitle"]}
+          rules={[
+            {
+              required: true,
+              len: 50,
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          label="Subtitle Remark"
+          name={["subtitle_remark"]}
+          rules={[
+            {
+              required: true,
+              len: 50,
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
       </Form>
     </Edit>
   );

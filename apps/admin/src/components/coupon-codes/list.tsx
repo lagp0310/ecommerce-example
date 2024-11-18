@@ -40,12 +40,13 @@ export const CouponCodesList = () => {
             )
           }
         />
+        <Table.Column dataIndex="percentage" title="Percentage" />
+        <Table.Column dataIndex="amount" title="Amount" />
         <Table.Column
           dataIndex={["created_at"]}
           title="Created At"
           render={(value: any) => <DateField value={value} />}
         />
-        <Table.Column dataIndex="percentage" title="Percentage" />
         <Table.Column
           title="Actions"
           dataIndex="actions"

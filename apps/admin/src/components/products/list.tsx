@@ -39,6 +39,8 @@ export const ProductList = () => {
         <Table.Column dataIndex="id" title="ID" />
         <Table.Column dataIndex="name" title="Name" />
         <Table.Column dataIndex="price" title="Price" />
+        <Table.Column dataIndex="discounted_price" title="Discounted Price" />
+        <Table.Column dataIndex="discounted_until" title="Discounted Until" />
         <Table.Column
           dataIndex={["currency"]}
           title="Currency"

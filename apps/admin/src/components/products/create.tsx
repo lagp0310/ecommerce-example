@@ -2,9 +2,10 @@
 
 import React from "react";
 import { Create, getValueFromEvent, useForm, useSelect } from "@refinedev/antd";
-import { Form, Input, Select, Upload } from "antd";
+import { DatePicker, Form, Input, Select, Upload } from "antd";
 import isUUID from "validator/es/lib/isUUID";
 import { NumericFormat } from "react-number-format";
+import dayjs from "dayjs";
 
 export const ProductCreate = () => {
   const { formProps, saveButtonProps } = useForm();
@@ -78,6 +79,42 @@ export const ProductCreate = () => {
             fixedDecimalScale
             thousandSeparator=","
           />
+        </Form.Item>
+        <Form.Item
+          label="Discounted"
+          name={["discounted_price"]}
+          rules={[
+            {
+              required: false,
+              min: 0,
+            },
+          ]}
+        >
+          <NumericFormat
+            allowLeadingZeros={false}
+            allowNegative={false}
+            allowedDecimalSeparators={["."]}
+            decimalSeparator="."
+            customInput={Input}
+            decimalScale={2}
+            fixedDecimalScale
+            thousandSeparator=","
+          />
+        </Form.Item>
+        <Form.Item
+          label="Discounted Until"
+          name={["discounted_until"]}
+          rules={[
+            {
+              required: false,
+              validator: (_rule, value, callback) => {
+                const isValid = dayjs(value).isValid();
+                if (!isValid) callback("Date is not valid");
+              },
+            },
+          ]}
+        >
+          <DatePicker format="MM-DD-YYYY HH:mm:ss" />
         </Form.Item>
         <Form.Item
           label="Currency"

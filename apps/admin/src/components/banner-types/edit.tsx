@@ -35,6 +35,18 @@ export const BannerTypeEdit = () => {
         >
           <Input />
         </Form.Item>
+        <Form.Item
+          label="Description"
+          name={["description"]}
+          rules={[
+            {
+              required: false,
+              len: 500,
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
       </Form>
     </Edit>
   );

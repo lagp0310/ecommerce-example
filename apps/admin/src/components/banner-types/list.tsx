@@ -21,6 +21,7 @@ export const BannerTypeList = () => {
       <Table {...tableProps} rowKey="id">
         <Table.Column dataIndex="id" title="ID" />
         <Table.Column dataIndex="type" title="Type" />
+        <Table.Column dataIndex="description" title="Description" />
         <Table.Column
           dataIndex={["created_at"]}
           title="Created At"

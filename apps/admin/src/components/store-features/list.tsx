@@ -39,11 +39,6 @@ export const StoreFeatureList = () => {
           )}
         />
         <Table.Column
-          dataIndex={["created_at"]}
-          title="Created At"
-          render={(value: any) => <DateField value={value} />}
-        />
-        <Table.Column
           dataIndex={["store"]}
           title="Store"
           render={(value) =>
@@ -53,6 +48,11 @@ export const StoreFeatureList = () => {
               storeData?.data?.find((item) => item.id === value)?.name
             )
           }
+        />
+        <Table.Column
+          dataIndex={["created_at"]}
+          title="Created At"
+          render={(value: any) => <DateField value={value} />}
         />
         <Table.Column
           title="Actions"

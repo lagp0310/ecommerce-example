@@ -55,6 +55,54 @@ export const StoreImageBannerEdit = () => {
           <Input />
         </Form.Item>
         <Form.Item
+          label="Header Remark"
+          name={["header_remark"]}
+          rules={[
+            {
+              required: true,
+              len: 50,
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          label="Description"
+          name={["description"]}
+          rules={[
+            {
+              required: true,
+              len: 500,
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          label="CTA Text"
+          name={["cta_text"]}
+          rules={[
+            {
+              required: true,
+              len: 50,
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          label="CTA URL"
+          name={["cta_url"]}
+          rules={[
+            {
+              required: true,
+              len: 500,
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
           label="Banner Type"
           name={"banner_type"}
           rules={[

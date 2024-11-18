@@ -35,6 +35,19 @@ export const CurrencyCreate = () => {
         >
           <Input />
         </Form.Item>
+        <Form.Item
+          label="Numeric ID"
+          name={["numeric_id"]}
+          rules={[
+            {
+              required: true,
+              len: 3,
+              pattern: new RegExp(/[0-9]{3}/),
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
       </Form>
     </Create>
   );

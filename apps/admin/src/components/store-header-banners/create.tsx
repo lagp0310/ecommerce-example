@@ -78,6 +78,42 @@ export const StoreHeaderBannerCreate = () => {
         >
           <Select {...bannerTypeSelectProps} />
         </Form.Item>
+        <Form.Item
+          label="Subtitle"
+          name={["subtitle"]}
+          rules={[
+            {
+              required: true,
+              len: 50,
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          label="Subtitle Remark"
+          name={["subtitle_remark"]}
+          rules={[
+            {
+              required: true,
+              len: 50,
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          label="Subtitle Complement"
+          name={["subtitle_complement"]}
+          rules={[
+            {
+              required: true,
+              len: 50,
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
       </Form>
     </Create>
   );

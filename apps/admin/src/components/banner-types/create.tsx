@@ -22,6 +22,18 @@ export const BannerTypeCreate = () => {
         >
           <Input />
         </Form.Item>
+        <Form.Item
+          label="Description"
+          name={["description"]}
+          rules={[
+            {
+              required: false,
+              len: 500,
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
       </Form>
     </Create>
   );

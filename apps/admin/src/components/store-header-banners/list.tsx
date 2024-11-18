@@ -48,6 +48,12 @@ export const StoreHeaderBannerList = () => {
             )
           }
         />
+        <Table.Column dataIndex="subtitle" title="Subtitle" />
+        <Table.Column dataIndex="subtitle_remark" title="Subtitle Remark" />
+        <Table.Column
+          dataIndex="subtitle_complement"
+          title="Subtitle Complement"
+        />
         <Table.Column
           dataIndex={["created_at"]}
           title="Created At"

@@ -37,6 +37,7 @@ export const CustomerList = () => {
             record?.phone_numbers?.at(0)?.phone_number
           }
         />
+        <Table.Column dataIndex="birth_date" title="Birth Date" />
         <Table.Column
           dataIndex={["created_at"]}
           title="Created At"

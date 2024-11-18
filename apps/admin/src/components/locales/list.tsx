@@ -1,9 +1,9 @@
 "use client";
 
 import React from "react";
-import { BaseRecord, useMany } from "@refinedev/core";
-import { useTable, List, EditButton, DateField } from "@refinedev/antd";
-import { Table, Space } from "antd";
+import { useMany } from "@refinedev/core";
+import { useTable, List, DateField } from "@refinedev/antd";
+import { Table } from "antd";
 
 export const LocaleList = () => {
   const { tableProps } = useTable({

@@ -1,3 +1,17 @@
+import {
+  BeakerIcon,
+  CurrencyDollarIcon,
+  UsersIcon,
+  UserGroupIcon,
+  BuildingStorefrontIcon,
+  BuildingOfficeIcon,
+  TagIcon,
+  LanguageIcon,
+  PhotoIcon,
+  PercentBadgeIcon,
+  ShoppingBagIcon,
+} from "@heroicons/react/24/solid";
+
 export const refineResources = [
   {
     name: "banner_types",
@@ -6,6 +20,7 @@ export const refineResources = [
     edit: "/banner-types/edit/:id",
     meta: {
       canDelete: true,
+      icon: <PhotoIcon className="h-4 w-4" />,
     },
   },
   {
@@ -13,6 +28,9 @@ export const refineResources = [
     list: "/businesses",
     create: "/businesses/create",
     edit: "/businesses/edit/:id",
+    meta: {
+      icon: <BuildingOfficeIcon className="h-4 w-4" />,
+    },
   },
   {
     name: "categories",
@@ -21,6 +39,7 @@ export const refineResources = [
     edit: "/categories/edit/:id",
     meta: {
       canDelete: true,
+      icon: <TagIcon className="h-4 w-4" />,
     },
   },
   {
@@ -30,6 +49,7 @@ export const refineResources = [
     edit: "/coupon-codes/edit/:id",
     meta: {
       canDelete: true,
+      icon: <PercentBadgeIcon className="h-4 w-4" />,
     },
   },
   {
@@ -37,6 +57,9 @@ export const refineResources = [
     list: "/currencies",
     create: "/currencies/create",
     edit: "/currencies/edit/:id",
+    meta: {
+      icon: <CurrencyDollarIcon className="h-4 w-4" />,
+    },
   },
   {
     name: "customers",
@@ -45,6 +68,7 @@ export const refineResources = [
     edit: "/customers/edit/:id",
     meta: {
       canDelete: true,
+      icon: <UserGroupIcon className="h-4 w-4" />,
     },
   },
   {
@@ -54,6 +78,7 @@ export const refineResources = [
     edit: "/store-header-banners/edit/:id",
     meta: {
       canDelete: true,
+      icon: <PhotoIcon className="h-4 w-4" />,
     },
   },
   {
@@ -63,6 +88,7 @@ export const refineResources = [
     edit: "/store-image-banners/edit/:id",
     meta: {
       canDelete: true,
+      icon: <PhotoIcon className="h-4 w-4" />,
     },
   },
   {
@@ -70,6 +96,7 @@ export const refineResources = [
     list: "/locales",
     meta: {
       canDelete: false,
+      icon: <LanguageIcon className="h-4 w-4" />,
     },
   },
   {
@@ -79,6 +106,7 @@ export const refineResources = [
     edit: "/store-offer-banners/edit/:id",
     meta: {
       canDelete: true,
+      icon: <PhotoIcon className="h-4 w-4" />,
     },
   },
   {
@@ -88,6 +116,7 @@ export const refineResources = [
     edit: "/products/edit/:id",
     meta: {
       canDelete: true,
+      icon: <ShoppingBagIcon className="h-4 w-4" />,
     },
   },
   {
@@ -97,6 +126,7 @@ export const refineResources = [
     edit: "/stores/edit/:id",
     meta: {
       canDelete: true,
+      icon: <BuildingStorefrontIcon className="h-4 w-4" />,
     },
   },
   {
@@ -106,6 +136,7 @@ export const refineResources = [
     edit: "/store-features/edit/:id",
     meta: {
       canDelete: true,
+      icon: <BuildingStorefrontIcon className="h-4 w-4" />,
     },
   },
   {
@@ -115,6 +146,7 @@ export const refineResources = [
     edit: "/users/edit/:id",
     meta: {
       canDelete: true,
+      icon: <UsersIcon className="h-4 w-4" />,
     },
   },
 ];

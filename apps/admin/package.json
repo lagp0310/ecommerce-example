@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@ecommerce/ui": "workspace:*",
+    "@heroicons/react": "^2.2.0",
     "@refinedev/antd": "^5.44.0",
     "@refinedev/cli": "^2.16.39",
     "@refinedev/core": "^4.56.0",

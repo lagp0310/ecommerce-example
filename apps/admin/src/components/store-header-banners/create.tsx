@@ -4,7 +4,7 @@ import React from "react";
 import { Create, useForm, useSelect } from "@refinedev/antd";
 import { Form, Input, Select } from "antd";
 
-export const HeaderBannerCreate = () => {
+export const StoreHeaderBannerCreate = () => {
   const { formProps, saveButtonProps } = useForm();
 
   const { selectProps: bannerTypeSelectProps } = useSelect({

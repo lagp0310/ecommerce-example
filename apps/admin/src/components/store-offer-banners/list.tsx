@@ -12,7 +12,7 @@ import {
 } from "@refinedev/antd";
 import { Table, Space } from "antd";
 
-export const OfferBannerList = () => {
+export const StoreOfferBannerList = () => {
   const { tableProps } = useTable({
     syncWithLocation: true,
   });

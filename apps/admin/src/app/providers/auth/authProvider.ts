@@ -29,12 +29,14 @@ export const baseAuthProvider: AuthProvider = {
 
         return {
           success: true,
+          redirectTo: "/",
         };
       }
     } catch (error: any) {
       return {
         success: false,
         error,
+        redirectTo: "/login",
       };
     }
 
@@ -73,7 +75,7 @@ export const baseAuthProvider: AuthProvider = {
 
     return {
       success: true,
-      redirectTo: "/",
+      redirectTo: "/login",
     };
   },
   onError: async (error) => {

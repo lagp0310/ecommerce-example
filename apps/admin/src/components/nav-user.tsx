@@ -5,7 +5,6 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
@@ -20,17 +19,18 @@ import {
 import {
   ArrowRightStartOnRectangleIcon,
   ChevronUpDownIcon,
-  PencilSquareIcon,
 } from "@heroicons/react/24/solid";
 import { baseSupabaseClient } from "@/app/providers/data/dataProvider";
 import { authLoginRoute } from "@/app/constants/constants";
 import { useRouter } from "next/navigation";
 import { useNotificationProvider } from "@refinedev/antd";
+import { OpenNotificationParams } from "@refinedev/core";
 
 export function NavUser({
-  user,
+  user: { avatar, email, name },
 }: {
   user: {
+    id: string;
     name: string;
     email: string;
     avatar: string;
@@ -40,20 +40,31 @@ export function NavUser({
   const router = useRouter();
 
   const { open } = useNotificationProvider();
-  const openNotification = React.useCallback(() => {
-    open({
-      description: "Error",
-      message: "There was an error trying to sign out. Please try again.",
-      type: "error",
-    });
-  }, [open]);
+  const openNotification = React.useCallback(
+    (
+      type: OpenNotificationParams["type"],
+      description: string,
+      message: string
+    ) => {
+      open({
+        description,
+        message,
+        type,
+      });
+    },
+    [open]
+  );
 
   const handleLogout = React.useCallback(async () => {
     const { error } = await baseSupabaseClient.auth.signOut();
 
     if (error) {
       console.error("Could not sign out the user");
-      openNotification();
+      openNotification(
+        "error",
+        "Error",
+        "There was an error trying to sign out. Please try again."
+      );
     }
 
     return router.push(authLoginRoute);
@@ -69,12 +80,12 @@ export function NavUser({
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
             >
               <Avatar className="h-8 w-8 rounded-lg">
-                <AvatarImage src={user.avatar} alt={user.name} />
+                <AvatarImage src={avatar} alt={name} />
                 <AvatarFallback className="rounded-lg">CN</AvatarFallback>
               </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-semibold">{user.name}</span>
-                <span className="truncate text-xs">{user.email}</span>
+                <span className="truncate font-semibold">{name}</span>
+                <span className="truncate text-xs">{email}</span>
               </div>
               <ChevronUpDownIcon className="ml-auto size-4" />
             </SidebarMenuButton>
@@ -88,22 +99,15 @@ export function NavUser({
             <DropdownMenuLabel className="p-0 font-normal">
               <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
                 <Avatar className="h-8 w-8 rounded-lg">
-                  <AvatarImage src={user.avatar} alt={user.name} />
+                  <AvatarImage src={avatar} alt={name} />
                   <AvatarFallback className="rounded-lg">CN</AvatarFallback>
                 </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-semibold">{user.name}</span>
-                  <span className="truncate text-xs">{user.email}</span>
+                  <span className="truncate font-semibold">{name}</span>
+                  <span className="truncate text-xs">{email}</span>
                 </div>
               </div>
             </DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuGroup>
-              <DropdownMenuItem>
-                <PencilSquareIcon className="h-4 w-4" />
-                Edit User
-              </DropdownMenuItem>
-            </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={handleLogout}>
               <ArrowRightStartOnRectangleIcon className="h-4 w-4" />

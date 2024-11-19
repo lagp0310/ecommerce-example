@@ -18,6 +18,7 @@ import { ShoppingBagIcon } from "@heroicons/react/24/solid";
 
 const data = {
   user: {
+    id: "dd8d6bec-5c3c-4518-bd18-a0a62080e316",
     name: "Test User",
     email: "test@example.com",
     avatar: "/avatars/test.jpg",

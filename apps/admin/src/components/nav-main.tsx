@@ -21,6 +21,9 @@ import React from "react";
 
 export function NavMain({
   items,
+  showSectionTitle = true,
+  additionalMenuClasses = "",
+  additionalMenuButtonClasses = "",
 }: {
   items: {
     title: string;
@@ -32,15 +35,24 @@ export function NavMain({
       url: string;
     }[];
   }[];
+  showSectionTitle?: boolean;
+  additionalMenuClasses?: string;
+  additionalMenuButtonClasses?: string;
 }) {
   return (
-    <SidebarGroup>
-      <SidebarGroupLabel>Ecommerce Platform</SidebarGroupLabel>
-      <SidebarMenu>
+    <SidebarGroup className="py-0">
+      {showSectionTitle ? (
+        <SidebarGroupLabel>Ecommerce Platform</SidebarGroupLabel>
+      ) : null}
+      <SidebarMenu className={additionalMenuClasses}>
         {items.map((item) => (
           <Collapsible key={item.title} asChild defaultOpen={item.isActive}>
             <SidebarMenuItem>
-              <SidebarMenuButton asChild tooltip={item.title}>
+              <SidebarMenuButton
+                asChild
+                tooltip={item.title}
+                className={additionalMenuButtonClasses}
+              >
                 <a href={item.url}>
                   {item.icon}
                   <span>{item.title}</span>

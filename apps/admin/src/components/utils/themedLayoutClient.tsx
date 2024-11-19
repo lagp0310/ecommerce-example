@@ -6,7 +6,7 @@ import { AppSidebar } from "@/components/app-sidebar";
 
 export function ThemedLayoutClient({
   initialSiderCollapsed = false,
-  Sider = ({ Title, meta, render }) => <AppSidebar />,
+  Sider = () => <AppSidebar />,
   ...props
 }: RefineThemedLayoutV2Props) {
   return (

@@ -5,6 +5,7 @@ import {
   PhotoIcon,
   ShoppingBagIcon,
   Cog6ToothIcon,
+  ChartPieIcon,
 } from "@heroicons/react/24/solid";
 
 export const refineResources = [
@@ -168,12 +169,19 @@ export const formValidationMessages = {
   },
 };
 
+export const topMainSidebarItems = [
+  {
+    title: "Dashboard",
+    url: "/",
+    icon: <ChartPieIcon className="h-4 w-4" />,
+  },
+];
+
 export const sidebarItems = [
   {
     groupName: "banners",
     groupLabel: "Banners",
     groupIcon: <PhotoIcon className="h-4 w-4" />,
-    isDefaultGroup: true,
     items: refineResources.filter(
       ({ meta: { groupName } }) => groupName === "banners"
     ),

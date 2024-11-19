@@ -13,7 +13,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import { sidebarItems } from "@/app/constants/constants";
+import { sidebarItems, topMainSidebarItems } from "@/app/constants/constants";
 import { ShoppingBagIcon } from "@heroicons/react/24/solid";
 
 const data = {
@@ -22,18 +22,16 @@ const data = {
     email: "test@example.com",
     avatar: "/avatars/test.jpg",
   },
-  navMain: sidebarItems.map(
-    ({ groupIcon, groupLabel, isDefaultGroup, items }) => ({
-      title: groupLabel,
-      url: "#",
-      icon: groupIcon,
-      isActive: isDefaultGroup,
-      items: items.map(({ list, meta: { label } }) => ({
-        title: label,
-        url: list,
-      })),
-    })
-  ),
+  topMain: topMainSidebarItems,
+  navMain: sidebarItems.map(({ groupIcon, groupLabel, items }) => ({
+    title: groupLabel,
+    url: "#",
+    icon: groupIcon,
+    items: items.map(({ list, meta: { label } }) => ({
+      title: label,
+      url: list,
+    })),
+  })),
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
@@ -58,8 +56,13 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
-      <SidebarContent>
-        <NavMain items={data.navMain} />
+      <SidebarContent className="gap-1">
+        <NavMain
+          items={data.topMain}
+          additionalMenuClasses="mb-0"
+          additionalMenuButtonClasses="py-0"
+        />
+        <NavMain items={data.navMain} showSectionTitle={false} />
       </SidebarContent>
       <SidebarFooter>
         <NavUser user={data.user} />

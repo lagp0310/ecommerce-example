@@ -1,16 +1,26 @@
-import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
-import { nonProtectedPathnames } from "./app/constants/constants";
+import { NextRequest, NextResponse } from "next/server";
+import {
+  authLoginRoute,
+  nonProtectedPathnames,
+  sessionCookieName,
+} from "@/app/constants/constants";
+import { baseSupabaseClient } from "@/app/providers/data/dataProvider";
 
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
+  const sessionCookie = request.cookies.get(sessionCookieName)?.value;
+  const jsonSessionCookie = !!sessionCookie ? JSON.parse(sessionCookie) : null;
+  const {
+    data: { user },
+  } = await baseSupabaseClient.auth.getUser(jsonSessionCookie?.access_token);
+
   if (
+    !user &&
     nonProtectedPathnames.some(
       (partialPath) => !request.nextUrl.pathname.startsWith(partialPath)
     )
   ) {
-    if (request.nextUrl.pathname === "/auth/login") return;
-
-    return NextResponse.redirect(new URL("/auth/login", request.url));
+    if (request.nextUrl.pathname === authLoginRoute) return;
+    return NextResponse.redirect(new URL(authLoginRoute, request.url));
   }
 
   return NextResponse.next();

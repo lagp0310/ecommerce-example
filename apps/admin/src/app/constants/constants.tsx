@@ -221,3 +221,15 @@ export const sidebarItems = [
 ];
 
 export const nonProtectedPathnames = ["/auth"];
+
+export const authLoginRoute = "/auth/login";
+export const sessionCookieName = "supabase-session";
+const cookieExpireDays = 30;
+const cookieExpireHours = 24;
+const cookieExpireMinutes = 60;
+const cookieExpireSeconds = 60;
+export const cookieExpiresAfter =
+  cookieExpireDays *
+  cookieExpireHours *
+  cookieExpireMinutes *
+  cookieExpireSeconds;

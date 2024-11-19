@@ -1,28 +1,14 @@
-import { AuthProvider } from "@refinedev/core";
+import { type AuthProvider } from "@refinedev/core";
 import { baseSupabaseClient } from "@/app/providers/data/dataProvider";
+import nookies from "nookies";
+import {
+  cookieExpiresAfter,
+  sessionCookieName,
+} from "@/app/constants/constants";
 
 export const baseAuthProvider: AuthProvider = {
-  login: async ({ email, password, providerName }) => {
+  login: async ({ email, password, remember }) => {
     try {
-      if (providerName) {
-        const { data, error } = await baseSupabaseClient.auth.signInWithOAuth({
-          provider: providerName,
-        });
-
-        if (error) {
-          return {
-            success: false,
-            error,
-          };
-        }
-
-        if (data?.url) {
-          return {
-            success: true,
-          };
-        }
-      }
-
       const { data, error } = await baseSupabaseClient.auth.signInWithPassword({
         email,
         password,
@@ -36,6 +22,11 @@ export const baseAuthProvider: AuthProvider = {
       }
 
       if (data?.user) {
+        nookies.set(null, sessionCookieName, JSON.stringify(data.session), {
+          maxAge: !remember ? cookieExpiresAfter : undefined,
+          path: "/",
+        });
+
         return {
           success: true,
         };
@@ -65,13 +56,19 @@ export const baseAuthProvider: AuthProvider = {
     throw new Error("Not implemented");
   },
   logout: async () => {
-    const { error } = await baseSupabaseClient.auth.signOut();
+    try {
+      const { error } = await baseSupabaseClient.auth.signOut();
 
-    if (error) {
-      return {
-        success: false,
-        error,
-      };
+      if (error) {
+        return {
+          success: false,
+          error,
+        };
+      }
+
+      nookies.destroy(null, sessionCookieName);
+    } catch (error) {
+      console.error(error);
     }
 
     return {
@@ -85,10 +82,11 @@ export const baseAuthProvider: AuthProvider = {
   },
   check: async () => {
     try {
-      const { data } = await baseSupabaseClient.auth.getSession();
-      const { session } = data;
+      const {
+        data: { user },
+      } = await baseSupabaseClient.auth.getUser();
 
-      if (!session) {
+      if (!user) {
         return {
           authenticated: false,
           error: {

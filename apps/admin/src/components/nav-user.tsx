@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
@@ -21,6 +22,10 @@ import {
   ChevronUpDownIcon,
   PencilSquareIcon,
 } from "@heroicons/react/24/solid";
+import { baseSupabaseClient } from "@/app/providers/data/dataProvider";
+import { authLoginRoute } from "@/app/constants/constants";
+import { useRouter } from "next/navigation";
+import { useNotificationProvider } from "@refinedev/antd";
 
 export function NavUser({
   user,
@@ -32,6 +37,27 @@ export function NavUser({
   };
 }) {
   const { isMobile } = useSidebar();
+  const router = useRouter();
+
+  const { open } = useNotificationProvider();
+  const openNotification = React.useCallback(() => {
+    open({
+      description: "Error",
+      message: "There was an error trying to sign out. Please try again.",
+      type: "error",
+    });
+  }, [open]);
+
+  const handleLogout = React.useCallback(async () => {
+    const { error } = await baseSupabaseClient.auth.signOut();
+
+    if (error) {
+      console.error("Could not sign out the user");
+      openNotification();
+    }
+
+    return router.push(authLoginRoute);
+  }, [openNotification, router]);
 
   return (
     <SidebarMenu>
@@ -79,7 +105,7 @@ export function NavUser({
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
+            <DropdownMenuItem onClick={handleLogout}>
               <ArrowRightStartOnRectangleIcon className="h-4 w-4" />
               Log out
             </DropdownMenuItem>

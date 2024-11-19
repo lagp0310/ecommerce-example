@@ -56,7 +56,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
-      <SidebarContent className="gap-1">
+      <SidebarContent className="gap-[0.5px]">
         <NavMain
           items={data.topMain}
           additionalMenuClasses="mb-0"

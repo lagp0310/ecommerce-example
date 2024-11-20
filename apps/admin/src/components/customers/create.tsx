@@ -55,7 +55,7 @@ export const CustomerCreate = () => {
 
   return (
     <Create footerButtons={[]}>
-      <Form {...formProps} layout="vertical" onSubmitCapture={createCustomer}>
+      <Form {...formProps} layout="vertical">
         <div className="flex flex-1 flex-row gap-x-4 w-full">
           <Form.Item
             label="First Name"

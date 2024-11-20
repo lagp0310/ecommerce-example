@@ -39,7 +39,7 @@ export const CurrencyCreate = () => {
             },
           ]}
         >
-          <Input />
+          <Input maxLength={3} />
         </Form.Item>
         <Form.Item
           label="Numeric ID"
@@ -52,7 +52,7 @@ export const CurrencyCreate = () => {
             },
           ]}
         >
-          <Input />
+          <Input maxLength={3} />
         </Form.Item>
       </Form>
     </Create>

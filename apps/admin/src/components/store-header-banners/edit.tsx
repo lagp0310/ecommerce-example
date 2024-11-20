@@ -59,8 +59,8 @@ export const StoreHeaderBannerEdit = () => {
           name={["description"]}
           rules={[
             {
-              required: true,
-              max: 500,
+              required: false,
+              max: 50,
             },
           ]}
         >

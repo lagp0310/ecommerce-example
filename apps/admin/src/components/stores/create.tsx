@@ -23,6 +23,20 @@ export const StoreCreate = () => {
     >
       <Form {...formProps} layout="vertical">
         <Form.Item
+          label="Business"
+          name={"business"}
+          rules={[
+            {
+              required: true,
+              validator(_rule, value, callback) {
+                if (!isUUID(value)) callback("Business should be an UUID");
+              },
+            },
+          ]}
+        >
+          <Select {...businessSelectProps} />
+        </Form.Item>
+        <Form.Item
           label="Name"
           name={["name"]}
           rules={[
@@ -39,26 +53,12 @@ export const StoreCreate = () => {
           name={["description"]}
           rules={[
             {
-              required: true,
+              required: false,
               max: 500,
             },
           ]}
         >
           <Input.TextArea />
-        </Form.Item>
-        <Form.Item
-          label="Business"
-          name={"business"}
-          rules={[
-            {
-              required: true,
-              validator(_rule, value, callback) {
-                if (!isUUID(value)) callback("Business should be an UUID");
-              },
-            },
-          ]}
-        >
-          <Select {...businessSelectProps} />
         </Form.Item>
       </Form>
     </Create>

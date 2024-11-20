@@ -79,18 +79,6 @@ export const StoreImageBannerEdit = () => {
           <Input />
         </Form.Item>
         <Form.Item
-          label="Description"
-          name={["description"]}
-          rules={[
-            {
-              required: true,
-              max: 500,
-            },
-          ]}
-        >
-          <Input />
-        </Form.Item>
-        <Form.Item
           label="CTA Text"
           name={["cta_text"]}
           rules={[
@@ -108,6 +96,18 @@ export const StoreImageBannerEdit = () => {
           rules={[
             {
               required: true,
+              max: 500,
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          label="Description"
+          name={["description"]}
+          rules={[
+            {
+              required: false,
               max: 500,
             },
           ]}

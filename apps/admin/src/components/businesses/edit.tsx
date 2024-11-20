@@ -51,7 +51,7 @@ export const BusinessEdit = () => {
           name={["description"]}
           rules={[
             {
-              required: true,
+              required: false,
               max: 500,
             },
           ]}

@@ -30,6 +30,20 @@ export const ProductCreate = () => {
     >
       <Form {...formProps} layout="vertical">
         <Form.Item
+          label="Store"
+          name={"store"}
+          rules={[
+            {
+              required: true,
+              validator(_rule, value, callback) {
+                if (!isUUID(value)) callback("Store should be an UUID");
+              },
+            },
+          ]}
+        >
+          <Select {...storeSelectProps} />
+        </Form.Item>
+        <Form.Item
           label="Name"
           name={["name"]}
           rules={[
@@ -46,7 +60,7 @@ export const ProductCreate = () => {
           name={["description"]}
           rules={[
             {
-              required: true,
+              required: false,
               max: 500,
             },
           ]}
@@ -141,33 +155,6 @@ export const ProductCreate = () => {
           ]}
         >
           <Select {...currencySelectProps} />
-        </Form.Item>
-        <Form.Item
-          label="Rating"
-          name={["rating"]}
-          rules={[
-            {
-              required: true,
-              min: 1,
-              max: 5,
-            },
-          ]}
-        >
-          <Input />
-        </Form.Item>
-        <Form.Item
-          label="Store"
-          name={"store"}
-          rules={[
-            {
-              required: true,
-              validator(_rule, value, callback) {
-                if (!isUUID(value)) callback("Store should be an UUID");
-              },
-            },
-          ]}
-        >
-          <Select {...storeSelectProps} />
         </Form.Item>
         <Form.Item label="Image">
           <Form.Item

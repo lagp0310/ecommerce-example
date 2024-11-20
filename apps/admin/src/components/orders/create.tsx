@@ -63,7 +63,7 @@ export const OrderCreate = () => {
           name={["notes"]}
           rules={[
             {
-              required: true,
+              required: false,
               max: 500,
             },
           ]}

@@ -82,7 +82,7 @@ export const OrderEdit = () => {
           name={["notes"]}
           rules={[
             {
-              required: true,
+              required: false,
               max: 500,
             },
           ]}

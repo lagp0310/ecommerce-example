@@ -50,6 +50,20 @@ export const ProductEdit = () => {
           <Input readOnly disabled />
         </Form.Item>
         <Form.Item
+          label="Store"
+          name={"store"}
+          rules={[
+            {
+              required: true,
+              validator(_rule, value, callback) {
+                if (!isUUID(value)) callback("Store should be an UUID");
+              },
+            },
+          ]}
+        >
+          <Select {...storeSelectProps} />
+        </Form.Item>
+        <Form.Item
           label="Name"
           name={["name"]}
           rules={[
@@ -66,7 +80,7 @@ export const ProductEdit = () => {
           name={["description"]}
           rules={[
             {
-              required: true,
+              required: false,
               max: 500,
             },
           ]}
@@ -109,33 +123,6 @@ export const ProductEdit = () => {
           />
         </Form.Item>
         <Form.Item
-          label="Currency"
-          name={"currency"}
-          rules={[
-            {
-              required: true,
-              validator(_rule, value, callback) {
-                if (!isUUID(value)) callback("Currency should be an UUID");
-              },
-            },
-          ]}
-        >
-          <Select {...currencySelectProps} />
-        </Form.Item>
-        <Form.Item
-          label="Rating"
-          name={["rating"]}
-          rules={[
-            {
-              required: true,
-              min: 1,
-              max: 5,
-            },
-          ]}
-        >
-          <Input />
-        </Form.Item>
-        <Form.Item
           label="Discounted Price"
           name={["discounted_price"]}
           rules={[
@@ -176,18 +163,18 @@ export const ProductEdit = () => {
           <DatePicker format="MM-DD-YYYY HH:mm:ss" />
         </Form.Item>
         <Form.Item
-          label="Store"
-          name={"store"}
+          label="Currency"
+          name={"currency"}
           rules={[
             {
               required: true,
               validator(_rule, value, callback) {
-                if (!isUUID(value)) callback("Store should be an UUID");
+                if (!isUUID(value)) callback("Currency should be an UUID");
               },
             },
           ]}
         >
-          <Select {...storeSelectProps} />
+          <Select {...currencySelectProps} />
         </Form.Item>
         <Form.Item label="Image">
           <Form.Item

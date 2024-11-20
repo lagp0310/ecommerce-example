@@ -74,7 +74,6 @@ export const ProductList = () => {
             return currencyIsLoading ? <>Loading...</> : composedName;
           }}
         />
-        <Table.Column dataIndex="rating" title="Rating" />
         <Table.Column
           dataIndex={["image_url"]}
           title="Image"

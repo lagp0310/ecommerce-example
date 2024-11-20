@@ -24,6 +24,20 @@ export const StoreFeatureCreate = () => {
     >
       <Form {...formProps} layout="vertical">
         <Form.Item
+          label="Store"
+          name={"store"}
+          rules={[
+            {
+              required: true,
+              validator(_rule, value, callback) {
+                if (!isUUID(value)) callback("Store should be an UUID");
+              },
+            },
+          ]}
+        >
+          <Select {...storeSelectProps} />
+        </Form.Item>
+        <Form.Item
           label="Title"
           name={["title"]}
           rules={[
@@ -40,7 +54,7 @@ export const StoreFeatureCreate = () => {
           name={["description"]}
           rules={[
             {
-              required: true,
+              required: false,
               max: 500,
             },
           ]}
@@ -65,20 +79,6 @@ export const StoreFeatureCreate = () => {
               <p className="ant-upload-text">Drag & drop a file in this area</p>
             </Upload.Dragger>
           </Form.Item>
-        </Form.Item>
-        <Form.Item
-          label="Store"
-          name={"store"}
-          rules={[
-            {
-              required: true,
-              validator(_rule, value, callback) {
-                if (!isUUID(value)) callback("Store should be an UUID");
-              },
-            },
-          ]}
-        >
-          <Select {...storeSelectProps} />
         </Form.Item>
       </Form>
     </Create>

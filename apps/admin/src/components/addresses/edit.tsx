@@ -20,10 +20,12 @@ export const AddressEdit = () => {
     <Edit
       saveButtonProps={{
         ...saveButtonProps,
+        className: "align-middle",
         icon: <FolderArrowDownIcon className="h-4 w-4 text-white" />,
       }}
       deleteButtonProps={{
-        icon: <TrashIcon className="h4 w-4 text-red-500" />,
+        className: "align-middle mr-1.5",
+        icon: <TrashIcon className="h-4 w-4 text-red-500" />,
       }}
     >
       <Form {...formProps} layout="vertical">

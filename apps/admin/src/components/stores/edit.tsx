@@ -4,7 +4,7 @@ import React from "react";
 import { Edit, useForm, useSelect } from "@refinedev/antd";
 import { Form, Input, Select } from "antd";
 import isUUID from "validator/es/lib/isUUID";
-import { FolderArrowDownIcon } from "@heroicons/react/24/solid";
+import { FolderArrowDownIcon, TrashIcon } from "@heroicons/react/24/solid";
 
 export const StoreEdit = () => {
   const { formProps, saveButtonProps, query } = useForm();
@@ -21,7 +21,12 @@ export const StoreEdit = () => {
     <Edit
       saveButtonProps={{
         ...saveButtonProps,
+        className: "align-middle",
         icon: <FolderArrowDownIcon className="h-4 w-4 text-white" />,
+      }}
+      deleteButtonProps={{
+        className: "align-middle mr-1.5",
+        icon: <TrashIcon className="h-4 w-4 text-red-500" />,
       }}
     >
       <Form {...formProps} layout="vertical">

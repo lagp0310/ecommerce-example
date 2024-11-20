@@ -42,7 +42,11 @@ export const CouponCodesList = () => {
             )
           }
         />
-        <Table.Column dataIndex="percentage" title="Percentage" />
+        <Table.Column
+          dataIndex="percentage"
+          title="Percentage"
+          render={(value) => `${value}%`}
+        />
         <Table.Column dataIndex="amount" title="Amount" />
         <Table.Column
           title="Actions"

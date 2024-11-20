@@ -93,6 +93,7 @@ export const CouponCodesEdit = () => {
             decimalScale={2}
             fixedDecimalScale
             thousandSeparator=","
+            suffix="%"
           />
         </Form.Item>
         <Form.Item

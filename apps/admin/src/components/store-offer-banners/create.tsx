@@ -16,6 +16,7 @@ export const StoreOfferBannerCreate = () => {
 
   return (
     <Create
+      title="Create Offer Banner"
       saveButtonProps={{
         ...saveButtonProps,
         icon: <FolderArrowDownIcon className="h-4 w-4 text-white" />,

@@ -16,6 +16,7 @@ export const StoreHeaderBannerCreate = () => {
 
   return (
     <Create
+      title="Create Header Banner"
       saveButtonProps={{
         ...saveButtonProps,
         icon: <FolderArrowDownIcon className="h-4 w-4 text-white" />,

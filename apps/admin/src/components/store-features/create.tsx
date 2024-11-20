@@ -16,6 +16,7 @@ export const StoreFeatureCreate = () => {
 
   return (
     <Create
+      title="Create Store Feature"
       saveButtonProps={{
         ...saveButtonProps,
         icon: <FolderArrowDownIcon className="h-4 w-4 text-white" />,

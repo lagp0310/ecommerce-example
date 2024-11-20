@@ -19,6 +19,7 @@ export const StoreImageBannerEdit = () => {
 
   return (
     <Edit
+      title="Edit Image Banner"
       saveButtonProps={{
         ...saveButtonProps,
         icon: <FolderArrowDownIcon className="h-4 w-4 text-white" />,

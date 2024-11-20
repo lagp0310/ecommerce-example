@@ -20,6 +20,7 @@ export const CouponCodesEdit = () => {
 
   return (
     <Edit
+      title="Edit Coupon Code"
       saveButtonProps={{
         ...saveButtonProps,
         icon: <FolderArrowDownIcon className="h-4 w-4 text-white" />,

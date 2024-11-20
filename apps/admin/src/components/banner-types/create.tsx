@@ -10,6 +10,7 @@ export const BannerTypeCreate = () => {
 
   return (
     <Create
+      title="Create Banner Type"
       saveButtonProps={{
         ...saveButtonProps,
         icon: <FolderArrowDownIcon className="h-4 w-4 text-white" />,

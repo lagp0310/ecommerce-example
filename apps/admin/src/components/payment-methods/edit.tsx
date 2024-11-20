@@ -18,6 +18,7 @@ export const PaymentMethodEdit = () => {
 
   return (
     <Edit
+      title="Edit Payment Method"
       saveButtonProps={{
         ...saveButtonProps,
         icon: <FolderArrowDownIcon className="h-4 w-4 text-white" />,

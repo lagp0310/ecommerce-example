@@ -12,6 +12,7 @@ export const BannerTypeEdit = () => {
 
   return (
     <Edit
+      title="Edit Banner Type"
       saveButtonProps={{
         ...saveButtonProps,
         icon: <FolderArrowDownIcon className="h-4 w-4 text-white" />,

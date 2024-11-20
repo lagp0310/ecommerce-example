@@ -2,13 +2,8 @@
 
 import React from "react";
 import { BaseRecord, useMany } from "@refinedev/core";
-import { useTable, List, EditButton, DeleteButton } from "@refinedev/antd";
+import { useTable, List } from "@refinedev/antd";
 import { Table, Space } from "antd";
-import {
-  PencilSquareIcon,
-  PlusIcon,
-  TrashIcon,
-} from "@heroicons/react/24/solid";
 
 export const OrderList = () => {
   const { tableProps } = useTable({
@@ -42,9 +37,7 @@ export const OrderList = () => {
     });
 
   return (
-    <List
-      createButtonProps={{ icon: <PlusIcon className="h-4 w-4 text-white" /> }}
-    >
+    <List>
       <Table {...tableProps} rowKey="id">
         <Table.Column dataIndex="id" title="ID" />
         <Table.Column
@@ -80,22 +73,7 @@ export const OrderList = () => {
         <Table.Column
           title="Actions"
           dataIndex="actions"
-          render={(_, record: BaseRecord) => (
-            <Space>
-              <EditButton
-                hideText
-                size="small"
-                recordItemId={record.id}
-                icon={<PencilSquareIcon className="h-4 w-4 text-gray-500" />}
-              />
-              <DeleteButton
-                hideText
-                size="small"
-                recordItemId={record.id}
-                icon={<TrashIcon className="h-4 w-4 text-red-500" />}
-              />
-            </Space>
-          )}
+          render={(_, record: BaseRecord) => <Space></Space>}
         />
       </Table>
     </List>

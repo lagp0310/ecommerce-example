@@ -47,10 +47,8 @@ export const refineResources = [
   {
     name: "carts",
     list: "/admin/carts",
-    create: "/admin/carts/create",
-    edit: "/admin/carts/edit/:id",
     meta: {
-      canDelete: true,
+      canDelete: false,
       label: "Carts",
       groupName: "selling",
     },
@@ -144,10 +142,8 @@ export const refineResources = [
   {
     name: "orders",
     list: "/admin/orders",
-    create: "/admin/orders/create",
-    edit: "/admin/orders/edit/:id",
     meta: {
-      canDelete: true,
+      canDelete: false,
       label: "Orders",
       groupName: "selling",
     },
@@ -155,10 +151,8 @@ export const refineResources = [
   {
     name: "payments",
     list: "/admin/payments",
-    create: "/admin/payments/create",
-    edit: "/admin/payments/edit/:id",
     meta: {
-      canDelete: true,
+      canDelete: false,
       label: "Payments",
       groupName: "payments",
     },
@@ -221,10 +215,8 @@ export const refineResources = [
   {
     name: "transactions",
     list: "/admin/transactions",
-    create: "/admin/transactions/create",
-    edit: "/admin/transactions/edit/:id",
     meta: {
-      canDelete: true,
+      canDelete: false,
       label: "Transactions",
       groupName: "payments",
     },

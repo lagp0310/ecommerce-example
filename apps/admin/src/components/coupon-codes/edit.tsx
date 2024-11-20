@@ -49,7 +49,7 @@ export const CouponCodesEdit = () => {
           rules={[
             {
               required: true,
-              len: 20,
+              max: 20,
             },
           ]}
         >

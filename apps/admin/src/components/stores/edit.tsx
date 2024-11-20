@@ -47,7 +47,7 @@ export const StoreEdit = () => {
           rules={[
             {
               required: true,
-              len: 50,
+              max: 50,
             },
           ]}
         >
@@ -59,7 +59,7 @@ export const StoreEdit = () => {
           rules={[
             {
               required: true,
-              len: 500,
+              max: 500,
             },
           ]}
         >

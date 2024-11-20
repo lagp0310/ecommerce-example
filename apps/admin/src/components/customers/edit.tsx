@@ -75,7 +75,7 @@ export const CustomerEdit = () => {
               {
                 required: true,
                 pattern: new RegExp(/^[a-zA-Z]+$/),
-                len: 50,
+                max: 50,
               },
             ]}
             className="flex-1"
@@ -89,7 +89,7 @@ export const CustomerEdit = () => {
               {
                 required: true,
                 pattern: new RegExp(/^[a-zA-Z]+$/),
-                len: 50,
+                max: 50,
               },
             ]}
             className="flex-1"
@@ -105,7 +105,7 @@ export const CustomerEdit = () => {
               {
                 required: true,
                 pattern: new RegExp(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/),
-                len: 50,
+                max: 50,
               },
             ]}
             className="flex-1"
@@ -119,7 +119,7 @@ export const CustomerEdit = () => {
               {
                 required: true,
                 pattern: new RegExp(/[0-9]{3}\-[0-9]{3}\-[0-9]{4}/),
-                len: 12,
+                max: 12,
               },
             ]}
             className="flex-1"

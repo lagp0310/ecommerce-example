@@ -41,7 +41,7 @@ export const BannerTypeEdit = () => {
           rules={[
             {
               required: true,
-              len: 50,
+              max: 50,
             },
           ]}
         >
@@ -53,7 +53,7 @@ export const BannerTypeEdit = () => {
           rules={[
             {
               required: false,
-              len: 500,
+              max: 500,
             },
           ]}
         >

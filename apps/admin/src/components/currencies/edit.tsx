@@ -40,7 +40,7 @@ export const CurrencyEdit = () => {
           rules={[
             {
               required: true,
-              len: 50,
+              max: 50,
             },
           ]}
         >

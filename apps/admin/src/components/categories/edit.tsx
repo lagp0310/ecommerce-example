@@ -46,7 +46,7 @@ export const CategoryEdit = () => {
           rules={[
             {
               required: true,
-              len: 50,
+              max: 50,
             },
           ]}
         >
@@ -58,7 +58,7 @@ export const CategoryEdit = () => {
           rules={[
             {
               required: true,
-              len: 500,
+              max: 500,
             },
           ]}
         >

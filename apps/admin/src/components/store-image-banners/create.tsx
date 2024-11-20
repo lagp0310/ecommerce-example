@@ -29,7 +29,7 @@ export const StoreImageBannerCreate = () => {
           rules={[
             {
               required: true,
-              len: 50,
+              max: 50,
             },
           ]}
         >
@@ -41,7 +41,7 @@ export const StoreImageBannerCreate = () => {
           rules={[
             {
               required: true,
-              len: 50,
+              max: 50,
             },
           ]}
         >
@@ -53,7 +53,7 @@ export const StoreImageBannerCreate = () => {
           rules={[
             {
               required: true,
-              len: 50,
+              max: 50,
             },
           ]}
         >
@@ -65,7 +65,7 @@ export const StoreImageBannerCreate = () => {
           rules={[
             {
               required: true,
-              len: 500,
+              max: 500,
             },
           ]}
         >
@@ -77,7 +77,7 @@ export const StoreImageBannerCreate = () => {
           rules={[
             {
               required: true,
-              len: 50,
+              max: 50,
             },
           ]}
         >
@@ -89,7 +89,7 @@ export const StoreImageBannerCreate = () => {
           rules={[
             {
               required: true,
-              len: 500,
+              max: 500,
             },
           ]}
         >

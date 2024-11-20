@@ -30,7 +30,7 @@ export const CouponCodesCreate = () => {
           rules={[
             {
               required: true,
-              len: 20,
+              max: 20,
             },
           ]}
         >

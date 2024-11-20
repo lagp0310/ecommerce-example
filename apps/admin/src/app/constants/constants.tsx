@@ -148,17 +148,6 @@ export const refineResources = [
       groupName: "stores",
     },
   },
-  {
-    name: "users",
-    list: "/users",
-    create: "/users/create",
-    edit: "/users/edit/:id",
-    meta: {
-      canDelete: true,
-      label: "Users",
-      groupName: "admin",
-    },
-  },
 ];
 
 export const formValidationMessages = {

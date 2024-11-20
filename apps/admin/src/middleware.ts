@@ -23,6 +23,15 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL(authLoginRoute, request.url));
   }
 
+  if (
+    !!user &&
+    nonProtectedPathnames.some((partialPath) =>
+      request.nextUrl.pathname.startsWith(partialPath)
+    )
+  ) {
+    return NextResponse.redirect(`${request.nextUrl.origin}/`);
+  }
+
   return NextResponse.next();
 }
 

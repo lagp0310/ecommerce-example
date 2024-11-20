@@ -16,7 +16,7 @@ export default function Error({
   }, [error]);
 
   return (
-    <div className="flex flex-1 flex-col justify-center items-center">
+    <div className="flex flex-1 flex-col justify-center items-center h-[99%]">
       <PageError className="h-64 w-64" />
       <h2 className="mt-8 text-2xl">Oops! Something went wrong</h2>
       <p>{`We're sorry. We've had a problem processing your request.`}</p>

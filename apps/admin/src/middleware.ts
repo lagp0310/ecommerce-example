@@ -29,7 +29,11 @@ export async function middleware(request: NextRequest) {
       request.nextUrl.pathname.startsWith(partialPath)
     )
   ) {
-    return NextResponse.redirect(`${request.nextUrl.origin}/`);
+    return NextResponse.redirect(`${request.nextUrl.origin}/admin/dashboard`);
+  }
+
+  if (request.nextUrl.pathname === "/") {
+    return NextResponse.redirect(new URL("/admin/dashboard", request.url));
   }
 
   return NextResponse.next();

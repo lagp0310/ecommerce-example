@@ -1,11 +1,15 @@
+import { PageNotFound } from "@/components/illustrations/PageNotFound";
 import Link from "next/link";
 
 export default function NotFound() {
   return (
-    <div>
-      <h2>Not Found</h2>
-      <p>Could not find requested resource</p>
-      <Link href="/">Return to the Dashboard</Link>
+    <div className="flex flex-1 flex-col justify-center items-center">
+      <PageNotFound className="h-64 w-64" />
+      <h2>Page Not Found</h2>
+      <p>{`We couldn't find the page you're looking for.`}</p>
+      <Link href="/" className="underline text-blue-400">
+        Return to the Dashboard
+      </Link>
     </div>
   );
 }

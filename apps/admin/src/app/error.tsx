@@ -1,7 +1,7 @@
 "use client"; // Error boundaries must be Client Components
 
 import React from "react";
-import { PageError } from "@/components/illustrations/PageError";
+import { PageError } from "@/components/ui/illustrations/PageError";
 import Link from "next/link";
 
 export default function Error({

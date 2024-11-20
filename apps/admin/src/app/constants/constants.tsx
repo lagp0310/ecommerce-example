@@ -6,9 +6,22 @@ import {
   ShoppingBagIcon,
   Cog6ToothIcon,
   ChartPieIcon,
+  ShoppingCartIcon,
+  CreditCardIcon,
 } from "@heroicons/react/24/solid";
 
 export const refineResources = [
+  {
+    name: "addresses",
+    list: "/admin/addresses",
+    create: "/admin/addresses/create",
+    edit: "/admin/addresses/edit/:id",
+    meta: {
+      canDelete: true,
+      label: "Addresses",
+      groupName: "customers",
+    },
+  },
   {
     name: "banner_types",
     list: "/admin/banner-types",
@@ -26,8 +39,20 @@ export const refineResources = [
     create: "/admin/businesses/create",
     edit: "/admin/businesses/edit/:id",
     meta: {
+      canDelete: false,
       label: "Businesses",
       groupName: "admin",
+    },
+  },
+  {
+    name: "carts",
+    list: "/admin/carts",
+    create: "/admin/carts/create",
+    edit: "/admin/carts/edit/:id",
+    meta: {
+      canDelete: true,
+      label: "Carts",
+      groupName: "selling",
     },
   },
   {
@@ -58,6 +83,7 @@ export const refineResources = [
     create: "/admin/currencies/create",
     edit: "/admin/currencies/edit/:id",
     meta: {
+      canDelete: false,
       label: "Currencies",
       groupName: "admin",
     },
@@ -116,6 +142,50 @@ export const refineResources = [
     },
   },
   {
+    name: "orders",
+    list: "/admin/orders",
+    create: "/admin/orders/create",
+    edit: "/admin/orders/edit/:id",
+    meta: {
+      canDelete: true,
+      label: "Orders",
+      groupName: "selling",
+    },
+  },
+  {
+    name: "payments",
+    list: "/admin/payments",
+    create: "/admin/payments/create",
+    edit: "/admin/payments/edit/:id",
+    meta: {
+      canDelete: true,
+      label: "Payments",
+      groupName: "payments",
+    },
+  },
+  {
+    name: "payment_methods",
+    list: "/admin/payment-methods",
+    create: "/admin/payment-methods/create",
+    edit: "/admin/payment-methods/edit/:id",
+    meta: {
+      canDelete: true,
+      label: "Payment Methods",
+      groupName: "payments",
+    },
+  },
+  {
+    name: "payment_method_types",
+    list: "/admin/payment-method-types",
+    create: "/admin/payment-method-types/create",
+    edit: "/admin/payment-method-types/edit/:id",
+    meta: {
+      canDelete: false,
+      label: "Payment Method Types",
+      groupName: "payments",
+    },
+  },
+  {
     name: "products",
     list: "/admin/products",
     create: "/admin/products/create",
@@ -146,6 +216,17 @@ export const refineResources = [
       canDelete: true,
       label: "Store Features",
       groupName: "stores",
+    },
+  },
+  {
+    name: "transactions",
+    list: "/admin/transactions",
+    create: "/admin/transactions/create",
+    edit: "/admin/transactions/edit/:id",
+    meta: {
+      canDelete: true,
+      label: "Transactions",
+      groupName: "payments",
     },
   },
 ];
@@ -189,6 +270,22 @@ export const sidebarItems = [
     groupIcon: <UserGroupIcon className="h-4 w-4" />,
     items: refineResources.filter(
       ({ meta: { groupName } }) => groupName === "customers"
+    ),
+  },
+  {
+    groupName: "selling",
+    groupLabel: "Selling",
+    groupIcon: <ShoppingCartIcon className="h-4 w-4" />,
+    items: refineResources.filter(
+      ({ meta: { groupName } }) => groupName === "selling"
+    ),
+  },
+  {
+    groupName: "payments",
+    groupLabel: "Payments",
+    groupIcon: <CreditCardIcon className="h-4 w-4" />,
+    items: refineResources.filter(
+      ({ meta: { groupName } }) => groupName === "payments"
     ),
   },
   {

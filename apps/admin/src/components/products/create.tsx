@@ -71,7 +71,9 @@ export const ProductCreate = () => {
           rules={[
             {
               required: true,
-              min: 0,
+              validator(_rule, value, callback) {
+                if (value < 0) callback("Price must be positive");
+              },
             },
           ]}
         >
@@ -92,7 +94,9 @@ export const ProductCreate = () => {
           rules={[
             {
               required: false,
-              min: 0,
+              validator(_rule, value, callback) {
+                if (!!value && value < 0) callback("Price must be positive");
+              },
             },
           ]}
         >

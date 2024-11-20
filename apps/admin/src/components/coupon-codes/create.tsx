@@ -57,6 +57,10 @@ export const CouponCodesCreate = () => {
               required: false,
               min: 0,
               max: 100,
+              validator(_rule, value, callback) {
+                if (value < 0) callback("Percentage cannot be negative");
+                else if (value > 100) callback("Percentage cannot exceed 100");
+              },
             },
           ]}
         >
@@ -78,6 +82,9 @@ export const CouponCodesCreate = () => {
             {
               required: false,
               min: 0,
+              validator(_rule, value, callback) {
+                if (value < 0) callback("Amount must be positive");
+              },
             },
           ]}
         >

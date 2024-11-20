@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/sidebar";
 import { sidebarItems, topMainSidebarItems } from "@/app/constants/constants";
 import { ShoppingBagIcon } from "@heroicons/react/24/solid";
+import Link from "next/link";
 
 const data = {
   user: {
@@ -26,7 +27,6 @@ const data = {
   topMain: topMainSidebarItems,
   navMain: sidebarItems.map(({ groupIcon, groupLabel, items }) => ({
     title: groupLabel,
-    url: "#",
     icon: groupIcon,
     items: items.map(({ list, meta: { label } }) => ({
       title: label,
@@ -42,7 +42,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
-              <a href="#">
+              <Link href="/admin/dashboard">
                 <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
                   <ShoppingBagIcon className="h-4 w-4" />
                 </div>
@@ -52,7 +52,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                   </span>
                   <span className="truncate text-xs">Enterprise</span>
                 </div>
-              </a>
+              </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>

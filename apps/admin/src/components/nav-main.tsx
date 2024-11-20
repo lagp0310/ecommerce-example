@@ -17,7 +17,9 @@ import {
   SidebarMenuSubItem,
 } from "@/components/ui/sidebar";
 import { ChevronRightIcon } from "@heroicons/react/24/solid";
+import Link from "next/link";
 import React from "react";
+import isURL from "validator/lib/isURL";
 
 export function NavMain({
   items,
@@ -27,7 +29,7 @@ export function NavMain({
 }: {
   items: {
     title: string;
-    url: string;
+    url?: string;
     icon: React.ReactNode;
     isActive?: boolean;
     items?: {
@@ -39,6 +41,17 @@ export function NavMain({
   additionalMenuClasses?: string;
   additionalMenuButtonClasses?: string;
 }) {
+  const hasGroupValidLink = React.useCallback(
+    (url: string) =>
+      typeof url === "string" &&
+      isURL(url, {
+        require_host: false,
+        require_port: false,
+        require_protocol: false,
+      }),
+    []
+  );
+
   return (
     <SidebarGroup className="py-0">
       {showSectionTitle ? (
@@ -53,10 +66,17 @@ export function NavMain({
                 tooltip={item.title}
                 className={additionalMenuButtonClasses}
               >
-                <a href={item.url}>
-                  {item.icon}
-                  <span>{item.title}</span>
-                </a>
+                {!!item.url && hasGroupValidLink(item.url) ? (
+                  <Link href={item.url}>
+                    {item.icon}
+                    <span>{item.title}</span>
+                  </Link>
+                ) : (
+                  <button type="button">
+                    {item.icon}
+                    <span>{item.title}</span>
+                  </button>
+                )}
               </SidebarMenuButton>
               {item.items?.length ? (
                 <>
@@ -71,9 +91,9 @@ export function NavMain({
                       {item.items?.map((subItem) => (
                         <SidebarMenuSubItem key={subItem.title}>
                           <SidebarMenuSubButton asChild>
-                            <a href={subItem.url}>
+                            <Link href={subItem.url}>
                               <span>{subItem.title}</span>
-                            </a>
+                            </Link>
                           </SidebarMenuSubButton>
                         </SidebarMenuSubItem>
                       ))}

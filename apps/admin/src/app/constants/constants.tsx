@@ -11,9 +11,9 @@ import {
 export const refineResources = [
   {
     name: "banner_types",
-    list: "/banner-types",
-    create: "/banner-types/create",
-    edit: "/banner-types/edit/:id",
+    list: "/admin/banner-types",
+    create: "/admin/banner-types/create",
+    edit: "/admin/banner-types/edit/:id",
     meta: {
       canDelete: true,
       label: "Banner Types",
@@ -22,9 +22,9 @@ export const refineResources = [
   },
   {
     name: "businesses",
-    list: "/businesses",
-    create: "/businesses/create",
-    edit: "/businesses/edit/:id",
+    list: "/admin/businesses",
+    create: "/admin/businesses/create",
+    edit: "/admin/businesses/edit/:id",
     meta: {
       label: "Businesses",
       groupName: "admin",
@@ -32,9 +32,9 @@ export const refineResources = [
   },
   {
     name: "categories",
-    list: "/categories",
-    create: "/categories/create",
-    edit: "/categories/edit/:id",
+    list: "/admin/categories",
+    create: "/admin/categories/create",
+    edit: "/admin/categories/edit/:id",
     meta: {
       canDelete: true,
       label: "Categories",
@@ -43,9 +43,9 @@ export const refineResources = [
   },
   {
     name: "coupon_codes",
-    list: "/coupon-codes",
-    create: "/coupon-codes/create",
-    edit: "/coupon-codes/edit/:id",
+    list: "/admin/coupon-codes",
+    create: "/admin/coupon-codes/create",
+    edit: "/admin/coupon-codes/edit/:id",
     meta: {
       canDelete: true,
       label: "Coupon Codes",
@@ -54,9 +54,9 @@ export const refineResources = [
   },
   {
     name: "currencies",
-    list: "/currencies",
-    create: "/currencies/create",
-    edit: "/currencies/edit/:id",
+    list: "/admin/currencies",
+    create: "/admin/currencies/create",
+    edit: "/admin/currencies/edit/:id",
     meta: {
       label: "Currencies",
       groupName: "admin",
@@ -64,9 +64,9 @@ export const refineResources = [
   },
   {
     name: "customers",
-    list: "/customers",
-    create: "/customers/create",
-    edit: "/customers/edit/:id",
+    list: "/admin/customers",
+    create: "/admin/customers/create",
+    edit: "/admin/customers/edit/:id",
     meta: {
       canDelete: true,
       label: "Customers",
@@ -75,9 +75,9 @@ export const refineResources = [
   },
   {
     name: "header_banners",
-    list: "/store-header-banners",
-    create: "/store-header-banners/create",
-    edit: "/store-header-banners/edit/:id",
+    list: "/admin/store-header-banners",
+    create: "/admin/store-header-banners/create",
+    edit: "/admin/store-header-banners/edit/:id",
     meta: {
       canDelete: true,
       label: "Store Header Banners",
@@ -86,9 +86,9 @@ export const refineResources = [
   },
   {
     name: "image_banners",
-    list: "/store-image-banners",
-    create: "/store-image-banners/create",
-    edit: "/store-image-banners/edit/:id",
+    list: "/admin/store-image-banners",
+    create: "/admin/store-image-banners/create",
+    edit: "/admin/store-image-banners/edit/:id",
     meta: {
       canDelete: true,
       label: "Store Image Banners",
@@ -97,7 +97,7 @@ export const refineResources = [
   },
   {
     name: "locales",
-    list: "/locales",
+    list: "/admin/locales",
     meta: {
       canDelete: false,
       label: "Locales",
@@ -106,9 +106,9 @@ export const refineResources = [
   },
   {
     name: "offer_banners",
-    list: "/store-offer-banners",
-    create: "/store-offer-banners/create",
-    edit: "/store-offer-banners/edit/:id",
+    list: "/admin/store-offer-banners",
+    create: "/admin/store-offer-banners/create",
+    edit: "/admin/store-offer-banners/edit/:id",
     meta: {
       canDelete: true,
       label: "Store Offer Banners",
@@ -117,9 +117,9 @@ export const refineResources = [
   },
   {
     name: "products",
-    list: "/products",
-    create: "/products/create",
-    edit: "/products/edit/:id",
+    list: "/admin/products",
+    create: "/admin/products/create",
+    edit: "/admin/products/edit/:id",
     meta: {
       canDelete: true,
       label: "Products",
@@ -128,9 +128,9 @@ export const refineResources = [
   },
   {
     name: "stores",
-    list: "/stores",
-    create: "/stores/create",
-    edit: "/stores/edit/:id",
+    list: "/admin/stores",
+    create: "/admin/stores/create",
+    edit: "/admin/stores/edit/:id",
     meta: {
       canDelete: true,
       label: "Stores",
@@ -139,9 +139,9 @@ export const refineResources = [
   },
   {
     name: "store_features",
-    list: "/store-features",
-    create: "/store-features/create",
-    edit: "/store-features/edit/:id",
+    list: "/admin/store-features",
+    create: "/admin/store-features/create",
+    edit: "/admin/store-features/edit/:id",
     meta: {
       canDelete: true,
       label: "Store Features",

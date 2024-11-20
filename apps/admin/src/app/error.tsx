@@ -1,10 +1,11 @@
 "use client"; // Error boundaries must be Client Components
 
 import React from "react";
+import { PageError } from "@/components/illustrations/PageError";
+import Link from "next/link";
 
 export default function Error({
   error,
-  reset,
 }: {
   error: Error & { digest?: string };
   reset: () => void;
@@ -15,16 +16,13 @@ export default function Error({
   }, [error]);
 
   return (
-    <div>
-      <h2>Something went wrong!</h2>
-      <button
-        onClick={
-          // Attempt to recover by trying to re-render the segment
-          () => reset()
-        }
-      >
-        Try again
-      </button>
+    <div className="flex flex-1 flex-col justify-center items-center">
+      <PageError className="h-64 w-64" />
+      <h2 className="mt-8 text-2xl">Oops! Something went wrong</h2>
+      <p>{`We're sorry. We've had a problem processing your request.`}</p>
+      <Link href="/" className="underline text-blue-400">
+        Return to the Dashboard
+      </Link>
     </div>
   );
 }

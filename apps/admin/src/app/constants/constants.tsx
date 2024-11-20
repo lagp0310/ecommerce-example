@@ -161,7 +161,7 @@ export const formValidationMessages = {
 export const topMainSidebarItems = [
   {
     title: "Dashboard",
-    url: "/",
+    url: `${process.env.ADMIN_ROOT_URL}/admin/dashboard`,
     icon: <ChartPieIcon className="h-4 w-4" />,
   },
 ];

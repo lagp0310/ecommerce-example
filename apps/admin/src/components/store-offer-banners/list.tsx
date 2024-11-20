@@ -32,6 +32,7 @@ export const StoreOfferBannerList = () => {
 
   return (
     <List
+      title="Store Offer Banners"
       createButtonProps={{ icon: <PlusIcon className="h-4 w-4 text-white" /> }}
     >
       <Table {...tableProps} rowKey="id">

@@ -32,6 +32,7 @@ export const StoreFeatureList = () => {
 
   return (
     <List
+      title="Store Features"
       createButtonProps={{ icon: <PlusIcon className="h-4 w-4 text-white" /> }}
     >
       <Table {...tableProps} rowKey="id">

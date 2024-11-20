@@ -136,7 +136,7 @@ export const ProductEdit = () => {
           <Input />
         </Form.Item>
         <Form.Item
-          label="Discounted"
+          label="Discounted Price"
           name={["discounted_price"]}
           rules={[
             {

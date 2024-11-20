@@ -89,7 +89,7 @@ export const ProductCreate = () => {
           />
         </Form.Item>
         <Form.Item
-          label="Discounted"
+          label="Discounted Price"
           name={["discounted_price"]}
           rules={[
             {

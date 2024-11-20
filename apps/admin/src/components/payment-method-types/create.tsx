@@ -39,7 +39,7 @@ export const PaymentMethodTypeCreate = () => {
             },
           ]}
         >
-          <Input />
+          <Input.TextArea />
         </Form.Item>
       </Form>
     </Create>

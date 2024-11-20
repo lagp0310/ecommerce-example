@@ -40,7 +40,9 @@ export const ProductList = () => {
 
   return (
     <List
-      createButtonProps={{ icon: <PlusIcon className="h-4 w-4 text-white" /> }}
+      createButtonProps={{
+        icon: <PlusIcon className="h-4 w-4 text-white" />,
+      }}
     >
       <Table {...tableProps} rowKey="id">
         <Table.Column dataIndex="id" title="ID" />

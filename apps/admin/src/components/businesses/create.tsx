@@ -37,7 +37,7 @@ export const BusinessCreate = () => {
             },
           ]}
         >
-          <Input />
+          <Input.TextArea />
         </Form.Item>
       </Form>
     </Create>

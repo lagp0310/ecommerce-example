@@ -62,7 +62,7 @@ export const CategoryEdit = () => {
             },
           ]}
         >
-          <Input />
+          <Input.TextArea />
         </Form.Item>
         <Form.Item
           label="Store"

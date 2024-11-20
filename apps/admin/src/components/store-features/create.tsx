@@ -45,7 +45,7 @@ export const StoreFeatureCreate = () => {
             },
           ]}
         >
-          <Input />
+          <Input.TextArea />
         </Form.Item>
         <Form.Item label="Icon">
           <Form.Item

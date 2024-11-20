@@ -63,7 +63,7 @@ export const StoreEdit = () => {
             },
           ]}
         >
-          <Input />
+          <Input.TextArea />
         </Form.Item>
         <Form.Item
           label="Business"

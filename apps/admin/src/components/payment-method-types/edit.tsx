@@ -55,7 +55,7 @@ export const PaymentMethodTypeEdit = () => {
             },
           ]}
         >
-          <Input />
+          <Input.TextArea />
         </Form.Item>
       </Form>
     </Edit>

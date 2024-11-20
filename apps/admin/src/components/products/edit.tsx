@@ -71,7 +71,7 @@ export const ProductEdit = () => {
             },
           ]}
         >
-          <Input />
+          <Input.TextArea />
         </Form.Item>
         <Form.Item
           label="SKU"

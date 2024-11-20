@@ -31,7 +31,7 @@ export const AddressCreate = () => {
             },
           ]}
         >
-          <Input />
+          <Input.TextArea />
         </Form.Item>
         <Form.Item
           label="Customer"

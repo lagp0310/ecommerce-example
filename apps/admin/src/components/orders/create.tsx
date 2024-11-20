@@ -68,7 +68,7 @@ export const OrderCreate = () => {
             },
           ]}
         >
-          <Input />
+          <Input.TextArea />
         </Form.Item>
       </Form>
     </Create>

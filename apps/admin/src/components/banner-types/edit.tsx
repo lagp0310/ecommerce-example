@@ -57,7 +57,7 @@ export const BannerTypeEdit = () => {
             },
           ]}
         >
-          <Input />
+          <Input.TextArea />
         </Form.Item>
       </Form>
     </Edit>

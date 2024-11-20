@@ -64,7 +64,7 @@ export const StoreFeatureEdit = () => {
             },
           ]}
         >
-          <Input />
+          <Input.TextArea />
         </Form.Item>
         <Form.Item label="Icon">
           <Form.Item

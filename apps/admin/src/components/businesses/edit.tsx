@@ -56,7 +56,7 @@ export const BusinessEdit = () => {
             },
           ]}
         >
-          <Input />
+          <Input.TextArea />
         </Form.Item>
       </Form>
     </Edit>

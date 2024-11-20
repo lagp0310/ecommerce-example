@@ -44,7 +44,7 @@ export const StoreCreate = () => {
             },
           ]}
         >
-          <Input />
+          <Input.TextArea />
         </Form.Item>
         <Form.Item
           label="Business"

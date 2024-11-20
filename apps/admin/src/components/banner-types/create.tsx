@@ -39,7 +39,7 @@ export const BannerTypeCreate = () => {
             },
           ]}
         >
-          <Input />
+          <Input.TextArea />
         </Form.Item>
       </Form>
     </Create>

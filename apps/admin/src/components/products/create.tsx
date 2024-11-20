@@ -51,7 +51,7 @@ export const ProductCreate = () => {
             },
           ]}
         >
-          <Input />
+          <Input.TextArea />
         </Form.Item>
         <Form.Item
           label="SKU"

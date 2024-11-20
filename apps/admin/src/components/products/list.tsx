@@ -7,7 +7,6 @@ import {
   List,
   EditButton,
   DeleteButton,
-  DateField,
   ImageField,
 } from "@refinedev/antd";
 import { Table, Space } from "antd";
@@ -46,7 +45,20 @@ export const ProductList = () => {
     >
       <Table {...tableProps} rowKey="id">
         <Table.Column dataIndex="id" title="ID" />
-        <Table.Column dataIndex="name" title="Name" />
+        <Table.Column
+          dataIndex={["store"]}
+          title="Store"
+          render={(value) =>
+            storeIsLoading ? (
+              <>Loading...</>
+            ) : (
+              storeData?.data?.find((item) => item.id === value)?.name
+            )
+          }
+        />
+        <Table.Column dataIndex="sku" title="SKU" />
+        <Table.Column dataIndex="name" title="Product Name" />
+        <Table.Column dataIndex="description" title="Description" />
         <Table.Column dataIndex="price" title="Price" />
         <Table.Column dataIndex="discounted_price" title="Discounted Price" />
         <Table.Column dataIndex="discounted_until" title="Discounted Until" />
@@ -63,24 +75,6 @@ export const ProductList = () => {
           }}
         />
         <Table.Column dataIndex="rating" title="Rating" />
-        <Table.Column
-          dataIndex={["created_at"]}
-          title="Created At"
-          render={(value: any) => <DateField value={value} />}
-        />
-        <Table.Column dataIndex="sku" title="SKU" />
-        <Table.Column
-          dataIndex={["store"]}
-          title="Store"
-          render={(value) =>
-            storeIsLoading ? (
-              <>Loading...</>
-            ) : (
-              storeData?.data?.find((item) => item.id === value)?.name
-            )
-          }
-        />
-        <Table.Column dataIndex="description" title="Description" />
         <Table.Column
           dataIndex={["image_url"]}
           title="Image"

@@ -2,13 +2,7 @@
 
 import React from "react";
 import { BaseRecord, useMany } from "@refinedev/core";
-import {
-  useTable,
-  List,
-  EditButton,
-  DeleteButton,
-  DateField,
-} from "@refinedev/antd";
+import { useTable, List, EditButton, DeleteButton } from "@refinedev/antd";
 import { Table, Space } from "antd";
 import {
   PlusIcon,
@@ -35,8 +29,6 @@ export const StoreList = () => {
     >
       <Table {...tableProps} rowKey="id">
         <Table.Column dataIndex="id" title="ID" />
-        <Table.Column dataIndex="name" title="Name" />
-        <Table.Column dataIndex="description" title="Description" />
         <Table.Column
           dataIndex={["business"]}
           title="Business"
@@ -48,11 +40,8 @@ export const StoreList = () => {
             )
           }
         />
-        <Table.Column
-          dataIndex={["created_at"]}
-          title="Created At"
-          render={(value: any) => <DateField value={value} />}
-        />
+        <Table.Column dataIndex="name" title="Store Name" />
+        <Table.Column dataIndex="description" title="Description" />
         <Table.Column
           title="Actions"
           dataIndex="actions"

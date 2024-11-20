@@ -8,7 +8,6 @@ import {
   EditButton,
   DeleteButton,
   ImageField,
-  DateField,
 } from "@refinedev/antd";
 import { Table, Space } from "antd";
 import {
@@ -37,15 +36,6 @@ export const StoreFeatureList = () => {
     >
       <Table {...tableProps} rowKey="id">
         <Table.Column dataIndex="id" title="ID" />
-        <Table.Column dataIndex="title" title="Title" />
-        <Table.Column dataIndex="description" title="Description" />
-        <Table.Column
-          dataIndex={["icon_url"]}
-          title="Icon"
-          render={(value: any) => (
-            <ImageField style={{ maxWidth: "100px" }} value={value} />
-          )}
-        />
         <Table.Column
           dataIndex={["store"]}
           title="Store"
@@ -57,10 +47,14 @@ export const StoreFeatureList = () => {
             )
           }
         />
+        <Table.Column dataIndex="title" title="Title" />
+        <Table.Column dataIndex="description" title="Description" />
         <Table.Column
-          dataIndex={["created_at"]}
-          title="Created At"
-          render={(value: any) => <DateField value={value} />}
+          dataIndex={["icon_url"]}
+          title="Icon"
+          render={(value: any) => (
+            <ImageField style={{ maxWidth: "100px" }} value={value} />
+          )}
         />
         <Table.Column
           title="Actions"

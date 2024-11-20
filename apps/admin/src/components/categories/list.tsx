@@ -8,7 +8,6 @@ import {
   EditButton,
   DeleteButton,
   ImageField,
-  DateField,
 } from "@refinedev/antd";
 import { Table, Space } from "antd";
 import {
@@ -55,11 +54,6 @@ export const CategoryList = () => {
           render={(value: any) => (
             <ImageField style={{ maxWidth: "100px" }} value={value} />
           )}
-        />
-        <Table.Column
-          dataIndex={["created_at"]}
-          title="Created At"
-          render={(value: any) => <DateField value={value} />}
         />
         <Table.Column
           title="Actions"

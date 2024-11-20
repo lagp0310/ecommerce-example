@@ -2,7 +2,7 @@
 
 import React from "react";
 import { BaseRecord } from "@refinedev/core";
-import { useTable, List, EditButton, DateField } from "@refinedev/antd";
+import { useTable, List, EditButton } from "@refinedev/antd";
 import { Table, Space } from "antd";
 import { PlusIcon, PencilSquareIcon } from "@heroicons/react/24/solid";
 
@@ -20,11 +20,6 @@ export const CurrencyList = () => {
         <Table.Column dataIndex="name" title="Name" />
         <Table.Column dataIndex="three_letter_code" title="Three Letter Code" />
         <Table.Column dataIndex="numeric_id" title="Numeric ID" />
-        <Table.Column
-          dataIndex={["created_at"]}
-          title="Created At"
-          render={(value: any) => <DateField value={value} />}
-        />
         <Table.Column
           title="Actions"
           dataIndex="actions"

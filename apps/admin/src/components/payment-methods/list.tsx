@@ -8,7 +8,6 @@ import {
   EditButton,
   DeleteButton,
   BooleanField,
-  DateField,
 } from "@refinedev/antd";
 import { Table, Space } from "antd";
 import {
@@ -51,12 +50,7 @@ export const PaymentMethodList = () => {
         <Table.Column
           dataIndex={["is_active"]}
           title="Is Active"
-          render={(value: any) => <BooleanField value={value} />}
-        />
-        <Table.Column
-          dataIndex={["created_at"]}
-          title="Created At"
-          render={(value: any) => <DateField value={value} />}
+          render={(value: boolean) => <BooleanField value={value} />}
         />
         <Table.Column
           title="Actions"

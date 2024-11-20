@@ -8,7 +8,6 @@ import {
   EditButton,
   DeleteButton,
   UrlField,
-  DateField,
 } from "@refinedev/antd";
 import { Table, Space } from "antd";
 import {
@@ -58,11 +57,6 @@ export const StoreOfferBannerList = () => {
         />
         <Table.Column dataIndex="subtitle" title="Subtitle" />
         <Table.Column dataIndex="subtitle_remark" title="Subtitle Remark" />
-        <Table.Column
-          dataIndex={["created_at"]}
-          title="Created At"
-          render={(value: any) => <DateField value={value} />}
-        />
         <Table.Column
           title="Actions"
           dataIndex="actions"

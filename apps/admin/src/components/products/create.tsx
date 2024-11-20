@@ -13,7 +13,7 @@ export const ProductCreate = () => {
 
   const { selectProps: currencySelectProps } = useSelect({
     resource: "currencies",
-    optionLabel: "name",
+    optionLabel: (item) => `${item.name} (${item.three_letter_code})`,
   });
 
   const { selectProps: storeSelectProps } = useSelect({

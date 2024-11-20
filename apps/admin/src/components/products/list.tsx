@@ -51,13 +51,14 @@ export const ProductList = () => {
         <Table.Column
           dataIndex={["currency"]}
           title="Currency"
-          render={(value) =>
-            currencyIsLoading ? (
-              <>Loading...</>
-            ) : (
-              currencyData?.data?.find((item) => item.id === value)?.name
-            )
-          }
+          render={(value) => {
+            const currency = currencyData?.data?.find(
+              (item) => item.id === value
+            );
+            const composedName = `${currency?.name} (${currency?.three_letter_code})`;
+
+            return currencyIsLoading ? <>Loading...</> : composedName;
+          }}
         />
         <Table.Column dataIndex="rating" title="Rating" />
         <Table.Column

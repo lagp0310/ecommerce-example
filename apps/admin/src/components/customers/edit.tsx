@@ -41,8 +41,9 @@ export const CustomerEdit = () => {
     try {
       const { errorFields } = await validateFields();
 
-      if (Array.isArray(errorFields) && errorFields.length > 0)
+      if (Array.isArray(errorFields) && errorFields.length > 0) {
         throw new Error("Form is invalid");
+      }
 
       const { email, phone_number, ...rest } = getFieldsValue();
       mutateCustomer({ values: { ...rest } });

@@ -1,27 +1,121 @@
 "use client";
 
 import React from "react";
-import { Edit, useForm } from "@refinedev/antd";
-import { Form, Input } from "antd";
-import { FolderArrowDownIcon, TrashIcon } from "@heroicons/react/24/solid";
+import { Edit, SaveButton, useForm, useSelect } from "@refinedev/antd";
+import { Form, Input, Select } from "antd";
+import { FolderArrowDownIcon } from "@heroicons/react/24/solid";
+import {
+  useCreateMany,
+  useDeleteMany,
+  useUpdate,
+  useUpdateMany,
+} from "@refinedev/core";
+import isUUID from "validator/es/lib/isUUID";
 
 export const BusinessEdit = () => {
-  const { formProps, saveButtonProps, query } = useForm();
+  const {
+    formProps,
+    saveButtonProps,
+    redirect,
+    query,
+    form: { getFieldsValue, setFieldValue, validateFields },
+  } = useForm({
+    queryMeta: {
+      select: "*, business_currency(id, currency(id, name, three_letter_code))",
+    },
+  });
 
-  const businessesData = query?.data?.data;
+  const businessData = React.useMemo(
+    () => query?.data?.data,
+    [query?.data?.data]
+  );
+  React.useEffect(() => {
+    if (!!businessData) {
+      setFieldValue(
+        "business_currencies",
+        businessData?.business_currency?.map(({ currency: { id } }) => id)
+      );
+    }
+  }, [businessData, setFieldValue]);
+
+  const { mutate: deleteBusinessCurrency } = useDeleteMany();
+  const { mutate: mutateBusinessCurrency } = useCreateMany({
+    resource: "business_currency",
+  });
+  const { mutate: mutateBusiness } = useUpdate({
+    resource: "businesses",
+    id: businessData?.id,
+    mutationOptions: {
+      onError: (error) => {
+        console.error("here error", error);
+      },
+      onSuccess: ({ data }) => {
+        const { business_currencies: selectedCurrencies } = getFieldsValue();
+        const currentCurrencies = businessData?.business_currency?.map(
+          ({ id, currency: { id: currencyId } }) => ({ id, currencyId })
+        );
+
+        const newCurrencies = selectedCurrencies
+          .filter(
+            (selectedCurrencyId) =>
+              !currentCurrencies.find(
+                ({ currencyId }) => selectedCurrencyId === currencyId
+              )
+          )
+          .map((currencyId) => ({ business: data.id, currency: currencyId }));
+        const deleteCurrenciesIds = currentCurrencies
+          .filter(
+            ({ currencyId }) =>
+              !selectedCurrencies.find(
+                (selectedCurrencyId) => selectedCurrencyId === currencyId
+              )
+          )
+          .map(({ id }) => id);
+
+        const hasNewCurrencies =
+          Array.isArray(newCurrencies) && newCurrencies.length > 0;
+        const hasCurrenciesToBeDeleted =
+          Array.isArray(deleteCurrenciesIds) && deleteCurrenciesIds.length > 0;
+        if (hasNewCurrencies) {
+          mutateBusinessCurrency({ values: newCurrencies });
+        }
+        if (hasCurrenciesToBeDeleted) {
+          deleteBusinessCurrency({
+            resource: "business_currency",
+            ids: deleteCurrenciesIds,
+          });
+        }
+      },
+    },
+  });
+
+  const updateBusiness = React.useCallback(async () => {
+    try {
+      const { errorFields } = await validateFields(["name", "description"]);
+
+      if (Array.isArray(errorFields) && errorFields.length > 0) {
+        throw new Error("Form is invalid");
+      }
+
+      const { business_currencies, ...rest } = getFieldsValue();
+      mutateBusiness({ values: { ...rest } });
+
+      redirect("list");
+    } catch (error) {
+      console.error(error);
+    }
+  }, [getFieldsValue, mutateBusiness, redirect, validateFields]);
+
+  const { selectProps: currencySelectProps } = useSelect({
+    resource: "currencies",
+    optionLabel: (item) => `${item.name} (${item.three_letter_code})`,
+    pagination: {
+      mode: "off",
+    },
+  });
 
   return (
-    <Edit
-      saveButtonProps={{
-        ...saveButtonProps,
-        className: "align-middle",
-        icon: <FolderArrowDownIcon className="h-4 w-4 text-white" />,
-      }}
-      deleteButtonProps={{
-        className: "align-middle mr-1.5",
-        icon: <TrashIcon className="h-4 w-4 text-red-500" />,
-      }}
-    >
+    <Edit footerButtons={[]}>
       <Form {...formProps} layout="vertical">
         <Form.Item
           label="ID"
@@ -58,7 +152,38 @@ export const BusinessEdit = () => {
         >
           <Input.TextArea />
         </Form.Item>
+        <Form.Item
+          label="Currencies"
+          name="business_currencies"
+          rules={[
+            {
+              required: true,
+              validator(_rule, value, callback) {
+                if (Array.isArray(value)) {
+                  if (value.length === 0) {
+                    callback("You must select at least a Currency");
+                  }
+
+                  if (value.some((currencyValue) => !isUUID(currencyValue))) {
+                    callback("Currency should be an UUID");
+                  }
+                } else if (!isUUID(value)) {
+                  callback("Currency should be an UUID");
+                }
+              },
+            },
+          ]}
+        >
+          <Select {...currencySelectProps} mode="multiple" />
+        </Form.Item>
       </Form>
+      <div className="flex flex-1 flex-row w-full justify-end">
+        <SaveButton
+          {...saveButtonProps}
+          onClick={updateBusiness}
+          icon={<FolderArrowDownIcon className="h-4 w-4 text-white" />}
+        />
+      </div>
     </Edit>
   );
 };

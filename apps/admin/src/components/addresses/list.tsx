@@ -39,13 +39,14 @@ export const AddressList = () => {
         <Table.Column
           dataIndex={["customer"]}
           title="Customer"
-          render={(value) =>
-            customerIsLoading ? (
-              <>Loading...</>
-            ) : (
-              customerData?.data?.find((item) => item.id === value)?.first_name
-            )
-          }
+          render={(value) => {
+            const customer = customerData?.data?.find(
+              (item) => item.id === value
+            );
+            const fullName = `${customer?.first_name} ${customer?.last_name}`;
+
+            return customerIsLoading ? <>Loading...</> : fullName;
+          }}
         />
         <Table.Column
           dataIndex={["created_at"]}

@@ -43,6 +43,13 @@ export const BusinessCreate = () => {
       }
 
       const { business_currencies, ...rest } = getFieldsValue();
+      if (
+        !business_currencies ||
+        (Array.isArray(business_currencies) && business_currencies.length === 0)
+      ) {
+        throw new Error("You must select at least a Currency");
+      }
+
       mutateBusiness({ values: { ...rest } });
 
       redirect("list");

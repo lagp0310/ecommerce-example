@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { BaseRecord, useMany } from "@refinedev/core";
+import { BaseRecord } from "@refinedev/core";
 import {
   useTable,
   List,
@@ -19,13 +19,8 @@ import {
 export const PaymentMethodList = () => {
   const { tableProps } = useTable({
     syncWithLocation: true,
-  });
-
-  const { data: storeData, isLoading: storeIsLoading } = useMany({
-    resource: "stores",
-    ids: tableProps?.dataSource?.map((item) => item?.store) ?? [],
-    queryOptions: {
-      enabled: !!tableProps?.dataSource,
+    meta: {
+      select: "*, stores(name)",
     },
   });
 
@@ -39,13 +34,10 @@ export const PaymentMethodList = () => {
         <Table.Column
           dataIndex={["store"]}
           title="Store"
-          render={(value) =>
-            storeIsLoading ? (
-              <>Loading...</>
-            ) : (
-              storeData?.data?.find((item) => item.id === value)?.name
-            )
-          }
+          render={(_value, record) => {
+            const store = record?.stores;
+            return <span>{store?.name}</span>;
+          }}
         />
         <Table.Column
           dataIndex={["is_active"]}

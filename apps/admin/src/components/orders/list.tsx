@@ -1,40 +1,17 @@
 "use client";
 
 import React from "react";
-import { useMany } from "@refinedev/core";
 import { useTable, List } from "@refinedev/antd";
 import { Table } from "antd";
 
 export const OrderList = () => {
   const { tableProps } = useTable({
     syncWithLocation: true,
-  });
-
-  const { data: cartData, isLoading: cartIsLoading } = useMany({
-    resource: "carts",
-    ids: tableProps?.dataSource?.map((item) => item?.cart) ?? [],
-    queryOptions: {
-      enabled: !!tableProps?.dataSource,
+    meta: {
+      select:
+        "*, carts(customers(first_name, last_name, billing_address, shipping_address), stores(name))",
     },
   });
-
-  const { data: billingAddressData, isLoading: billingAddressIsLoading } =
-    useMany({
-      resource: "addresses",
-      ids: tableProps?.dataSource?.map((item) => item?.billing_address) ?? [],
-      queryOptions: {
-        enabled: !!tableProps?.dataSource,
-      },
-    });
-
-  const { data: shippingAddressData, isLoading: shippingAddressIsLoading } =
-    useMany({
-      resource: "addresses",
-      ids: tableProps?.dataSource?.map((item) => item?.shipping_address) ?? [],
-      queryOptions: {
-        enabled: !!tableProps?.dataSource,
-      },
-    });
 
   return (
     <List>
@@ -43,31 +20,41 @@ export const OrderList = () => {
         <Table.Column
           dataIndex={["cart"]}
           title="Cart"
-          render={() =>
-            cartIsLoading ? <>Loading...</> : cartData?.data?.at(0)?.id
-          }
+          render={(_value, record) => record?.cart}
         />
         <Table.Column
-          dataIndex="billing_address"
+          dataIndex={["store"]}
+          title="Store"
+          render={(_value, record) => {
+            const store = record?.carts?.stores;
+            return <span>{store?.name}</span>;
+          }}
+        />
+        <Table.Column
+          dataIndex={["customer"]}
+          title="Customer"
+          render={(_value, record) => {
+            const customer = record?.carts?.customers;
+            return (
+              <span>{`${customer?.first_name} ${customer?.last_name}`}</span>
+            );
+          }}
+        />
+        <Table.Column
+          dataIndex={["billing_address"]}
           title="Billing Address"
-          render={() =>
-            billingAddressIsLoading ? (
-              <>Loading...</>
-            ) : (
-              billingAddressData?.data?.at(0)?.address
-            )
-          }
+          render={(_value, record) => {
+            const customer = record?.carts?.customers;
+            return <span>{customer?.billing_address}</span>;
+          }}
         />
         <Table.Column
           dataIndex="shipping_address"
           title="Shipping Address"
-          render={() =>
-            shippingAddressIsLoading ? (
-              <>Loading...</>
-            ) : (
-              shippingAddressData?.data?.at(0)?.address
-            )
-          }
+          render={(_value, record) => {
+            const customer = record?.carts?.customers;
+            return <span>{customer?.shipping_address}</span>;
+          }}
         />
         <Table.Column dataIndex="notes" title="Notes" />
       </Table>

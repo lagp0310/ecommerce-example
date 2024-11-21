@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { BaseRecord, useMany } from "@refinedev/core";
+import { BaseRecord } from "@refinedev/core";
 import {
   useTable,
   List,
@@ -19,13 +19,8 @@ import {
 export const StoreImageBannerList = () => {
   const { tableProps } = useTable({
     syncWithLocation: true,
-  });
-
-  const { data: bannerTypeData, isLoading: bannerTypeIsLoading } = useMany({
-    resource: "banner_types",
-    ids: tableProps?.dataSource?.map((item) => item?.banner_type) ?? [],
-    queryOptions: {
-      enabled: !!tableProps?.dataSource,
+    meta: {
+      select: "*, banner_types(type)",
     },
   });
 
@@ -49,13 +44,10 @@ export const StoreImageBannerList = () => {
         <Table.Column
           dataIndex={["banner_type"]}
           title="Banner Type"
-          render={() =>
-            bannerTypeIsLoading ? (
-              <>Loading...</>
-            ) : (
-              bannerTypeData?.data?.at(0)?.type
-            )
-          }
+          render={(_value, record) => {
+            const bannerType = record?.banner_types;
+            return <span>{bannerType?.type}</span>;
+          }}
         />
         <Table.Column
           title="Actions"

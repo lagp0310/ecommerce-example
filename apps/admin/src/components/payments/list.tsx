@@ -1,21 +1,12 @@
 "use client";
 
 import React from "react";
-import { useMany } from "@refinedev/core";
 import { useTable, List } from "@refinedev/antd";
 import { Table } from "antd";
 
 export const PaymentList = () => {
   const { tableProps } = useTable({
     syncWithLocation: true,
-  });
-
-  const { data: cartData, isLoading: cartIsLoading } = useMany({
-    resource: "carts",
-    ids: tableProps?.dataSource?.map((item) => item?.cart) ?? [],
-    queryOptions: {
-      enabled: !!tableProps?.dataSource,
-    },
   });
 
   return (
@@ -25,9 +16,7 @@ export const PaymentList = () => {
         <Table.Column
           dataIndex={["cart"]}
           title="Cart"
-          render={() =>
-            cartIsLoading ? <>Loading...</> : cartData?.data?.at(0)?.id
-          }
+          render={(_value, record) => record?.cart}
         />
       </Table>
     </List>

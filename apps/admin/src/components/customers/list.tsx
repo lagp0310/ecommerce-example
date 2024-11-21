@@ -38,6 +38,8 @@ export const CustomerList = () => {
             record?.phone_numbers?.at(0)?.phone_number
           }
         />
+        <Table.Column dataIndex="billing_address" title="Billing Address" />
+        <Table.Column dataIndex="shipping_address" title="Shipping Address" />
         <Table.Column dataIndex="birth_date" title="Birth Date" />
         <Table.Column
           title="Actions"

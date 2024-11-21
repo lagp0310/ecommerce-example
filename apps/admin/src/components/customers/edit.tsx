@@ -151,6 +151,30 @@ export const CustomerEdit = () => {
         >
           <DatePicker format="MM-DD-YYYY" />
         </Form.Item>
+        <Form.Item
+          label="Billing Address"
+          name={"billing_address"}
+          rules={[
+            {
+              required: true,
+              max: 500,
+            },
+          ]}
+        >
+          <Input.TextArea />
+        </Form.Item>
+        <Form.Item
+          label="Shipping Address"
+          name={"shipping_address"}
+          rules={[
+            {
+              required: true,
+              max: 500,
+            },
+          ]}
+        >
+          <Input.TextArea />
+        </Form.Item>
         <div className="flex flex-1 flex-row w-full justify-end">
           <SaveButton
             {...saveButtonProps}

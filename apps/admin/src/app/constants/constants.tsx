@@ -12,17 +12,6 @@ import {
 
 export const refineResources = [
   {
-    name: "addresses",
-    list: "/admin/addresses",
-    create: "/admin/addresses/create",
-    edit: "/admin/addresses/edit/:id",
-    meta: {
-      canDelete: true,
-      label: "Addresses",
-      groupName: "customers",
-    },
-  },
-  {
     name: "banner_types",
     list: "/admin/banner-types",
     create: "/admin/banner-types/create",

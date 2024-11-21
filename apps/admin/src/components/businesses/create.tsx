@@ -61,9 +61,6 @@ export const BusinessCreate = () => {
   const { selectProps: currencySelectProps } = useSelect({
     resource: "currencies",
     optionLabel: (item) => `${item.name} (${item.three_letter_code})`,
-    pagination: {
-      mode: "off",
-    },
   });
 
   return (

@@ -3,7 +3,7 @@
 import React from "react";
 import { useMany } from "@refinedev/core";
 import { useTable, List } from "@refinedev/antd";
-import { Table, Space } from "antd";
+import { Table } from "antd";
 
 export const OrderList = () => {
   const { tableProps } = useTable({
@@ -70,11 +70,6 @@ export const OrderList = () => {
           }
         />
         <Table.Column dataIndex="notes" title="Notes" />
-        <Table.Column
-          title="Actions"
-          dataIndex="actions"
-          render={() => <Space></Space>}
-        />
       </Table>
     </List>
   );

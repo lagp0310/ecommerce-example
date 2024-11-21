@@ -3,7 +3,7 @@
 import React from "react";
 import { useMany } from "@refinedev/core";
 import { useTable, List } from "@refinedev/antd";
-import { Table, Space, Tag } from "antd";
+import { Table, Tag } from "antd";
 
 export const CartList = () => {
   const { tableProps } = useTable({

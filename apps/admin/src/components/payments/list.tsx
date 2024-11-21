@@ -3,7 +3,7 @@
 import React from "react";
 import { useMany } from "@refinedev/core";
 import { useTable, List } from "@refinedev/antd";
-import { Table, Space } from "antd";
+import { Table } from "antd";
 
 export const PaymentList = () => {
   const { tableProps } = useTable({
@@ -28,11 +28,6 @@ export const PaymentList = () => {
           render={() =>
             cartIsLoading ? <>Loading...</> : cartData?.data?.at(0)?.id
           }
-        />
-        <Table.Column
-          title="Actions"
-          dataIndex="actions"
-          render={() => <Space></Space>}
         />
       </Table>
     </List>

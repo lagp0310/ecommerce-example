@@ -102,6 +102,20 @@ export const ProductCreate = () => {
           />
         </Form.Item>
         <Form.Item
+          label="Currency"
+          name={"currency"}
+          rules={[
+            {
+              required: true,
+              validator(_rule, value, callback) {
+                if (!isUUID(value)) callback("Currency should be an UUID");
+              },
+            },
+          ]}
+        >
+          <Select {...currencySelectProps} />
+        </Form.Item>
+        <Form.Item
           label="Price"
           name={["price"]}
           rules={[
@@ -163,20 +177,6 @@ export const ProductCreate = () => {
           ]}
         >
           <DatePicker format="MM-DD-YYYY HH:mm:ss" />
-        </Form.Item>
-        <Form.Item
-          label="Currency"
-          name={"currency"}
-          rules={[
-            {
-              required: true,
-              validator(_rule, value, callback) {
-                if (!isUUID(value)) callback("Currency should be an UUID");
-              },
-            },
-          ]}
-        >
-          <Select {...currencySelectProps} />
         </Form.Item>
         <Form.Item label="Image">
           <Form.Item

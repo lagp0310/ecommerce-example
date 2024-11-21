@@ -60,9 +60,6 @@ export const ProductList = () => {
         <Table.Column dataIndex="available_quantity" title="Stock" />
         <Table.Column dataIndex="name" title="Product Name" />
         <Table.Column dataIndex="description" title="Description" />
-        <Table.Column dataIndex="price" title="Price" />
-        <Table.Column dataIndex="discounted_price" title="Discounted Price" />
-        <Table.Column dataIndex="discounted_until" title="Discounted Until" />
         <Table.Column
           dataIndex={["currency"]}
           title="Currency"
@@ -75,6 +72,9 @@ export const ProductList = () => {
             return currencyIsLoading ? <>Loading...</> : composedName;
           }}
         />
+        <Table.Column dataIndex="price" title="Price" />
+        <Table.Column dataIndex="discounted_price" title="Discounted Price" />
+        <Table.Column dataIndex="discounted_until" title="Discounted Until" />
         <Table.Column
           dataIndex={["image_url"]}
           title="Image"

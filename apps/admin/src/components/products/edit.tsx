@@ -100,6 +100,28 @@ export const ProductEdit = () => {
           <Input />
         </Form.Item>
         <Form.Item
+          label="Available Quantity"
+          name={["available_quantity"]}
+          rules={[
+            {
+              required: false,
+              validator(_rule, value, callback) {
+                if (!!value && value < 0)
+                  callback("Available Quantity must be positive");
+              },
+            },
+          ]}
+        >
+          <NumericFormat
+            allowLeadingZeros={false}
+            allowNegative={false}
+            customInput={Input}
+            decimalScale={0}
+            fixedDecimalScale
+            thousandSeparator=","
+          />
+        </Form.Item>
+        <Form.Item
           label="Price"
           name={["price"]}
           rules={[
@@ -186,7 +208,7 @@ export const ProductEdit = () => {
             noStyle
             rules={[
               {
-                required: true,
+                required: false,
               },
             ]}
           >

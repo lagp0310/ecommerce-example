@@ -57,6 +57,7 @@ export const ProductList = () => {
           }
         />
         <Table.Column dataIndex="sku" title="SKU" />
+        <Table.Column dataIndex="available_quantity" title="Stock" />
         <Table.Column dataIndex="name" title="Product Name" />
         <Table.Column dataIndex="description" title="Description" />
         <Table.Column dataIndex="price" title="Price" />

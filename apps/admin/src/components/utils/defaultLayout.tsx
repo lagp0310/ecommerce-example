@@ -5,12 +5,8 @@ import { dataProviderClient } from "@/app/providers/data/dataProvider.client";
 import { authProviderClient } from "@/app/providers/auth/authProvider.client";
 import { Refine } from "@refinedev/core";
 import routerProvider from "@refinedev/nextjs-router";
-import {
-  RefineThemes,
-  ThemedLayoutV2,
-  useNotificationProvider,
-} from "@refinedev/antd";
-import { App as AntdApp, ConfigProvider } from "antd";
+import { ThemedLayoutV2, useNotificationProvider } from "@refinedev/antd";
+import { App as AntdApp, ConfigProvider, theme } from "antd";
 import "@refinedev/antd/dist/reset.css";
 import { QueryClientProvider } from "@/components/utils/queryClientProvider";
 import {
@@ -21,10 +17,12 @@ import {
 import { ThemedLayoutClient } from "@/components/utils/themedLayoutClient";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { usePathname } from "next/navigation";
+import { useTheme } from "@/context/themeContext";
 
 type Props = { children: React.ReactNode };
 
 export function DefaultLayout({ children }: Props) {
+  const { theme: currentTheme } = useTheme();
   const pathname = usePathname();
   const shouldShowSidebar = React.useMemo(
     () =>
@@ -37,7 +35,12 @@ export function DefaultLayout({ children }: Props) {
   return (
     <QueryClientProvider>
       <ConfigProvider
-        theme={RefineThemes.Blue}
+        theme={{
+          algorithm:
+            currentTheme === "light"
+              ? theme.defaultAlgorithm
+              : theme.darkAlgorithm,
+        }}
         form={{ validateMessages: formValidationMessages }}
       >
         <AntdApp>

@@ -18,13 +18,19 @@ import {
 } from "@/components/ui/sidebar";
 import {
   ArrowRightStartOnRectangleIcon,
+  CheckIcon,
+  ChevronRightIcon,
   ChevronUpDownIcon,
+  ComputerDesktopIcon,
+  MoonIcon,
+  SunIcon,
 } from "@heroicons/react/24/solid";
 import { baseSupabaseClient } from "@/app/providers/data/dataProvider";
 import { authLoginRoute } from "@/app/constants/constants";
 import { usePathname, useRouter } from "next/navigation";
 import { useNotificationProvider } from "@refinedev/antd";
 import { OpenNotificationParams } from "@refinedev/core";
+import { Theme, useTheme } from "@/context/themeContext";
 
 export function NavUser({
   user: { avatar, email, name },
@@ -71,6 +77,24 @@ export function NavUser({
     return router.push(`${authLoginRoute}?redirectTo=${pathname}`);
   }, [openNotification, pathname, router]);
 
+  const { theme, setTheme } = useTheme();
+  const themeIcon = React.useMemo(() => {
+    if (theme === "system") return <ComputerDesktopIcon className="h-4 w-4" />;
+
+    return theme === "dark" ? (
+      <MoonIcon className="h-4 w-4" />
+    ) : (
+      <SunIcon className="h4 w-4" />
+    );
+  }, [theme]);
+  const getCheckedComponent = React.useCallback((themeArg: Theme) => {
+    return theme === themeArg ? (
+      <div className="flex flex-1 justify-end items-center">
+        <CheckIcon className="h-4 w-4" />
+      </div>
+    ) : null;
+  }, []);
+
   return (
     <SidebarMenu>
       <SidebarMenuItem>
@@ -110,9 +134,58 @@ export function NavUser({
               </div>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
+            <DropdownMenuItem className="hover:cursor-pointer dark:hover:bg-sidebar-accent dark:hover:text-sidebar-accent-foreground flex flex-1 p-0">
+              <SidebarMenu className="m-0">
+                <SidebarMenuItem>
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <SidebarMenuButton className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground">
+                        {themeIcon}
+                        Theme
+                        <div className="flex flex-1 justify-end">
+                          <ChevronRightIcon className="h-4 w-4" />
+                        </div>
+                      </SidebarMenuButton>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent
+                      className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg"
+                      side={isMobile ? "bottom" : "right"}
+                      align="end"
+                      sideOffset={6}
+                    >
+                      <DropdownMenuItem
+                        onClick={() => setTheme("system")}
+                        className="hover:cursor-pointer hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
+                      >
+                        <ComputerDesktopIcon className="h-4 w-4" />
+                        System
+                        {getCheckedComponent("system")}
+                      </DropdownMenuItem>
+                      <DropdownMenuItem
+                        onClick={() => setTheme("light")}
+                        className="hover:cursor-pointer hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
+                      >
+                        <SunIcon className="h-4 w-4" />
+                        Light
+                        {getCheckedComponent("light")}
+                      </DropdownMenuItem>
+                      <DropdownMenuItem
+                        onClick={() => setTheme("dark")}
+                        className="hover:cursor-pointer hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
+                      >
+                        <MoonIcon className="h-4 w-4" />
+                        Dark
+                        {getCheckedComponent("dark")}
+                      </DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                </SidebarMenuItem>
+              </SidebarMenu>
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
             <DropdownMenuItem
               onClick={handleLogout}
-              className="hover:cursor-pointer dark:hover:bg-sidebar-accent dark:hover:text-sidebar-accent-foreground"
+              className="hover:cursor-pointer hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
             >
               <ArrowRightStartOnRectangleIcon className="h-4 w-4" />
               Log out

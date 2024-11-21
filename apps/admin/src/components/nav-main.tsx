@@ -101,9 +101,7 @@ export function NavMain({
                           <Link
                             href={url}
                             className={
-                              isCurrent
-                                ? "bg-sidebar-accent text-sidebar-accent-foreground"
-                                : ""
+                              isCurrent ? "bg-sidebar-accent text-white" : ""
                             }
                           >
                             <span>{title}</span>

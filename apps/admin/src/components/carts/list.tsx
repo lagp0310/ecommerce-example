@@ -3,11 +3,14 @@
 import React from "react";
 import { useMany } from "@refinedev/core";
 import { useTable, List } from "@refinedev/antd";
-import { Table, Space } from "antd";
+import { Table, Space, Tag } from "antd";
 
 export const CartList = () => {
   const { tableProps } = useTable({
     syncWithLocation: true,
+    meta: {
+      select: "*, line_items(id, products(name), quantity)",
+    },
   });
 
   const { data: customerData, isLoading: customerIsLoading } = useMany({
@@ -33,6 +36,8 @@ export const CartList = () => {
       enabled: !!tableProps?.dataSource,
     },
   });
+
+  console.log(tableProps.dataSource);
 
   return (
     <List>
@@ -70,13 +75,29 @@ export const CartList = () => {
             );
             const composedName = `${currency?.name} (${currency?.three_letter_code})`;
 
-            return currencyIsLoading ? <>Loading...</> : composedName;
+            return currencyIsLoading ? (
+              <>Loading...</>
+            ) : (
+              <Tag>{composedName}</Tag>
+            );
           }}
         />
         <Table.Column
-          title="Actions"
-          dataIndex="actions"
-          render={() => <Space></Space>}
+          dataIndex={["line_items"]}
+          title="Line Items"
+          render={(_value, record) => {
+            const lineItems = record?.line_items;
+            const tags = lineItems?.map(({ products, quantity }, index) => {
+              const composedName = `${products?.name} (${quantity})`;
+              return <Tag key={index}>{composedName}</Tag>;
+            });
+
+            return currencyIsLoading ? (
+              <>Loading...</>
+            ) : (
+              <div className="flex gap-y-1 flex-wrap">{tags}</div>
+            );
+          }}
         />
       </Table>
     </List>

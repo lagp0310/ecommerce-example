@@ -6,9 +6,7 @@ import { Form, Input } from "antd";
 import { FolderArrowDownIcon, TrashIcon } from "@heroicons/react/24/solid";
 
 export const CurrencyEdit = () => {
-  const { formProps, saveButtonProps, query } = useForm();
-
-  const currenciesData = query?.data?.data;
+  const { formProps, saveButtonProps } = useForm();
 
   return (
     <Edit

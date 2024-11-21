@@ -42,12 +42,12 @@ export const StoreOfferBannerList = () => {
         <Table.Column
           dataIndex={["cta_url"]}
           title="CTA URL"
-          render={(value: any) => <UrlField value={value} />}
+          render={(value: string) => <UrlField value={value} />}
         />
         <Table.Column
           dataIndex={["banner_type"]}
           title="Banner Type"
-          render={(value) =>
+          render={() =>
             bannerTypeIsLoading ? (
               <>Loading...</>
             ) : (

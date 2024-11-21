@@ -51,7 +51,7 @@ export const CategoryList = () => {
         <Table.Column
           dataIndex={["image_url"]}
           title="Image"
-          render={(value: any) => (
+          render={(value: string) => (
             <ImageField style={{ maxWidth: "100px" }} value={value} />
           )}
         />

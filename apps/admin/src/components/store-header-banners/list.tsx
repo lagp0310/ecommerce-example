@@ -42,7 +42,7 @@ export const StoreHeaderBannerList = () => {
         <Table.Column
           dataIndex={["cta_url"]}
           title="CTA URL"
-          render={(value: any) => <UrlField value={value} />}
+          render={(value: string) => <UrlField value={value} />}
         />
         <Table.Column
           dataIndex={["banner_type"]}

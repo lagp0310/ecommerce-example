@@ -52,7 +52,7 @@ export const StoreFeatureList = () => {
         <Table.Column
           dataIndex={["icon_url"]}
           title="Icon"
-          render={(value: any) => (
+          render={(value: string) => (
             <ImageField style={{ maxWidth: "100px" }} value={value} />
           )}
         />

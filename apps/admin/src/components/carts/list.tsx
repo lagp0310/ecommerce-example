@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { BaseRecord, useMany } from "@refinedev/core";
+import { useMany } from "@refinedev/core";
 import { useTable, List } from "@refinedev/antd";
 import { Table, Space } from "antd";
 
@@ -76,7 +76,7 @@ export const CartList = () => {
         <Table.Column
           title="Actions"
           dataIndex="actions"
-          render={(_, record: BaseRecord) => <Space></Space>}
+          render={() => <Space></Space>}
         />
       </Table>
     </List>

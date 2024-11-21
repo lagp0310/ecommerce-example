@@ -9,6 +9,10 @@ import {
 export const baseAuthProvider: AuthProvider = {
   login: async ({ email, password, remember }) => {
     try {
+      const searchParams =
+        typeof window !== undefined
+          ? new URLSearchParams(window.location.search)
+          : null;
       const { data, error } = await baseSupabaseClient.auth.signInWithPassword({
         email,
         password,
@@ -29,7 +33,7 @@ export const baseAuthProvider: AuthProvider = {
 
         return {
           success: true,
-          redirectTo: "/",
+          redirectTo: searchParams?.get("redirectTo") ?? "/admin/dashboard",
         };
       }
     } catch (error: any) {

@@ -22,7 +22,7 @@ import {
 } from "@heroicons/react/24/solid";
 import { baseSupabaseClient } from "@/app/providers/data/dataProvider";
 import { authLoginRoute } from "@/app/constants/constants";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useNotificationProvider } from "@refinedev/antd";
 import { OpenNotificationParams } from "@refinedev/core";
 
@@ -38,6 +38,7 @@ export function NavUser({
 }) {
   const { isMobile } = useSidebar();
   const router = useRouter();
+  const pathname = usePathname();
 
   const { open } = useNotificationProvider();
   const openNotification = React.useCallback(
@@ -67,8 +68,8 @@ export function NavUser({
       );
     }
 
-    return router.push(authLoginRoute);
-  }, [openNotification, router]);
+    return router.push(`${authLoginRoute}?redirectTo=${pathname}`);
+  }, [openNotification, pathname, router]);
 
   return (
     <SidebarMenu>

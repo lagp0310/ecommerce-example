@@ -110,7 +110,10 @@ export function NavUser({
               </div>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={handleLogout}>
+            <DropdownMenuItem
+              onClick={handleLogout}
+              className="hover:cursor-pointer dark:hover:bg-sidebar-accent dark:hover:text-sidebar-accent-foreground"
+            >
               <ArrowRightStartOnRectangleIcon className="h-4 w-4" />
               Log out
             </DropdownMenuItem>

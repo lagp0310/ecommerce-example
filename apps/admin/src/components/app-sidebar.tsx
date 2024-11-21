@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-
 import { NavMain } from "@/components/nav-main";
 import { NavUser } from "@/components/nav-user";
 import {
@@ -16,26 +15,49 @@ import {
 import { sidebarItems, topMainSidebarItems } from "@/app/constants/constants";
 import { ShoppingBagIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
-
-const data = {
-  user: {
-    id: "dd8d6bec-5c3c-4518-bd18-a0a62080e316",
-    name: "Test User",
-    email: "test@example.com",
-    avatar: "/avatars/test.jpg",
-  },
-  topMain: topMainSidebarItems,
-  navMain: sidebarItems.map(({ groupIcon, groupLabel, items }) => ({
-    title: groupLabel,
-    icon: groupIcon,
-    items: items.map(({ list, meta: { label } }) => ({
-      title: label,
-      url: list,
-    })),
-  })),
-};
+import { useSidebarHighlight } from "@/hooks/use-sidebar-highlight";
+import { usePathname } from "next/navigation";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const currentSelectedObject = useSidebarHighlight();
+  const pathname = usePathname();
+
+  const sidebarData = React.useMemo(
+    () => ({
+      user: {
+        id: "dd8d6bec-5c3c-4518-bd18-a0a62080e316",
+        name: "Test User",
+        email: "test@example.com",
+        avatar: "/avatars/test.jpg",
+      },
+      topMain: topMainSidebarItems.map(({ icon, title, url }) => ({
+        icon,
+        title,
+        url,
+        isActive:
+          !!currentSelectedObject?.path &&
+          pathname === currentSelectedObject?.path,
+      })),
+      navMain: sidebarItems.map(
+        ({ groupIcon, groupLabel, groupName, items }) => ({
+          groupName,
+          title: groupLabel,
+          icon: groupIcon,
+          isActive:
+            !!currentSelectedObject &&
+            currentSelectedObject.groupName === groupName,
+          items: items.map(({ list, meta: { label } }) => ({
+            title: label,
+            url: list,
+            isCurrent:
+              !!currentSelectedObject && currentSelectedObject.list === list,
+          })),
+        })
+      ),
+    }),
+    [currentSelectedObject, pathname]
+  );
+
   return (
     <Sidebar variant="sidebar" {...props}>
       <SidebarHeader>
@@ -43,7 +65,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
               <Link href="/admin/dashboard">
-                <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
+                <div className="flex size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
                   <ShoppingBagIcon className="h-4 w-4" />
                 </div>
                 <div className="grid flex-1 text-left text-sm leading-tight">
@@ -59,14 +81,14 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarHeader>
       <SidebarContent className="gap-[0.5px]">
         <NavMain
-          items={data.topMain}
+          items={sidebarData.topMain}
           additionalMenuClasses="mb-0"
           additionalMenuButtonClasses="py-0"
         />
-        <NavMain items={data.navMain} showSectionTitle={false} />
+        <NavMain items={sidebarData.navMain} showSectionTitle={false} />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={data.user} />
+        <NavUser user={sidebarData.user} />
       </SidebarFooter>
     </Sidebar>
   );

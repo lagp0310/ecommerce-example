@@ -22,7 +22,7 @@ import { useTheme } from "@/context/themeContext";
 type Props = { children: React.ReactNode };
 
 export function DefaultLayout({ children }: Props) {
-  const { theme: currentTheme } = useTheme();
+  const { theme: currentTheme, prefersDarkTheme } = useTheme();
   const pathname = usePathname();
   const shouldShowSidebar = React.useMemo(
     () =>
@@ -37,9 +37,9 @@ export function DefaultLayout({ children }: Props) {
       <ConfigProvider
         theme={{
           algorithm:
-            currentTheme === "light"
-              ? theme.defaultAlgorithm
-              : theme.darkAlgorithm,
+            currentTheme === "dark" || prefersDarkTheme
+              ? theme.darkAlgorithm
+              : theme.defaultAlgorithm,
         }}
         form={{ validateMessages: formValidationMessages }}
       >

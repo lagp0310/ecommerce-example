@@ -77,7 +77,7 @@ export function NavUser({
     return router.push(`${authLoginRoute}?redirectTo=${pathname}`);
   }, [openNotification, pathname, router]);
 
-  const { theme, setTheme } = useTheme();
+  const { theme, setTheme, setLocalStorageTheme } = useTheme();
   const themeIcon = React.useMemo(() => {
     if (theme === "system") return <ComputerDesktopIcon className="h-4 w-4" />;
 
@@ -87,13 +87,23 @@ export function NavUser({
       <SunIcon className="h4 w-4" />
     );
   }, [theme]);
-  const getCheckedComponent = React.useCallback((themeArg: Theme) => {
-    return theme === themeArg ? (
-      <div className="flex flex-1 justify-end items-center">
-        <CheckIcon className="h-4 w-4" />
-      </div>
-    ) : null;
-  }, []);
+  const handleThemeChange = React.useCallback(
+    (theme: Theme) => {
+      setTheme(theme);
+      setLocalStorageTheme(theme);
+    },
+    [setLocalStorageTheme, setTheme]
+  );
+  const getCheckedComponent = React.useCallback(
+    (themeArg: Theme) => {
+      return theme === themeArg ? (
+        <div className="flex flex-1 justify-end items-center">
+          <CheckIcon className="h-4 w-4" />
+        </div>
+      ) : null;
+    },
+    [theme]
+  );
 
   return (
     <SidebarMenu>
@@ -154,7 +164,7 @@ export function NavUser({
                       sideOffset={6}
                     >
                       <DropdownMenuItem
-                        onClick={() => setTheme("system")}
+                        onClick={() => handleThemeChange("system")}
                         className="hover:cursor-pointer hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
                       >
                         <ComputerDesktopIcon className="h-4 w-4" />
@@ -162,7 +172,7 @@ export function NavUser({
                         {getCheckedComponent("system")}
                       </DropdownMenuItem>
                       <DropdownMenuItem
-                        onClick={() => setTheme("light")}
+                        onClick={() => handleThemeChange("light")}
                         className="hover:cursor-pointer hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
                       >
                         <SunIcon className="h-4 w-4" />
@@ -170,7 +180,7 @@ export function NavUser({
                         {getCheckedComponent("light")}
                       </DropdownMenuItem>
                       <DropdownMenuItem
-                        onClick={() => setTheme("dark")}
+                        onClick={() => handleThemeChange("dark")}
                         className="hover:cursor-pointer hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
                       >
                         <MoonIcon className="h-4 w-4" />

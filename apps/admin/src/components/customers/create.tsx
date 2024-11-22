@@ -63,7 +63,7 @@ export const CustomerCreate = () => {
   return (
     <Create footerButtons={[]}>
       <Form {...formProps} layout="vertical">
-        <div className="flex flex-1 flex-row gap-x-4 w-full">
+        <div className="flex flex-1 flex-col md:flex-row gap-x-4 w-full">
           <Form.Item
             label="First Name"
             name={["first_name"]}
@@ -93,7 +93,7 @@ export const CustomerCreate = () => {
             <Input />
           </Form.Item>
         </div>
-        <div className="flex flex-1 flex-row gap-x-4 w-full">
+        <div className="flex flex-1 flex-col md:flex-row gap-x-4 w-full">
           <Form.Item
             label="Email"
             name={["email"]}
@@ -142,7 +142,7 @@ export const CustomerCreate = () => {
             },
           ]}
         >
-          <DatePicker format="MM-DD-YYYY" />
+          <DatePicker format="MM-DD-YYYY" className="w-full" />
         </Form.Item>
         <Form.Item
           label="Billing Address"

@@ -196,7 +196,7 @@ export const ProductEdit = () => {
             },
           ]}
         >
-          <DatePicker format="MM-DD-YYYY HH:mm:ss" />
+          <DatePicker format="MM-DD-YYYY HH:mm:ss" className="w-full" />
         </Form.Item>
         <Form.Item label="Image">
           <Form.Item

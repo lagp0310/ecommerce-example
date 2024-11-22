@@ -8,13 +8,13 @@ const acceptedThemeValues: Theme[] = ["light", "dark", "system"];
 
 type ThemeContext = {
   theme: Theme;
-  prefersDarkTheme: boolean;
+  prefersDarkTheme: boolean | null;
   setTheme: React.Dispatch<React.SetStateAction<Theme>> | (() => void);
   setLocalStorageTheme: (theme: Theme) => void | (() => void);
 };
 const ThemeContext = React.createContext<ThemeContext>({
   theme: defaultTheme,
-  prefersDarkTheme: true,
+  prefersDarkTheme: null,
   setTheme: () => {},
   setLocalStorageTheme: () => {},
 });
@@ -39,7 +39,10 @@ export function ThemeContextProvider({
 }: Props) {
   const [theme, setTheme] = React.useState<Theme>(initialTheme);
   const prefersDarkTheme = React.useMemo(
-    () => window.matchMedia("(prefers-color-scheme: dark)").matches,
+    () =>
+      typeof window !== "undefined"
+        ? window.matchMedia("(prefers-color-scheme: dark)").matches
+        : null,
     []
   );
 

@@ -42,7 +42,13 @@ export const PaymentMethodList = () => {
         <Table.Column
           dataIndex={["is_active"]}
           title="Is Active"
-          render={(value: boolean) => <BooleanField value={value} />}
+          render={(value: boolean) => (
+            <div className="flex flex-1 items-center jutify-center">
+              <div className="flex flex-1 justify-center">
+                <BooleanField value={value} />
+              </div>
+            </div>
+          )}
         />
         <Table.Column
           title="Actions"

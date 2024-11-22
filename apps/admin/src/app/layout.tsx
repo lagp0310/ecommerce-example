@@ -6,6 +6,9 @@ import { DefaultLayout } from "@/components/utils/default-layout";
 import NextTopLoader from "nextjs-toploader";
 import { ThemeContextProvider } from "@/context/theme-context";
 import { UserContextProvider } from "@/context/user-context";
+import { validateEnvs } from "@/lib/env";
+
+validateEnvs();
 
 const poppins = Poppins({
   subsets: ["latin"],

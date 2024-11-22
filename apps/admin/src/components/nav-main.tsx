@@ -15,6 +15,7 @@ import {
   SidebarMenuSub,
   SidebarMenuSubButton,
   SidebarMenuSubItem,
+  useSidebar,
 } from "@/components/ui/sidebar";
 import { ChevronRightIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
@@ -42,6 +43,8 @@ export function NavMain({
   additionalMenuClasses?: string;
   additionalMenuButtonClasses?: string;
 }) {
+  const { setOpenMobile } = useSidebar();
+
   const hasGroupValidLink = React.useCallback(
     (url: string) =>
       typeof url === "string" &&
@@ -75,6 +78,7 @@ export function NavMain({
                         ? "bg-sidebar-accent text-sidebar-accent-foreground"
                         : ""
                     }
+                    onClick={() => setOpenMobile(false)}
                   >
                     {icon}
                     <span>{title}</span>
@@ -103,6 +107,7 @@ export function NavMain({
                             className={
                               isCurrent ? "bg-sidebar-accent text-white" : ""
                             }
+                            onClick={() => setOpenMobile(false)}
                           >
                             <span>{title}</span>
                           </Link>

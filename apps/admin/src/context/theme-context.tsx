@@ -20,9 +20,12 @@ const ThemeContext = React.createContext<ThemeContext>({
 });
 
 export function useTheme() {
-  const { theme, prefersDarkTheme, setTheme, setLocalStorageTheme } =
-    React.useContext(ThemeContext);
-  return { theme, prefersDarkTheme, setTheme, setLocalStorageTheme };
+  const context = React.useContext(ThemeContext);
+  if (!context) {
+    throw new Error("useTheme must be used within a ThemeContextProvider.");
+  }
+
+  return context;
 }
 
 type Props = {

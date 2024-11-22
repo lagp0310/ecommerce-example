@@ -16,8 +16,14 @@ const UserContext = React.createContext<UserContext>({
 });
 
 export function useCurrentUser() {
-  const { usersData } = React.useContext(UserContext);
-  return { usersData };
+  const context = React.useContext(UserContext);
+  if (!context) {
+    throw new Error(
+      "useCurrentUser must be used within a UserContextProvider."
+    );
+  }
+
+  return context;
 }
 
 type Props = {

@@ -2,7 +2,7 @@
 
 import React from "react";
 import { Create, SaveButton, useForm } from "@refinedev/antd";
-import { Form, Input, DatePicker, Button } from "antd";
+import { Form, Input, DatePicker } from "antd";
 import { useCreate } from "@refinedev/core";
 import { PatternFormat } from "react-number-format";
 import dayjs from "dayjs";
@@ -45,8 +45,14 @@ export const CustomerCreate = () => {
         throw new Error("Form is invalid");
       }
 
-      const { email, phone_number, ...rest } = getFieldsValue();
-      mutateCustomer({ values: { ...rest } });
+      const { ...formValues } = getFieldsValue([
+        "first_name",
+        "last_name",
+        "birth_date",
+        "billing_address",
+        "shipping_address",
+      ]);
+      mutateCustomer({ values: { ...formValues } });
 
       redirect("list");
     } catch (error) {

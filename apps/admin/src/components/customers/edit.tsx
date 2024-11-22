@@ -45,8 +45,14 @@ export const CustomerEdit = () => {
         throw new Error("Form is invalid");
       }
 
-      const { email, phone_number, ...rest } = getFieldsValue();
-      mutateCustomer({ values: { ...rest } });
+      const { ...formValues } = getFieldsValue([
+        "first_name",
+        "last_name",
+        "birth_date",
+        "billing_address",
+        "shipping_address",
+      ]);
+      mutateCustomer({ values: { ...formValues } });
 
       redirect("list");
     } catch (error) {

@@ -33,11 +33,19 @@ import { OpenNotificationParams } from "@refinedev/core";
 import { Theme, useTheme } from "@/context/theme-context";
 import { UserData } from "@/context/user-context";
 
-export function NavUser({
-  user: { avatar, firstName, lastName, email },
-}: {
-  user: UserData;
-}) {
+export function NavUser({ user }: { user: UserData }) {
+  const usersData = React.useMemo(
+    () =>
+      !!user
+        ? {
+            avatar: user?.avatar,
+            firstName: user?.firstName,
+            lastName: user?.lastName,
+            email: user?.email,
+          }
+        : null,
+    [user]
+  );
   const { isMobile } = useSidebar();
   const router = useRouter();
   const pathname = usePathname();
@@ -105,19 +113,27 @@ export function NavUser({
     (showChevronUpDown = true) => (
       <>
         <Avatar className="h-8 w-8 rounded-lg">
-          <AvatarImage src={avatar} alt={`${firstName} ${lastName}`} />
-          <AvatarFallback className="rounded-lg">{`${firstName?.substring(0, 1)} ${lastName?.substring(0, 1)}`}</AvatarFallback>
+          <AvatarImage
+            src={usersData?.avatar}
+            alt={`${usersData?.firstName} ${usersData?.lastName}`}
+          />
+          <AvatarFallback className="rounded-lg">{`${usersData?.firstName?.substring(0, 1)} ${usersData?.lastName?.substring(0, 1)}`}</AvatarFallback>
         </Avatar>
         <div className="grid flex-1 text-left text-sm leading-tight">
-          <span className="truncate font-semibold">{`${firstName} ${lastName}`}</span>
-          <span className="truncate text-xs">{email}</span>
+          <span className="truncate font-semibold">{`${usersData?.firstName} ${usersData?.lastName}`}</span>
+          <span className="truncate text-xs">{usersData?.email}</span>
         </div>
         {showChevronUpDown ? (
           <ChevronUpDownIcon className="ml-auto size-4" />
         ) : null}
       </>
     ),
-    [avatar, email, firstName, lastName]
+    [
+      usersData?.avatar,
+      usersData?.email,
+      usersData?.firstName,
+      usersData?.lastName,
+    ]
   );
 
   return (

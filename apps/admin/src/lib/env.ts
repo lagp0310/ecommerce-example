@@ -18,4 +18,4 @@ export function validateEnvs() {
   }
 }
 
-export const env = parsedEnvs.data;
+export const env = parsedEnvs.data!;

@@ -36,6 +36,7 @@ export const baseAuthProvider: AuthProvider = {
           redirectTo: searchParams?.get("redirectTo") ?? "/admin/dashboard",
         };
       }
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       return {
         success: false,
@@ -103,6 +104,7 @@ export const baseAuthProvider: AuthProvider = {
           redirectTo: "/login",
         };
       }
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       return {
         authenticated: false,

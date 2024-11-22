@@ -1,23 +1,23 @@
 "use client";
 
 import React from "react";
-import { dataProviderClient } from "@/app/providers/data/dataProvider.client";
-import { authProviderClient } from "@/app/providers/auth/authProvider.client";
+import { dataProviderClient } from "@/app/providers/data/data-provider.client";
+import { authProviderClient } from "@/app/providers/auth/auth-provider.client";
 import { Refine } from "@refinedev/core";
 import routerProvider from "@refinedev/nextjs-router";
 import { ThemedLayoutV2, useNotificationProvider } from "@refinedev/antd";
 import { App as AntdApp, ConfigProvider, theme } from "antd";
 import "@refinedev/antd/dist/reset.css";
-import { QueryClientProvider } from "@/components/utils/queryClientProvider";
+import { QueryClientProvider } from "@/components/utils/query-client-provider";
 import {
   formValidationMessages,
   nonProtectedPathnames,
   refineResources,
 } from "@/app/constants/constants";
-import { ThemedLayoutClient } from "@/components/utils/themedLayoutClient";
+import { ThemedLayoutClient } from "@/components/utils/themed-layout-client";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { usePathname } from "next/navigation";
-import { useTheme } from "@/context/themeContext";
+import { useTheme } from "@/context/theme-context";
 
 type Props = { children: React.ReactNode };
 

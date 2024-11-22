@@ -2,9 +2,9 @@ import React from "react";
 import type { Metadata } from "next";
 import "./globals.css";
 import { Poppins } from "next/font/google";
-import { DefaultLayout } from "@/components/utils/defaultLayout";
+import { DefaultLayout } from "@/components/utils/default-layout";
 import NextTopLoader from "nextjs-toploader";
-import { ThemeContextProvider } from "@/context/themeContext";
+import { ThemeContextProvider } from "@/context/theme-context";
 
 const poppins = Poppins({
   subsets: ["latin"],

@@ -1,4 +1,4 @@
-import { PageNotFound } from "@/components/ui/illustrations/PageNotFound";
+import { PageNotFound } from "@/components/ui/illustrations/page-not-found";
 import Link from "next/link";
 
 export default function NotFound() {

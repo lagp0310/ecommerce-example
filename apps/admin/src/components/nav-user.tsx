@@ -25,12 +25,12 @@ import {
   MoonIcon,
   SunIcon,
 } from "@heroicons/react/24/solid";
-import { baseSupabaseClient } from "@/app/providers/data/dataProvider";
+import { baseSupabaseClient } from "@/app/providers/data/data-provider";
 import { authLoginRoute } from "@/app/constants/constants";
 import { usePathname, useRouter } from "next/navigation";
 import { useNotificationProvider } from "@refinedev/antd";
 import { OpenNotificationParams } from "@refinedev/core";
-import { Theme, useTheme } from "@/context/themeContext";
+import { Theme, useTheme } from "@/context/theme-context";
 
 export function NavUser({
   user: { avatar, email, name },

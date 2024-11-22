@@ -1,5 +1,5 @@
 import { type AuthProvider } from "@refinedev/core";
-import { baseSupabaseClient } from "@/app/providers/data/dataProvider";
+import { baseSupabaseClient } from "@/app/providers/data/data-provider";
 import nookies from "nookies";
 import {
   cookieExpiresAfter,

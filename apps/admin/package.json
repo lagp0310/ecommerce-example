@@ -6,7 +6,7 @@
     "dev": "refine dev --turbopack --port 3000",
     "build": "refine build",
     "start": "refine start --port 3000",
-    "lint": "refine lint",
+    "lint": "next lint",
     "refine": "refine"
   },
   "dependencies": {

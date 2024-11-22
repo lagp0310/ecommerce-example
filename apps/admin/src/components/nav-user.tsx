@@ -31,16 +31,12 @@ import { usePathname, useRouter } from "next/navigation";
 import { useNotificationProvider } from "@refinedev/antd";
 import { OpenNotificationParams } from "@refinedev/core";
 import { Theme, useTheme } from "@/context/theme-context";
+import { UserData } from "@/context/user-context";
 
 export function NavUser({
-  user: { avatar, email, name },
+  user: { avatar, firstName, lastName, email },
 }: {
-  user: {
-    id: string;
-    name: string;
-    email: string;
-    avatar: string;
-  };
+  user: UserData;
 }) {
   const { isMobile } = useSidebar();
   const router = useRouter();
@@ -105,6 +101,25 @@ export function NavUser({
     [theme]
   );
 
+  const userInfoSection = React.useCallback(
+    (showChevronUpDown = true) => (
+      <>
+        <Avatar className="h-8 w-8 rounded-lg">
+          <AvatarImage src={avatar} alt={`${firstName} ${lastName}`} />
+          <AvatarFallback className="rounded-lg">{`${firstName?.substring(0, 1)} ${lastName?.substring(0, 1)}`}</AvatarFallback>
+        </Avatar>
+        <div className="grid flex-1 text-left text-sm leading-tight">
+          <span className="truncate font-semibold">{`${firstName} ${lastName}`}</span>
+          <span className="truncate text-xs">{email}</span>
+        </div>
+        {showChevronUpDown ? (
+          <ChevronUpDownIcon className="ml-auto size-4" />
+        ) : null}
+      </>
+    ),
+    [avatar, email, firstName, lastName]
+  );
+
   return (
     <SidebarMenu>
       <SidebarMenuItem>
@@ -114,15 +129,7 @@ export function NavUser({
               size="lg"
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
             >
-              <Avatar className="h-8 w-8 rounded-lg">
-                <AvatarImage src={avatar} alt={name} />
-                <AvatarFallback className="rounded-lg">CN</AvatarFallback>
-              </Avatar>
-              <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-semibold">{name}</span>
-                <span className="truncate text-xs">{email}</span>
-              </div>
-              <ChevronUpDownIcon className="ml-auto size-4" />
+              {userInfoSection()}
             </SidebarMenuButton>
           </DropdownMenuTrigger>
           <DropdownMenuContent
@@ -133,14 +140,7 @@ export function NavUser({
           >
             <DropdownMenuLabel className="p-0 font-normal">
               <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-                <Avatar className="h-8 w-8 rounded-lg">
-                  <AvatarImage src={avatar} alt={name} />
-                  <AvatarFallback className="rounded-lg">CN</AvatarFallback>
-                </Avatar>
-                <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-semibold">{name}</span>
-                  <span className="truncate text-xs">{email}</span>
-                </div>
+                {userInfoSection(false)}
               </div>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />

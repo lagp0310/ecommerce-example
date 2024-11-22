@@ -17,18 +17,17 @@ import { ShoppingBagIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
 import { useSidebarHighlight } from "@/hooks/use-sidebar-highlight";
 import { usePathname } from "next/navigation";
+import { useCurrentUser } from "@/context/user-context";
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const currentSelectedObject = useSidebarHighlight();
   const pathname = usePathname();
+  const { usersData } = useCurrentUser();
 
   const sidebarData = React.useMemo(
     () => ({
       user: {
-        id: "dd8d6bec-5c3c-4518-bd18-a0a62080e316",
-        name: "Test User",
-        email: "test@example.com",
-        avatar: "/avatars/test.jpg",
+        ...usersData,
       },
       topMain: topMainSidebarItems.map(({ icon, title, url }) => ({
         icon,
@@ -55,7 +54,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         })
       ),
     }),
-    [currentSelectedObject, pathname]
+    [currentSelectedObject, pathname, usersData]
   );
 
   return (

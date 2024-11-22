@@ -5,6 +5,7 @@ import { Poppins } from "next/font/google";
 import { DefaultLayout } from "@/components/utils/default-layout";
 import NextTopLoader from "nextjs-toploader";
 import { ThemeContextProvider } from "@/context/theme-context";
+import { UserContextProvider } from "@/context/user-context";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -26,7 +27,9 @@ export default async function RootLayout({
       <body className={`${poppins.className} antialiased`}>
         <NextTopLoader />
         <ThemeContextProvider initialTheme="system">
-          <DefaultLayout>{children}</DefaultLayout>
+          <UserContextProvider>
+            <DefaultLayout>{children}</DefaultLayout>
+          </UserContextProvider>
         </ThemeContextProvider>
       </body>
     </html>

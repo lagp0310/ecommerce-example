@@ -49,7 +49,7 @@ export default function DashboardPage() {
                 <Card>
                   <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                     <CardTitle className="text-sm font-medium">
-                      Total Revenue
+                      Monthly Revenue
                     </CardTitle>
                     <CurrencyDollarIcon className="h-4 w-4" />
                   </CardHeader>
@@ -63,7 +63,7 @@ export default function DashboardPage() {
                 <Card>
                   <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                     <CardTitle className="text-sm font-medium">
-                      Subscriptions
+                      Monthly Subscriptions
                     </CardTitle>
                     <UserGroupIcon className="h-4 w-4" />
                   </CardHeader>
@@ -76,7 +76,9 @@ export default function DashboardPage() {
                 </Card>
                 <Card>
                   <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                    <CardTitle className="text-sm font-medium">Sales</CardTitle>
+                    <CardTitle className="text-sm font-medium">
+                      Monthly Sales
+                    </CardTitle>
                     <CreditCardIcon className="h-4 w-4" />
                   </CardHeader>
                   <CardContent>
@@ -89,7 +91,7 @@ export default function DashboardPage() {
                 <Card>
                   <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                     <CardTitle className="text-sm font-medium">
-                      Active Now
+                      Current Active Users
                     </CardTitle>
                     <CursorArrowRaysIcon className="h-4 w-4" />
                   </CardHeader>

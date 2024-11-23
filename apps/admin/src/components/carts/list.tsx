@@ -3,6 +3,7 @@
 import React from "react";
 import { useTable, List } from "@refinedev/antd";
 import { Table, Tag } from "antd";
+import { LineItem } from "@/types/types";
 
 export const CartList = () => {
   const { tableProps } = useTable({
@@ -50,10 +51,12 @@ export const CartList = () => {
           title="Line Items"
           render={(_value, record) => {
             const lineItems = record?.line_items;
-            const tags = lineItems?.map(({ products, quantity }, index) => {
-              const composedName = `${products?.name} (${quantity})`;
-              return <Tag key={index}>{composedName}</Tag>;
-            });
+            const tags = (lineItems as LineItem[])?.map(
+              ({ products, quantity }, index) => {
+                const composedName = `${products?.name} (${quantity})`;
+                return <Tag key={index}>{composedName}</Tag>;
+              }
+            );
 
             return <div className="flex gap-y-1 flex-wrap">{tags}</div>;
           }}

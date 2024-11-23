@@ -5,6 +5,7 @@ import { BaseRecord } from "@refinedev/core";
 import { useTable, List, EditButton } from "@refinedev/antd";
 import { Table, Space, Tag } from "antd";
 import { PlusIcon, PencilSquareIcon } from "@heroicons/react/24/solid";
+import { Business } from "@/types/types";
 
 export const BusinessList = () => {
   const { tableProps } = useTable({
@@ -27,7 +28,7 @@ export const BusinessList = () => {
           title="Currencies"
           render={(_value, record) => (
             <>
-              {record?.business_currency?.map(
+              {(record as Business)?.business_currency?.map(
                 ({ currency: { name, three_letter_code } }, index) => (
                   <Tag key={index}>{`${name} (${three_letter_code})`}</Tag>
                 )

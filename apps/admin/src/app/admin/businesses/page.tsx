@@ -1,5 +1,10 @@
 import { BusinessList } from "@/components/businesses";
+import React from "react";
 
 export default function BusinessListPage() {
-  return <BusinessList />;
+  return (
+    <React.Suspense>
+      <BusinessList />
+    </React.Suspense>
+  );
 }

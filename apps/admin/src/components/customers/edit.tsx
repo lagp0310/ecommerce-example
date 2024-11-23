@@ -3,10 +3,11 @@
 import React from "react";
 import { Edit, SaveButton, useForm } from "@refinedev/antd";
 import { Form, Input, DatePicker } from "antd";
-import { useUpdate } from "@refinedev/core";
+import { HttpError, useUpdate } from "@refinedev/core";
 import { PatternFormat } from "react-number-format";
 import dayjs from "dayjs";
 import { FolderArrowDownIcon } from "@heroicons/react/24/solid";
+import { Customer, FormValues, ValidateFieldsResponse } from "@/types/types";
 
 export const CustomerEdit = () => {
   const {
@@ -15,7 +16,7 @@ export const CustomerEdit = () => {
     redirect,
     query,
     form: { getFieldsValue, setFieldValue, validateFields },
-  } = useForm({
+  } = useForm<Customer, HttpError, FormValues<Customer>>({
     queryMeta: { select: "*, emails(email), phone_numbers(phone_number)" },
   });
 
@@ -39,7 +40,8 @@ export const CustomerEdit = () => {
 
   const updateCustomer = React.useCallback(async () => {
     try {
-      const { errorFields } = await validateFields();
+      const { errorFields } =
+        (await validateFields()) as unknown as ValidateFieldsResponse<Customer>;
 
       if (Array.isArray(errorFields) && errorFields.length > 0) {
         throw new Error("Form is invalid");

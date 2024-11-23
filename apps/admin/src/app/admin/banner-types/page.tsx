@@ -1,5 +1,10 @@
 import { BannerTypeList } from "@/components/banner-types";
+import React from "react";
 
 export default function BannerTypeListPage() {
-  return <BannerTypeList />;
+  return (
+    <React.Suspense>
+      <BannerTypeList />
+    </React.Suspense>
+  );
 }

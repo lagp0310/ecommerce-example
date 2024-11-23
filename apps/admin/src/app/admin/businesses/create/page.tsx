@@ -1,5 +1,10 @@
+import React from "react";
 import { BusinessCreate } from "@/components/businesses";
 
 export default function BusinessCreatePage() {
-  return <BusinessCreate />;
+  return (
+    <React.Suspense>
+      <BusinessCreate />
+    </React.Suspense>
+  );
 }

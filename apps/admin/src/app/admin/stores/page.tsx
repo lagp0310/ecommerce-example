@@ -1,5 +1,10 @@
 import { StoreList } from "@/components/stores";
+import React from "react";
 
 export default function StoreListPage() {
-  return <StoreList />;
+  return (
+    <React.Suspense>
+      <StoreList />
+    </React.Suspense>
+  );
 }

@@ -1,5 +1,10 @@
 import { LocaleList } from "@/components/locales";
+import React from "react";
 
 export default function LocaleListPage() {
-  return <LocaleList />;
+  return (
+    <React.Suspense>
+      <LocaleList />
+    </React.Suspense>
+  );
 }

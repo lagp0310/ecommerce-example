@@ -1,5 +1,10 @@
 import { CategoryEdit } from "@/components/categories";
+import React from "react";
 
 export default function CategoryEditPage() {
-  return <CategoryEdit />;
+  return (
+    <React.Suspense>
+      <CategoryEdit />
+    </React.Suspense>
+  );
 }

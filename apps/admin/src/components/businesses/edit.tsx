@@ -4,8 +4,14 @@ import React from "react";
 import { Edit, SaveButton, useForm, useSelect } from "@refinedev/antd";
 import { Form, Input, Select } from "antd";
 import { FolderArrowDownIcon } from "@heroicons/react/24/solid";
-import { useCreateMany, useDeleteMany, useUpdate } from "@refinedev/core";
+import {
+  HttpError,
+  useCreateMany,
+  useDeleteMany,
+  useUpdate,
+} from "@refinedev/core";
 import isUUID from "validator/es/lib/isUUID";
+import { ValidateFieldsResponse, Business, FormValues } from "@/types/types";
 
 export const BusinessEdit = () => {
   const {
@@ -14,7 +20,7 @@ export const BusinessEdit = () => {
     redirect,
     query,
     form: { getFieldsValue, setFieldValue, validateFields },
-  } = useForm({
+  } = useForm<Business, HttpError, FormValues<Business>>({
     queryMeta: {
       select: "*, business_currency(id, currency(id, name, three_letter_code))",
     },
@@ -42,7 +48,7 @@ export const BusinessEdit = () => {
     id: businessData?.id,
     mutationOptions: {
       onError: (error) => {
-        console.error("here error", error);
+        console.error(error);
       },
       onSuccess: ({ data }) => {
         const { business_currencies: selectedCurrencies } = getFieldsValue();
@@ -53,13 +59,13 @@ export const BusinessEdit = () => {
         const newCurrencies = selectedCurrencies
           .filter(
             (selectedCurrencyId) =>
-              !currentCurrencies.find(
+              !currentCurrencies?.find(
                 ({ currencyId }) => selectedCurrencyId === currencyId
               )
           )
           .map((currencyId) => ({ business: data.id, currency: currencyId }));
         const deleteCurrenciesIds = currentCurrencies
-          .filter(
+          ?.filter(
             ({ currencyId }) =>
               !selectedCurrencies.find(
                 (selectedCurrencyId) => selectedCurrencyId === currencyId
@@ -86,7 +92,10 @@ export const BusinessEdit = () => {
 
   const updateBusiness = React.useCallback(async () => {
     try {
-      const { errorFields } = await validateFields(["name", "description"]);
+      const { errorFields } = (await validateFields([
+        "name",
+        "description",
+      ])) as unknown as ValidateFieldsResponse<Business>;
 
       if (Array.isArray(errorFields) && errorFields.length > 0) {
         throw new Error("Form is invalid");

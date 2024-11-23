@@ -5,7 +5,8 @@ import { Create, SaveButton, useForm, useSelect } from "@refinedev/antd";
 import { Form, Input, Select } from "antd";
 import { FolderArrowDownIcon } from "@heroicons/react/24/solid";
 import isUUID from "validator/es/lib/isUUID";
-import { useCreate, useCreateMany } from "@refinedev/core";
+import { HttpError, useCreate, useCreateMany } from "@refinedev/core";
+import { ValidateFieldsResponse, Business, FormValues } from "@/types/types";
 
 export const BusinessCreate = () => {
   const {
@@ -13,7 +14,7 @@ export const BusinessCreate = () => {
     saveButtonProps,
     redirect,
     form: { getFieldsValue, validateFields },
-  } = useForm();
+  } = useForm<Business, HttpError, FormValues<Business>>();
   const { mutate: mutateBusinessCurrency } = useCreateMany({
     resource: "business_currency",
   });
@@ -22,9 +23,14 @@ export const BusinessCreate = () => {
     mutationOptions: {
       onSuccess: ({ data }) => {
         try {
-          const { business_currencies } = getFieldsValue();
+          const { business_currencies } = getFieldsValue([
+            "business_currencies",
+          ]);
           const businessCurrenciesValues = business_currencies.map(
-            (currencyId) => ({ business: data.id, currency: currencyId })
+            (currencyId: string) => ({
+              business: data.id,
+              currency: currencyId,
+            })
           );
           mutateBusinessCurrency({ values: businessCurrenciesValues });
         } catch (error) {
@@ -36,7 +42,10 @@ export const BusinessCreate = () => {
 
   const createBusiness = React.useCallback(async () => {
     try {
-      const { errorFields } = await validateFields(["name", "description"]);
+      const { errorFields } = (await validateFields([
+        "name",
+        "description",
+      ])) as unknown as ValidateFieldsResponse<Business>;
 
       if (Array.isArray(errorFields) && errorFields.length > 0) {
         throw new Error("Form is invalid");

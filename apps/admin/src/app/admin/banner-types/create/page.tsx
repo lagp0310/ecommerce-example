@@ -1,5 +1,10 @@
 import { BannerTypeCreate } from "@/components/banner-types";
+import React from "react";
 
 export default function BannerTypeCreatePage() {
-  return <BannerTypeCreate />;
+  return (
+    <React.Suspense>
+      <BannerTypeCreate />
+    </React.Suspense>
+  );
 }

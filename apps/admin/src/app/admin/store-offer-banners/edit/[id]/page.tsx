@@ -1,5 +1,10 @@
 import { StoreOfferBannerEdit } from "@/components/store-offer-banners";
+import React from "react";
 
 export default function StoreOfferBannerEditPage() {
-  return <StoreOfferBannerEdit />;
+  return (
+    <React.Suspense>
+      <StoreOfferBannerEdit />
+    </React.Suspense>
+  );
 }

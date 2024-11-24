@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import {
   Card,
@@ -10,15 +12,75 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Overview } from "@/components/ui/charts/overview";
 import { RecentSales } from "@/components/ui/recent-sales";
 import {
-  CreditCardIcon,
   CurrencyDollarIcon,
   CursorArrowRaysIcon,
+  ShoppingBagIcon,
   UserGroupIcon,
 } from "@heroicons/react/24/solid";
+import { baseSupabaseClient } from "@/app/providers/data/data-provider";
+import { DashboardDataResponse } from "@/types/types";
 // import { useCurrentUser } from "@/context/user-context";
 
 export default function DashboardPage() {
   // const { usersData } = useCurrentUser();
+  const [dashboardData, setDashboardData] =
+    React.useState<DashboardDataResponse | null>(null);
+  const getDashboardMetricsData = React.useCallback(async () => {
+    const response = await baseSupabaseClient.rpc("get_dashboard_data");
+
+    if (response) {
+      const { data, error } = response as {
+        data?: DashboardDataResponse;
+        error?: unknown;
+      };
+
+      if (error) {
+        console.error(error);
+        throw new Error((error as { message?: string }).message);
+      } else if (data) {
+        setDashboardData(data);
+      }
+    } else {
+      throw new Error("Failed to get dashboard data");
+    }
+  }, []);
+  React.useEffect(() => {
+    getDashboardMetricsData();
+  }, [getDashboardMetricsData]);
+  const hasMonthlyRevenueData = React.useMemo(
+    () =>
+      typeof dashboardData?.result_orders_total === "number" &&
+      typeof dashboardData?.orders_amount_difference_percentage === "number" &&
+      typeof dashboardData?.is_orders_amount_percentage_positive === "boolean",
+    [
+      dashboardData?.is_orders_amount_percentage_positive,
+      dashboardData?.orders_amount_difference_percentage,
+      dashboardData?.result_orders_total,
+    ]
+  );
+  const hasMonthlySubscriptionsData = React.useMemo(
+    () =>
+      typeof dashboardData?.result_customers_count === "number" &&
+      typeof dashboardData?.customers_difference_percentage === "number" &&
+      typeof dashboardData?.is_customers_difference_percentage_positive ===
+        "boolean",
+    [
+      dashboardData?.customers_difference_percentage,
+      dashboardData?.is_customers_difference_percentage_positive,
+      dashboardData?.result_customers_count,
+    ]
+  );
+  const hasMonthlyOrdersData = React.useMemo(
+    () =>
+      typeof dashboardData?.result_orders_total === "number" &&
+      typeof dashboardData?.orders_difference_percentage === "number" &&
+      typeof dashboardData?.is_orders_percentage_positive === "boolean",
+    [
+      dashboardData?.is_orders_percentage_positive,
+      dashboardData?.orders_difference_percentage,
+      dashboardData?.result_orders_total,
+    ]
+  );
 
   return (
     <div className="flex flex-1 flex-col py-4">
@@ -54,10 +116,16 @@ export default function DashboardPage() {
                     <CurrencyDollarIcon className="h-4 w-4" />
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-bold">$45,231.89</div>
-                    <p className="text-xs text-muted-foreground">
-                      +20.1% from last month
-                    </p>
+                    {hasMonthlyRevenueData ? (
+                      <React.Fragment>
+                        <div className="text-2xl font-bold">{`$${dashboardData?.result_orders_total}`}</div>
+                        <p className="text-xs text-muted-foreground">
+                          {`${dashboardData?.is_orders_amount_percentage_positive ? "+" : ""}${dashboardData?.orders_amount_difference_percentage}% from last month`}
+                        </p>
+                      </React.Fragment>
+                    ) : (
+                      <span className="text-lg font-bold">No data yet</span>
+                    )}
                   </CardContent>
                 </Card>
                 <Card>
@@ -68,24 +136,36 @@ export default function DashboardPage() {
                     <UserGroupIcon className="h-4 w-4" />
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-bold">+2350</div>
-                    <p className="text-xs text-muted-foreground">
-                      +180.1% from last month
-                    </p>
+                    {hasMonthlySubscriptionsData ? (
+                      <React.Fragment>
+                        <div className="text-2xl font-bold">{`${dashboardData?.result_customers_count}`}</div>
+                        <p className="text-xs text-muted-foreground">
+                          {`${dashboardData?.is_customers_difference_percentage_positive ? "+" : "-"}${dashboardData?.customers_difference_percentage}% from last month`}
+                        </p>
+                      </React.Fragment>
+                    ) : (
+                      <span className="text-lg font-bold">No data yet</span>
+                    )}
                   </CardContent>
                 </Card>
                 <Card>
                   <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                     <CardTitle className="text-sm font-medium">
-                      Monthly Sales
+                      Monthly Orders
                     </CardTitle>
-                    <CreditCardIcon className="h-4 w-4" />
+                    <ShoppingBagIcon className="h-4 w-4" />
                   </CardHeader>
                   <CardContent>
-                    <div className="text-2xl font-bold">+12,234</div>
-                    <p className="text-xs text-muted-foreground">
-                      +19% from last month
-                    </p>
+                    {hasMonthlyOrdersData ? (
+                      <React.Fragment>
+                        <div className="text-2xl font-bold">{`${dashboardData?.result_total_orders}`}</div>
+                        <p className="text-xs text-muted-foreground">
+                          {`${dashboardData?.is_orders_percentage_positive ? "+" : "-"}${dashboardData?.orders_difference_percentage}% from last month`}
+                        </p>
+                      </React.Fragment>
+                    ) : (
+                      <span className="text-lg font-bold">No data yet</span>
+                    )}
                   </CardContent>
                 </Card>
                 <Card>

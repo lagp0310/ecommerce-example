@@ -1,5 +1,20 @@
 import { BaseKey } from "@refinedev/core";
 
+export type DashboardDataResponse = {
+  result_orders_total: number;
+  result_total_orders: number;
+  lm_orders_total: number;
+  lm_total_orders: number;
+  result_customers_count: number;
+  lm_customers_count: number;
+  orders_amount_difference_percentage: number;
+  is_orders_amount_percentage_positive: boolean;
+  orders_difference_percentage: number;
+  is_orders_percentage_positive: boolean;
+  customers_difference_percentage: number;
+  is_customers_difference_percentage_positive: boolean;
+};
+
 export type ValidateFieldsResponse<Resource> = {
   values: Omit<Resource, "id">;
   errorFields: { errors: string[]; name: string[]; warnings: string[] }[];

@@ -4,6 +4,7 @@ import React from "react";
 import { type OrderSummary } from "@/types/types";
 import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
 import { getMonthName } from "@/lib/utils";
+import { EmptyData } from "../illustrations/empty-data";
 
 type Props = {
   data?: OrderSummary[] | null;
@@ -55,7 +56,8 @@ export function Overview({ data }: Props) {
           </BarChart>
         </ResponsiveContainer>
       ) : (
-        <div className="flex flex-1 flex-row items-center justify-center">
+        <div className="flex flex-1 flex-col items-center justify-center gap-y-4 text-center">
+          <EmptyData className="h-16 w-16 md:h-20 md:w-20" />
           <span className="text-lg font-bold">No data to be shown</span>
         </div>
       )}

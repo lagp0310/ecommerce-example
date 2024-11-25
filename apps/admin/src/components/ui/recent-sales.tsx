@@ -1,6 +1,7 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { type DashboardOrder } from "@/types/types";
 import React from "react";
+import { EmptyData } from "./illustrations/empty-data";
 
 type Props = {
   latestOrders?: DashboardOrder[] | null;
@@ -12,7 +13,7 @@ export function RecentSales({ latestOrders }: Props) {
   return (
     <React.Fragment>
       {hasOrders ? (
-        <div className="space-y-8">
+        <div className="space-y-8 flex flex-1 flex-col h-full">
           {latestOrders.map(
             ({ email, first_name, last_name, result_orders_total }, index) => (
               <div
@@ -45,7 +46,10 @@ export function RecentSales({ latestOrders }: Props) {
           )}
         </div>
       ) : (
-        <span className="text-lg font-bold">No orders yet</span>
+        <div className="flex flex-1 flex-col items-center justify-center gap-y-4 text-center">
+          <EmptyData className="h-16 w-16 md:h-20 md:w-20" />
+          <span className="text-lg font-bold">No data to be shown</span>
+        </div>
       )}
     </React.Fragment>
   );

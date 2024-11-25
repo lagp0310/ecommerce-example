@@ -64,8 +64,6 @@ export default function DashboardPage() {
     getDashboardMetricsData("get_latest_orders", setLatestOrders);
   }, [getDashboardMetricsData]);
 
-  console.log(dashboardMainMetrics, ordersPerMonth, latestOrders);
-
   const hasMonthlyRevenueData = React.useMemo(
     () =>
       typeof dashboardMainMetrics?.result_orders_total === "number" &&
@@ -206,19 +204,19 @@ export default function DashboardPage() {
                 </Card>
               </div>
               <div className="flex flex-col gap-y-4 md:grid md:gap-4 md:grid-cols-2 lg:grid-cols-7">
-                <Card className="col-span-4">
+                <Card className="col-span-4 flex flex-1 flex-col">
                   <CardHeader>
                     <CardTitle>Overview</CardTitle>
                   </CardHeader>
-                  <CardContent className="pl-2">
+                  <CardContent className="p-4 flex flex-1 h-full">
                     <Overview data={ordersPerMonth} />
                   </CardContent>
                 </Card>
-                <Card className="sm:col-span-4 lg:col-span-3">
+                <Card className="sm:col-span-4 lg:col-span-3 flex flex-1 flex-col">
                   <CardHeader>
                     <CardTitle>Recent Sales</CardTitle>
                   </CardHeader>
-                  <CardContent>
+                  <CardContent className="p-4 flex flex-1 h-full">
                     <RecentSales latestOrders={latestOrders} />
                   </CardContent>
                 </Card>

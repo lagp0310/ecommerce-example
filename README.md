@@ -1,14 +1,6 @@
-# Turborepo starter
+# Ecommerce Monorepo
 
-This is an official starter Turborepo.
-
-## Using this example
-
-Run the following command:
-
-```sh
-npx create-turbo@latest
-```
+This is a small ecommerce platform example using [Refine](https://refine.dev/), [Supabase](https://supabase.com/) and [Next.js](https://nextjs.org/).
 
 ## What's inside?
 
@@ -16,11 +8,10 @@ This Turborepo includes the following packages/apps:
 
 ### Apps and Packages
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@ecommerce/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@ecommerce/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@ecommerce/typescript-config`: `tsconfig.json`s used throughout the monorepo
+- `admin`: a [Next.js](https://nextjs.org/) app.
+- `@ecommerce/ui`: a stub React component library shared by apps.
+- `@ecommerce/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`).
+- `@ecommerce/typescript-config`: `tsconfig.json`s used throughout the monorepo.
 
 Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
 
@@ -28,54 +19,45 @@ Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
 
 This Turborepo has some additional tools already setup for you:
 
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
+- [TypeScript](https://www.typescriptlang.org/) for static type checking.
+- [ESLint](https://eslint.org/) for code linting.
+- [Prettier](https://prettier.io) for code formatting.
+
+## Requirements
+
+You'll need the following:
+
+- [Git](https://git-scm.com/).
+- [Docker](https://docs.docker.com/).
+- [Node](https://nodejs.org/en/) (tested on `v20.18.0 LTS`).
+- [pnpm](https://pnpm.io/) (**Recommended**).
+
+## How to run it locally
+
+First, set the required environment variables for each app. You can copy the `.env.example` in the root directory of each app file into a `.env`.
+
+Then, you'll need to follow the [Self-Hosting with Docker](https://supabase.com/docs/guides/self-hosting/docker) before running this project.
+
+After Supabase is ready and all the containers are running, you can run any of the following commands.
+
+### Develop
+
+To run development mode in all apps and packages, run the following command:
+
+```
+cd this-repo-root
+pnpm dev
+```
 
 ### Build
 
 To build all apps and packages, run the following command:
 
 ```
-cd my-turborepo
+cd this-repo-root
 pnpm build
 ```
 
-### Develop
+## License.
 
-To develop all apps and packages, run the following command:
-
-```
-cd my-turborepo
-pnpm dev
-```
-
-### Remote Caching
-
-Turborepo can use a technique known as [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup), then enter the following commands:
-
-```
-cd my-turborepo
-npx turbo login
-```
-
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
-
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
-```
-npx turbo link
-```
-
-## Useful Links
-
-Learn more about the power of Turborepo:
-
-- [Tasks](https://turbo.build/repo/docs/core-concepts/monorepos/running-tasks)
-- [Caching](https://turbo.build/repo/docs/core-concepts/caching)
-- [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching)
-- [Filtering](https://turbo.build/repo/docs/core-concepts/monorepos/filtering)
-- [Configuration Options](https://turbo.build/repo/docs/reference/configuration)
-- [CLI Usage](https://turbo.build/repo/docs/reference/command-line-reference)
+Although is just a test, it contains a base for creating apps for an ecommerce platform. This code is **propietary code** and **SHOULD NOT** be used without asking for permission.

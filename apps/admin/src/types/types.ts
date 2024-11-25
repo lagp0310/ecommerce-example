@@ -1,18 +1,47 @@
 import { BaseKey } from "@refinedev/core";
 
-export type DashboardDataResponse = {
+export enum Month {
+  JANUARY = 1,
+  FEBRUARY = 2,
+  MARCH = 3,
+  APRIL = 4,
+  MAY = 5,
+  JUNE = 6,
+  JULY = 7,
+  AUGUST = 8,
+  SEPTEMBER = 9,
+  OCTOBER = 10,
+  NOVEMBER = 11,
+  DECEMBER = 12,
+}
+
+export type DashboardOrder = {
+  first_name: string;
+  last_name: string;
+  email: string;
   result_orders_total: number;
-  result_total_orders: number;
-  lm_orders_total: number;
-  lm_total_orders: number;
-  result_customers_count: number;
-  lm_customers_count: number;
-  orders_amount_difference_percentage: number;
-  is_orders_amount_percentage_positive: boolean;
-  orders_difference_percentage: number;
-  is_orders_percentage_positive: boolean;
-  customers_difference_percentage: number;
-  is_customers_difference_percentage_positive: boolean;
+};
+
+export type OrderSummary = {
+  result_month_number: number;
+  result_month_name: string;
+  total_orders: number;
+  orders_total: number;
+};
+
+export type DashboardDataResponse = {
+  result_orders_total?: number;
+  result_total_orders?: number;
+  lm_orders_total?: number;
+  lm_total_orders?: number;
+  result_customers_count?: number;
+  lm_customers_count?: number;
+  orders_amount_difference_percentage?: number;
+  is_orders_amount_percentage_positive?: boolean;
+  orders_difference_percentage?: number;
+  is_orders_percentage_positive?: boolean;
+  customers_difference_percentage?: number;
+  is_customers_difference_percentage_positive?: boolean;
 };
 
 export type ValidateFieldsResponse<Resource> = {

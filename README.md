@@ -1,6 +1,6 @@
 # Ecommerce Monorepo
 
-This is a small ecommerce platform example using [Refine](https://refine.dev/), [Supabase](https://supabase.com/) and [Next.js](https://nextjs.org/).
+This is a small example of an ecommerce platform example using [Refine](https://refine.dev/), [Supabase](https://supabase.com/) and [Next.js](https://nextjs.org/).
 
 ## What's inside?
 
@@ -36,7 +36,7 @@ You'll need the following:
 
 First, set the required environment variables for each app. You can copy the `.env.example` in the root directory of each app file into a `.env`.
 
-Then, you'll need to follow the [Self-Hosting with Docker](https://supabase.com/docs/guides/self-hosting/docker) before running this project.
+Then, you'll need to follow the [Self-Hosting with Docker](https://supabase.com/docs/guides/self-hosting/docker).
 
 After Supabase is ready and all the containers are running, you can run any of the following commands.
 

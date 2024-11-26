@@ -17,10 +17,10 @@ import {
   DashboardOrder,
   OrderSummary,
 } from "@/types/types";
-// import { useCurrentUser } from "@/context/user-context";
+import { useCurrentUser } from "@/context/user-context";
 
 export default function DashboardPage() {
-  // const { usersData } = useCurrentUser();
+  const { usersData } = useCurrentUser();
   const [dashboardMainMetrics, setDashboardMainMetrics] =
     React.useState<DashboardDataResponse | null>(null);
   const [ordersPerMonth, setOrdersPerMonth] = React.useState<
@@ -102,16 +102,21 @@ export default function DashboardPage() {
     ]
   );
 
+  const welcomeMessage = React.useMemo(
+    () =>
+      `Welcome back${!!usersData && usersData?.firstName ? `, ${usersData?.firstName}` : ""}!`,
+    [usersData]
+  );
+
   return (
     <div className="flex flex-1 flex-col py-4">
       <div className="flex flex-col">
         <div className="flex-1 space-y-4 p-8 pt-6">
-          <div className="flex items-center justify-between space-y-2">
+          <div className="flex flex-col justify-center gap-y-1">
             <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
-            {/* <h3 className="text-xl font-medium tracking-normal">
-              Welcome back,
-              {!!usersData && usersData?.firstName ? usersData?.firstName : null}!
-            </h3> */}
+            <h3 className="text-base font-medium tracking-normal">
+              {welcomeMessage}
+            </h3>
           </div>
           <Tabs defaultValue="overview" className="space-y-4">
             <TabsList className="h-full justify-start sm:justify-center">

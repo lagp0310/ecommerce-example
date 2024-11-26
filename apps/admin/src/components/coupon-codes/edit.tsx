@@ -8,7 +8,12 @@ import { NumericFormat } from "react-number-format";
 import { FolderArrowDownIcon, TrashIcon } from "@heroicons/react/24/solid";
 
 export const CouponCodesEdit = () => {
-  const { formProps, saveButtonProps, query } = useForm();
+  const {
+    formProps,
+    saveButtonProps,
+    query,
+    form: { getFieldValue },
+  } = useForm();
 
   const couponCodesData = query?.data?.data;
 
@@ -83,6 +88,13 @@ export const CouponCodesEdit = () => {
                 } else if (value > 100) {
                   throw new Error("Percentage cannot exceed 100");
                 }
+
+                const amountValue = getFieldValue("amount");
+                if (!!amountValue) {
+                  throw new Error(
+                    "Only one between 'percentage' and 'amount' should be set, not both"
+                  );
+                }
               },
             },
           ]}
@@ -108,6 +120,13 @@ export const CouponCodesEdit = () => {
               validator(_rule, value) {
                 if (value < 0) {
                   throw new Error("Amount must be positive");
+                }
+
+                const percentageValue = getFieldValue("percentage");
+                if (!!percentageValue) {
+                  throw new Error(
+                    "Only one between 'percentage' and 'amount' should be set, not both"
+                  );
                 }
               },
             },

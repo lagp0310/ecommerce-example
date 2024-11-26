@@ -8,7 +8,11 @@ import { NumericFormat } from "react-number-format";
 import { FolderArrowDownIcon } from "@heroicons/react/24/solid";
 
 export const CouponCodesCreate = () => {
-  const { formProps, saveButtonProps } = useForm();
+  const {
+    formProps,
+    saveButtonProps,
+    form: { getFieldValue },
+  } = useForm();
 
   const { selectProps: storeSelectProps } = useSelect({
     resource: "stores",
@@ -64,6 +68,13 @@ export const CouponCodesCreate = () => {
                 } else if (value > 100) {
                   throw new Error("Percentage cannot exceed 100");
                 }
+
+                const amountValue = getFieldValue("amount");
+                if (!!amountValue) {
+                  throw new Error(
+                    "Only one between 'percentage' and 'amount' should be set, not both"
+                  );
+                }
               },
             },
           ]}
@@ -89,6 +100,13 @@ export const CouponCodesCreate = () => {
               validator(_rule, value) {
                 if (value < 0) {
                   throw new Error("Amount must be positive");
+                }
+
+                const percentageValue = getFieldValue("percentage");
+                if (!!percentageValue) {
+                  throw new Error(
+                    "Only one between 'percentage' and 'amount' should be set, not both"
+                  );
                 }
               },
             },

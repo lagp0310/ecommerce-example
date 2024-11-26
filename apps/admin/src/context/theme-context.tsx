@@ -38,10 +38,14 @@ export function ThemeContextProvider({
   initialTheme = defaultTheme,
 }: Props) {
   const [theme, setTheme] = React.useState<Theme>(initialTheme);
-  const prefersDarkTheme = React.useMemo(
-    () => window?.matchMedia("(prefers-color-scheme: dark)").matches,
-    []
-  );
+  const prefersDarkTheme = React.useRef(false);
+  React.useEffect(() => {
+    if (typeof window !== "undefined") {
+      prefersDarkTheme.current = window.matchMedia(
+        "(prefers-color-scheme: dark)"
+      ).matches;
+    }
+  }, []);
 
   const getPreferredTheme = React.useCallback(
     (localStorageTheme: string | null) => {
@@ -113,8 +117,13 @@ export function ThemeContextProvider({
   }, [getPreferredTheme, setLocalStorageTheme]);
 
   const providerValue = React.useMemo(
-    () => ({ theme, prefersDarkTheme, setTheme, setLocalStorageTheme }),
-    [prefersDarkTheme, setLocalStorageTheme, theme]
+    () => ({
+      theme,
+      prefersDarkTheme: prefersDarkTheme.current,
+      setTheme,
+      setLocalStorageTheme,
+    }),
+    [setLocalStorageTheme, theme]
   );
 
   return (

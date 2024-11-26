@@ -39,10 +39,7 @@ export function ThemeContextProvider({
 }: Props) {
   const [theme, setTheme] = React.useState<Theme>(initialTheme);
   const prefersDarkTheme = React.useMemo(
-    () =>
-      typeof window !== "undefined"
-        ? window.matchMedia("(prefers-color-scheme: dark)").matches
-        : null,
+    () => window?.matchMedia("(prefers-color-scheme: dark)").matches,
     []
   );
 

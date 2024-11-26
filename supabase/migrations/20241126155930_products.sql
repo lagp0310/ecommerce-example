@@ -1,0 +1,21 @@
+create table
+  public.products (
+    id uuid not null default gen_random_uuid (),
+    name character varying not null,
+    price double precision not null,
+    discounted_price double precision null,
+    currency uuid not null,
+    rating smallint null,
+    created_at timestamp with time zone not null default (now() at time zone 'utc'::text),
+    updated_at timestamp with time zone null,
+    sku character varying not null,
+    store uuid not null,
+    discounted_until timestamp with time zone null,
+    description text null,
+    image_url text null,
+    available_quantity bigint null,
+    constraint products_pkey primary key (id),
+    constraint products_sku_key unique (sku),
+    constraint products_store_fkey foreign key (store) references stores (id) on update cascade on delete cascade,
+    constraint products_currency_fkey foreign key (currency) references currencies (id) on update cascade on delete set null
+  ) tablespace pg_default;

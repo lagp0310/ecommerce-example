@@ -18,19 +18,13 @@ import {
 } from "@/components/ui/sidebar";
 import {
   ArrowRightStartOnRectangleIcon,
-  CheckIcon,
-  ChevronRightIcon,
   ChevronUpDownIcon,
-  ComputerDesktopIcon,
-  MoonIcon,
-  SunIcon,
 } from "@heroicons/react/24/solid";
 import { baseSupabaseClient } from "@/app/providers/data/data-provider";
 import { authLoginRoute } from "@/app/constants/constants";
 import { usePathname, useRouter } from "next/navigation";
 import { useNotificationProvider } from "@refinedev/antd";
 import { OpenNotificationParams } from "@refinedev/core";
-import { Theme, useTheme } from "@/context/theme-context";
 import { UserData } from "@/context/user-context";
 
 export function NavUser({ user }: { user: UserData }) {
@@ -81,33 +75,33 @@ export function NavUser({ user }: { user: UserData }) {
     return router.push(`${authLoginRoute}?redirectTo=${pathname}`);
   }, [openNotification, pathname, router]);
 
-  const { theme, setTheme, setLocalStorageTheme } = useTheme();
-  const themeIcon = React.useMemo(() => {
-    if (theme === "system") return <ComputerDesktopIcon className="h-4 w-4" />;
+  // const { theme, setTheme, setLocalStorageTheme } = useTheme();
+  // const themeIcon = React.useMemo(() => {
+  //   if (theme === "system") return <ComputerDesktopIcon className="h-4 w-4" />;
 
-    return theme === "dark" ? (
-      <MoonIcon className="h-4 w-4" />
-    ) : (
-      <SunIcon className="h4 w-4" />
-    );
-  }, [theme]);
-  const handleThemeChange = React.useCallback(
-    (theme: Theme) => {
-      setTheme(theme);
-      setLocalStorageTheme(theme);
-    },
-    [setLocalStorageTheme, setTheme]
-  );
-  const getCheckedComponent = React.useCallback(
-    (themeArg: Theme) => {
-      return theme === themeArg ? (
-        <div className="flex flex-1 justify-end items-center">
-          <CheckIcon className="h-4 w-4" />
-        </div>
-      ) : null;
-    },
-    [theme]
-  );
+  //   return theme === "dark" ? (
+  //     <MoonIcon className="h-4 w-4" />
+  //   ) : (
+  //     <SunIcon className="h4 w-4" />
+  //   );
+  // }, [theme]);
+  // const handleThemeChange = React.useCallback(
+  //   (theme: Theme) => {
+  //     setTheme(theme);
+  //     setLocalStorageTheme(theme);
+  //   },
+  //   [setLocalStorageTheme, setTheme]
+  // );
+  // const getCheckedComponent = React.useCallback(
+  //   (themeArg: Theme) => {
+  //     return theme === themeArg ? (
+  //       <div className="flex flex-1 justify-end items-center">
+  //         <CheckIcon className="h-4 w-4" />
+  //       </div>
+  //     ) : null;
+  //   },
+  //   [theme]
+  // );
 
   const userInfoSection = React.useCallback(
     (showChevronUpDown = true) => (
@@ -159,7 +153,7 @@ export function NavUser({ user }: { user: UserData }) {
                 {userInfoSection(false)}
               </div>
             </DropdownMenuLabel>
-            <DropdownMenuSeparator />
+            {/* <DropdownMenuSeparator />
             <DropdownMenuItem className="hover:cursor-pointer dark:hover:bg-sidebar-accent dark:hover:text-sidebar-accent-foreground flex flex-1 p-0">
               <SidebarMenu className="m-0">
                 <SidebarMenuItem>
@@ -207,7 +201,7 @@ export function NavUser({ user }: { user: UserData }) {
                   </DropdownMenu>
                 </SidebarMenuItem>
               </SidebarMenu>
-            </DropdownMenuItem>
+            </DropdownMenuItem> */}
             <DropdownMenuSeparator />
             <DropdownMenuItem
               onClick={handleLogout}

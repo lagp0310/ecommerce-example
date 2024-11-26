@@ -54,11 +54,13 @@ export function ThemeContextProvider({
       }
 
       const themeToSet =
-        prefersDarkTheme || localStorageTheme === "dark" ? "dark" : "light";
+        prefersDarkTheme.current || localStorageTheme === "dark"
+          ? "dark"
+          : "light";
 
       return themeToSet;
     },
-    [prefersDarkTheme]
+    []
   );
   const setLocalStorageTheme = React.useCallback((theme: Theme) => {
     if (typeof window !== "undefined") {

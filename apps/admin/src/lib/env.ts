@@ -3,8 +3,8 @@ import { z } from "zod";
 export const parsedEnvs = z
   .object({
     NODE_ENV: z.enum(["development", "production", "test"]),
-    SUPABASE_URL: z.string().url(),
-    SUPABASE_KEY: z.string(),
+    NEXT_PUBLIC_SUPABASE_URL: z.string().url(),
+    NEXT_PUBLIC_SUPABASE_KEY: z.string(),
     ECOMMERCE_ADMIN: z.string().email().optional(),
     ECOMMERCE_PASSWORD: z.string().optional(),
   })

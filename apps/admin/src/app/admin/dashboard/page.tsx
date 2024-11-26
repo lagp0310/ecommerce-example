@@ -30,14 +30,8 @@ export default function DashboardPage() {
     DashboardOrder[] | null
   >(null);
 
-  const getDashboardMetricsData = React.useCallback(
-    async (
-      postgresFunctionName: string,
-      setStateFunction:
-        | React.Dispatch<React.SetStateAction<DashboardDataResponse | null>>
-        | React.Dispatch<React.SetStateAction<OrderSummary[] | null>>
-        | React.Dispatch<React.SetStateAction<DashboardOrder[] | null>>
-    ) => {
+  const getDashboardData = React.useCallback(
+    async (postgresFunctionName: string) => {
       const response = await baseSupabaseClient.rpc(postgresFunctionName);
 
       if (response) {
@@ -49,20 +43,53 @@ export default function DashboardPage() {
         if (error) {
           console.error(error);
           throw new Error((error as { message?: string }).message);
-        } else if (data) {
-          setStateFunction(data);
         }
+
+        return data;
       } else {
         throw new Error("Failed to get dashboard data");
       }
     },
     []
   );
+  const getDashboardMainMetricsData = React.useCallback(async () => {
+    const data = (await getDashboardData(
+      "get_dashboard_data"
+    )) as DashboardDataResponse;
+
+    if (!data) {
+      return setDashboardMainMetrics(null);
+    }
+
+    setDashboardMainMetrics(data);
+  }, [getDashboardData]);
+  const getOrdersPerMonthData = React.useCallback(async () => {
+    const data = (await getDashboardData(
+      "get_orders_summary_per_month"
+    )) as OrderSummary[];
+
+    if (!data) {
+      return setOrdersPerMonth(null);
+    }
+
+    setOrdersPerMonth(data);
+  }, [getDashboardData]);
+  const getLatestOrdersData = React.useCallback(async () => {
+    const data = (await getDashboardData(
+      "get_latest_orders"
+    )) as DashboardOrder[];
+
+    if (!data) {
+      return setLatestOrders(null);
+    }
+
+    setLatestOrders(data);
+  }, [getDashboardData]);
   React.useEffect(() => {
-    getDashboardMetricsData("get_dashboard_data", setDashboardMainMetrics);
-    getDashboardMetricsData("get_orders_summary_per_month", setOrdersPerMonth);
-    getDashboardMetricsData("get_latest_orders", setLatestOrders);
-  }, [getDashboardMetricsData]);
+    getDashboardMainMetricsData();
+    getOrdersPerMonthData();
+    getLatestOrdersData();
+  }, [getDashboardMainMetricsData, getLatestOrdersData, getOrdersPerMonthData]);
 
   const hasMonthlyRevenueData = React.useMemo(
     () =>

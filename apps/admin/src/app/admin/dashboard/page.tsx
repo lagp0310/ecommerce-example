@@ -116,13 +116,25 @@ export default function DashboardPage() {
           <Tabs defaultValue="overview" className="space-y-4">
             <TabsList className="h-full justify-start sm:justify-center">
               <TabsTrigger value="overview">Overview</TabsTrigger>
-              <TabsTrigger value="analytics" disabled>
+              <TabsTrigger
+                value="analytics"
+                disabled
+                className="disabled:pointer-events-auto disabled:hover:cursor-not-allowed"
+              >
                 Analytics
               </TabsTrigger>
-              <TabsTrigger value="reports" disabled>
+              <TabsTrigger
+                value="reports"
+                disabled
+                className="disabled:pointer-events-auto disabled:hover:cursor-not-allowed"
+              >
                 Reports
               </TabsTrigger>
-              <TabsTrigger value="notifications" disabled>
+              <TabsTrigger
+                value="notifications"
+                disabled
+                className="disabled:pointer-events-auto disabled:hover:cursor-not-allowed"
+              >
                 Notifications
               </TabsTrigger>
             </TabsList>

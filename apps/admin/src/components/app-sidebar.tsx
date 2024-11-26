@@ -33,9 +33,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         icon,
         title,
         url,
-        isActive:
-          !!currentSelectedObject?.path &&
-          pathname === currentSelectedObject?.path,
+        isActive: !!url && pathname.includes(url),
       })),
       navMain: sidebarItems.map(
         ({ groupIcon, groupLabel, groupName, items }) => ({
@@ -49,7 +47,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             title: label,
             url: list,
             isCurrent:
-              !!currentSelectedObject && currentSelectedObject.list === list,
+              !!currentSelectedObject &&
+              !!currentSelectedObject?.list &&
+              currentSelectedObject.list.includes(list),
           })),
         })
       ),

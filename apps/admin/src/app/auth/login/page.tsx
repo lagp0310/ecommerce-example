@@ -2,6 +2,9 @@ import { AuthPage } from "@refinedev/antd";
 import React from "react";
 
 export default function LoginPage() {
+  const email = process.env.ECOMMERCE_ADMIN ?? "admin@ecommerce.com";
+  const password = process.env.ECOMMERCE_PASSWORD ?? "A$RK-ERYBLBn2ir";
+
   return (
     <React.Suspense>
       <AuthPage
@@ -10,8 +13,8 @@ export default function LoginPage() {
         registerLink={false}
         formProps={{
           initialValues: {
-            email: process.env.ECOMMERCE_ADMIN,
-            password: process.env.ECOMMERCE_PASSWORD,
+            email,
+            password,
           },
         }}
       />

@@ -105,17 +105,17 @@ export const BusinessCreate = () => {
           rules={[
             {
               required: true,
-              validator(_rule, value, callback) {
+              validator(_rule, value) {
                 if (Array.isArray(value)) {
                   if (value.length === 0) {
-                    callback("You must select at least a Currency");
+                    throw new Error("You must select at least a Currency");
                   }
 
                   if (value.some((currencyValue) => !isUUID(currencyValue))) {
-                    callback("Currency should be an UUID");
+                    throw new Error("Currency should be an UUID");
                   }
                 } else if (!isUUID(value)) {
-                  callback("Currency should be an UUID");
+                  throw new Error("Currency should be an UUID");
                 }
               },
             },

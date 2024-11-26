@@ -55,8 +55,10 @@ export const ProductEdit = () => {
           rules={[
             {
               required: true,
-              validator(_rule, value, callback) {
-                if (!isUUID(value)) callback("Store should be an UUID");
+              validator(_rule, value) {
+                if (!isUUID(value)) {
+                  throw new Error("Store should be an UUID");
+                }
               },
             },
           ]}
@@ -105,9 +107,10 @@ export const ProductEdit = () => {
           rules={[
             {
               required: false,
-              validator(_rule, value, callback) {
-                if (!!value && value < 0)
-                  callback("Available Quantity must be positive");
+              validator(_rule, value) {
+                if (!!value && value < 0) {
+                  throw new Error("Available Quantity must be positive");
+                }
               },
             },
           ]}
@@ -127,8 +130,10 @@ export const ProductEdit = () => {
           rules={[
             {
               required: true,
-              validator(_rule, value, callback) {
-                if (!isUUID(value)) callback("Currency should be an UUID");
+              validator(_rule, value) {
+                if (!isUUID(value)) {
+                  throw new Error("Currency should be an UUID");
+                }
               },
             },
           ]}
@@ -141,8 +146,10 @@ export const ProductEdit = () => {
           rules={[
             {
               required: true,
-              validator(_rule, value, callback) {
-                if (value < 0) callback("Price must be positive");
+              validator(_rule, value) {
+                if (value < 0) {
+                  throw new Error("Price must be positive");
+                }
               },
             },
           ]}
@@ -164,8 +171,10 @@ export const ProductEdit = () => {
           rules={[
             {
               required: false,
-              validator(_rule, value, callback) {
-                if (!!value && value < 0) callback("Price must be positive");
+              validator(_rule, value) {
+                if (!!value && value < 0) {
+                  throw new Error("Price must be positive");
+                }
               },
             },
           ]}
@@ -187,11 +196,13 @@ export const ProductEdit = () => {
           rules={[
             {
               required: false,
-              validator: (_rule, value, callback) => {
+              validator(_rule, value) {
                 if (!value) return;
 
                 const isValid = dayjs(value).isValid();
-                if (!isValid) callback("Date is not valid");
+                if (!isValid) {
+                  throw new Error("Date is not valid");
+                }
               },
             },
           ]}

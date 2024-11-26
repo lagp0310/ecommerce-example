@@ -48,8 +48,10 @@ export const StoreFeatureEdit = () => {
           rules={[
             {
               required: true,
-              validator(_rule, value, callback) {
-                if (!isUUID(value)) callback("Store should be an UUID");
+              validator(_rule, value) {
+                if (!isUUID(value)) {
+                  throw new Error("Store should be an UUID");
+                }
               },
             },
           ]}

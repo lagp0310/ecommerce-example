@@ -77,8 +77,10 @@ export const StoreHeaderBannerCreate = () => {
           rules={[
             {
               required: true,
-              validator(_rule, value, callback) {
-                if (!isUUID(value)) callback("Banner Type should be an UUID");
+              validator(_rule, value) {
+                if (!isUUID(value)) {
+                  throw new Error("Banner Type should be an UUID");
+                }
               },
             },
           ]}

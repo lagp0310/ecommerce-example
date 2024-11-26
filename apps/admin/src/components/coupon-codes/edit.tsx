@@ -61,8 +61,10 @@ export const CouponCodesEdit = () => {
           rules={[
             {
               required: true,
-              validator(_rule, value, callback) {
-                if (!isUUID(value)) callback("Store should be an UUID");
+              validator(_rule, value) {
+                if (!isUUID(value)) {
+                  throw new Error("Store should be an UUID");
+                }
               },
             },
           ]}
@@ -75,9 +77,12 @@ export const CouponCodesEdit = () => {
           rules={[
             {
               required: false,
-              validator(_rule, value, callback) {
-                if (value < 0) callback("Percentage cannot be negative");
-                else if (value > 100) callback("Percentage cannot exceed 100");
+              validator(_rule, value) {
+                if (value < 0) {
+                  throw new Error("Percentage cannot be negative");
+                } else if (value > 100) {
+                  throw new Error("Percentage cannot exceed 100");
+                }
               },
             },
           ]}
@@ -100,8 +105,10 @@ export const CouponCodesEdit = () => {
           rules={[
             {
               required: false,
-              validator(_rule, value, callback) {
-                if (value < 0) callback("Amount must be positive");
+              validator(_rule, value) {
+                if (value < 0) {
+                  throw new Error("Amount must be positive");
+                }
               },
             },
           ]}

@@ -11,6 +11,7 @@ export default function LoginPage() {
         type="login"
         forgotPasswordLink={false}
         registerLink={false}
+        title={<h1>Ecommerce Admin</h1>}
         formProps={{
           initialValues: {
             email,

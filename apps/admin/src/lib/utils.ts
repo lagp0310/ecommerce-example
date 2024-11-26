@@ -6,7 +6,7 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export function getMonthName(monthNumber: number) {
+export function getMonthName(monthNumber: number, returnShortName = true) {
   const monthName = Object.entries(Month)
     .find(([monthNro]) => parseInt(monthNro) === monthNumber)
     ?.at(1)
@@ -17,7 +17,9 @@ export function getMonthName(monthNumber: number) {
     throw Error("Could not find the month name");
   }
 
-  const finalName = `${monthName.substring(0, 1)}${monthName.substring(1, 3).toLocaleLowerCase()}`;
+  const finalName = returnShortName
+    ? `${monthName.substring(0, 1)}${monthName.substring(1, 3).toLocaleLowerCase()}`
+    : `${monthName.substring(0, 1)}${monthName.substring(1).toLocaleLowerCase()}`;
 
   return finalName;
 }

@@ -4,9 +4,13 @@ import { Edit, useForm, useSelect, getValueFromEvent } from "@refinedev/antd";
 import { Form, Input, Select, Upload } from "antd";
 import isUUID from "validator/es/lib/isUUID";
 import { FolderArrowDownIcon, TrashIcon } from "@heroicons/react/24/solid";
+import { errorNotification, successNotification } from "@/lib/utils";
 
 export const CategoryEdit = () => {
-  const { formProps, saveButtonProps, query } = useForm();
+  const { formProps, saveButtonProps, query } = useForm({
+    successNotification,
+    errorNotification,
+  });
 
   const categoriesData = query?.data?.data;
 

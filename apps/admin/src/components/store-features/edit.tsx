@@ -5,9 +5,13 @@ import { Edit, useForm, useSelect, getValueFromEvent } from "@refinedev/antd";
 import { Form, Input, Upload, Select } from "antd";
 import isUUID from "validator/es/lib/isUUID";
 import { FolderArrowDownIcon, TrashIcon } from "@heroicons/react/24/solid";
+import { errorNotification, successNotification } from "@/lib/utils";
 
 export const StoreFeatureEdit = () => {
-  const { formProps, saveButtonProps, query } = useForm();
+  const { formProps, saveButtonProps, query } = useForm({
+    successNotification,
+    errorNotification,
+  });
 
   const storeFeaturesData = query?.data?.data;
 

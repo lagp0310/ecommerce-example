@@ -4,9 +4,13 @@ import React from "react";
 import { Edit, useForm, useSelect } from "@refinedev/antd";
 import { Form, Input, Select, Checkbox } from "antd";
 import { FolderArrowDownIcon, TrashIcon } from "@heroicons/react/24/solid";
+import { errorNotification, successNotification } from "@/lib/utils";
 
 export const PaymentMethodEdit = () => {
-  const { formProps, saveButtonProps, query } = useForm();
+  const { formProps, saveButtonProps, query } = useForm({
+    successNotification,
+    errorNotification,
+  });
 
   const paymentMethodsData = query?.data?.data;
 

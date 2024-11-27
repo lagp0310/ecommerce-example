@@ -5,9 +5,13 @@ import { Create, useForm, useSelect, getValueFromEvent } from "@refinedev/antd";
 import { Form, Input, Upload, Select } from "antd";
 import isUUID from "validator/es/lib/isUUID";
 import { FolderArrowDownIcon } from "@heroicons/react/24/solid";
+import { errorNotification, successNotification } from "@/lib/utils";
 
 export const StoreFeatureCreate = () => {
-  const { formProps, saveButtonProps } = useForm();
+  const { formProps, saveButtonProps } = useForm({
+    successNotification,
+    errorNotification,
+  });
 
   const { selectProps: storeSelectProps } = useSelect({
     resource: "stores",

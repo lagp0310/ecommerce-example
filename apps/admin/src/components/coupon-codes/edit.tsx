@@ -6,6 +6,7 @@ import { Form, Input, Select } from "antd";
 import isUUID from "validator/es/lib/isUUID";
 import { NumericFormat } from "react-number-format";
 import { FolderArrowDownIcon, TrashIcon } from "@heroicons/react/24/solid";
+import { errorNotification, successNotification } from "@/lib/utils";
 
 export const CouponCodesEdit = () => {
   const {
@@ -13,7 +14,10 @@ export const CouponCodesEdit = () => {
     saveButtonProps,
     query,
     form: { getFieldValue },
-  } = useForm();
+  } = useForm({
+    successNotification,
+    errorNotification,
+  });
 
   const couponCodesData = query?.data?.data;
 

@@ -4,9 +4,13 @@ import React from "react";
 import { Edit, useForm } from "@refinedev/antd";
 import { Form, Input } from "antd";
 import { FolderArrowDownIcon, TrashIcon } from "@heroicons/react/24/solid";
+import { errorNotification, successNotification } from "@/lib/utils";
 
 export const BannerTypeEdit = () => {
-  const { formProps, saveButtonProps } = useForm();
+  const { formProps, saveButtonProps } = useForm({
+    successNotification,
+    errorNotification,
+  });
 
   return (
     <Edit

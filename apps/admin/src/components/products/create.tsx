@@ -7,9 +7,13 @@ import isUUID from "validator/es/lib/isUUID";
 import { NumericFormat } from "react-number-format";
 import dayjs from "dayjs";
 import { FolderArrowDownIcon } from "@heroicons/react/24/solid";
+import { errorNotification, successNotification } from "@/lib/utils";
 
 export const ProductCreate = () => {
-  const { formProps, saveButtonProps } = useForm();
+  const { formProps, saveButtonProps } = useForm({
+    successNotification,
+    errorNotification,
+  });
 
   const { selectProps: currencySelectProps } = useSelect({
     resource: "currencies",

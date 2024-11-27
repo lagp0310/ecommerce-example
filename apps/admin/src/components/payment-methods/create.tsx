@@ -4,9 +4,13 @@ import React from "react";
 import { Create, useForm, useSelect } from "@refinedev/antd";
 import { Form, Select, Checkbox } from "antd";
 import { FolderArrowDownIcon } from "@heroicons/react/24/solid";
+import { errorNotification, successNotification } from "@/lib/utils";
 
 export const PaymentMethodCreate = () => {
-  const { formProps, saveButtonProps } = useForm();
+  const { formProps, saveButtonProps } = useForm({
+    successNotification,
+    errorNotification,
+  });
 
   const { selectProps: storeSelectProps } = useSelect({
     resource: "stores",

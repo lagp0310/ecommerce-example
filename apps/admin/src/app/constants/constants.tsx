@@ -19,6 +19,7 @@ export const refineResources = [
     meta: {
       canDelete: true,
       label: "Banner Types",
+      singularLabel: "Banner Type",
       groupName: "banners",
     },
   },
@@ -30,6 +31,7 @@ export const refineResources = [
     meta: {
       canDelete: false,
       label: "Businesses",
+      singularLabel: "Business",
       groupName: "admin",
     },
   },
@@ -39,6 +41,7 @@ export const refineResources = [
     meta: {
       canDelete: false,
       label: "Carts",
+      singularLabel: "Cart",
       groupName: "selling",
     },
   },
@@ -50,6 +53,7 @@ export const refineResources = [
     meta: {
       canDelete: true,
       label: "Categories",
+      singularLabel: "Category",
       groupName: "categories",
     },
   },
@@ -61,6 +65,7 @@ export const refineResources = [
     meta: {
       canDelete: true,
       label: "Coupon Codes",
+      singularLabel: "Coupon Code",
       groupName: "stores",
     },
   },
@@ -72,6 +77,7 @@ export const refineResources = [
     meta: {
       canDelete: false,
       label: "Currencies",
+      singularLabel: "Currency",
       groupName: "admin",
     },
   },
@@ -83,6 +89,7 @@ export const refineResources = [
     meta: {
       canDelete: true,
       label: "Customers",
+      singularLabel: "Customer",
       groupName: "customers",
     },
   },
@@ -94,6 +101,7 @@ export const refineResources = [
     meta: {
       canDelete: true,
       label: "Store Header Banners",
+      singularLabel: "Header Banner",
       groupName: "banners",
     },
   },
@@ -105,6 +113,7 @@ export const refineResources = [
     meta: {
       canDelete: true,
       label: "Store Image Banners",
+      singularLabel: "Image Banner",
       groupName: "banners",
     },
   },
@@ -114,6 +123,7 @@ export const refineResources = [
     meta: {
       canDelete: false,
       label: "Locales",
+      singularLabel: "Locale",
       groupName: "admin",
     },
   },
@@ -125,6 +135,7 @@ export const refineResources = [
     meta: {
       canDelete: true,
       label: "Store Offer Banners",
+      singularLabel: "Offer Banner",
       groupName: "banners",
     },
   },
@@ -143,6 +154,7 @@ export const refineResources = [
     meta: {
       canDelete: false,
       label: "Payments",
+      singularLabel: "Payment",
       groupName: "payments",
     },
   },
@@ -154,6 +166,7 @@ export const refineResources = [
     meta: {
       canDelete: true,
       label: "Payment Methods",
+      singularLabel: "Payment Method",
       groupName: "payments",
     },
   },
@@ -165,6 +178,7 @@ export const refineResources = [
     meta: {
       canDelete: false,
       label: "Payment Method Types",
+      singularLabel: "Payment Method Type",
       groupName: "payments",
     },
   },
@@ -176,6 +190,7 @@ export const refineResources = [
     meta: {
       canDelete: true,
       label: "Products",
+      singularLabel: "Product",
       groupName: "products",
     },
   },
@@ -187,6 +202,7 @@ export const refineResources = [
     meta: {
       canDelete: true,
       label: "Stores",
+      singularLabel: "Store",
       groupName: "stores",
     },
   },
@@ -198,6 +214,7 @@ export const refineResources = [
     meta: {
       canDelete: true,
       label: "Store Features",
+      singularLabel: "Store Feature",
       groupName: "stores",
     },
   },
@@ -207,6 +224,7 @@ export const refineResources = [
     meta: {
       canDelete: false,
       label: "Transactions",
+      singularLabel: "Transaction",
       groupName: "payments",
     },
   },

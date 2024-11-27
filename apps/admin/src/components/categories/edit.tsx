@@ -96,7 +96,7 @@ export const CategoryEdit = () => {
             noStyle
             rules={[
               {
-                required: true,
+                required: false,
               },
             ]}
           >

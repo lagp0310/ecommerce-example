@@ -78,7 +78,7 @@ export const CategoryCreate = () => {
             noStyle
             rules={[
               {
-                required: true,
+                required: false,
               },
             ]}
           >

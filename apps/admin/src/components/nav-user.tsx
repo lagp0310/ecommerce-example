@@ -111,7 +111,7 @@ export function NavUser({ user }: { user: UserData }) {
             src={usersData?.avatar}
             alt={`${usersData?.firstName} ${usersData?.lastName}`}
           />
-          <AvatarFallback className="rounded-lg">{`${usersData?.firstName?.substring(0, 1)} ${usersData?.lastName?.substring(0, 1)}`}</AvatarFallback>
+          <AvatarFallback className="rounded-lg">{`${usersData?.firstName?.substring(0, 1)}${usersData?.lastName?.substring(0, 1)}`}</AvatarFallback>
         </Avatar>
         <div className="grid flex-1 text-left text-sm leading-tight">
           <span className="truncate font-semibold">{`${usersData?.firstName} ${usersData?.lastName}`}</span>

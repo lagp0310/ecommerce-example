@@ -27,7 +27,7 @@ export function RecentSales({ latestOrders }: Props) {
                 <div className="ml-4 flex flex-1 flex-col sm:flex-row gap-y-1 sm:justify-start">
                   <div className="flex flex-1 flex-col gap-y-2">
                     <p className="text-sm font-medium leading-none mb-0">
-                      {`${first_name} ${last_name}`}
+                      {`${first_name}${last_name}`}
                     </p>
                     <p className="text-sm text-muted-foreground mb-0">
                       {email}

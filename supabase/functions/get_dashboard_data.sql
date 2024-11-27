@@ -32,8 +32,8 @@ OR REPLACE FUNCTION get_dashboard_data (
         get_monthly_orders_info();
 
       SELECT 
-        orders_total, 
-        total_orders
+        COALESCE(orders_total, 0), 
+        COALESCE(total_orders, 0)
       INTO 
         var_lm_orders_total, 
         var_lm_total_orders 

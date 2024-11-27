@@ -20,6 +20,12 @@ export const PaymentMethodEdit = () => {
     optionLabel: "name",
   });
 
+  const { selectProps: paymentMethodTypeProps } = useSelect({
+    resource: "payment_method_types",
+    defaultValue: paymentMethodsData?.payment_method_type,
+    optionLabel: "type",
+  });
+
   return (
     <Edit
       title="Edit Payment Method"
@@ -55,6 +61,17 @@ export const PaymentMethodEdit = () => {
           ]}
         >
           <Select {...storeSelectProps} />
+        </Form.Item>
+        <Form.Item
+          label="Payment Method Type"
+          name={"payment_method_type"}
+          rules={[
+            {
+              required: true,
+            },
+          ]}
+        >
+          <Select {...paymentMethodTypeProps} />
         </Form.Item>
         <Form.Item
           label="Is Active"

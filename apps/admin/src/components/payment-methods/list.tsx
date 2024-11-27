@@ -20,7 +20,7 @@ export const PaymentMethodList = () => {
   const { tableProps } = useTable({
     syncWithLocation: true,
     meta: {
-      select: "*, stores(name)",
+      select: "*, stores(name), payment_method_types(type)",
     },
   });
 
@@ -37,6 +37,14 @@ export const PaymentMethodList = () => {
           render={(_value, record) => {
             const store = record?.stores;
             return <span>{store?.name}</span>;
+          }}
+        />
+        <Table.Column
+          dataIndex={["payment_method_type"]}
+          title="Payment Method Type"
+          render={(_value, record) => {
+            const paymentMethodType = record?.payment_method_types;
+            return <span>{paymentMethodType?.type}</span>;
           }}
         />
         <Table.Column

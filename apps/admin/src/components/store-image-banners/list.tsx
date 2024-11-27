@@ -49,6 +49,13 @@ export const StoreImageBannerList = () => {
             return <span>{bannerType?.type}</span>;
           }}
         />
+        {/* <Table.Column
+          dataIndex={["image_url"]}
+          title="Image"
+          render={(value: string) => (
+            <ImageField style={{ maxWidth: "100px" }} value={value} />
+          )}
+        /> */}
         <Table.Column
           title="Actions"
           dataIndex="actions"

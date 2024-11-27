@@ -2,13 +2,7 @@
 
 import React from "react";
 import { BaseRecord } from "@refinedev/core";
-import {
-  useTable,
-  List,
-  EditButton,
-  DeleteButton,
-  ImageField,
-} from "@refinedev/antd";
+import { useTable, List, EditButton, DeleteButton } from "@refinedev/antd";
 import { Table, Space } from "antd";
 import {
   PlusIcon,
@@ -40,13 +34,13 @@ export const CategoryList = () => {
             return <span>{store?.name}</span>;
           }}
         />
-        <Table.Column
+        {/* <Table.Column
           dataIndex={["image_url"]}
           title="Image"
           render={(value: string) => (
             <ImageField style={{ maxWidth: "100px" }} value={value} />
           )}
-        />
+        /> */}
         <Table.Column
           title="Actions"
           dataIndex="actions"

@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
-import { Edit, useForm, useSelect, getValueFromEvent } from "@refinedev/antd";
-import { Form, Input, Select, Upload } from "antd";
+import { Edit, useForm, useSelect } from "@refinedev/antd";
+import { Form, Input, Select } from "antd";
 import isUUID from "validator/es/lib/isUUID";
 import { FolderArrowDownIcon, TrashIcon } from "@heroicons/react/24/solid";
 import { errorNotification, successNotification } from "@/lib/utils";
@@ -86,7 +86,7 @@ export const CategoryEdit = () => {
         >
           <Select {...storeSelectProps} />
         </Form.Item>
-        <Form.Item label="Image">
+        {/* <Form.Item label="Image">
           <Form.Item
             name="image_url"
             getValueProps={(value) => ({
@@ -104,7 +104,7 @@ export const CategoryEdit = () => {
               <p className="ant-upload-text">Drag & drop a file in this area</p>
             </Upload.Dragger>
           </Form.Item>
-        </Form.Item>
+        </Form.Item> */}
       </Form>
     </Edit>
   );

@@ -146,6 +146,25 @@ export const StoreImageBannerEdit = () => {
         >
           <Select {...bannerTypeSelectProps} />
         </Form.Item>
+        {/* <Form.Item label="Image">
+          <Form.Item
+            name="image_url"
+            getValueProps={(value) => ({
+              fileList: [{ url: value, name: value, uid: value }],
+            })}
+            getValueFromEvent={getValueFromEvent}
+            noStyle
+            rules={[
+              {
+                required: false,
+              },
+            ]}
+          >
+            <Upload.Dragger listType="picture" beforeUpload={() => false}>
+              <p className="ant-upload-text">Drag & drop a file in this area</p>
+            </Upload.Dragger>
+          </Form.Item>
+        </Form.Item> */}
       </Form>
     </Edit>
   );

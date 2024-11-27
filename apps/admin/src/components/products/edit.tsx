@@ -1,8 +1,8 @@
 "use client";
 
 import React from "react";
-import { Edit, getValueFromEvent, useForm, useSelect } from "@refinedev/antd";
-import { DatePicker, Form, Input, Select, Upload } from "antd";
+import { Edit, useForm, useSelect } from "@refinedev/antd";
+import { DatePicker, Form, Input, Select } from "antd";
 import isUUID from "validator/es/lib/isUUID";
 import { NumericFormat } from "react-number-format";
 import dayjs from "dayjs";
@@ -229,7 +229,7 @@ export const ProductEdit = () => {
         >
           <DatePicker format="MM-DD-YYYY HH:mm:ss" className="w-full" />
         </Form.Item>
-        <Form.Item label="Image">
+        {/* <Form.Item label="Image">
           <Form.Item
             name="image_url"
             getValueProps={(value) => ({
@@ -247,7 +247,7 @@ export const ProductEdit = () => {
               <p className="ant-upload-text">Drag & drop a file in this area</p>
             </Upload.Dragger>
           </Form.Item>
-        </Form.Item>
+        </Form.Item> */}
       </Form>
     </Edit>
   );

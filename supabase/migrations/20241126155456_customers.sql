@@ -6,7 +6,7 @@ create table
     created_at timestamp with time zone not null default (now() at time zone 'utc'::text),
     updated_at timestamp with time zone null,
     birth_date date null,
-    password text not null,
+    password text null,
     billing_address text not null,
     shipping_address text not null,
     constraint customers_pkey primary key (id)

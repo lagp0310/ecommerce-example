@@ -5,6 +5,7 @@ import { Create, useForm, useSelect } from "@refinedev/antd";
 import { Form, Input, Select } from "antd";
 import isUUID from "validator/es/lib/isUUID";
 import { FolderArrowDownIcon } from "@heroicons/react/24/solid";
+import isURL from "validator/es/lib/isURL";
 
 export const StoreImageBannerCreate = () => {
   const { formProps, saveButtonProps } = useForm();
@@ -78,6 +79,13 @@ export const StoreImageBannerCreate = () => {
             {
               required: true,
               max: 500,
+              validator(_, value) {
+                if (!isURL(value)) {
+                  return Promise.reject(new Error("Should be a valid URL"));
+                }
+
+                return Promise.resolve();
+              },
             },
           ]}
         >
@@ -101,10 +109,14 @@ export const StoreImageBannerCreate = () => {
           rules={[
             {
               required: true,
-              validator(_rule, value) {
+              validator(_, value) {
                 if (!isUUID(value)) {
-                  throw new Error("Banner Type should be an UUID");
+                  return Promise.reject(
+                    new Error("Banner Type should be an UUID")
+                  );
                 }
+
+                return Promise.resolve();
               },
             },
           ]}

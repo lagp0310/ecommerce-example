@@ -35,10 +35,12 @@ export const ProductCreate = () => {
           rules={[
             {
               required: true,
-              validator(_rule, value) {
+              validator(_, value) {
                 if (!isUUID(value)) {
-                  throw new Error("Store should be an UUID");
+                  return Promise.reject(new Error("Store should be an UUID"));
                 }
+
+                return Promise.resolve();
               },
             },
           ]}
@@ -87,10 +89,14 @@ export const ProductCreate = () => {
           rules={[
             {
               required: false,
-              validator(_rule, value) {
+              validator(_, value) {
                 if (!!value && value < 0) {
-                  throw new Error("Available Quantity must be positive");
+                  return Promise.reject(
+                    new Error("Available Quantity must be positive")
+                  );
                 }
+
+                return Promise.resolve();
               },
             },
           ]}
@@ -110,10 +116,14 @@ export const ProductCreate = () => {
           rules={[
             {
               required: true,
-              validator(_rule, value) {
+              validator(_, value) {
                 if (!isUUID(value)) {
-                  throw new Error("Currency should be an UUID");
+                  return Promise.reject(
+                    new Error("Currency should be an UUID")
+                  );
                 }
+
+                return Promise.resolve();
               },
             },
           ]}
@@ -126,10 +136,12 @@ export const ProductCreate = () => {
           rules={[
             {
               required: true,
-              validator(_rule, value) {
+              validator(_, value) {
                 if (value < 0) {
-                  throw new Error("Price must be positive");
+                  return Promise.reject(new Error("Price must be positive"));
                 }
+
+                return Promise.resolve();
               },
             },
           ]}
@@ -151,10 +163,12 @@ export const ProductCreate = () => {
           rules={[
             {
               required: false,
-              validator(_rule, value) {
+              validator(_, value) {
                 if (!!value && value < 0) {
-                  throw new Error("Price must be positive");
+                  return Promise.reject(new Error("Price must be positive"));
                 }
+
+                return Promise.resolve();
               },
             },
           ]}
@@ -176,13 +190,15 @@ export const ProductCreate = () => {
           rules={[
             {
               required: false,
-              validator(_rule, value) {
-                if (!value) return;
+              validator(_, value) {
+                if (!value) return Promise.resolve();
 
                 const isValid = dayjs(value).isValid();
                 if (!isValid) {
-                  throw new Error("Date is not valid");
+                  return Promise.reject(new Error("Date is not valid"));
                 }
+
+                return Promise.resolve();
               },
             },
           ]}

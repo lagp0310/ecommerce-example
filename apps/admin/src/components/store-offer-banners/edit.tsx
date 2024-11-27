@@ -5,6 +5,7 @@ import { Edit, useForm, useSelect } from "@refinedev/antd";
 import { Form, Input, Select } from "antd";
 import isUUID from "validator/es/lib/isUUID";
 import { FolderArrowDownIcon, TrashIcon } from "@heroicons/react/24/solid";
+import isURL from "validator/es/lib/isURL";
 
 export const StoreOfferBannerEdit = () => {
   const { formProps, saveButtonProps, query } = useForm();
@@ -85,6 +86,13 @@ export const StoreOfferBannerEdit = () => {
             {
               required: true,
               max: 500,
+              validator(_, value) {
+                if (!isURL(value)) {
+                  return Promise.reject(new Error("Should be a valid URL"));
+                }
+
+                return Promise.resolve();
+              },
             },
           ]}
         >
@@ -96,10 +104,14 @@ export const StoreOfferBannerEdit = () => {
           rules={[
             {
               required: true,
-              validator(_rule, value) {
+              validator(_, value) {
                 if (!isUUID(value)) {
-                  throw new Error("Banner Type should be an UUID");
+                  return Promise.reject(
+                    new Error("Banner Type should be an UUID")
+                  );
                 }
+
+                return Promise.resolve();
               },
             },
           ]}

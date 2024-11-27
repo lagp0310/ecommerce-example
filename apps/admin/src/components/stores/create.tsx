@@ -28,10 +28,14 @@ export const StoreCreate = () => {
           rules={[
             {
               required: true,
-              validator(_rule, value) {
+              validator(_, value) {
                 if (!isUUID(value)) {
-                  throw new Error("Business should be an UUID");
+                  return Promise.reject(
+                    new Error("Business should be an UUID")
+                  );
                 }
+
+                return Promise.resolve();
               },
             },
           ]}

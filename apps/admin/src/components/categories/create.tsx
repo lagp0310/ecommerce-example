@@ -52,10 +52,12 @@ export const CategoryCreate = () => {
           rules={[
             {
               required: true,
-              validator(_rule, value) {
+              validator(_, value) {
                 if (!isUUID(value)) {
-                  throw new Error("Store should be an UUID");
+                  return Promise.reject(new Error("Store should be an UUID"));
                 }
+
+                return Promise.resolve();
               },
             },
           ]}

@@ -148,13 +148,15 @@ export const CustomerEdit = () => {
           rules={[
             {
               required: false,
-              validator(_rule, value) {
-                if (!value) return;
+              validator(_, value) {
+                if (!value) return Promise.resolve();
 
                 const isValid = dayjs(value).isValid();
                 if (!isValid) {
-                  throw new Error("Date is not valid");
+                  return Promise.reject(new Error("Date is not valid"));
                 }
+
+                return Promise.resolve();
               },
             },
           ]}

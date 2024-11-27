@@ -66,9 +66,9 @@ export const CouponCodesEdit = () => {
           rules={[
             {
               required: true,
-              validator(_rule, value) {
+              validator(_, value) {
                 if (!isUUID(value)) {
-                  throw new Error("Store should be an UUID");
+                  return Promise.reject(new Error("Store should be an UUID"));
                 }
               },
             },
@@ -82,19 +82,27 @@ export const CouponCodesEdit = () => {
           rules={[
             {
               required: false,
-              validator(_rule, value) {
+              validator(_, value) {
                 if (value < 0) {
-                  throw new Error("Percentage cannot be negative");
+                  return Promise.reject(
+                    new Error("Percentage cannot be negative")
+                  );
                 } else if (value > 100) {
-                  throw new Error("Percentage cannot exceed 100");
+                  return Promise.reject(
+                    new Error("Percentage cannot exceed 100")
+                  );
                 }
 
                 const amountValue = getFieldValue("amount");
                 if (!!amountValue) {
-                  throw new Error(
-                    "Only one between 'percentage' and 'amount' should be set, not both"
+                  return Promise.reject(
+                    new Error(
+                      "Only one between 'percentage' and 'amount' should be set, not both"
+                    )
                   );
                 }
+
+                return Promise.resolve();
               },
             },
           ]}
@@ -117,17 +125,21 @@ export const CouponCodesEdit = () => {
           rules={[
             {
               required: false,
-              validator(_rule, value) {
+              validator(_, value) {
                 if (value < 0) {
-                  throw new Error("Amount must be positive");
+                  return Promise.reject(new Error("Amount must be positive"));
                 }
 
                 const percentageValue = getFieldValue("percentage");
                 if (!!percentageValue) {
-                  throw new Error(
-                    "Only one between 'percentage' and 'amount' should be set, not both"
+                  return Promise.reject(
+                    new Error(
+                      "Only one between 'percentage' and 'amount' should be set, not both"
+                    )
                   );
                 }
+
+                return Promise.resolve();
               },
             },
           ]}

@@ -92,7 +92,7 @@ export function DefaultLayout({ children }: Props) {
             href="/"
             className="flex flex-row gap-x-4 justify-center items-center"
           >
-            <Bars3Icon className="h-6 w-6 text-gray-900" />
+            <Bars3Icon className="flex md:hidden h-6 w-6 text-gray-900" />
             <Logo className="h-6 w-6 md:h-8 md:w-8 text-primary" />
             <h1 className="text-body-xxl font-medium md:text-heading-5 leading-[38px] tracking-[-3%] text-green-900">
               Ecobazar
@@ -124,7 +124,7 @@ export function DefaultLayout({ children }: Props) {
         </Navbar>
       </nav>
       <main>{children}</main>
-      <footer className="flex flex-1 flex-col justify-center">
+      <footer className="flex flex-1 flex-col justify-center bg-gray-900">
         <NewsletterSubscribe className="bg-[#F7F7F7] flex flex-1 flex-row gap-x-10 items-center justify-center py-10">
           <div className="flex flex-1 flex-col gap-y-4 md:gap-y-0 md:flex-row items-center justify-center max-w-7xl px-6 md:px-0">
             <div className="flex flex-1 flex-col gap-y-2 basis-full md:basis-1/2 md:pr-48">

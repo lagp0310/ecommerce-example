@@ -168,6 +168,9 @@ importers:
 
   apps/storefront:
     dependencies:
+      clsx:
+        specifier: ^2.1.1
+        version: 2.1.1
       next:
         specifier: 15.0.3
         version: 15.0.3(@babel/core@7.25.2)(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)
@@ -177,6 +180,12 @@ importers:
       react-dom:
         specifier: 19.0.0-rc-66855b96-20241106
         version: 19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106)
+      tailwind-merge:
+        specifier: ^2.5.4
+        version: 2.5.4
+      zod:
+        specifier: ^3.23.8
+        version: 3.23.8
     devDependencies:
       '@types/node':
         specifier: ^20

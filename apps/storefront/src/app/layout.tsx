@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Poppins } from "next/font/google";
 import { validateEnvs } from "@/lib/env";
+import { DefaultLayout } from "@/components/ui/default-layout";
 
 validateEnvs();
 
@@ -23,7 +24,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${poppins.className} antialiased`}>{children}</body>
+      <body className={`${poppins.className} antialiased`}>
+        <DefaultLayout>{children}</DefaultLayout>
+      </body>
     </html>
   );
 }

@@ -1,10 +1,7 @@
 import { type AuthProvider } from "@refinedev/core";
 import { baseSupabaseClient } from "@/app/providers/data/data-provider";
 import nookies from "nookies";
-import {
-  cookieExpiresAfter,
-  sessionCookieName,
-} from "@/app/constants/constants";
+import { cookieExpiresAfter, sessionCookieName } from "@/constants/constants";
 
 export const baseAuthProvider: AuthProvider = {
   login: async ({ email, password, remember }) => {

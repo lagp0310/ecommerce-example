@@ -3,7 +3,7 @@ import {
   authLoginRoute,
   nonProtectedPathnames,
   sessionCookieName,
-} from "@/app/constants/constants";
+} from "@/constants/constants";
 import { baseSupabaseClient } from "@/app/providers/data/data-provider";
 
 export async function middleware(request: NextRequest) {

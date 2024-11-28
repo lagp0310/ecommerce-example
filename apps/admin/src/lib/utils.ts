@@ -1,4 +1,4 @@
-import { refineResources } from "@/app/constants/constants";
+import { refineResources } from "@/constants/constants";
 import { Month } from "@/types/types";
 import type { HttpError, OpenNotificationParams } from "@refinedev/core";
 import { clsx, type ClassValue } from "clsx";

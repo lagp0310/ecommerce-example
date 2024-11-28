@@ -12,7 +12,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import { sidebarItems, topMainSidebarItems } from "@/app/constants/constants";
+import { sidebarItems, topMainSidebarItems } from "@/constants/constants";
 import { ShoppingBagIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
 import { useSidebarHighlight } from "@/hooks/use-sidebar-highlight";

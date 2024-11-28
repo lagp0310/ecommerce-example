@@ -13,7 +13,7 @@ import {
   formValidationMessages,
   nonProtectedPathnames,
   refineResources,
-} from "@/app/constants/constants";
+} from "@/constants/constants";
 import { ThemedLayoutClient } from "@/components/utils/themed-layout-client";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { usePathname } from "next/navigation";

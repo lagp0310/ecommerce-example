@@ -21,7 +21,7 @@ import {
   ChevronUpDownIcon,
 } from "@heroicons/react/24/solid";
 import { baseSupabaseClient } from "@/app/providers/data/data-provider";
-import { authLoginRoute } from "@/app/constants/constants";
+import { authLoginRoute } from "@/constants/constants";
 import { usePathname, useRouter } from "next/navigation";
 import { useNotificationProvider } from "@refinedev/antd";
 import { OpenNotificationParams } from "@refinedev/core";

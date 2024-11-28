@@ -2,7 +2,7 @@
 
 import React from "react";
 import { usePathname } from "next/navigation";
-import { refineResources } from "@/app/constants/constants";
+import { refineResources } from "@/constants/constants";
 
 export function useSidebarHighlight() {
   const pathname = usePathname();

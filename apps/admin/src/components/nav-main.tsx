@@ -64,7 +64,7 @@ export function NavMain({
       <SidebarMenu className={additionalMenuClasses}>
         {items.map(({ icon, title, isActive, items, url }) => (
           <Collapsible key={title} asChild defaultOpen={isActive}>
-            <SidebarMenuItem>
+            <SidebarMenuItem className="group">
               <SidebarMenuButton
                 asChild
                 tooltip={title}
@@ -89,7 +89,7 @@ export function NavMain({
                       {icon}
                       <span>{title}</span>
                       <div className="flex flex-1 justify-end w-full">
-                        <ChevronRightIcon className="open-close-icon h-4 w-4" />
+                        <ChevronRightIcon className="h-4 w-4 group-data-[state=open]:rotate-90" />
                       </div>
                       <span className="sr-only">{`Toggle ${title}`}</span>
                     </SidebarMenuAction>

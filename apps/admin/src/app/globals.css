@@ -31,7 +31,3 @@ body {
 .ant-layout-content > div {
   height: 100%;
 }
-
-li[data-state="open"] svg.open-close-icon {
-  transform: rotate(90deg);
-}

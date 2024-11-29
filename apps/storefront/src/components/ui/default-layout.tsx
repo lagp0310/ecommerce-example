@@ -21,9 +21,9 @@ import { NewsletterSubscribe } from "@/components/ui/newsletter-subscribe";
 import { Input } from "@/components/ui/input";
 import { FooterContent } from "@/components/ui/footer-content";
 import Link from "next/link";
-import { FacebookIcon } from "@/components/ui/facebook-icon";
-import { PinterestIcon } from "@/components/ui/pinterest-icon";
-import { InstagramIcon } from "@/components/ui/instagram-icon";
+import { FacebookIcon } from "@/components/ui/icons/facebook";
+import { PinterestIcon } from "@/components/ui/icons/pinterest";
+import { InstagramIcon } from "@/components/ui/icons/instagram";
 import { FooterLink } from "@/types/types";
 
 type Props = React.PropsWithChildren;
@@ -72,7 +72,7 @@ export function DefaultLayout({ children }: Props) {
           </div>
         </div>
       </TopBar>
-      <nav className="flex flex-1 flex-row justify-center items-center bg-white">
+      <nav className="flex flex-1 flex-row justify-center items-center bg-white shadow-sm">
         <Navbar className="flex flex-1 flex-row items-center justify-center py-6 px-6 md:px-0 max-w-7xl">
           <div className="hidden md:flex flex-1 flex-row items-center gap-x-10">
             <NavbarLinkDropdown className="flex flex-row gap-x-1 items-center text-body-small font-medium text-gray-500 hover:text-gray-900 cursor-pointer">
@@ -102,7 +102,7 @@ export function DefaultLayout({ children }: Props) {
             <div className="flex flex-1 flex-row gap-x-4 justify-end">
               <NavbarLink
                 href="tel:2195550114"
-                className="text-gray-900 text-body-small font-medium hidden md:flex flex-1 flex-row md:gap-x-2 items-center justify-end mr-4"
+                className="text-gray-900 text-body-small font-medium hidden md:flex flex-row md:gap-x-2 items-center mr-4"
               >
                 <PhoneIcon className="h-6 w-6" />
                 <span className="hidden md:flex">(219) 555-0114</span>

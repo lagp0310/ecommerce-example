@@ -1,6 +1,10 @@
 import { Banner } from "@/components/ui/banner";
 import { BasicProductCard } from "@/components/ui/basic-product-card";
 import { Button } from "@/components/ui/button";
+import { CarouselMobileRenderer } from "@/components/ui/carousel/carousel-mobile-renderer";
+import { DefaultDotGroup } from "@/components/ui/carousel/default-dot-group";
+import { DotsMobileRenderer } from "@/components/ui/carousel/dots-mobile-renderer";
+import { SlideMobileRenderer } from "@/components/ui/carousel/slide-mobile-renderer";
 import { CategoryCard } from "@/components/ui/category-card";
 import { HomepageCustomerTestimonial } from "@/components/ui/homepage-customer-testimonial";
 import { BookOffBrandIcon } from "@/components/ui/icons/book-off-brand";
@@ -19,6 +23,7 @@ import { SectionTitle } from "@/components/ui/section-title";
 import { StoreHighlight } from "@/components/ui/store-highlight";
 import { StoreHighlights } from "@/components/ui/store-highlights";
 import { SummarizedProductCard } from "@/components/ui/summarized-product-card";
+import { storeHighlightCarouselInterval } from "@/constants/constants";
 import discountBanner from "@/public/images/discount-banner.png";
 import firstOfferBanner from "@/public/images/first-offer-banner.png";
 import freshFruitCategory from "@/public/images/fresh-fruit.png";
@@ -192,30 +197,53 @@ export default function Home() {
         </div>
       </div>
       <div className="flex flex-1 justify-center px-6 md:px-0">
-        <StoreHighlights className="flex flex-1 flex-col md:flex-row rounded-lg p-10 shadow-[0px_8px_40px_0px_rgba(0,38,3,0.08)] justify-center items-center max-w-7xl">
-          {storeHighlights.map(({ description, icon, title }, index) => (
-            <StoreHighlight
-              key={index}
-              className="flex flex-1 flex-row gap-x-4 w-full justify-center"
-            >
-              {icon}
-              <div className="flex flex-1 flex-col gap-y-2">
-                <h3 className="text-body-medium font-semibold text-gray-900">
-                  {title}
-                </h3>
-                <p className="text-body-small font-normal text-gray-400">
-                  {description}
-                </p>
-              </div>
-            </StoreHighlight>
-          ))}
+        <StoreHighlights className="relative flex flex-1 flex-col md:flex-row rounded-lg p-6 md:p-10 shadow-[0px_8px_40px_0px_rgba(0,38,3,0.08)] justify-center items-center max-w-7xl">
+          <CarouselMobileRenderer
+            carouselProviderProps={{
+              naturalSlideHeight: 300,
+              naturalSlideWidth: 300,
+              totalSlides: storeHighlights.length,
+              interval: storeHighlightCarouselInterval,
+              isPlaying: true,
+              infinite: true,
+              className: "w-full h-28 md:h-auto",
+            }}
+            carouselSliderProps={{
+              className: "h-28 md:h-auto",
+              classNameTray: "h-28 md:h-auto",
+            }}
+          >
+            {storeHighlights.map(({ description, icon, title }, index) => (
+              <SlideMobileRenderer
+                key={index}
+                index={index}
+                className="!pb-16 md:pb-0"
+                innerClassName="!h-16 md:h-auto"
+              >
+                <StoreHighlight className="flex flex-1 flex-row gap-x-4 w-full justify-center">
+                  {icon}
+                  <div className="flex flex-1 flex-col gap-y-2">
+                    <h3 className="text-body-medium font-semibold text-gray-900">
+                      {title}
+                    </h3>
+                    <p className="text-body-small font-normal text-gray-400">
+                      {description}
+                    </p>
+                  </div>
+                </StoreHighlight>
+              </SlideMobileRenderer>
+            ))}
+            <DotsMobileRenderer>
+              <DefaultDotGroup disableActiveDots />
+            </DotsMobileRenderer>
+          </CarouselMobileRenderer>
         </StoreHighlights>
       </div>
       <div className="flex flex-1 flex-col gap-y-[60px] mt-[60px] items-center">
         <Section className="flex flex-1 flex-col gap-y-8 px-6 md:px-0">
           <SectionTitle className="max-w-7xl w-full">
             <div className="flex flex-1 flex-row">
-              <h2 className="text-heading-5 font-semibold text-gray-900">
+              <h2 className="text-body-xl md:text-heading-5 font-semibold text-gray-900">
                 Popular Categories
               </h2>
               <div className="flex flex-1 flex-row justify-end">
@@ -245,7 +273,7 @@ export default function Home() {
         <Section className="flex flex-1 flex-col gap-y-8 px-6 md:px-0">
           <SectionTitle className="max-w-7xl w-full">
             <div className="flex flex-1 flex-row">
-              <h2 className="text-heading-5 font-semibold text-gray-900">
+              <h2 className="text-body-xl md:text-heading-5 font-semibold text-gray-900">
                 Popular Products
               </h2>
               <div className="flex flex-1 flex-row justify-end">
@@ -345,7 +373,7 @@ export default function Home() {
             <Section className="flex flex-1 flex-col gap-y-8 max-w-7xl">
               <SectionTitle className="w-full">
                 <div className="flex flex-1 flex-row">
-                  <h2 className="text-heading-5 font-semibold text-gray-900">
+                  <h2 className="text-body-xl md:text-heading-5 font-semibold text-gray-900">
                     Hot Deals
                   </h2>
                   <div className="flex flex-1 flex-row justify-end">
@@ -405,7 +433,7 @@ export default function Home() {
         <Section className="flex flex-1 flex-col gap-y-8 px-6 md:px-0">
           <SectionTitle className="max-w-7xl w-full">
             <div className="flex flex-1 flex-row">
-              <h2 className="text-heading-5 font-semibold text-gray-900">
+              <h2 className="text-body-xl md:text-heading-5 font-semibold text-gray-900">
                 Featured Products
               </h2>
               <div className="flex flex-1 flex-row justify-end">
@@ -434,7 +462,7 @@ export default function Home() {
             <Section className="flex flex-1 flex-col gap-y-8 max-w-7xl">
               <SectionTitle className="w-full">
                 <div className="flex flex-1 flex-row">
-                  <h2 className="text-heading-5 font-semibold text-gray-900 text-center md:text-left">
+                  <h2 className="text-body-xl md:text-heading-5 font-semibold text-gray-900 text-center md:text-left w-full">
                     Customer Testimonials
                   </h2>
                   <div className="flex-1 flex-row justify-end gap-x-3 hidden md:flex">
@@ -460,10 +488,10 @@ export default function Home() {
         </div>
         <div className="w-full px-6 md:px-0">
           <div className="flex flex-1 flex-row justify-center">
-            <Section className="flex flex-1 flex-col gap-y-8 py-[60px] max-w-7xl">
+            <Section className="flex flex-1 flex-col gap-y-8 pb-[60px] max-w-7xl">
               <SectionTitle className="w-full">
                 <div className="flex flex-1 flex-row">
-                  <h2 className="text-heading-5 font-semibold text-gray-900 text-center">
+                  <h2 className="text-body-xl md:text-heading-5 font-semibold text-gray-900 text-center w-full">
                     Trusted by Leading Brands
                   </h2>
                 </div>

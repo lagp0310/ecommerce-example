@@ -1,0 +1,140 @@
+import { cn } from "@/lib/utils";
+import { Product } from "@/types/types";
+import {
+  HeartIcon,
+  ShoppingBagIcon,
+  StarIcon,
+} from "@heroicons/react/24/outline";
+import { StarIcon as FilledStarIcon } from "@heroicons/react/24/solid";
+import Link from "next/link";
+import React from "react";
+import { Button } from "./button";
+import { ProductCard } from "./product-card";
+import { Rating } from "./rating";
+
+type Props = {
+  product: Product;
+  shouldShowProductTags?: boolean;
+  shouldUseNextLink?: boolean;
+  isFirstOnList: boolean;
+};
+
+export function SummarizedProductCard({
+  product: {
+    id,
+    name,
+    price,
+    currencySymbol,
+    discountedPrice,
+    image,
+    rating,
+    totalRatings,
+    tags,
+  },
+  shouldShowProductTags = true,
+  shouldUseNextLink = true,
+  isFirstOnList,
+}: Props) {
+  const shouldShowTags =
+    Array.isArray(tags) &&
+    tags.length > 0 &&
+    shouldShowProductTags &&
+    isFirstOnList;
+  const productNode = (
+    <ProductCard
+      className={
+        "h-full relative bg-white flex flex-1 flex-col justify-center border border-gray-100 gap-y-[6px] p-3 rounded-[5px] hover:border-soft-primary/45 hover:shadow-[0px_0px_12px_0px_rgba(132,209,135,0.32)] hover:shadow-soft-primary/60 col-span-1"
+      }
+    >
+      {shouldShowTags ? (
+        <div className="z-10 absolute top-3 left-3 flex flex-1 flex-row gap-x-2">
+          {tags.map(({ text, type }, index) => (
+            <span
+              key={index}
+              className={cn(
+                "cursor-pointer rounded-[4px] px-2 py-[3px] text-white",
+                {
+                  "bg-blue-500": type === "info",
+                  "bg-danger": type === "danger",
+                }
+              )}
+            >
+              {text}
+            </span>
+          ))}
+        </div>
+      ) : null}
+      <div className="flex flex-1 flex-row justify-center min-h-[250px]">
+        {image}
+      </div>
+      <div className="flex flex-row gap-x-2">
+        <Button className="bg-gray-50 rounded-full h-8 w-8 flex flex-row justify-center items-center group hover:bg-primary">
+          <HeartIcon className="h-4 w-4 text-gray-900 group-hover:text-white" />
+        </Button>
+        <Button className="bg-primary text-white flex flex-1 flex-row items-center justify-center gap-x-2 rounded-full text-body-small font-semibold group hover:text-primary hover:border hover:border-primary hover:bg-white leading-6">
+          Add to Cart
+          <ShoppingBagIcon className="h-4 w-4 group-hover:text-primary" />
+        </Button>
+      </div>
+      <div className="flex flex-col gap-y-2 pt-[6px] items-center">
+        <span className="text-body-large font-normal text-hard-primary truncate line-clamp-2">
+          {name}
+        </span>
+        <div className="flex flex-row gap-x-2">
+          {!!discountedPrice && isFirstOnList ? (
+            <span
+              className={cn({
+                "text-body-xxl font-medium text-gray-900 truncate line-clamp-1":
+                  !discountedPrice,
+              })}
+            >{`${currencySymbol}${discountedPrice}`}</span>
+          ) : null}
+          <span
+            className={cn({
+              "text-body-xxl font-normal text-gray-400 leading-[150%] line-through truncate line-clamp-1":
+                discountedPrice && isFirstOnList,
+              "text-body-medium font-medium text-gray-900 truncate line-clamp-1":
+                !discountedPrice,
+            })}
+          >{`${currencySymbol}${price}`}</span>
+        </div>
+        {typeof rating === "number" && typeof totalRatings === "number" ? (
+          <div className="flex flex-row gap-x-1 items-center">
+            <Rating
+              className="flex flex-1 flex-row gap-x-0.5"
+              rating={rating}
+              emptyIcon={<StarIcon className="text-warning h-3 w-3" />}
+              filledIcon={<FilledStarIcon className="text-warning h-3 w-3" />}
+            />
+            <span className="text-body-tiny font-normal text-gray-500">
+              {`(${totalRatings})`}
+            </span>
+          </div>
+        ) : null}
+      </div>
+      <div className="flex flex-1 flex-col items-center gap-y-[6px] pt-[18px] pb-6">
+        <span className="text-body-small leading-[18px] text-gray-400">
+          Hurry up! Offer ends In:
+        </span>
+        <span className=""></span>
+      </div>
+    </ProductCard>
+  );
+
+  return (
+    <React.Fragment>
+      {shouldUseNextLink ? (
+        <Link
+          href={`/products/${id}`}
+          className={cn("col-span-1", {
+            "col-span-2 row-span-2": isFirstOnList,
+          })}
+        >
+          {productNode}
+        </Link>
+      ) : (
+        productNode
+      )}
+    </React.Fragment>
+  );
+}

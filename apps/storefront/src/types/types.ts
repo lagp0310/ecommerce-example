@@ -30,6 +30,7 @@ export type Product = {
   currencyCode: string;
   image?: React.ReactNode;
   rating?: number;
+  totalRatings?: number;
   tags?: ProductTag[];
 };
 

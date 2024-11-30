@@ -3,7 +3,6 @@ import React from "react";
 type Props = React.SVGProps<SVGSVGElement>;
 
 export function HeadphonesIcon({ ...props }: Props) {
-  console.log(props.width, props.height, props.className);
   return (
     <svg
       viewBox="0 0 41 40"

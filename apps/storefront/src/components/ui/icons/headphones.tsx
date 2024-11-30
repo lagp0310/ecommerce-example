@@ -3,6 +3,7 @@ import React from "react";
 type Props = React.SVGProps<SVGSVGElement>;
 
 export function HeadphonesIcon({ ...props }: Props) {
+  console.log(props.width, props.height, props.className);
   return (
     <svg
       viewBox="0 0 41 40"
@@ -19,8 +20,8 @@ export function HeadphonesIcon({ ...props }: Props) {
       <defs>
         <clipPath id="clip0_629_3527">
           <rect
-            width={props.width}
-            height={props.height}
+            width={40}
+            height={40}
             fill="currentColor"
             transform="translate(0.333374)"
           />

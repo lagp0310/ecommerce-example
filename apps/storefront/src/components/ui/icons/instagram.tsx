@@ -26,7 +26,7 @@ export function InstagramIcon({ ...props }: Props) {
       </g>
       <defs>
         <clipPath id="clip0_2030_220">
-          <rect width={props.width} height={props.height} fill="currentColor" />
+          <rect width={40} height={40} fill="currentColor" />
         </clipPath>
       </defs>
     </svg>

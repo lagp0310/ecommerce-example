@@ -23,8 +23,8 @@ export function ShoppingBagCheckedIcon({ ...props }: Props) {
       <defs>
         <clipPath id="clip0_629_3558">
           <rect
-            width={props.width}
-            height={props.height}
+            width={40}
+            height={40}
             fill="currentColor"
             transform="translate(0.666687)"
           />

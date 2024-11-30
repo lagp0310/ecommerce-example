@@ -128,10 +128,10 @@ export function DefaultLayout({ children }: Props) {
         <NewsletterSubscribe className="bg-[#F7F7F7] flex flex-1 flex-row gap-x-10 items-center justify-center py-10">
           <div className="flex flex-1 flex-col gap-y-4 md:gap-y-0 md:flex-row items-center justify-center max-w-7xl px-6 md:px-0">
             <div className="flex flex-1 flex-col gap-y-2 basis-full md:basis-1/2 md:pr-48">
-              <span className="text-body-xxl font-semibold text-gray-900 text-center md:text-left">
+              <span className="text-body-xl md:text-body-xxl font-semibold text-gray-900 text-center md:text-left">
                 Subscribe to our Newsletter
               </span>
-              <span className="text-body-small font-normal text-gray-400 text-center md:text-left">
+              <span className="text-body-tiny md:text-body-small font-normal text-gray-400 text-center md:text-left">
                 Pellentesque eu nibh eget mauris congue mattis mattis nec
                 tellus. Phasellus imperdiet elit eu magna.
               </span>
@@ -141,9 +141,9 @@ export function DefaultLayout({ children }: Props) {
                 <Input
                   placeholder="Your email address"
                   type="email"
-                  className="flex-1 rounded-full outline-none p-3.5 placeholder:text-body-medium placeholder:font-normal placeholder:text-gray-500 text-gray-500"
+                  className="flex-1 rounded-full outline-none p-3.5 placeholder:text-body-small md:placeholder:text-body-medium placeholder:font-normal placeholder:text-gray-500 text-gray-500"
                 />
-                <Button className="rounded-full text-white bg-primary p-3.5 -ml-10">
+                <Button className="rounded-full text-white bg-primary p-3.5 -ml-10 text-body-small md:text-base">
                   Subscribe
                 </Button>
               </div>

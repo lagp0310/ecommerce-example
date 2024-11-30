@@ -47,15 +47,15 @@ export function BasicProductCard({
       }
     >
       {shouldShowTags ? (
-        <div className="z-10 absolute top-3 left-3 flex flex-1 flex-row gap-x-2">
+        <div className="z-10 absolute top-3 left-3 flex flex-1 flex-row gap-x-2 text-body-tiny md:text-body-small flex-wrap pr-6 gap-y-1">
           {tags.map(({ text, type }, index) => (
             <span
               key={index}
               className={cn(
-                "cursor-pointer rounded-[4px] px-2 py-[3px] text-white truncate whitespace-break-spaces",
+                "font-normal cursor-pointer rounded-[4px] px-2 py-[3px] truncate whitespace-break-spaces",
                 {
-                  "bg-blue-500": type === "info",
-                  "bg-danger": type === "danger",
+                  "bg-blue-500 text-white": type === "info",
+                  "bg-danger text-white": type === "danger",
                 }
               )}
             >
@@ -64,7 +64,7 @@ export function BasicProductCard({
           ))}
         </div>
       ) : null}
-      {image}
+      <div className="mt-6 md:mt-2">{image}</div>
       <div className="z-10 absolute top-3 right-3 flex flex-1 flex-col gap-y-2">
         <Button className="bg-white rounded-full h-8 w-8 flex flex-row justify-center items-center border border-gray-50 group hover:bg-primary hover:border-none">
           <HeartIcon className="h-4 w-4 text-gray-900 group-hover:text-white" />
@@ -75,20 +75,20 @@ export function BasicProductCard({
           <span className="text-body-small font-normal text-gray-700 truncate line-clamp-1">
             {name}
           </span>
-          <div className="flex flex-1 flex-row gap-x-2">
+          <div className="flex flex-1 flex-row gap-x-2 text-body-small md:text-body-medium">
             {!!discountedPrice && isFirstOnList ? (
               <span
                 className={cn({
-                  "text-body-medium font-medium text-gray-900 truncate line-clamp-1":
+                  "font-medium text-gray-900 truncate line-clamp-1":
                     !discountedPrice,
                 })}
               >{`${currencySymbol}${discountedPrice}`}</span>
             ) : null}
             <span
               className={cn({
-                "text-body-medium font-normal text-gray-400 line-through truncate line-clamp-1":
+                "font-normal text-gray-400 line-through truncate line-clamp-1":
                   discountedPrice && isFirstOnList,
-                "text-body-medium font-medium text-gray-900 truncate line-clamp-1":
+                "font-medium text-gray-900 truncate line-clamp-1":
                   !discountedPrice,
               })}
             >{`${currencySymbol}${price}`}</span>

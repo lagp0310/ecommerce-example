@@ -47,15 +47,15 @@ export function SummarizedProductCard({
       }
     >
       {shouldShowTags ? (
-        <div className="z-10 absolute top-3 left-3 flex flex-1 flex-row gap-x-2">
+        <div className="z-10 absolute top-3 left-3 flex flex-1 flex-row gap-x-2 text-body-tiny md:text-body-small flex-wrap pr-6 gap-y-1">
           {tags.map(({ text, type }, index) => (
             <span
               key={index}
               className={cn(
-                "cursor-pointer rounded-[4px] px-2 py-[3px] text-white",
+                "font-normal cursor-pointer rounded-[4px] px-2 py-[3px] truncate whitespace-break-spaces",
                 {
-                  "bg-blue-500": type === "info",
-                  "bg-danger": type === "danger",
+                  "bg-blue-500 text-white": type === "info",
+                  "bg-danger text-white": type === "danger",
                 }
               )}
             >

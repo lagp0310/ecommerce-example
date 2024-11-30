@@ -119,12 +119,7 @@ export function BasicProductCard({
   return (
     <React.Fragment>
       {shouldUseNextLink ? (
-        <Link
-          href={`/products/${id}`}
-          className={cn("col-span-1", {
-            "col-span-2 row-span-2": isFirstOnList,
-          })}
-        >
+        <Link href={`/products/${id}`} className="col-span-1">
           {productNode}
         </Link>
       ) : (

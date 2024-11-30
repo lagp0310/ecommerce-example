@@ -2,6 +2,7 @@ import { Banner } from "@/components/ui/banner";
 import { BasicProductCard } from "@/components/ui/basic-product-card";
 import { Button } from "@/components/ui/button";
 import { CategoryCard } from "@/components/ui/category-card";
+import { HomepageCustomerTestimonial } from "@/components/ui/homepage-customer-testimonial";
 import { BookOffBrandIcon } from "@/components/ui/icons/book-off-brand";
 import { BoxIcon } from "@/components/ui/icons/box";
 import { FoodCoUkBrandIcon } from "@/components/ui/icons/food-co-uk-brand";
@@ -9,11 +10,9 @@ import { FoodNetworkBrandIcon } from "@/components/ui/icons/food-network-brand";
 import { GSeriesBrandIcon } from "@/components/ui/icons/g-series-brand";
 import { HeadphonesIcon } from "@/components/ui/icons/headphones";
 import { MangoBrandIcon } from "@/components/ui/icons/mango-brand";
-import { QuoteIcon } from "@/components/ui/icons/quote";
 import { ShoppingBagCheckedIcon } from "@/components/ui/icons/shopping-bag-checked";
 import { StepsBrandIcon } from "@/components/ui/icons/steps-brand";
 import { TruckIcon } from "@/components/ui/icons/truck";
-import { Rating } from "@/components/ui/rating";
 import { Section } from "@/components/ui/section";
 import { SectionContent } from "@/components/ui/section-content";
 import { SectionTitle } from "@/components/ui/section-title";
@@ -35,12 +34,7 @@ import {
   Product,
   StoreHighlight as TStoreHighlight,
 } from "@/types/types";
-import {
-  ArrowLeftIcon,
-  ArrowRightIcon,
-  StarIcon,
-} from "@heroicons/react/24/outline";
-import { StarIcon as FilledStarIcon } from "@heroicons/react/24/solid";
+import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -92,7 +86,7 @@ export default function Home() {
   const customerTestimonial: CustomerTestimonial = {
     id: "f015e892-5c95-4a0e-957d-27acac18860d",
     text: "Pellentesque eu nibh eget mauris congue mattis mattis nec tellus. Phasellus imperdiet elit eu magna dictum, bibendum cursus velit sodales. Donec sed neque eget",
-    avatarUrl: "https://i.pravatar.cc/200",
+    avatarUrl: "https://i.pravatar.cc/200?img=45",
     rating: 5,
     fullName: "Dianne Russell",
   };
@@ -125,9 +119,9 @@ export default function Home() {
 
   return (
     <div className="flex flex-1 flex-col">
-      <div className="flex flex-1 flex-row justify-center items-center my-6">
-        <div className="grid grid-cols-3 grid-rows-2 gap-6 max-w-7xl">
-          <Banner className="relative row-span-2 col-span-2 rounded-[10px]">
+      <div className="flex flex-1 flex-row justify-center items-center my-6 px-6 md:px-0">
+        <div className="grid grid-cols-1 md:grid-cols-3 md:grid-rows-2 gap-6 max-w-7xl">
+          <Banner className="relative md:row-span-2 md:col-span-2 rounded-[10px]">
             <Image
               src={headerBigBanner}
               alt="Header Banner"
@@ -135,7 +129,7 @@ export default function Home() {
             />
             <div className="absolute top-0 left-0 bg-gradient-to-br from-black/60 to-black/0 h-full w-full rounded-[10px]"></div>
             <div className="absolute top-0 flex flex-1 flex-col gap-y-7 h-full justify-center px-12">
-              <h2 className="text-heading-2 font-semibold text-white">
+              <h2 className="text-heading-5 md:text-heading-2 font-semibold text-white text-center md:text-left">
                 Fresh and Healthy Organic Food
               </h2>
               <div className="flex flex-col border-l-2 border-primary gap-y-2 pl-2">
@@ -170,8 +164,9 @@ export default function Home() {
               <span className="text-body-small font-normal text-gray-600">
                 Only Fruits and Vegetables
               </span>
-              <Button className="flex flex-row gap-x-2 items-center text-primary max-w-fit pr-5 py-3">
-                Shop now <ArrowRightIcon className="h-4 w-4 text-primary" />
+              <Button className="flex flex-row gap-x-2 items-center text-white max-w-fit bg-primary group hover:bg-white hover:text-primary rounded-full px-5 py-3">
+                Shop now{" "}
+                <ArrowRightIcon className="h-4 w-4 text-white group-hover:text-primary" />
               </Button>
             </div>
           </Banner>
@@ -196,12 +191,12 @@ export default function Home() {
           </Banner>
         </div>
       </div>
-      <div className="flex flex-1 justify-center">
-        <StoreHighlights className="flex flex-1 flex-row rounded-lg p-10 shadow-[0px_8px_40px_0px_rgba(0,38,3,0.08)] justify-center items-center max-w-7xl">
+      <div className="flex flex-1 justify-center px-6 md:px-0">
+        <StoreHighlights className="flex flex-1 flex-col md:flex-row rounded-lg p-10 shadow-[0px_8px_40px_0px_rgba(0,38,3,0.08)] justify-center items-center max-w-7xl">
           {storeHighlights.map(({ description, icon, title }, index) => (
             <StoreHighlight
               key={index}
-              className="flex flex-1 flex-row gap-x-4"
+              className="flex flex-1 flex-row gap-x-4 w-full justify-center"
             >
               {icon}
               <div className="flex flex-1 flex-col gap-y-2">
@@ -217,7 +212,7 @@ export default function Home() {
         </StoreHighlights>
       </div>
       <div className="flex flex-1 flex-col gap-y-[60px] mt-[60px] items-center">
-        <Section className="flex flex-1 flex-col gap-y-8">
+        <Section className="flex flex-1 flex-col gap-y-8 px-6 md:px-0">
           <SectionTitle className="max-w-7xl w-full">
             <div className="flex flex-1 flex-row">
               <h2 className="text-heading-5 font-semibold text-gray-900">
@@ -234,7 +229,7 @@ export default function Home() {
               </div>
             </div>
           </SectionTitle>
-          <SectionContent className="grid grid-cols-6 gap-6 max-w-7xl w-full">
+          <SectionContent className="grid grid-cols-2 gap-4 md:grid-cols-6 md:gap-6 max-w-7xl w-full">
             {Array.from({ length: 12 }).map((_value, index) => (
               <Link key={index} href={category.url}>
                 <CategoryCard className="flex flex-1 flex-col items-center justify-center gap-y-4 bg-white border border-gray-100 rounded-[5px] pt-4 pb-6 hover:border-soft-primary/45 hover:shadow-[0px_0px_12px_0px_rgba(132,209,135,0.32)] hover:shadow-soft-primary/60">
@@ -247,7 +242,7 @@ export default function Home() {
             ))}
           </SectionContent>
         </Section>
-        <Section className="flex flex-1 flex-col gap-y-8">
+        <Section className="flex flex-1 flex-col gap-y-8 px-6 md:px-0">
           <SectionTitle className="max-w-7xl w-full">
             <div className="flex flex-1 flex-row">
               <h2 className="text-heading-5 font-semibold text-gray-900">
@@ -264,7 +259,7 @@ export default function Home() {
               </div>
             </div>
           </SectionTitle>
-          <SectionContent className="max-w-7xl w-full grid grid-cols-5 gap-6">
+          <SectionContent className="max-w-7xl w-full grid grid-cols-2 gap-4 md:grid-cols-5 md:gap-6">
             {Array.from({ length: 10 }).map((_value, index) => (
               <Link key={index} href={`/products/${popularProduct.id}`}>
                 <BasicProductCard
@@ -275,7 +270,7 @@ export default function Home() {
             ))}
           </SectionContent>
         </Section>
-        <Section className="flex flex-1 flex-col gap-y-8">
+        <Section className="flex flex-1 flex-col gap-y-8 px-6 md:px-0">
           <SectionContent className="max-w-7xl w-full flex flex-1 flex-col md:flex-row gap-6">
             <Banner className="relative flex flex-1 flex-col gap-y-4 items-center">
               <Image src={firstOfferBanner} alt="Offer Banner" />
@@ -346,7 +341,7 @@ export default function Home() {
             </Banner>
           </SectionContent>
         </Section>
-        <div className="bg-[#F7F7F7] py-[60px] w-full">
+        <div className="bg-[#F7F7F7] py-[60px] w-full px-6 md:px-0">
           <div className="flex flex-1 flex-row justify-center">
             <Section className="flex flex-1 flex-col gap-y-8 max-w-7xl">
               <SectionTitle className="w-full">
@@ -365,7 +360,7 @@ export default function Home() {
                   </div>
                 </div>
               </SectionTitle>
-              <SectionContent className="max-w-7xl w-full grid grid-cols-5 gap-6">
+              <SectionContent className="max-w-7xl w-full grid grid-cols-2 gap-4 md:grid-cols-5 md:gap-6">
                 {Array.from({ length: 12 }).map((_value, index) => (
                   <React.Fragment key={index}>
                     {index === 0 ? (
@@ -385,7 +380,7 @@ export default function Home() {
             </Section>
           </div>
         </div>
-        <Section className="max-w-7xl">
+        <Section className="max-w-7xl px-6 md:px-0">
           <Banner className="relative flex flex-1 flex-col gap-y-4 items-end">
             <Image src={discountBanner} alt="Offer Banner" />
             <div className="absolute right-12 flex flex-col gap-y-4 h-full items-start justify-center">
@@ -408,7 +403,7 @@ export default function Home() {
             </div>
           </Banner>
         </Section>
-        <Section className="flex flex-1 flex-col gap-y-8">
+        <Section className="flex flex-1 flex-col gap-y-8 px-6 md:px-0">
           <SectionTitle className="max-w-7xl w-full">
             <div className="flex flex-1 flex-row">
               <h2 className="text-heading-5 font-semibold text-gray-900">
@@ -425,7 +420,7 @@ export default function Home() {
               </div>
             </div>
           </SectionTitle>
-          <SectionContent className="max-w-7xl w-full grid grid-cols-5 gap-6">
+          <SectionContent className="max-w-7xl w-full grid grid-cols-2 gap-4 md:grid-cols-5 md:gap-6">
             {Array.from({ length: 5 }).map((_value, index) => (
               <Link key={index} href={`/products/${popularProduct.id}`}>
                 <BasicProductCard
@@ -436,15 +431,15 @@ export default function Home() {
             ))}
           </SectionContent>
         </Section>
-        <div className="bg-[#F7F7F7] py-[60px] w-full">
-          <div className="flex flex-1 flex-row justify-center">
+        <div className="bg-[#F7F7F7] py-[60px] w-full px-6 md:px-0">
+          <div className="flex flex-1 flex-row justify-center px-6 md:px-0">
             <Section className="flex flex-1 flex-col gap-y-8 max-w-7xl">
               <SectionTitle className="w-full">
                 <div className="flex flex-1 flex-row">
-                  <h2 className="text-heading-5 font-semibold text-gray-900">
+                  <h2 className="text-heading-5 font-semibold text-gray-900 text-center md:text-left">
                     Customer Testimonials
                   </h2>
-                  <div className="flex flex-1 flex-row justify-end gap-x-3">
+                  <div className="flex-1 flex-row justify-end gap-x-3 hidden md:flex">
                     <Button className="rounded-full h-[45px] w-[45px] border border-gray-100 flex flex-row items-center justify-center group hover:bg-primary hover:border-none">
                       <ArrowLeftIcon className="h-4 w-4 text-gray-900 group-hover:text-white" />
                     </Button>
@@ -454,65 +449,36 @@ export default function Home() {
                   </div>
                 </div>
               </SectionTitle>
-              <SectionContent className="w-full flex flex-1 flex-row gap-x-6">
-                {/* TODO: Component for this. */}
+              <SectionContent className="w-full flex flex-1 flex-col md:flex-row gap-x-6">
                 {Array.from({ length: 3 }).map((_value, index) => (
-                  <div
+                  <HomepageCustomerTestimonial
                     key={index}
-                    className="flex flex-1 flex-col gap-y-4 p-6 rounded-lg shadow-[0px_10px_20px_0px_rgba(0,0,0,0.01)] bg-white"
-                  >
-                    <QuoteIcon className="h-[26px] w-8 text-soft-primary" />
-                    <p className="text-body-small font-normal text-gray-700 line-clamp-5">
-                      {customerTestimonial.text}
-                    </p>
-                    {/* TODO: Component for this (UserAvatar). */}
-                    <div className="flex flex-1 flex-row items-center gap-x-2">
-                      <Image
-                        src={customerTestimonial.avatarUrl}
-                        width={200}
-                        height={200}
-                        alt="Customer's Avatar"
-                        className="rounded-full h-[56px] w-[56px]"
-                      />
-                      <div className="flex flex-1 flex-col justify-center">
-                        <span className="text-body-medium font-medium text-gray-900">
-                          {customerTestimonial.fullName}
-                        </span>
-                        <span className="text-body-small font-normal text-gray-400">
-                          Customer
-                        </span>
-                      </div>
-                      <Rating
-                        className="flex flex-1 flex-row gap-x-0.5 justify-end"
-                        rating={customerTestimonial.rating}
-                        emptyIcon={
-                          <StarIcon
-                            key={index}
-                            className="text-warning h-3 w-3"
-                          />
-                        }
-                        filledIcon={
-                          <FilledStarIcon
-                            key={index}
-                            className="text-warning h-3 w-3"
-                          />
-                        }
-                      />
-                    </div>
-                  </div>
+                    testimonial={customerTestimonial}
+                  />
+                ))}
+              </SectionContent>
+            </Section>
+          </div>
+        </div>
+        <div className="w-full px-6 md:px-0">
+          <div className="flex flex-1 flex-row justify-center">
+            <Section className="flex flex-1 flex-col gap-y-8 py-[60px] max-w-7xl">
+              <SectionTitle className="w-full">
+                <div className="flex flex-1 flex-row">
+                  <h2 className="text-heading-5 font-semibold text-gray-900 text-center">
+                    Trusted by Leading Brands
+                  </h2>
+                </div>
+              </SectionTitle>
+              <SectionContent className="flex flex-1 flex-col gap-y-4 flex-wrap md:flex-row justify-between max-w-7xl">
+                {brandIcons.map((brandIcon, index) => (
+                  <div key={index}>{brandIcon}</div>
                 ))}
               </SectionContent>
             </Section>
           </div>
         </div>
       </div>
-      <Section className="flex flex-1 flex-row justify-center py-[60px]">
-        <SectionContent className="flex flex-1 flex-row justify-between max-w-7xl">
-          {brandIcons.map((brandIcon, index) => (
-            <div key={index}>{brandIcon}</div>
-          ))}
-        </SectionContent>
-      </Section>
     </div>
   );
 }

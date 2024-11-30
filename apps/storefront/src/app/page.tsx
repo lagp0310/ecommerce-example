@@ -261,12 +261,11 @@ export default function Home() {
           </SectionTitle>
           <SectionContent className="max-w-7xl w-full grid grid-cols-2 gap-4 md:grid-cols-5 md:gap-6">
             {Array.from({ length: 10 }).map((_value, index) => (
-              <Link key={index} href={`/products/${popularProduct.id}`}>
-                <BasicProductCard
-                  product={popularProduct}
-                  isFirstOnList={index === 0}
-                />
-              </Link>
+              <BasicProductCard
+                key={index}
+                product={popularProduct}
+                isFirstOnList={index === 0}
+              />
             ))}
           </SectionContent>
         </Section>
@@ -422,12 +421,11 @@ export default function Home() {
           </SectionTitle>
           <SectionContent className="max-w-7xl w-full grid grid-cols-2 gap-4 md:grid-cols-5 md:gap-6">
             {Array.from({ length: 5 }).map((_value, index) => (
-              <Link key={index} href={`/products/${popularProduct.id}`}>
-                <BasicProductCard
-                  product={popularProduct}
-                  isFirstOnList={index === 0}
-                />
-              </Link>
+              <BasicProductCard
+                key={index}
+                product={popularProduct}
+                isFirstOnList={index === 0}
+              />
             ))}
           </SectionContent>
         </Section>

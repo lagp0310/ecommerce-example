@@ -17,9 +17,12 @@ export function DefaultDotGroup({ ...props }: Props) {
             <Dot
               key={index}
               slide={index}
-              className={cn("rounded-full h-3 w-3 bg-gray-900", {
-                "bg-primary": index === currentSlide,
-              })}
+              className={cn(
+                "rounded-full h-2.5 w-2.5 bg-gray-900 first:ml-0 ml-2",
+                {
+                  "bg-primary": index === currentSlide,
+                }
+              )}
             />
           ))}
         </React.Fragment>

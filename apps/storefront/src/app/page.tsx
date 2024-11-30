@@ -2,6 +2,7 @@ import { Banner } from "@/components/ui/banner";
 import { BasicProductCard } from "@/components/ui/basic-product-card";
 import { Button } from "@/components/ui/button";
 import { CarouselMobileRenderer } from "@/components/ui/carousel/carousel-mobile-renderer";
+import { CarouselProvider } from "@/components/ui/carousel/carousel-provider";
 import { DefaultDotGroup } from "@/components/ui/carousel/default-dot-group";
 import { DotsMobileRenderer } from "@/components/ui/carousel/dots-mobile-renderer";
 import { SlideMobileRenderer } from "@/components/ui/carousel/slide-mobile-renderer";
@@ -23,7 +24,11 @@ import { SectionTitle } from "@/components/ui/section-title";
 import { StoreHighlight } from "@/components/ui/store-highlight";
 import { StoreHighlights } from "@/components/ui/store-highlights";
 import { SummarizedProductCard } from "@/components/ui/summarized-product-card";
-import { storeHighlightCarouselInterval } from "@/constants/constants";
+import {
+  storeHighlightCarouselInterval,
+  storeHighlightSlideHeight,
+  storeHighlightSlideWidth,
+} from "@/constants/constants";
 import discountBanner from "@/public/images/discount-banner.png";
 import firstOfferBanner from "@/public/images/first-offer-banner.png";
 import freshFruitCategory from "@/public/images/fresh-fruit.png";
@@ -42,6 +47,7 @@ import {
 import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import Link from "next/link";
+import { CarouselProviderProps } from "pure-react-carousel";
 import React from "react";
 
 export default function Home() {
@@ -121,6 +127,21 @@ export default function Home() {
       className="h-8 w-full text-gray-200 hover:text-primary"
     />,
   ];
+  const carouselProviderProps: Omit<CarouselProviderProps, "children"> = {
+    naturalSlideHeight: storeHighlightSlideHeight,
+    naturalSlideWidth: storeHighlightSlideWidth,
+    totalSlides: storeHighlights.length,
+    interval: storeHighlightCarouselInterval,
+    isPlaying: true,
+    infinite: true,
+    className: "w-full h-20",
+  };
+  const carouselMobileRendererProps = {
+    carouselSliderProps: {
+      className: "h-20",
+      classNameTray: "h-20",
+    },
+  };
 
   return (
     <div className="flex flex-1 flex-col">
@@ -198,45 +219,36 @@ export default function Home() {
       </div>
       <div className="flex flex-1 justify-center px-6 md:px-0">
         <StoreHighlights className="relative flex flex-1 flex-col md:flex-row rounded-lg p-6 md:p-10 shadow-[0px_8px_40px_0px_rgba(0,38,3,0.08)] justify-center items-center max-w-7xl">
-          <CarouselMobileRenderer
-            carouselProviderProps={{
-              naturalSlideHeight: 300,
-              naturalSlideWidth: 300,
-              totalSlides: storeHighlights.length,
-              interval: storeHighlightCarouselInterval,
-              isPlaying: true,
-              infinite: true,
-              className: "w-full h-28 md:h-auto",
-            }}
-            carouselSliderProps={{
-              className: "h-28 md:h-auto",
-              classNameTray: "h-28 md:h-auto",
-            }}
-          >
-            {storeHighlights.map(({ description, icon, title }, index) => (
-              <SlideMobileRenderer
-                key={index}
-                index={index}
-                className="!pb-16 md:pb-0"
-                innerClassName="!h-16 md:h-auto"
-              >
-                <StoreHighlight className="flex flex-1 flex-row gap-x-4 w-full justify-center">
-                  {icon}
-                  <div className="flex flex-1 flex-col gap-y-2">
-                    <h3 className="text-body-medium font-semibold text-gray-900">
-                      {title}
-                    </h3>
-                    <p className="text-body-small font-normal text-gray-400">
-                      {description}
-                    </p>
-                  </div>
-                </StoreHighlight>
-              </SlideMobileRenderer>
-            ))}
+          <CarouselProvider {...carouselProviderProps}>
+            <CarouselMobileRenderer {...carouselMobileRendererProps}>
+              {storeHighlights.map(({ description, icon, title }, index) => (
+                <SlideMobileRenderer
+                  key={index}
+                  index={index}
+                  className="!pb-16"
+                  innerClassName="!h-16"
+                >
+                  <StoreHighlight className="flex flex-1 flex-row gap-x-4 w-full justify-center">
+                    {icon}
+                    <div className="flex flex-1 flex-col gap-y-2">
+                      <h3 className="text-body-medium font-semibold text-gray-900">
+                        {title}
+                      </h3>
+                      <p className="text-body-small font-normal text-gray-400">
+                        {description}
+                      </p>
+                    </div>
+                  </StoreHighlight>
+                </SlideMobileRenderer>
+              ))}
+            </CarouselMobileRenderer>
             <DotsMobileRenderer>
-              <DefaultDotGroup disableActiveDots />
+              <DefaultDotGroup
+                disableActiveDots
+                className="flex flex-1 flex-row gap-x-1 w-full justify-center items-center"
+              />
             </DotsMobileRenderer>
-          </CarouselMobileRenderer>
+          </CarouselProvider>
         </StoreHighlights>
       </div>
       <div className="flex flex-1 flex-col gap-y-[60px] mt-[60px] items-center">

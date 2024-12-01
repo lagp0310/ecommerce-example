@@ -124,14 +124,15 @@ export function SummarizedProductCard({
   return (
     <React.Fragment>
       {shouldUseNextLink ? (
-        <Link
+        // FIXME: This should be a Next Link but it's throwing errors.
+        <a
           href={`/products/${id}`}
           className={cn("col-span-1", {
             "col-span-2 row-span-2": isFirstOnList,
           })}
         >
           {productNode}
-        </Link>
+        </a>
       ) : (
         productNode
       )}

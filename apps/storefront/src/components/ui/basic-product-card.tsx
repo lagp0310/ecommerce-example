@@ -119,9 +119,10 @@ export function BasicProductCard({
   return (
     <React.Fragment>
       {shouldUseNextLink ? (
-        <Link href={`/products/${id}`} className="col-span-1">
+        // FIXME: This should be a Next Link but it's throwing errors.
+        <a href={`/products/${id}`} className="col-span-1">
           {productNode}
-        </Link>
+        </a>
       ) : (
         productNode
       )}

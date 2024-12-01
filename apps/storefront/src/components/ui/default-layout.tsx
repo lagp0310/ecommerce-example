@@ -228,7 +228,7 @@ export function DefaultLayout({ children }: Props) {
                 </div>
               ))}
             </div>
-            <hr className="col-span-full -ml-8 -mr-8 md:ml-0 md:mr-0" />
+            <hr className="col-span-full -mx-6 md:mx-0" />
             <div className="flex flex-1 flex-row items-center col-span-full py-6">
               <span className="text-body-small font-normal text-gray-500">
                 Ecobazar © 2024. All Rights Reserved

@@ -433,7 +433,7 @@ export default function Home() {
             </CarouselProvider>
           </SectionContent>
         </Section>
-        <Section className="flex flex-1 flex-col gap-y-8 px-6 md:px-0">
+        <Section className="flex flex-1 flex-col gap-y-8 px-6 md:px-0 mt-[60px] md:mt-0">
           <SectionContent className="max-w-7xl w-full flex flex-1 flex-col md:flex-row gap-6">
             <Banner className="relative flex flex-1 flex-col gap-y-4 items-center">
               <Image src={firstOfferBanner} alt="Offer Banner" />
@@ -569,17 +569,28 @@ export default function Home() {
           </div>
         </div>
         <Section className="max-w-7xl px-6 md:px-0">
-          <Banner className="relative flex flex-1 flex-col gap-y-4 items-end">
-            <Image src={discountBanner} alt="Offer Banner" />
-            <div className="absolute right-12 flex flex-col gap-y-4 h-full items-start justify-center">
+          <Banner className="relative flex flex-1 flex-col gap-y-4 items-end rounded-[10px]">
+            <div className="bg-gradient-to-r from-black/60 to-black/0 h-[250px] w-full absolute top-0 rounded-[10px]"></div>
+            <Image
+              src={discountBanner}
+              alt="Offer Banner"
+              placeholder="blur"
+              quality={100}
+              sizes="100vw"
+              className="h-[250px] w-full rounded-[10px]"
+              style={{
+                objectFit: "cover",
+              }}
+            />
+            <div className="absolute left-6 md:right-12 flex flex-col gap-y-2 md:gap-y-4 h-full items-start justify-center">
               <span className="text-body-medium font-normal leading-[100%] text-white uppercase">
                 Summer Sale
               </span>
-              <h3 className="text-heading-1 font-semibold text-warning">
+              <h3 className="text-body-xxl md:text-heading-1 font-semibold text-warning">
                 37%{" "}
                 <span className="font-normal uppercase text-white">Off</span>
               </h3>
-              <p className="text-body-medium font-normal text-white">
+              <p className="text-body-small md:text-body-medium font-normal text-white">
                 Free Shipping and 30 days money-back guarantee.
               </p>
               <Link

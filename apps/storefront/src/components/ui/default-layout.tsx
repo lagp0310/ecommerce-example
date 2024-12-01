@@ -73,7 +73,7 @@ export function DefaultLayout({ children }: Props) {
         </div>
       </TopBar>
       <nav className="flex flex-1 flex-row justify-center items-center bg-white shadow-sm px-6">
-        <Navbar className="flex flex-1 flex-row items-center justify-center py-6 px-6 md:px-0 max-w-7xl gap-x-2 lg:gap-x-0">
+        <Navbar className="flex flex-1 flex-row items-center justify-center py-6 max-w-7xl gap-x-2 lg:gap-x-0">
           <div className="hidden lg:flex flex-1 flex-row items-center gap-x-10">
             <NavbarLinkDropdown className="flex flex-row gap-x-1 items-center text-body-small font-medium text-gray-500 hover:text-gray-900 cursor-pointer">
               Home <ChevronDownIcon className="h-4 w-4" />

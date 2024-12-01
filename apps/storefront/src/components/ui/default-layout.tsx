@@ -56,7 +56,7 @@ export function DefaultLayout({ children }: Props) {
 
   return (
     <div className="flex flex-1 flex-col">
-      <TopBar className="hidden md:flex flex-1 items-center justify-center py-3 bg-green-gray-50">
+      <TopBar className="hidden md:flex flex-1 items-center justify-center py-3 bg-green-gray-50 px-6">
         <div className="flex flex-1 flex-row max-w-7xl items-center justify-center">
           <span className="flex flex-1 flex-row gap-x-4 text-green-gray-700 items-center text-body-tiny font-normal">
             <MapPinIcon className="h-4 w-4 text-green-gray-700" />
@@ -72,9 +72,9 @@ export function DefaultLayout({ children }: Props) {
           </div>
         </div>
       </TopBar>
-      <nav className="flex flex-1 flex-row justify-center items-center bg-white shadow-sm">
+      <nav className="flex flex-1 flex-row justify-center items-center bg-white shadow-sm px-6">
         <Navbar className="flex flex-1 flex-row items-center justify-center py-6 px-6 md:px-0 max-w-7xl">
-          <div className="hidden md:flex flex-1 flex-row items-center gap-x-10">
+          <div className="hidden lg:flex flex-1 flex-row items-center gap-x-10">
             <NavbarLinkDropdown className="flex flex-row gap-x-1 items-center text-body-small font-medium text-gray-500 hover:text-gray-900 cursor-pointer">
               Home <ChevronDownIcon className="h-4 w-4" />
             </NavbarLinkDropdown>
@@ -83,7 +83,7 @@ export function DefaultLayout({ children }: Props) {
             </NavbarLinkDropdown>
             <NavbarLink
               href="/about-us"
-              className="flex flex-row gap-x-1 items-center text-body-small font-medium text-gray-500 hover:text-gray-900 cursor-pointer"
+              className="flex flex-row gap-x-1 items-center text-body-small font-medium text-gray-500 hover:text-gray-900 cursor-pointer truncate line-clamp-1"
             >
               About Us
             </NavbarLink>
@@ -92,9 +92,9 @@ export function DefaultLayout({ children }: Props) {
             href="/"
             className="flex flex-row gap-x-4 justify-center items-center"
           >
-            <Bars3Icon className="flex md:hidden h-6 w-6 text-gray-900" />
+            <Bars3Icon className="flex lg:hidden h-6 w-6 text-gray-900" />
             <Logo className="h-6 w-6 md:h-8 md:w-8 text-primary" />
-            <h1 className="text-body-xxl font-medium md:text-heading-5 leading-[38px] tracking-[-3%] text-green-900">
+            <h1 className="text-body-xxl font-medium lg:text-heading-5 leading-[38px] tracking-[-3%] text-green-900">
               Ecobazar
             </h1>
           </NavbarLink>
@@ -102,10 +102,10 @@ export function DefaultLayout({ children }: Props) {
             <div className="flex flex-1 flex-row gap-x-4 justify-end">
               <NavbarLink
                 href="tel:2195550114"
-                className="text-gray-900 text-body-small font-medium hidden md:flex flex-row md:gap-x-2 items-center mr-4"
+                className="text-gray-900 text-body-small font-medium hidden md:flex flex-row md:gap-x-2 items-center lg:mr-4"
               >
                 <PhoneIcon className="h-6 w-6" />
-                <span className="hidden md:flex">(219) 555-0114</span>
+                <span className="hidden lg:flex">(219) 555-0114</span>
               </NavbarLink>
               <Button>
                 <MagnifyingGlassIcon className="h-6 w-6 text-gray-900" />
@@ -126,8 +126,8 @@ export function DefaultLayout({ children }: Props) {
       <main>{children}</main>
       <footer className="flex flex-1 flex-col justify-center bg-gray-900">
         <NewsletterSubscribe className="bg-[#F7F7F7] flex flex-1 flex-row gap-x-10 items-center justify-center py-10">
-          <div className="flex flex-1 flex-col gap-y-4 md:gap-y-0 md:flex-row items-center justify-center max-w-7xl px-6 md:px-0">
-            <div className="flex flex-1 flex-col gap-y-2 basis-full md:basis-1/2 md:pr-48">
+          <div className="flex flex-1 flex-col gap-y-4 lg:gap-y-0 lg:flex-row items-center justify-center max-w-7xl px-6 xl:px-0">
+            <div className="flex flex-1 flex-col gap-y-2 basis-full md:basis-1/2 lg:pr-48 md:max-w-screen-sm">
               <span className="text-body-xl md:text-body-xxl font-semibold text-gray-900 text-center md:text-left">
                 Subscribe to our Newsletter
               </span>
@@ -136,8 +136,8 @@ export function DefaultLayout({ children }: Props) {
                 tellus. Phasellus imperdiet elit eu magna.
               </span>
             </div>
-            <div className="flex flex-1 flex-col gap-y-4 md:gap-y-0 md:flex-row items-center justify-center md:justify-end basis-full md:basis-1/2 w-full">
-              <div className="flex flex-1 w-full">
+            <div className="flex flex-1 flex-col gap-y-4 lg:gap-y-0 lg:flex-row items-center justify-center md:justify-end basis-full md:basis-1/2 w-full">
+              <div className="flex flex-1 w-full md:max-w-screen-sm">
                 <Input
                   placeholder="Your email address"
                   type="email"
@@ -170,9 +170,9 @@ export function DefaultLayout({ children }: Props) {
             </div>
           </div>
         </NewsletterSubscribe>
-        <FooterContent className="flex flex-1 flex-row justify-center items-center px-6 md:px-0">
-          <div className="grid grid-cols-1 md:grid-cols-5 md:gap-x-56 max-w-7xl">
-            <div className="col-span-1 md:col-span-2 flex flex-1 flex-col gap-y-2 py-8 md:py-[60px]">
+        <FooterContent className="flex flex-1 flex-row justify-center items-center px-6 xl:px-0">
+          <div className="grid grid-cols-1 lg:grid-cols-5 lg:gap-x-56 md:max-w-screen-sm lg:max-w-7xl">
+            <div className="col-span-1 md:col-span-2 flex flex-1 flex-col gap-y-2 py-8 md:pt-[60px] lg:pb-[60px]">
               <NavbarLink
                 href="/"
                 className="flex flex-row gap-x-4 items-center"
@@ -189,7 +189,7 @@ export function DefaultLayout({ children }: Props) {
               <div className="flex flex-1 flex-col gap-y-4 md:gap-y-0 md:flex-row gap-x-2">
                 <Link
                   href="tel:2195550114"
-                  className="text-body-small font-normal text-white max-w-fit"
+                  className="text-body-small font-normal text-white max-w-fit whitespace-nowrap"
                 >
                   (219) 555-0114
                   <hr className="bg-primary mt-2 border border-primary" />
@@ -206,7 +206,7 @@ export function DefaultLayout({ children }: Props) {
                 </Link>
               </div>
             </div>
-            <div className="grid col-span-1 grid-cols-1 md:col-span-3 md:grid-cols-3 md:py-[60px] gap-x-4 gap-y-8 md:gap-y-0 pb-8 md:pb-0">
+            <div className="grid col-span-1 grid-cols-1 md:col-span-3 md:grid-cols-3 lg:py-[60px] gap-x-4 gap-y-8 md:gap-y-0 pb-8 lg:pb-0">
               {footerLinks.map(({ groupName, links }, index) => (
                 <div
                   key={index}

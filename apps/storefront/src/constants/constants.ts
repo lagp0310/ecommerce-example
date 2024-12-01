@@ -1,6 +1,10 @@
 export const defaultAvatarImageWidth = 200;
 export const defaultAvatarImageHeight = 200;
 
-export const storeHighlightSlideWidth = 300;
-export const storeHighlightSlideHeight = 80;
-export const storeHighlightCarouselInterval = 5000;
+export const defaultVisibleSlides = 1;
+export const defaultSlideWidth = 300;
+export const defaultSlideHeight = 80;
+export const defaultCarouselInterval = 5000;
+export const testimonialsCarouselInterval = 10000;
+
+export const isMobileMediaQuery = "(max-width: 640px)";

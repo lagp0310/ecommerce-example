@@ -1,20 +1,47 @@
 "use client";
 
 import React from "react";
-import {
-  type CarouselProviderProps as ProviderProps,
-  CarouselProvider as Provider,
-} from "pure-react-carousel";
+import { CarouselProvider as Provider } from "pure-react-carousel";
 import { useIsMobile } from "@/hooks/useIsMobile";
+import { CarouselProviderCustomProps } from "@/types/types";
+import {
+  defaultVisibleSlides,
+  isMobileMediaQuery,
+} from "@/constants/constants";
+import { useVisibleSlides } from "@/hooks/useVisibleSlides";
 
-type Props = React.PropsWithChildren<ProviderProps>;
+type Props = React.PropsWithChildren<CarouselProviderCustomProps>;
 
-export function CarouselProvider({ children, ...props }: Props) {
-  const isMobile = useIsMobile("(max-width: 640px)");
+export function CarouselProvider({
+  children,
+  renderInDesktop = false,
+  visibleSlides = defaultVisibleSlides,
+  visibleSlidesSm,
+  visibleSlidesMd,
+  visibleSlidesLg,
+  visibleSlidesXl,
+  ...props
+}: Props) {
+  const isMobile = useIsMobile(isMobileMediaQuery);
+  const currentVisibleSlides = useVisibleSlides({
+    visibleSlides,
+    mediaQuerySlides: [
+      visibleSlidesSm,
+      visibleSlidesMd,
+      visibleSlidesLg,
+      visibleSlidesXl,
+    ],
+  });
 
   return (
     <React.Fragment>
-      {isMobile ? <Provider {...props}>{children}</Provider> : children}
+      {isMobile || renderInDesktop ? (
+        <Provider {...props} visibleSlides={currentVisibleSlides}>
+          {children}
+        </Provider>
+      ) : (
+        children
+      )}
     </React.Fragment>
   );
 }

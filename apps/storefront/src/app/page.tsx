@@ -1,11 +1,11 @@
 import { Banner } from "@/components/ui/banner";
 import { BasicProductCard } from "@/components/ui/basic-product-card";
 import { Button } from "@/components/ui/button";
-import { CarouselMobileRenderer } from "@/components/ui/carousel/carousel-mobile-renderer";
+import { CarouselRenderer } from "@/components/ui/carousel/carousel-renderer";
 import { CarouselProvider } from "@/components/ui/carousel/carousel-provider";
 import { DefaultDotGroup } from "@/components/ui/carousel/default-dot-group";
-import { DotsMobileRenderer } from "@/components/ui/carousel/dots-mobile-renderer";
-import { SlideMobileRenderer } from "@/components/ui/carousel/slide-mobile-renderer";
+import { DotsRenderer } from "@/components/ui/carousel/dots-renderer";
+import { SlideRenderer } from "@/components/ui/carousel/slide-renderer";
 import { CategoryCard } from "@/components/ui/category-card";
 import { HomepageCustomerTestimonial } from "@/components/ui/homepage-customer-testimonial";
 import { BookOffBrandIcon } from "@/components/ui/icons/book-off-brand";
@@ -25,9 +25,9 @@ import { StoreHighlight } from "@/components/ui/store-highlight";
 import { StoreHighlights } from "@/components/ui/store-highlights";
 import { SummarizedProductCard } from "@/components/ui/summarized-product-card";
 import {
-  storeHighlightCarouselInterval,
-  storeHighlightSlideHeight,
-  storeHighlightSlideWidth,
+  defaultCarouselInterval,
+  defaultSlideHeight,
+  defaultSlideWidth,
 } from "@/constants/constants";
 import discountBanner from "@/public/images/discount-banner.png";
 import firstOfferBanner from "@/public/images/first-offer-banner.png";
@@ -39,6 +39,8 @@ import headerThirdBanner from "@/public/images/header-third-banner.png";
 import secondOfferBanner from "@/public/images/second-offer-banner.png";
 import thirdOfferBanner from "@/public/images/third-offer-banner.png";
 import {
+  CarouselProviderCustomProps,
+  CarouselRendererProps,
   Category,
   CustomerTestimonial,
   Product,
@@ -47,7 +49,6 @@ import {
 import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import Link from "next/link";
-import { CarouselProviderProps } from "pure-react-carousel";
 import React from "react";
 
 export default function Home() {
@@ -127,19 +128,109 @@ export default function Home() {
       className="h-8 w-full text-gray-200 hover:text-primary"
     />,
   ];
-  const carouselProviderProps: Omit<CarouselProviderProps, "children"> = {
-    naturalSlideHeight: storeHighlightSlideHeight,
-    naturalSlideWidth: storeHighlightSlideWidth,
+  const highlightCarouselProviderProps: CarouselProviderCustomProps = {
+    naturalSlideHeight: defaultSlideHeight,
+    naturalSlideWidth: defaultSlideWidth,
     totalSlides: storeHighlights.length,
-    interval: storeHighlightCarouselInterval,
+    interval: defaultCarouselInterval,
     isPlaying: true,
     infinite: true,
     className: "w-full h-20",
   };
-  const carouselMobileRendererProps = {
+  const highlightCarouselRendererProps: CarouselRendererProps = {
     carouselSliderProps: {
       className: "h-20",
       classNameTray: "h-20",
+    },
+  };
+  const categoriesCarouselProviderProps: CarouselProviderCustomProps = {
+    naturalSlideHeight: defaultSlideHeight,
+    naturalSlideWidth: defaultSlideWidth,
+    totalSlides: 12,
+    interval: defaultCarouselInterval,
+    isPlaying: true,
+    infinite: true,
+    visibleSlides: 2,
+    className: "w-full h-56",
+  };
+  const categoriesCarouselRendererProps: CarouselRendererProps = {
+    carouselSliderProps: {
+      className: "h-56",
+      classNameTray: "h-56",
+    },
+  };
+  const popularProductsCarouselProviderProps: CarouselProviderCustomProps = {
+    naturalSlideHeight: defaultSlideHeight,
+    naturalSlideWidth: defaultSlideWidth,
+    totalSlides: 10,
+    interval: defaultCarouselInterval,
+    isPlaying: true,
+    infinite: true,
+    visibleSlides: 2,
+    className: "w-full h-64",
+  };
+  const popularProductsCarouselRendererProps: CarouselRendererProps = {
+    carouselSliderProps: {
+      className: "h-64",
+      classNameTray: "h-64",
+    },
+  };
+  const hotDealsCarouselProviderProps: CarouselProviderCustomProps = {
+    naturalSlideHeight: defaultSlideHeight,
+    naturalSlideWidth: defaultSlideWidth,
+    totalSlides: 12,
+    interval: defaultCarouselInterval,
+    isPlaying: true,
+    infinite: true,
+    visibleSlides: 2,
+    className: "w-full h-64",
+  };
+  const hotDealsCarouselRendererProps: CarouselRendererProps = {
+    carouselSliderProps: {
+      className: "h-64",
+      classNameTray: "h-64",
+    },
+  };
+  const featuredProductsCarouselProviderProps: CarouselProviderCustomProps = {
+    naturalSlideHeight: defaultSlideHeight,
+    naturalSlideWidth: defaultSlideWidth,
+    totalSlides: 5,
+    interval: defaultCarouselInterval,
+    isPlaying: true,
+    infinite: true,
+    visibleSlides: 2,
+    className: "w-full h-64",
+  };
+  const featuredProductsCarouselRendererProps: CarouselRendererProps = {
+    carouselSliderProps: {
+      className: "h-64",
+      classNameTray: "h-64",
+    },
+  };
+  const testimonialsCarouselProviderProps: CarouselProviderCustomProps = {
+    naturalSlideHeight: defaultSlideHeight,
+    naturalSlideWidth: defaultSlideWidth,
+    totalSlides: 6,
+    interval: defaultCarouselInterval,
+    isPlaying: true,
+    infinite: true,
+    visibleSlidesSm: { mediaQuery: "(max-width: 640px)", visibleSlides: 1 },
+    visibleSlidesMd: {
+      mediaQuery: "(min-width: 641px) and (max-width: 768px)",
+      visibleSlides: 2,
+    },
+    visibleSlidesLg: {
+      mediaQuery: "(min-width: 769px)",
+      visibleSlides: 3,
+    },
+    className: "w-full h-64",
+    renderInDesktop: true,
+  };
+  const testimonialsCarouselRendererProps: CarouselRendererProps = {
+    renderInDesktop: true,
+    carouselSliderProps: {
+      className: "h-64",
+      classNameTray: "h-64",
     },
   };
 
@@ -217,12 +308,12 @@ export default function Home() {
           </Banner>
         </div>
       </div>
-      <div className="flex flex-1 justify-center px-6 md:px-0">
+      <div className="flex flex-1 md:justify-center px-6 md:px-0">
         <StoreHighlights className="relative flex flex-1 flex-col md:flex-row rounded-lg p-6 md:p-10 shadow-[0px_8px_40px_0px_rgba(0,38,3,0.08)] justify-center items-center max-w-7xl">
-          <CarouselProvider {...carouselProviderProps}>
-            <CarouselMobileRenderer {...carouselMobileRendererProps}>
+          <CarouselProvider {...highlightCarouselProviderProps}>
+            <CarouselRenderer {...highlightCarouselRendererProps}>
               {storeHighlights.map(({ description, icon, title }, index) => (
-                <SlideMobileRenderer
+                <SlideRenderer
                   key={index}
                   index={index}
                   className="!pb-16"
@@ -239,19 +330,19 @@ export default function Home() {
                       </p>
                     </div>
                   </StoreHighlight>
-                </SlideMobileRenderer>
+                </SlideRenderer>
               ))}
-            </CarouselMobileRenderer>
-            <DotsMobileRenderer>
+            </CarouselRenderer>
+            <DotsRenderer>
               <DefaultDotGroup
                 disableActiveDots
                 className="flex flex-1 flex-row gap-x-1 w-full justify-center items-center"
               />
-            </DotsMobileRenderer>
+            </DotsRenderer>
           </CarouselProvider>
         </StoreHighlights>
       </div>
-      <div className="flex flex-1 flex-col gap-y-[60px] mt-[60px] items-center">
+      <div className="flex flex-1 flex-col gap-y-[60px] mt-[60px] md:items-center">
         <Section className="flex flex-1 flex-col gap-y-8 px-6 md:px-0">
           <SectionTitle className="max-w-7xl w-full">
             <div className="flex flex-1 flex-row">
@@ -269,17 +360,32 @@ export default function Home() {
               </div>
             </div>
           </SectionTitle>
-          <SectionContent className="grid grid-cols-2 gap-4 md:grid-cols-6 md:gap-6 max-w-7xl w-full">
-            {Array.from({ length: 12 }).map((_value, index) => (
-              <Link key={index} href={category.url}>
-                <CategoryCard className="flex flex-1 flex-col items-center justify-center gap-y-4 bg-white border border-gray-100 rounded-[5px] pt-4 pb-6 hover:border-soft-primary/45 hover:shadow-[0px_0px_12px_0px_rgba(132,209,135,0.32)] hover:shadow-soft-primary/60">
-                  {category?.image}
-                  <span className="text-body-large font-medium text-gray-900 text-center whitespace-break-spaces">
-                    {category.title}
-                  </span>
-                </CategoryCard>
-              </Link>
-            ))}
+          <SectionContent className="md:grid md:grid-cols-6 md:gap-6 max-w-7xl w-full">
+            <CarouselProvider {...categoriesCarouselProviderProps}>
+              <CarouselRenderer {...categoriesCarouselRendererProps}>
+                {Array.from({ length: 12 }).map((_value, index) => (
+                  <SlideRenderer
+                    key={index}
+                    index={index}
+                    className="!pb-56"
+                    innerClassName="!h-56 px-1 mx-auto"
+                  >
+                    <CategoryCard className="flex flex-1 flex-col items-center justify-center gap-y-1.5 md:gap-y-4 bg-white border border-gray-100 rounded-[5px] pt-4 pb-6 hover:border-soft-primary/45 hover:shadow-[0px_0px_12px_0px_rgba(132,209,135,0.32)] hover:shadow-soft-primary/60">
+                      {category?.image}
+                      <span className="text-body-small md:text-body-large font-medium text-gray-900 text-center truncate whitespace-break-spaces">
+                        {category.title}
+                      </span>
+                    </CategoryCard>
+                  </SlideRenderer>
+                ))}
+              </CarouselRenderer>
+              <DotsRenderer>
+                <DefaultDotGroup
+                  disableActiveDots
+                  className="flex flex-1 flex-row gap-x-1 w-full justify-center items-center"
+                />
+              </DotsRenderer>
+            </CarouselProvider>
           </SectionContent>
         </Section>
         <Section className="flex flex-1 flex-col gap-y-8 px-6 md:px-0">
@@ -299,14 +405,30 @@ export default function Home() {
               </div>
             </div>
           </SectionTitle>
-          <SectionContent className="max-w-7xl w-full grid grid-cols-2 gap-4 md:grid-cols-5 md:gap-6">
-            {Array.from({ length: 10 }).map((_value, index) => (
-              <BasicProductCard
-                key={index}
-                product={popularProduct}
-                isFirstOnList={index === 0}
-              />
-            ))}
+          <SectionContent className="max-w-7xl w-full grid md:grid-cols-5 md:gap-6">
+            <CarouselProvider {...popularProductsCarouselProviderProps}>
+              <CarouselRenderer {...popularProductsCarouselRendererProps}>
+                {Array.from({ length: 10 }).map((_value, index) => (
+                  <SlideRenderer
+                    key={index}
+                    index={index}
+                    className="!pb-64"
+                    innerClassName="!h-64 px-1 mx-auto"
+                  >
+                    <BasicProductCard
+                      product={popularProduct}
+                      isFirstOnList={index === 0}
+                    />
+                  </SlideRenderer>
+                ))}
+              </CarouselRenderer>
+              <DotsRenderer>
+                <DefaultDotGroup
+                  disableActiveDots
+                  className="flex flex-1 flex-row gap-x-1 w-full justify-center items-center mt-7"
+                />
+              </DotsRenderer>
+            </CarouselProvider>
           </SectionContent>
         </Section>
         <Section className="flex flex-1 flex-col gap-y-8 px-6 md:px-0">
@@ -317,7 +439,7 @@ export default function Home() {
                 <span className="text-body-small font-normal leading-[100%] text-white uppercase">
                   Best Deals
                 </span>
-                <h3 className="text-heading-3 font-semibold text-white">
+                <h3 className="text-heading-4 md:text-heading-3 font-semibold text-white text-center">
                   Sale of the Month
                 </h3>
                 <div className="flex flex-1 flex-row gap-x-2">
@@ -341,7 +463,7 @@ export default function Home() {
                 <span className="text-body-small font-normal leading-[100%] text-white uppercase">
                   85% Fat Free
                 </span>
-                <h3 className="text-heading-3 font-semibold text-white">
+                <h3 className="text-heading-4 md:text-heading-3 font-semibold text-white text-center">
                   Low-Fat Meat
                 </h3>
                 <span className="text-white">
@@ -361,7 +483,7 @@ export default function Home() {
                 <span className="text-body-small font-normal leading-[100%] text-gray-900 uppercase">
                   Summer Sale
                 </span>
-                <h3 className="text-heading-3 font-semibold text-gray-900">
+                <h3 className="text-heading-4 md:text-heading-3 font-semibold text-gray-900 text-center">
                   100% Fresh Fruit
                 </h3>
                 <span className="text-body-xl font-medium text-gray-900">
@@ -399,22 +521,47 @@ export default function Home() {
                   </div>
                 </div>
               </SectionTitle>
-              <SectionContent className="max-w-7xl w-full grid grid-cols-2 gap-4 md:grid-cols-5 md:gap-6">
-                {Array.from({ length: 12 }).map((_value, index) => (
-                  <React.Fragment key={index}>
-                    {index === 0 ? (
-                      <SummarizedProductCard
-                        product={popularProduct}
-                        isFirstOnList={index === 0}
-                      />
-                    ) : (
-                      <BasicProductCard
-                        product={popularProduct}
-                        isFirstOnList={index === 0}
-                      />
-                    )}
-                  </React.Fragment>
-                ))}
+              <SectionContent className="max-w-7xl w-full grid md:grid-cols-5 md:gap-6">
+                <CarouselProvider {...hotDealsCarouselProviderProps}>
+                  <CarouselRenderer {...hotDealsCarouselRendererProps}>
+                    {Array.from({ length: 12 }).map((_value, index) => (
+                      <SlideRenderer
+                        key={index}
+                        index={index}
+                        className="!pb-64"
+                        innerClassName="!h-64 px-1 mx-auto"
+                      >
+                        {index === 0 ? (
+                          <React.Fragment>
+                            <div className="hidden md:block col-span-1 row-span-1 md:col-span-2 md:row-span-2">
+                              <SummarizedProductCard
+                                product={popularProduct}
+                                isFirstOnList={index === 0}
+                              />
+                            </div>
+                            <div className="block md:hidden">
+                              <BasicProductCard
+                                product={popularProduct}
+                                isFirstOnList={index === 0}
+                              />
+                            </div>
+                          </React.Fragment>
+                        ) : (
+                          <BasicProductCard
+                            product={popularProduct}
+                            isFirstOnList={index === 0}
+                          />
+                        )}
+                      </SlideRenderer>
+                    ))}
+                  </CarouselRenderer>
+                  <DotsRenderer>
+                    <DefaultDotGroup
+                      disableActiveDots
+                      className="flex flex-1 flex-row gap-x-1 w-full justify-center items-center mt-7"
+                    />
+                  </DotsRenderer>
+                </CarouselProvider>
               </SectionContent>
             </Section>
           </div>
@@ -459,18 +606,34 @@ export default function Home() {
               </div>
             </div>
           </SectionTitle>
-          <SectionContent className="max-w-7xl w-full grid grid-cols-2 gap-4 md:grid-cols-5 md:gap-6">
-            {Array.from({ length: 5 }).map((_value, index) => (
-              <BasicProductCard
-                key={index}
-                product={popularProduct}
-                isFirstOnList={index === 0}
-              />
-            ))}
+          <SectionContent className="max-w-7xl w-full grid md:grid-cols-5 md:gap-6">
+            <CarouselProvider {...featuredProductsCarouselProviderProps}>
+              <CarouselRenderer {...featuredProductsCarouselRendererProps}>
+                {Array.from({ length: 5 }).map((_value, index) => (
+                  <SlideRenderer
+                    key={index}
+                    index={index}
+                    className="!pb-64"
+                    innerClassName="!h-64 px-1 mx-auto"
+                  >
+                    <BasicProductCard
+                      product={popularProduct}
+                      isFirstOnList={index === 0}
+                    />
+                  </SlideRenderer>
+                ))}
+              </CarouselRenderer>
+              <DotsRenderer>
+                <DefaultDotGroup
+                  disableActiveDots
+                  className="flex flex-1 flex-row gap-x-1 w-full justify-center items-center mt-7"
+                />
+              </DotsRenderer>
+            </CarouselProvider>
           </SectionContent>
         </Section>
         <div className="bg-[#F7F7F7] py-[60px] w-full px-6 md:px-0">
-          <div className="flex flex-1 flex-row justify-center px-6 md:px-0">
+          <div className="flex flex-1 flex-row md:justify-center">
             <Section className="flex flex-1 flex-col gap-y-8 max-w-7xl">
               <SectionTitle className="w-full">
                 <div className="flex flex-1 flex-row">
@@ -488,12 +651,29 @@ export default function Home() {
                 </div>
               </SectionTitle>
               <SectionContent className="w-full flex flex-1 flex-col md:flex-row gap-x-6">
-                {Array.from({ length: 3 }).map((_value, index) => (
-                  <HomepageCustomerTestimonial
-                    key={index}
-                    testimonial={customerTestimonial}
-                  />
-                ))}
+                <CarouselProvider {...testimonialsCarouselProviderProps}>
+                  <CarouselRenderer {...testimonialsCarouselRendererProps}>
+                    {Array.from({ length: 6 }).map((_value, index) => (
+                      <SlideRenderer
+                        key={index}
+                        index={index}
+                        className="!pb-64"
+                        innerClassName="!h-64 px-1 mx-auto"
+                        renderInDesktop
+                      >
+                        <HomepageCustomerTestimonial
+                          testimonial={customerTestimonial}
+                        />
+                      </SlideRenderer>
+                    ))}
+                  </CarouselRenderer>
+                  <DotsRenderer renderInDesktop>
+                    <DefaultDotGroup
+                      disableActiveDots
+                      className="flex flex-1 flex-row gap-x-1 w-full justify-center items-center mt-7"
+                    />
+                  </DotsRenderer>
+                </CarouselProvider>
               </SectionContent>
             </Section>
           </div>

@@ -50,6 +50,8 @@ import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import { ButtonNextRenderer } from "@/components/ui/carousel/button-next-renderer";
+import { ButtonBackRenderer } from "@/components/ui/carousel/button-back-renderer";
 
 export default function Home() {
   const storeHighlights: TStoreHighlight[] = [
@@ -223,7 +225,7 @@ export default function Home() {
       mediaQuery: "(min-width: 769px)",
       visibleSlides: 3,
     },
-    className: "w-full h-64",
+    className: "w-full max-w-7xl",
     renderInDesktop: true,
   };
   const testimonialsCarouselRendererProps: CarouselRendererProps = {
@@ -634,24 +636,24 @@ export default function Home() {
         </Section>
         <div className="bg-[#F7F7F7] py-[60px] w-full px-6 md:px-0">
           <div className="flex flex-1 flex-row md:justify-center">
-            <Section className="flex flex-1 flex-col gap-y-8 max-w-7xl">
-              <SectionTitle className="w-full">
-                <div className="flex flex-1 flex-row">
-                  <h2 className="text-body-xl md:text-heading-5 font-semibold text-gray-900 text-center md:text-left w-full">
-                    Customer Testimonials
-                  </h2>
-                  <div className="flex-1 flex-row justify-end gap-x-3 hidden md:flex">
-                    <Button className="rounded-full h-[45px] w-[45px] border border-gray-100 flex flex-row items-center justify-center group hover:bg-primary hover:border-none">
-                      <ArrowLeftIcon className="h-4 w-4 text-gray-900 group-hover:text-white" />
-                    </Button>
-                    <Button className="rounded-full h-[45px] w-[45px] border border-gray-100 flex flex-row items-center justify-center group hover:bg-primary hover:border-none">
-                      <ArrowRightIcon className="h-4 w-4 text-gray-900 group-hover:text-white" />
-                    </Button>
+            <CarouselProvider {...testimonialsCarouselProviderProps}>
+              <Section className="flex flex-1 flex-col gap-y-8 max-w-7xl">
+                <SectionTitle className="w-full">
+                  <div className="flex flex-1 flex-row">
+                    <h2 className="text-body-xl md:text-heading-5 font-semibold text-gray-900 text-center md:text-left w-full">
+                      Customer Testimonials
+                    </h2>
+                    <div className="flex-1 flex-row justify-end gap-x-3 hidden md:flex">
+                      <ButtonBackRenderer className="rounded-full h-[45px] w-[45px] border border-gray-100 flex flex-row items-center justify-center group hover:bg-primary hover:border-none">
+                        <ArrowLeftIcon className="h-4 w-4 text-gray-900 group-hover:text-white" />
+                      </ButtonBackRenderer>
+                      <ButtonNextRenderer className="rounded-full h-[45px] w-[45px] border border-gray-100 flex flex-row items-center justify-center group hover:bg-primary hover:border-none">
+                        <ArrowRightIcon className="h-4 w-4 text-gray-900 group-hover:text-white" />
+                      </ButtonNextRenderer>
+                    </div>
                   </div>
-                </div>
-              </SectionTitle>
-              <SectionContent className="w-full flex flex-1 flex-col md:flex-row gap-x-6">
-                <CarouselProvider {...testimonialsCarouselProviderProps}>
+                </SectionTitle>
+                <SectionContent className="w-full">
                   <CarouselRenderer {...testimonialsCarouselRendererProps}>
                     {Array.from({ length: 6 }).map((_value, index) => (
                       <SlideRenderer
@@ -673,9 +675,9 @@ export default function Home() {
                       className="flex flex-1 flex-row gap-x-1 w-full justify-center items-center mt-7"
                     />
                   </DotsRenderer>
-                </CarouselProvider>
-              </SectionContent>
-            </Section>
+                </SectionContent>
+              </Section>
+            </CarouselProvider>
           </div>
         </div>
         <div className="w-full px-6 md:px-0">

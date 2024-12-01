@@ -612,40 +612,39 @@ export default function Home() {
             </Section>
           </div>
         </div>
-        <Section className="max-w-7xl px-6 md:px-0">
-          <Banner className="relative flex flex-1 flex-col gap-y-4 items-end rounded-[10px]">
-            <div className="bg-gradient-to-r from-black/60 to-black/0 h-[250px] w-full absolute top-0 rounded-[10px]"></div>
-            <Image
-              src={discountBanner}
-              alt="Offer Banner"
-              placeholder="blur"
-              quality={100}
-              sizes="100vw"
-              className="h-[250px] w-full rounded-[10px]"
-              style={{
-                objectFit: "cover",
-              }}
-            />
-            <div className="absolute left-6 md:right-12 flex flex-col gap-y-2 md:gap-y-4 h-full items-start justify-center">
-              <span className="text-body-medium font-normal leading-[100%] text-white uppercase">
-                Summer Sale
-              </span>
-              <h3 className="text-body-xxl md:text-heading-1 font-semibold text-warning">
-                37%{" "}
-                <span className="font-normal uppercase text-white">Off</span>
-              </h3>
-              <p className="text-body-small md:text-body-medium font-normal text-white">
-                Free Shipping and 30 days money-back guarantee.
-              </p>
-              <Link
-                href="/products"
-                className="flex flex-row gap-x-2 items-center text-white rounded-full bg-primary max-w-fit px-5 py-3 text-body-small md:text-body-medium font-semibold leading-[120%]"
-              >
-                Shop now <ArrowRightIcon className="h-4 w-4 text-white" />
-              </Link>
-            </div>
-          </Banner>
-        </Section>
+        <div className="w-full">
+          <Section className="flex flex-1 flex-row justify-center px-6 md:px-0">
+            <Banner className="relative flex flex-1 flex-col gap-y-4 items-end rounded-[10px] max-w-7xl">
+              <div className="bg-gradient-to-r from-black/60 to-black/0 h-[250px] w-full absolute top-0 rounded-[10px] flex md:hidden"></div>
+              <Image
+                src={discountBanner}
+                alt="Offer Banner"
+                placeholder="blur"
+                quality={100}
+                sizes="100vw"
+                className="h-[250px] md:h-auto w-full rounded-[10px] object-cover"
+              />
+              <div className="absolute left-6 md:right-12 flex flex-col gap-y-2 md:gap-y-4 h-full items-start justify-center">
+                <span className="text-body-medium font-normal leading-[100%] text-white uppercase">
+                  Summer Sale
+                </span>
+                <h3 className="text-body-xxl md:text-heading-1 font-semibold text-warning">
+                  37%{" "}
+                  <span className="font-normal uppercase text-white">Off</span>
+                </h3>
+                <p className="text-body-small md:text-body-medium font-normal text-white">
+                  Free Shipping and 30 days money-back guarantee.
+                </p>
+                <Link
+                  href="/products"
+                  className="flex flex-row gap-x-2 items-center text-white rounded-full bg-primary max-w-fit px-5 py-3 text-body-small md:text-body-medium font-semibold leading-[120%]"
+                >
+                  Shop now <ArrowRightIcon className="h-4 w-4 text-white" />
+                </Link>
+              </div>
+            </Banner>
+          </Section>
+        </div>
         <Section className="flex flex-1 flex-col gap-y-8 px-6 md:px-0">
           <SectionTitle className="max-w-7xl w-full">
             <div className="flex flex-1 flex-row">

@@ -142,8 +142,8 @@ export default function Home() {
         className="rounded-[10px] h-auto w-full"
       />
       <div className="absolute top-0 left-0 bg-gradient-to-br from-black/60 to-black/0 h-full w-full rounded-[10px]"></div>
-      <div className="absolute top-0 flex flex-1 flex-col gap-y-7 h-full justify-center px-6 md:px-12">
-        <h2 className="text-body-xl md:text-heading-2 font-semibold text-white">
+      <div className="absolute top-0 flex flex-1 flex-col gap-y-2 md:gap-y-7 h-full justify-center px-6 md:px-12">
+        <h2 className="text-body-xxl md:text-heading-2 font-semibold text-white">
           Fresh and Healthy Organic Food
         </h2>
         <div className="flex flex-col border-l-2 border-primary gap-y-2 pl-2">

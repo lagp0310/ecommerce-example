@@ -130,6 +130,97 @@ export default function Home() {
       className="h-10 w-full text-gray-200 hover:text-primary"
     />,
   ];
+
+  const headerBanners = [
+    <Banner
+      key={0}
+      className="relative md:row-span-2 md:col-span-2 rounded-[10px]"
+    >
+      <Image
+        src={headerBigBanner}
+        alt="Header Banner"
+        className="rounded-[10px] h-auto w-full"
+      />
+      <div className="absolute top-0 left-0 bg-gradient-to-br from-black/60 to-black/0 h-full w-full rounded-[10px]"></div>
+      <div className="absolute top-0 flex flex-1 flex-col gap-y-7 h-full justify-center px-6 md:px-12">
+        <h2 className="text-body-xl md:text-heading-2 font-semibold text-white">
+          Fresh and Healthy Organic Food
+        </h2>
+        <div className="flex flex-col border-l-2 border-primary gap-y-2 pl-2">
+          <span className="text-body-small md:text-body-xl font-medium text-white">
+            Sale up to
+            <span className="bg-warning rounded-[5px] font-semibold px-3 py-1 ml-2 uppercase">
+              30% Off
+            </span>
+          </span>
+          <span className="text-body-tiny md:text-body-small font-normal text-white">
+            Free shipping on all your orders
+          </span>
+        </div>
+        <Button className="flex flex-row gap-x-2 items-center text-primary rounded-full bg-white max-w-fit px-5 py-3">
+          Shop now <ArrowRightIcon className="h-4 w-4 text-primary" />
+        </Button>
+      </div>
+    </Banner>,
+    <Banner key={1} className="relative col-span-1 rounded-[10px]">
+      <div className="h-full absolute top-0 left-0 bg-gradient-to-r from-white/60 via-white/50 to-white/30 w-full rounded-[10px]"></div>
+      <Image
+        src={headerSecondBanner}
+        alt="Second Header Banner"
+        className="rounded-[10px]"
+      />
+      <div className="absolute top-0 left-0 flex flex-1 flex-col gap-y-6 px-8 h-full justify-center">
+        <span className="text-gray-900 font-medium text-body-small leading-[100%] uppercase">
+          Summer Sale
+        </span>
+        <h5 className="text-heading-5 font-semibold text-gray-900 uppercase">
+          75% Off
+        </h5>
+        <span className="text-body-small font-normal text-gray-800">
+          Only Fruits and Vegetables
+        </span>
+        <Button className="flex flex-row gap-x-2 items-center text-white max-w-fit bg-primary group hover:bg-white hover:text-primary rounded-full px-5 py-3">
+          Shop now{" "}
+          <ArrowRightIcon className="h-4 w-4 text-white group-hover:text-primary" />
+        </Button>
+      </div>
+    </Banner>,
+    <Banner key={2} className="relative col-span-1 max-w-fit rounded-[10px]">
+      <Image
+        src={headerThirdBanner}
+        alt="Third Header Banner"
+        className="rounded-[10px]"
+      />
+      <div className="absolute top-0 left-0 bg-green-gray-900/80 h-full w-full rounded-[10px]"></div>
+      <div className="absolute top-0 left-0 flex flex-1 flex-col gap-y-6 md:gap-y-8 items-center px-6 md:px-12 h-full justify-center">
+        <span className="text-white font-medium text-body-small leading-[100%] uppercase text-center">
+          Best Deal
+        </span>
+        <h5 className="text-white text-body-xxl md:text-heading-5 font-semibold text-center">
+          Special Products of the Month
+        </h5>
+        <Button className="flex flex-row gap-x-2 items-center text-primary max-w-fit px-5 py-3">
+          Shop now <ArrowRightIcon className="h-4 w-4 text-primary" />
+        </Button>
+      </div>
+    </Banner>,
+  ];
+  const headerBannerCarouselProviderProps: CarouselProviderCustomProps = {
+    naturalSlideHeight: defaultSlideHeight,
+    naturalSlideWidth: defaultSlideWidth,
+    totalSlides: headerBanners.length,
+    interval: defaultCarouselInterval,
+    isPlaying: true,
+    infinite: true,
+    visibleSlides: 1,
+    className: "w-full h-80",
+  };
+  const headerBannerCarouselRendererProps: CarouselRendererProps = {
+    carouselSliderProps: {
+      className: "h-72",
+      classNameTray: "h-64",
+    },
+  };
   const highlightCarouselProviderProps: CarouselProviderCustomProps = {
     naturalSlideHeight: defaultSlideHeight,
     naturalSlideWidth: defaultSlideWidth,
@@ -137,6 +228,7 @@ export default function Home() {
     interval: defaultCarouselInterval,
     isPlaying: true,
     infinite: true,
+    visibleSlides: 1,
     className: "w-full h-20",
   };
   const highlightCarouselRendererProps: CarouselRendererProps = {
@@ -239,76 +331,27 @@ export default function Home() {
   return (
     <div className="flex flex-1 flex-col">
       <div className="flex flex-1 flex-row justify-center items-center my-6 px-6 md:px-0">
-        <div className="grid grid-cols-1 md:grid-cols-3 md:grid-rows-2 gap-6 max-w-7xl">
-          <Banner className="relative md:row-span-2 md:col-span-2 rounded-[10px]">
-            <Image
-              src={headerBigBanner}
-              alt="Header Banner"
-              className="rounded-[10px] h-auto w-full"
-            />
-            <div className="absolute top-0 left-0 bg-gradient-to-br from-black/60 to-black/0 h-full w-full rounded-[10px]"></div>
-            <div className="absolute top-0 flex flex-1 flex-col gap-y-7 h-full justify-center px-6 md:px-12">
-              <h2 className="text-body-xl md:text-heading-2 font-semibold text-white">
-                Fresh and Healthy Organic Food
-              </h2>
-              <div className="flex flex-col border-l-2 border-primary gap-y-2 pl-2">
-                <span className="text-body-small md:text-body-xl font-medium text-white">
-                  Sale up to
-                  <span className="bg-warning rounded-[5px] font-semibold px-3 py-1 ml-2 uppercase">
-                    30% Off
-                  </span>
-                </span>
-                <span className="text-body-tiny md:text-body-small font-normal text-white">
-                  Free shipping on all your orders
-                </span>
-              </div>
-              <Button className="flex flex-row gap-x-2 items-center text-primary rounded-full bg-white max-w-fit px-5 py-3">
-                Shop now <ArrowRightIcon className="h-4 w-4 text-primary" />
-              </Button>
-            </div>
-          </Banner>
-          <Banner className="relative col-span-1 rounded-[10px]">
-            <div className="h-full absolute top-0 left-0 bg-gradient-to-r from-white/60 via-white/50 to-white/30 w-full rounded-[10px]"></div>
-            <Image
-              src={headerSecondBanner}
-              alt="Second Header Banner"
-              className="rounded-[10px]"
-            />
-            <div className="absolute top-0 left-0 flex flex-1 flex-col gap-y-6 px-8 h-full justify-center">
-              <span className="text-gray-900 font-medium text-body-small leading-[100%] uppercase">
-                Summer Sale
-              </span>
-              <h5 className="text-heading-5 font-semibold text-gray-900 uppercase">
-                75% Off
-              </h5>
-              <span className="text-body-small font-normal text-gray-800">
-                Only Fruits and Vegetables
-              </span>
-              <Button className="flex flex-row gap-x-2 items-center text-white max-w-fit bg-primary group hover:bg-white hover:text-primary rounded-full px-5 py-3">
-                Shop now{" "}
-                <ArrowRightIcon className="h-4 w-4 text-white group-hover:text-primary" />
-              </Button>
-            </div>
-          </Banner>
-          <Banner className="relative col-span-1 max-w-fit rounded-[10px]">
-            <Image
-              src={headerThirdBanner}
-              alt="Third Header Banner"
-              className="rounded-[10px]"
-            />
-            <div className="absolute top-0 left-0 bg-green-gray-900/80 h-full w-full rounded-[10px]"></div>
-            <div className="absolute top-0 left-0 flex flex-1 flex-col gap-y-6 md:gap-y-8 items-center px-6 md:px-12 h-full justify-center">
-              <span className="text-white font-medium text-body-small leading-[100%] uppercase text-center">
-                Best Deal
-              </span>
-              <h5 className="text-white text-body-xxl md:text-heading-5 font-semibold text-center">
-                Special Products of the Month
-              </h5>
-              <Button className="flex flex-row gap-x-2 items-center text-primary max-w-fit px-5 py-3">
-                Shop now <ArrowRightIcon className="h-4 w-4 text-primary" />
-              </Button>
-            </div>
-          </Banner>
+        <div className="grid md:grid-cols-3 md:grid-rows-2 gap-6 max-w-7xl w-full">
+          <CarouselProvider {...headerBannerCarouselProviderProps}>
+            <CarouselRenderer {...headerBannerCarouselRendererProps}>
+              {headerBanners.map((bannerNode, index) => (
+                <SlideRenderer
+                  key={index}
+                  index={index}
+                  className="!pb-64"
+                  innerClassName="!h-64"
+                >
+                  {bannerNode}
+                </SlideRenderer>
+              ))}
+            </CarouselRenderer>
+            <DotsRenderer>
+              <DefaultDotGroup
+                disableActiveDots
+                className="flex flex-1 flex-row gap-x-1 w-full justify-center items-center"
+              />
+            </DotsRenderer>
+          </CarouselProvider>
         </div>
       </div>
       <div className="flex flex-1 md:justify-center px-6 md:px-0">

@@ -157,7 +157,7 @@ export default function Home() {
             Free shipping on all your orders
           </span>
         </div>
-        <Button className="flex flex-row gap-x-2 items-center text-primary rounded-full bg-white max-w-fit px-5 py-3">
+        <Button className="flex flex-row gap-x-2 items-center text-primary rounded-full bg-white max-w-fit px-5 py-3 text-body-small md:text-body-medium font-semibold leading-[120%]">
           Shop now <ArrowRightIcon className="h-4 w-4 text-primary" />
         </Button>
       </div>
@@ -179,7 +179,7 @@ export default function Home() {
         <span className="text-body-small font-normal text-gray-800">
           Only Fruits and Vegetables
         </span>
-        <Button className="flex flex-row gap-x-2 items-center text-white max-w-fit bg-primary group hover:bg-white hover:text-primary rounded-full px-5 py-3">
+        <Button className="flex flex-row gap-x-2 items-center text-white max-w-fit bg-primary group hover:bg-white hover:text-primary rounded-full px-5 py-3 text-body-small md:text-body-medium font-semibold leading-[120%]">
           Shop now{" "}
           <ArrowRightIcon className="h-4 w-4 text-white group-hover:text-primary" />
         </Button>
@@ -199,7 +199,7 @@ export default function Home() {
         <h5 className="text-white text-body-xxl md:text-heading-5 font-semibold text-center">
           Special Products of the Month
         </h5>
-        <Button className="flex flex-row gap-x-2 items-center text-primary max-w-fit px-5 py-3">
+        <Button className="flex flex-row gap-x-2 items-center text-primary max-w-fit px-5 py-3 text-body-small md:text-body-medium font-semibold leading-[120%]">
           Shop now <ArrowRightIcon className="h-4 w-4 text-primary" />
         </Button>
       </div>
@@ -497,7 +497,7 @@ export default function Home() {
                 </div>
                 <Link
                   href="/products"
-                  className="flex flex-row gap-x-2 items-center text-primary rounded-full bg-white max-w-fit px-5 py-3"
+                  className="flex flex-row gap-x-2 items-center text-primary rounded-full bg-white max-w-fit px-5 py-3 text-body-small md:text-body-medium font-semibold leading-[120%]"
                 >
                   Shop now <ArrowRightIcon className="h-4 w-4 text-primary" />
                 </Link>
@@ -517,7 +517,7 @@ export default function Home() {
                 </span>
                 <Link
                   href="/products"
-                  className="flex flex-row gap-x-2 items-center text-primary rounded-full bg-white max-w-fit px-5 py-3"
+                  className="flex flex-row gap-x-2 items-center text-primary rounded-full bg-white max-w-fit px-5 py-3 text-body-small md:text-body-medium font-semibold leading-[120%]"
                 >
                   Shop now <ArrowRightIcon className="h-4 w-4 text-primary" />
                 </Link>
@@ -540,7 +540,7 @@ export default function Home() {
                 </span>
                 <Link
                   href="/products"
-                  className="flex flex-row gap-x-2 items-center text-primary rounded-full bg-white max-w-fit px-5 py-3"
+                  className="flex flex-row gap-x-2 items-center text-primary rounded-full bg-white max-w-fit px-5 py-3 text-body-small md:text-body-medium font-semibold leading-[120%]"
                 >
                   Shop now <ArrowRightIcon className="h-4 w-4 text-primary" />
                 </Link>
@@ -639,7 +639,7 @@ export default function Home() {
               </p>
               <Link
                 href="/products"
-                className="flex flex-row gap-x-2 items-center text-white rounded-full bg-primary max-w-fit px-5 py-3"
+                className="flex flex-row gap-x-2 items-center text-white rounded-full bg-primary max-w-fit px-5 py-3 text-body-small md:text-body-medium font-semibold leading-[120%]"
               >
                 Shop now <ArrowRightIcon className="h-4 w-4 text-white" />
               </Link>

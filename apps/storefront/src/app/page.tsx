@@ -107,27 +107,27 @@ export default function Home() {
   const brandIcons = [
     <StepsBrandIcon
       key={0}
-      className="h-8 w-full text-gray-200 hover:text-primary"
+      className="h-10 w-full text-gray-200 hover:text-primary"
     />,
     <MangoBrandIcon
       key={1}
-      className="h-8 w-full text-gray-200 hover:text-primary"
+      className="h-10 w-full text-gray-200 hover:text-primary"
     />,
     <FoodNetworkBrandIcon
       key={2}
-      className="h-8 w-full text-gray-200 hover:text-primary"
+      className="h-10 w-full text-gray-200 hover:text-primary"
     />,
     <FoodCoUkBrandIcon
       key={3}
-      className="h-8 w-full text-gray-200 hover:text-primary"
+      className="h-10 w-full text-gray-200 hover:text-primary"
     />,
     <BookOffBrandIcon
       key={4}
-      className="h-8 w-full text-gray-200 hover:text-primary"
+      className="h-10 w-full text-gray-200 hover:text-primary"
     />,
     <GSeriesBrandIcon
       key={5}
-      className="h-8 w-full text-gray-200 hover:text-primary"
+      className="h-10 w-full text-gray-200 hover:text-primary"
     />,
   ];
   const highlightCarouselProviderProps: CarouselProviderCustomProps = {
@@ -681,8 +681,8 @@ export default function Home() {
           </div>
         </div>
         <div className="w-full px-6 md:px-0">
-          <div className="flex flex-1 flex-row justify-center">
-            <Section className="flex flex-1 flex-col gap-y-8 pb-[60px] max-w-7xl">
+          <div className="flex flex-1 flex-row md:justify-center">
+            <Section className="flex flex-1 flex-col gap-y-8 pb-[60px] max-w-7xl w-full">
               <SectionTitle className="w-full">
                 <div className="flex flex-1 flex-row">
                   <h2 className="text-body-xl md:text-heading-5 font-semibold text-gray-900 text-center w-full">
@@ -690,10 +690,16 @@ export default function Home() {
                   </h2>
                 </div>
               </SectionTitle>
-              <SectionContent className="flex flex-1 flex-col gap-y-4 flex-wrap md:flex-row justify-between max-w-7xl">
-                {brandIcons.map((brandIcon, index) => (
-                  <div key={index}>{brandIcon}</div>
-                ))}
+              <SectionContent className="max-w-7xl">
+                <div className="w-full overflow-x-hidden">
+                  <div className="motion-safe:animate-infinite-carousel flex flex-1 flex-row w-[3000px]">
+                    {brandIcons.concat(brandIcons).map((brandIcon, index) => (
+                      <div key={index} className="flex flex-1">
+                        {brandIcon}
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </SectionContent>
             </Section>
           </div>

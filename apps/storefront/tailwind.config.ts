@@ -55,6 +55,15 @@ export default {
         "body-small": ["14px", "150%"],
         "body-tiny": ["12px", "130%"],
       },
+      keyframes: {
+        "infinite-slide": {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-1500px)" },
+        },
+      },
+      animation: {
+        "infinite-carousel": "infinite-slide 20s linear infinite",
+      },
     },
   },
   plugins: [],

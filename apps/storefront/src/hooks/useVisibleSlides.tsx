@@ -43,10 +43,10 @@ export function useVisibleSlides({
             ? mediaQuerySlide.visibleSlides
             : null
         )
-        ?.findLast((value) => !!value) ?? defaultVisibleSlides;
+        ?.findLast((value) => !!value) ?? visibleSlides;
 
     setCurrentVisibleSlides(newVisibleSlides);
-  }, [mediaQuerySlides]);
+  }, [mediaQuerySlides, visibleSlides]);
 
   React.useEffect(() => {
     if (
@@ -60,7 +60,10 @@ export function useVisibleSlides({
     window.addEventListener("load", handleViewportResize);
     window.addEventListener("resize", handleViewportResize);
 
-    if (!wasInitiallyCalled.current) {
+    if (
+      !wasInitiallyCalled.current &&
+      (!Array.isArray(mediaQuerySlides) || mediaQuerySlides.length === 0)
+    ) {
       handleViewportResize();
       wasInitiallyCalled.current = true;
     }

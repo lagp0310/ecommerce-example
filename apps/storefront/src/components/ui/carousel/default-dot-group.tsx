@@ -18,7 +18,7 @@ export function DefaultDotGroup({ ...props }: Props) {
               key={index}
               slide={index}
               className={cn(
-                "rounded-full h-2.5 w-2.5 bg-gray-900 first:ml-0 ml-2",
+                "rounded-full h-2.5 w-2.5 bg-gray-100 first:ml-0 ml-2",
                 {
                   "bg-primary": index === currentSlide,
                 }

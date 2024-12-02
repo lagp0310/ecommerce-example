@@ -6,7 +6,7 @@ import { useIsMobile } from "@/hooks/useIsMobile";
 import { CarouselProviderCustomProps } from "@/types/types";
 import {
   defaultVisibleSlides,
-  isMobileMediaQuery,
+  defaultMobileMediaQuery,
 } from "@/constants/constants";
 import { useVisibleSlides } from "@/hooks/useVisibleSlides";
 
@@ -15,6 +15,7 @@ type Props = React.PropsWithChildren<CarouselProviderCustomProps>;
 export function CarouselProvider({
   children,
   renderInDesktop = false,
+  mobileMediaQuery = defaultMobileMediaQuery,
   visibleSlides = defaultVisibleSlides,
   visibleSlidesSm,
   visibleSlidesMd,
@@ -22,7 +23,7 @@ export function CarouselProvider({
   visibleSlidesXl,
   ...props
 }: Props) {
-  const isMobile = useIsMobile(isMobileMediaQuery);
+  const isMobile = useIsMobile(mobileMediaQuery);
   const currentVisibleSlides = useVisibleSlides({
     visibleSlides,
     mediaQuerySlides: [

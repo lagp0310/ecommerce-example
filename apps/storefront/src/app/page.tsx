@@ -230,8 +230,10 @@ export default function Home() {
     infinite: true,
     visibleSlides: 1,
     className: "w-full h-20",
+    mobileMediaQuery: "(max-width: 768px)",
   };
   const highlightCarouselRendererProps: CarouselRendererProps = {
+    mobileMediaQuery: "(max-width: 768px)",
     carouselSliderProps: {
       className: "h-20",
       classNameTray: "h-20",
@@ -330,8 +332,8 @@ export default function Home() {
 
   return (
     <div className="flex flex-1 flex-col">
-      <div className="flex flex-1 flex-row justify-center items-center my-6 px-6 md:px-0">
-        <div className="grid md:grid-cols-3 md:grid-rows-2 gap-6 max-w-7xl w-full">
+      <div className="flex flex-1 flex-row justify-center items-center my-6 px-6 xl:px-0">
+        <div className="grid lg:grid-cols-3 lg:grid-rows-2 gap-6 max-w-7xl w-full">
           <CarouselProvider {...headerBannerCarouselProviderProps}>
             <CarouselRenderer {...headerBannerCarouselRendererProps}>
               {headerBanners.map((bannerNode, index) => (
@@ -354,8 +356,8 @@ export default function Home() {
           </CarouselProvider>
         </div>
       </div>
-      <div className="flex flex-1 md:justify-center px-6 md:px-0">
-        <StoreHighlights className="relative flex flex-1 flex-col md:flex-row rounded-lg p-6 md:p-10 shadow-[0px_8px_40px_0px_rgba(0,38,3,0.08)] justify-center items-center max-w-7xl">
+      <div className="flex flex-1 md:justify-center px-6 xl:px-0">
+        <StoreHighlights className="relative flex flex-1 flex-col md:flex-row md:flex-wrap md:gap-y-6 lg:flex-nowrap rounded-lg p-6 md:p-10 shadow-[0px_8px_40px_0px_rgba(0,38,3,0.08)] justify-center items-center lg:items-start max-w-7xl">
           <CarouselProvider {...highlightCarouselProviderProps}>
             <CarouselRenderer {...highlightCarouselRendererProps}>
               {storeHighlights.map(({ description, icon, title }, index) => (
@@ -364,8 +366,9 @@ export default function Home() {
                   index={index}
                   className="!pb-16"
                   innerClassName="!h-16"
+                  mobileMediaQuery="(max-width: 768px)"
                 >
-                  <StoreHighlight className="flex flex-1 flex-row gap-x-4 w-full justify-center">
+                  <StoreHighlight className="flex flex-1 flex-row gap-x-4 w-full justify-center md:basis-1/2">
                     {icon}
                     <div className="flex flex-1 flex-col gap-y-2">
                       <h3 className="text-body-medium font-semibold text-gray-900">
@@ -379,7 +382,7 @@ export default function Home() {
                 </SlideRenderer>
               ))}
             </CarouselRenderer>
-            <DotsRenderer>
+            <DotsRenderer mobileMediaQuery="(max-width: 768px)">
               <DefaultDotGroup
                 disableActiveDots
                 className="flex flex-1 flex-row gap-x-1 w-full justify-center items-center"

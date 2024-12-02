@@ -51,6 +51,7 @@ export type CarouselProviderCustomProps = Omit<
   "children"
 > & {
   renderInDesktop?: boolean;
+  mobileMediaQuery?: string;
   visibleSlidesSm?: MediaQuerySlide;
   visibleSlidesMd?: MediaQuerySlide;
   visibleSlidesLg?: MediaQuerySlide;
@@ -59,4 +60,5 @@ export type CarouselProviderCustomProps = Omit<
 
 export type CarouselRendererProps = Partial<CarouselProps> & {
   renderInDesktop?: boolean;
+  mobileMediaQuery?: string;
 };

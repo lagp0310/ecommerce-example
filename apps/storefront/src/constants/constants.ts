@@ -7,4 +7,4 @@ export const defaultSlideHeight = 80;
 export const defaultCarouselInterval = 5000;
 export const testimonialsCarouselInterval = 10000;
 
-export const isMobileMediaQuery = "(max-width: 640px)";
+export const defaultMobileMediaQuery = "(max-width: 640px)";

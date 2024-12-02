@@ -2,18 +2,20 @@
 
 import React from "react";
 import { useIsMobile } from "@/hooks/useIsMobile";
-import { isMobileMediaQuery } from "@/constants/constants";
+import { defaultMobileMediaQuery } from "@/constants/constants";
 
 type Props = React.PropsWithChildren<React.HTMLProps<HTMLDivElement>> & {
   renderInDesktop?: boolean;
+  mobileMediaQuery?: string;
 };
 
 export function DotsRenderer({
   children,
   renderInDesktop = false,
+  mobileMediaQuery = defaultMobileMediaQuery,
   ...containerProps
 }: Props) {
-  const isMobile = useIsMobile(isMobileMediaQuery);
+  const isMobile = useIsMobile(mobileMediaQuery);
 
   return (
     <div {...containerProps}>

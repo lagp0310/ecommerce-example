@@ -3,18 +3,22 @@
 import React from "react";
 import { useIsMobile } from "@/hooks/useIsMobile";
 import { type Props as SlideProps, Slide } from "./slide";
-import { isMobileMediaQuery } from "@/constants/constants";
+import { defaultMobileMediaQuery } from "@/constants/constants";
 
+// TODO: Refactor this into a single type object as optional carousel
+// props for all the components using renderInDesktop and mobileMediaQuery.
 type Props = React.PropsWithChildren<SlideProps> & {
   renderInDesktop?: boolean;
+  mobileMediaQuery?: string;
 };
 
 export function SlideRenderer({
   children,
   renderInDesktop = false,
+  mobileMediaQuery = defaultMobileMediaQuery,
   ...slideProps
 }: Props) {
-  const isMobile = useIsMobile(isMobileMediaQuery);
+  const isMobile = useIsMobile(mobileMediaQuery);
 
   return (
     <React.Fragment>

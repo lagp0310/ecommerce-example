@@ -4,16 +4,17 @@ import React from "react";
 import { useIsMobile } from "@/hooks/useIsMobile";
 import { Carousel } from "./carousel";
 import { CarouselRendererProps } from "@/types/types";
-import { isMobileMediaQuery } from "@/constants/constants";
+import { defaultMobileMediaQuery } from "@/constants/constants";
 
 type Props = React.PropsWithChildren<CarouselRendererProps>;
 
 export function CarouselRenderer({
   children,
   renderInDesktop = false,
+  mobileMediaQuery = defaultMobileMediaQuery,
   ...carouselProps
 }: Props) {
-  const isMobile = useIsMobile(isMobileMediaQuery);
+  const isMobile = useIsMobile(mobileMediaQuery);
 
   return (
     <React.Fragment>

@@ -490,7 +490,7 @@ export default function Home() {
         </StoreHighlights>
       </div>
       <div className="flex flex-1 flex-col gap-y-[60px] mt-[60px] md:items-center">
-        <Section className="flex flex-1 flex-col gap-y-8 px-6 md:px-0">
+        <Section className="flex flex-1 flex-col gap-y-8 px-6 xl:px-0">
           <SectionTitle className="max-w-7xl w-full">
             <div className="flex flex-1 flex-row">
               <h2 className="text-body-xl md:text-heading-5 font-semibold text-gray-900">
@@ -535,7 +535,7 @@ export default function Home() {
             </CarouselProvider>
           </SectionContent>
         </Section>
-        <Section className="flex flex-1 flex-col gap-y-8 px-6 md:px-0">
+        <Section className="flex flex-1 flex-col gap-y-8 px-6 xl:px-0">
           <SectionTitle className="max-w-7xl w-full">
             <div className="flex flex-1 flex-row">
               <h2 className="text-body-xl md:text-heading-5 font-semibold text-gray-900">
@@ -578,7 +578,7 @@ export default function Home() {
             </CarouselProvider>
           </SectionContent>
         </Section>
-        <Section className="flex flex-1 flex-col gap-y-8 px-6 md:px-0 mt-[60px] md:mt-0">
+        <Section className="flex flex-1 flex-col gap-y-8 px-6 lg:px-0 mt-[60px] md:mt-0">
           <SectionContent className="max-w-7xl w-full flex flex-1 flex-col md:flex-row gap-6">
             <CarouselProvider {...offerBannersCarouselProviderProps}>
               <CarouselRenderer {...offerBannersCarouselRendererProps}>
@@ -602,7 +602,7 @@ export default function Home() {
             </CarouselProvider>
           </SectionContent>
         </Section>
-        <div className="bg-[#F7F7F7] py-[60px] w-full px-6 md:px-0">
+        <div className="bg-[#F7F7F7] py-[60px] w-full px-6 xl:px-0">
           <div className="flex flex-1 flex-row justify-center">
             <Section className="flex flex-1 flex-col gap-y-8 max-w-7xl">
               <SectionTitle className="w-full">
@@ -667,7 +667,7 @@ export default function Home() {
           </div>
         </div>
         <div className="w-full">
-          <Section className="flex flex-1 flex-row justify-center px-6 md:px-0">
+          <Section className="flex flex-1 flex-row justify-center px-6 xl:px-0">
             <Banner className="relative flex flex-1 flex-col gap-y-4 items-end rounded-[10px] max-w-7xl">
               <div className="bg-gradient-to-r from-black/60 to-black/0 h-[250px] w-full absolute top-0 rounded-[10px] flex md:hidden"></div>
               <Image
@@ -676,7 +676,7 @@ export default function Home() {
                 placeholder="blur"
                 quality={100}
                 sizes="100vw"
-                className="h-[250px] md:h-auto w-full rounded-[10px] object-cover"
+                className="h-[250px] md:h-[300px] lg:h-auto w-full rounded-[10px] object-cover"
               />
               <div className="absolute left-6 md:right-12 flex flex-col gap-y-2 md:gap-y-4 h-full items-start justify-center">
                 <span className="text-body-medium font-normal leading-[100%] text-white uppercase">
@@ -699,7 +699,7 @@ export default function Home() {
             </Banner>
           </Section>
         </div>
-        <Section className="flex flex-1 flex-col gap-y-8 px-6 md:px-0">
+        <Section className="flex flex-1 flex-col gap-y-8 px-6 xl:px-0">
           <SectionTitle className="max-w-7xl w-full">
             <div className="flex flex-1 flex-row">
               <h2 className="text-body-xl md:text-heading-5 font-semibold text-gray-900">
@@ -742,7 +742,7 @@ export default function Home() {
             </CarouselProvider>
           </SectionContent>
         </Section>
-        <div className="bg-[#F7F7F7] py-[60px] w-full px-6 md:px-0">
+        <div className="bg-[#F7F7F7] py-[60px] w-full px-6 xl:px-0">
           <div className="flex flex-1 flex-row md:justify-center">
             <CarouselProvider {...testimonialsCarouselProviderProps}>
               <Section className="flex flex-1 flex-col gap-y-8 max-w-7xl">
@@ -788,7 +788,7 @@ export default function Home() {
             </CarouselProvider>
           </div>
         </div>
-        <div className="w-full px-6 md:px-0">
+        <div className="w-full px-6 xl:px-0">
           <div className="flex flex-1 flex-row md:justify-center">
             <Section className="flex flex-1 flex-col gap-y-8 pb-[60px] max-w-7xl w-full">
               <SectionTitle className="w-full">

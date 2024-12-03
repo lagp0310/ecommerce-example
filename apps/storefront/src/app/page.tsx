@@ -139,7 +139,10 @@ export default function Home() {
       <Image
         src={headerBigBanner}
         alt="Header Banner"
-        className="rounded-[10px] h-auto w-full"
+        placeholder="blur"
+        quality={100}
+        sizes="100vw"
+        className="h-[300px] sm:h-[400px] lg:h-auto w-full rounded-[10px] object-cover"
       />
       <div className="absolute top-0 left-0 bg-gradient-to-br from-black/60 to-black/0 h-full w-full rounded-[10px]"></div>
       <div className="absolute top-0 flex flex-1 flex-col gap-y-2 md:gap-y-7 h-full justify-center px-6 md:px-12">
@@ -167,7 +170,10 @@ export default function Home() {
       <Image
         src={headerSecondBanner}
         alt="Second Header Banner"
-        className="rounded-[10px]"
+        placeholder="blur"
+        quality={100}
+        sizes="100vw"
+        className="h-[300px] sm:h-[400px] lg:h-auto w-full rounded-[10px] object-cover"
       />
       <div className="absolute top-0 left-0 flex flex-1 flex-col gap-y-6 px-8 h-full justify-center">
         <span className="text-gray-900 font-medium text-body-small leading-[100%] uppercase">
@@ -185,18 +191,21 @@ export default function Home() {
         </Button>
       </div>
     </Banner>,
-    <Banner key={2} className="relative col-span-1 max-w-fit rounded-[10px]">
+    <Banner key={2} className="relative col-span-1 rounded-[10px]">
       <Image
         src={headerThirdBanner}
         alt="Third Header Banner"
-        className="rounded-[10px]"
+        placeholder="blur"
+        quality={100}
+        sizes="100vw"
+        className="h-[300px] sm:h-[400px] lg:h-auto w-full rounded-[10px] object-cover"
       />
       <div className="absolute top-0 left-0 bg-green-gray-900/80 h-full w-full rounded-[10px]"></div>
-      <div className="absolute top-0 left-0 flex flex-1 flex-col gap-y-6 md:gap-y-8 items-center px-6 md:px-12 h-full justify-center">
+      <div className="absolute top-0 left-0 flex flex-1 flex-col gap-y-6 md:gap-y-8 items-center px-6 md:px-12 h-full justify-center w-full">
         <span className="text-white font-medium text-body-small leading-[100%] uppercase text-center">
           Best Deal
         </span>
-        <h5 className="text-white text-body-xxl md:text-heading-5 font-semibold text-center">
+        <h5 className="text-white text-body-xxl md:text-heading-5 font-semibold text-center line-clamp-2">
           Special Products of the Month
         </h5>
         <Button className="flex flex-row gap-x-2 items-center text-primary max-w-fit px-5 py-3 text-body-small md:text-body-medium font-semibold leading-[120%]">
@@ -213,13 +222,15 @@ export default function Home() {
     isPlaying: true,
     infinite: true,
     visibleSlides: 1,
-    className: "w-full h-80",
+    className: "w-full h-[350px] sm:h-[450px]",
+    mobileMediaQuery: "(max-width: 768px)",
   };
   const headerBannerCarouselRendererProps: CarouselRendererProps = {
     carouselSliderProps: {
-      className: "h-72",
-      classNameTray: "h-64",
+      className: "h-80 sm:h-[430px]",
+      classNameTray: "h-64 sm:h-[430px]",
     },
+    mobileMediaQuery: "(max-width: 768px)",
   };
   const highlightCarouselProviderProps: CarouselProviderCustomProps = {
     naturalSlideHeight: defaultSlideHeight,
@@ -247,12 +258,23 @@ export default function Home() {
     isPlaying: true,
     infinite: true,
     visibleSlides: 2,
-    className: "w-full h-56",
+    className: "w-full h-64",
+    mobileMediaQuery: "(max-width: 768px)",
+    visibleSlidesSm: { mediaQuery: "(max-width: 640px)", visibleSlides: 2 },
+    visibleSlidesMd: {
+      mediaQuery: "(min-width: 641px) and (max-width: 768px)",
+      visibleSlides: 3,
+    },
+    visibleSlidesLg: {
+      mediaQuery: "(min-width: 769px)",
+      visibleSlides: 5,
+    },
   };
   const categoriesCarouselRendererProps: CarouselRendererProps = {
+    mobileMediaQuery: "(max-width: 768px)",
     carouselSliderProps: {
-      className: "h-56",
-      classNameTray: "h-56",
+      className: "h-64",
+      classNameTray: "h-64",
     },
   };
   const popularProductsCarouselProviderProps: CarouselProviderCustomProps = {
@@ -263,12 +285,25 @@ export default function Home() {
     isPlaying: true,
     infinite: true,
     visibleSlides: 2,
-    className: "w-full h-64",
+    className:
+      "w-full h-64 min-[400px]:h-72 min-[500px]:h-80 min-[580px]:h-[360px]",
+    mobileMediaQuery: "(max-width: 768px)",
+    visibleSlidesSm: { mediaQuery: "(max-width: 640px)", visibleSlides: 2 },
+    visibleSlidesMd: {
+      mediaQuery: "(min-width: 641px) and (max-width: 768px)",
+      visibleSlides: 3,
+    },
+    visibleSlidesLg: {
+      mediaQuery: "(min-width: 769px)",
+      visibleSlides: 5,
+    },
   };
   const popularProductsCarouselRendererProps: CarouselRendererProps = {
+    mobileMediaQuery: "(max-width: 768px)",
     carouselSliderProps: {
-      className: "h-64",
-      classNameTray: "h-64",
+      className: "h-64 min-[400px]:h-72 min-[500px]:h-80 min-[580px]:h-[360px]",
+      classNameTray:
+        "h-64 min-[400px]:h-72 min-[500px]:h-80 min-[580px]:h-[360px]",
     },
   };
   const hotDealsCarouselProviderProps: CarouselProviderCustomProps = {
@@ -279,12 +314,25 @@ export default function Home() {
     isPlaying: true,
     infinite: true,
     visibleSlides: 2,
-    className: "w-full h-64",
+    className:
+      "w-full h-64 min-[400px]:h-72 min-[500px]:h-80 min-[580px]:h-[360px]",
+    mobileMediaQuery: "(max-width: 768px)",
+    visibleSlidesSm: { mediaQuery: "(max-width: 640px)", visibleSlides: 2 },
+    visibleSlidesMd: {
+      mediaQuery: "(min-width: 641px) and (max-width: 768px)",
+      visibleSlides: 3,
+    },
+    visibleSlidesLg: {
+      mediaQuery: "(min-width: 769px)",
+      visibleSlides: 5,
+    },
   };
   const hotDealsCarouselRendererProps: CarouselRendererProps = {
+    mobileMediaQuery: "(max-width: 768px)",
     carouselSliderProps: {
-      className: "h-64",
-      classNameTray: "h-64",
+      className: "h-64 min-[400px]:h-72 min-[500px]:h-80 min-[580px]:h-[360px]",
+      classNameTray:
+        "h-64 min-[400px]:h-72 min-[500px]:h-80 min-[580px]:h-[360px]",
     },
   };
   const featuredProductsCarouselProviderProps: CarouselProviderCustomProps = {
@@ -295,12 +343,25 @@ export default function Home() {
     isPlaying: true,
     infinite: true,
     visibleSlides: 2,
-    className: "w-full h-64",
+    className:
+      "w-full h-64 min-[400px]:h-72 min-[500px]:h-80 min-[580px]:h-[360px]",
+    mobileMediaQuery: "(max-width: 768px)",
+    visibleSlidesSm: { mediaQuery: "(max-width: 640px)", visibleSlides: 2 },
+    visibleSlidesMd: {
+      mediaQuery: "(min-width: 641px) and (max-width: 768px)",
+      visibleSlides: 3,
+    },
+    visibleSlidesLg: {
+      mediaQuery: "(min-width: 769px)",
+      visibleSlides: 5,
+    },
   };
   const featuredProductsCarouselRendererProps: CarouselRendererProps = {
+    mobileMediaQuery: "(max-width: 768px)",
     carouselSliderProps: {
-      className: "h-64",
-      classNameTray: "h-64",
+      className: "h-64 min-[400px]:h-72 min-[500px]:h-80 min-[580px]:h-[360px]",
+      classNameTray:
+        "h-64 min-[400px]:h-72 min-[500px]:h-80 min-[580px]:h-[360px]",
     },
   };
   const testimonialsCarouselProviderProps: CarouselProviderCustomProps = {
@@ -335,7 +396,14 @@ export default function Home() {
       key={0}
       className="relative flex flex-1 flex-col gap-y-4 items-center"
     >
-      <Image src={firstOfferBanner} alt="Offer Banner" />
+      <Image
+        src={firstOfferBanner}
+        alt="Offer Banner"
+        placeholder="blur"
+        quality={100}
+        sizes="100vw"
+        className="h-[500px] lg:h-auto w-full rounded-[10px] object-cover"
+      />
       <div className="absolute top-10 left-0 flex flex-1 flex-col gap-y-4 items-center w-full">
         <span className="text-body-small font-normal leading-[100%] text-white uppercase">
           Best Deals
@@ -363,7 +431,14 @@ export default function Home() {
       key={1}
       className="relative flex flex-1 flex-col gap-y-4 items-center"
     >
-      <Image src={secondOfferBanner} alt="Offer Banner" />
+      <Image
+        src={secondOfferBanner}
+        alt="Offer Banner"
+        placeholder="blur"
+        quality={100}
+        sizes="100vw"
+        className="h-[500px] lg:h-auto w-full rounded-[10px] object-cover"
+      />
       <div className="absolute top-10 left-0 flex flex-1 flex-col gap-y-4 items-center w-full">
         <span className="text-body-small font-normal leading-[100%] text-white uppercase">
           85% Fat Free
@@ -387,7 +462,14 @@ export default function Home() {
       key={2}
       className="relative flex flex-1 flex-col gap-y-4 items-center"
     >
-      <Image src={thirdOfferBanner} alt="Offer Banner" />
+      <Image
+        src={thirdOfferBanner}
+        alt="Offer Banner"
+        placeholder="blur"
+        quality={100}
+        sizes="100vw"
+        className="h-[500px] lg:h-auto w-full rounded-[10px] object-cover"
+      />
       <div className="absolute top-10 left-0 flex flex-1 flex-col gap-y-4 items-center w-full">
         <span className="text-body-small font-normal leading-[100%] text-gray-900 uppercase">
           Summer Sale
@@ -419,12 +501,14 @@ export default function Home() {
     isPlaying: true,
     infinite: true,
     visibleSlides: 1,
-    className: "w-full h-64",
+    className: "w-full h-[500px]",
+    mobileMediaQuery: "(max-width: 1024px)",
   };
   const offerBannersCarouselRendererProps: CarouselRendererProps = {
+    mobileMediaQuery: "(max-width: 1024px)",
     carouselSliderProps: {
-      className: "h-64",
-      classNameTray: "h-64",
+      className: "h-[500px]",
+      classNameTray: "h-[500px]",
     },
   };
 
@@ -438,14 +522,13 @@ export default function Home() {
                 <SlideRenderer
                   key={index}
                   index={index}
-                  className="!pb-64"
-                  innerClassName="!h-64"
+                  mobileMediaQuery="(max-width: 768px)"
                 >
                   {bannerNode}
                 </SlideRenderer>
               ))}
             </CarouselRenderer>
-            <DotsRenderer>
+            <DotsRenderer mobileMediaQuery="(max-width: 768px)">
               <DefaultDotGroup
                 disableActiveDots
                 className="flex flex-1 flex-row gap-x-1 w-full justify-center items-center"
@@ -490,7 +573,7 @@ export default function Home() {
         </StoreHighlights>
       </div>
       <div className="flex flex-1 flex-col gap-y-[60px] mt-[60px] md:items-center">
-        <Section className="flex flex-1 flex-col gap-y-8 px-6 xl:px-0">
+        <Section className="flex flex-1 flex-col gap-y-8 px-6 xl:px-0 w-full items-center">
           <SectionTitle className="max-w-7xl w-full">
             <div className="flex flex-1 flex-row">
               <h2 className="text-body-xl md:text-heading-5 font-semibold text-gray-900">
@@ -507,15 +590,15 @@ export default function Home() {
               </div>
             </div>
           </SectionTitle>
-          <SectionContent className="md:grid md:grid-cols-6 md:gap-6 max-w-7xl w-full">
+          <SectionContent className="md:grid md:grid-cols-4 lg:grid-cols-6 md:gap-6 max-w-7xl w-full">
             <CarouselProvider {...categoriesCarouselProviderProps}>
               <CarouselRenderer {...categoriesCarouselRendererProps}>
                 {Array.from({ length: 12 }).map((_value, index) => (
                   <SlideRenderer
                     key={index}
                     index={index}
-                    className="!pb-56"
-                    innerClassName="!h-56 px-1 mx-auto"
+                    innerClassName="px-1 mx-auto"
+                    mobileMediaQuery="(max-width: 768px)"
                   >
                     <CategoryCard
                       url={`/products?categoryIds=${category?.categoryId}`}
@@ -529,7 +612,7 @@ export default function Home() {
                   </SlideRenderer>
                 ))}
               </CarouselRenderer>
-              <DotsRenderer>
+              <DotsRenderer mobileMediaQuery="(max-width: 768px)">
                 <DefaultDotGroup
                   disableActiveDots
                   className="flex flex-1 flex-row gap-x-1 w-full justify-center items-center"
@@ -555,15 +638,15 @@ export default function Home() {
               </div>
             </div>
           </SectionTitle>
-          <SectionContent className="max-w-7xl w-full grid md:grid-cols-5 md:gap-6">
+          <SectionContent className="max-w-7xl w-full md:grid md:grid-cols-3 lg:grid-cols-5 md:gap-6">
             <CarouselProvider {...popularProductsCarouselProviderProps}>
               <CarouselRenderer {...popularProductsCarouselRendererProps}>
                 {Array.from({ length: 10 }).map((_value, index) => (
                   <SlideRenderer
                     key={index}
                     index={index}
-                    className="!pb-64"
-                    innerClassName="!h-64 px-1 mx-auto"
+                    innerClassName="px-1 mx-auto"
+                    mobileMediaQuery="(max-width: 768px)"
                   >
                     <BasicProductCard
                       product={popularProduct}
@@ -572,7 +655,7 @@ export default function Home() {
                   </SlideRenderer>
                 ))}
               </CarouselRenderer>
-              <DotsRenderer>
+              <DotsRenderer mobileMediaQuery="(max-width: 768px)">
                 <DefaultDotGroup
                   disableActiveDots
                   className="flex flex-1 flex-row gap-x-1 w-full justify-center items-center mt-7"
@@ -581,22 +664,25 @@ export default function Home() {
             </CarouselProvider>
           </SectionContent>
         </Section>
-        <Section className="flex flex-1 flex-col gap-y-8 px-6 lg:px-0 mt-[60px] md:mt-0">
-          <SectionContent className="max-w-7xl w-full flex flex-1 flex-col md:flex-row gap-6">
+        <Section className="lg:flex lg:flex-1 lg:flex-col lg:gap-y-8 lg:items-center px-6 xl:px-0 mt-[60px] md:mt-0 w-full">
+          <SectionContent className="max-w-7xl w-full lg:flex lg:flex-1 lg:flex-row lg:gap-x-6">
             <CarouselProvider {...offerBannersCarouselProviderProps}>
               <CarouselRenderer {...offerBannersCarouselRendererProps}>
                 {offerBanners.map((bannerNode, index) => (
                   <SlideRenderer
                     key={index}
                     index={index}
-                    className="!pb-64"
-                    innerClassName="!h-64 px-1"
+                    innerClassName="px-1 mx-auto"
+                    mobileMediaQuery="(max-width: 1024px)"
                   >
                     {bannerNode}
                   </SlideRenderer>
                 ))}
               </CarouselRenderer>
-              <DotsRenderer>
+              <DotsRenderer
+                mobileMediaQuery="(max-width: 1024px)"
+                className="block lg:hidden"
+              >
                 <DefaultDotGroup
                   disableActiveDots
                   className="flex flex-1 flex-row gap-x-1 w-full justify-center items-center mt-7"
@@ -624,15 +710,15 @@ export default function Home() {
                   </div>
                 </div>
               </SectionTitle>
-              <SectionContent className="max-w-7xl w-full grid md:grid-cols-5 md:gap-6">
+              <SectionContent className="max-w-7xl w-full grid md:grid-cols-4 lg:grid-cols-5 md:gap-6">
                 <CarouselProvider {...hotDealsCarouselProviderProps}>
                   <CarouselRenderer {...hotDealsCarouselRendererProps}>
                     {Array.from({ length: 12 }).map((_value, index) => (
                       <SlideRenderer
                         key={index}
                         index={index}
-                        className="!pb-64"
-                        innerClassName="!h-64 px-1 mx-auto"
+                        innerClassName="px-1 mx-auto"
+                        mobileMediaQuery="(max-width: 768px)"
                       >
                         {index === 0 ? (
                           <React.Fragment>
@@ -658,7 +744,7 @@ export default function Home() {
                       </SlideRenderer>
                     ))}
                   </CarouselRenderer>
-                  <DotsRenderer>
+                  <DotsRenderer mobileMediaQuery="(max-width: 768px)">
                     <DefaultDotGroup
                       disableActiveDots
                       className="flex flex-1 flex-row gap-x-1 w-full justify-center items-center mt-7"
@@ -719,15 +805,15 @@ export default function Home() {
               </div>
             </div>
           </SectionTitle>
-          <SectionContent className="max-w-7xl w-full grid md:grid-cols-5 md:gap-6">
+          <SectionContent className="max-w-7xl w-full grid md:grid-cols-3 lg:grid-cols-5 md:gap-6">
             <CarouselProvider {...featuredProductsCarouselProviderProps}>
               <CarouselRenderer {...featuredProductsCarouselRendererProps}>
-                {Array.from({ length: 5 }).map((_value, index) => (
+                {Array.from({ length: 10 }).map((_value, index) => (
                   <SlideRenderer
                     key={index}
                     index={index}
-                    className="!pb-64"
-                    innerClassName="!h-64 px-1 mx-auto"
+                    innerClassName="px-1 mx-auto"
+                    mobileMediaQuery="(max-width: 768px)"
                   >
                     <BasicProductCard
                       product={popularProduct}
@@ -736,7 +822,7 @@ export default function Home() {
                   </SlideRenderer>
                 ))}
               </CarouselRenderer>
-              <DotsRenderer>
+              <DotsRenderer mobileMediaQuery="(max-width: 768px)">
                 <DefaultDotGroup
                   disableActiveDots
                   className="flex flex-1 flex-row gap-x-1 w-full justify-center items-center mt-7"

@@ -286,7 +286,7 @@ export default function Home() {
     infinite: true,
     visibleSlides: 2,
     className:
-      "w-full h-64 min-[400px]:h-72 min-[500px]:h-80 min-[580px]:h-[360px]",
+      "w-full h-60 min-[400px]:h-72 min-[500px]:h-80 min-[580px]:h-[350px] sm:h-[300px]",
     mobileMediaQuery: "(max-width: 768px)",
     visibleSlidesSm: { mediaQuery: "(max-width: 640px)", visibleSlides: 2 },
     visibleSlidesMd: {
@@ -301,9 +301,10 @@ export default function Home() {
   const popularProductsCarouselRendererProps: CarouselRendererProps = {
     mobileMediaQuery: "(max-width: 768px)",
     carouselSliderProps: {
-      className: "h-64 min-[400px]:h-72 min-[500px]:h-80 min-[580px]:h-[360px]",
+      className:
+        "h-60 min-[400px]:h-72 min-[500px]:h-80 min-[580px]:h-[350px] sm:h-[300px]",
       classNameTray:
-        "h-64 min-[400px]:h-72 min-[500px]:h-80 min-[580px]:h-[360px]",
+        "h-60 min-[400px]:h-72 min-[500px]:h-80 min-[580px]:h-[350px] sm:h-[300px]",
     },
   };
   const hotDealsCarouselProviderProps: CarouselProviderCustomProps = {
@@ -315,7 +316,7 @@ export default function Home() {
     infinite: true,
     visibleSlides: 2,
     className:
-      "w-full h-64 min-[400px]:h-72 min-[500px]:h-80 min-[580px]:h-[360px]",
+      "w-full h-60 min-[400px]:h-72 min-[500px]:h-80 min-[580px]:h-[350px] sm:h-[300px]",
     mobileMediaQuery: "(max-width: 768px)",
     visibleSlidesSm: { mediaQuery: "(max-width: 640px)", visibleSlides: 2 },
     visibleSlidesMd: {
@@ -330,21 +331,22 @@ export default function Home() {
   const hotDealsCarouselRendererProps: CarouselRendererProps = {
     mobileMediaQuery: "(max-width: 768px)",
     carouselSliderProps: {
-      className: "h-64 min-[400px]:h-72 min-[500px]:h-80 min-[580px]:h-[360px]",
+      className:
+        "h-60 min-[400px]:h-72 min-[500px]:h-80 min-[580px]:h-[350px] sm:h-[300px]",
       classNameTray:
-        "h-64 min-[400px]:h-72 min-[500px]:h-80 min-[580px]:h-[360px]",
+        "h-60 min-[400px]:h-72 min-[500px]:h-80 min-[580px]:h-[350px] sm:h-[300px]",
     },
   };
   const featuredProductsCarouselProviderProps: CarouselProviderCustomProps = {
     naturalSlideHeight: defaultSlideHeight,
     naturalSlideWidth: defaultSlideWidth,
-    totalSlides: 5,
+    totalSlides: 10,
     interval: defaultCarouselInterval,
     isPlaying: true,
     infinite: true,
     visibleSlides: 2,
     className:
-      "w-full h-64 min-[400px]:h-72 min-[500px]:h-80 min-[580px]:h-[360px]",
+      "w-full h-60 min-[400px]:h-72 min-[500px]:h-80 min-[580px]:h-[350px] sm:h-[300px]",
     mobileMediaQuery: "(max-width: 768px)",
     visibleSlidesSm: { mediaQuery: "(max-width: 640px)", visibleSlides: 2 },
     visibleSlidesMd: {
@@ -359,9 +361,10 @@ export default function Home() {
   const featuredProductsCarouselRendererProps: CarouselRendererProps = {
     mobileMediaQuery: "(max-width: 768px)",
     carouselSliderProps: {
-      className: "h-64 min-[400px]:h-72 min-[500px]:h-80 min-[580px]:h-[360px]",
+      className:
+        "h-60 min-[400px]:h-72 min-[500px]:h-80 min-[580px]:h-[350px] sm:h-[300px]",
       classNameTray:
-        "h-64 min-[400px]:h-72 min-[500px]:h-80 min-[580px]:h-[360px]",
+        "h-60 min-[400px]:h-72 min-[500px]:h-80 min-[580px]:h-[350px] sm:h-[300px]",
     },
   };
   const testimonialsCarouselProviderProps: CarouselProviderCustomProps = {

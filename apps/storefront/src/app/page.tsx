@@ -330,6 +330,104 @@ export default function Home() {
     },
   };
 
+  const offerBanners = [
+    <Banner
+      key={0}
+      className="relative flex flex-1 flex-col gap-y-4 items-center"
+    >
+      <Image src={firstOfferBanner} alt="Offer Banner" />
+      <div className="absolute top-10 left-0 flex flex-1 flex-col gap-y-4 items-center w-full">
+        <span className="text-body-small font-normal leading-[100%] text-white uppercase">
+          Best Deals
+        </span>
+        <h3 className="text-heading-4 md:text-heading-3 font-semibold text-white text-center">
+          Sale of the Month
+        </h3>
+        <div className="flex flex-1 flex-row gap-x-2">
+          <div className="flex flex-1 flex-col gap-y-2">
+            {/* <BannerCounter endDate={} /> */}
+            <span className="text-white"></span>
+            <span className="text-white uppercase"></span>
+          </div>
+        </div>
+        {/* FIXME: This should be a next link but it's throwing errors. */}
+        <a
+          href="/products"
+          className="flex flex-row gap-x-2 items-center text-primary rounded-full bg-white max-w-fit px-5 py-3 text-body-small md:text-body-medium font-semibold leading-[120%]"
+        >
+          Shop now <ArrowRightIcon className="h-4 w-4 text-primary" />
+        </a>
+      </div>
+    </Banner>,
+    <Banner
+      key={1}
+      className="relative flex flex-1 flex-col gap-y-4 items-center"
+    >
+      <Image src={secondOfferBanner} alt="Offer Banner" />
+      <div className="absolute top-10 left-0 flex flex-1 flex-col gap-y-4 items-center w-full">
+        <span className="text-body-small font-normal leading-[100%] text-white uppercase">
+          85% Fat Free
+        </span>
+        <h3 className="text-heading-4 md:text-heading-3 font-semibold text-white text-center">
+          Low-Fat Meat
+        </h3>
+        <span className="text-white">
+          Starting at <span className="text-warning">$79.99</span>
+        </span>
+        {/* FIXME: This should be a next link but it's throwing errors. */}
+        <a
+          href="/products"
+          className="flex flex-row gap-x-2 items-center text-primary rounded-full bg-white max-w-fit px-5 py-3 text-body-small md:text-body-medium font-semibold leading-[120%]"
+        >
+          Shop now <ArrowRightIcon className="h-4 w-4 text-primary" />
+        </a>
+      </div>
+    </Banner>,
+    <Banner
+      key={2}
+      className="relative flex flex-1 flex-col gap-y-4 items-center"
+    >
+      <Image src={thirdOfferBanner} alt="Offer Banner" />
+      <div className="absolute top-10 left-0 flex flex-1 flex-col gap-y-4 items-center w-full">
+        <span className="text-body-small font-normal leading-[100%] text-gray-900 uppercase">
+          Summer Sale
+        </span>
+        <h3 className="text-heading-4 md:text-heading-3 font-semibold text-gray-900 text-center">
+          100% Fresh Fruit
+        </h3>
+        <span className="text-body-xl font-medium text-gray-900">
+          Up to
+          <span className="bg-gray-900 rounded-[5px] font-semibold px-3 py-1 ml-2 uppercase text-[#FCC900]">
+            64% Off
+          </span>
+        </span>
+        {/* FIXME: This should be a next link but it's throwing errors. */}
+        <a
+          href="/products"
+          className="flex flex-row gap-x-2 items-center text-primary rounded-full bg-white max-w-fit px-5 py-3 text-body-small md:text-body-medium font-semibold leading-[120%]"
+        >
+          Shop now <ArrowRightIcon className="h-4 w-4 text-primary" />
+        </a>
+      </div>
+    </Banner>,
+  ];
+  const offerBannersCarouselProviderProps: CarouselProviderCustomProps = {
+    naturalSlideHeight: defaultSlideHeight,
+    naturalSlideWidth: defaultSlideWidth,
+    totalSlides: offerBanners.length,
+    interval: defaultCarouselInterval,
+    isPlaying: true,
+    infinite: true,
+    visibleSlides: 1,
+    className: "w-full h-64",
+  };
+  const offerBannersCarouselRendererProps: CarouselRendererProps = {
+    carouselSliderProps: {
+      className: "h-64",
+      classNameTray: "h-64",
+    },
+  };
+
   return (
     <div className="flex flex-1 flex-col">
       <div className="flex flex-1 flex-row justify-center items-center my-6 px-6 xl:px-0">
@@ -482,73 +580,26 @@ export default function Home() {
         </Section>
         <Section className="flex flex-1 flex-col gap-y-8 px-6 md:px-0 mt-[60px] md:mt-0">
           <SectionContent className="max-w-7xl w-full flex flex-1 flex-col md:flex-row gap-6">
-            <Banner className="relative flex flex-1 flex-col gap-y-4 items-center">
-              <Image src={firstOfferBanner} alt="Offer Banner" />
-              <div className="absolute top-10 left-0 flex flex-1 flex-col gap-y-4 items-center w-full">
-                <span className="text-body-small font-normal leading-[100%] text-white uppercase">
-                  Best Deals
-                </span>
-                <h3 className="text-heading-4 md:text-heading-3 font-semibold text-white text-center">
-                  Sale of the Month
-                </h3>
-                <div className="flex flex-1 flex-row gap-x-2">
-                  <div className="flex flex-1 flex-col gap-y-2">
-                    {/* <BannerCounter endDate={} /> */}
-                    <span className="text-white"></span>
-                    <span className="text-white uppercase"></span>
-                  </div>
-                </div>
-                <Link
-                  href="/products"
-                  className="flex flex-row gap-x-2 items-center text-primary rounded-full bg-white max-w-fit px-5 py-3 text-body-small md:text-body-medium font-semibold leading-[120%]"
-                >
-                  Shop now <ArrowRightIcon className="h-4 w-4 text-primary" />
-                </Link>
-              </div>
-            </Banner>
-            <Banner className="relative flex flex-1 flex-col gap-y-4 items-center">
-              <Image src={secondOfferBanner} alt="Offer Banner" />
-              <div className="absolute top-10 left-0 flex flex-1 flex-col gap-y-4 items-center w-full">
-                <span className="text-body-small font-normal leading-[100%] text-white uppercase">
-                  85% Fat Free
-                </span>
-                <h3 className="text-heading-4 md:text-heading-3 font-semibold text-white text-center">
-                  Low-Fat Meat
-                </h3>
-                <span className="text-white">
-                  Starting at <span className="text-warning">$79.99</span>
-                </span>
-                <Link
-                  href="/products"
-                  className="flex flex-row gap-x-2 items-center text-primary rounded-full bg-white max-w-fit px-5 py-3 text-body-small md:text-body-medium font-semibold leading-[120%]"
-                >
-                  Shop now <ArrowRightIcon className="h-4 w-4 text-primary" />
-                </Link>
-              </div>
-            </Banner>
-            <Banner className="relative flex flex-1 flex-col gap-y-4 items-center">
-              <Image src={thirdOfferBanner} alt="Offer Banner" />
-              <div className="absolute top-10 left-0 flex flex-1 flex-col gap-y-4 items-center w-full">
-                <span className="text-body-small font-normal leading-[100%] text-gray-900 uppercase">
-                  Summer Sale
-                </span>
-                <h3 className="text-heading-4 md:text-heading-3 font-semibold text-gray-900 text-center">
-                  100% Fresh Fruit
-                </h3>
-                <span className="text-body-xl font-medium text-gray-900">
-                  Up to
-                  <span className="bg-gray-900 rounded-[5px] font-semibold px-3 py-1 ml-2 uppercase text-[#FCC900]">
-                    64% Off
-                  </span>
-                </span>
-                <Link
-                  href="/products"
-                  className="flex flex-row gap-x-2 items-center text-primary rounded-full bg-white max-w-fit px-5 py-3 text-body-small md:text-body-medium font-semibold leading-[120%]"
-                >
-                  Shop now <ArrowRightIcon className="h-4 w-4 text-primary" />
-                </Link>
-              </div>
-            </Banner>
+            <CarouselProvider {...offerBannersCarouselProviderProps}>
+              <CarouselRenderer {...offerBannersCarouselRendererProps}>
+                {offerBanners.map((bannerNode, index) => (
+                  <SlideRenderer
+                    key={index}
+                    index={index}
+                    className="!pb-64"
+                    innerClassName="!h-64 px-1"
+                  >
+                    {bannerNode}
+                  </SlideRenderer>
+                ))}
+              </CarouselRenderer>
+              <DotsRenderer>
+                <DefaultDotGroup
+                  disableActiveDots
+                  className="flex flex-1 flex-row gap-x-1 w-full justify-center items-center mt-7"
+                />
+              </DotsRenderer>
+            </CarouselProvider>
           </SectionContent>
         </Section>
         <div className="bg-[#F7F7F7] py-[60px] w-full px-6 md:px-0">

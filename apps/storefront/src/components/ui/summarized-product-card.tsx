@@ -47,7 +47,7 @@ export function SummarizedProductCard({
       }
     >
       {shouldShowTags ? (
-        <div className="z-10 absolute top-3 left-3 flex flex-1 flex-row gap-x-2 text-body-tiny md:text-body-small flex-wrap pr-6 gap-y-1">
+        <div className="z-20 absolute top-3 left-3 flex flex-1 flex-row gap-x-2 text-body-tiny md:text-body-small flex-wrap pr-12 gap-y-1">
           {tags.map(({ text, type }, index) => (
             <span
               key={index}

@@ -258,7 +258,7 @@ export default function Home() {
     isPlaying: true,
     infinite: true,
     visibleSlides: 2,
-    className: "w-full h-64",
+    className: "w-full h-48 min-[400px]:h-52 min-[450px]:h-60",
     mobileMediaQuery: "(max-width: 768px)",
     visibleSlidesSm: { mediaQuery: "(max-width: 640px)", visibleSlides: 2 },
     visibleSlidesMd: {
@@ -273,8 +273,8 @@ export default function Home() {
   const categoriesCarouselRendererProps: CarouselRendererProps = {
     mobileMediaQuery: "(max-width: 768px)",
     carouselSliderProps: {
-      className: "h-64",
-      classNameTray: "h-64",
+      className: "h-48 min-[400px]:h-52 min-[450px]:h-60",
+      classNameTray: "h-48 min-[400px]:h-52 min-[450px]:h-60",
     },
   };
   const popularProductsCarouselProviderProps: CarouselProviderCustomProps = {

@@ -517,7 +517,10 @@ export default function Home() {
                     className="!pb-56"
                     innerClassName="!h-56 px-1 mx-auto"
                   >
-                    <CategoryCard className="flex flex-1 flex-col items-center justify-center gap-y-1.5 md:gap-y-4 bg-white border border-gray-100 rounded-[5px] pt-4 pb-6 hover:border-soft-primary/45 hover:shadow-[0px_0px_12px_0px_rgba(132,209,135,0.32)] hover:shadow-soft-primary/60">
+                    <CategoryCard
+                      url={`/products?categoryIds=${category?.categoryId}`}
+                      className="flex flex-1 flex-col items-center justify-center gap-y-1.5 md:gap-y-4 bg-white border border-gray-100 rounded-[5px] pt-4 pb-6 hover:border-soft-primary/45 hover:shadow-[0px_0px_12px_0px_rgba(132,209,135,0.32)] hover:shadow-soft-primary/60"
+                    >
                       {category?.image}
                       <span className="text-body-small md:text-body-large font-medium text-gray-900 text-center truncate whitespace-break-spaces">
                         {category.title}

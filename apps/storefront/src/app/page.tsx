@@ -376,11 +376,11 @@ export default function Home() {
     infinite: true,
     visibleSlidesSm: { mediaQuery: "(max-width: 640px)", visibleSlides: 1 },
     visibleSlidesMd: {
-      mediaQuery: "(min-width: 641px) and (max-width: 768px)",
+      mediaQuery: "(min-width: 641px) and (max-width: 1024px)",
       visibleSlides: 2,
     },
     visibleSlidesLg: {
-      mediaQuery: "(min-width: 769px)",
+      mediaQuery: "(min-width: 1025px)",
       visibleSlides: 3,
     },
     className: "w-full max-w-7xl",
@@ -389,8 +389,10 @@ export default function Home() {
   const testimonialsCarouselRendererProps: CarouselRendererProps = {
     renderInDesktop: true,
     carouselSliderProps: {
-      className: "h-64",
-      classNameTray: "h-64",
+      className:
+        "h-72 min-[420px]:h-72 min-[430px]:h-64 min-[500px]:h-64 min-[520px]:h-60 sm:h-72 md:h-64 lg:h-72 min-[1150px]:h-64",
+      classNameTray:
+        "h-72 min-[420px]:h-72 min-[430px]:h-64 min-[500px]:h-64 min-[520px]:h-60 sm:h-72 md:h-64 lg:h-72 min-[1150px]:h-64",
     },
   };
 
@@ -859,8 +861,7 @@ export default function Home() {
                       <SlideRenderer
                         key={index}
                         index={index}
-                        className="!pb-64"
-                        innerClassName="!h-64 px-1 mx-auto"
+                        innerClassName="px-1 mx-auto"
                         renderInDesktop
                       >
                         <HomepageCustomerTestimonial

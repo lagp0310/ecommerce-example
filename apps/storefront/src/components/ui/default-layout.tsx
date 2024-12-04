@@ -183,7 +183,9 @@ export function DefaultLayout({ children }: Props) {
           passHref
           className="w-full flex flex-1 flex-row"
         >
-          <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+          <NavigationMenuLink
+            className={`flex flex-row justify-center gap-x-1 items-center text-body-small font-medium text-gray-500 hover:text-gray-900 cursor-pointer ${navigationMenuTriggerStyle()}`}
+          >
             About Us
           </NavigationMenuLink>
         </Link>

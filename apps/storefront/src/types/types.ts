@@ -3,6 +3,17 @@ import { type Props as CarouselProps } from "@/components/ui/carousel/carousel";
 import { MediaQuerySlide } from "@/hooks/useVisibleSlides";
 import React from "react";
 
+export type Language = {
+  name: string;
+  shortName?: string;
+  icon: React.ReactNode;
+};
+export type Currency = {
+  name: string;
+  shortName?: string;
+  icon: React.ReactNode;
+};
+
 export type NavigationCategory = {
   title: string;
   href: string;

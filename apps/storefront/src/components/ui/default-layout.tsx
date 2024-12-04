@@ -434,6 +434,23 @@ export function DefaultLayout({ children }: Props) {
                 <span className="text-body-small font-normal text-gray-500">
                   Ecobazar © 2024. All Rights Reserved
                 </span>
+                <div className="flex flex-1 flex-row justify-end items-center w-full">
+                  <span className="text-body-small font-normal text-gray-500">
+                    <Link
+                      href="https://www.figma.com/community/file/1272474484693685580"
+                      className="underline"
+                    >
+                      Design
+                    </Link>{" "}
+                    by:{" "}
+                    <Link
+                      href="https://www.figma.com/@templatecookie"
+                      className="underline"
+                    >
+                      TemplateCookie
+                    </Link>
+                  </span>
+                </div>
               </div>
             </div>
           </FooterContent>

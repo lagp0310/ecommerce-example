@@ -423,13 +423,12 @@ export default function Home() {
             <span className="text-white uppercase"></span>
           </div>
         </div>
-        {/* FIXME: This should be a next link but it's throwing errors. */}
-        <a
+        <Link
           href="/products"
           className="flex flex-row gap-x-2 items-center text-primary rounded-full bg-white max-w-fit px-5 py-3 text-body-small md:text-body-medium font-semibold leading-[120%]"
         >
           Shop now <ArrowRightIcon className="h-4 w-4 text-primary" />
-        </a>
+        </Link>
       </div>
     </Banner>,
     <Banner
@@ -454,13 +453,12 @@ export default function Home() {
         <span className="text-white">
           Starting at <span className="text-warning">$79.99</span>
         </span>
-        {/* FIXME: This should be a next link but it's throwing errors. */}
-        <a
+        <Link
           href="/products"
           className="flex flex-row gap-x-2 items-center text-primary rounded-full bg-white max-w-fit px-5 py-3 text-body-small md:text-body-medium font-semibold leading-[120%]"
         >
           Shop now <ArrowRightIcon className="h-4 w-4 text-primary" />
-        </a>
+        </Link>
       </div>
     </Banner>,
     <Banner
@@ -488,13 +486,12 @@ export default function Home() {
             64% Off
           </span>
         </span>
-        {/* FIXME: This should be a next link but it's throwing errors. */}
-        <a
+        <Link
           href="/products"
           className="flex flex-row gap-x-2 items-center text-primary rounded-full bg-white max-w-fit px-5 py-3 text-body-small md:text-body-medium font-semibold leading-[120%]"
         >
           Shop now <ArrowRightIcon className="h-4 w-4 text-primary" />
-        </a>
+        </Link>
       </div>
     </Banner>,
   ];

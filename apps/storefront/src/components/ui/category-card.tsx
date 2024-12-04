@@ -19,10 +19,9 @@ export function CategoryCard({
   return (
     <React.Fragment>
       {isValidUrl && shouldUseNextLink ? (
-        // FIXME: This should be a next link but it's throwing errors.
-        <a href={url} className={props.className}>
+        <Link href={url} className={props.className}>
           {children}
-        </a>
+        </Link>
       ) : (
         <div {...props}>{children}</div>
       )}

@@ -5,7 +5,6 @@ import { LanguageSelector } from "@/components/ui/language-selector";
 import { Logo } from "@/components/ui/logo";
 import { Navbar } from "@/components/ui/navbar";
 import { NavbarLink } from "@/components/ui/navbar-link";
-import { NavbarLinkDropdown } from "@/components/ui/navbar-link-dropdown";
 import { TopBar } from "@/components/ui/top-bar";
 import {
   MapPinIcon,
@@ -24,11 +23,125 @@ import Link from "next/link";
 import { FacebookIcon } from "@/components/ui/icons/facebook";
 import { PinterestIcon } from "@/components/ui/icons/pinterest";
 import { InstagramIcon } from "@/components/ui/icons/instagram";
-import { FooterLink } from "@/types/types";
+import type {
+  FooterLink,
+  NavigationCategory,
+  NavigationLink,
+} from "@/types/types";
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  navigationMenuTriggerStyle,
+} from "@/components/ui/navigation-menu";
+import { ListItem } from "@/components/ui/list-item";
+import navigationTopImage from "@/public/images/navigation-top-image.png";
+import Image from "next/image";
 
 type Props = React.PropsWithChildren;
 
 export function DefaultLayout({ children }: Props) {
+  const navigationCategories: NavigationCategory[] = Array.from({
+    length: 6,
+  }).map(() => ({
+    title: "Fresh Fruit",
+    href: "/products",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam egestas faucibus est at dapibus. Quisque.",
+  }));
+  const navigationLinks: NavigationLink[] = [
+    {
+      title: (
+        <span className="flex flex-row gap-x-1 items-center text-body-small font-medium text-gray-500 hover:text-gray-900 cursor-pointer">
+          Home
+        </span>
+      ),
+      content: (
+        <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
+          <li className="row-span-3">
+            <NavigationMenuLink asChild>
+              <Link
+                className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md gap-y-4"
+                href="/"
+              >
+                <Image src={navigationTopImage} alt="Fruits Basket" />
+                <div className="flex flex-1 flex-row gap-x-4 items-center justify-center">
+                  <Logo className="h-6 w-6 md:h-8 md:w-8 text-primary" />
+                  <h2 className="text-body-xxl font-medium lg:text-heading-5 leading-[38px] tracking-[-3%] text-green-900">
+                    Ecobazar
+                  </h2>
+                </div>
+                <p className="text-sm leading-tight text-muted-foreground">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Nullam egestas faucibus est at dapibus. Quisque.
+                </p>
+              </Link>
+            </NavigationMenuLink>
+          </li>
+          <ListItem
+            href="/products"
+            title="Products"
+            className="hover:bg-gray-50/50"
+          >
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
+            egestas faucibus est at dapibus. Quisque.
+          </ListItem>
+          <ListItem href="/faq" title="FAQ" className="hover:bg-gray-50/50">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
+            egestas faucibus est at dapibus. Quisque.
+          </ListItem>
+          <ListItem
+            href="/contact-us"
+            title="Contact"
+            className="hover:bg-gray-50/50"
+          >
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
+            egestas faucibus est at dapibus. Quisque.
+          </ListItem>
+        </ul>
+      ),
+      isDropdown: true,
+    },
+    {
+      title: (
+        <span className="flex flex-row gap-x-1 items-center text-body-small font-medium text-gray-500 hover:text-gray-900 cursor-pointer">
+          Products
+        </span>
+      ),
+      content: (
+        <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
+          {navigationCategories.map((component) => (
+            <ListItem
+              key={component.title}
+              title={component.title}
+              href={component.href}
+              className="hover:bg-gray-50/50"
+            >
+              {component.description}
+            </ListItem>
+          ))}
+        </ul>
+      ),
+      isDropdown: true,
+    },
+    {
+      content: (
+        <Link
+          href="/about-us"
+          legacyBehavior
+          passHref
+          className="w-full flex flex-1 flex-row"
+        >
+          <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+            About Us
+          </NavigationMenuLink>
+        </Link>
+      ),
+    },
+  ];
   const footerLinks: FooterLink[] = [
     {
       groupName: "My Account",
@@ -72,34 +185,43 @@ export function DefaultLayout({ children }: Props) {
           </div>
         </div>
       </TopBar>
-      <nav className="flex flex-1 flex-row justify-center items-center bg-white shadow-sm px-6">
+      <div className="flex flex-1 flex-row justify-center items-center bg-white shadow-sm px-6">
         <Navbar className="flex flex-1 flex-row items-center justify-center py-6 max-w-7xl gap-x-2 lg:gap-x-0">
-          <div className="hidden lg:flex flex-1 flex-row items-center gap-x-10">
-            <NavbarLinkDropdown className="flex flex-row gap-x-1 items-center text-body-small font-medium text-gray-500 hover:text-gray-900 cursor-pointer">
-              Home <ChevronDownIcon className="h-4 w-4" />
-            </NavbarLinkDropdown>
-            <NavbarLinkDropdown className="flex flex-row gap-x-1 items-center text-body-small font-medium text-gray-500 hover:text-gray-900 cursor-pointer">
-              Products <ChevronDownIcon className="h-4 w-4" />
-            </NavbarLinkDropdown>
+          <NavigationMenu className="hidden lg:flex flex-row items-center justify-start gap-x-2 lg:gap-x-0 basis-1/3 max-w-full">
+            <NavigationMenuList>
+              {navigationLinks.map(
+                ({ content, title, isDropdown = false }, index) => (
+                  <NavigationMenuItem
+                    key={index}
+                    className="flex flex-1 flex-row"
+                  >
+                    {isDropdown ? (
+                      <NavigationMenuTrigger>{title}</NavigationMenuTrigger>
+                    ) : null}
+                    {isDropdown ? (
+                      <NavigationMenuContent>{content}</NavigationMenuContent>
+                    ) : (
+                      content
+                    )}
+                  </NavigationMenuItem>
+                )
+              )}
+            </NavigationMenuList>
+          </NavigationMenu>
+          <div className="flex flex-1 flex-row justify-start w-full basis-1/3 lg:justify-center items-center">
             <NavbarLink
-              href="/about-us"
-              className="flex flex-row gap-x-1 items-center text-body-small font-medium text-gray-500 hover:text-gray-900 cursor-pointer truncate line-clamp-1"
+              href="/"
+              className="flex flex-1 flex-row gap-x-4 justify-start lg:justify-center items-center max-w-fit"
             >
-              About Us
+              <Bars3Icon className="flex lg:hidden h-6 w-6 text-gray-900" />
+              <Logo className="h-6 w-6 md:h-8 md:w-8 text-primary" />
+              <h1 className="text-body-xxl font-medium lg:text-heading-5 leading-[38px] tracking-[-3%] text-green-900">
+                Ecobazar
+              </h1>
             </NavbarLink>
           </div>
-          <NavbarLink
-            href="/"
-            className="flex flex-row gap-x-4 justify-center items-center"
-          >
-            <Bars3Icon className="flex lg:hidden h-6 w-6 text-gray-900" />
-            <Logo className="h-6 w-6 md:h-8 md:w-8 text-primary" />
-            <h1 className="text-body-xxl font-medium lg:text-heading-5 leading-[38px] tracking-[-3%] text-green-900">
-              Ecobazar
-            </h1>
-          </NavbarLink>
-          <div className="flex flex-1 flex-row items-center justify-end max-w-7xl">
-            <div className="flex flex-1 flex-row gap-x-4 justify-end">
+          <div className="flex flex-row items-center justify-end max-w-7xl basis-1/3">
+            <div className="flex flex-row gap-x-4 justify-end">
               <NavbarLink
                 href="tel:2195550114"
                 className="text-gray-900 text-body-small font-medium hidden md:flex flex-row md:gap-x-2 items-center lg:mr-4"
@@ -122,7 +244,7 @@ export function DefaultLayout({ children }: Props) {
             </div>
           </div>
         </Navbar>
-      </nav>
+      </div>
       <main>{children}</main>
       <footer className="flex flex-1 flex-col justify-center bg-gray-900">
         <NewsletterSubscribe className="bg-[#F7F7F7] flex flex-1 flex-row gap-x-10 items-center justify-center py-10">

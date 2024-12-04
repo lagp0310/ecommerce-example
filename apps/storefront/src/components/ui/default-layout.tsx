@@ -58,11 +58,7 @@ export function DefaultLayout({ children }: Props) {
   }));
   const navigationLinks: NavigationLink[] = [
     {
-      title: (
-        <span className="flex flex-row gap-x-1 items-center text-body-small font-medium text-gray-500 hover:text-gray-900 cursor-pointer">
-          Home
-        </span>
-      ),
+      title: "Home",
       content: (
         <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
           <li className="row-span-3">
@@ -144,11 +140,7 @@ export function DefaultLayout({ children }: Props) {
       isDropdown: true,
     },
     {
-      title: (
-        <span className="flex flex-row gap-x-1 items-center text-body-small font-medium text-gray-500 hover:text-gray-900 cursor-pointer">
-          Products
-        </span>
-      ),
+      title: "Products",
       content: (
         <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
           {navigationCategories.map(({ href, title, description }, index) => (
@@ -243,10 +235,12 @@ export function DefaultLayout({ children }: Props) {
                 ({ content, title, isDropdown = false }, index) => (
                   <NavigationMenuItem
                     key={index}
-                    className="flex flex-1 flex-row"
+                    className="flex flex-1 flex-row text-body-small font-medium"
                   >
                     {isDropdown ? (
-                      <NavigationMenuTrigger>{title}</NavigationMenuTrigger>
+                      <NavigationMenuTrigger className="text-body-small font-medium text-gray-500 hover:!text-gray-900 cursor-pointer">
+                        {title}
+                      </NavigationMenuTrigger>
                     ) : null}
                     {isDropdown ? (
                       <NavigationMenuContent>{content}</NavigationMenuContent>

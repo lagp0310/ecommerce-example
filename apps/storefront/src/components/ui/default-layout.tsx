@@ -40,6 +40,10 @@ import {
 import { ListItem } from "@/components/ui/list-item";
 import navigationTopImage from "@/public/images/navigation-top-image.png";
 import Image from "next/image";
+import productsBackground from "@/public/images/navigation-products-bg.png";
+import faqBackground from "@/public/images/navigation-faq-bg.png";
+import contactUsBackground from "@/public/images/navigation-contact-us-bg.png";
+import categoryBackground from "@/public/images/header-second-banner.png";
 
 type Props = React.PropsWithChildren;
 
@@ -64,7 +68,7 @@ export function DefaultLayout({ children }: Props) {
           <li className="row-span-3">
             <NavigationMenuLink asChild>
               <Link
-                className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md gap-y-4"
+                className="flex h-full w-full select-none flex-col justify-end rounded-md p-6 no-underline outline-none focus:shadow-md gap-y-4"
                 href="/"
               >
                 <Image src={navigationTopImage} alt="Fruits Basket" />
@@ -84,19 +88,53 @@ export function DefaultLayout({ children }: Props) {
           <ListItem
             href="/products"
             title="Products"
-            className="hover:bg-gray-50/50"
+            className="relative z-10 hover:bg-green-gray-900/65 hover:text-white"
+            backgroundImage={
+              <Image
+                src={productsBackground}
+                alt="Products Background"
+                placeholder="blur"
+                quality={100}
+                sizes="100vw"
+                className="-z-10 h-auto w-full rounded-[10px] object-cover absolute -top-8 left-0 hidden group-hover:block group-hover:opacity-40"
+              />
+            }
           >
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
             egestas faucibus est at dapibus. Quisque.
           </ListItem>
-          <ListItem href="/faq" title="FAQ" className="hover:bg-gray-50/50">
+          <ListItem
+            href="/faq"
+            title="FAQ"
+            className="relative z-10 hover:bg-green-gray-900/65 hover:text-white"
+            backgroundImage={
+              <Image
+                src={faqBackground}
+                alt="FAQ Background"
+                placeholder="blur"
+                quality={100}
+                sizes="100vw"
+                className="-z-10 h-auto w-full rounded-[10px] object-cover absolute top-0 left-0 hidden group-hover:block group-hover:opacity-40"
+              />
+            }
+          >
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
             egestas faucibus est at dapibus. Quisque.
           </ListItem>
           <ListItem
             href="/contact-us"
             title="Contact"
-            className="hover:bg-gray-50/50"
+            className="relative z-10 hover:bg-green-gray-900/65 hover:text-white"
+            backgroundImage={
+              <Image
+                src={contactUsBackground}
+                alt="Contact Us Background"
+                placeholder="blur"
+                quality={100}
+                sizes="100vw"
+                className="-z-10 h-auto w-full rounded-[10px] object-cover absolute top-0 left-0 hidden group-hover:block group-hover:opacity-40"
+              />
+            }
           >
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
             egestas faucibus est at dapibus. Quisque.
@@ -112,15 +150,25 @@ export function DefaultLayout({ children }: Props) {
         </span>
       ),
       content: (
-        <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
-          {navigationCategories.map((component) => (
+        <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+          {navigationCategories.map(({ href, title, description }, index) => (
             <ListItem
-              key={component.title}
-              title={component.title}
-              href={component.href}
-              className="hover:bg-gray-50/50"
+              key={index}
+              title={title}
+              href={href}
+              className="relative z-10 hover:bg-green-gray-900/80 hover:text-white"
+              backgroundImage={
+                <Image
+                  src={categoryBackground}
+                  alt="Fresh Fruit Category"
+                  placeholder="blur"
+                  quality={100}
+                  sizes="100vw"
+                  className="-z-10 h-auto w-full rounded-[10px] object-cover absolute -top-20 left-0 hidden group-hover:block group-hover:opacity-40"
+                />
+              }
             >
-              {component.description}
+              {description}
             </ListItem>
           ))}
         </ul>

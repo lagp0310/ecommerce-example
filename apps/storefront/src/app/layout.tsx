@@ -4,6 +4,7 @@ import "./globals.css";
 import { Poppins } from "next/font/google";
 import { validateEnvs } from "@/lib/env";
 import { DefaultLayout } from "@/components/ui/default-layout";
+import NextTopLoader from "nextjs-toploader";
 
 validateEnvs();
 
@@ -25,6 +26,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${poppins.className} antialiased`}>
+        <NextTopLoader />
         <DefaultLayout>{children}</DefaultLayout>
       </body>
     </html>

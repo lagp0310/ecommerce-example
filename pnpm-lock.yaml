@@ -207,6 +207,9 @@ importers:
       next:
         specifier: 15.0.3
         version: 15.0.3(@babel/core@7.25.2)(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)
+      nextjs-toploader:
+        specifier: ^3.7.15
+        version: 3.7.15(next@15.0.3(@babel/core@7.25.2)(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)
       pure-react-carousel:
         specifier: ^1.32.0
         version: 1.32.0(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)

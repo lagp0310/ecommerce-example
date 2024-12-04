@@ -65,11 +65,6 @@ export function BasicProductCard({
         </div>
       ) : null}
       <div className="mt-6 md:mt-2">{image}</div>
-      <div className="z-10 absolute top-3 right-3 flex flex-1 flex-col gap-y-2">
-        <Button className="bg-white rounded-full h-8 w-8 flex flex-row justify-center items-center border border-gray-50 group hover:bg-primary hover:border-none">
-          <HeartIcon className="h-4 w-4 text-gray-900 group-hover:text-white" />
-        </Button>
-      </div>
       <div className="flex flex-1 flex-row">
         <div className="flex flex-1 flex-col">
           <span className="text-body-small font-normal text-gray-700 truncate line-clamp-1">
@@ -96,7 +91,7 @@ export function BasicProductCard({
           {typeof rating === "number" && typeof totalRatings === "number" ? (
             <div className="flex flex-1 flex-row gap-x-1 items-center">
               <Rating
-                className="flex flex-1 flex-row gap-x-0.5"
+                className="flex flex-row gap-x-0.5"
                 rating={rating}
                 emptyIcon={<StarIcon className="text-warning h-3 w-3" />}
                 filledIcon={<FilledStarIcon className="text-warning h-3 w-3" />}
@@ -107,11 +102,6 @@ export function BasicProductCard({
             </div>
           ) : null}
         </div>
-        <div className="flex flex-1 flex-row items-center justify-end">
-          <Button className="bg-gray-50 rounded-full h-8 w-8 flex flex-row justify-center items-center hover:bg-primary group">
-            <ShoppingBagIcon className="h-4 w-4 text-gray-900 group-hover:text-white" />
-          </Button>
-        </div>
       </div>
     </ProductCard>
   );
@@ -119,10 +109,21 @@ export function BasicProductCard({
   return (
     <React.Fragment>
       {shouldUseNextLink ? (
-        // FIXME: This should be a Next Link but it's throwing errors.
-        <a href={`/products/${id}`} className="col-span-1">
-          {productNode}
-        </a>
+        <div className="relative">
+          <div className="z-10 absolute top-3 right-3 flex flex-1 flex-col gap-y-2">
+            <Button className="bg-white rounded-full h-8 w-8 flex flex-row justify-center items-center border border-gray-50 group hover:bg-primary hover:border-none">
+              <HeartIcon className="h-4 w-4 text-gray-900 group-hover:text-white" />
+            </Button>
+          </div>
+          <Link href={`/products/${id}`} className="col-span-1">
+            {productNode}
+          </Link>
+          <div className="absolute bottom-6 right-3 flex flex-1 flex-row items-center justify-end">
+            <Button className="bg-gray-50 rounded-full h-8 w-8 flex flex-row justify-center items-center hover:bg-primary group">
+              <ShoppingBagIcon className="h-4 w-4 text-gray-900 group-hover:text-white" />
+            </Button>
+          </div>
+        </div>
       ) : (
         productNode
       )}

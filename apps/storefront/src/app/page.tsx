@@ -539,12 +539,12 @@ export default function Home() {
                 </SlideRenderer>
               ))}
             </CarouselRenderer>
-            <DotsRenderer mobileMediaQuery="(max-width: 768px)">
+            {/* <DotsRenderer mobileMediaQuery="(max-width: 768px)">
               <DefaultDotGroup
                 disableActiveDots
                 className="flex flex-1 flex-row gap-x-1 w-full justify-center items-center"
               />
-            </DotsRenderer>
+            </DotsRenderer> */}
           </CarouselProvider>
         </div>
       </div>
@@ -574,12 +574,12 @@ export default function Home() {
                 </SlideRenderer>
               ))}
             </CarouselRenderer>
-            <DotsRenderer mobileMediaQuery="(max-width: 768px)">
+            {/* <DotsRenderer mobileMediaQuery="(max-width: 768px)">
               <DefaultDotGroup
                 disableActiveDots
                 className="flex flex-1 flex-row gap-x-1 w-full justify-center items-center"
               />
-            </DotsRenderer>
+            </DotsRenderer> */}
           </CarouselProvider>
         </StoreHighlights>
       </div>
@@ -623,12 +623,12 @@ export default function Home() {
                   </SlideRenderer>
                 ))}
               </CarouselRenderer>
-              <DotsRenderer mobileMediaQuery="(max-width: 768px)">
+              {/* <DotsRenderer mobileMediaQuery="(max-width: 768px)">
                 <DefaultDotGroup
                   disableActiveDots
                   className="flex flex-1 flex-row gap-x-1 w-full justify-center items-center"
                 />
-              </DotsRenderer>
+              </DotsRenderer> */}
             </CarouselProvider>
           </SectionContent>
         </Section>
@@ -666,12 +666,12 @@ export default function Home() {
                   </SlideRenderer>
                 ))}
               </CarouselRenderer>
-              <DotsRenderer mobileMediaQuery="(max-width: 768px)">
+              {/* <DotsRenderer mobileMediaQuery="(max-width: 768px)">
                 <DefaultDotGroup
                   disableActiveDots
                   className="flex flex-1 flex-row gap-x-1 w-full justify-center items-center mt-7"
                 />
-              </DotsRenderer>
+              </DotsRenderer> */}
             </CarouselProvider>
           </SectionContent>
         </Section>
@@ -690,7 +690,7 @@ export default function Home() {
                   </SlideRenderer>
                 ))}
               </CarouselRenderer>
-              <DotsRenderer
+              {/* <DotsRenderer
                 mobileMediaQuery="(max-width: 1024px)"
                 className="block lg:hidden"
               >
@@ -698,7 +698,7 @@ export default function Home() {
                   disableActiveDots
                   className="flex flex-1 flex-row gap-x-1 w-full justify-center items-center mt-7"
                 />
-              </DotsRenderer>
+              </DotsRenderer> */}
             </CarouselProvider>
           </SectionContent>
         </Section>
@@ -755,12 +755,12 @@ export default function Home() {
                       </SlideRenderer>
                     ))}
                   </CarouselRenderer>
-                  <DotsRenderer mobileMediaQuery="(max-width: 768px)">
+                  {/* <DotsRenderer mobileMediaQuery="(max-width: 768px)">
                     <DefaultDotGroup
                       disableActiveDots
                       className="flex flex-1 flex-row gap-x-1 w-full justify-center items-center mt-7"
                     />
-                  </DotsRenderer>
+                  </DotsRenderer> */}
                 </CarouselProvider>
               </SectionContent>
             </Section>
@@ -833,12 +833,12 @@ export default function Home() {
                   </SlideRenderer>
                 ))}
               </CarouselRenderer>
-              <DotsRenderer mobileMediaQuery="(max-width: 768px)">
+              {/* <DotsRenderer mobileMediaQuery="(max-width: 768px)">
                 <DefaultDotGroup
                   disableActiveDots
                   className="flex flex-1 flex-row gap-x-1 w-full justify-center items-center mt-7"
                 />
-              </DotsRenderer>
+              </DotsRenderer> */}
             </CarouselProvider>
           </SectionContent>
         </Section>
@@ -876,12 +876,12 @@ export default function Home() {
                       </SlideRenderer>
                     ))}
                   </CarouselRenderer>
-                  <DotsRenderer renderInDesktop>
+                  {/* <DotsRenderer renderInDesktop>
                     <DefaultDotGroup
                       disableActiveDots
                       className="flex flex-1 flex-row gap-x-1 w-full justify-center items-center mt-7"
                     />
-                  </DotsRenderer>
+                  </DotsRenderer> */}
                 </SectionContent>
               </Section>
             </CarouselProvider>

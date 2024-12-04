@@ -160,9 +160,12 @@ export default function Home() {
             Free shipping on all your orders
           </span>
         </div>
-        <Button className="flex flex-row gap-x-2 items-center text-primary rounded-full bg-white max-w-fit px-5 py-3 text-body-small md:text-body-medium font-semibold leading-[120%]">
+        <Link
+          href="/products"
+          className="flex flex-row gap-x-2 items-center text-primary rounded-full bg-white max-w-fit px-5 py-3 text-body-small md:text-body-medium font-semibold leading-[120%]"
+        >
           Shop now <ArrowRightIcon className="h-4 w-4 text-primary" />
-        </Button>
+        </Link>
       </div>
     </Banner>,
     <Banner key={1} className="relative col-span-1 rounded-[10px]">
@@ -185,10 +188,13 @@ export default function Home() {
         <span className="text-body-small font-normal text-gray-800">
           Only Fruits and Vegetables
         </span>
-        <Button className="flex flex-row gap-x-2 items-center text-white max-w-fit bg-primary group hover:bg-white hover:text-primary rounded-full px-5 py-3 text-body-small md:text-body-medium font-semibold leading-[120%]">
+        <Link
+          href="/products"
+          className="flex flex-row gap-x-2 items-center text-white max-w-fit bg-primary group hover:bg-white hover:text-primary rounded-full px-5 py-3 text-body-small md:text-body-medium font-semibold leading-[120%]"
+        >
           Shop now{" "}
           <ArrowRightIcon className="h-4 w-4 text-white group-hover:text-primary" />
-        </Button>
+        </Link>
       </div>
     </Banner>,
     <Banner key={2} className="relative col-span-1 rounded-[10px]">
@@ -208,9 +214,12 @@ export default function Home() {
         <h5 className="text-white text-body-xxl md:text-heading-5 font-semibold text-center line-clamp-2">
           Special Products of the Month
         </h5>
-        <Button className="flex flex-row gap-x-2 items-center text-primary max-w-fit px-5 py-3 text-body-small md:text-body-medium font-semibold leading-[120%]">
+        <Link
+          href="/products"
+          className="flex flex-row gap-x-2 items-center text-primary max-w-fit px-5 py-3 text-body-small md:text-body-medium font-semibold leading-[120%]"
+        >
           Shop now <ArrowRightIcon className="h-4 w-4 text-primary" />
-        </Button>
+        </Link>
       </div>
     </Banner>,
   ];

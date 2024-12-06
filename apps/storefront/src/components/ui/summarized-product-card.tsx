@@ -6,11 +6,11 @@ import {
   StarIcon,
 } from "@heroicons/react/24/outline";
 import { StarIcon as FilledStarIcon } from "@heroicons/react/24/solid";
-import Link from "next/link";
 import React from "react";
 import { Button } from "./button";
 import { ProductCard } from "./product-card";
 import { Rating } from "./rating";
+import { ClientLink } from "../client-link";
 
 type Props = {
   product: Product;
@@ -130,23 +130,23 @@ export function SummarizedProductCard({
       )}
     >
       {shouldUseNextLink ? (
-        <Link
+        <ClientLink
           href={`/products/${id}`}
           className="flex flex-1 flex-col gap-y-2 pt-[6px] items-center"
         >
           {productPresentation}
-        </Link>
+        </ClientLink>
       ) : (
         productPresentation
       )}
       {productActions}
       {shouldUseNextLink ? (
-        <Link
+        <ClientLink
           href={`/products/${id}`}
           className="flex flex-1 flex-col gap-y-2 pt-[6px] items-center"
         >
           {productData}
-        </Link>
+        </ClientLink>
       ) : (
         productData
       )}

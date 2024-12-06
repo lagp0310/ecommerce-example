@@ -1,6 +1,6 @@
-import Link from "next/link";
 import React from "react";
 import isURL from "validator/es/lib/isURL";
+import { ClientLink } from "../client-link";
 
 type Props = React.HTMLProps<HTMLDivElement> & {
   url?: string;
@@ -19,9 +19,9 @@ export function CategoryCard({
   return (
     <React.Fragment>
       {isValidUrl && shouldUseNextLink ? (
-        <Link href={url} className={props.className}>
+        <ClientLink href={url} className={props.className}>
           {children}
-        </Link>
+        </ClientLink>
       ) : (
         <div {...props}>{children}</div>
       )}

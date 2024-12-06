@@ -6,11 +6,11 @@ import {
   StarIcon,
 } from "@heroicons/react/24/outline";
 import { StarIcon as FilledStarIcon } from "@heroicons/react/24/solid";
-import Link from "next/link";
 import React from "react";
 import { Button } from "./button";
 import { ProductCard } from "./product-card";
 import { Rating } from "./rating";
+import { ClientLink } from "../client-link";
 
 type Props = {
   product: Product;
@@ -115,9 +115,9 @@ export function BasicProductCard({
               <HeartIcon className="h-4 w-4 text-gray-900 group-hover:text-white" />
             </Button>
           </div>
-          <Link href={`/products/${id}`} className="col-span-1">
+          <ClientLink href={`/products/${id}`} className="col-span-1">
             {productNode}
-          </Link>
+          </ClientLink>
           <div className="absolute bottom-6 right-3 flex flex-1 flex-row items-center justify-end">
             <Button className="bg-gray-50 rounded-full h-8 w-8 flex flex-row justify-center items-center hover:bg-primary group">
               <ShoppingBagIcon className="h-4 w-4 text-gray-900 group-hover:text-white" />

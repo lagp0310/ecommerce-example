@@ -26,15 +26,18 @@ export function DefaultDotGroup({ ...props }: Props) {
               const isDotActive =
                 (currentSlide % 2 === 0 ? slideIndex : slideIndex + 1) >=
                   currentSlide && slideIndex < maxDotLimit;
+              const isCustomLogic = visibleSlides !== 1;
 
               return (
                 <Dot
                   key={index}
-                  slide={slideIndex}
+                  slide={isCustomLogic ? slideIndex : index}
                   className={cn(
                     "rounded-full h-2.5 w-2.5 bg-gray-100 first:ml-0 ml-2",
                     {
-                      "bg-primary": isDotActive,
+                      "bg-primary": isCustomLogic
+                        ? isDotActive
+                        : currentSlide === index,
                     }
                   )}
                 />

@@ -9,7 +9,6 @@ import {
   ButtonNext,
   Slider,
 } from "pure-react-carousel";
-import "pure-react-carousel/dist/react-carousel.es.css";
 
 export type Props = {
   children: React.ReactNode;

@@ -2,7 +2,6 @@
 
 import React from "react";
 import { type DotGroupProps, Dot, DotGroup } from "pure-react-carousel";
-import "pure-react-carousel/dist/react-carousel.es.css";
 import { cn } from "@/lib/utils";
 
 type Props = Omit<DotGroupProps, "renderDots">;

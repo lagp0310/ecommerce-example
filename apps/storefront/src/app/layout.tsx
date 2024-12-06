@@ -1,6 +1,7 @@
 import React from "react";
 import type { Metadata } from "next";
 import "./globals.css";
+import "pure-react-carousel/dist/react-carousel.es.css";
 import { Poppins } from "next/font/google";
 import { validateEnvs } from "@/lib/env";
 import { DefaultLayout } from "@/components/ui/default-layout";

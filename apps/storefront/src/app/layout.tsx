@@ -9,6 +9,9 @@ import NextTopLoader from "nextjs-toploader";
 
 validateEnvs();
 
+// TODO: Code refactor. Check all components and pages to see how to
+// improve the code.
+
 const poppins = Poppins({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],

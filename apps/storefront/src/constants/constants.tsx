@@ -36,3 +36,8 @@ export const {
 } = availableCurrencies.at(0)!;
 
 export const offerEndDate = dayjs().add(6, "hours").toDate();
+
+export const intervalMs = 1000;
+export const secondsTransform = 60;
+export const minutesTransform = 60 * 60;
+export const daysTransform = minutesTransform * 24;

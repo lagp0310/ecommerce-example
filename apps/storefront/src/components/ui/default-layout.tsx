@@ -14,8 +14,6 @@ import {
   HeartIcon,
   ShoppingBagIcon,
   UserIcon,
-  CurrencyDollarIcon,
-  LanguageIcon,
 } from "@heroicons/react/24/outline";
 import { NewsletterSubscribe } from "@/components/ui/newsletter-subscribe";
 import { Input } from "@/components/ui/input";
@@ -25,9 +23,7 @@ import { FacebookIcon } from "@/components/ui/icons/facebook";
 import { PinterestIcon } from "@/components/ui/icons/pinterest";
 import { InstagramIcon } from "@/components/ui/icons/instagram";
 import type {
-  Currency,
   FooterLink,
-  Language,
   NavigationCategory,
   NavigationLink,
 } from "@/types/types";
@@ -49,6 +45,16 @@ import contactUsBackground from "@/public/images/navigation-contact-us-bg.png";
 import categoryBackground from "@/public/images/header-second-banner.png";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/ui/app-sidebar";
+import {
+  availableCurrencies,
+  availableLanguages,
+  currencyIcon,
+  currencyName,
+  currencyShortName,
+  languageIcon,
+  languageName,
+  languageShortName,
+} from "@/constants/constants";
 
 type Props = React.PropsWithChildren;
 
@@ -213,26 +219,6 @@ export function DefaultLayout({ children }: Props) {
       links: [{ text: "About Us", url: "#" }],
     },
   ];
-  const availableLanguages: Language[] = [
-    {
-      name: "English",
-      shortName: "Eng",
-      icon: <LanguageIcon className="h-4 w-4 mr-1" />,
-    },
-  ];
-  const {
-    name: languageName,
-    shortName: languageShortName,
-    icon: languageIcon,
-  } = availableLanguages.at(0)!;
-  const availableCurrencies: Currency[] = [
-    { name: "USD", icon: <CurrencyDollarIcon className="h-4 w-4 mr-1" /> },
-  ];
-  const {
-    name: currencyName,
-    shortName: currencyShortName,
-    icon: currencyIcon,
-  } = availableCurrencies.at(0)!;
 
   return (
     <SidebarProvider open={false} className="*:max-w-full">
@@ -245,14 +231,20 @@ export function DefaultLayout({ children }: Props) {
               Store Location: Lincoln- 344, Illinois, Chicago, USA
             </span>
             <div className="flex flex-1 flex-row gap-x-4 justify-end">
-              <LanguageSelector languages={availableLanguages}>
+              <LanguageSelector
+                languages={availableLanguages}
+                wrapperClassname="max-h-5"
+              >
                 <div className="text-green-gray-700 flex flex-row gap-x-1 items-center text-body-tiny font-normal">
                   {languageIcon}{" "}
                   {(languageShortName ?? languageName).toLocaleUpperCase()}{" "}
                   <ChevronDownIcon className="h-4 w-4 text-green-gray-700" />
                 </div>
               </LanguageSelector>
-              <CurrencySelector currencies={availableCurrencies}>
+              <CurrencySelector
+                currencies={availableCurrencies}
+                wrapperClassname="max-h-5"
+              >
                 <div className="text-green-gray-700 flex flex-row gap-x-1 items-center text-body-tiny font-normal">
                   {currencyIcon}{" "}
                   {(currencyShortName ?? currencyName).toLocaleUpperCase()}{" "}

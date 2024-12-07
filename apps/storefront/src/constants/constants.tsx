@@ -1,5 +1,6 @@
 import type { Language, Currency } from "@/types/types";
 import { CurrencyDollarIcon, LanguageIcon } from "@heroicons/react/24/outline";
+import dayjs from "dayjs";
 
 export const defaultAvatarImageWidth = 200;
 export const defaultAvatarImageHeight = 200;
@@ -33,3 +34,5 @@ export const {
   shortName: currencyShortName,
   icon: currencyIcon,
 } = availableCurrencies.at(0)!;
+
+export const offerEndDate = dayjs().add(6, "hours").toDate();

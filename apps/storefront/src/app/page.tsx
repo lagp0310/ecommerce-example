@@ -27,6 +27,7 @@ import {
   defaultCarouselInterval,
   defaultSlideHeight,
   defaultSlideWidth,
+  offerEndDate,
 } from "@/constants/constants";
 import discountBanner from "@/public/images/discount-banner.png";
 import firstOfferBanner from "@/public/images/first-offer-banner.png";
@@ -52,6 +53,7 @@ import React from "react";
 import { ButtonNextRenderer } from "@/components/ui/carousel/button-next-renderer";
 import { ButtonBackRenderer } from "@/components/ui/carousel/button-back-renderer";
 import { ClientLink } from "@/components/client-link";
+import { BannerCountdownWrapper } from "@/components/ui/banner-countdown-wrapper";
 
 export default function Home() {
   const storeHighlights: TStoreHighlight[] = [
@@ -425,11 +427,15 @@ export default function Home() {
         <h3 className="text-heading-4 md:text-heading-3 font-semibold text-white text-center">
           Sale of the Month
         </h3>
-        <div className="flex flex-1 flex-row gap-x-2">
+        <div className="flex flex-1 flex-row gap-x-2 pb-2">
           <div className="flex flex-1 flex-col gap-y-2">
-            {/* <BannerCounter endDate={} /> */}
-            <span className="text-white"></span>
-            <span className="text-white uppercase"></span>
+            <BannerCountdownWrapper
+              className="flex flex-1 flex-row gap-x-4"
+              endDate={offerEndDate}
+              semicolonClasses="font-normal text-body-xxl leading-[120%] text-white/60"
+              timeClasses="font-normal text-body-xxl text-white uppercase"
+              timeUnitClasses="font-normal text-body-tiny leading-[100%] text-white uppercase"
+            />
           </div>
         </div>
         <ClientLink

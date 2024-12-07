@@ -11,6 +11,8 @@ import { Button } from "./button";
 import { ProductCard } from "./product-card";
 import { Rating } from "./rating";
 import { ClientLink } from "../client-link";
+import { BannerCountdownWrapper } from "./banner-countdown-wrapper";
+import { offerEndDate } from "@/constants/constants";
 
 type Props = {
   product: Product;
@@ -87,11 +89,17 @@ export function SummarizedProductCard({
           </span>
         </div>
       ) : null}
-      <div className="flex flex-1 flex-col items-center gap-y-[6px] pt-[18px] pb-6">
+      <div className="flex flex-1 flex-col items-center gap-y-4 pt-[18px]">
         <span className="text-body-small leading-[18px] text-gray-400">
           Hurry up! Offer ends In:
         </span>
-        <span className=""></span>
+        <BannerCountdownWrapper
+          className="flex flex-1 flex-row gap-x-4"
+          endDate={offerEndDate}
+          semicolonClasses="font-normal text-body-xl text-gray-500"
+          timeClasses="font-medium text-body-large text-gray-900 uppercase"
+          timeUnitClasses="font-medium text-[10px] leading-[100%] text-gray-400 uppercase"
+        />
       </div>
     </React.Fragment>
   );

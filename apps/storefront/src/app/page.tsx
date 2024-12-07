@@ -527,6 +527,8 @@ export default function Home() {
     <div className="flex flex-1 flex-col">
       <div className="flex flex-1 flex-row justify-center items-center my-6 px-6 xl:px-0">
         <div className="grid lg:grid-cols-3 lg:grid-rows-2 gap-6 max-w-7xl w-full">
+          {/* FIXME: While carousels are loaded (client component) the server sends a basic HTML version which is
+          a column-based slides. We can improve this by using a loader (skeleton) while the component loads. */}
           <CarouselProvider {...headerBannerCarouselProviderProps}>
             <CarouselRenderer {...headerBannerCarouselRendererProps}>
               {headerBanners.map((bannerNode, index) => (

@@ -2,13 +2,13 @@
 
 import React from "react";
 import { CarouselProvider as Provider } from "pure-react-carousel";
-import { useIsMobile } from "@/hooks/useIsMobile";
+import { useIsMobile } from "@/hooks/use-is-mobile";
 import { CarouselProviderCustomProps } from "@/types/types";
 import {
   defaultVisibleSlides,
   defaultMobileMediaQuery,
 } from "@/constants/constants";
-import { useVisibleSlides } from "@/hooks/useVisibleSlides";
+import { useVisibleSlides } from "@/hooks/use-visible-slides";
 
 type Props = React.PropsWithChildren<CarouselProviderCustomProps>;
 

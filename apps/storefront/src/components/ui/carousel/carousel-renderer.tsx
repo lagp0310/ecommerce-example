@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { useIsMobile } from "@/hooks/useIsMobile";
+import { useIsMobile } from "@/hooks/use-is-mobile";
 import { Carousel } from "./carousel";
 import { CarouselRendererProps } from "@/types/types";
 import { defaultMobileMediaQuery } from "@/constants/constants";

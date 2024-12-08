@@ -131,12 +131,12 @@ export function DefaultLayout({ children }: Props) {
                   <PhoneIcon className="h-6 w-6" />
                   <span className="hidden lg:flex">(219) 555-0114</span>
                 </NavbarLink>
-                <Button>
+                {/* <Button>
                   <MagnifyingGlassIcon className="h-6 w-6 text-gray-900" />
                 </Button>
                 <Button>
                   <HeartIcon className="h-6 w-6 text-gray-900" />
-                </Button>
+                </Button> */}
                 <Button>
                   <ShoppingBagIcon className="h-6 w-6 text-gray-900" />
                 </Button>

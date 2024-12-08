@@ -27,7 +27,6 @@ import {
   defaultCarouselInterval,
   defaultSlideHeight,
   defaultSlideWidth,
-  offerEndDate,
 } from "@/constants/constants";
 import discountBanner from "@/public/images/discount-banner.png";
 import firstOfferBanner from "@/public/images/first-offer-banner.png";

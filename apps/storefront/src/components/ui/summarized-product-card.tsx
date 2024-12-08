@@ -95,7 +95,6 @@ export function SummarizedProductCard({
         </span>
         <BannerCountdownWrapper
           className="flex flex-1 flex-row gap-x-4"
-          endDate={offerEndDate}
           semicolonClasses="font-normal text-body-xl text-gray-500"
           timeClasses="font-medium text-body-large text-gray-900 uppercase"
           timeUnitClasses="font-medium text-[10px] leading-[100%] text-gray-400 uppercase"

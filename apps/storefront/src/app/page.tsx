@@ -431,7 +431,6 @@ export default function Home() {
           <div className="flex flex-1 flex-col gap-y-2">
             <BannerCountdownWrapper
               className="flex flex-1 flex-row gap-x-4"
-              endDate={offerEndDate}
               semicolonClasses="font-normal text-body-xxl leading-[120%] text-white/60"
               timeClasses="font-normal text-body-xxl text-white uppercase"
               timeUnitClasses="font-normal text-body-tiny leading-[100%] text-white uppercase"

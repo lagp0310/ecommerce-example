@@ -20,6 +20,7 @@ export type NavigationCategory = {
   description?: string;
 };
 export type NavigationLink = {
+  groupName: string;
   title?: React.ReactNode;
   content: React.ReactNode;
   isDropdown?: boolean;

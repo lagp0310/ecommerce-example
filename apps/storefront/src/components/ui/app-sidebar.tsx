@@ -4,9 +4,6 @@ import {
   SidebarFooter,
   SidebarGroup,
   SidebarHeader,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import { Logo } from "@/components/ui/logo";
 import { LanguageSelector } from "./language-selector";
@@ -22,19 +19,9 @@ import {
   currencyShortName,
   currencyName,
 } from "@/constants/constants";
+import { SidebarLinksWrapper } from "./sidebar-menu-links-wrapper";
 
 export function AppSidebar() {
-  const items = [
-    {
-      title: "Home",
-      url: "/",
-    },
-    {
-      title: "Products",
-      url: "/products",
-    },
-  ];
-
   return (
     <Sidebar>
       <SidebarHeader className="flex flex-row gap-x-4 items-center p-4">
@@ -45,15 +32,7 @@ export function AppSidebar() {
       </SidebarHeader>
       <SidebarContent className="p-4 pt-0">
         <SidebarGroup className="flex flex-1 flex-col gap-y-2 p-0">
-          <SidebarMenu>
-            {items.map((item) => (
-              <SidebarMenuItem key={item.title}>
-                <SidebarMenuButton asChild href={item.url}>
-                  <span>{item.title}</span>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-            ))}
-          </SidebarMenu>
+          <SidebarLinksWrapper />
         </SidebarGroup>
       </SidebarContent>
       <SidebarFooter className="p-4">

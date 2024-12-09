@@ -22,7 +22,7 @@ export function useVisibleSlides({
   const [currentVisibleSlides, setCurrentVisibleSlides] =
     React.useState(visibleSlides);
 
-  const handleViewportResize = React.useCallback(() => {
+  const updateVisibleSlides = React.useCallback(() => {
     if (
       typeof window === "undefined" ||
       !Array.isArray(mediaQuerySlides) ||
@@ -57,22 +57,26 @@ export function useVisibleSlides({
       return;
     }
 
-    window.addEventListener("load", handleViewportResize);
-    window.addEventListener("resize", handleViewportResize);
+    window.addEventListener("load", updateVisibleSlides);
+    window.addEventListener("resize", updateVisibleSlides);
 
     if (
       !wasInitiallyCalled.current &&
       (!Array.isArray(mediaQuerySlides) || mediaQuerySlides.length === 0)
     ) {
-      handleViewportResize();
+      updateVisibleSlides();
       wasInitiallyCalled.current = true;
     }
 
     return () => {
-      window.removeEventListener("load", handleViewportResize);
-      window.removeEventListener("resize", handleViewportResize);
+      window.removeEventListener("load", updateVisibleSlides);
+      window.removeEventListener("resize", updateVisibleSlides);
     };
-  }, [handleViewportResize, mediaQuerySlides]);
+  }, [updateVisibleSlides, mediaQuerySlides]);
+
+  React.useEffect(() => {
+    updateVisibleSlides();
+  }, [updateVisibleSlides]);
 
   return currentVisibleSlides;
 }

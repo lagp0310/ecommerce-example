@@ -13,16 +13,22 @@ import { TrashIcon } from "@heroicons/react/24/outline";
 type Props = React.HTMLProps<HTMLDivElement> & {
   actionsProps?: CartProductActionsProps;
   product: Product;
+  toggleSidebar: () => void;
 };
 
 export function BasicCartProduct({
   actionsProps,
   product: { id, name, price, currencySymbol, discountedPrice, image },
+  toggleSidebar,
   ...props
 }: Props) {
   return (
     <div className="flex flex-1 flex-row gap-x-1 items-center">
-      <Link href={`/products/${id}`} className="flex flex-1 flex-row gap-x-1">
+      <Link
+        href={`/products/${id}`}
+        className="flex flex-1 flex-row gap-x-1"
+        onClick={toggleSidebar}
+      >
         <CartProduct {...props} className="flex flex-1 flex-row gap-4">
           {image}
           <div className="flex flex-1 flex-col gap-1 justify-center">

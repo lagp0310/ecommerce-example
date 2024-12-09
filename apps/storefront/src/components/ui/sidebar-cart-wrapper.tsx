@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import { BasicCartProduct } from "./basic-cart-product";
 import { CartSheet } from "./cart-sheet";
@@ -13,7 +15,25 @@ import Link from "next/link";
 import Image from "next/image";
 import type { Product } from "@/types/types";
 import greenAppleProduct from "@/public/images/green-apple-product.png";
-import { DialogProps } from "@radix-ui/react-dialog";
+import { type DialogProps } from "@radix-ui/react-dialog";
+
+const cartProduct: Product = {
+  id: "868b9f7f-620c-490c-9c8b-b45cccb4507f",
+  name: "Green Apple",
+  price: 20.99,
+  currencySymbol: "$",
+  currencyCode: "USD",
+  image: (
+    <Image
+      src={greenAppleProduct}
+      alt="Green Apple"
+      className="h-auto w-20 max-w-20 rounded-[10px]"
+    />
+  ),
+};
+const cartId = "0e84b499-0047-4125-9f96-f44b7a793214";
+const numberOfProducts = 40;
+const hasProducts = numberOfProducts > 0;
 
 type Props = {
   sheetProps?: DialogProps;
@@ -30,26 +50,13 @@ export function SidebarCartWrapper({
   sheetTitle = <SheetTitle className="text-left">My Shopping Cart</SheetTitle>,
   ...sheetProps
 }: Props) {
-  const cartProduct: Product = {
-    id: "868b9f7f-620c-490c-9c8b-b45cccb4507f",
-    name: "Green Apple",
-    price: 20.99,
-    currencySymbol: "$",
-    currencyCode: "USD",
-    image: (
-      <Image
-        src={greenAppleProduct}
-        alt="Green Apple"
-        className="h-auto w-20 max-w-20 rounded-[10px]"
-      />
-    ),
-  };
-  const cartId = "0e84b499-0047-4125-9f96-f44b7a793214";
-  const numberOfProducts = 40;
-  const hasProducts = numberOfProducts > 0;
+  const [isOpen, setIsOpen] = React.useState(false);
+  const toggleSidebar = React.useCallback(() => {
+    setIsOpen((prevState) => !prevState);
+  }, []);
 
   return (
-    <CartSheet {...sheetProps}>
+    <CartSheet {...sheetProps} open={isOpen} onOpenChange={setIsOpen}>
       {sheetTrigger}
       <SheetContent className="flex flex-1 flex-col gap-y-4">
         <SheetHeader>{sheetTitle}</SheetHeader>
@@ -57,7 +64,11 @@ export function SidebarCartWrapper({
           <div className="flex flex-1 flex-col h-full max-h-full overflow-y-auto overflow-x-hidden basis-full">
             {Array.from({ length: numberOfProducts }).map((_value, index) => (
               <div key={index} className="group/cart-product flex flex-col">
-                <BasicCartProduct key={index} product={cartProduct} />
+                <BasicCartProduct
+                  key={index}
+                  product={cartProduct}
+                  toggleSidebar={toggleSidebar}
+                />
                 <div className="group-last/cart-product:hidden border-t border-gray-100/50 w-full"></div>
               </div>
             ))}

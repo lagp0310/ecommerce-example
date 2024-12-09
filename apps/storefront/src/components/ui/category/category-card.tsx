@@ -1,6 +1,6 @@
 import React from "react";
 import isURL from "validator/es/lib/isURL";
-import { ClientLink } from "../client-link";
+import { ClientLink } from "@/components/navigation/client-link";
 
 type Props = React.HTMLProps<HTMLDivElement> & {
   url?: string;

@@ -4,21 +4,21 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import type { Currency } from "@/types/types";
+} from "@/components/ui/common/dropdown-menu";
+import type { Language } from "@/types/types";
 
 type Props = React.PropsWithChildren<{
-  currencies: Currency[];
+  languages: Language[];
   wrapperClassname?: Pick<
     React.HTMLProps<HTMLDivElement>,
     "className"
   >["className"];
 }>;
 
-export function CurrencySelector({
+export function LanguageSelector({
   children,
   wrapperClassname = "",
-  currencies,
+  languages,
   ...props
 }: Props) {
   return (
@@ -28,7 +28,7 @@ export function CurrencySelector({
           {children}
         </DropdownMenuTrigger>
         <DropdownMenuContent>
-          {currencies.map(({ name }, index) => (
+          {languages.map(({ name }, index) => (
             <DropdownMenuItem
               key={index}
               className="flex flex-1 flex-row gap-x-1"

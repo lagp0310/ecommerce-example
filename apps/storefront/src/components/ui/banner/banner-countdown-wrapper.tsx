@@ -2,7 +2,7 @@
 
 import React from "react";
 import { useCountdown } from "@/hooks/use-countdown";
-import { BannerCountdown } from "./banner-countdown";
+import { BannerCountdown } from "@/components/ui/banner/banner-countdown";
 import dayjs from "dayjs";
 import utcPlugin from "dayjs/plugin/utc";
 import { cn } from "@/lib/utils";

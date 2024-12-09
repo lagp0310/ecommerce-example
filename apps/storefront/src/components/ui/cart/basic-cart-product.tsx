@@ -7,7 +7,7 @@ import {
   CartProductActions,
   type Props as CartProductActionsProps,
 } from "./cart-product-actions";
-import { Button } from "./button";
+import { Button } from "@/components/ui/common/button";
 import { TrashIcon } from "@heroicons/react/24/outline";
 
 type Props = React.HTMLProps<HTMLDivElement> & {

@@ -1,31 +1,34 @@
 import React from "react";
-import { Button } from "@/components/ui/button";
-import { CurrencySelector } from "@/components/ui/currency-selector";
-import { LanguageSelector } from "@/components/ui/language-selector";
-import { Logo } from "@/components/ui/logo";
-import { Navbar } from "@/components/ui/navbar";
-import { NavbarLink } from "@/components/ui/navbar-link";
-import { TopBar } from "@/components/ui/top-bar";
+import { Button } from "@/components/ui/common/button";
+import { CurrencySelector } from "@/components/ui/currency/currency-selector";
+import { LanguageSelector } from "@/components/ui/locale/language-selector";
+import { Logo } from "@/components/ui/common/logo";
+import { Navbar } from "@/components/navigation/navbar";
+import { NavbarLink } from "@/components/navigation/navbar-link";
+import { TopBar } from "@/components/ui/common/top-bar";
 import {
   MapPinIcon,
   ChevronDownIcon,
   PhoneIcon,
   UserIcon,
 } from "@heroicons/react/24/outline";
-import { NewsletterSubscribe } from "@/components/ui/newsletter-subscribe";
-import { Input } from "@/components/ui/input";
-import { FooterContent } from "@/components/ui/footer-content";
+import { NewsletterSubscribe } from "@/components/ui/marketing/newsletter-subscribe";
+import { Input } from "@/components/ui/common/input";
+import { FooterContent } from "@/components/ui/common/footer-content";
 import Link from "next/link";
-import { FacebookIcon } from "@/components/ui/icons/facebook";
-import { PinterestIcon } from "@/components/ui/icons/pinterest";
-import { InstagramIcon } from "@/components/ui/icons/instagram";
+import { FacebookIcon } from "@/components/ui/icons/brands/facebook";
+import { PinterestIcon } from "@/components/ui/icons/brands/pinterest";
+import { InstagramIcon } from "@/components/ui/icons/brands/instagram";
 import type { FooterLink } from "@/types/types";
 import {
   NavigationMenu,
   NavigationMenuList,
-} from "@/components/ui/navigation-menu";
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
-import { AppSidebar } from "@/components/ui/app-sidebar";
+} from "@/components/navigation/navigation-menu";
+import {
+  SidebarProvider,
+  SidebarTrigger,
+} from "@/components/ui/common/sidebar";
+import { AppSidebar } from "@/components/ui/common/app-sidebar";
 import {
   availableCurrencies,
   availableLanguages,
@@ -36,8 +39,8 @@ import {
   languageName,
   languageShortName,
 } from "@/constants/constants";
-import { NavigationLinksWrapper } from "./navigation-links-wrapper";
-import { SidebarCartWrapper } from "./sidebar-cart-wrapper";
+import { NavigationLinksWrapper } from "@/components/navigation/navigation-links-wrapper";
+import { SidebarCartWrapper } from "@/components/ui/cart/sidebar-cart-wrapper";
 
 type Props = React.PropsWithChildren;
 

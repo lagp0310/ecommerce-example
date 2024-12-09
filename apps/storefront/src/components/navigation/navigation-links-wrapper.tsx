@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { ClientLink } from "../client-link";
+import { ClientLink } from "@/components/navigation/client-link";
 import { NavigationLink } from "@/types/types";
 import {
   NavigationMenuContent,

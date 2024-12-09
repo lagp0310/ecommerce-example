@@ -1,4 +1,4 @@
-import { Sheet } from "@/components/ui/sheet";
+import { Sheet } from "@/components/ui/common/sheet";
 import { type DialogProps } from "@radix-ui/react-dialog";
 
 type Props = DialogProps;

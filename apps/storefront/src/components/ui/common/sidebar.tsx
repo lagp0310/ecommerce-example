@@ -6,17 +6,17 @@ import { VariantProps, cva } from "class-variance-authority";
 
 import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Separator } from "@/components/ui/separator";
-import { Sheet, SheetContent } from "@/components/ui/sheet";
-import { Skeleton } from "@/components/ui/skeleton";
+import { Button } from "@/components/ui/common/button";
+import { Input } from "@/components/ui/common/input";
+import { Separator } from "@/components/ui/common/separator";
+import { Sheet, SheetContent } from "@/components/ui/common/sheet";
+import { Skeleton } from "@/components/ui/common/skeleton";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/components/ui/tooltip";
+} from "@/components/ui/common/tooltip";
 import { Bars3Icon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import isURL from "validator/es/lib/isURL";

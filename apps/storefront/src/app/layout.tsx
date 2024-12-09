@@ -4,7 +4,7 @@ import "./globals.css";
 import "pure-react-carousel/dist/react-carousel.es.css";
 import { Poppins } from "next/font/google";
 import { validateEnvs } from "@/lib/env";
-import { DefaultLayout } from "@/components/ui/default-layout";
+import { DefaultLayout } from "@/components/ui/common/default-layout";
 import NextTopLoader from "nextjs-toploader";
 
 validateEnvs();

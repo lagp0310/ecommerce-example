@@ -5,7 +5,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@/components/ui/sidebar";
+} from "@/components/ui/common/sidebar";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 

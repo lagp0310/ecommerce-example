@@ -1,12 +1,12 @@
 import { CustomerTestimonial as TCustomerTestimonial } from "@/types/types";
 import React from "react";
-import { QuoteIcon } from "./icons/quote";
+import { QuoteIcon } from "@/components/ui/icons/quote";
 import Image from "next/image";
-import { Rating } from "./rating";
+import { Rating } from "@/components/ui/product/rating";
 import { StarIcon } from "@heroicons/react/24/outline";
 import { StarIcon as FilledStarIcon } from "@heroicons/react/24/solid";
-import { CustomerTestimonial } from "./customer-testimonial";
-import { UserAvatar } from "./user-avatar";
+import { CustomerTestimonial } from "@/components/ui/customer/customer-testimonial";
+import { UserAvatar } from "@/components/ui/user/user-avatar";
 
 type Props = { testimonial: TCustomerTestimonial };
 

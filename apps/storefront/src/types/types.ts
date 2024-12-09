@@ -1,5 +1,5 @@
 import { CarouselProviderProps } from "pure-react-carousel";
-import { type Props as CarouselProps } from "@/components/ui/carousel/carousel";
+import { type Props as CarouselProps } from "@/components/carousel/carousel";
 import { MediaQuerySlide } from "@/hooks/use-visible-slides";
 import React from "react";
 

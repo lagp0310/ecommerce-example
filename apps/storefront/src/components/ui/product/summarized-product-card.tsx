@@ -7,12 +7,11 @@ import {
 } from "@heroicons/react/24/outline";
 import { StarIcon as FilledStarIcon } from "@heroicons/react/24/solid";
 import React from "react";
-import { Button } from "./button";
-import { ProductCard } from "./product-card";
-import { Rating } from "./rating";
-import { ClientLink } from "../client-link";
-import { BannerCountdownWrapper } from "./banner-countdown-wrapper";
-import { offerEndDate } from "@/constants/constants";
+import { Button } from "@/components/ui/common/button";
+import { ProductCard } from "@/components/ui//product/product-card";
+import { Rating } from "@/components/ui/product/rating";
+import { ClientLink } from "@/components/navigation/client-link";
+import { BannerCountdownWrapper } from "@/components/ui/banner/banner-countdown-wrapper";
 
 type Props = {
   product: Product;

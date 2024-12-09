@@ -4,11 +4,11 @@ import {
   SidebarFooter,
   SidebarGroup,
   SidebarHeader,
-} from "@/components/ui/sidebar";
-import { Logo } from "@/components/ui/logo";
-import { LanguageSelector } from "./language-selector";
+} from "@/components/ui/common/sidebar";
+import { Logo } from "@/components/ui/common/logo";
+import { LanguageSelector } from "@/components/ui/locale/language-selector";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
-import { CurrencySelector } from "./currency-selector";
+import { CurrencySelector } from "@/components/ui/currency/currency-selector";
 import {
   availableLanguages,
   languageIcon,
@@ -19,7 +19,7 @@ import {
   currencyShortName,
   currencyName,
 } from "@/constants/constants";
-import { SidebarLinksWrapper } from "./sidebar-menu-links-wrapper";
+import { SidebarLinksWrapper } from "@/components/ui/common/sidebar-menu-links-wrapper";
 
 export function AppSidebar() {
   return (

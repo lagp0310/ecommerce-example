@@ -1,28 +1,28 @@
-import { Banner } from "@/components/ui/banner";
-import { BasicProductCard } from "@/components/ui/basic-product-card";
-import { CarouselRenderer } from "@/components/ui/carousel/carousel-renderer";
-import { CarouselProvider } from "@/components/ui/carousel/carousel-provider";
-import { DefaultDotGroup } from "@/components/ui/carousel/default-dot-group";
-import { DotsRenderer } from "@/components/ui/carousel/dots-renderer";
-import { SlideRenderer } from "@/components/ui/carousel/slide-renderer";
-import { CategoryCard } from "@/components/ui/category-card";
-import { HomepageCustomerTestimonial } from "@/components/ui/homepage-customer-testimonial";
-import { BookOffBrandIcon } from "@/components/ui/icons/book-off-brand";
+import { Banner } from "@/components/ui/banner/banner";
+import { BasicProductCard } from "@/components/ui/product/basic-product-card";
+import { CarouselRenderer } from "@/components/carousel/carousel-renderer";
+import { CarouselProvider } from "@/components/carousel/carousel-provider";
+import { DefaultDotGroup } from "@/components/carousel/default-dot-group";
+import { DotsRenderer } from "@/components/carousel/dots-renderer";
+import { SlideRenderer } from "@/components/carousel/slide-renderer";
+import { CategoryCard } from "@/components/ui/category/category-card";
+import { HomepageCustomerTestimonial } from "@/components/ui/customer/homepage-customer-testimonial";
+import { BookOffBrandIcon } from "@/components/ui/icons/brands/book-off-brand";
 import { BoxIcon } from "@/components/ui/icons/box";
-import { FoodCoUkBrandIcon } from "@/components/ui/icons/food-co-uk-brand";
-import { FoodNetworkBrandIcon } from "@/components/ui/icons/food-network-brand";
-import { GSeriesBrandIcon } from "@/components/ui/icons/g-series-brand";
+import { FoodCoUkBrandIcon } from "@/components/ui/icons/brands/food-co-uk-brand";
+import { FoodNetworkBrandIcon } from "@/components/ui/icons/brands/food-network-brand";
+import { GSeriesBrandIcon } from "@/components/ui/icons/brands/g-series-brand";
 import { HeadphonesIcon } from "@/components/ui/icons/headphones";
-import { MangoBrandIcon } from "@/components/ui/icons/mango-brand";
+import { MangoBrandIcon } from "@/components/ui/icons/brands/mango-brand";
 import { ShoppingBagCheckedIcon } from "@/components/ui/icons/shopping-bag-checked";
-import { StepsBrandIcon } from "@/components/ui/icons/steps-brand";
+import { StepsBrandIcon } from "@/components/ui/icons/brands/steps-brand";
 import { TruckIcon } from "@/components/ui/icons/truck";
-import { Section } from "@/components/ui/section";
-import { SectionContent } from "@/components/ui/section-content";
-import { SectionTitle } from "@/components/ui/section-title";
-import { StoreHighlight } from "@/components/ui/store-highlight";
-import { StoreHighlights } from "@/components/ui/store-highlights";
-import { SummarizedProductCard } from "@/components/ui/summarized-product-card";
+import { Section } from "@/components/ui/common/section";
+import { SectionContent } from "@/components/ui/common/section-content";
+import { SectionTitle } from "@/components/ui/common/section-title";
+import { StoreHighlight } from "@/components/ui/store/store-highlight";
+import { StoreHighlights } from "@/components/ui/store/store-highlights";
+import { SummarizedProductCard } from "@/components/ui/product/summarized-product-card";
 import {
   defaultCarouselInterval,
   defaultSlideHeight,
@@ -49,10 +49,10 @@ import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import { ButtonNextRenderer } from "@/components/ui/carousel/button-next-renderer";
-import { ButtonBackRenderer } from "@/components/ui/carousel/button-back-renderer";
-import { ClientLink } from "@/components/client-link";
-import { BannerCountdownWrapper } from "@/components/ui/banner-countdown-wrapper";
+import { ButtonNextRenderer } from "@/components/carousel/button-next-renderer";
+import { ButtonBackRenderer } from "@/components/carousel/button-back-renderer";
+import { ClientLink } from "@/components/navigation/client-link";
+import { BannerCountdownWrapper } from "@/components/ui/banner/banner-countdown-wrapper";
 
 export default function Home() {
   const storeHighlights: TStoreHighlight[] = [

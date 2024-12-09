@@ -9,7 +9,7 @@ import {
   SheetHeader,
   SheetTitle,
   SheetFooter,
-} from "./sheet";
+} from "@/components/ui/common/sheet";
 import { ShoppingBagIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import Image from "next/image";

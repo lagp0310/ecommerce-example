@@ -32,7 +32,7 @@ const cartProduct: Product = {
   ),
 };
 const cartId = "0e84b499-0047-4125-9f96-f44b7a793214";
-const numberOfProducts = 40;
+const numberOfProducts = 4;
 const hasProducts = numberOfProducts > 0;
 
 type Props = {
@@ -61,7 +61,7 @@ export function SidebarCartWrapper({
       <SheetContent className="flex flex-1 flex-col gap-y-4">
         <SheetHeader>{sheetTitle}</SheetHeader>
         {hasProducts ? (
-          <div className="flex flex-1 flex-col h-full max-h-full overflow-y-auto overflow-x-hidden basis-full">
+          <div className="flex flex-1 flex-col h-full max-h-full overflow-y-auto overflow-x-hidden pr-4 basis-full">
             {Array.from({ length: numberOfProducts }).map((_value, index) => (
               <div key={index} className="group/cart-product flex flex-col">
                 <BasicCartProduct

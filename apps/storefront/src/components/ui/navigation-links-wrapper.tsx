@@ -115,7 +115,7 @@ export function NavigationLinksWrapper() {
             <NavigationMenuLink
               data-active={pathname === "/"}
               className={cn(
-                "flex flex-row justify-center gap-x-1 items-center text-body-small font-medium text-gray-500 hover:text-gray-900 cursor-pointer data-[active=true]:text-gray-900 data-[active=true]:bg-green-gray-100/50 data-[active=false]:bg-white group-hover/home:bg-green-gray-100/50 group-hover/home:rounded-md",
+                "flex flex-row justify-center gap-x-1 items-center text-body-small font-medium text-gray-500 hover:!text-gray-900 cursor-pointer data-[active=true]:text-gray-900 data-[active=true]:!bg-green-gray-100/50 data-[active=false]:!bg-white group-hover/home:!bg-green-gray-100/50 group-hover/home:!rounded-md",
                 navigationMenuTriggerStyle()
               )}
             >
@@ -160,7 +160,7 @@ export function NavigationLinksWrapper() {
             <NavigationMenuLink
               data-active={pathname === "/products"}
               className={cn(
-                "flex flex-row justify-center gap-x-1 items-center text-body-small font-medium text-gray-500 hover:text-gray-900 cursor-pointer data-[active=true]:text-gray-900 data-[active=true]:bg-green-gray-100/50 data-[active=false]:bg-white group-hover/products:bg-green-gray-100/50 group-hover/products:rounded-md",
+                "flex flex-row justify-center gap-x-1 items-center text-body-small font-medium text-gray-500 hover:!text-gray-900 cursor-pointer data-[active=true]:text-gray-900 data-[active=true]:!bg-green-gray-100/50 data-[active=false]:!bg-white group-hover/products:!bg-green-gray-100/50 group-hover/products:!rounded-md",
                 navigationMenuTriggerStyle()
               )}
             >
@@ -182,7 +182,7 @@ export function NavigationLinksWrapper() {
             <NavigationMenuLink
               data-active={pathname === "/about-us"}
               className={cn(
-                "flex flex-row justify-center gap-x-1 items-center text-body-small font-medium text-gray-500 hover:text-gray-900 cursor-pointer data-[active=true]:text-gray-900 data-[active=true]:bg-green-gray-100/50 data-[active=false]:bg-white group-hover/about-us:bg-green-gray-100/50 group-hover/about-us:rounded-md",
+                "flex flex-row justify-center gap-x-1 items-center text-body-small font-medium text-gray-500 hover:!text-gray-900 cursor-pointer data-[active=true]:text-gray-900 data-[active=true]:!bg-green-gray-100/50 data-[active=false]:!bg-white group-hover/about-us:!bg-green-gray-100/50 group-hover/about-us:!rounded-md",
                 navigationMenuTriggerStyle()
               )}
             >

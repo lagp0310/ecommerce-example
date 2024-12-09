@@ -5,5 +5,6 @@ export default async function ResetPassword({
 }: {
   params: Promise<{ accountId: string }>;
 }) {
+  console.log(await params);
   return <></>;
 }

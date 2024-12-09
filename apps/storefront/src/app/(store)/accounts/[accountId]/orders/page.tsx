@@ -1,9 +1,10 @@
 import React from "react";
 
-export default function Orders({
+export default async function Orders({
   params,
 }: {
   params: Promise<{ accountId: string }>;
 }) {
+  console.log(await params);
   return <></>;
 }

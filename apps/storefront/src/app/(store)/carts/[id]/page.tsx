@@ -1,5 +1,10 @@
 import React from "react";
 
-export default function Cart({ params }: { params: Promise<{ id: string }> }) {
+export default async function Cart({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  console.log(await params);
   return <></>;
 }

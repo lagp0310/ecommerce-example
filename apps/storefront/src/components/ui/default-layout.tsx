@@ -10,9 +10,6 @@ import {
   MapPinIcon,
   ChevronDownIcon,
   PhoneIcon,
-  MagnifyingGlassIcon,
-  HeartIcon,
-  ShoppingBagIcon,
   UserIcon,
 } from "@heroicons/react/24/outline";
 import { NewsletterSubscribe } from "@/components/ui/newsletter-subscribe";
@@ -40,6 +37,7 @@ import {
   languageShortName,
 } from "@/constants/constants";
 import { NavigationLinksWrapper } from "./navigation-links-wrapper";
+import { SidebarCartWrapper } from "./sidebar-cart-wrapper";
 
 type Props = React.PropsWithChildren;
 
@@ -137,9 +135,7 @@ export function DefaultLayout({ children }: Props) {
                 <Button>
                   <HeartIcon className="h-6 w-6 text-gray-900" />
                 </Button> */}
-                <Button>
-                  <ShoppingBagIcon className="h-6 w-6 text-gray-900" />
-                </Button>
+                <SidebarCartWrapper />
                 <Button>
                   <UserIcon className="h-6 w-6 text-gray-900" />
                 </Button>

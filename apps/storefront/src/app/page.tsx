@@ -24,25 +24,23 @@ import { StoreHighlight } from "@/components/ui/store/store-highlight";
 import { StoreHighlights } from "@/components/ui/store/store-highlights";
 import { SummarizedProductCard } from "@/components/ui/product/summarized-product-card";
 import {
+  category,
   defaultCarouselInterval,
   defaultSlideHeight,
   defaultSlideWidth,
+  product,
 } from "@/constants/constants";
 import discountBanner from "@/public/images/discount-banner.png";
 import firstOfferBanner from "@/public/images/first-offer-banner.png";
-import freshFruitCategory from "@/public/images/fresh-fruit.png";
-import greenAppleProduct from "@/public/images/green-apple-product.png";
 import headerBigBanner from "@/public/images/header-big-banner.png";
 import headerSecondBanner from "@/public/images/header-second-banner.png";
 import headerThirdBanner from "@/public/images/header-third-banner.png";
 import secondOfferBanner from "@/public/images/second-offer-banner.png";
 import thirdOfferBanner from "@/public/images/third-offer-banner.png";
-import {
+import type {
   CarouselProviderCustomProps,
   CarouselRendererProps,
-  Category,
   CustomerTestimonial,
-  Product,
   StoreHighlight as TStoreHighlight,
 } from "@/types/types";
 import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/24/outline";
@@ -54,7 +52,7 @@ import { ButtonBackRenderer } from "@/components/carousel/button-back-renderer";
 import { ClientLink } from "@/components/navigation/client-link";
 import { BannerCountdownWrapper } from "@/components/ui/banner/banner-countdown-wrapper";
 
-export default function Home() {
+export default async function Home() {
   const storeHighlights: TStoreHighlight[] = [
     {
       icon: <TruckIcon className="h-10 w-10 text-primary" />,
@@ -77,27 +75,6 @@ export default function Home() {
       description: "30 Days Money-Back Guarantee",
     },
   ];
-  const category: Category = {
-    categoryId: "a55fef0a-230d-402f-b263-9fe44d226a9f",
-    image: <Image src={freshFruitCategory} alt="Category Image" />,
-    title: "Fresh Fruit",
-    url: "/products",
-  };
-  const popularProduct: Product = {
-    id: "868b9f7f-620c-490c-9c8b-b45cccb4507f",
-    name: "Green Apple",
-    price: 20.99,
-    discountedPrice: 14.99,
-    currencySymbol: "$",
-    currencyCode: "USD",
-    image: <Image src={greenAppleProduct} alt="Green Apple" />,
-    rating: 4,
-    totalRatings: 25,
-    tags: [
-      { text: "50% Off", type: "danger" },
-      { text: "Top Seller", type: "info" },
-    ],
-  };
   const customerTestimonial: CustomerTestimonial = {
     id: "f015e892-5c95-4a0e-957d-27acac18860d",
     text: "Pellentesque eu nibh eget mauris congue mattis mattis nec tellus. Phasellus imperdiet elit eu magna dictum, bibendum cursus velit sodales. Donec sed neque eget",
@@ -666,7 +643,7 @@ export default function Home() {
                     mobileMediaQuery="(max-width: 768px)"
                   >
                     <BasicProductCard
-                      product={popularProduct}
+                      product={product}
                       isFirstOnList={index === 0}
                     />
                   </SlideRenderer>
@@ -741,20 +718,20 @@ export default function Home() {
                           <React.Fragment>
                             <div className="hidden md:block col-span-1 row-span-1 md:col-span-2 md:row-span-2">
                               <SummarizedProductCard
-                                product={popularProduct}
+                                product={product}
                                 isFirstOnList={index === 0}
                               />
                             </div>
                             <div className="block md:hidden">
                               <BasicProductCard
-                                product={popularProduct}
+                                product={product}
                                 isFirstOnList={index === 0}
                               />
                             </div>
                           </React.Fragment>
                         ) : (
                           <BasicProductCard
-                            product={popularProduct}
+                            product={product}
                             isFirstOnList={index === 0}
                           />
                         )}
@@ -833,7 +810,7 @@ export default function Home() {
                     mobileMediaQuery="(max-width: 768px)"
                   >
                     <BasicProductCard
-                      product={popularProduct}
+                      product={product}
                       isFirstOnList={index === 0}
                     />
                   </SlideRenderer>

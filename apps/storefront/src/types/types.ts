@@ -41,6 +41,7 @@ export type Category = {
   image?: React.ReactNode;
   title: string;
   url: string;
+  numberOfItems?: number;
 };
 
 export type ProductTag = {
@@ -84,4 +85,17 @@ export type CarouselProviderCustomProps = Omit<
 export type CarouselRendererProps = Partial<CarouselProps> & {
   renderInDesktop?: boolean;
   mobileMediaQuery?: string;
+};
+
+export type ProductFilter = {
+  name: string;
+  initiallyCollapsed?: boolean;
+  children: React.ReactNode;
+};
+
+export type SelectOption = {
+  id: string;
+  name: string;
+  value: string;
+  isDisabled?: boolean;
 };

@@ -398,7 +398,7 @@ export default async function Home() {
         sizes="100vw"
         className="h-[500px] lg:h-auto w-full rounded-[10px] object-cover"
       />
-      <div className="absolute top-10 left-0 flex flex-1 flex-col gap-y-4 items-center w-full">
+      <div className="absolute top-10 left-0 flex flex-1 flex-col gap-y-4 items-center w-full h-[230px]">
         <span className="text-body-small font-normal leading-[100%] text-white uppercase">
           Best Deals
         </span>
@@ -415,13 +415,15 @@ export default async function Home() {
             />
           </div>
         </div>
-        <ClientLink
-          href="/products"
-          className="flex flex-row gap-x-2 items-center text-primary rounded-full bg-white max-w-fit px-5 py-3 text-body-small md:text-body-medium font-semibold leading-[120%] group hover:text-white hover:bg-primary motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100"
-        >
-          Shop now{" "}
-          <ArrowRightIcon className="h-4 w-4 text-primary group-hover:text-white" />
-        </ClientLink>
+        <div className="h-full flex flex-1 flex-row items-end">
+          <ClientLink
+            href="/products"
+            className="flex flex-row gap-x-2 items-center text-primary rounded-full bg-white max-w-fit px-5 py-3 text-body-small md:text-body-medium font-semibold leading-[120%] group hover:text-white hover:bg-primary motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100"
+          >
+            Shop now{" "}
+            <ArrowRightIcon className="h-4 w-4 text-primary group-hover:text-white" />
+          </ClientLink>
+        </div>
       </div>
     </Banner>,
     <Banner
@@ -436,7 +438,7 @@ export default async function Home() {
         sizes="100vw"
         className="h-[500px] lg:h-auto w-full rounded-[10px] object-cover"
       />
-      <div className="absolute top-10 left-0 flex flex-1 flex-col gap-y-4 items-center w-full">
+      <div className="absolute top-10 left-0 flex flex-1 flex-col gap-y-4 items-center w-full h-[230px]">
         <span className="text-body-small font-normal leading-[100%] text-white uppercase">
           85% Fat Free
         </span>
@@ -446,13 +448,15 @@ export default async function Home() {
         <span className="text-white">
           Starting at <span className="text-warning">$79.99</span>
         </span>
-        <ClientLink
-          href="/products"
-          className="flex flex-row gap-x-2 items-center text-primary rounded-full bg-white max-w-fit px-5 py-3 text-body-small md:text-body-medium font-semibold leading-[120%] group hover:text-white hover:bg-primary motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100"
-        >
-          Shop now{" "}
-          <ArrowRightIcon className="h-4 w-4 text-primary group-hover:text-white" />
-        </ClientLink>
+        <div className="h-full flex flex-1 flex-row items-end">
+          <ClientLink
+            href="/products"
+            className="flex flex-row gap-x-2 items-center text-primary rounded-full bg-white max-w-fit px-5 py-3 text-body-small md:text-body-medium font-semibold leading-[120%] group hover:text-white hover:bg-primary motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100"
+          >
+            Shop now{" "}
+            <ArrowRightIcon className="h-4 w-4 text-primary group-hover:text-white" />
+          </ClientLink>
+        </div>
       </div>
     </Banner>,
     <Banner
@@ -467,7 +471,7 @@ export default async function Home() {
         sizes="100vw"
         className="h-[500px] lg:h-auto w-full rounded-[10px] object-cover"
       />
-      <div className="absolute top-10 left-0 flex flex-1 flex-col gap-y-4 items-center w-full">
+      <div className="absolute top-10 left-0 flex flex-1 flex-col gap-y-4 items-center w-full h-[230px]">
         <span className="text-body-small font-normal leading-[100%] text-gray-900 uppercase">
           Summer Sale
         </span>
@@ -480,13 +484,15 @@ export default async function Home() {
             64% Off
           </span>
         </span>
-        <ClientLink
-          href="/products"
-          className="flex flex-row gap-x-2 items-center text-primary rounded-full bg-white max-w-fit px-5 py-3 text-body-small md:text-body-medium font-semibold leading-[120%] group hover:text-white hover:bg-primary motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100"
-        >
-          Shop now{" "}
-          <ArrowRightIcon className="h-4 w-4 text-primary group-hover:text-white" />
-        </ClientLink>
+        <div className="h-full flex flex-1 flex-row items-end">
+          <ClientLink
+            href="/products"
+            className="flex flex-row gap-x-2 items-center text-primary rounded-full bg-white max-w-fit px-5 py-3 text-body-small md:text-body-medium font-semibold leading-[120%] group hover:text-white hover:bg-primary motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100"
+          >
+            Shop now{" "}
+            <ArrowRightIcon className="h-4 w-4 text-primary group-hover:text-white" />
+          </ClientLink>
+        </div>
       </div>
     </Banner>,
   ];

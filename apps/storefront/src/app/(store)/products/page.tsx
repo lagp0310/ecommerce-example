@@ -27,6 +27,15 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { PricingSlider } from "@/components/ui/product/pricing-slider";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { DropdownSelector } from "@/components/ui/common/dropdown-selector";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
 
 export default async function Products() {
   const numberOfPopularTags = 12;
@@ -135,7 +144,7 @@ export default async function Products() {
   ];
 
   return (
-    <div className="flex flex-1 flex-col gap-y-8">
+    <div className="flex flex-1 flex-col gap-y-8 pb-8">
       <div className="relative">
         <div className="absolute top-0 left-0 bg-gradient-to-r from-black/70 to-black/0 h-full w-full"></div>
         <Image
@@ -147,7 +156,7 @@ export default async function Products() {
           sizes="100vw"
         />
       </div>
-      <div className="flex flex-1 flex-row justify-center w-full">
+      <div className="flex flex-1 flex-col items-center w-full">
         <div className="grid grid-cols-1 xl:grid-cols-5 gap-8 max-w-7xl">
           <div className="col-span-1 row-span-2">
             <Button className="flex flex-row gap-x-2 items-center bg-white border border-primary rounded-full text-primary max-w-fit px-5 py-3 text-body-small md:text-body-medium font-semibold leading-[120%] group/filter-button hover:text-white hover:bg-primary motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100">
@@ -199,6 +208,43 @@ export default async function Products() {
                 />
               </div>
             ))}
+          </div>
+          <div className="grid grid-cols-1 xl:grid-cols-4 xl:col-start-2 xl:col-span-4 gap-4">
+            <Pagination className="flex flex-1 flex-row justify-center items-center col-span-full gap-x-3">
+              <PaginationContent>
+                <PaginationItem className="rounded-full border border-neutral-100 disabled:border-neutral-50 disabled:bg-gray-300 disabled:cursor-not-allowed group/back-button flex flex-1 flex-row justify-center items-center hover:bg-primary hover:text-white motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100">
+                  <PaginationPrevious
+                    href="#"
+                    className="px-0 rounded-full h-9 w-9 disabled:text-gray-300 group-disabled/back-button:hover:cursor-not-allowed group-hover/back-button:bg-primary group-hover/back-button:text-white group-hover/back-button:font-semibold text-gray-600"
+                  />
+                </PaginationItem>
+                <PaginationItem className="rounded-full flex flex-1 flex-row justify-center items-center hover:bg-primary hover:text-white group/page-item motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100">
+                  <PaginationLink
+                    href="#"
+                    className="px-0 rounded-full h-9 w-9 bg-white font-normal text-body-medium group-hover/page-item:bg-primary group-hover/page-item:text-white group-hover/page-item:font-semibold text-gray-600"
+                  >
+                    1
+                  </PaginationLink>
+                </PaginationItem>
+                <PaginationItem>
+                  <PaginationEllipsis />
+                </PaginationItem>
+                <PaginationItem className="rounded-full flex flex-1 flex-row justify-center items-center hover:bg-primary hover:text-white group/page-item motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100">
+                  <PaginationLink
+                    href="#"
+                    className="px-0 rounded-full h-9 w-9 bg-white font-normal text-body-medium group-hover/page-item:bg-primary group-hover/page-item:text-white group-hover/page-item:font-semibold text-gray-600"
+                  >
+                    21
+                  </PaginationLink>
+                </PaginationItem>
+                <PaginationItem className="rounded-full border border-neutral-100 disabled:border-neutral-50 disabled:bg-gray-300 disabled:cursor-not-allowed group/back-button flex flex-1 flex-row justify-center items-center hover:bg-primary hover:text-white motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100">
+                  <PaginationNext
+                    href="#"
+                    className="px-0 rounded-full h-9 w-9 disabled:text-gray-300 group-disabled/back-button:hover:cursor-not-allowed group-hover/back-button:bg-primary group-hover/back-button:text-white group-hover/back-button:font-semibold text-gray-600"
+                  />
+                </PaginationItem>
+              </PaginationContent>
+            </Pagination>
           </div>
         </div>
       </div>

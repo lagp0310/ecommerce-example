@@ -64,7 +64,7 @@ export default async function Products() {
                 value={categoryId}
                 id={`${categoryId}-${index}`}
                 name={`${categoryId}-${index}`}
-                className="font-normal text-body-small text-gray-900 hover:bg-transparent hover:text-gray-900 focus-active:bg-black data-[state=on]:bg-transparent"
+                className="pl-0 font-normal text-body-small text-gray-900 hover:bg-transparent hover:text-gray-900 focus-active:bg-black data-[state=on]:bg-transparent"
               >
                 <Checkbox className="h-5 w-5 rounded-[3px] bg-white border border-gray-100 outline-none data-[state=checked]:border-none text-gray-900 data-[state=checked]:text-white data-[state=checked]:bg-primary motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100" />
                 <Label

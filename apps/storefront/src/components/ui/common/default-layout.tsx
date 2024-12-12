@@ -1,17 +1,10 @@
 import React from "react";
 import { Button } from "@/components/ui/common/button";
-import { CurrencySelector } from "@/components/ui/currency/currency-selector";
-import { LanguageSelector } from "@/components/ui/locale/language-selector";
 import { Logo } from "@/components/ui/common/logo";
 import { Navbar } from "@/components/navigation/navbar";
 import { NavbarLink } from "@/components/navigation/navbar-link";
 import { TopBar } from "@/components/ui/common/top-bar";
-import {
-  MapPinIcon,
-  ChevronDownIcon,
-  PhoneIcon,
-  UserIcon,
-} from "@heroicons/react/24/outline";
+import { MapPinIcon, PhoneIcon, UserIcon } from "@heroicons/react/24/outline";
 import { NewsletterSubscribe } from "@/components/ui/marketing/newsletter-subscribe";
 import { Input } from "@/components/ui/common/input";
 import { FooterContent } from "@/components/ui/common/footer-content";
@@ -34,13 +27,15 @@ import {
   availableLanguages,
   currencyIcon,
   currencyName,
-  currencyShortName,
+  currencyValue,
   languageIcon,
   languageName,
-  languageShortName,
+  languageValue,
 } from "@/constants/constants";
 import { NavigationLinksWrapper } from "@/components/navigation/navigation-links-wrapper";
 import { SidebarCartWrapper } from "@/components/ui/cart/sidebar-cart-wrapper";
+import { DropdownSelector } from "./dropdown-selector";
+import { SelectTrigger, SelectValue } from "@/components/ui/select";
 
 type Props = React.PropsWithChildren;
 
@@ -81,26 +76,24 @@ export function DefaultLayout({ children }: Props) {
               Store Location: Lincoln- 344, Illinois, Chicago, USA
             </span>
             <div className="flex flex-1 flex-row gap-x-4 justify-end">
-              <LanguageSelector
-                languages={availableLanguages}
-                wrapperClassname="max-h-5"
+              <DropdownSelector
+                options={availableLanguages}
+                defaultValue={languageValue}
               >
-                <div className="text-green-gray-700 flex flex-row gap-x-1 items-center text-body-tiny font-normal">
-                  {languageIcon}{" "}
-                  {(languageShortName ?? languageName).toLocaleUpperCase()}{" "}
-                  <ChevronDownIcon className="h-4 w-4 text-green-gray-700" />
-                </div>
-              </LanguageSelector>
-              <CurrencySelector
-                currencies={availableCurrencies}
-                wrapperClassname="max-h-5"
+                <SelectTrigger className="w-fit gap-x-2 outline-none focus:ring-0 focus:ring-offset-0 text-green-gray-700 flex flex-row items-center text-body-tiny font-normal bg-transparent border-none p-0 max-h-5">
+                  {languageIcon}
+                  <SelectValue placeholder={languageName} />
+                </SelectTrigger>
+              </DropdownSelector>
+              <DropdownSelector
+                options={availableCurrencies}
+                defaultValue={currencyValue}
               >
-                <div className="text-green-gray-700 flex flex-row gap-x-1 items-center text-body-tiny font-normal">
-                  {currencyIcon}{" "}
-                  {(currencyShortName ?? currencyName).toLocaleUpperCase()}{" "}
-                  <ChevronDownIcon className="h-4 w-4 text-green-gray-700" />
-                </div>
-              </CurrencySelector>
+                <SelectTrigger className="w-fit gap-x-2 outline-none focus:ring-0 focus:ring-offset-0 text-green-gray-700 flex flex-row items-center text-body-tiny font-normal bg-transparent border-none p-0 max-h-5">
+                  {currencyIcon}
+                  <SelectValue placeholder={currencyName} />
+                </SelectTrigger>
+              </DropdownSelector>
             </div>
           </div>
         </TopBar>

@@ -3,7 +3,7 @@ import type {
   Currency,
   Category,
   Product,
-  SelectOption,
+  BaseSelectOption,
 } from "@/types/types";
 import { CurrencyDollarIcon, LanguageIcon } from "@heroicons/react/24/outline";
 import dayjs from "dayjs";
@@ -24,23 +24,34 @@ export const defaultMobileMediaQuery = "(max-width: 640px)";
 
 export const availableLanguages: Language[] = [
   {
+    id: "0c0f36d0-b730-48ac-bad6-c7f958ad5c13",
     name: "English",
     shortName: "Eng",
+    value: "en-US",
     icon: <LanguageIcon className="h-4 w-4 mr-1" />,
   },
 ];
 export const {
+  id: languageId,
   name: languageName,
   shortName: languageShortName,
+  value: languageValue,
   icon: languageIcon,
 } = availableLanguages.at(0)!;
 
 export const availableCurrencies: Currency[] = [
-  { name: "USD", icon: <CurrencyDollarIcon className="h-4 w-4 mr-1" /> },
+  {
+    id: "2f21e3cd-ce78-4970-a918-6a8e5a50c504",
+    name: "USD",
+    value: "USD",
+    icon: <CurrencyDollarIcon className="h-4 w-4 mr-1" />,
+  },
 ];
 export const {
+  id: currencyId,
   name: currencyName,
   shortName: currencyShortName,
+  value: currencyValue,
   icon: currencyIcon,
 } = availableCurrencies.at(0)!;
 
@@ -74,7 +85,7 @@ export const product: Product = {
   ],
 };
 
-export const productsSortByOptions: SelectOption[] = [
+export const productsSortByOptions: BaseSelectOption[] = [
   {
     id: "39255263-b14d-4988-8d4e-a7aacad23aea",
     name: "Latest",

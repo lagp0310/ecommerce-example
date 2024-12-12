@@ -4,13 +4,17 @@ import { MediaQuerySlide } from "@/hooks/use-visible-slides";
 import React from "react";
 
 export type Language = {
+  id: string;
   name: string;
   shortName?: string;
+  value: string;
   icon: React.ReactNode;
 };
 export type Currency = {
+  id: string;
   name: string;
   shortName?: string;
+  value: string;
   icon: React.ReactNode;
 };
 
@@ -93,7 +97,7 @@ export type ProductFilter = {
   children: React.ReactNode;
 };
 
-export type SelectOption = {
+export type BaseSelectOption = {
   id: string;
   name: string;
   value: string;

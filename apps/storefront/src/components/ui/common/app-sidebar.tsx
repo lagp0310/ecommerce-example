@@ -6,20 +6,19 @@ import {
   SidebarHeader,
 } from "@/components/ui/common/sidebar";
 import { Logo } from "@/components/ui/common/logo";
-import { LanguageSelector } from "@/components/ui/locale/language-selector";
-import { ChevronDownIcon } from "@heroicons/react/24/outline";
-import { CurrencySelector } from "@/components/ui/currency/currency-selector";
 import {
   availableLanguages,
   languageIcon,
-  languageShortName,
-  languageName,
   availableCurrencies,
   currencyIcon,
-  currencyShortName,
+  languageValue,
+  currencyValue,
+  languageName,
   currencyName,
 } from "@/constants/constants";
 import { SidebarLinksWrapper } from "@/components/ui/common/sidebar-menu-links-wrapper";
+import { DropdownSelector } from "./dropdown-selector";
+import { SelectTrigger, SelectValue } from "@/components/ui/select";
 
 export function AppSidebar() {
   return (
@@ -37,26 +36,26 @@ export function AppSidebar() {
       </SidebarContent>
       <SidebarFooter className="p-4">
         <div className="flex flex-1 flex-row gap-x-2">
-          <LanguageSelector
-            languages={availableLanguages}
+          <DropdownSelector
+            options={availableLanguages}
             wrapperClassname="flex flex-1 w-full"
+            defaultValue={languageValue}
           >
-            <div className="text-green-gray-700 flex flex-1 flex-row gap-x-1 items-center text-body-tiny font-normal border border-neutral-200 rounded-sm p-1.5 w-full justify-center">
-              {languageIcon}{" "}
-              {(languageShortName ?? languageName).toLocaleUpperCase()}{" "}
-              <ChevronDownIcon className="h-4 w-4 text-green-gray-700" />
-            </div>
-          </LanguageSelector>
-          <CurrencySelector
-            currencies={availableCurrencies}
+            <SelectTrigger className="w-full gap-x-2 outline-none focus:ring-0 focus:ring-offset-0 text-green-gray-700 flex flex-1 flex-row items-center text-body-tiny font-normal border border-neutral-200 rounded-sm p-1.5 justify-center">
+              {languageIcon}
+              <SelectValue placeholder={languageName} />
+            </SelectTrigger>
+          </DropdownSelector>
+          <DropdownSelector
+            options={availableCurrencies}
             wrapperClassname="flex flex-1 w-full"
+            defaultValue={currencyValue}
           >
-            <div className="text-green-gray-700 flex flex-1 flex-row gap-x-1 items-center text-body-tiny font-normal border border-neutral-200 rounded-sm p-1.5 w-full justify-center">
-              {currencyIcon}{" "}
-              {(currencyShortName ?? currencyName).toLocaleUpperCase()}{" "}
-              <ChevronDownIcon className="h-4 w-4 text-green-gray-700" />
-            </div>
-          </CurrencySelector>
+            <SelectTrigger className="outline-none focus:ring-0 focus:ring-offset-0 w-full text-green-gray-700 flex flex-1 flex-row gap-x-1 items-center text-body-tiny font-normal border border-neutral-200 rounded-sm p-1.5 justify-center">
+              {currencyIcon}
+              <SelectValue placeholder={currencyName} />
+            </SelectTrigger>
+          </DropdownSelector>
         </div>
         <span className="text-body-tiny font-normal text-gray-900">
           Ecobazar © 2024. All Rights Reserved

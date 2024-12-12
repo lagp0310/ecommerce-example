@@ -1,6 +1,4 @@
 import React from "react";
-import breadcrumbsBackground from "@/public/images/products-breadcrumbs-bg.png";
-import Image from "next/image";
 import {
   category,
   product,
@@ -149,18 +147,7 @@ export default async function Products() {
   ];
 
   return (
-    <div className="flex flex-1 flex-col gap-y-8 pb-8">
-      <div className="relative">
-        <div className="absolute top-0 left-0 bg-gradient-to-r from-black/70 to-black/0 h-full w-full"></div>
-        <Image
-          src={breadcrumbsBackground}
-          alt="Breadcrumbs Background"
-          className="h-[120px] object-cover"
-          placeholder="blur"
-          quality={100}
-          sizes="100vw"
-        />
-      </div>
+    <div className="flex flex-1 flex-col gap-y-8 py-8">
       <div className="flex flex-1 flex-col items-center w-full">
         <div className="grid grid-cols-1 xl:grid-cols-5 gap-8 max-w-7xl">
           <div className="col-span-1 row-span-2">

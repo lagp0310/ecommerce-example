@@ -26,7 +26,7 @@ import { Rating } from "@/components/ui/product/rating";
 import { Checkbox } from "@/components/ui/checkbox";
 import { PricingSlider } from "@/components/ui/product/pricing-slider";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
-import { SortBySelector } from "@/components/ui/common/sort-by-selector";
+import { DropdownSelector } from "@/components/ui/common/dropdown-selector";
 
 export default async function Products() {
   const numberOfPopularTags = 12;
@@ -174,7 +174,7 @@ export default async function Products() {
                 <span className="font-normal text-body-small text-gray-500">
                   Sort by:
                 </span>
-                <SortBySelector
+                <DropdownSelector
                   options={productsSortByOptions}
                   defaultValue={productsSortByOptions.at(0)?.value}
                 />

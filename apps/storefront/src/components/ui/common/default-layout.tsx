@@ -174,7 +174,7 @@ export function DefaultLayout({ children }: Props) {
                     type="email"
                     className="flex-1 rounded-full outline-none p-3.5 placeholder:text-body-small md:placeholder:text-body-medium placeholder:font-normal placeholder:text-gray-500 text-gray-500"
                   />
-                  <Button className="rounded-full text-white bg-primary p-3.5 -ml-10 text-body-small md:text-base">
+                  <Button className="rounded-full text-white bg-primary p-3.5 -ml-10 text-body-small md:text-base hover:bg-white hover:text-primary hover:border hover:border-primary motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100">
                     Subscribe
                   </Button>
                 </div>

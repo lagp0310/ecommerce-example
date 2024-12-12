@@ -165,7 +165,7 @@ export default async function Products() {
         <div className="grid grid-cols-1 xl:grid-cols-5 gap-8 max-w-7xl">
           <div className="col-span-1 row-span-2">
             <Button className="flex flex-row gap-x-2 items-center bg-white border border-primary rounded-full text-primary max-w-fit px-5 py-3 text-body-small md:text-body-medium font-semibold leading-[120%] group/filter-button hover:text-white hover:bg-primary motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100">
-              Filter{" "}
+              Filters{" "}
               <AdjustmentsHorizontalIcon className="h-5 w-5 text-primary group-hover/filter-button:text-white" />
             </Button>
             {filters.map(({ children, name, initiallyCollapsed }, index) => (

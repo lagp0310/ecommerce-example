@@ -168,6 +168,7 @@ export function DefaultLayout({ children }: Props) {
                 </span>
               </div>
               <div className="flex flex-1 flex-col gap-y-4 lg:gap-y-0 lg:flex-row items-center justify-center md:justify-end basis-full md:basis-1/2 w-full">
+                {/* TODO: Add form with validation. */}
                 <div className="flex flex-1 w-full md:max-w-screen-sm">
                   <Input
                     placeholder="Your email address"

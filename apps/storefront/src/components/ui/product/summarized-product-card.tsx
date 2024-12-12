@@ -129,7 +129,7 @@ export function SummarizedProductCard({
   const productNode = (
     <ProductCard
       className={cn(
-        "h-full relative bg-white flex flex-1 flex-col justify-center border border-gray-100 gap-y-[6px] p-3 rounded-[5px] hover:border-soft-primary/45 hover:shadow-[0px_0px_12px_0px_rgba(132,209,135,0.32)] hover:shadow-soft-primary/60 col-span-1",
+        "h-full relative bg-white flex flex-1 flex-col justify-center border border-gray-100 gap-y-[6px] p-3 rounded-[5px] hover:border-soft-primary/45 hover:shadow-[0px_0px_12px_0px_rgba(132,209,135,0.32)] hover:shadow-soft-primary/60 col-span-1 motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100",
         {
           "col-span-2 row-span-2": isFirstOnList,
         }

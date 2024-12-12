@@ -140,9 +140,10 @@ export default async function Home() {
         </div>
         <ClientLink
           href="/products"
-          className="flex flex-row gap-x-2 items-center text-primary rounded-full bg-white max-w-fit px-5 py-3 text-body-small md:text-body-medium font-semibold leading-[120%]"
+          className="flex flex-row gap-x-2 items-center text-primary rounded-full bg-white max-w-fit px-5 py-3 text-body-small md:text-body-medium font-semibold leading-[120%] group hover:text-white hover:bg-primary motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100"
         >
-          Shop now <ArrowRightIcon className="h-4 w-4 text-primary" />
+          Shop now
+          <ArrowRightIcon className="h-4 w-4 text-primary group-hover:text-white" />
         </ClientLink>
       </div>
     </Banner>,
@@ -168,9 +169,9 @@ export default async function Home() {
         </span>
         <ClientLink
           href="/products"
-          className="flex flex-row gap-x-2 items-center text-white max-w-fit bg-primary group hover:bg-white hover:text-primary rounded-full px-5 py-3 text-body-small md:text-body-medium font-semibold leading-[120%]"
+          className="flex flex-row gap-x-2 items-center text-white max-w-fit bg-primary group hover:bg-white hover:text-primary rounded-full px-5 py-3 text-body-small md:text-body-medium font-semibold leading-[120%] motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100"
         >
-          Shop now{" "}
+          Shop now
           <ArrowRightIcon className="h-4 w-4 text-white group-hover:text-primary" />
         </ClientLink>
       </div>
@@ -194,9 +195,10 @@ export default async function Home() {
         </h5>
         <ClientLink
           href="/products"
-          className="flex flex-row gap-x-2 items-center text-primary max-w-fit px-5 py-3 text-body-small md:text-body-medium font-semibold leading-[120%]"
+          className="flex flex-row gap-x-2 items-center text-primary max-w-fit px-5 py-3 text-body-small md:text-body-medium font-semibold leading-[120%] rounded-full group hover:bg-white hover:text-primary motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100"
         >
-          Shop now <ArrowRightIcon className="h-4 w-4 text-primary" />
+          Shop now
+          <ArrowRightIcon className="h-4 w-4 text-primary group-hover:text-primary" />
         </ClientLink>
       </div>
     </Banner>,
@@ -415,9 +417,10 @@ export default async function Home() {
         </div>
         <ClientLink
           href="/products"
-          className="flex flex-row gap-x-2 items-center text-primary rounded-full bg-white max-w-fit px-5 py-3 text-body-small md:text-body-medium font-semibold leading-[120%]"
+          className="flex flex-row gap-x-2 items-center text-primary rounded-full bg-white max-w-fit px-5 py-3 text-body-small md:text-body-medium font-semibold leading-[120%] group hover:text-white hover:bg-primary motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100"
         >
-          Shop now <ArrowRightIcon className="h-4 w-4 text-primary" />
+          Shop now{" "}
+          <ArrowRightIcon className="h-4 w-4 text-primary group-hover:text-white" />
         </ClientLink>
       </div>
     </Banner>,
@@ -445,9 +448,10 @@ export default async function Home() {
         </span>
         <ClientLink
           href="/products"
-          className="flex flex-row gap-x-2 items-center text-primary rounded-full bg-white max-w-fit px-5 py-3 text-body-small md:text-body-medium font-semibold leading-[120%]"
+          className="flex flex-row gap-x-2 items-center text-primary rounded-full bg-white max-w-fit px-5 py-3 text-body-small md:text-body-medium font-semibold leading-[120%] group hover:text-white hover:bg-primary motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100"
         >
-          Shop now <ArrowRightIcon className="h-4 w-4 text-primary" />
+          Shop now{" "}
+          <ArrowRightIcon className="h-4 w-4 text-primary group-hover:text-white" />
         </ClientLink>
       </div>
     </Banner>,
@@ -478,9 +482,10 @@ export default async function Home() {
         </span>
         <ClientLink
           href="/products"
-          className="flex flex-row gap-x-2 items-center text-primary rounded-full bg-white max-w-fit px-5 py-3 text-body-small md:text-body-medium font-semibold leading-[120%]"
+          className="flex flex-row gap-x-2 items-center text-primary rounded-full bg-white max-w-fit px-5 py-3 text-body-small md:text-body-medium font-semibold leading-[120%] group hover:text-white hover:bg-primary motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100"
         >
-          Shop now <ArrowRightIcon className="h-4 w-4 text-primary" />
+          Shop now{" "}
+          <ArrowRightIcon className="h-4 w-4 text-primary group-hover:text-white" />
         </ClientLink>
       </div>
     </Banner>,
@@ -774,9 +779,10 @@ export default async function Home() {
                 </p>
                 <Link
                   href="/products"
-                  className="flex flex-row gap-x-2 items-center text-white rounded-full bg-primary max-w-fit px-5 py-3 text-body-small md:text-body-medium font-semibold leading-[120%]"
+                  className="flex flex-row gap-x-2 items-center text-white rounded-full bg-primary max-w-fit px-5 py-3 text-body-small md:text-body-medium font-semibold leading-[120%] group hover:bg-white hover:text-primary motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100"
                 >
-                  Shop now <ArrowRightIcon className="h-4 w-4 text-white" />
+                  Shop now{" "}
+                  <ArrowRightIcon className="h-4 w-4 text-white group-hover:text-primary" />
                 </Link>
               </div>
             </Banner>

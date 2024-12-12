@@ -55,8 +55,8 @@ export function BasicCartProduct({
         </CartProduct>
       </Link>
       <CartProductActions {...actionsProps} className="flex flex-row gap-x-1">
-        <Button className="group p-2 rounded-full hover:bg-gray-100/50 border-none -mr-2">
-          <TrashIcon className="h-4 w-4 text-gray-900 group-hover:text-danger" />
+        <Button className="group p-2 rounded-full hover:bg-gray-100/50 border-none -mr-2 motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100">
+          <TrashIcon className="h-4 w-4 text-gray-900 group-hover:text-danger motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100" />
         </Button>
       </CartProductActions>
     </div>

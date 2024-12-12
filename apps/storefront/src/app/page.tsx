@@ -85,27 +85,27 @@ export default async function Home() {
   const brandIcons = [
     <StepsBrandIcon
       key={0}
-      className="h-10 w-full text-gray-200 hover:text-primary"
+      className="h-10 w-full text-gray-200 hover:text-primary motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100"
     />,
     <MangoBrandIcon
       key={1}
-      className="h-10 w-full text-gray-200 hover:text-primary"
+      className="h-10 w-full text-gray-200 hover:text-primary motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100"
     />,
     <FoodNetworkBrandIcon
       key={2}
-      className="h-10 w-full text-gray-200 hover:text-primary"
+      className="h-10 w-full text-gray-200 hover:text-primary motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100"
     />,
     <FoodCoUkBrandIcon
       key={3}
-      className="h-10 w-full text-gray-200 hover:text-primary"
+      className="h-10 w-full text-gray-200 hover:text-primary motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100"
     />,
     <BookOffBrandIcon
       key={4}
-      className="h-10 w-full text-gray-200 hover:text-primary"
+      className="h-10 w-full text-gray-200 hover:text-primary motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100"
     />,
     <GSeriesBrandIcon
       key={5}
-      className="h-10 w-full text-gray-200 hover:text-primary"
+      className="h-10 w-full text-gray-200 hover:text-primary motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100"
     />,
   ];
 
@@ -601,7 +601,7 @@ export default async function Home() {
                   >
                     <CategoryCard
                       url={`/products?categoryIds=${category?.categoryId}`}
-                      className="flex flex-1 flex-col items-center justify-center gap-y-1.5 md:gap-y-4 bg-white border border-gray-100 rounded-[5px] pt-4 pb-6 hover:border-soft-primary/45 hover:shadow-[0px_0px_12px_0px_rgba(132,209,135,0.32)] hover:shadow-soft-primary/60"
+                      className="flex flex-1 flex-col items-center justify-center gap-y-1.5 md:gap-y-4 bg-white border border-gray-100 rounded-[5px] pt-4 pb-6 hover:border-soft-primary/45 hover:shadow-[0px_0px_12px_0px_rgba(132,209,135,0.32)] hover:shadow-soft-primary/60 motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100"
                     >
                       {category?.image}
                       <span className="text-body-small md:text-body-large font-medium text-gray-900 text-center truncate whitespace-break-spaces">
@@ -841,10 +841,10 @@ export default async function Home() {
                       Customer Testimonials
                     </h2>
                     <div className="flex-1 flex-row justify-end gap-x-3 hidden md:flex">
-                      <ButtonBackRenderer className="rounded-full h-[45px] w-[45px] border border-gray-100 flex flex-row items-center justify-center group hover:bg-primary hover:border-none">
+                      <ButtonBackRenderer className="rounded-full h-[45px] w-[45px] border border-gray-100 flex flex-row items-center justify-center group hover:bg-primary hover:border-none motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100">
                         <ArrowLeftIcon className="h-4 w-4 text-gray-900 group-hover:text-white" />
                       </ButtonBackRenderer>
-                      <ButtonNextRenderer className="rounded-full h-[45px] w-[45px] border border-gray-100 flex flex-row items-center justify-center group hover:bg-primary hover:border-none">
+                      <ButtonNextRenderer className="rounded-full h-[45px] w-[45px] border border-gray-100 flex flex-row items-center justify-center group hover:bg-primary hover:border-none motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100">
                         <ArrowRightIcon className="h-4 w-4 text-gray-900 group-hover:text-white" />
                       </ButtonNextRenderer>
                     </div>

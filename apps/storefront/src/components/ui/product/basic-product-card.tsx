@@ -111,7 +111,7 @@ export function BasicProductCard({
       {shouldUseNextLink ? (
         <div className="relative">
           <div className="z-10 absolute top-3 right-3 flex flex-1 flex-col gap-y-2">
-            <Button className="bg-white rounded-full h-8 w-8 flex flex-row justify-center items-center border border-gray-50 group hover:bg-primary hover:border-none">
+            <Button className="bg-white rounded-full h-8 w-8 flex flex-row justify-center items-center border border-gray-50 group hover:bg-primary hover:border-none motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100">
               <HeartIcon className="h-4 w-4 text-gray-900 group-hover:text-white" />
             </Button>
           </div>
@@ -119,7 +119,7 @@ export function BasicProductCard({
             {productNode}
           </ClientLink>
           <div className="absolute bottom-6 right-3 flex flex-1 flex-row items-center justify-end">
-            <Button className="bg-gray-50 rounded-full h-8 w-8 flex flex-row justify-center items-center hover:bg-primary group">
+            <Button className="bg-gray-50 rounded-full h-8 w-8 flex flex-row justify-center items-center hover:bg-primary group motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100">
               <ShoppingBagIcon className="h-4 w-4 text-gray-900 group-hover:text-white" />
             </Button>
           </div>

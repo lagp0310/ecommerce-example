@@ -166,19 +166,19 @@ export function DefaultLayout({ children }: Props) {
                 <div className="flex flex-row gap-x-2 items-center justify-center md:justify-end md:ml-8">
                   <Link
                     href="#"
-                    className="text-gray-700 hover:bg-primary hover:text-white rounded-full p-3"
+                    className="text-gray-700 hover:bg-primary hover:text-white rounded-full p-3 motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100"
                   >
                     <FacebookIcon className="h-[18px] w-[18px]" />
                   </Link>
                   <Link
                     href="#"
-                    className="text-gray-700 hover:bg-primary hover:text-white rounded-full p-3"
+                    className="text-gray-700 hover:bg-primary hover:text-white rounded-full p-3 motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100"
                   >
                     <PinterestIcon className="h-[18px] w-[18px]" />
                   </Link>
                   <Link
                     href="#"
-                    className="text-gray-700 hover:bg-primary hover:text-white rounded-full p-3"
+                    className="text-gray-700 hover:bg-primary hover:text-white rounded-full p-3 motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100"
                   >
                     <InstagramIcon className="h-[18px] w-[18px]" />
                   </Link>
@@ -236,7 +236,7 @@ export function DefaultLayout({ children }: Props) {
                       <Link
                         key={linkIndex}
                         href={url}
-                        className="text-body-small font-normal text-gray-400 hover:text-white"
+                        className="text-body-small font-normal text-gray-400 hover:text-white motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100"
                       >
                         {text}
                       </Link>

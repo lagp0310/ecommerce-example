@@ -82,14 +82,14 @@ export function SidebarCartWrapper({
           <div className="border-t border-gray-100/50 w-full"></div>
           <Link
             href={`/carts/${cartId}`}
-            className="rounded-[10px] border border-gray-100/50 w-full text-gray-900 text-center px-5 py-3 text-body-small md:text-body-medium font-normal leading-[120%] hover:bg-green-gray-100/50"
+            className="rounded-[10px] border border-gray-100/50 w-full text-gray-900 text-center px-5 py-3 text-body-small md:text-body-medium font-normal leading-[120%] hover:bg-green-gray-100/50 motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100"
             onClick={toggleSidebar}
           >
             View Cart
           </Link>
           <Link
             href={`/checkout/${cartId}`}
-            className="rounded-[10px] border border-gray-100/50 w-full text-center px-5 py-3 text-body-small md:text-body-medium font-normal leading-[120%] bg-primary text-white hover:bg-hard-primary/100"
+            className="rounded-[10px] border border-gray-100/50 w-full text-center px-5 py-3 text-body-small md:text-body-medium font-normal leading-[120%] bg-primary text-white hover:bg-hard-primary/100 motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100"
             onClick={toggleSidebar}
           >
             Checkout

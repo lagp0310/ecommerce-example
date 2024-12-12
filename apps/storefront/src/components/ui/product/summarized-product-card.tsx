@@ -43,10 +43,10 @@ export function SummarizedProductCard({
     isFirstOnList;
   const productActions = (
     <div className="flex flex-row gap-x-2">
-      <Button className="bg-gray-50 rounded-full h-8 w-8 flex flex-row justify-center items-center group hover:bg-primary">
+      <Button className="bg-gray-50 rounded-full h-8 w-8 flex flex-row justify-center items-center group hover:bg-primary motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100">
         <HeartIcon className="h-4 w-4 text-gray-900 group-hover:text-white" />
       </Button>
-      <Button className="bg-primary text-white flex flex-1 flex-row items-center justify-center gap-x-2 rounded-full text-body-small font-semibold group hover:text-primary hover:border hover:border-primary hover:bg-white leading-6">
+      <Button className="bg-primary text-white flex flex-1 flex-row items-center justify-center gap-x-2 rounded-full text-body-small font-semibold group hover:text-primary hover:border hover:border-primary hover:bg-white leading-6 motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100">
         Add to Cart
         <ShoppingBagIcon className="h-4 w-4 group-hover:text-primary" />
       </Button>

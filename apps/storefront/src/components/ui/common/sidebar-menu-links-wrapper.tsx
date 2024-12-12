@@ -33,7 +33,7 @@ export function SidebarLinksWrapper() {
         <SidebarMenuItem
           key={title}
           className={cn(
-            "hover:bg-green-gray-100/50 group-hover/menu-item:rounded-md rounded-md",
+            "hover:bg-green-gray-100/50 group-hover/menu-item:rounded-md rounded-md motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100",
             { "bg-green-gray-100/50 text-gray-900": pathname === url }
           )}
         >
@@ -41,7 +41,8 @@ export function SidebarLinksWrapper() {
             asChild
             href={url}
             className={cn({
-              "group-hover/menu-item:bg-green-gray-100/50": pathname !== url,
+              "group-hover/menu-item:bg-green-gray-100/50 motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100":
+                pathname !== url,
               "group-hover/menu-item:bg-transparent": pathname === url,
             })}
           >

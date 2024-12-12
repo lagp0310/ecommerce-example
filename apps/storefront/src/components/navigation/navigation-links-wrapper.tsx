@@ -201,7 +201,7 @@ export function NavigationLinksWrapper() {
         ({ content, title, groupName, isDropdown = false }, index) => (
           <NavigationMenuItem
             key={index}
-            className={`flex flex-1 flex-row text-body-small font-medium hover:rounded-md group/${groupName}`}
+            className={`flex flex-1 flex-row text-body-small font-medium hover:rounded-md group/${groupName} motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100`}
           >
             {isDropdown ? (
               <NavigationMenuTrigger className="text-body-small font-medium text-gray-500 hover:!text-gray-900 cursor-pointer">

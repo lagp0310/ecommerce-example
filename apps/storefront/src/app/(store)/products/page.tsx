@@ -47,9 +47,9 @@ export default async function Products() {
           {categories.map(({ categoryId, title, numberOfItems }, index) => (
             <div key={index} className="flex items-center space-x-2">
               <RadioGroupItem
-                value={categoryId}
-                id={categoryId}
-                className="rounded-full border border-gray-100 data-[state=checked]:bg-white data-[state=checked]:border-primary h-5 w-5 data-[state=checked]:text-primary"
+                value={`${categoryId}-${index}`}
+                id={`${categoryId}-${index}`}
+                className="rounded-full border border-gray-100 data-[state=checked]:bg-white data-[state=checked]:border-primary h-5 w-5 data-[state=checked]:*:text-primary motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100"
                 insetCircleClasses="h-3 w-3"
               />
               <Label
@@ -85,7 +85,7 @@ export default async function Products() {
                 key={index}
                 className="flex flex-1 flex-row gap-x-2 items-center group/rating"
               >
-                <Checkbox className="h-5 w-5 rounded-[3px] bg-white border border-gray-100 outline-none data-[state=checked]:border-none text-gray-900 data-[state=checked]:text-white data-[state=checked]:bg-primary" />
+                <Checkbox className="h-5 w-5 rounded-[3px] bg-white border border-gray-100 outline-none data-[state=checked]:border-none text-gray-900 data-[state=checked]:text-white data-[state=checked]:bg-primary motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100" />
                 <Rating
                   className="flex flex-row gap-x-0.5 justify-end"
                   rating={index + 1}
@@ -122,7 +122,7 @@ export default async function Products() {
               <ToggleGroupItem
                 value={tag.text}
                 id={`${tag.text}-${index}`}
-                className="font-normal text-body-small text-gray-900 rounded-full hover:bg-primary hover:text-white"
+                className="font-normal text-body-small text-gray-900 rounded-full hover:bg-primary hover:text-white motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100"
               >
                 {tag.text}
               </ToggleGroupItem>

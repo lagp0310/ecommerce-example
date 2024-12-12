@@ -36,6 +36,12 @@ import { NavigationLinksWrapper } from "@/components/navigation/navigation-links
 import { SidebarCartWrapper } from "@/components/ui/cart/sidebar-cart-wrapper";
 import { DropdownSelector } from "./dropdown-selector";
 import { SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/common/tooltip";
 
 type Props = React.PropsWithChildren;
 
@@ -132,9 +138,18 @@ export function DefaultLayout({ children }: Props) {
                   <HeartIcon className="h-6 w-6 text-gray-900" />
                 </Button> */}
                 <SidebarCartWrapper />
-                <Button>
-                  <UserIcon className="h-6 w-6 text-gray-900" />
-                </Button>
+                <TooltipProvider delayDuration={100}>
+                  <Tooltip>
+                    <TooltipTrigger>
+                      <UserIcon className="h-6 w-6 text-gray-900" />
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p className="font-normal text-body-medium text-gray-900">
+                        My Account
+                      </p>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
               </div>
             </div>
           </Navbar>

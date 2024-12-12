@@ -16,6 +16,12 @@ import Image from "next/image";
 import type { Product } from "@/types/types";
 import greenAppleProduct from "@/public/images/green-apple-product.png";
 import { type DialogProps } from "@radix-ui/react-dialog";
+import {
+  TooltipProvider,
+  Tooltip,
+  TooltipTrigger,
+  TooltipContent,
+} from "@/components/ui/common/tooltip";
 
 const cartProduct: Product = {
   id: "868b9f7f-620c-490c-9c8b-b45cccb4507f",
@@ -43,9 +49,18 @@ type Props = {
 
 export function SidebarCartWrapper({
   sheetTrigger = (
-    <SheetTrigger>
-      <ShoppingBagIcon className="h-6 w-6 text-gray-900" />
-    </SheetTrigger>
+    <TooltipProvider delayDuration={100}>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <SheetTrigger>
+            <ShoppingBagIcon className="h-6 w-6 text-gray-900" />
+          </SheetTrigger>
+        </TooltipTrigger>
+        <TooltipContent>
+          <p className="font-normal text-body-medium text-gray-900">My Cart</p>
+        </TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
   ),
   sheetTitle = <SheetTitle className="text-left">My Shopping Cart</SheetTitle>,
   ...sheetProps

@@ -11,6 +11,8 @@ validateEnvs();
 
 // TODO: Code refactor. Check all components and pages to see how to
 // improve the code.
+// FIXME: Render carousel provider on desktop too so we avoid errors when changing
+// resolutions from desktop to mobile.
 
 const poppins = Poppins({
   subsets: ["latin"],

@@ -9,7 +9,6 @@ import {
 import { BasicProductCard } from "@/components/ui/product/basic-product-card";
 import { Button } from "@/components/ui/common/button";
 import type { ProductFilter, ProductTag } from "@/types/types";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import {
   AdjustmentsHorizontalIcon,
@@ -52,27 +51,33 @@ export default async function Products() {
   const filters: ProductFilter[] = [
     {
       children: (
-        <RadioGroup>
+        <ToggleGroup
+          type="single"
+          className="flex flex-1 flex-row gap-2 justify-start items-center flex-wrap"
+        >
           {categories.map(({ categoryId, title, numberOfItems }, index) => (
-            <div key={index} className="flex items-center space-x-2">
-              <RadioGroupItem
-                value={`${categoryId}-${index}`}
+            <div
+              key={index}
+              className="flex items-center space-x-2 rounded-full"
+            >
+              <ToggleGroupItem
+                value={categoryId}
                 id={`${categoryId}-${index}`}
-                className="rounded-full border border-gray-100 data-[state=checked]:bg-white data-[state=checked]:border-primary h-5 w-5 data-[state=checked]:*:text-primary motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100"
-                insetCircleClasses="h-3 w-3"
-              />
-              <Label
-                htmlFor={categoryId}
-                className="font-normal text-body-small text-gray-900"
+                name={`${categoryId}-${index}`}
+                className="font-normal text-body-small text-gray-900 hover:bg-transparent hover:text-gray-900 focus-active:bg-black data-[state=on]:bg-transparent"
               >
-                {title}
-                <span className="font-normal text-body-small text-gray-500">
-                  {` (${numberOfItems})`}
-                </span>
-              </Label>
+                <Checkbox className="h-5 w-5 rounded-[3px] bg-white border border-gray-100 outline-none data-[state=checked]:border-none text-gray-900 data-[state=checked]:text-white data-[state=checked]:bg-primary motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100" />
+                <Label
+                  htmlFor={`${categoryId}-${index}`}
+                  className="font-normal text-body-small text-gray-900 flex flex-1 flex-row items-center gap-x-1"
+                >
+                  {title}
+                  <span className="font-normal text-body-small text-gray-500">{`(${numberOfItems})`}</span>
+                </Label>
+              </ToggleGroupItem>
             </div>
           ))}
-        </RadioGroup>
+        </ToggleGroup>
       ),
       name: "Categories",
     },

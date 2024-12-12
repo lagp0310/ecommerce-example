@@ -67,7 +67,7 @@ export default {
         "body-tiny": ["12px", "130%"],
       },
       keyframes: {
-        "infinite-slide": {
+        "infinite-carousel": {
           "0%": {
             transform: "translateX(0)",
           },
@@ -93,7 +93,7 @@ export default {
         },
       },
       animation: {
-        "infinite-carousel": "infinite-slide 20s linear infinite",
+        "infinite-carousel": "infinite-carousel 20s linear infinite",
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },

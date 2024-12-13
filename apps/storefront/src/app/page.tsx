@@ -55,22 +55,22 @@ import { BannerCountdownWrapper } from "@/components/ui/banner/banner-countdown-
 export default async function Home() {
   const storeHighlights: TStoreHighlight[] = [
     {
-      icon: <TruckIcon className="h-10 w-10 text-primary" />,
+      icon: <TruckIcon className="size-10 text-primary" />,
       title: "Free Shipping",
       description: "Free shipping on all your orders",
     },
     {
-      icon: <HeadphonesIcon className="h-10 w-10 text-primary" />,
+      icon: <HeadphonesIcon className="size-10 text-primary" />,
       title: "Customer Support 24/7",
       description: "Instant access to Support",
     },
     {
-      icon: <ShoppingBagCheckedIcon className="h-10 w-10 text-primary" />,
+      icon: <ShoppingBagCheckedIcon className="size-10 text-primary" />,
       title: "100% Secure Payment",
       description: "We ensure your money is save",
     },
     {
-      icon: <BoxIcon className="h-10 w-10 text-primary" />,
+      icon: <BoxIcon className="size-10 text-primary" />,
       title: "Money-Back Guarantee",
       description: "30 Days Money-Back Guarantee",
     },
@@ -85,34 +85,34 @@ export default async function Home() {
   const brandIcons = [
     <StepsBrandIcon
       key={0}
-      className="h-10 w-full text-gray-200 hover:text-primary motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100"
+      className="h-10 w-full text-gray-200 hover:text-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
     />,
     <MangoBrandIcon
       key={1}
-      className="h-10 w-full text-gray-200 hover:text-primary motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100"
+      className="h-10 w-full text-gray-200 hover:text-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
     />,
     <FoodNetworkBrandIcon
       key={2}
-      className="h-10 w-full text-gray-200 hover:text-primary motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100"
+      className="h-10 w-full text-gray-200 hover:text-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
     />,
     <FoodCoUkBrandIcon
       key={3}
-      className="h-10 w-full text-gray-200 hover:text-primary motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100"
+      className="h-10 w-full text-gray-200 hover:text-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
     />,
     <BookOffBrandIcon
       key={4}
-      className="h-10 w-full text-gray-200 hover:text-primary motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100"
+      className="h-10 w-full text-gray-200 hover:text-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
     />,
     <GSeriesBrandIcon
       key={5}
-      className="h-10 w-full text-gray-200 hover:text-primary motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100"
+      className="h-10 w-full text-gray-200 hover:text-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
     />,
   ];
 
   const headerBanners = [
     <Banner
       key={0}
-      className="relative md:row-span-2 md:col-span-2 rounded-[10px]"
+      className="relative rounded-[10px] md:col-span-2 md:row-span-2"
     >
       <Image
         src={headerBigBanner}
@@ -120,48 +120,48 @@ export default async function Home() {
         placeholder="blur"
         quality={100}
         sizes="100vw"
-        className="h-[300px] sm:h-[400px] lg:h-auto w-full rounded-[10px] object-cover"
+        className="h-[300px] w-full rounded-[10px] object-cover sm:h-[400px] lg:h-auto"
       />
-      <div className="absolute top-0 left-0 bg-gradient-to-br from-black/60 to-black/0 h-full w-full rounded-[10px]"></div>
-      <div className="absolute top-0 flex flex-1 flex-col gap-y-2 md:gap-y-7 h-full justify-center px-6 md:px-12">
-        <h2 className="text-body-xxl md:text-heading-2 font-semibold text-white">
+      <div className="absolute left-0 top-0 size-full rounded-[10px] bg-gradient-to-br from-black/60 to-black/0"></div>
+      <div className="absolute top-0 flex h-full flex-1 flex-col justify-center gap-y-2 px-6 md:gap-y-7 md:px-12">
+        <h2 className="text-body-xxl font-semibold text-white md:text-heading-2">
           Fresh and Healthy Organic Food
         </h2>
-        <div className="flex flex-col border-l-2 border-primary gap-y-2 pl-2">
-          <span className="text-body-small md:text-body-xl font-medium text-white">
+        <div className="flex flex-col gap-y-2 border-l-2 border-primary pl-2">
+          <span className="text-body-small font-medium text-white md:text-body-xl">
             Sale up to
-            <span className="bg-warning rounded-[5px] font-semibold px-3 py-1 ml-2 uppercase">
+            <span className="ml-2 rounded-[5px] bg-warning px-3 py-1 font-semibold uppercase">
               30% Off
             </span>
           </span>
-          <span className="text-body-tiny md:text-body-small font-normal text-white">
+          <span className="text-body-tiny font-normal text-white md:text-body-small">
             Free shipping on all your orders
           </span>
         </div>
         <ClientLink
           href="/products"
-          className="flex flex-row gap-x-2 items-center text-primary rounded-full bg-white max-w-fit px-5 py-3 text-body-small md:text-body-medium font-semibold leading-[120%] group hover:text-white hover:bg-primary motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100"
+          className="group flex max-w-fit flex-row items-center gap-x-2 rounded-full bg-white px-5 py-3 text-body-small font-semibold leading-[120%] text-primary hover:bg-primary hover:text-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none md:text-body-medium"
         >
           Shop now
-          <ArrowRightIcon className="h-4 w-4 text-primary group-hover:text-white" />
+          <ArrowRightIcon className="size-4 text-primary group-hover:text-white" />
         </ClientLink>
       </div>
     </Banner>,
     <Banner key={1} className="relative col-span-1 rounded-[10px]">
-      <div className="h-full absolute top-0 left-0 bg-gradient-to-r from-white/60 via-white/50 to-white/30 w-full rounded-[10px]"></div>
+      <div className="absolute left-0 top-0 size-full rounded-[10px] bg-gradient-to-r from-white/60 via-white/50 to-white/30"></div>
       <Image
         src={headerSecondBanner}
         alt="Second Header Banner"
         placeholder="blur"
         quality={100}
         sizes="100vw"
-        className="h-[300px] sm:h-[400px] lg:h-auto w-full rounded-[10px] object-cover"
+        className="h-[300px] w-full rounded-[10px] object-cover sm:h-[400px] lg:h-auto"
       />
-      <div className="absolute top-0 left-0 flex flex-1 flex-col gap-y-6 px-8 h-full justify-center">
-        <span className="text-gray-900 font-medium text-body-small leading-[100%] uppercase">
+      <div className="absolute left-0 top-0 flex h-full flex-1 flex-col justify-center gap-y-6 px-8">
+        <span className="text-body-small font-medium uppercase leading-[100%] text-gray-900">
           Summer Sale
         </span>
-        <h5 className="text-heading-5 font-semibold text-gray-900 uppercase">
+        <h5 className="text-heading-5 font-semibold uppercase text-gray-900">
           75% Off
         </h5>
         <span className="text-body-small font-normal text-gray-800">
@@ -169,10 +169,10 @@ export default async function Home() {
         </span>
         <ClientLink
           href="/products"
-          className="flex flex-row gap-x-2 items-center text-white max-w-fit bg-primary group hover:bg-white hover:text-primary rounded-full px-5 py-3 text-body-small md:text-body-medium font-semibold leading-[120%] motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100"
+          className="group flex max-w-fit flex-row items-center gap-x-2 rounded-full bg-primary px-5 py-3 text-body-small font-semibold leading-[120%] text-white hover:bg-white hover:text-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none md:text-body-medium"
         >
           Shop now
-          <ArrowRightIcon className="h-4 w-4 text-white group-hover:text-primary" />
+          <ArrowRightIcon className="size-4 text-white group-hover:text-primary" />
         </ClientLink>
       </div>
     </Banner>,
@@ -183,22 +183,22 @@ export default async function Home() {
         placeholder="blur"
         quality={100}
         sizes="100vw"
-        className="h-[300px] sm:h-[400px] lg:h-auto w-full rounded-[10px] object-cover"
+        className="h-[300px] w-full rounded-[10px] object-cover sm:h-[400px] lg:h-auto"
       />
-      <div className="absolute top-0 left-0 bg-green-gray-900/80 h-full w-full rounded-[10px]"></div>
-      <div className="absolute top-0 left-0 flex flex-1 flex-col gap-y-6 md:gap-y-8 items-center px-6 md:px-12 h-full justify-center w-full">
-        <span className="text-white font-medium text-body-small leading-[100%] uppercase text-center">
+      <div className="absolute left-0 top-0 size-full rounded-[10px] bg-green-gray-900/80"></div>
+      <div className="absolute left-0 top-0 flex size-full flex-1 flex-col items-center justify-center gap-y-6 px-6 md:gap-y-8 md:px-12">
+        <span className="text-center text-body-small font-medium uppercase leading-[100%] text-white">
           Best Deal
         </span>
-        <h5 className="text-white text-body-xxl md:text-heading-5 font-semibold text-center line-clamp-2">
+        <h5 className="line-clamp-2 text-center text-body-xxl font-semibold text-white md:text-heading-5">
           Special Products of the Month
         </h5>
         <ClientLink
           href="/products"
-          className="flex flex-row gap-x-2 items-center text-primary max-w-fit px-5 py-3 text-body-small md:text-body-medium font-semibold leading-[120%] rounded-full group hover:bg-white hover:text-primary motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100"
+          className="group flex max-w-fit flex-row items-center gap-x-2 rounded-full px-5 py-3 text-body-small font-semibold leading-[120%] text-primary hover:bg-white hover:text-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none md:text-body-medium"
         >
           Shop now
-          <ArrowRightIcon className="h-4 w-4 text-primary group-hover:text-primary" />
+          <ArrowRightIcon className="size-4 text-primary group-hover:text-primary" />
         </ClientLink>
       </div>
     </Banner>,
@@ -388,7 +388,7 @@ export default async function Home() {
   const offerBanners = [
     <Banner
       key={0}
-      className="relative flex flex-1 flex-col gap-y-4 items-center"
+      className="relative flex flex-1 flex-col items-center gap-y-4"
     >
       <Image
         src={firstOfferBanner}
@@ -396,13 +396,13 @@ export default async function Home() {
         placeholder="blur"
         quality={100}
         sizes="100vw"
-        className="h-[500px] lg:h-auto w-full rounded-[10px] object-cover"
+        className="h-[500px] w-full rounded-[10px] object-cover lg:h-auto"
       />
-      <div className="absolute top-10 left-0 flex flex-1 flex-col gap-y-4 items-center w-full h-[230px]">
-        <span className="text-body-small font-normal leading-[100%] text-white uppercase">
+      <div className="absolute left-0 top-10 flex h-[230px] w-full flex-1 flex-col items-center gap-y-4">
+        <span className="text-body-small font-normal uppercase leading-[100%] text-white">
           Best Deals
         </span>
-        <h3 className="text-heading-4 md:text-heading-3 font-semibold text-white text-center">
+        <h3 className="text-center text-heading-4 font-semibold text-white md:text-heading-3">
           Sale of the Month
         </h3>
         <div className="flex flex-1 flex-row gap-x-2 pb-2">
@@ -415,20 +415,20 @@ export default async function Home() {
             />
           </div>
         </div>
-        <div className="h-full flex flex-1 flex-row items-end">
+        <div className="flex h-full flex-1 flex-row items-end">
           <ClientLink
             href="/products"
-            className="flex flex-row gap-x-2 items-center text-primary rounded-full bg-white max-w-fit px-5 py-3 text-body-small md:text-body-medium font-semibold leading-[120%] group hover:text-white hover:bg-primary motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100"
+            className="group flex max-w-fit flex-row items-center gap-x-2 rounded-full bg-white px-5 py-3 text-body-small font-semibold leading-[120%] text-primary hover:bg-primary hover:text-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none md:text-body-medium"
           >
             Shop now{" "}
-            <ArrowRightIcon className="h-4 w-4 text-primary group-hover:text-white" />
+            <ArrowRightIcon className="size-4 text-primary group-hover:text-white" />
           </ClientLink>
         </div>
       </div>
     </Banner>,
     <Banner
       key={1}
-      className="relative flex flex-1 flex-col gap-y-4 items-center"
+      className="relative flex flex-1 flex-col items-center gap-y-4"
     >
       <Image
         src={secondOfferBanner}
@@ -436,32 +436,32 @@ export default async function Home() {
         placeholder="blur"
         quality={100}
         sizes="100vw"
-        className="h-[500px] lg:h-auto w-full rounded-[10px] object-cover"
+        className="h-[500px] w-full rounded-[10px] object-cover lg:h-auto"
       />
-      <div className="absolute top-10 left-0 flex flex-1 flex-col gap-y-4 items-center w-full h-[230px]">
-        <span className="text-body-small font-normal leading-[100%] text-white uppercase">
+      <div className="absolute left-0 top-10 flex h-[230px] w-full flex-1 flex-col items-center gap-y-4">
+        <span className="text-body-small font-normal uppercase leading-[100%] text-white">
           85% Fat Free
         </span>
-        <h3 className="text-heading-4 md:text-heading-3 font-semibold text-white text-center">
+        <h3 className="text-center text-heading-4 font-semibold text-white md:text-heading-3">
           Low-Fat Meat
         </h3>
         <span className="text-white">
           Starting at <span className="text-warning">$79.99</span>
         </span>
-        <div className="h-full flex flex-1 flex-row items-end">
+        <div className="flex h-full flex-1 flex-row items-end">
           <ClientLink
             href="/products"
-            className="flex flex-row gap-x-2 items-center text-primary rounded-full bg-white max-w-fit px-5 py-3 text-body-small md:text-body-medium font-semibold leading-[120%] group hover:text-white hover:bg-primary motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100"
+            className="group flex max-w-fit flex-row items-center gap-x-2 rounded-full bg-white px-5 py-3 text-body-small font-semibold leading-[120%] text-primary hover:bg-primary hover:text-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none md:text-body-medium"
           >
             Shop now{" "}
-            <ArrowRightIcon className="h-4 w-4 text-primary group-hover:text-white" />
+            <ArrowRightIcon className="size-4 text-primary group-hover:text-white" />
           </ClientLink>
         </div>
       </div>
     </Banner>,
     <Banner
       key={2}
-      className="relative flex flex-1 flex-col gap-y-4 items-center"
+      className="relative flex flex-1 flex-col items-center gap-y-4"
     >
       <Image
         src={thirdOfferBanner}
@@ -469,28 +469,28 @@ export default async function Home() {
         placeholder="blur"
         quality={100}
         sizes="100vw"
-        className="h-[500px] lg:h-auto w-full rounded-[10px] object-cover"
+        className="h-[500px] w-full rounded-[10px] object-cover lg:h-auto"
       />
-      <div className="absolute top-10 left-0 flex flex-1 flex-col gap-y-4 items-center w-full h-[230px]">
-        <span className="text-body-small font-normal leading-[100%] text-gray-900 uppercase">
+      <div className="absolute left-0 top-10 flex h-[230px] w-full flex-1 flex-col items-center gap-y-4">
+        <span className="text-body-small font-normal uppercase leading-[100%] text-gray-900">
           Summer Sale
         </span>
-        <h3 className="text-heading-4 md:text-heading-3 font-semibold text-gray-900 text-center">
+        <h3 className="text-center text-heading-4 font-semibold text-gray-900 md:text-heading-3">
           100% Fresh Fruit
         </h3>
         <span className="text-body-xl font-medium text-gray-900">
           Up to
-          <span className="bg-gray-900 rounded-[5px] font-semibold px-3 py-1 ml-2 uppercase text-[#FCC900]">
+          <span className="ml-2 rounded-[5px] bg-gray-900 px-3 py-1 font-semibold uppercase text-[#FCC900]">
             64% Off
           </span>
         </span>
-        <div className="h-full flex flex-1 flex-row items-end">
+        <div className="flex h-full flex-1 flex-row items-end">
           <ClientLink
             href="/products"
-            className="flex flex-row gap-x-2 items-center text-primary rounded-full bg-white max-w-fit px-5 py-3 text-body-small md:text-body-medium font-semibold leading-[120%] group hover:text-white hover:bg-primary motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100"
+            className="group flex max-w-fit flex-row items-center gap-x-2 rounded-full bg-white px-5 py-3 text-body-small font-semibold leading-[120%] text-primary hover:bg-primary hover:text-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none md:text-body-medium"
           >
             Shop now{" "}
-            <ArrowRightIcon className="h-4 w-4 text-primary group-hover:text-white" />
+            <ArrowRightIcon className="size-4 text-primary group-hover:text-white" />
           </ClientLink>
         </div>
       </div>
@@ -517,8 +517,8 @@ export default async function Home() {
 
   return (
     <div className="flex flex-1 flex-col">
-      <div className="flex flex-1 flex-row justify-center items-center my-6 px-6 xl:px-0">
-        <div className="grid lg:grid-cols-3 lg:grid-rows-2 gap-6 max-w-7xl w-full">
+      <div className="my-6 flex flex-1 flex-row items-center justify-center px-6 xl:px-0">
+        <div className="grid w-full max-w-7xl gap-6 lg:grid-cols-3 lg:grid-rows-2">
           {/* FIXME: While carousels are loaded (client component) the server sends a basic HTML version which is
           a column-based slides. We can improve this by using a loader (skeleton) while the component loads. */}
           <CarouselProvider {...headerBannerCarouselProviderProps}>
@@ -536,14 +536,14 @@ export default async function Home() {
             <DotsRenderer mobileMediaQuery="(max-width: 768px)">
               <DefaultDotGroup
                 disableActiveDots
-                className="flex flex-1 flex-row gap-x-1 w-full justify-center items-center"
+                className="flex w-full flex-1 flex-row items-center justify-center gap-x-1"
               />
             </DotsRenderer>
           </CarouselProvider>
         </div>
       </div>
-      <div className="flex flex-1 md:justify-center px-6 xl:px-0">
-        <StoreHighlights className="relative flex flex-1 flex-col md:flex-row md:flex-wrap md:gap-y-6 lg:flex-nowrap rounded-lg p-6 md:p-10 shadow-[0px_8px_40px_0px_rgba(0,38,3,0.08)] justify-center items-center lg:items-start max-w-7xl">
+      <div className="flex flex-1 px-6 md:justify-center xl:px-0">
+        <StoreHighlights className="relative flex max-w-7xl flex-1 flex-col items-center justify-center rounded-lg p-6 shadow-[0px_8px_40px_0px_rgba(0,38,3,0.08)] md:flex-row md:flex-wrap md:gap-y-6 md:p-10 lg:flex-nowrap lg:items-start">
           <CarouselProvider {...highlightCarouselProviderProps}>
             <CarouselRenderer {...highlightCarouselRendererProps}>
               {storeHighlights.map(({ description, icon, title }, index) => (
@@ -554,7 +554,7 @@ export default async function Home() {
                   innerClassName="!h-16"
                   mobileMediaQuery="(max-width: 768px)"
                 >
-                  <StoreHighlight className="flex flex-1 flex-row gap-x-4 w-full justify-center md:basis-1/2">
+                  <StoreHighlight className="flex w-full flex-1 flex-row justify-center gap-x-4 md:basis-1/2">
                     {icon}
                     <div className="flex flex-1 flex-col gap-y-2">
                       <h3 className="text-body-medium font-semibold text-gray-900">
@@ -571,31 +571,31 @@ export default async function Home() {
             <DotsRenderer mobileMediaQuery="(max-width: 768px)">
               <DefaultDotGroup
                 disableActiveDots
-                className="flex flex-1 flex-row gap-x-1 w-full justify-center items-center"
+                className="flex w-full flex-1 flex-row items-center justify-center gap-x-1"
               />
             </DotsRenderer>
           </CarouselProvider>
         </StoreHighlights>
       </div>
-      <div className="flex flex-1 flex-col gap-y-[60px] mt-[60px] md:items-center">
-        <Section className="flex flex-1 flex-col gap-y-8 px-6 xl:px-0 w-full items-center">
-          <SectionTitle className="max-w-7xl w-full">
+      <div className="mt-[60px] flex flex-1 flex-col gap-y-[60px] md:items-center">
+        <Section className="flex w-full flex-1 flex-col items-center gap-y-8 px-6 xl:px-0">
+          <SectionTitle className="w-full max-w-7xl">
             <div className="flex flex-1 flex-row">
-              <h2 className="text-body-xl md:text-heading-5 font-semibold text-gray-900">
+              <h2 className="text-body-xl font-semibold text-gray-900 md:text-heading-5">
                 Popular Categories
               </h2>
               <div className="flex flex-1 flex-row justify-end">
                 <Link
                   href="/products"
-                  className="text-body-medium font-medium text-primary flex flex-row gap-x-2 items-center justify-end"
+                  className="flex flex-row items-center justify-end gap-x-2 text-body-medium font-medium text-primary"
                 >
                   View All
-                  <ArrowRightIcon className="h-4 w-4 text-primary" />
+                  <ArrowRightIcon className="size-4 text-primary" />
                 </Link>
               </div>
             </div>
           </SectionTitle>
-          <SectionContent className="md:grid md:grid-cols-4 lg:grid-cols-6 md:gap-6 max-w-7xl w-full">
+          <SectionContent className="w-full max-w-7xl md:grid md:grid-cols-4 md:gap-6 lg:grid-cols-6">
             <CarouselProvider {...categoriesCarouselProviderProps}>
               <CarouselRenderer {...categoriesCarouselRendererProps}>
                 {Array.from({ length: 12 }).map((_value, index) => (
@@ -607,10 +607,10 @@ export default async function Home() {
                   >
                     <CategoryCard
                       url={`/products?categoryIds=${category?.categoryId}`}
-                      className="flex flex-1 flex-col items-center justify-center gap-y-1.5 md:gap-y-4 bg-white border border-gray-100 rounded-[5px] pt-4 pb-6 hover:border-soft-primary/45 hover:shadow-[0px_0px_12px_0px_rgba(132,209,135,0.32)] hover:shadow-soft-primary/60 motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100"
+                      className="flex flex-1 flex-col items-center justify-center gap-y-1.5 rounded-[5px] border border-gray-100 bg-white pb-6 pt-4 hover:border-soft-primary/45 hover:shadow-[0px_0px_12px_0px_rgba(132,209,135,0.32)] hover:shadow-soft-primary/60 motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none md:gap-y-4"
                     >
                       {category?.image}
-                      <span className="text-body-small md:text-body-large font-medium text-gray-900 text-center truncate whitespace-break-spaces">
+                      <span className="truncate whitespace-break-spaces text-center text-body-small font-medium text-gray-900 md:text-body-large">
                         {category.title}
                       </span>
                     </CategoryCard>
@@ -620,30 +620,30 @@ export default async function Home() {
               <DotsRenderer mobileMediaQuery="(max-width: 768px)">
                 <DefaultDotGroup
                   disableActiveDots
-                  className="flex flex-1 flex-row gap-x-1 w-full justify-center items-center"
+                  className="flex w-full flex-1 flex-row items-center justify-center gap-x-1"
                 />
               </DotsRenderer>
             </CarouselProvider>
           </SectionContent>
         </Section>
         <Section className="flex flex-1 flex-col gap-y-8 px-6 xl:px-0">
-          <SectionTitle className="max-w-7xl w-full">
+          <SectionTitle className="w-full max-w-7xl">
             <div className="flex flex-1 flex-row">
-              <h2 className="text-body-xl md:text-heading-5 font-semibold text-gray-900">
+              <h2 className="text-body-xl font-semibold text-gray-900 md:text-heading-5">
                 Popular Products
               </h2>
               <div className="flex flex-1 flex-row justify-end">
                 <Link
                   href="/products"
-                  className="text-body-medium font-medium text-primary flex flex-row gap-x-2 items-center justify-end"
+                  className="flex flex-row items-center justify-end gap-x-2 text-body-medium font-medium text-primary"
                 >
                   View All
-                  <ArrowRightIcon className="h-4 w-4 text-primary" />
+                  <ArrowRightIcon className="size-4 text-primary" />
                 </Link>
               </div>
             </div>
           </SectionTitle>
-          <SectionContent className="max-w-7xl w-full md:grid md:grid-cols-3 lg:grid-cols-5 md:gap-6">
+          <SectionContent className="w-full max-w-7xl md:grid md:grid-cols-3 md:gap-6 lg:grid-cols-5">
             <CarouselProvider {...popularProductsCarouselProviderProps}>
               <CarouselRenderer {...popularProductsCarouselRendererProps}>
                 {Array.from({ length: 10 }).map((_value, index) => (
@@ -663,14 +663,14 @@ export default async function Home() {
               <DotsRenderer mobileMediaQuery="(max-width: 768px)">
                 <DefaultDotGroup
                   disableActiveDots
-                  className="flex flex-1 flex-row gap-x-1 w-full justify-center items-center mt-7"
+                  className="mt-7 flex w-full flex-1 flex-row items-center justify-center gap-x-1"
                 />
               </DotsRenderer>
             </CarouselProvider>
           </SectionContent>
         </Section>
-        <Section className="lg:flex lg:flex-1 lg:flex-col lg:gap-y-8 lg:items-center px-6 xl:px-0 mt-[60px] md:mt-0 w-full">
-          <SectionContent className="max-w-7xl w-full lg:flex lg:flex-1 lg:flex-row lg:gap-x-6">
+        <Section className="mt-[60px] w-full px-6 md:mt-0 lg:flex lg:flex-1 lg:flex-col lg:items-center lg:gap-y-8 xl:px-0">
+          <SectionContent className="w-full max-w-7xl lg:flex lg:flex-1 lg:flex-row lg:gap-x-6">
             <CarouselProvider {...offerBannersCarouselProviderProps}>
               <CarouselRenderer {...offerBannersCarouselRendererProps}>
                 {offerBanners.map((bannerNode, index) => (
@@ -690,32 +690,32 @@ export default async function Home() {
               >
                 <DefaultDotGroup
                   disableActiveDots
-                  className="flex flex-1 flex-row gap-x-1 w-full justify-center items-center mt-7"
+                  className="mt-7 flex w-full flex-1 flex-row items-center justify-center gap-x-1"
                 />
               </DotsRenderer>
             </CarouselProvider>
           </SectionContent>
         </Section>
-        <div className="bg-[#F7F7F7] py-[60px] w-full px-6 xl:px-0">
+        <div className="w-full bg-[#F7F7F7] px-6 py-[60px] xl:px-0">
           <div className="flex flex-1 flex-row justify-center">
-            <Section className="flex flex-1 flex-col gap-y-8 max-w-7xl">
+            <Section className="flex max-w-7xl flex-1 flex-col gap-y-8">
               <SectionTitle className="w-full">
                 <div className="flex flex-1 flex-row">
-                  <h2 className="text-body-xl md:text-heading-5 font-semibold text-gray-900">
+                  <h2 className="text-body-xl font-semibold text-gray-900 md:text-heading-5">
                     Hot Deals
                   </h2>
                   <div className="flex flex-1 flex-row justify-end">
                     <Link
                       href="/products"
-                      className="text-body-medium font-medium text-primary flex flex-row gap-x-2 items-center justify-end"
+                      className="flex flex-row items-center justify-end gap-x-2 text-body-medium font-medium text-primary"
                     >
                       View All
-                      <ArrowRightIcon className="h-4 w-4 text-primary" />
+                      <ArrowRightIcon className="size-4 text-primary" />
                     </Link>
                   </div>
                 </div>
               </SectionTitle>
-              <SectionContent className="max-w-7xl w-full grid md:grid-cols-4 lg:grid-cols-5 md:gap-6">
+              <SectionContent className="grid w-full max-w-7xl md:grid-cols-4 md:gap-6 lg:grid-cols-5">
                 <CarouselProvider {...hotDealsCarouselProviderProps}>
                   <CarouselRenderer {...hotDealsCarouselRendererProps}>
                     {Array.from({ length: 12 }).map((_value, index) => (
@@ -727,7 +727,7 @@ export default async function Home() {
                       >
                         {index === 0 ? (
                           <React.Fragment>
-                            <div className="hidden md:block col-span-1 row-span-1 md:col-span-2 md:row-span-2">
+                            <div className="col-span-1 row-span-1 hidden md:col-span-2 md:row-span-2 md:block">
                               <SummarizedProductCard
                                 product={product}
                                 isFirstOnList={index === 0}
@@ -752,7 +752,7 @@ export default async function Home() {
                   <DotsRenderer mobileMediaQuery="(max-width: 768px)">
                     <DefaultDotGroup
                       disableActiveDots
-                      className="flex flex-1 flex-row gap-x-1 w-full justify-center items-center mt-7"
+                      className="mt-7 flex w-full flex-1 flex-row items-center justify-center gap-x-1"
                     />
                   </DotsRenderer>
                 </CarouselProvider>
@@ -762,56 +762,56 @@ export default async function Home() {
         </div>
         <div className="w-full">
           <Section className="flex flex-1 flex-row justify-center px-6 xl:px-0">
-            <Banner className="relative flex flex-1 flex-col gap-y-4 items-end rounded-[10px] max-w-7xl">
-              <div className="bg-gradient-to-r from-black/60 to-black/0 h-[250px] w-full absolute top-0 rounded-[10px] flex md:hidden"></div>
+            <Banner className="relative flex max-w-7xl flex-1 flex-col items-end gap-y-4 rounded-[10px]">
+              <div className="absolute top-0 flex h-[250px] w-full rounded-[10px] bg-gradient-to-r from-black/60 to-black/0 md:hidden"></div>
               <Image
                 src={discountBanner}
                 alt="Offer Banner"
                 placeholder="blur"
                 quality={100}
                 sizes="100vw"
-                className="h-[250px] md:h-[300px] lg:h-auto w-full rounded-[10px] object-cover"
+                className="h-[250px] w-full rounded-[10px] object-cover md:h-[300px] lg:h-auto"
               />
-              <div className="absolute left-6 md:right-12 flex flex-col gap-y-2 md:gap-y-4 h-full items-start justify-center">
-                <span className="text-body-medium font-normal leading-[100%] text-white uppercase">
+              <div className="absolute left-6 flex h-full flex-col items-start justify-center gap-y-2 md:right-12 md:gap-y-4">
+                <span className="text-body-medium font-normal uppercase leading-[100%] text-white">
                   Summer Sale
                 </span>
-                <h3 className="text-body-xxl md:text-heading-1 font-semibold text-warning">
+                <h3 className="text-body-xxl font-semibold text-warning md:text-heading-1">
                   37%{" "}
                   <span className="font-normal uppercase text-white">Off</span>
                 </h3>
-                <p className="text-body-small md:text-body-medium font-normal text-white">
+                <p className="text-body-small font-normal text-white md:text-body-medium">
                   Free Shipping and 30 days money-back guarantee.
                 </p>
                 <Link
                   href="/products"
-                  className="flex flex-row gap-x-2 items-center text-white rounded-full bg-primary max-w-fit px-5 py-3 text-body-small md:text-body-medium font-semibold leading-[120%] group hover:bg-white hover:text-primary motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100"
+                  className="group flex max-w-fit flex-row items-center gap-x-2 rounded-full bg-primary px-5 py-3 text-body-small font-semibold leading-[120%] text-white hover:bg-white hover:text-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none md:text-body-medium"
                 >
                   Shop now{" "}
-                  <ArrowRightIcon className="h-4 w-4 text-white group-hover:text-primary" />
+                  <ArrowRightIcon className="size-4 text-white group-hover:text-primary" />
                 </Link>
               </div>
             </Banner>
           </Section>
         </div>
         <Section className="flex flex-1 flex-col gap-y-8 px-6 xl:px-0">
-          <SectionTitle className="max-w-7xl w-full">
+          <SectionTitle className="w-full max-w-7xl">
             <div className="flex flex-1 flex-row">
-              <h2 className="text-body-xl md:text-heading-5 font-semibold text-gray-900">
+              <h2 className="text-body-xl font-semibold text-gray-900 md:text-heading-5">
                 Featured Products
               </h2>
               <div className="flex flex-1 flex-row justify-end">
                 <Link
                   href="/products"
-                  className="text-body-medium font-medium text-primary flex flex-row gap-x-2 items-center justify-end"
+                  className="flex flex-row items-center justify-end gap-x-2 text-body-medium font-medium text-primary"
                 >
                   View All
-                  <ArrowRightIcon className="h-4 w-4 text-primary" />
+                  <ArrowRightIcon className="size-4 text-primary" />
                 </Link>
               </div>
             </div>
           </SectionTitle>
-          <SectionContent className="max-w-7xl w-full grid md:grid-cols-3 lg:grid-cols-5 md:gap-6">
+          <SectionContent className="grid w-full max-w-7xl md:grid-cols-3 md:gap-6 lg:grid-cols-5">
             <CarouselProvider {...featuredProductsCarouselProviderProps}>
               <CarouselRenderer {...featuredProductsCarouselRendererProps}>
                 {Array.from({ length: 10 }).map((_value, index) => (
@@ -831,27 +831,27 @@ export default async function Home() {
               <DotsRenderer mobileMediaQuery="(max-width: 768px)">
                 <DefaultDotGroup
                   disableActiveDots
-                  className="flex flex-1 flex-row gap-x-1 w-full justify-center items-center mt-7"
+                  className="mt-7 flex w-full flex-1 flex-row items-center justify-center gap-x-1"
                 />
               </DotsRenderer>
             </CarouselProvider>
           </SectionContent>
         </Section>
-        <div className="bg-[#F7F7F7] py-[60px] w-full px-6 xl:px-0">
+        <div className="w-full bg-[#F7F7F7] px-6 py-[60px] xl:px-0">
           <div className="flex flex-1 flex-row md:justify-center">
             <CarouselProvider {...testimonialsCarouselProviderProps}>
-              <Section className="flex flex-1 flex-col gap-y-8 max-w-7xl">
+              <Section className="flex max-w-7xl flex-1 flex-col gap-y-8">
                 <SectionTitle className="w-full">
                   <div className="flex flex-1 flex-row">
-                    <h2 className="text-body-xl md:text-heading-5 font-semibold text-gray-900 text-center md:text-left w-full">
+                    <h2 className="w-full text-center text-body-xl font-semibold text-gray-900 md:text-left md:text-heading-5">
                       Customer Testimonials
                     </h2>
-                    <div className="flex-1 flex-row justify-end gap-x-3 hidden md:flex">
-                      <ButtonBackRenderer className="rounded-full h-[45px] w-[45px] border border-gray-100 flex flex-row items-center justify-center group hover:bg-primary hover:border-none motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100">
-                        <ArrowLeftIcon className="h-4 w-4 text-gray-900 group-hover:text-white" />
+                    <div className="hidden flex-1 flex-row justify-end gap-x-3 md:flex">
+                      <ButtonBackRenderer className="group flex size-[45px] flex-row items-center justify-center rounded-full border border-gray-100 hover:border-none hover:bg-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none">
+                        <ArrowLeftIcon className="size-4 text-gray-900 group-hover:text-white" />
                       </ButtonBackRenderer>
-                      <ButtonNextRenderer className="rounded-full h-[45px] w-[45px] border border-gray-100 flex flex-row items-center justify-center group hover:bg-primary hover:border-none motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100">
-                        <ArrowRightIcon className="h-4 w-4 text-gray-900 group-hover:text-white" />
+                      <ButtonNextRenderer className="group flex size-[45px] flex-row items-center justify-center rounded-full border border-gray-100 hover:border-none hover:bg-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none">
+                        <ArrowRightIcon className="size-4 text-gray-900 group-hover:text-white" />
                       </ButtonNextRenderer>
                     </div>
                   </div>
@@ -874,7 +874,7 @@ export default async function Home() {
                   <DotsRenderer renderInDesktop>
                     <DefaultDotGroup
                       disableActiveDots
-                      className="flex flex-1 flex-row gap-x-1 w-full justify-center items-center mt-7"
+                      className="mt-7 flex w-full flex-1 flex-row items-center justify-center gap-x-1"
                     />
                   </DotsRenderer>
                 </SectionContent>
@@ -884,17 +884,17 @@ export default async function Home() {
         </div>
         <div className="w-full px-6 xl:px-0">
           <div className="flex flex-1 flex-row md:justify-center">
-            <Section className="flex flex-1 flex-col gap-y-8 pb-[60px] max-w-7xl w-full">
+            <Section className="flex w-full max-w-7xl flex-1 flex-col gap-y-8 pb-[60px]">
               <SectionTitle className="w-full">
                 <div className="flex flex-1 flex-row">
-                  <h2 className="text-body-xl md:text-heading-5 font-semibold text-gray-900 text-center w-full">
+                  <h2 className="w-full text-center text-body-xl font-semibold text-gray-900 md:text-heading-5">
                     Trusted by Leading Brands
                   </h2>
                 </div>
               </SectionTitle>
               <SectionContent className="max-w-7xl">
                 <div className="w-full overflow-x-hidden">
-                  <div className="motion-safe:animate-infinite-carousel flex flex-1 flex-row w-[3000px]">
+                  <div className="flex w-[3000px] flex-1 flex-row motion-safe:animate-infinite-carousel">
                     {brandIcons.concat(brandIcons).map((brandIcon, index) => (
                       <div key={index} className="flex flex-1">
                         {brandIcon}

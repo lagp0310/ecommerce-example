@@ -25,9 +25,9 @@ export function PricingSlider({
         onValueChange={setValue}
         {...props}
       />
-      <span className="font-normal text-body-small text-gray-700">
+      <span className="text-body-small font-normal text-gray-700">
         Price:
-        <span className="font-medium text-body-small text-gray-900">
+        <span className="text-body-small font-medium text-gray-900">
           {` ${currencySymbol}0 - ${currencySymbol}${value}`}
         </span>
       </span>

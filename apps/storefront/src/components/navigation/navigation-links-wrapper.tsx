@@ -110,7 +110,7 @@ export function NavigationLinksWrapper() {
             href="/"
             legacyBehavior
             passHref
-            className="w-full flex flex-1 flex-row group-hover/home:bg-green-gray-100/50 group-hover/home:rounded-md"
+            className="flex w-full flex-1 flex-row group-hover/home:rounded-md group-hover/home:bg-green-gray-100/50"
           >
             <NavigationMenuLink
               data-active={pathname === "/"}
@@ -155,7 +155,7 @@ export function NavigationLinksWrapper() {
             href="/products"
             legacyBehavior
             passHref
-            className="w-full flex flex-1 flex-row group-hover/products:bg-green-gray-100/50 group-hover/products:rounded-md"
+            className="flex w-full flex-1 flex-row group-hover/products:rounded-md group-hover/products:bg-green-gray-100/50"
           >
             <NavigationMenuLink
               data-active={pathname === "/products"}
@@ -177,7 +177,7 @@ export function NavigationLinksWrapper() {
             href="/about-us"
             legacyBehavior
             passHref
-            className="w-full flex flex-1 flex-row group-hover/about-us:bg-green-gray-100/50 group-hover/about-us:rounded-md"
+            className="flex w-full flex-1 flex-row group-hover/about-us:rounded-md group-hover/about-us:bg-green-gray-100/50"
           >
             <NavigationMenuLink
               data-active={pathname === "/about-us"}
@@ -201,10 +201,11 @@ export function NavigationLinksWrapper() {
         ({ content, title, groupName, isDropdown = false }, index) => (
           <NavigationMenuItem
             key={index}
-            className={`flex flex-1 flex-row text-body-small font-medium hover:rounded-md group/${groupName} motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100`}
+            // eslint-disable-next-line tailwindcss/no-custom-classname
+            className={`group/${groupName} flex flex-1 flex-row text-body-small font-medium hover:rounded-md motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none`}
           >
             {isDropdown ? (
-              <NavigationMenuTrigger className="text-body-small font-medium text-gray-500 hover:!text-gray-900 cursor-pointer">
+              <NavigationMenuTrigger className="cursor-pointer text-body-small font-medium text-gray-500 hover:!text-gray-900">
                 {title}
               </NavigationMenuTrigger>
             ) : null}

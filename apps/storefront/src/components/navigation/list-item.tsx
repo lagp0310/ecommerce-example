@@ -15,9 +15,7 @@ const ListItem = React.forwardRef<
     <React.Fragment>
       {backgroundImage}
       <div className="text-sm font-medium leading-none">{title}</div>
-      <p className="line-clamp-3 text-sm leading-snug text-muted-foreground">
-        {children}
-      </p>
+      <p className="line-clamp-3 text-sm leading-snug">{children}</p>
     </React.Fragment>
   );
 

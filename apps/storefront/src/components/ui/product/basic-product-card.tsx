@@ -43,11 +43,11 @@ export function BasicProductCard({
   const productNode = (
     <ProductCard
       className={
-        "relative bg-white flex flex-1 flex-col justify-center border border-gray-100 gap-y-[6px] p-3 rounded-[5px] hover:border-soft-primary/45 hover:shadow-[0px_0px_12px_0px_rgba(132,209,135,0.32)] hover:shadow-soft-primary/60 col-span-1 motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100"
+        "relative col-span-1 flex flex-1 flex-col justify-center gap-y-[6px] rounded-[5px] border border-gray-100 bg-white p-3 hover:border-soft-primary/45 hover:shadow-[0px_0px_12px_0px_rgba(132,209,135,0.32)] hover:shadow-soft-primary/60 motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
       }
     >
       {shouldShowTags ? (
-        <div className="z-20 absolute top-3 left-3 flex flex-1 flex-row gap-x-2 text-body-tiny md:text-body-small flex-wrap pr-12 gap-y-1">
+        <div className="absolute left-3 top-3 z-20 flex flex-1 flex-row flex-wrap gap-x-2 gap-y-1 pr-12 text-body-tiny md:text-body-small">
           {tags.map(({ text, type }, index) => (
             <span
               key={index}
@@ -67,7 +67,7 @@ export function BasicProductCard({
       <div className="mt-6 md:mt-2">{image}</div>
       <div className="flex flex-1 flex-row">
         <div className="flex flex-1 flex-col">
-          <span className="text-body-small font-normal text-gray-700 truncate line-clamp-1">
+          <span className="line-clamp-1 truncate text-body-small font-normal text-gray-700">
             {name}
           </span>
           <div className="flex flex-1 flex-row gap-x-2 text-body-small md:text-body-medium">
@@ -89,12 +89,12 @@ export function BasicProductCard({
             >{`${currencySymbol}${price}`}</span>
           </div>
           {typeof rating === "number" && typeof totalRatings === "number" ? (
-            <div className="flex flex-1 flex-row gap-x-1 items-center">
+            <div className="flex flex-1 flex-row items-center gap-x-1">
               <Rating
                 className="flex flex-row gap-x-0.5"
                 rating={rating}
-                emptyIcon={<StarIcon className="text-warning h-3 w-3" />}
-                filledIcon={<FilledStarIcon className="text-warning h-3 w-3" />}
+                emptyIcon={<StarIcon className="size-3 text-warning" />}
+                filledIcon={<FilledStarIcon className="size-3 text-warning" />}
               />
               <span className="text-body-tiny font-normal text-gray-500">
                 {`(${totalRatings})`}
@@ -110,17 +110,17 @@ export function BasicProductCard({
     <React.Fragment>
       {shouldUseNextLink ? (
         <div className="relative">
-          <div className="z-10 absolute top-3 right-3 flex flex-1 flex-col gap-y-2">
-            <Button className="bg-white rounded-full h-8 w-8 flex flex-row justify-center items-center border border-gray-50 group hover:bg-primary hover:border-none motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100">
-              <HeartIcon className="h-4 w-4 text-gray-900 group-hover:text-white" />
+          <div className="absolute right-3 top-3 z-10 flex flex-1 flex-col gap-y-2">
+            <Button className="group flex size-8 flex-row items-center justify-center rounded-full border border-gray-50 bg-white hover:border-none hover:bg-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none">
+              <HeartIcon className="size-4 text-gray-900 group-hover:text-white" />
             </Button>
           </div>
           <ClientLink href={`/products/${id}`} className="col-span-1">
             {productNode}
           </ClientLink>
           <div className="absolute bottom-6 right-3 flex flex-1 flex-row items-center justify-end">
-            <Button className="bg-gray-50 rounded-full h-8 w-8 flex flex-row justify-center items-center hover:bg-primary group motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100">
-              <ShoppingBagIcon className="h-4 w-4 text-gray-900 group-hover:text-white" />
+            <Button className="group flex size-8 flex-row items-center justify-center rounded-full bg-gray-50 hover:bg-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none">
+              <ShoppingBagIcon className="size-4 text-gray-900 group-hover:text-white" />
             </Button>
           </div>
         </div>

@@ -28,7 +28,7 @@ export const availableLanguages: Language[] = [
     name: "English",
     shortName: "Eng",
     value: "en-US",
-    icon: <LanguageIcon className="h-4 w-4 mr-1" />,
+    icon: <LanguageIcon className="mr-1 size-4" />,
   },
 ];
 export const {
@@ -44,7 +44,7 @@ export const availableCurrencies: Currency[] = [
     id: "2f21e3cd-ce78-4970-a918-6a8e5a50c504",
     name: "USD",
     value: "USD",
-    icon: <CurrencyDollarIcon className="h-4 w-4 mr-1" />,
+    icon: <CurrencyDollarIcon className="mr-1 size-4" />,
   },
 ];
 export const {

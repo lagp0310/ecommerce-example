@@ -15,9 +15,9 @@ type Props = DialogProps & {
 
 export function FiltersWrapper({
   dialogTrigger = (
-    <DialogTrigger className="outline-none w-full flex flex-row gap-x-2 justify-center items-center bg-white border border-primary rounded-full text-primary px-5 py-3 text-body-small md:text-body-medium font-semibold leading-[120%] group/filter-button hover:text-white hover:bg-primary motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100">
+    <DialogTrigger className="group/filter-button flex w-full flex-row items-center justify-center gap-x-2 rounded-full border border-primary bg-white px-5 py-3 text-body-small font-semibold leading-[120%] text-primary outline-none hover:bg-primary hover:text-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none md:text-body-medium">
       Filters{" "}
-      <AdjustmentsHorizontalIcon className="h-5 w-5 text-primary group-hover/filter-button:text-white" />
+      <AdjustmentsHorizontalIcon className="size-5 text-primary group-hover/filter-button:text-white" />
     </DialogTrigger>
   ),
   children,

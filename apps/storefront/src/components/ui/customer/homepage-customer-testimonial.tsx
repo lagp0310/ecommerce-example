@@ -14,9 +14,9 @@ export function HomepageCustomerTestimonial({
   testimonial: { avatarUrl, fullName, rating, text },
 }: Props) {
   return (
-    <CustomerTestimonial className="flex flex-1 flex-col gap-y-4 p-6 rounded-lg shadow-[0px_10px_20px_0px_rgba(0,0,0,0.01)] bg-white">
+    <CustomerTestimonial className="flex flex-1 flex-col gap-y-4 rounded-lg bg-white p-6 shadow-[0px_10px_20px_0px_rgba(0,0,0,0.01)]">
       <QuoteIcon className="h-[26px] w-8 text-soft-primary" />
-      <p className="text-body-small font-normal text-gray-700 line-clamp-5">
+      <p className="line-clamp-5 text-body-small font-normal text-gray-700">
         {text}
       </p>
       <div className="flex flex-1 flex-row items-center gap-x-2">
@@ -26,7 +26,7 @@ export function HomepageCustomerTestimonial({
             width={200}
             height={200}
             alt="Customer's Avatar"
-            className="rounded-full h-[56px] w-[56px]"
+            className="size-[56px] rounded-full"
           />
         </UserAvatar>
         <div className="flex flex-1 flex-col justify-center">
@@ -38,10 +38,10 @@ export function HomepageCustomerTestimonial({
           </span>
         </div>
         <Rating
-          className="flex flex-1 flex-row gap-x-0.5 justify-end"
+          className="flex flex-1 flex-row justify-end gap-x-0.5"
           rating={rating}
-          emptyIcon={<StarIcon className="text-warning h-3 w-3" />}
-          filledIcon={<FilledStarIcon className="text-warning h-3 w-3" />}
+          emptyIcon={<StarIcon className="size-3 text-warning" />}
+          filledIcon={<FilledStarIcon className="size-3 text-warning" />}
         />
       </div>
     </CustomerTestimonial>

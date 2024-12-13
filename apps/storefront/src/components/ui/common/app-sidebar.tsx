@@ -23,9 +23,9 @@ import { SelectTrigger, SelectValue } from "@/components/ui/common/select";
 export function AppSidebar() {
   return (
     <Sidebar>
-      <SidebarHeader className="flex flex-row gap-x-4 items-center p-4">
-        <Logo className="h-6 w-6 md:h-8 md:w-8 text-primary" />
-        <h1 className="text-body-xxl font-medium lg:text-heading-5 leading-[38px] tracking-[-3%] text-green-900">
+      <SidebarHeader className="flex flex-row items-center gap-x-4 p-4">
+        <Logo className="size-6 text-primary md:size-8" />
+        <h1 className="text-body-xxl font-medium leading-[38px] tracking-[-3%] text-green-900 lg:text-heading-5">
           Ecobazar
         </h1>
       </SidebarHeader>
@@ -41,7 +41,7 @@ export function AppSidebar() {
             wrapperClassname="flex flex-1 w-full"
             defaultValue={languageValue}
           >
-            <SelectTrigger className="w-full gap-x-2 outline-none focus:ring-0 focus:ring-offset-0 text-green-gray-700 flex flex-1 flex-row items-center text-body-tiny font-normal border border-neutral-200 rounded-sm p-1.5 justify-center">
+            <SelectTrigger className="flex w-full flex-1 flex-row items-center justify-center gap-x-2 rounded-sm border border-neutral-200 p-1.5 text-body-tiny font-normal text-green-gray-700 outline-none focus:ring-0 focus:ring-offset-0">
               {languageIcon}
               <SelectValue placeholder={languageName} />
             </SelectTrigger>
@@ -51,7 +51,7 @@ export function AppSidebar() {
             wrapperClassname="flex flex-1 w-full"
             defaultValue={currencyValue}
           >
-            <SelectTrigger className="outline-none focus:ring-0 focus:ring-offset-0 w-full text-green-gray-700 flex flex-1 flex-row gap-x-1 items-center text-body-tiny font-normal border border-neutral-200 rounded-sm p-1.5 justify-center">
+            <SelectTrigger className="flex w-full flex-1 flex-row items-center justify-center gap-x-1 rounded-sm border border-neutral-200 p-1.5 text-body-tiny font-normal text-green-gray-700 outline-none focus:ring-0 focus:ring-offset-0">
               {currencyIcon}
               <SelectValue placeholder={currencyName} />
             </SelectTrigger>

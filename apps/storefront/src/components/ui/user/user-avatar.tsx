@@ -21,7 +21,7 @@ export function UserAvatar({ children, firstName, lastName }: Props) {
       {!!children ? (
         <React.Fragment>{children}</React.Fragment>
       ) : hasInitials ? (
-        <div className="rounded-full h-[56px] w-[56px]">{initials}</div>
+        <div className="size-[56px] rounded-full">{initials}</div>
       ) : null}
     </React.Fragment>
   );

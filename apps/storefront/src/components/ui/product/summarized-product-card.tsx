@@ -43,18 +43,18 @@ export function SummarizedProductCard({
     isFirstOnList;
   const productActions = (
     <div className="flex flex-row gap-x-2">
-      <Button className="bg-gray-50 rounded-full h-8 w-8 flex flex-row justify-center items-center group hover:bg-primary motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100">
-        <HeartIcon className="h-4 w-4 text-gray-900 group-hover:text-white" />
+      <Button className="group flex size-8 flex-row items-center justify-center rounded-full bg-gray-50 hover:bg-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none">
+        <HeartIcon className="size-4 text-gray-900 group-hover:text-white" />
       </Button>
-      <Button className="bg-primary text-white flex flex-1 flex-row items-center justify-center gap-x-2 rounded-full text-body-small font-semibold group hover:text-primary hover:border hover:border-primary hover:bg-white leading-6 motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100">
+      <Button className="group flex flex-1 flex-row items-center justify-center gap-x-2 rounded-full bg-primary text-body-small font-semibold leading-6 text-white hover:border hover:border-primary hover:bg-white hover:text-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none">
         Add to Cart
-        <ShoppingBagIcon className="h-4 w-4 group-hover:text-primary" />
+        <ShoppingBagIcon className="size-4 group-hover:text-primary" />
       </Button>
     </div>
   );
   const productData = (
     <React.Fragment>
-      <span className="text-body-large font-normal text-hard-primary truncate line-clamp-2">
+      <span className="line-clamp-2 truncate text-body-large font-normal text-hard-primary">
         {name}
       </span>
       <div className="flex flex-row gap-x-2">
@@ -76,12 +76,12 @@ export function SummarizedProductCard({
         >{`${currencySymbol}${price}`}</span>
       </div>
       {typeof rating === "number" && typeof totalRatings === "number" ? (
-        <div className="flex flex-row gap-x-1 items-center">
+        <div className="flex flex-row items-center gap-x-1">
           <Rating
             className="flex flex-1 flex-row gap-x-0.5"
             rating={rating}
-            emptyIcon={<StarIcon className="text-warning h-3 w-3" />}
-            filledIcon={<FilledStarIcon className="text-warning h-3 w-3" />}
+            emptyIcon={<StarIcon className="size-3 text-warning" />}
+            filledIcon={<FilledStarIcon className="size-3 text-warning" />}
           />
           <span className="text-body-tiny font-normal text-gray-500">
             {`(${totalRatings})`}
@@ -104,7 +104,7 @@ export function SummarizedProductCard({
   const productPresentation = (
     <React.Fragment>
       {shouldShowTags ? (
-        <div className="z-20 absolute top-3 left-3 flex flex-1 flex-row gap-x-2 text-body-tiny md:text-body-small flex-wrap pr-12 gap-y-1">
+        <div className="absolute left-3 top-3 z-20 flex flex-1 flex-row flex-wrap gap-x-2 gap-y-1 pr-12 text-body-tiny md:text-body-small">
           {tags.map(({ text, type }, index) => (
             <span
               key={index}
@@ -121,7 +121,7 @@ export function SummarizedProductCard({
           ))}
         </div>
       ) : null}
-      <div className="flex flex-1 flex-row justify-center min-h-[250px]">
+      <div className="flex min-h-[250px] flex-1 flex-row justify-center">
         {image}
       </div>
     </React.Fragment>
@@ -138,7 +138,7 @@ export function SummarizedProductCard({
       {shouldUseNextLink ? (
         <ClientLink
           href={`/products/${id}`}
-          className="flex flex-1 flex-col gap-y-2 pt-[6px] items-center"
+          className="flex flex-1 flex-col items-center gap-y-2 pt-[6px]"
         >
           {productPresentation}
         </ClientLink>
@@ -149,7 +149,7 @@ export function SummarizedProductCard({
       {shouldUseNextLink ? (
         <ClientLink
           href={`/products/${id}`}
-          className="flex flex-1 flex-col gap-y-2 pt-[6px] items-center"
+          className="flex flex-1 flex-col items-center gap-y-2 pt-[6px]"
         >
           {productData}
         </ClientLink>

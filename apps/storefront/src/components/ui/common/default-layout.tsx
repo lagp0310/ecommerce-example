@@ -75,18 +75,18 @@ export function DefaultLayout({ children }: Props) {
     <SidebarProvider open={false} className="*:max-w-full">
       <AppSidebar />
       <div className="flex flex-1 flex-col">
-        <TopBar className="hidden md:flex items-center justify-center py-3 bg-green-gray-50 px-6">
-          <div className="flex flex-1 flex-row max-w-7xl items-center justify-center">
-            <span className="flex flex-1 flex-row gap-x-4 text-green-gray-700 items-center text-body-tiny font-normal">
-              <MapPinIcon className="h-4 w-4 text-green-gray-700" />
+        <TopBar className="hidden items-center justify-center bg-green-gray-50 px-6 py-3 md:flex">
+          <div className="flex max-w-7xl flex-1 flex-row items-center justify-center">
+            <span className="flex flex-1 flex-row items-center gap-x-4 text-body-tiny font-normal text-green-gray-700">
+              <MapPinIcon className="size-4 text-green-gray-700" />
               Store Location: Lincoln- 344, Illinois, Chicago, USA
             </span>
-            <div className="flex flex-1 flex-row gap-x-4 justify-end">
+            <div className="flex flex-1 flex-row justify-end gap-x-4">
               <DropdownSelector
                 options={availableLanguages}
                 defaultValue={languageValue}
               >
-                <SelectTrigger className="w-fit gap-x-2 outline-none focus:ring-0 focus:ring-offset-0 text-green-gray-700 flex flex-row items-center text-body-tiny font-normal bg-transparent border-none p-0 max-h-5">
+                <SelectTrigger className="flex max-h-5 w-fit flex-row items-center gap-x-2 border-none bg-transparent p-0 text-body-tiny font-normal text-green-gray-700 outline-none focus:ring-0 focus:ring-offset-0">
                   {languageIcon}
                   <SelectValue placeholder={languageName} />
                 </SelectTrigger>
@@ -95,7 +95,7 @@ export function DefaultLayout({ children }: Props) {
                 options={availableCurrencies}
                 defaultValue={currencyValue}
               >
-                <SelectTrigger className="w-fit gap-x-2 outline-none focus:ring-0 focus:ring-offset-0 text-green-gray-700 flex flex-row items-center text-body-tiny font-normal bg-transparent border-none p-0 max-h-5">
+                <SelectTrigger className="flex max-h-5 w-fit flex-row items-center gap-x-2 border-none bg-transparent p-0 text-body-tiny font-normal text-green-gray-700 outline-none focus:ring-0 focus:ring-offset-0">
                   {currencyIcon}
                   <SelectValue placeholder={currencyName} />
                 </SelectTrigger>
@@ -103,32 +103,32 @@ export function DefaultLayout({ children }: Props) {
             </div>
           </div>
         </TopBar>
-        <div className="flex flex-row justify-center items-center bg-white shadow-sm px-6">
-          <Navbar className="flex flex-1 flex-row items-center justify-center py-6 max-w-7xl gap-x-2 lg:gap-x-0">
-            <NavigationMenu className="hidden lg:flex flex-row items-center justify-start gap-x-2 lg:gap-x-0 basis-1/3 max-w-full">
+        <div className="flex flex-row items-center justify-center bg-white px-6 shadow-sm">
+          <Navbar className="flex max-w-7xl flex-1 flex-row items-center justify-center gap-x-2 py-6 lg:gap-x-0">
+            <NavigationMenu className="hidden max-w-full basis-1/3 flex-row items-center justify-start gap-x-2 lg:flex lg:gap-x-0">
               <NavigationMenuList>
                 <NavigationLinksWrapper />
               </NavigationMenuList>
             </NavigationMenu>
-            <div className="flex flex-1 flex-row justify-start w-full basis-1/3 lg:justify-center items-center">
+            <div className="flex w-full flex-1 basis-1/3 flex-row items-center justify-start lg:justify-center">
               <SidebarTrigger className="mr-4" />
               <NavbarLink
                 href="/"
-                className="flex flex-1 flex-row gap-x-4 justify-start lg:justify-center items-center max-w-fit"
+                className="flex max-w-fit flex-1 flex-row items-center justify-start gap-x-4 lg:justify-center"
               >
-                <Logo className="h-6 w-6 md:h-8 md:w-8 text-primary" />
-                <h1 className="text-body-xxl font-medium lg:text-heading-5 leading-[38px] tracking-[-3%] text-green-900">
+                <Logo className="size-6 text-primary md:size-8" />
+                <h1 className="text-body-xxl font-medium leading-[38px] tracking-[-3%] text-green-900 lg:text-heading-5">
                   Ecobazar
                 </h1>
               </NavbarLink>
             </div>
-            <div className="flex flex-row items-center justify-end max-w-7xl basis-1/3">
-              <div className="flex flex-row gap-x-4 justify-end">
+            <div className="flex max-w-7xl basis-1/3 flex-row items-center justify-end">
+              <div className="flex flex-row justify-end gap-x-4">
                 <NavbarLink
                   href="tel:2195550114"
-                  className="text-gray-900 text-body-small font-medium hidden md:flex flex-row md:gap-x-2 items-center lg:mr-4"
+                  className="hidden flex-row items-center text-body-small font-medium text-gray-900 md:flex md:gap-x-2 lg:mr-4"
                 >
-                  <PhoneIcon className="h-6 w-6" />
+                  <PhoneIcon className="size-6" />
                   <span className="hidden lg:flex">(219) 555-0114</span>
                 </NavbarLink>
                 {/* <Button>
@@ -141,10 +141,10 @@ export function DefaultLayout({ children }: Props) {
                 <TooltipProvider delayDuration={100}>
                   <Tooltip>
                     <TooltipTrigger>
-                      <UserIcon className="h-6 w-6 text-gray-900" />
+                      <UserIcon className="size-6 text-gray-900" />
                     </TooltipTrigger>
                     <TooltipContent>
-                      <p className="font-normal text-body-medium text-gray-900">
+                      <p className="text-body-medium font-normal text-gray-900">
                         My Account
                       </p>
                     </TooltipContent>
@@ -156,61 +156,61 @@ export function DefaultLayout({ children }: Props) {
         </div>
         <main>{children}</main>
         <footer className="flex flex-col justify-center bg-gray-900">
-          <NewsletterSubscribe className="bg-[#F7F7F7] flex flex-1 flex-row gap-x-10 items-center justify-center py-10">
-            <div className="flex flex-1 flex-col gap-y-4 lg:gap-y-0 lg:flex-row items-center justify-center max-w-7xl px-6 xl:px-0">
-              <div className="flex flex-1 flex-col gap-y-2 basis-full md:basis-1/2 lg:pr-48 md:max-w-screen-sm">
-                <span className="text-body-xl md:text-body-xxl font-semibold text-gray-900 text-center md:text-left">
+          <NewsletterSubscribe className="flex flex-1 flex-row items-center justify-center gap-x-10 bg-[#F7F7F7] py-10">
+            <div className="flex max-w-7xl flex-1 flex-col items-center justify-center gap-y-4 px-6 lg:flex-row lg:gap-y-0 xl:px-0">
+              <div className="flex flex-1 basis-full flex-col gap-y-2 md:max-w-screen-sm md:basis-1/2 lg:pr-48">
+                <span className="text-center text-body-xl font-semibold text-gray-900 md:text-left md:text-body-xxl">
                   Subscribe to our Newsletter
                 </span>
-                <span className="text-body-tiny md:text-body-small font-normal text-gray-400 text-center md:text-left">
+                <span className="text-center text-body-tiny font-normal text-gray-400 md:text-left md:text-body-small">
                   Pellentesque eu nibh eget mauris congue mattis mattis nec
                   tellus. Phasellus imperdiet elit eu magna.
                 </span>
               </div>
-              <div className="flex flex-1 flex-col gap-y-4 lg:gap-y-0 lg:flex-row items-center justify-center md:justify-end basis-full md:basis-1/2 w-full">
+              <div className="flex w-full flex-1 basis-full flex-col items-center justify-center gap-y-4 md:basis-1/2 md:justify-end lg:flex-row lg:gap-y-0">
                 {/* TODO: Add form with validation. */}
-                <div className="flex flex-1 w-full md:max-w-screen-sm">
+                <div className="flex w-full flex-1 md:max-w-screen-sm">
                   <Input
                     placeholder="Your email address"
                     type="email"
-                    className="flex-1 rounded-full outline-none p-3.5 placeholder:text-body-small md:placeholder:text-body-medium placeholder:font-normal placeholder:text-gray-500 text-gray-500"
+                    className="flex-1 rounded-full p-3.5 text-gray-500 outline-none placeholder:text-body-small placeholder:font-normal placeholder:text-gray-500 md:placeholder:text-body-medium"
                   />
-                  <Button className="rounded-full text-white bg-primary p-3.5 -ml-10 text-body-small md:text-base hover:bg-white hover:text-primary hover:border hover:border-primary motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100">
+                  <Button className="-ml-10 rounded-full bg-primary p-3.5 text-body-small text-white hover:border hover:border-primary hover:bg-white hover:text-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none md:text-base">
                     Subscribe
                   </Button>
                 </div>
-                <div className="flex flex-row gap-x-2 items-center justify-center md:justify-end md:ml-8">
+                <div className="flex flex-row items-center justify-center gap-x-2 md:ml-8 md:justify-end">
                   <Link
                     href="#"
-                    className="text-gray-700 hover:bg-primary hover:text-white rounded-full p-3 motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100"
+                    className="rounded-full p-3 text-gray-700 hover:bg-primary hover:text-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
                   >
-                    <FacebookIcon className="h-[18px] w-[18px]" />
+                    <FacebookIcon className="size-[18px]" />
                   </Link>
                   <Link
                     href="#"
-                    className="text-gray-700 hover:bg-primary hover:text-white rounded-full p-3 motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100"
+                    className="rounded-full p-3 text-gray-700 hover:bg-primary hover:text-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
                   >
-                    <PinterestIcon className="h-[18px] w-[18px]" />
+                    <PinterestIcon className="size-[18px]" />
                   </Link>
                   <Link
                     href="#"
-                    className="text-gray-700 hover:bg-primary hover:text-white rounded-full p-3 motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100"
+                    className="rounded-full p-3 text-gray-700 hover:bg-primary hover:text-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
                   >
-                    <InstagramIcon className="h-[18px] w-[18px]" />
+                    <InstagramIcon className="size-[18px]" />
                   </Link>
                 </div>
               </div>
             </div>
           </NewsletterSubscribe>
-          <FooterContent className="flex flex-1 flex-row justify-center items-center px-6 xl:px-0">
-            <div className="grid grid-cols-1 lg:grid-cols-5 lg:gap-x-56 md:max-w-screen-sm lg:max-w-7xl">
-              <div className="col-span-1 md:col-span-2 flex flex-1 flex-col gap-y-2 py-8 md:pt-[60px] lg:pb-[60px]">
+          <FooterContent className="flex flex-1 flex-row items-center justify-center px-6 xl:px-0">
+            <div className="grid grid-cols-1 md:max-w-screen-sm lg:max-w-7xl lg:grid-cols-5 lg:gap-x-56">
+              <div className="col-span-1 flex flex-1 flex-col gap-y-2 py-8 md:col-span-2 md:pt-[60px] lg:pb-[60px]">
                 <NavbarLink
                   href="/"
-                  className="flex flex-row gap-x-4 items-center"
+                  className="flex flex-row items-center gap-x-4"
                 >
-                  <Logo className="h-6 w-6 md:h-8 md:w-8 text-primary" />
-                  <h1 className="font-medium text-heading-5 leading-[38px] tracking-[-3%] text-white">
+                  <Logo className="size-6 text-primary md:size-8" />
+                  <h1 className="text-heading-5 font-medium leading-[38px] tracking-[-3%] text-white">
                     Ecobazar
                   </h1>
                 </NavbarLink>
@@ -218,41 +218,41 @@ export function DefaultLayout({ children }: Props) {
                   Morbi cursus porttitor enim lobortis molestie. Duis gravida
                   turpis dui, eget bibendum magna congue nec.
                 </span>
-                <div className="flex flex-1 flex-col gap-y-4 md:gap-y-0 md:flex-row gap-x-2">
+                <div className="flex flex-1 flex-col gap-x-2 gap-y-4 md:flex-row md:gap-y-0">
                   <Link
                     href="tel:2195550114"
-                    className="text-body-small font-normal text-white max-w-fit whitespace-nowrap"
+                    className="max-w-fit whitespace-nowrap text-body-small font-normal text-white"
                   >
                     (219) 555-0114
-                    <hr className="bg-primary mt-2 border border-primary" />
+                    <hr className="mt-2 border border-primary bg-primary" />
                   </Link>
-                  <span className="hidden md:flex text-body-medium font-normal text-gray-500 mx-4">
+                  <span className="mx-4 hidden text-body-medium font-normal text-gray-500 md:flex">
                     or
                   </span>
                   <Link
                     href="mailto:support@ecommerce.com"
-                    className="text-body-small font-normal text-white max-w-fit"
+                    className="max-w-fit text-body-small font-normal text-white"
                   >
                     support@ecommerce.com
-                    <hr className="bg-primary mt-2 border border-primary" />
+                    <hr className="mt-2 border border-primary bg-primary" />
                   </Link>
                 </div>
               </div>
-              <div className="grid col-span-1 grid-cols-1 md:col-span-3 md:grid-cols-3 lg:py-[60px] gap-x-4 gap-y-8 md:gap-y-0 pb-8 lg:pb-0">
+              <div className="col-span-1 grid grid-cols-1 gap-x-4 gap-y-8 pb-8 md:col-span-3 md:grid-cols-3 md:gap-y-0 lg:py-[60px] lg:pb-0">
                 {footerLinks.map(({ groupName, links }, index) => (
                   <div
                     key={index}
                     className="col-span-1 flex flex-1 flex-col gap-y-2"
                   >
-                    <span className="text-body-medium font-medium text-white max-w-fit mb-2">
+                    <span className="mb-2 max-w-fit text-body-medium font-medium text-white">
                       {groupName}
-                      <hr className="bg-primary mt-2 border border-primary" />
+                      <hr className="mt-2 border border-primary bg-primary" />
                     </span>
                     {links.map(({ text, url }, linkIndex) => (
                       <Link
                         key={linkIndex}
                         href={url}
-                        className="text-body-small font-normal text-gray-400 hover:text-white motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100"
+                        className="text-body-small font-normal text-gray-400 hover:text-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
                       >
                         {text}
                       </Link>
@@ -261,11 +261,11 @@ export function DefaultLayout({ children }: Props) {
                 ))}
               </div>
               <hr className="col-span-full -mx-6 md:mx-0" />
-              <div className="flex flex-1 flex-row items-center col-span-full py-6">
+              <div className="col-span-full flex flex-1 flex-row items-center py-6">
                 <span className="text-body-small font-normal text-gray-500">
                   Ecobazar © 2024. All Rights Reserved
                 </span>
-                <div className="flex flex-1 flex-row justify-end items-center w-full">
+                <div className="flex w-full flex-1 flex-row items-center justify-end">
                   <span className="text-body-small font-normal text-gray-500">
                     <Link
                       href="https://www.figma.com/community/file/1272474484693685580"

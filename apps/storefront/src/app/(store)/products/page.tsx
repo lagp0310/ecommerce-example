@@ -53,7 +53,7 @@ export default async function Products() {
       children: (
         <ToggleGroup
           type="single"
-          className="flex flex-1 flex-row gap-2 justify-start items-center flex-wrap"
+          className="flex flex-1 flex-row flex-wrap items-center justify-start gap-2"
         >
           {categories.map(({ categoryId, title, numberOfItems }, index) => (
             <div
@@ -64,15 +64,15 @@ export default async function Products() {
                 value={categoryId}
                 id={`${categoryId}-${index}`}
                 name={`${categoryId}-${index}`}
-                className="pl-0 font-normal text-body-small text-gray-900 hover:bg-transparent hover:text-gray-900 focus-active:bg-black data-[state=on]:bg-transparent"
+                className="focus-active:bg-black pl-0 text-body-small font-normal text-gray-900 hover:bg-transparent hover:text-gray-900 data-[state=on]:bg-transparent"
               >
-                <Checkbox className="h-5 w-5 rounded-[3px] bg-white border border-gray-100 outline-none data-[state=checked]:border-none text-gray-900 data-[state=checked]:text-white data-[state=checked]:bg-primary motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100" />
+                <Checkbox className="size-5 rounded-[3px] border border-gray-100 bg-white text-gray-900 outline-none data-[state=checked]:border-none data-[state=checked]:bg-primary data-[state=checked]:text-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none" />
                 <Label
                   htmlFor={`${categoryId}-${index}`}
-                  className="font-normal text-body-small text-gray-900 flex flex-1 flex-row items-center gap-x-1"
+                  className="flex flex-1 flex-row items-center gap-x-1 text-body-small font-normal text-gray-900"
                 >
                   {title}
-                  <span className="font-normal text-body-small text-gray-500">{`(${numberOfItems})`}</span>
+                  <span className="text-body-small font-normal text-gray-500">{`(${numberOfItems})`}</span>
                 </Label>
               </ToggleGroupItem>
             </div>
@@ -83,7 +83,7 @@ export default async function Products() {
     },
     {
       children: (
-        <div className="flex flex-1 flex-col justify-center pt-4 gap-6">
+        <div className="flex flex-1 flex-col justify-center gap-6 pt-4">
           <PricingSlider {...pricingSliderProps} />
         </div>
       ),
@@ -97,18 +97,18 @@ export default async function Products() {
               // TODO: Hide some on selection.
               <div
                 key={index}
-                className="flex flex-1 flex-row gap-x-2 items-center group/rating"
+                className="group/rating flex flex-1 flex-row items-center gap-x-2"
               >
-                <Checkbox className="h-5 w-5 rounded-[3px] bg-white border border-gray-100 outline-none data-[state=checked]:border-none text-gray-900 data-[state=checked]:text-white data-[state=checked]:bg-primary motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100" />
+                <Checkbox className="size-5 rounded-[3px] border border-gray-100 bg-white text-gray-900 outline-none data-[state=checked]:border-none data-[state=checked]:bg-primary data-[state=checked]:text-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none" />
                 <Rating
-                  className="flex flex-row gap-x-0.5 justify-end"
+                  className="flex flex-row justify-end gap-x-0.5"
                   rating={index + 1}
-                  emptyIcon={<StarIcon className="text-warning h-3 w-3" />}
+                  emptyIcon={<StarIcon className="size-3 text-warning" />}
                   filledIcon={
-                    <FilledStarIcon className="text-warning h-3 w-3" />
+                    <FilledStarIcon className="size-3 text-warning" />
                   }
                 />
-                <span className="font-normal text-body-small text-gray-900">
+                <span className="text-body-small font-normal text-gray-900">
                   {new Intl.NumberFormat("en-US", {
                     minimumFractionDigits: 1,
                     maximumFractionDigits: 1,
@@ -126,7 +126,7 @@ export default async function Products() {
       children: (
         <ToggleGroup
           type="single"
-          className="flex flex-1 flex-row gap-2 justify-start items-center flex-wrap"
+          className="flex flex-1 flex-row flex-wrap items-center justify-start gap-2"
         >
           {Array.from({ length: numberOfPopularTags }).map((_value, index) => (
             <div
@@ -136,7 +136,7 @@ export default async function Products() {
               <ToggleGroupItem
                 value={tag.text}
                 id={`${tag.text}-${index}`}
-                className="font-normal text-body-small text-gray-900 rounded-full hover:bg-primary hover:text-white motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100"
+                className="rounded-full text-body-small font-normal text-gray-900 hover:bg-primary hover:text-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
               >
                 {tag.text}
               </ToggleGroupItem>
@@ -149,10 +149,10 @@ export default async function Products() {
   ];
 
   return (
-    <div className="flex flex-1 flex-col gap-y-8 py-8 px-6 xl:px-0">
-      <div className="flex flex-1 flex-col xl:items-center w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-4 xl:grid-cols-5 gap-8 max-w-7xl">
-          <div className="col-span-1 row-span-2 lg:row-start-2 w-full">
+    <div className="flex flex-1 flex-col gap-y-8 px-6 py-8 xl:px-0">
+      <div className="flex w-full flex-1 flex-col xl:items-center">
+        <div className="grid max-w-7xl grid-cols-1 gap-8 lg:grid-cols-4 xl:grid-cols-5">
+          <div className="col-span-1 row-span-2 w-full lg:row-start-2">
             <FiltersWrapper
               wrapperClassname="grid lg:hidden"
               contentClassname="rounded-[10px] max-w-[80vw] sm:max-w-[70vw] md:max-w-[60vw] overflow-y-auto max-h-[90vh]"
@@ -192,10 +192,10 @@ export default async function Products() {
               </Accordion>
             ))}
           </div>
-          <div className="lg:col-span-3 xl:col-span-4 lg:row-span-1 lg:col-start-2 xl:col-start-2">
-            <div className="flex flex-1 flex-row w-full items-center">
+          <div className="lg:col-span-3 lg:col-start-2 lg:row-span-1 xl:col-span-4 xl:col-start-2">
+            <div className="flex w-full flex-1 flex-row items-center">
               <div className="flex flex-1 flex-row items-center gap-x-2">
-                <span className="font-normal text-body-small text-gray-500">
+                <span className="text-body-small font-normal text-gray-500">
                   Sort by:
                 </span>
                 <DropdownSelector
@@ -204,8 +204,8 @@ export default async function Products() {
                 />
               </div>
               <div className="flex flex-1 flex-row justify-end">
-                <span className="font-normal text-body-medium text-gray-600">
-                  <span className="font-semibold text-body-medium text-gray-900">
+                <span className="text-body-medium font-normal text-gray-600">
+                  <span className="text-body-medium font-semibold text-gray-900">
                     52
                   </span>{" "}
                   Results Found
@@ -213,7 +213,7 @@ export default async function Products() {
               </div>
             </div>
           </div>
-          <div className="grid grid-cols-1 min-[450px]:grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 lg:col-start-2 lg:col-span-3 xl:col-span-4 gap-4">
+          <div className="grid grid-cols-1 gap-4 min-[450px]:grid-cols-2 sm:grid-cols-3 lg:col-span-3 lg:col-start-2 lg:grid-cols-3 xl:col-span-4 xl:grid-cols-4">
             {Array.from({ length: 20 }).map((_value, index) => (
               <div key={index} className="col-span-1 row-span-1">
                 <BasicProductCard
@@ -224,19 +224,19 @@ export default async function Products() {
               </div>
             ))}
           </div>
-          <div className="grid grid-cols-1 xl:grid-cols-4 xl:col-start-2 xl:col-span-4 gap-4">
-            <Pagination className="flex flex-1 flex-row justify-center items-center col-span-full gap-x-3">
+          <div className="grid grid-cols-1 gap-4 xl:col-span-4 xl:col-start-2 xl:grid-cols-4">
+            <Pagination className="col-span-full flex flex-1 flex-row items-center justify-center gap-x-3">
               <PaginationContent>
-                <PaginationItem className="rounded-full border border-neutral-100 disabled:border-neutral-50 disabled:bg-gray-300 disabled:cursor-not-allowed group/back-button hover:bg-primary hover:text-white motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100">
+                <PaginationItem className="group/back-button rounded-full border border-neutral-100 hover:bg-primary hover:text-white disabled:cursor-not-allowed disabled:border-neutral-50 disabled:bg-gray-300 motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none">
                   <PaginationPrevious
                     href="#"
-                    className="flex flex-1 flex-row items-center justify-center px-0 rounded-full h-9 w-9 disabled:text-gray-300 group-disabled/back-button:hover:cursor-not-allowed group-hover/back-button:bg-primary group-hover/back-button:text-white group-hover/back-button:font-semibold text-gray-600"
+                    className="flex size-9 flex-1 flex-row items-center justify-center rounded-full px-0 text-gray-600 disabled:text-gray-300 group-hover/back-button:bg-primary group-hover/back-button:font-semibold group-hover/back-button:text-white group-disabled/back-button:hover:cursor-not-allowed"
                   />
                 </PaginationItem>
-                <PaginationItem className="rounded-full hover:bg-primary hover:text-white group/page-item motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100">
+                <PaginationItem className="group/page-item rounded-full hover:bg-primary hover:text-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none">
                   <PaginationLink
                     href="#"
-                    className="flex flex-1 flex-row items-center justify-center p-0 rounded-full h-9 w-9 bg-white font-normal text-body-medium group-hover/page-item:bg-primary group-hover/page-item:text-white group-hover/page-item:font-semibold text-gray-600"
+                    className="flex size-9 flex-1 flex-row items-center justify-center rounded-full bg-white p-0 text-body-medium font-normal text-gray-600 group-hover/page-item:bg-primary group-hover/page-item:font-semibold group-hover/page-item:text-white"
                   >
                     1
                   </PaginationLink>
@@ -244,18 +244,18 @@ export default async function Products() {
                 <PaginationItem>
                   <PaginationEllipsis className="flex flex-1 flex-row items-center justify-center" />
                 </PaginationItem>
-                <PaginationItem className="rounded-full hover:bg-primary hover:text-white group/page-item motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100">
+                <PaginationItem className="group/page-item rounded-full hover:bg-primary hover:text-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none">
                   <PaginationLink
                     href="#"
-                    className="flex flex-1 flex-row items-center justify-center p-0 rounded-full h-9 w-9 bg-white font-normal text-body-medium group-hover/page-item:bg-primary group-hover/page-item:text-white group-hover/page-item:font-semibold text-gray-600"
+                    className="flex size-9 flex-1 flex-row items-center justify-center rounded-full bg-white p-0 text-body-medium font-normal text-gray-600 group-hover/page-item:bg-primary group-hover/page-item:font-semibold group-hover/page-item:text-white"
                   >
                     21
                   </PaginationLink>
                 </PaginationItem>
-                <PaginationItem className="rounded-full border border-neutral-100 disabled:border-neutral-50 disabled:bg-gray-300 disabled:cursor-not-allowed group/back-button hover:bg-primary hover:text-white motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100">
+                <PaginationItem className="group/back-button rounded-full border border-neutral-100 hover:bg-primary hover:text-white disabled:cursor-not-allowed disabled:border-neutral-50 disabled:bg-gray-300 motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none">
                   <PaginationNext
                     href="#"
-                    className="flex flex-1 flex-row items-center justify-center p-0 rounded-full h-9 w-9 disabled:text-gray-300 group-disabled/back-button:hover:cursor-not-allowed group-hover/back-button:bg-primary group-hover/back-button:text-white group-hover/back-button:font-semibold text-gray-600"
+                    className="flex size-9 flex-1 flex-row items-center justify-center rounded-full p-0 text-gray-600 disabled:text-gray-300 group-hover/back-button:bg-primary group-hover/back-button:font-semibold group-hover/back-button:text-white group-disabled/back-button:hover:cursor-not-allowed"
                   />
                 </PaginationItem>
               </PaginationContent>

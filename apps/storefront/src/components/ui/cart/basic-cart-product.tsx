@@ -23,7 +23,7 @@ export function BasicCartProduct({
   ...props
 }: Props) {
   return (
-    <div className="flex flex-1 flex-row gap-x-1 items-center">
+    <div className="flex flex-1 flex-row items-center gap-x-1">
       <Link
         href={`/products/${id}`}
         className="flex flex-1 flex-row gap-x-1"
@@ -31,9 +31,9 @@ export function BasicCartProduct({
       >
         <CartProduct {...props} className="flex flex-1 flex-row gap-4">
           {image}
-          <div className="flex flex-1 flex-col gap-1 justify-center">
+          <div className="flex flex-1 flex-col justify-center gap-1">
             {name}
-            <div className="flex flex-row gap-x-2 items-center text-body-small md:text-body-medium">
+            <div className="flex flex-row items-center gap-x-2 text-body-small md:text-body-medium">
               {!!discountedPrice ? (
                 <span
                   className={cn({
@@ -55,8 +55,8 @@ export function BasicCartProduct({
         </CartProduct>
       </Link>
       <CartProductActions {...actionsProps} className="flex flex-row gap-x-1">
-        <Button className="group p-2 rounded-full hover:bg-gray-100/50 border-none -mr-2 motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100">
-          <TrashIcon className="h-4 w-4 text-gray-900 group-hover:text-danger motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100" />
+        <Button className="group -mr-2 rounded-full border-none p-2 hover:bg-gray-100/50 motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none">
+          <TrashIcon className="size-4 text-gray-900 group-hover:text-danger motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none" />
         </Button>
       </CartProductActions>
     </div>

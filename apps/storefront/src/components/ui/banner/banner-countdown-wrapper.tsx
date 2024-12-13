@@ -48,7 +48,7 @@ export function BannerCountdownWrapper({
             <div className={cn("first:hidden last:hidden", semicolonClasses)}>
               :
             </div>
-            <div className="flex flex-1 flex-col gap-y-4 items-center">
+            <div className="flex flex-1 flex-col items-center gap-y-4">
               <span className={cn(timeClasses)}>{time}</span>
               <span className={cn(timeUnitClasses)}>{unit}</span>
             </div>

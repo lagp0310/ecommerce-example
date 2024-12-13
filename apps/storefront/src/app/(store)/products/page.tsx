@@ -147,11 +147,11 @@ export default async function Products() {
   ];
 
   return (
-    <div className="flex flex-1 flex-col gap-y-8 py-8">
-      <div className="flex flex-1 flex-col items-center w-full">
-        <div className="grid grid-cols-1 xl:grid-cols-5 gap-8 max-w-7xl">
-          <div className="col-span-1 row-span-2">
-            <Button className="flex flex-row gap-x-2 items-center bg-white border border-primary rounded-full text-primary max-w-fit px-5 py-3 text-body-small md:text-body-medium font-semibold leading-[120%] group/filter-button hover:text-white hover:bg-primary motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100">
+    <div className="flex flex-1 flex-col gap-y-8 py-8 px-6 xl:px-0">
+      <div className="flex flex-1 flex-col xl:items-center w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-4 xl:grid-cols-5 gap-8 max-w-7xl">
+          <div className="col-span-1 row-span-2 w-full">
+            <Button className="w-full flex flex-row gap-x-2 justify-center items-center bg-white border border-primary rounded-full text-primary px-5 py-3 text-body-small md:text-body-medium font-semibold leading-[120%] group/filter-button hover:text-white hover:bg-primary motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100">
               Filters{" "}
               <AdjustmentsHorizontalIcon className="h-5 w-5 text-primary group-hover/filter-button:text-white" />
             </Button>
@@ -161,6 +161,7 @@ export default async function Products() {
                 type="single"
                 collapsible
                 defaultValue={!initiallyCollapsed ? name : undefined}
+                className="hidden lg:grid"
               >
                 <AccordionItem value={name}>
                   <AccordionTrigger>{name}</AccordionTrigger>
@@ -169,7 +170,7 @@ export default async function Products() {
               </Accordion>
             ))}
           </div>
-          <div className="col-span-4 row-span-1">
+          <div className="lg:col-span-3 xl:col-span-4 lg:row-span-1">
             <div className="flex flex-1 flex-row w-full items-center">
               <div className="flex flex-1 flex-row items-center gap-x-2">
                 <span className="font-normal text-body-small text-gray-500">
@@ -190,7 +191,7 @@ export default async function Products() {
               </div>
             </div>
           </div>
-          <div className="grid grid-cols-1 xl:grid-cols-4 xl:col-start-2 xl:col-span-4 gap-4">
+          <div className="grid grid-cols-1 min-[450px]:grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 lg:col-start-2 lg:col-span-3 xl:col-span-4 gap-4">
             {Array.from({ length: 20 }).map((_value, index) => (
               <div key={index} className="col-span-1 row-span-1">
                 <BasicProductCard

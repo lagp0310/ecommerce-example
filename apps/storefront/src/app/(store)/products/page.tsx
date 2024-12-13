@@ -6,7 +6,7 @@ import {
 } from "@/constants/constants";
 import { BasicProductCard } from "@/components/ui/product/basic-product-card";
 import type { ProductFilter, ProductTag } from "@/types/types";
-import { Label } from "@/components/ui/label";
+import { Label } from "@/components/ui/common/label";
 import { StarIcon } from "@heroicons/react/24/outline";
 import { StarIcon as FilledStarIcon } from "@heroicons/react/24/solid";
 import {
@@ -14,11 +14,14 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/components/ui/accordion";
+} from "@/components/ui/common/accordion";
 import { Rating } from "@/components/ui/product/rating";
-import { Checkbox } from "@/components/ui/checkbox";
+import { Checkbox } from "@/components/ui/common/checkbox";
 import { PricingSlider } from "@/components/ui/product/pricing-slider";
-import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import {
+  ToggleGroup,
+  ToggleGroupItem,
+} from "@/components/ui/common/toggle-group";
 import { DropdownSelector } from "@/components/ui/common/dropdown-selector";
 import {
   Pagination,
@@ -28,9 +31,9 @@ import {
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-} from "@/components/ui/pagination";
+} from "@/components/ui/pagination/pagination";
 import { FiltersWrapper } from "@/components/ui/product/filters-wrapper";
-import { DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { DialogHeader, DialogTitle } from "@/components/ui/common/dialog";
 import { cn } from "@/lib/utils";
 
 export default async function Products() {
@@ -224,35 +227,35 @@ export default async function Products() {
           <div className="grid grid-cols-1 xl:grid-cols-4 xl:col-start-2 xl:col-span-4 gap-4">
             <Pagination className="flex flex-1 flex-row justify-center items-center col-span-full gap-x-3">
               <PaginationContent>
-                <PaginationItem className="rounded-full border border-neutral-100 disabled:border-neutral-50 disabled:bg-gray-300 disabled:cursor-not-allowed group/back-button flex flex-1 flex-row justify-center items-center hover:bg-primary hover:text-white motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100">
+                <PaginationItem className="rounded-full border border-neutral-100 disabled:border-neutral-50 disabled:bg-gray-300 disabled:cursor-not-allowed group/back-button hover:bg-primary hover:text-white motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100">
                   <PaginationPrevious
                     href="#"
-                    className="px-0 rounded-full h-9 w-9 disabled:text-gray-300 group-disabled/back-button:hover:cursor-not-allowed group-hover/back-button:bg-primary group-hover/back-button:text-white group-hover/back-button:font-semibold text-gray-600"
+                    className="flex flex-1 flex-row items-center justify-center px-0 rounded-full h-9 w-9 disabled:text-gray-300 group-disabled/back-button:hover:cursor-not-allowed group-hover/back-button:bg-primary group-hover/back-button:text-white group-hover/back-button:font-semibold text-gray-600"
                   />
                 </PaginationItem>
-                <PaginationItem className="rounded-full flex flex-1 flex-row justify-center items-center hover:bg-primary hover:text-white group/page-item motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100">
+                <PaginationItem className="rounded-full hover:bg-primary hover:text-white group/page-item motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100">
                   <PaginationLink
                     href="#"
-                    className="px-0 rounded-full h-9 w-9 bg-white font-normal text-body-medium group-hover/page-item:bg-primary group-hover/page-item:text-white group-hover/page-item:font-semibold text-gray-600"
+                    className="flex flex-1 flex-row items-center justify-center p-0 rounded-full h-9 w-9 bg-white font-normal text-body-medium group-hover/page-item:bg-primary group-hover/page-item:text-white group-hover/page-item:font-semibold text-gray-600"
                   >
                     1
                   </PaginationLink>
                 </PaginationItem>
                 <PaginationItem>
-                  <PaginationEllipsis />
+                  <PaginationEllipsis className="flex flex-1 flex-row items-center justify-center" />
                 </PaginationItem>
-                <PaginationItem className="rounded-full flex flex-1 flex-row justify-center items-center hover:bg-primary hover:text-white group/page-item motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100">
+                <PaginationItem className="rounded-full hover:bg-primary hover:text-white group/page-item motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100">
                   <PaginationLink
                     href="#"
-                    className="px-0 rounded-full h-9 w-9 bg-white font-normal text-body-medium group-hover/page-item:bg-primary group-hover/page-item:text-white group-hover/page-item:font-semibold text-gray-600"
+                    className="flex flex-1 flex-row items-center justify-center p-0 rounded-full h-9 w-9 bg-white font-normal text-body-medium group-hover/page-item:bg-primary group-hover/page-item:text-white group-hover/page-item:font-semibold text-gray-600"
                   >
                     21
                   </PaginationLink>
                 </PaginationItem>
-                <PaginationItem className="rounded-full border border-neutral-100 disabled:border-neutral-50 disabled:bg-gray-300 disabled:cursor-not-allowed group/back-button flex flex-1 flex-row justify-center items-center hover:bg-primary hover:text-white motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100">
+                <PaginationItem className="rounded-full border border-neutral-100 disabled:border-neutral-50 disabled:bg-gray-300 disabled:cursor-not-allowed group/back-button hover:bg-primary hover:text-white motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100">
                   <PaginationNext
                     href="#"
-                    className="px-0 rounded-full h-9 w-9 disabled:text-gray-300 group-disabled/back-button:hover:cursor-not-allowed group-hover/back-button:bg-primary group-hover/back-button:text-white group-hover/back-button:font-semibold text-gray-600"
+                    className="flex flex-1 flex-row items-center justify-center p-0 rounded-full h-9 w-9 disabled:text-gray-300 group-disabled/back-button:hover:cursor-not-allowed group-hover/back-button:bg-primary group-hover/back-button:text-white group-hover/back-button:font-semibold text-gray-600"
                   />
                 </PaginationItem>
               </PaginationContent>

@@ -1,6 +1,6 @@
 import React from "react";
 
-type Props = Omit<React.HTMLProps<HTMLButtonElement>, "type"> & {
+export type Props = Omit<React.HTMLProps<HTMLButtonElement>, "type"> & {
   type?: "button" | "reset" | "submit";
 };
 

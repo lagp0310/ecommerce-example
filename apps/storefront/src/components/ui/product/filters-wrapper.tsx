@@ -1,5 +1,9 @@
 import React from "react";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogTrigger,
+} from "@/components/ui/common/dialog";
 import { DialogProps } from "@radix-ui/react-dialog";
 import { AdjustmentsHorizontalIcon } from "@heroicons/react/24/outline";
 

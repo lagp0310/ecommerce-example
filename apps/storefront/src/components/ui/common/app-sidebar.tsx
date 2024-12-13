@@ -18,7 +18,7 @@ import {
 } from "@/constants/constants";
 import { SidebarLinksWrapper } from "@/components/ui/common/sidebar-menu-links-wrapper";
 import { DropdownSelector } from "./dropdown-selector";
-import { SelectTrigger, SelectValue } from "@/components/ui/select";
+import { SelectTrigger, SelectValue } from "@/components/ui/common/select";
 
 export function AppSidebar() {
   return (

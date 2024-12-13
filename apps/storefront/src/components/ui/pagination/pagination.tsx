@@ -1,6 +1,6 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
-import { ButtonProps, buttonVariants } from "@/components/ui/button";
+import { Props as ButtonProps } from "@/components/ui/common/button";
 import Link from "next/link";
 import {
   ChevronLeftIcon,
@@ -43,23 +43,8 @@ type PaginationLinkProps = {
 } & Pick<ButtonProps, "size"> &
   React.ComponentProps<typeof Link>;
 
-const PaginationLink = ({
-  className,
-  isActive,
-  size = "icon",
-  ...props
-}: PaginationLinkProps) => (
-  <Link
-    aria-current={isActive ? "page" : undefined}
-    className={cn(
-      buttonVariants({
-        variant: isActive ? "outline" : "ghost",
-        size,
-      }),
-      className
-    )}
-    {...props}
-  />
+const PaginationLink = ({ isActive, ...props }: PaginationLinkProps) => (
+  <Link aria-current={isActive ? "page" : undefined} {...props} />
 );
 PaginationLink.displayName = "PaginationLink";
 
@@ -70,7 +55,6 @@ const PaginationPrevious = ({
 }: React.ComponentProps<typeof PaginationLink> & { showText?: boolean }) => (
   <PaginationLink
     aria-label="Go to previous page"
-    size="default"
     className={cn("gap-1 pl-2.5", className)}
     {...props}
   >
@@ -87,7 +71,6 @@ const PaginationNext = ({
 }: React.ComponentProps<typeof PaginationLink> & { showText?: boolean }) => (
   <PaginationLink
     aria-label="Go to next page"
-    size="default"
     className={cn("gap-1 pr-2.5", className)}
     {...props}
   >

@@ -6,7 +6,7 @@ import {
   SelectContent,
   SelectItem,
   SelectValue,
-} from "@/components/ui/select";
+} from "@/components/ui/common/select";
 import type { SelectProps } from "@radix-ui/react-select";
 
 type Props = SelectProps & {

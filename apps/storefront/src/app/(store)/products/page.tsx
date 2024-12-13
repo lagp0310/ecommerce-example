@@ -5,13 +5,9 @@ import {
   productsSortByOptions,
 } from "@/constants/constants";
 import { BasicProductCard } from "@/components/ui/product/basic-product-card";
-import { Button } from "@/components/ui/common/button";
 import type { ProductFilter, ProductTag } from "@/types/types";
 import { Label } from "@/components/ui/label";
-import {
-  AdjustmentsHorizontalIcon,
-  StarIcon,
-} from "@heroicons/react/24/outline";
+import { StarIcon } from "@heroicons/react/24/outline";
 import { StarIcon as FilledStarIcon } from "@heroicons/react/24/solid";
 import {
   Accordion,
@@ -33,6 +29,9 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
+import { FiltersWrapper } from "@/components/ui/product/filters-wrapper";
+import { DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { cn } from "@/lib/utils";
 
 export default async function Products() {
   const numberOfPopularTags = 12;
@@ -150,11 +149,29 @@ export default async function Products() {
     <div className="flex flex-1 flex-col gap-y-8 py-8 px-6 xl:px-0">
       <div className="flex flex-1 flex-col xl:items-center w-full">
         <div className="grid grid-cols-1 lg:grid-cols-4 xl:grid-cols-5 gap-8 max-w-7xl">
-          <div className="col-span-1 row-span-2 w-full">
-            <Button className="w-full flex flex-row gap-x-2 justify-center items-center bg-white border border-primary rounded-full text-primary px-5 py-3 text-body-small md:text-body-medium font-semibold leading-[120%] group/filter-button hover:text-white hover:bg-primary motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100">
-              Filters{" "}
-              <AdjustmentsHorizontalIcon className="h-5 w-5 text-primary group-hover/filter-button:text-white" />
-            </Button>
+          <div className="col-span-1 row-span-2 lg:row-start-2 w-full">
+            <FiltersWrapper
+              wrapperClassname="grid lg:hidden"
+              contentClassname="rounded-[10px] max-w-[80vw] sm:max-w-[70vw] md:max-w-[60vw] overflow-y-auto max-h-[90vh]"
+            >
+              <DialogHeader>
+                <DialogTitle>Filters</DialogTitle>
+              </DialogHeader>
+              {filters.map(({ children, name, initiallyCollapsed }, index) => (
+                <Accordion
+                  key={index}
+                  type="single"
+                  collapsible
+                  defaultValue={!initiallyCollapsed ? name : undefined}
+                  className="grid"
+                >
+                  <AccordionItem value={name}>
+                    <AccordionTrigger>{name}</AccordionTrigger>
+                    <AccordionContent>{children}</AccordionContent>
+                  </AccordionItem>
+                </Accordion>
+              ))}
+            </FiltersWrapper>
             {filters.map(({ children, name, initiallyCollapsed }, index) => (
               <Accordion
                 key={index}
@@ -164,13 +181,15 @@ export default async function Products() {
                 className="hidden lg:grid"
               >
                 <AccordionItem value={name}>
-                  <AccordionTrigger>{name}</AccordionTrigger>
+                  <AccordionTrigger className={cn({ "pt-0": index === 0 })}>
+                    {name}
+                  </AccordionTrigger>
                   <AccordionContent>{children}</AccordionContent>
                 </AccordionItem>
               </Accordion>
             ))}
           </div>
-          <div className="lg:col-span-3 xl:col-span-4 lg:row-span-1">
+          <div className="lg:col-span-3 xl:col-span-4 lg:row-span-1 lg:col-start-2 xl:col-start-2">
             <div className="flex flex-1 flex-row w-full items-center">
               <div className="flex flex-1 flex-row items-center gap-x-2">
                 <span className="font-normal text-body-small text-gray-500">

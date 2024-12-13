@@ -256,6 +256,9 @@ importers:
         specifier: ^3.23.8
         version: 3.23.8
     devDependencies:
+      '@types/eslint-plugin-tailwindcss':
+        specifier: ^3.17.0
+        version: 3.17.0
       '@types/node':
         specifier: ^20
         version: 20.16.5
@@ -265,12 +268,18 @@ importers:
       '@types/react-dom':
         specifier: ^18
         version: 18.3.1
+      '@typescript-eslint/parser':
+        specifier: ^7.1.0
+        version: 7.18.0(eslint@8.57.1)(typescript@5.5.4)
       eslint:
         specifier: ^8
         version: 8.57.1
       eslint-config-next:
         specifier: 15.0.3
         version: 15.0.3(eslint@8.57.1)(typescript@5.5.4)
+      eslint-plugin-tailwindcss:
+        specifier: ^3.17.5
+        version: 3.17.5(tailwindcss@3.4.15(ts-node@10.9.2(@types/node@20.16.5)(typescript@5.5.4)))
       postcss:
         specifier: ^8
         version: 8.4.49
@@ -1799,6 +1808,9 @@ packages:
   '@types/d3-timer@3.0.2':
     resolution: {integrity: sha512-Ps3T8E8dZDam6fUyNiMkekK3XUsaUEik+idO9/YjPtfj2qruF8tFBXS7XhtE4iIXBLxhmLjP3SXpLhVf21I9Lw==}
 
+  '@types/eslint-plugin-tailwindcss@3.17.0':
+    resolution: {integrity: sha512-ucQGf2YIdTcndYcxRU3UdZgmhUHsOlbIF4BaRtl0op+7k2JmqM2i3aXZ6XIcfZgVq1ZKov7VM5c/BR81ukmkyg==}
+
   '@types/eslint@8.56.12':
     resolution: {integrity: sha512-03ruubjWyOHlmljCVoxSuNDdmfZDzsrrz0P2LeJsOXr+ZwFQ+0yQIwNCwt/GYhV7Z31fgtXJTAEs+FYlEL851g==}
 
@@ -3004,6 +3016,12 @@ packages:
     engines: {node: '>=4'}
     peerDependencies:
       eslint: ^3 || ^4 || ^5 || ^6 || ^7 || ^8 || ^9.7
+
+  eslint-plugin-tailwindcss@3.17.5:
+    resolution: {integrity: sha512-8Mi7p7dm+mO1dHgRHHFdPu4RDTBk69Cn4P0B40vRQR+MrguUpwmKwhZy1kqYe3Km8/4nb+cyrCF+5SodOEmaow==}
+    engines: {node: '>=18.12.0'}
+    peerDependencies:
+      tailwindcss: ^3.4.0
 
   eslint-plugin-testing-library@6.3.0:
     resolution: {integrity: sha512-GYcEErTt6EGwE0bPDY+4aehfEBpB2gDBFKohir8jlATSUvzStEyzCx8QWB/14xeKc/AwyXkzScSzMHnFojkWrA==}
@@ -7469,6 +7487,10 @@ snapshots:
 
   '@types/d3-timer@3.0.2': {}
 
+  '@types/eslint-plugin-tailwindcss@3.17.0':
+    dependencies:
+      '@types/eslint': 8.56.12
+
   '@types/eslint@8.56.12':
     dependencies:
       '@types/estree': 1.0.5
@@ -8972,6 +8994,12 @@ snapshots:
       semver: 6.3.1
       string.prototype.matchall: 4.0.11
       string.prototype.repeat: 1.0.0
+
+  eslint-plugin-tailwindcss@3.17.5(tailwindcss@3.4.15(ts-node@10.9.2(@types/node@20.16.5)(typescript@5.5.4))):
+    dependencies:
+      fast-glob: 3.3.2
+      postcss: 8.4.49
+      tailwindcss: 3.4.15(ts-node@10.9.2(@types/node@20.16.5)(typescript@5.5.4))
 
   eslint-plugin-testing-library@6.3.0(eslint@8.57.1)(typescript@5.5.4):
     dependencies:

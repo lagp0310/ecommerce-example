@@ -32,11 +32,11 @@ export const PaymentMethodEdit = () => {
       saveButtonProps={{
         ...saveButtonProps,
         className: "align-middle",
-        icon: <FolderArrowDownIcon className="h-4 w-4 text-white" />,
+        icon: <FolderArrowDownIcon className="size-4 text-white" />,
       }}
       deleteButtonProps={{
         className: "align-middle mr-1.5",
-        icon: <TrashIcon className="h-4 w-4 text-red-500" />,
+        icon: <TrashIcon className="size-4 text-red-500" />,
       }}
     >
       <Form {...formProps} layout="vertical">

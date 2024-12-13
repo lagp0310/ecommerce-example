@@ -242,7 +242,7 @@ export const topMainSidebarItems = [
   {
     title: "Dashboard",
     url: "/admin/dashboard",
-    icon: <ChartPieIcon className="h-4 w-4" />,
+    icon: <ChartPieIcon className="size-4" />,
   },
 ];
 
@@ -250,7 +250,7 @@ export const sidebarItems = [
   {
     groupName: "banners",
     groupLabel: "Banners",
-    groupIcon: <PhotoIcon className="h-4 w-4" />,
+    groupIcon: <PhotoIcon className="size-4" />,
     items: refineResources.filter(
       ({ meta: { groupName } }) => groupName === "banners"
     ),
@@ -258,7 +258,7 @@ export const sidebarItems = [
   {
     groupName: "categories",
     groupLabel: "Categories",
-    groupIcon: <TagIcon className="h-4 w-4" />,
+    groupIcon: <TagIcon className="size-4" />,
     items: refineResources.filter(
       ({ meta: { groupName } }) => groupName === "categories"
     ),
@@ -266,7 +266,7 @@ export const sidebarItems = [
   {
     groupName: "customers",
     groupLabel: "Customers",
-    groupIcon: <UserGroupIcon className="h-4 w-4" />,
+    groupIcon: <UserGroupIcon className="size-4" />,
     items: refineResources.filter(
       ({ meta: { groupName } }) => groupName === "customers"
     ),
@@ -274,7 +274,7 @@ export const sidebarItems = [
   {
     groupName: "selling",
     groupLabel: "Selling",
-    groupIcon: <ShoppingCartIcon className="h-4 w-4" />,
+    groupIcon: <ShoppingCartIcon className="size-4" />,
     items: refineResources.filter(
       ({ meta: { groupName } }) => groupName === "selling"
     ),
@@ -282,7 +282,7 @@ export const sidebarItems = [
   {
     groupName: "payments",
     groupLabel: "Payments",
-    groupIcon: <CreditCardIcon className="h-4 w-4" />,
+    groupIcon: <CreditCardIcon className="size-4" />,
     items: refineResources.filter(
       ({ meta: { groupName } }) => groupName === "payments"
     ),
@@ -290,7 +290,7 @@ export const sidebarItems = [
   {
     groupName: "stores",
     groupLabel: "Stores",
-    groupIcon: <BuildingStorefrontIcon className="h-4 w-4" />,
+    groupIcon: <BuildingStorefrontIcon className="size-4" />,
     items: refineResources.filter(
       ({ meta: { groupName } }) => groupName === "stores"
     ),
@@ -298,7 +298,7 @@ export const sidebarItems = [
   {
     groupName: "products",
     groupLabel: "Products",
-    groupIcon: <ShoppingBagIcon className="h-4 w-4" />,
+    groupIcon: <ShoppingBagIcon className="size-4" />,
     items: refineResources.filter(
       ({ meta: { groupName } }) => groupName === "products"
     ),
@@ -306,7 +306,7 @@ export const sidebarItems = [
   {
     groupName: "admin",
     groupLabel: "Administration",
-    groupIcon: <Cog6ToothIcon className="h-4 w-4" />,
+    groupIcon: <Cog6ToothIcon className="size-4" />,
     items: refineResources.filter(
       ({ meta: { groupName } }) => groupName === "admin"
     ),

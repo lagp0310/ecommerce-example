@@ -58,7 +58,7 @@ export const CartList = () => {
               }
             );
 
-            return <div className="flex gap-y-1 flex-wrap">{tags}</div>;
+            return <div className="flex flex-wrap gap-y-1">{tags}</div>;
           }}
         />
       </Table>

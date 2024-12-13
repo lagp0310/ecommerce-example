@@ -88,8 +88,8 @@ export function NavMain({
                     <SidebarMenuAction>
                       {icon}
                       <span>{title}</span>
-                      <div className="flex flex-1 justify-end w-full">
-                        <ChevronRightIcon className="h-4 w-4 group-data-[state=open]:rotate-90" />
+                      <div className="flex w-full flex-1 justify-end">
+                        <ChevronRightIcon className="size-4 group-data-[state=open]:rotate-90" />
                       </div>
                       <span className="sr-only">{`Toggle ${title}`}</span>
                     </SidebarMenuAction>

@@ -73,7 +73,7 @@ export default function DashboardPage() {
                     <CardTitle className="text-sm font-medium">
                       Monthly Revenue
                     </CardTitle>
-                    <CurrencyDollarIcon className="h-4 w-4" />
+                    <CurrencyDollarIcon className="size-4" />
                   </CardHeader>
                   <CardContent>
                     {hasMonthlyRevenueData ? (
@@ -87,7 +87,7 @@ export default function DashboardPage() {
                         ).format(
                           dashboardMainMetrics?.result_orders_total ?? 0
                         )}`}</div>
-                        <p className="text-xs text-muted-foreground">
+                        <p className="text-xs">
                           {`${dashboardMainMetrics?.is_orders_amount_percentage_positive ? "+" : ""}${dashboardMainMetrics?.orders_amount_difference_percentage}% from last month`}
                         </p>
                       </React.Fragment>
@@ -101,7 +101,7 @@ export default function DashboardPage() {
                     <CardTitle className="text-sm font-medium">
                       Monthly Subscriptions
                     </CardTitle>
-                    <UserGroupIcon className="h-4 w-4" />
+                    <UserGroupIcon className="size-4" />
                   </CardHeader>
                   <CardContent>
                     {hasMonthlySubscriptionsData ? (
@@ -114,7 +114,7 @@ export default function DashboardPage() {
                         ).format(
                           dashboardMainMetrics?.result_customers_count ?? 0
                         )}`}</div>
-                        <p className="text-xs text-muted-foreground">
+                        <p className="text-xs">
                           {`${dashboardMainMetrics?.is_customers_difference_percentage_positive ? "+" : "-"}${dashboardMainMetrics?.customers_difference_percentage}% from last month`}
                         </p>
                       </React.Fragment>
@@ -128,7 +128,7 @@ export default function DashboardPage() {
                     <CardTitle className="text-sm font-medium">
                       Monthly Orders
                     </CardTitle>
-                    <ShoppingBagIcon className="h-4 w-4" />
+                    <ShoppingBagIcon className="size-4" />
                   </CardHeader>
                   <CardContent>
                     {hasMonthlyOrdersData ? (
@@ -139,7 +139,7 @@ export default function DashboardPage() {
                         }).format(
                           dashboardMainMetrics?.result_total_orders ?? 0
                         )}`}</div>
-                        <p className="text-xs text-muted-foreground">
+                        <p className="text-xs">
                           {`${dashboardMainMetrics?.is_orders_percentage_positive ? "+" : "-"}${dashboardMainMetrics?.orders_difference_percentage}% from last month`}
                         </p>
                       </React.Fragment>
@@ -153,30 +153,28 @@ export default function DashboardPage() {
                     <CardTitle className="text-sm font-medium">
                       Current Active Users
                     </CardTitle>
-                    <CursorArrowRaysIcon className="h-4 w-4" />
+                    <CursorArrowRaysIcon className="size-4" />
                   </CardHeader>
                   <CardContent>
                     <div className="text-2xl font-bold">+573</div>
-                    <p className="text-xs text-muted-foreground">
-                      +201 since last hour
-                    </p>
+                    <p className="text-xs">+201 since last hour</p>
                   </CardContent>
                 </Card>
               </div>
-              <div className="flex flex-col gap-y-4 md:grid md:gap-4 md:grid-cols-2 lg:grid-cols-7">
+              <div className="flex flex-col gap-y-4 md:grid md:grid-cols-2 md:gap-4 lg:grid-cols-7">
                 <Card className="col-span-4 flex flex-1 flex-col">
                   <CardHeader>
                     <CardTitle>Overview</CardTitle>
                   </CardHeader>
-                  <CardContent className="p-4 flex flex-1 h-full">
+                  <CardContent className="flex h-full flex-1 p-4">
                     <Overview data={ordersPerMonth} />
                   </CardContent>
                 </Card>
-                <Card className="sm:col-span-4 lg:col-span-3 flex flex-1 flex-col">
+                <Card className="flex flex-1 flex-col sm:col-span-4 lg:col-span-3">
                   <CardHeader>
                     <CardTitle>Recent Sales</CardTitle>
                   </CardHeader>
-                  <CardContent className="p-4 flex flex-1 h-full">
+                  <CardContent className="flex h-full flex-1 p-4">
                     <RecentSales latestOrders={latestOrders} />
                   </CardContent>
                 </Card>

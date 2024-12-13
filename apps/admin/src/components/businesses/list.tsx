@@ -17,7 +17,7 @@ export const BusinessList = () => {
 
   return (
     <List
-      createButtonProps={{ icon: <PlusIcon className="h-4 w-4 text-white" /> }}
+      createButtonProps={{ icon: <PlusIcon className="size-4 text-white" /> }}
     >
       <Table {...tableProps} rowKey="id">
         <Table.Column dataIndex="id" title="ID" />
@@ -45,7 +45,7 @@ export const BusinessList = () => {
                 hideText
                 size="small"
                 recordItemId={record.id}
-                icon={<PencilSquareIcon className="h-4 w-4 text-gray-500" />}
+                icon={<PencilSquareIcon className="size-4 text-gray-500" />}
               />
             </Space>
           )}

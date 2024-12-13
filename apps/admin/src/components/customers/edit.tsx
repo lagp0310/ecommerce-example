@@ -76,7 +76,7 @@ export const CustomerEdit = () => {
         >
           <Input readOnly disabled />
         </Form.Item>
-        <div className="flex flex-1 flex-col md:flex-row gap-x-4 w-full">
+        <div className="flex w-full flex-1 flex-col gap-x-4 md:flex-row">
           <Form.Item
             label="First Name"
             name={["first_name"]}
@@ -106,7 +106,7 @@ export const CustomerEdit = () => {
             <Input />
           </Form.Item>
         </div>
-        <div className="flex flex-1 flex-col md:flex-row gap-x-4 w-full">
+        <div className="flex w-full flex-1 flex-col gap-x-4 md:flex-row">
           <Form.Item
             label="Email"
             name={["email"]}
@@ -187,11 +187,11 @@ export const CustomerEdit = () => {
         >
           <Input.TextArea />
         </Form.Item>
-        <div className="flex flex-1 flex-row w-full justify-end">
+        <div className="flex w-full flex-1 flex-row justify-end">
           <SaveButton
             {...saveButtonProps}
             onClick={updateCustomer}
-            icon={<FolderArrowDownIcon className="h-4 w-4 text-white" />}
+            icon={<FolderArrowDownIcon className="size-4 text-white" />}
           />
         </div>
       </Form>

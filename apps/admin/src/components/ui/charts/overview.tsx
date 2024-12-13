@@ -87,7 +87,7 @@ export function Overview({ data }: Props) {
         </ResponsiveContainer>
       ) : (
         <div className="flex flex-1 flex-col items-center justify-center gap-y-4 text-center">
-          <EmptyData className="h-16 w-16 md:h-20 md:w-20" />
+          <EmptyData className="size-16 md:size-20" />
           <span className="text-lg font-bold">No data to be shown</span>
         </div>
       )}

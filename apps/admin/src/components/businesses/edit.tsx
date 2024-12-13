@@ -193,11 +193,11 @@ export const BusinessEdit = () => {
           <Select {...currencySelectProps} mode="multiple" />
         </Form.Item>
       </Form>
-      <div className="flex flex-1 flex-row w-full justify-end">
+      <div className="flex w-full flex-1 flex-row justify-end">
         <SaveButton
           {...saveButtonProps}
           onClick={updateBusiness}
-          icon={<FolderArrowDownIcon className="h-4 w-4 text-white" />}
+          icon={<FolderArrowDownIcon className="size-4 text-white" />}
         />
       </div>
     </Edit>

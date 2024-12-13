@@ -106,7 +106,7 @@ export function NavUser({ user }: { user: UserData }) {
   const userInfoSection = React.useCallback(
     (showChevronUpDown = true) => (
       <>
-        <Avatar className="h-8 w-8 rounded-lg">
+        <Avatar className="size-8 rounded-lg">
           <AvatarImage
             src={usersData?.avatar}
             alt={`${usersData?.firstName} ${usersData?.lastName}`}
@@ -207,7 +207,7 @@ export function NavUser({ user }: { user: UserData }) {
               onClick={handleLogout}
               className="hover:cursor-pointer hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
             >
-              <ArrowRightStartOnRectangleIcon className="h-4 w-4" />
+              <ArrowRightStartOnRectangleIcon className="size-4" />
               Log out
             </DropdownMenuItem>
           </DropdownMenuContent>

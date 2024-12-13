@@ -84,7 +84,7 @@ export const StoreFeatureCreate = () => {
             ]}
           >
             <Upload.Dragger listType="picture" beforeUpload={() => false}>
-              <p className="ant-upload-text">Drag & drop a file in this area</p>
+              <p>Drag & drop a file in this area</p>
             </Upload.Dragger>
           </Form.Item>
         </Form.Item>

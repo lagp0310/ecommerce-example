@@ -80,7 +80,6 @@ export function Overview({ data }: Props) {
                 dataKey="ordersTotal"
                 fill="currentColor"
                 radius={[4, 4, 0, 0]}
-                className="fill-primary"
               />
             </BarChart>
           </ChartContainer>

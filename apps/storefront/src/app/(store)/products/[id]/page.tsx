@@ -57,7 +57,7 @@ export default async function Product({
     visibleSlides: 2,
     renderInDesktop: true,
     className:
-      "w-full h-60 min-[400px]:h-72 min-[500px]:h-80 min-[580px]:h-[350px] sm:h-[300px]",
+      "w-full h-64 min-[420px]:h-72 min-[500px]:h-80 min-[580px]:h-[350px] sm:h-[300px] md:h-64 min-[860px]:h-72 lg:h-80 min-[1100px]:h-[350px] xl:h-80 mb-16",
     mobileMediaQuery: "(max-width: 768px)",
     visibleSlidesSm: { mediaQuery: "(max-width: 640px)", visibleSlides: 2 },
     visibleSlidesMd: {
@@ -65,7 +65,11 @@ export default async function Product({
       visibleSlides: 3,
     },
     visibleSlidesLg: {
-      mediaQuery: "(min-width: 769px)",
+      mediaQuery: "(min-width: 769px) and (max-width: 1280px)",
+      visibleSlides: 4,
+    },
+    visibleSlidesXl: {
+      mediaQuery: "(min-width: 1281px)",
       visibleSlides: 5,
     },
   };
@@ -74,9 +78,9 @@ export default async function Product({
     renderInDesktop: true,
     carouselSliderProps: {
       className:
-        "h-60 min-[400px]:h-72 min-[500px]:h-80 min-[580px]:h-[350px] sm:h-[300px]",
+        "h-64 min-[420px]:h-72 min-[500px]:h-80 min-[580px]:h-[350px] sm:h-[300px] md:h-64 min-[860px]:h-72 lg:h-80 min-[1100px]:h-[350px] xl:h-80",
       classNameTray:
-        "h-60 min-[400px]:h-72 min-[500px]:h-80 min-[580px]:h-[350px] sm:h-[300px]",
+        "h-64 min-[420px]:h-72 min-[500px]:h-80 min-[580px]:h-[350px] sm:h-[300px] md:h-64 min-[860px]:h-72 lg:h-80 min-[1100px]:h-[350px] xl:h-80",
     },
   };
 
@@ -108,14 +112,16 @@ export default async function Product({
                     <FilledStarIcon className="size-[18px] text-warning" />
                   }
                 />
-                <span className="font-normal text-body-small text-gray-600">{`${totalRatings} Reviews`}</span>
+                <div className="items-center">
+                  <span className="font-normal text-body-small text-gray-600">{`${totalRatings} Reviews`}</span>
+                </div>
               </div>
               <div className="flex flex-row gap-4 items-center">
                 <ProductPricing
-                  className="flex flex-1 flex-row gap-2 items-center"
+                  className="flex flex-row gap-2 items-center"
                   currencySymbol={currencySymbol}
                   price={price}
-                  // discountedPrice={discountedPrice}
+                  discountedPrice={discountedPrice}
                   discountedPriceClasses={cn(
                     "font-medium text-body-xxl text-hard-primary"
                   )}
@@ -143,7 +149,7 @@ export default async function Product({
           </div>
         </div>
       </div>
-      <Section className="flex flex-1 flex-col gap-y-8 px-6 xl:px-0">
+      <Section className="flex flex-1 flex-col gap-y-8 px-6 xl:px-0 w-full items-center">
         <SectionTitle className="w-full max-w-7xl">
           <div className="flex flex-1 flex-row">
             <h2 className="text-body-xl font-semibold text-gray-900 md:text-heading-5">
@@ -160,7 +166,7 @@ export default async function Product({
             </div>
           </div>
         </SectionTitle>
-        <SectionContent className="w-full max-w-7xl md:grid md:grid-cols-3 md:gap-6 lg:grid-cols-5">
+        <SectionContent className="w-full max-w-7xl">
           <CarouselProvider {...relatedProductsCarouselProviderProps}>
             <CarouselRenderer {...relatedProductsCarouselRendererProps}>
               {Array.from({ length: relatedProductsLength }).map(
@@ -170,16 +176,18 @@ export default async function Product({
                     index={index}
                     innerClassName="px-1 mx-auto"
                     mobileMediaQuery="(max-width: 768px)"
+                    renderInDesktop
                   >
                     <BasicProductCard
                       product={product}
                       isFirstOnList={index === 0}
+                      cardClassname="max-w-fit"
                     />
                   </SlideRenderer>
                 )
               )}
             </CarouselRenderer>
-            <DotsRenderer mobileMediaQuery="(max-width: 768px)">
+            <DotsRenderer mobileMediaQuery="(max-width: 768px)" renderInDesktop>
               <DefaultDotGroup
                 disableActiveDots
                 className="mt-7 flex w-full flex-1 flex-row items-center justify-center gap-x-1"

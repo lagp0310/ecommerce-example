@@ -228,7 +228,7 @@ export default async function Products() {
               </div>
             ))}
           </div>
-          <div className="grid grid-cols-1 gap-4 xl:col-span-4 xl:col-start-2 xl:grid-cols-4">
+          <div className="grid grid-cols-1 gap-4 lg:col-span-3 lg:col-start-2 xl:col-span-4 xl:col-start-2 xl:grid-cols-4">
             <Pagination className="col-span-full flex flex-1 flex-row items-center justify-center gap-x-3">
               <PaginationContent>
                 <PaginationItem className="group/back-button rounded-full border border-neutral-100 hover:bg-primary hover:text-white disabled:cursor-not-allowed disabled:border-neutral-50 disabled:bg-gray-300 motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none">

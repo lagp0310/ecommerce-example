@@ -12,9 +12,6 @@ import {
 } from "@/components/ui/common/sheet";
 import { ShoppingBagIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
-import Image from "next/image";
-import type { Product } from "@/types/types";
-import greenAppleProduct from "@/public/images/green-apple-product.png";
 import { type DialogProps } from "@radix-ui/react-dialog";
 import {
   TooltipProvider,
@@ -22,21 +19,8 @@ import {
   TooltipTrigger,
   TooltipContent,
 } from "@/components/ui/common/tooltip";
+import { product } from "@/constants/constants";
 
-const cartProduct: Product = {
-  id: "868b9f7f-620c-490c-9c8b-b45cccb4507f",
-  name: "Green Apple",
-  price: 20.99,
-  currencySymbol: "$",
-  currencyCode: "USD",
-  image: (
-    <Image
-      src={greenAppleProduct}
-      alt="Green Apple"
-      className="h-auto w-20 max-w-20 rounded-[10px]"
-    />
-  ),
-};
 const cartId = "0e84b499-0047-4125-9f96-f44b7a793214";
 const numberOfProducts = 4;
 const hasProducts = numberOfProducts > 0;
@@ -81,8 +65,9 @@ export function SidebarCartWrapper({
               <div key={index} className="group/cart-product flex flex-col">
                 <BasicCartProduct
                   key={index}
-                  product={cartProduct}
+                  product={product}
                   toggleSidebar={toggleSidebar}
+                  isFirstOnList={index === 0}
                 />
                 <div className="w-full border-t border-gray-100/50 group-last/cart-product:hidden"></div>
               </div>

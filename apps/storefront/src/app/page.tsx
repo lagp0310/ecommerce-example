@@ -384,6 +384,7 @@ export default async function Home() {
         "h-72 min-[420px]:h-72 min-[430px]:h-64 min-[500px]:h-64 min-[520px]:h-60 sm:h-72 md:h-64 lg:h-72 min-[1150px]:h-64",
     },
   };
+  const totalCustomerTestimonials = 6;
 
   const offerBanners = [
     <Banner
@@ -514,6 +515,7 @@ export default async function Home() {
       classNameTray: "h-[500px]",
     },
   };
+  const totalProducts = 10;
 
   return (
     <div className="flex flex-1 flex-col">
@@ -646,7 +648,7 @@ export default async function Home() {
           <SectionContent className="w-full max-w-7xl md:grid md:grid-cols-3 md:gap-6 lg:grid-cols-5">
             <CarouselProvider {...popularProductsCarouselProviderProps}>
               <CarouselRenderer {...popularProductsCarouselRendererProps}>
-                {Array.from({ length: 10 }).map((_value, index) => (
+                {Array.from({ length: totalProducts }).map((_value, index) => (
                   <SlideRenderer
                     key={index}
                     index={index}
@@ -814,7 +816,7 @@ export default async function Home() {
           <SectionContent className="grid w-full max-w-7xl md:grid-cols-3 md:gap-6 lg:grid-cols-5">
             <CarouselProvider {...featuredProductsCarouselProviderProps}>
               <CarouselRenderer {...featuredProductsCarouselRendererProps}>
-                {Array.from({ length: 10 }).map((_value, index) => (
+                {Array.from({ length: totalProducts }).map((_value, index) => (
                   <SlideRenderer
                     key={index}
                     index={index}
@@ -858,18 +860,20 @@ export default async function Home() {
                 </SectionTitle>
                 <SectionContent className="w-full">
                   <CarouselRenderer {...testimonialsCarouselRendererProps}>
-                    {Array.from({ length: 6 }).map((_value, index) => (
-                      <SlideRenderer
-                        key={index}
-                        index={index}
-                        innerClassName="px-1 mx-auto"
-                        renderInDesktop
-                      >
-                        <HomepageCustomerTestimonial
-                          testimonial={customerTestimonial}
-                        />
-                      </SlideRenderer>
-                    ))}
+                    {Array.from({ length: totalCustomerTestimonials }).map(
+                      (_value, index) => (
+                        <SlideRenderer
+                          key={index}
+                          index={index}
+                          innerClassName="px-1 mx-auto"
+                          renderInDesktop
+                        >
+                          <HomepageCustomerTestimonial
+                            testimonial={customerTestimonial}
+                          />
+                        </SlideRenderer>
+                      )
+                    )}
                   </CarouselRenderer>
                   <DotsRenderer renderInDesktop>
                     <DefaultDotGroup

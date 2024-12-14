@@ -12,8 +12,10 @@ import { Rating } from "@/components/ui/product/rating";
 import { ClientLink } from "@/components/navigation/client-link";
 import { ProductTag } from "./product-tag";
 import { ProductPricing } from "./product-pricing";
+import { cn } from "@/lib/utils";
 
-type Props = {
+type Props = React.HTMLProps<HTMLDivElement> & {
+  cardClassname?: string;
   product: Product;
   shouldShowProductTags?: boolean;
   shouldUseNextLink?: boolean;
@@ -21,6 +23,8 @@ type Props = {
 };
 
 export function BasicProductCard({
+  className,
+  cardClassname = "",
   product: {
     id,
     name,
@@ -45,9 +49,10 @@ export function BasicProductCard({
     isFirstOnList;
   const productNode = (
     <ProductCard
-      className={
-        "relative col-span-1 flex flex-1 flex-col justify-center gap-y-[6px] rounded-[5px] border border-gray-100 bg-white p-3 hover:border-soft-primary/45 hover:shadow-[0px_0px_12px_0px_rgba(132,209,135,0.32)] hover:shadow-soft-primary/60 motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
-      }
+      className={cn(
+        "relative col-span-1 flex flex-1 flex-col justify-center gap-y-[6px] rounded-[5px] border border-gray-100 bg-white p-3 hover:border-soft-primary/45 hover:shadow-[0px_0px_12px_0px_rgba(132,209,135,0.32)] hover:shadow-soft-primary/60 motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none",
+        className
+      )}
     >
       {shouldShowTags ? (
         <div className="absolute left-3 top-3 z-20 flex flex-1 flex-row flex-wrap gap-x-2 gap-y-1 pr-12 text-body-tiny md:text-body-small">
@@ -94,7 +99,7 @@ export function BasicProductCard({
   return (
     <React.Fragment>
       {shouldUseNextLink ? (
-        <div className="relative">
+        <div className={cn("relative", cardClassname)}>
           <div className="absolute right-3 top-3 z-10 flex flex-1 flex-col gap-y-2">
             <Button className="group flex size-8 flex-row items-center justify-center rounded-full border border-gray-50 bg-white hover:border-none hover:bg-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none">
               <HeartIcon className="size-4 text-gray-900 group-hover:text-white" />

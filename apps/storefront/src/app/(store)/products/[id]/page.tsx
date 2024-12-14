@@ -126,11 +126,11 @@ export default async function Product({
                     "font-medium text-body-xxl text-hard-primary"
                   )}
                   priceClasses={cn(
+                    "font-medium text-body-xxl text-hard-primary",
                     {
                       "font-normal leading-[150%] text-body-xl text-gray-300":
                         !!discountedPrice,
-                    },
-                    "font-medium text-body-xxl text-hard-primary"
+                    }
                   )}
                   isFirstOnList
                 />

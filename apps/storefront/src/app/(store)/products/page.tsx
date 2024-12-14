@@ -152,45 +152,49 @@ export default async function Products() {
     <div className="flex flex-1 flex-col gap-y-8 px-6 py-8 xl:px-0">
       <div className="flex w-full flex-1 flex-col xl:items-center">
         <div className="grid max-w-7xl grid-cols-1 gap-8 lg:grid-cols-4 xl:grid-cols-5">
-          <div className="col-span-1 row-span-2 w-full lg:row-start-2">
-            <FiltersWrapper
-              wrapperClassname="grid lg:hidden"
-              contentClassname="rounded-[10px] max-w-[80vw] sm:max-w-[70vw] md:max-w-[60vw] overflow-y-auto max-h-[90vh]"
-            >
-              <DialogHeader>
-                <DialogTitle>Filters</DialogTitle>
-              </DialogHeader>
+          <div className="col-span-1 row-span-2 w-full">
+            <div className="sticky top-8">
+              <FiltersWrapper
+                wrapperClassname="grid lg:hidden relative"
+                contentClassname="rounded-[10px] max-w-[80vw] sm:max-w-[70vw] md:max-w-[60vw] overflow-y-auto max-h-[90vh]"
+              >
+                <DialogHeader>
+                  <DialogTitle>Filters</DialogTitle>
+                </DialogHeader>
+                {filters.map(
+                  ({ children, name, initiallyCollapsed }, index) => (
+                    <Accordion
+                      key={index}
+                      type="single"
+                      collapsible
+                      defaultValue={!initiallyCollapsed ? name : undefined}
+                      className="grid"
+                    >
+                      <AccordionItem value={name}>
+                        <AccordionTrigger>{name}</AccordionTrigger>
+                        <AccordionContent>{children}</AccordionContent>
+                      </AccordionItem>
+                    </Accordion>
+                  )
+                )}
+              </FiltersWrapper>
               {filters.map(({ children, name, initiallyCollapsed }, index) => (
                 <Accordion
                   key={index}
                   type="single"
                   collapsible
                   defaultValue={!initiallyCollapsed ? name : undefined}
-                  className="grid"
+                  className="hidden lg:grid"
                 >
                   <AccordionItem value={name}>
-                    <AccordionTrigger>{name}</AccordionTrigger>
+                    <AccordionTrigger className={cn({ "pt-0": index === 0 })}>
+                      {name}
+                    </AccordionTrigger>
                     <AccordionContent>{children}</AccordionContent>
                   </AccordionItem>
                 </Accordion>
               ))}
-            </FiltersWrapper>
-            {filters.map(({ children, name, initiallyCollapsed }, index) => (
-              <Accordion
-                key={index}
-                type="single"
-                collapsible
-                defaultValue={!initiallyCollapsed ? name : undefined}
-                className="hidden lg:grid"
-              >
-                <AccordionItem value={name}>
-                  <AccordionTrigger className={cn({ "pt-0": index === 0 })}>
-                    {name}
-                  </AccordionTrigger>
-                  <AccordionContent>{children}</AccordionContent>
-                </AccordionItem>
-              </Accordion>
-            ))}
+            </div>
           </div>
           <div className="lg:col-span-3 lg:col-start-2 lg:row-span-1 xl:col-span-4 xl:col-start-2">
             <div className="flex w-full flex-1 flex-row items-center">

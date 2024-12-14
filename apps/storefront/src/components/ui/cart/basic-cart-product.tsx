@@ -9,17 +9,20 @@ import {
 } from "./cart-product-actions";
 import { Button } from "@/components/ui/common/button";
 import { TrashIcon } from "@heroicons/react/24/outline";
+import { ProductPricing } from "@/components/ui/product/product-pricing";
 
 type Props = React.HTMLProps<HTMLDivElement> & {
   actionsProps?: CartProductActionsProps;
   product: Product;
   toggleSidebar: () => void;
+  isFirstOnList?: boolean;
 };
 
 export function BasicCartProduct({
   actionsProps,
   product: { id, name, price, currencySymbol, discountedPrice, image },
   toggleSidebar,
+  isFirstOnList = false,
   ...props
 }: Props) {
   return (
@@ -30,27 +33,26 @@ export function BasicCartProduct({
         onClick={toggleSidebar}
       >
         <CartProduct {...props} className="flex flex-1 flex-row gap-4">
-          {image}
+          <div className="h-auto w-20 max-w-20 rounded-[10px]">{image}</div>
           <div className="flex flex-1 flex-col justify-center gap-1">
             {name}
-            <div className="flex flex-row items-center gap-x-2 text-body-small md:text-body-medium">
-              {!!discountedPrice ? (
-                <span
-                  className={cn({
-                    "font-medium text-gray-900 truncate line-clamp-1":
-                      !discountedPrice,
-                  })}
-                >{`${currencySymbol}${discountedPrice}`}</span>
-              ) : null}
-              <span
-                className={cn({
-                  "font-normal text-gray-400 line-through truncate line-clamp-1":
-                    discountedPrice,
-                  "font-medium text-gray-900 truncate line-clamp-1":
-                    !discountedPrice,
-                })}
-              >{`${currencySymbol}${price}`}</span>
-            </div>
+            <ProductPricing
+              className="flex flex-row items-center gap-x-2 text-body-small md:text-body-medium"
+              price={price}
+              discountedPrice={discountedPrice}
+              currencySymbol={currencySymbol}
+              discountedPriceClasses={cn({
+                "font-medium text-gray-900 truncate line-clamp-1":
+                  !discountedPrice,
+              })}
+              priceClasses={cn({
+                "font-normal text-gray-400 line-through truncate line-clamp-1":
+                  discountedPrice && isFirstOnList,
+                "font-medium text-gray-900 truncate line-clamp-1":
+                  !discountedPrice,
+              })}
+              isFirstOnList={isFirstOnList}
+            />
           </div>
         </CartProduct>
       </Link>

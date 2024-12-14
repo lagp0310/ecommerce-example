@@ -79,10 +79,10 @@ export const product: Product = {
   image: <Image src={greenAppleProduct} alt="Green Apple" />,
   rating: 4,
   totalRatings: 25,
-  tags: [
-    { text: "50% Off", type: "danger" },
-    { text: "Top Seller", type: "info" },
-  ],
+  generalTags: [{ text: "Top Seller", type: "info" }],
+  discountTags: [{ text: "50% Off", type: "danger" }],
+  description:
+    "Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla nibh diam, blandit vel consequat nec, ultrices et ipsum. Nulla varius magna a consequat pulvinar. ",
 };
 
 export const productsSortByOptions: BaseSelectOption[] = [

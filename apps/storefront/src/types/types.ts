@@ -58,12 +58,14 @@ export type Product = {
   name: string;
   price: number;
   discountedPrice?: number;
-  currencySymbol?: string;
+  currencySymbol: string;
   currencyCode: string;
   image?: React.ReactNode;
   rating?: number;
   totalRatings?: number;
-  tags?: ProductTag[];
+  generalTags?: ProductTag[];
+  discountTags?: ProductTag[];
+  description?: string;
 };
 
 export type CustomerTestimonial = {

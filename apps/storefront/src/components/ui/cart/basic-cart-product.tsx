@@ -20,7 +20,7 @@ type Props = React.HTMLProps<HTMLDivElement> & {
 
 export function BasicCartProduct({
   actionsProps,
-  product: { id, name, price, currencySymbol, discountedPrice, image },
+  product: { slug, name, price, currencySymbol, discountedPrice, image },
   toggleSidebar,
   isFirstOnList = false,
   ...props
@@ -28,7 +28,7 @@ export function BasicCartProduct({
   return (
     <div className="flex flex-1 flex-row items-center gap-x-1">
       <Link
-        href={`/products/${id}`}
+        href={`/products/${slug}`}
         className="flex flex-1 flex-row gap-x-1"
         onClick={toggleSidebar}
       >

@@ -24,7 +24,7 @@ type Props = {
 
 export function SummarizedProductCard({
   product: {
-    id,
+    slug,
     name,
     price,
     currencySymbol,
@@ -133,7 +133,7 @@ export function SummarizedProductCard({
     >
       {shouldUseNextLink ? (
         <ClientLink
-          href={`/products/${id}`}
+          href={`/products/${slug}`}
           className="flex flex-1 flex-col items-center gap-y-2 pt-[6px]"
         >
           {productPresentation}
@@ -144,7 +144,7 @@ export function SummarizedProductCard({
       {productActions}
       {shouldUseNextLink ? (
         <ClientLink
-          href={`/products/${id}`}
+          href={`/products/${slug}`}
           className="flex flex-1 flex-col items-center gap-y-2 pt-[6px]"
         >
           {productData}

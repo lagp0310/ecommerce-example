@@ -26,7 +26,7 @@ export function BasicProductCard({
   className,
   cardClassname = "",
   product: {
-    id,
+    slug,
     name,
     price,
     currencySymbol,
@@ -105,7 +105,7 @@ export function BasicProductCard({
               <HeartIcon className="size-4 text-gray-900 group-hover:text-white" />
             </Button>
           </div>
-          <ClientLink href={`/products/${id}`} className="col-span-1">
+          <ClientLink href={`/products/${slug}`} className="col-span-1">
             {productNode}
           </ClientLink>
           <div className="absolute bottom-6 right-1.5 min-[400px]:right-3 flex flex-1 flex-row items-center justify-end">

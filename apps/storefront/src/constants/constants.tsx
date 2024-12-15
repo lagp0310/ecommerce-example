@@ -71,6 +71,7 @@ export const category: Category = {
 };
 export const product: Product = {
   id: "868b9f7f-620c-490c-9c8b-b45cccb4507f",
+  slug: "ecobazar-green-apple-620c",
   name: "Green Apple",
   price: 20.99,
   discountedPrice: 14.99,

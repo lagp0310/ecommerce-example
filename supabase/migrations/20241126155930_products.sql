@@ -14,8 +14,9 @@ create table
     description text null,
     image_url text null,
     available_quantity bigint null,
+    slug text null,
     constraint products_pkey primary key (id),
     constraint products_sku_key unique (sku),
-    constraint products_store_fkey foreign key (store) references stores (id) on update cascade on delete cascade,
-    constraint products_currency_fkey foreign key (currency) references currencies (id) on update cascade on delete set null
+    constraint products_currency_fkey foreign key (currency) references currencies (id) on update cascade on delete set null,
+    constraint products_store_fkey foreign key (store) references stores (id) on update cascade on delete cascade
   ) tablespace pg_default;

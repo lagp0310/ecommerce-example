@@ -30,7 +30,7 @@ import React from "react";
 export default async function Product({
   params,
 }: {
-  params: Promise<{ id: string }>;
+  params: Promise<{ slug: string }>;
 }) {
   console.log(await params);
 

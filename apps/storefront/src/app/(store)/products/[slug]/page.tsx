@@ -181,7 +181,7 @@ export default async function Product({
                     <BasicProductCard
                       product={product}
                       isFirstOnList={index === 0}
-                      cardClassname="max-w-fit"
+                      cardClassname="max-w-fit mt-2"
                     />
                   </SlideRenderer>
                 )

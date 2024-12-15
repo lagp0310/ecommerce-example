@@ -12,10 +12,7 @@ import type { SelectProps } from "@radix-ui/react-select";
 type Props = SelectProps & {
   initialOption?: string;
   options: BaseSelectOption[];
-  wrapperClassname?: Pick<
-    React.HTMLProps<HTMLDivElement>,
-    "className"
-  >["className"];
+  wrapperClassname?: React.HTMLProps<HTMLDivElement>["className"];
 };
 
 export function DropdownSelector({

@@ -12,18 +12,9 @@ dayjs.extend(utcPlugin);
 
 type Props = React.HTMLProps<HTMLDivElement> & {
   endDate?: Date;
-  semicolonClasses?: Pick<
-    React.HTMLProps<HTMLDivElement>,
-    "className"
-  >["className"];
-  timeClasses?: Pick<
-    React.HTMLProps<HTMLSpanElement>,
-    "className"
-  >["className"];
-  timeUnitClasses?: Pick<
-    React.HTMLProps<HTMLSpanElement>,
-    "className"
-  >["className"];
+  semicolonClasses?: React.HTMLProps<HTMLDivElement>["className"];
+  timeClasses?: React.HTMLProps<HTMLSpanElement>["className"];
+  timeUnitClasses?: React.HTMLProps<HTMLSpanElement>["className"];
 };
 
 export function BannerCountdownWrapper({

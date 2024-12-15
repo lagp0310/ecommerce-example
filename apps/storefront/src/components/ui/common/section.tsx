@@ -1,7 +1,7 @@
 import React from "react";
 
-type Props = React.HTMLProps<HTMLDivElement>;
+type Props = React.HTMLProps<HTMLElement>;
 
 export function Section({ ...props }: Props) {
-  return <div {...props}></div>;
+  return <section {...props}></section>;
 }

@@ -522,7 +522,7 @@ export default async function Home() {
   return (
     <div className="flex flex-1 flex-col">
       <div className="my-6 flex flex-1 flex-row items-center justify-center px-6 xl:px-0">
-        <div className="grid w-full max-w-7xl gap-6 lg:grid-cols-3 lg:grid-rows-2">
+        <section className="grid w-full max-w-7xl gap-6 lg:grid-cols-3 lg:grid-rows-2">
           {/* FIXME: While carousels are loaded (client component) the server sends a basic HTML version which is
           a column-based slides. We can improve this by using a loader (skeleton) while the component loads. */}
           <CarouselProvider {...headerBannerCarouselProviderProps}>
@@ -544,7 +544,7 @@ export default async function Home() {
               />
             </DotsRenderer>
           </CarouselProvider>
-        </div>
+        </section>
       </div>
       <div className="flex flex-1 px-6 md:justify-center xl:px-0">
         <StoreHighlights className="relative flex max-w-7xl flex-1 flex-col items-center justify-center rounded-lg p-6 shadow-[0px_8px_40px_0px_rgba(0,38,3,0.08)] md:flex-row md:flex-wrap md:gap-y-6 md:p-10 lg:flex-nowrap lg:items-start">

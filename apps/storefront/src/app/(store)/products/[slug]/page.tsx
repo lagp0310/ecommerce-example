@@ -87,19 +87,23 @@ export default async function Product({
   return (
     <div className="flex flex-1 flex-col items-center">
       <div className="flex flex-1 flex-col px-6 py-8 xl:px-0 max-w-7xl">
-        <div className="flex flex-1 flex-row gap-x-4">
+        <div className="flex flex-1 flex-col sm:flex-row gap-x-4">
           <div className="flex flex-1 flex-row justify-center items-center basis-1/2">
             {image}
           </div>
           <div className="flex flex-col gap-6 basis-1/2">
-            <div className="flex flex-col gap-5 justify-center border-b border-gray-100">
-              <div className="flex flex-row gap-4 items-center">
+            <div className="flex flex-col gap-5 pb-5 justify-center border-b border-gray-100">
+              <div className="flex flex-row gap-4 items-center flex-wrap">
                 <ProductTitle className="font-normal text-heading-4 text-gray-900">
                   {name}
                 </ProductTitle>
-                <div className="flex flex-1 flex-row flex-wrap gap-2">
+                <div className="flex flex-1 flex-row flex-wrap gap-2 mr-20 min-[400px]:mr-0 sm:mr-10 min-[740px]:mr-20 min-[800px]:mr-0">
                   {generalTags?.map((tag, index) => (
-                    <ProductTag key={index} tag={tag} />
+                    <ProductTag
+                      key={index}
+                      tag={tag}
+                      className="line-clamp-1"
+                    />
                   ))}
                 </div>
               </div>
@@ -141,8 +145,8 @@ export default async function Product({
                 </div>
               </div>
             </div>
-            <div className="flex flex-col gap-5 justify-center border-b border-gray-100">
-              <p className="font-normal text-body-small text-gray-500">
+            <div className="flex flex-col gap-5 pb-5 justify-center border-b border-gray-100">
+              <p className="font-normal text-body-small text-gray-500 line-clamp-4">
                 {description}
               </p>
             </div>

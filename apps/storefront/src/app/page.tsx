@@ -51,6 +51,7 @@ import { ButtonNextRenderer } from "@/components/carousel/button-next-renderer";
 import { ButtonBackRenderer } from "@/components/carousel/button-back-renderer";
 import { ClientLink } from "@/components/navigation/client-link";
 import { BannerCountdownWrapper } from "@/components/ui/banner/banner-countdown-wrapper";
+import { ProductCarouselSection } from "@/components/ui/product/product-carousel-section";
 
 export default async function Home() {
   const storeHighlights: TStoreHighlight[] = [
@@ -516,6 +517,7 @@ export default async function Home() {
     },
   };
   const totalProducts = 10;
+  const products = Array.from({ length: totalProducts }).map(() => product);
 
   return (
     <div className="flex flex-1 flex-col">
@@ -628,49 +630,16 @@ export default async function Home() {
             </CarouselProvider>
           </SectionContent>
         </Section>
-        <Section className="flex flex-1 flex-col gap-y-8 px-6 xl:px-0">
-          <SectionTitle className="w-full max-w-7xl">
-            <div className="flex flex-1 flex-row">
-              <h2 className="text-body-xl font-semibold text-gray-900 md:text-heading-5">
-                Popular Products
-              </h2>
-              <div className="flex flex-1 flex-row justify-end">
-                <Link
-                  href="/products"
-                  className="flex flex-row items-center justify-end gap-x-2 text-body-medium font-medium text-primary"
-                >
-                  View All
-                  <ArrowRightIcon className="size-4 text-primary" />
-                </Link>
-              </div>
-            </div>
-          </SectionTitle>
-          <SectionContent className="w-full max-w-7xl md:grid md:grid-cols-3 md:gap-6 lg:grid-cols-5">
-            <CarouselProvider {...popularProductsCarouselProviderProps}>
-              <CarouselRenderer {...popularProductsCarouselRendererProps}>
-                {Array.from({ length: totalProducts }).map((_value, index) => (
-                  <SlideRenderer
-                    key={index}
-                    index={index}
-                    innerClassName="px-1 mx-auto"
-                    mobileMediaQuery="(max-width: 768px)"
-                  >
-                    <BasicProductCard
-                      product={product}
-                      isFirstOnList={index === 0}
-                    />
-                  </SlideRenderer>
-                ))}
-              </CarouselRenderer>
-              <DotsRenderer mobileMediaQuery="(max-width: 768px)">
-                <DefaultDotGroup
-                  disableActiveDots
-                  className="mt-7 flex w-full flex-1 flex-row items-center justify-center gap-x-1"
-                />
-              </DotsRenderer>
-            </CarouselProvider>
-          </SectionContent>
-        </Section>
+        <ProductCarouselSection
+          sectionTitle="Popular Products"
+          popularProductsCarouselProviderProps={
+            popularProductsCarouselProviderProps
+          }
+          popularProductsCarouselRendererProps={
+            popularProductsCarouselRendererProps
+          }
+          products={products}
+        />
         <Section className="mt-[60px] w-full px-6 md:mt-0 lg:flex lg:flex-1 lg:flex-col lg:items-center lg:gap-y-8 xl:px-0">
           <SectionContent className="w-full max-w-7xl lg:flex lg:flex-1 lg:flex-row lg:gap-x-6">
             <CarouselProvider {...offerBannersCarouselProviderProps}>
@@ -739,6 +708,7 @@ export default async function Home() {
                               <BasicProductCard
                                 product={product}
                                 isFirstOnList={index === 0}
+                                cardClassname="mt-2 md:mt-0"
                               />
                             </div>
                           </React.Fragment>
@@ -746,6 +716,7 @@ export default async function Home() {
                           <BasicProductCard
                             product={product}
                             isFirstOnList={index === 0}
+                            cardClassname="mt-2 md:mt-0"
                           />
                         )}
                       </SlideRenderer>
@@ -796,49 +767,16 @@ export default async function Home() {
             </Banner>
           </Section>
         </div>
-        <Section className="flex flex-1 flex-col gap-y-8 px-6 xl:px-0">
-          <SectionTitle className="w-full max-w-7xl">
-            <div className="flex flex-1 flex-row">
-              <h2 className="text-body-xl font-semibold text-gray-900 md:text-heading-5">
-                Featured Products
-              </h2>
-              <div className="flex flex-1 flex-row justify-end">
-                <Link
-                  href="/products"
-                  className="flex flex-row items-center justify-end gap-x-2 text-body-medium font-medium text-primary"
-                >
-                  View All
-                  <ArrowRightIcon className="size-4 text-primary" />
-                </Link>
-              </div>
-            </div>
-          </SectionTitle>
-          <SectionContent className="grid w-full max-w-7xl md:grid-cols-3 md:gap-6 lg:grid-cols-5">
-            <CarouselProvider {...featuredProductsCarouselProviderProps}>
-              <CarouselRenderer {...featuredProductsCarouselRendererProps}>
-                {Array.from({ length: totalProducts }).map((_value, index) => (
-                  <SlideRenderer
-                    key={index}
-                    index={index}
-                    innerClassName="px-1 mx-auto"
-                    mobileMediaQuery="(max-width: 768px)"
-                  >
-                    <BasicProductCard
-                      product={product}
-                      isFirstOnList={index === 0}
-                    />
-                  </SlideRenderer>
-                ))}
-              </CarouselRenderer>
-              <DotsRenderer mobileMediaQuery="(max-width: 768px)">
-                <DefaultDotGroup
-                  disableActiveDots
-                  className="mt-7 flex w-full flex-1 flex-row items-center justify-center gap-x-1"
-                />
-              </DotsRenderer>
-            </CarouselProvider>
-          </SectionContent>
-        </Section>
+        <ProductCarouselSection
+          sectionTitle="Featured Products"
+          popularProductsCarouselProviderProps={
+            featuredProductsCarouselProviderProps
+          }
+          popularProductsCarouselRendererProps={
+            featuredProductsCarouselRendererProps
+          }
+          products={products}
+        />
         <div className="w-full bg-[#F7F7F7] px-6 py-[60px] xl:px-0">
           <div className="flex flex-1 flex-row md:justify-center">
             <CarouselProvider {...testimonialsCarouselProviderProps}>

@@ -112,7 +112,7 @@ export function SummarizedProductCard({
             <ProductTag
               key={index}
               tag={tag}
-              className="font-normal cursor-pointer rounded-[4px] px-2 py-[3px] truncate whitespace-break-spaces"
+              className="cursor-pointer truncate whitespace-break-spaces rounded-[4px] px-2 py-[3px] font-normal"
             />
           ))}
         </div>

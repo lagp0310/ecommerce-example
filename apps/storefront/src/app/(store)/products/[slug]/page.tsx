@@ -86,18 +86,18 @@ export default async function Product({
 
   return (
     <div className="flex flex-1 flex-col items-center">
-      <div className="flex flex-1 flex-col px-6 py-8 xl:px-0 max-w-7xl">
-        <div className="flex flex-1 flex-col sm:flex-row gap-x-4">
-          <div className="flex flex-1 flex-row justify-center items-center basis-1/2">
+      <div className="flex max-w-7xl flex-1 flex-col px-6 py-8 xl:px-0">
+        <div className="flex flex-1 flex-col gap-x-4 sm:flex-row">
+          <div className="flex flex-1 basis-1/2 flex-row items-center justify-center">
             {image}
           </div>
-          <div className="flex flex-col gap-6 basis-1/2">
-            <div className="flex flex-col gap-5 pb-5 justify-center border-b border-gray-100">
-              <div className="flex flex-row gap-4 items-center flex-wrap">
-                <ProductTitle className="font-normal text-heading-4 text-gray-900">
+          <div className="flex basis-1/2 flex-col gap-6">
+            <div className="flex flex-col justify-center gap-5 border-b border-gray-100 pb-5">
+              <div className="flex flex-row flex-wrap items-center gap-4">
+                <ProductTitle className="text-heading-4 font-normal text-gray-900">
                   {name}
                 </ProductTitle>
-                <div className="flex flex-1 flex-row flex-wrap gap-2 mr-20 min-[400px]:mr-0 sm:mr-10 min-[740px]:mr-20 min-[800px]:mr-0">
+                <div className="mr-20 flex flex-1 flex-row flex-wrap gap-2 min-[400px]:mr-0 sm:mr-10 min-[740px]:mr-20 min-[800px]:mr-0">
                   {generalTags?.map((tag, index) => (
                     <ProductTag
                       key={index}
@@ -107,7 +107,7 @@ export default async function Product({
                   ))}
                 </div>
               </div>
-              <div className="flex flex-row gap-2 items-center">
+              <div className="flex flex-row items-center gap-2">
                 <Rating
                   className="flex flex-row justify-end gap-x-0.5"
                   rating={rating ?? 0}
@@ -117,12 +117,12 @@ export default async function Product({
                   }
                 />
                 <div className="items-center">
-                  <span className="font-normal text-body-small text-gray-600">{`${totalRatings} Reviews`}</span>
+                  <span className="text-body-small font-normal text-gray-600">{`${totalRatings} Reviews`}</span>
                 </div>
               </div>
-              <div className="flex flex-row gap-4 items-center">
+              <div className="flex flex-row items-center gap-4">
                 <ProductPricing
-                  className="flex flex-row gap-2 items-center"
+                  className="flex flex-row items-center gap-2"
                   currencySymbol={currencySymbol}
                   price={price}
                   discountedPrice={discountedPrice}
@@ -138,22 +138,22 @@ export default async function Product({
                   )}
                   isFirstOnList
                 />
-                <div className="flex flex-1 flex-row flex-wrap gap-2 items-center">
+                <div className="flex flex-1 flex-row flex-wrap items-center gap-2">
                   {discountTags?.map((tag, index) => (
                     <ProductTag key={index} tag={tag} />
                   ))}
                 </div>
               </div>
             </div>
-            <div className="flex flex-col gap-5 pb-5 justify-center border-b border-gray-100">
-              <p className="font-normal text-body-small text-gray-500 line-clamp-4">
+            <div className="flex flex-col justify-center gap-5 border-b border-gray-100 pb-5">
+              <p className="line-clamp-4 text-body-small font-normal text-gray-500">
                 {description}
               </p>
             </div>
           </div>
         </div>
       </div>
-      <Section className="flex flex-1 flex-col gap-y-8 px-6 xl:px-0 w-full items-center">
+      <Section className="flex w-full flex-1 flex-col items-center gap-y-8 px-6 xl:px-0">
         <SectionTitle className="w-full max-w-7xl">
           <div className="flex flex-1 flex-row">
             <h2 className="text-body-xl font-semibold text-gray-900 md:text-heading-5">

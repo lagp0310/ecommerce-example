@@ -9,5 +9,8 @@ create table
     is_general_tag boolean not null,
     is_discount_tag boolean not null,
     constraint product_tags_pkey primary key (id),
-    constraint product_tags_product_fkey foreign key (product) references products (id) on update cascade on delete cascade
+    constraint product_tags_product_fkey foreign key (product) references products (id) on update cascade on delete cascade,
+    constraint product_tags_type_fkey foreign key (
+      type
+    ) references tag_types (id) on update cascade on delete cascade
   ) tablespace pg_default;

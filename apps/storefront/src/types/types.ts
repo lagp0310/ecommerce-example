@@ -61,7 +61,7 @@ export type Product = {
   discountedPrice?: number;
   currencies: { id: string; currencySymbol: string; currencyCode: string };
   imageUrl: string;
-  rating?: number;
+  rating: number;
   totalRatings?: number;
   generalTags?: ProductTag[];
   discountTags?: ProductTag[];

@@ -85,7 +85,7 @@ export function BasicProductCard({
             currencySymbol={currencySymbol}
             isFirstOnList={isFirstOnList}
           />
-          {typeof rating === "number" && typeof totalRatings === "number" ? (
+          {typeof rating === "number" ? (
             <div className="flex flex-1 flex-row items-center gap-x-1">
               <Rating
                 className="flex flex-row gap-x-0.5"
@@ -93,9 +93,11 @@ export function BasicProductCard({
                 emptyIcon={<StarIcon className="size-3 text-warning" />}
                 filledIcon={<FilledStarIcon className="size-3 text-warning" />}
               />
-              <span className="text-body-tiny font-normal text-gray-500">
-                {`(${totalRatings})`}
-              </span>
+              {typeof totalRatings === "number" ? (
+                <span className="text-body-tiny font-normal text-gray-500">
+                  {`(${totalRatings})`}
+                </span>
+              ) : null}
             </div>
           ) : null}
         </div>

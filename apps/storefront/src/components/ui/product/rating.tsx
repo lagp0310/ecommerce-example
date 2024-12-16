@@ -25,7 +25,10 @@ export function Rating({
   return (
     <div {...props}>
       {createRatingIcons(rating, filledIcon)}
-      {createRatingIcons(maxRating - rating, emptyIcon)}
+      {createRatingIcons(
+        rating > 0 ? maxRating - rating : maxRating,
+        emptyIcon
+      )}
     </div>
   );
 }

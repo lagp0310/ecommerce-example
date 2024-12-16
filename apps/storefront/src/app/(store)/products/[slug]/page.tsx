@@ -115,7 +115,7 @@ export default async function Product({
               <div className="flex flex-row items-center gap-2">
                 <Rating
                   className="flex flex-row justify-end gap-x-0.5"
-                  rating={rating ?? 0}
+                  rating={rating}
                   emptyIcon={<StarIcon className="size-[18px] text-warning" />}
                   filledIcon={
                     <FilledStarIcon className="size-[18px] text-warning" />

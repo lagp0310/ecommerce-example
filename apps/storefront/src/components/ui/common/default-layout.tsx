@@ -65,10 +65,10 @@ export function DefaultLayout({ children }: Props) {
         { text: "Privacy Policy", url: "#" },
       ],
     },
-    {
-      groupName: "About Us",
-      links: [{ text: "About Us", url: "/about-us" }],
-    },
+    // {
+    //   groupName: "About Us",
+    //   links: [{ text: "About Us", url: "/about-us" }],
+    // },
   ];
 
   return (

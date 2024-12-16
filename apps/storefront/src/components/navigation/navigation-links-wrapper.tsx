@@ -170,27 +170,27 @@ export function NavigationLinksWrapper() {
         ),
         // isDropdown: true,
       },
-      {
-        groupName: "about-us",
-        content: (
-          <ClientLink
-            href="/about-us"
-            legacyBehavior
-            passHref
-            className="flex w-full flex-1 flex-row group-hover/about-us:rounded-md group-hover/about-us:bg-green-gray-100/50"
-          >
-            <NavigationMenuLink
-              data-active={pathname === "/about-us"}
-              className={cn(
-                "flex flex-row justify-center gap-x-1 items-center text-body-small font-medium text-gray-500 hover:!text-gray-900 cursor-pointer data-[active=true]:text-gray-900 data-[active=true]:!bg-green-gray-100/50 data-[active=false]:!bg-white group-hover/about-us:!bg-green-gray-100/50 group-hover/about-us:!rounded-md",
-                navigationMenuTriggerStyle()
-              )}
-            >
-              About Us
-            </NavigationMenuLink>
-          </ClientLink>
-        ),
-      },
+      // {
+      //   groupName: "about-us",
+      //   content: (
+      //     <ClientLink
+      //       href="/about-us"
+      //       legacyBehavior
+      //       passHref
+      //       className="flex w-full flex-1 flex-row group-hover/about-us:rounded-md group-hover/about-us:bg-green-gray-100/50"
+      //     >
+      //       <NavigationMenuLink
+      //         data-active={pathname === "/about-us"}
+      //         className={cn(
+      //           "flex flex-row justify-center gap-x-1 items-center text-body-small font-medium text-gray-500 hover:!text-gray-900 cursor-pointer data-[active=true]:text-gray-900 data-[active=true]:!bg-green-gray-100/50 data-[active=false]:!bg-white group-hover/about-us:!bg-green-gray-100/50 group-hover/about-us:!rounded-md",
+      //           navigationMenuTriggerStyle()
+      //         )}
+      //       >
+      //         About Us
+      //       </NavigationMenuLink>
+      //     </ClientLink>
+      //   ),
+      // },
     ],
     [pathname]
   );

@@ -1,3 +1,4 @@
+import { maxProductRating } from "@/constants/constants";
 import React from "react";
 
 function createRatingIcons(length: number, icon: React.ReactNode) {
@@ -17,7 +18,7 @@ type Props = React.HTMLProps<HTMLDivElement> & {
 
 export function Rating({
   rating,
-  maxRating = 5,
+  maxRating = maxProductRating,
   filledIcon,
   emptyIcon,
   ...props

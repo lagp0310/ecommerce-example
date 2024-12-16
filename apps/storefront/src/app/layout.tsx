@@ -6,6 +6,7 @@ import { Poppins } from "next/font/google";
 import { validateEnvs } from "@/lib/env";
 import { DefaultLayout } from "@/components/ui/common/default-layout";
 import NextTopLoader from "nextjs-toploader";
+import { ApolloWrapper } from "@/context/apollo-context";
 
 validateEnvs();
 
@@ -33,7 +34,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${poppins.className} antialiased`}>
         <NextTopLoader />
-        <DefaultLayout>{children}</DefaultLayout>
+        <ApolloWrapper>
+          <DefaultLayout>{children}</DefaultLayout>
+        </ApolloWrapper>
       </body>
     </html>
   );

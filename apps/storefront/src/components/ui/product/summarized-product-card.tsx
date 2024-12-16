@@ -125,7 +125,7 @@ export function SummarizedProductCard({
         alt={name}
         width={400}
         height={400}
-        className="flex min-h-[250px] flex-1 flex-row justify-center"
+        className="flex min-h-[250px] flex-1 flex-row justify-center max-h-80 object-contain"
       />
     </React.Fragment>
   );

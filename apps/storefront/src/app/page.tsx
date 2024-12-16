@@ -8,15 +8,11 @@ import { SlideRenderer } from "@/components/carousel/slide-renderer";
 import { CategoryCard } from "@/components/ui/category/category-card";
 import { HomepageCustomerTestimonial } from "@/components/ui/customer/homepage-customer-testimonial";
 import { BookOffBrandIcon } from "@/components/ui/icons/brands/book-off-brand";
-import { BoxIcon } from "@/components/ui/icons/box";
 import { FoodCoUkBrandIcon } from "@/components/ui/icons/brands/food-co-uk-brand";
 import { FoodNetworkBrandIcon } from "@/components/ui/icons/brands/food-network-brand";
 import { GSeriesBrandIcon } from "@/components/ui/icons/brands/g-series-brand";
-import { HeadphonesIcon } from "@/components/ui/icons/headphones";
 import { MangoBrandIcon } from "@/components/ui/icons/brands/mango-brand";
-import { ShoppingBagCheckedIcon } from "@/components/ui/icons/shopping-bag-checked";
 import { StepsBrandIcon } from "@/components/ui/icons/brands/steps-brand";
-import { TruckIcon } from "@/components/ui/icons/truck";
 import { Section } from "@/components/ui/common/section";
 import { SectionContent } from "@/components/ui/common/section-content";
 import { SectionTitle } from "@/components/ui/common/section-title";
@@ -27,6 +23,7 @@ import {
   defaultCarouselInterval,
   defaultSlideHeight,
   defaultSlideWidth,
+  getStoreHighlightsIcon,
   product,
 } from "@/constants/constants";
 import discountBanner from "@/public/images/discount-banner.png";
@@ -40,7 +37,6 @@ import type {
   CarouselProviderCustomProps,
   CarouselRendererProps,
   CustomerTestimonial,
-  StoreHighlight as TStoreHighlight,
 } from "@/types/types";
 import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
@@ -54,30 +50,9 @@ import { ProductCarouselSection } from "@/components/ui/product/product-carousel
 import { queryGraphql } from "@/lib/server-query";
 import { allCategories } from "@/gql/queries/category/queries";
 import { env } from "@/lib/env";
+import { allStoreFeatures } from "@/gql/queries/store-features/queries";
 
 export default async function Home() {
-  const storeHighlights: TStoreHighlight[] = [
-    {
-      icon: <TruckIcon className="size-10 text-primary" />,
-      title: "Free Shipping",
-      description: "Free shipping on all your orders",
-    },
-    {
-      icon: <HeadphonesIcon className="size-10 text-primary" />,
-      title: "Customer Support 24/7",
-      description: "Instant access to Support",
-    },
-    {
-      icon: <ShoppingBagCheckedIcon className="size-10 text-primary" />,
-      title: "100% Secure Payment",
-      description: "We ensure your money is save",
-    },
-    {
-      icon: <BoxIcon className="size-10 text-primary" />,
-      title: "Money-Back Guarantee",
-      description: "30 Days Money-Back Guarantee",
-    },
-  ];
   const customerTestimonial: CustomerTestimonial = {
     id: "f015e892-5c95-4a0e-957d-27acac18860d",
     text: "Pellentesque eu nibh eget mauris congue mattis mattis nec tellus. Phasellus imperdiet elit eu magna dictum, bibendum cursus velit sodales. Donec sed neque eget",
@@ -224,10 +199,19 @@ export default async function Home() {
     },
     mobileMediaQuery: "(max-width: 768px)",
   };
+
+  const storeHighlightsToShow = 4;
+  const storeHighlightsQuery = allStoreFeatures(
+    `first: ${storeHighlightsToShow}, after: $cursor, filter: {store: {eq: "${env.NEXT_PUBLIC_STORE_ID}"}}, orderBy:{ render_order: AscNullsFirst }`
+  );
+  const storeHighlights = await queryGraphql(
+    "store_featuresCollection",
+    storeHighlightsQuery
+  );
   const highlightCarouselProviderProps: CarouselProviderCustomProps = {
     naturalSlideHeight: defaultSlideHeight,
     naturalSlideWidth: defaultSlideWidth,
-    totalSlides: storeHighlights.length,
+    totalSlides: storeHighlights?.length,
     interval: defaultCarouselInterval,
     isPlaying: true,
     infinite: true,
@@ -242,6 +226,7 @@ export default async function Home() {
       classNameTray: "h-20",
     },
   };
+
   const categoriesCarouselProviderProps: CarouselProviderCustomProps = {
     naturalSlideHeight: defaultSlideHeight,
     naturalSlideWidth: defaultSlideWidth,
@@ -561,27 +546,29 @@ export default async function Home() {
         <StoreHighlights className="relative flex max-w-7xl flex-1 flex-col items-center justify-center rounded-lg p-6 shadow-[0px_8px_40px_0px_rgba(0,38,3,0.08)] md:flex-row md:flex-wrap md:gap-y-6 md:p-10 lg:flex-nowrap lg:items-start">
           <CarouselProvider {...highlightCarouselProviderProps}>
             <CarouselRenderer {...highlightCarouselRendererProps}>
-              {storeHighlights.map(({ description, icon, title }, index) => (
-                <SlideRenderer
-                  key={index}
-                  index={index}
-                  className="!pb-16"
-                  innerClassName="!h-16"
-                  mobileMediaQuery="(max-width: 768px)"
-                >
-                  <StoreHighlight className="flex w-full flex-1 flex-row justify-center gap-x-4 md:basis-1/2">
-                    {icon}
-                    <div className="flex flex-1 flex-col gap-y-2">
-                      <h3 className="text-body-medium font-semibold text-gray-900">
-                        {title}
-                      </h3>
-                      <p className="text-body-small font-normal text-gray-400">
-                        {description}
-                      </p>
-                    </div>
-                  </StoreHighlight>
-                </SlideRenderer>
-              ))}
+              {storeHighlights.map(
+                ({ id, description, iconName, title }, index) => (
+                  <SlideRenderer
+                    key={id}
+                    index={index}
+                    className="!pb-16"
+                    innerClassName="!h-16"
+                    mobileMediaQuery="(max-width: 768px)"
+                  >
+                    <StoreHighlight className="flex w-full flex-1 flex-row justify-center gap-x-4 md:basis-1/2">
+                      {getStoreHighlightsIcon(iconName)}
+                      <div className="flex flex-1 flex-col gap-y-2">
+                        <h3 className="text-body-medium font-semibold text-gray-900">
+                          {title}
+                        </h3>
+                        <p className="text-body-small font-normal text-gray-400">
+                          {description}
+                        </p>
+                      </div>
+                    </StoreHighlight>
+                  </SlideRenderer>
+                )
+              )}
             </CarouselRenderer>
             <DotsRenderer mobileMediaQuery="(max-width: 768px)">
               <DefaultDotGroup

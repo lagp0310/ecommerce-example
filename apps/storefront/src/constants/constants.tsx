@@ -1,3 +1,4 @@
+import React from "react";
 import type {
   Language,
   Currency,
@@ -10,6 +11,10 @@ import dayjs from "dayjs";
 import Image from "next/image";
 import freshFruitCategory from "@/public/images/fresh-fruit-category.png";
 import greenAppleProduct from "@/public/images/green-apple-product.png";
+import { HeadphonesIcon } from "@/components/ui/icons/headphones";
+import { ShoppingBagCheckedIcon } from "@/components/ui/icons/shopping-bag-checked";
+import { BoxIcon } from "@/components/ui/icons/box";
+import { TruckIcon } from "@/components/ui/icons/truck";
 
 export const defaultAvatarImageWidth = 200;
 export const defaultAvatarImageHeight = 200;
@@ -113,3 +118,25 @@ export const productsSortByOptions: BaseSelectOption[] = [
     value: "rating-low-to-high",
   },
 ];
+
+export enum StoreHighlightIcon {
+  TRUCK_ICON = "TruckIcon",
+  HEADPHONES_ICON = "HeadphonesIcon",
+  SHOPPING_BAG_CHECKED_ICON = "ShoppingBagCheckedIcon",
+  BOX_ICON = "BoxIcon",
+}
+
+export const getStoreHighlightsIcon = (icon: StoreHighlightIcon) => {
+  switch (icon) {
+    case StoreHighlightIcon.TRUCK_ICON:
+      return <TruckIcon className="size-10 text-primary" />;
+    case StoreHighlightIcon.HEADPHONES_ICON:
+      return <HeadphonesIcon className="size-10 text-primary" />;
+    case StoreHighlightIcon.SHOPPING_BAG_CHECKED_ICON:
+      return <ShoppingBagCheckedIcon className="size-10 text-primary" />;
+    case StoreHighlightIcon.BOX_ICON:
+      return <BoxIcon className="size-10 text-primary" />;
+    default:
+      return null;
+  }
+};

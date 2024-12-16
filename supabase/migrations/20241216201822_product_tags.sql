@@ -1,7 +1,7 @@
 create table
   public.product_tags (
     id uuid not null default gen_random_uuid (),
-    product uuid null,
+    product uuid not null,
     tag text not null,
     type uuid not null,
     created_at timestamp with time zone not null default (now() at time zone 'utc'::text),

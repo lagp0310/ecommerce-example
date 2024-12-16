@@ -24,7 +24,6 @@ import { StoreHighlight } from "@/components/ui/store/store-highlight";
 import { StoreHighlights } from "@/components/ui/store/store-highlights";
 import { SummarizedProductCard } from "@/components/ui/product/summarized-product-card";
 import {
-  category,
   defaultCarouselInterval,
   defaultSlideHeight,
   defaultSlideWidth,
@@ -52,6 +51,9 @@ import { ButtonBackRenderer } from "@/components/carousel/button-back-renderer";
 import { ClientLink } from "@/components/navigation/client-link";
 import { BannerCountdownWrapper } from "@/components/ui/banner/banner-countdown-wrapper";
 import { ProductCarouselSection } from "@/components/ui/product/product-carousel-section";
+import { queryGraphql } from "@/lib/server-query";
+import { allCategories } from "@/gql/queries/category/queries";
+import { env } from "@/lib/env";
 
 export default async function Home() {
   const storeHighlights: TStoreHighlight[] = [
@@ -519,6 +521,12 @@ export default async function Home() {
   const totalProducts = 10;
   const products = Array.from({ length: totalProducts }).map(() => product);
 
+  const categoriesToShow = 12;
+  const query = allCategories(
+    `first: ${categoriesToShow}, after: $cursor, filter: {store: {eq: "${env.NEXT_PUBLIC_STORE_ID}"}}, orderBy:{ name: AscNullsFirst }`
+  );
+  const categories = await queryGraphql("categoriesCollection", query);
+
   return (
     <div className="flex flex-1 flex-col">
       <div className="my-6 flex flex-1 flex-row items-center justify-center px-6 xl:px-0">
@@ -602,20 +610,28 @@ export default async function Home() {
           <SectionContent className="w-full max-w-7xl md:grid md:grid-cols-4 md:gap-6 lg:grid-cols-6">
             <CarouselProvider {...categoriesCarouselProviderProps}>
               <CarouselRenderer {...categoriesCarouselRendererProps}>
-                {Array.from({ length: 12 }).map((_value, index) => (
+                {categories.map(({ id, name, imageUrl }, index) => (
                   <SlideRenderer
-                    key={index}
+                    key={id}
                     index={index}
                     innerClassName="px-1 mx-auto"
                     mobileMediaQuery="(max-width: 768px)"
                   >
                     <CategoryCard
-                      url={`/products?categoryIds=${category?.categoryId}`}
+                      url={`/products?categoryIds=${id}`}
                       className="flex flex-1 flex-col items-center justify-center gap-y-1.5 rounded-[5px] border border-gray-100 bg-white pb-6 pt-4 hover:border-soft-primary/45 hover:shadow-[0px_0px_12px_0px_rgba(132,209,135,0.32)] hover:shadow-soft-primary/60 motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none md:gap-y-4"
                     >
-                      {category?.image}
+                      <Image
+                        src={imageUrl}
+                        alt={name}
+                        width={180}
+                        height={130}
+                        quality={100}
+                        sizes="100vw"
+                        className="h-[130px] w-full object-contain"
+                      />
                       <span className="truncate whitespace-break-spaces text-center text-body-small font-medium text-gray-900 md:text-body-large">
-                        {category.title}
+                        {name}
                       </span>
                     </CategoryCard>
                   </SlideRenderer>

@@ -11,6 +11,8 @@ create table
     subtitle character varying null,
     subtitle_remark character varying null,
     subtitle_complement character varying null,
+    store uuid not null,
     constraint header_banners_pkey primary key (id),
-    constraint header_banners_banner_type_fkey foreign key (banner_type) references banner_types (id) on update cascade on delete cascade
+    constraint header_banners_banner_type_fkey foreign key (banner_type) references banner_types (id) on update cascade on delete cascade,
+    constraint header_banners_store_fkey foreign key (store) references stores (id) on update cascade on delete cascade
   ) tablespace pg_default;

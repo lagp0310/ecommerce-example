@@ -3,7 +3,7 @@ create table
     id uuid not null default gen_random_uuid (),
     title character varying not null,
     description character varying null,
-    icon_url text null,
+    icon_name text null,
     created_at timestamp with time zone not null default (now() at time zone 'utc'::text),
     updated_at timestamp with time zone null,
     store uuid not null,

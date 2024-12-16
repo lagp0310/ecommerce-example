@@ -71,7 +71,7 @@ export function BasicProductCard({
         alt={name}
         width={180}
         height={180}
-        className="mt-6 md:mt-2"
+        className="mt-6 md:mt-2 w-full"
       />
       <div className="flex flex-1 flex-row">
         <div className="flex flex-1 flex-col">

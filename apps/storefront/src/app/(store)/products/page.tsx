@@ -1,11 +1,11 @@
 import React from "react";
 import {
-  category,
-  product,
+  defaultMaxProductPrice,
+  maxProductRating,
   productsSortByOptions,
 } from "@/constants/constants";
 import { BasicProductCard } from "@/components/ui/product/basic-product-card";
-import type { ProductFilter, ProductTag } from "@/types/types";
+import type { ProductFilter } from "@/types/types";
 import { Label } from "@/components/ui/common/label";
 import { StarIcon } from "@heroicons/react/24/outline";
 import { StarIcon as FilledStarIcon } from "@heroicons/react/24/solid";
@@ -34,45 +34,84 @@ import {
 } from "@/components/ui/pagination/pagination";
 import { FiltersWrapper } from "@/components/ui/product/filters-wrapper";
 import { DialogHeader, DialogTitle } from "@/components/ui/common/dialog";
-import { cn } from "@/lib/utils";
+import { cn, parseProductTags } from "@/lib/utils";
+import { allCategories } from "@/gql/queries/category/queries";
+import { queryGraphql } from "@/lib/server-query";
+import { env } from "@/lib/env";
+import { allProducts } from "@/gql/queries/product/queries";
+import { callDatabaseFunction } from "@/lib/call-database-function";
 
+// TODO: Refactor to simplify this page when getting data. Also, Promise.all for all async calls.
 export default async function Products() {
-  const numberOfPopularTags = 12;
-  const numberOfCategories = 7;
-  const maxRating = 5;
-  const pricingSliderProps = {
-    max: 100,
-  };
-
-  const categories = Array.from({ length: numberOfCategories }).map(
-    () => category
+  const categoriesToShow = 30;
+  const categoriesQuery = allCategories(
+    `first: ${categoriesToShow}, after: $cursor, filter: {store: {eq: "${env.NEXT_PUBLIC_STORE_ID}"}}, orderBy:{ name: AscNullsFirst }`
   );
-  const tag: ProductTag = { text: "Healthy" };
+  const categories = await queryGraphql(
+    "categoriesCollection",
+    categoriesQuery
+  );
+
+  const productsToShow = 20;
+  const productsQuery = allProducts(
+    `first: ${productsToShow}, after: $cursor, 
+        filter: {
+          store: {eq: "${env.NEXT_PUBLIC_STORE_ID}"} 
+          available_quantity: { gt: 0 }},
+        orderBy: { render_order: AscNullsLast }`
+  );
+  const productsResult = await queryGraphql(
+    "productsCollection",
+    productsQuery
+  );
+  const products = parseProductTags(productsResult);
+
+  const allTags = await callDatabaseFunction("get_all_product_tags", {
+    store_id: env.NEXT_PUBLIC_STORE_ID,
+  });
+  const { result_max_price: maxProductsPrice } = await callDatabaseFunction(
+    "get_products_max_price",
+    {
+      store_id: env.NEXT_PUBLIC_STORE_ID,
+    }
+  );
+  const pricingSliderProps = {
+    thumbClassName:
+      "outline-none ring-0 focus-visible:ring-0 focus-visible:ring-offset-0",
+    max:
+      typeof maxProductsPrice === "number"
+        ? maxProductsPrice
+        : defaultMaxProductPrice,
+  };
+  const { result_products_count: productsCount } = await callDatabaseFunction(
+    "get_products_count",
+    {
+      store_id: env.NEXT_PUBLIC_STORE_ID,
+    }
+  );
+
   const filters: ProductFilter[] = [
     {
       children: (
         <ToggleGroup
           type="single"
-          className="flex flex-1 flex-row flex-wrap items-center justify-start gap-2"
+          className="flex flex-1 flex-col items-start gap-2"
         >
-          {categories.map(({ categoryId, title, numberOfItems }, index) => (
-            <div
-              key={index}
-              className="flex items-center space-x-2 rounded-full"
-            >
+          {categories.map(({ id, name }) => (
+            <div key={id} className="flex space-x-2 rounded-full">
               <ToggleGroupItem
-                value={categoryId}
-                id={`${categoryId}-${index}`}
-                name={`${categoryId}-${index}`}
+                value={id}
+                id={id}
+                name={name}
                 className="focus-active:bg-black pl-0 text-body-small font-normal text-gray-900 hover:bg-transparent hover:text-gray-900 data-[state=on]:bg-transparent"
               >
                 <Checkbox className="size-5 rounded-[3px] border border-gray-100 bg-white text-gray-900 outline-none data-[state=checked]:border-none data-[state=checked]:bg-primary data-[state=checked]:text-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none" />
                 <Label
-                  htmlFor={`${categoryId}-${index}`}
+                  htmlFor={id}
                   className="flex flex-1 flex-row items-center gap-x-1 text-body-small font-normal text-gray-900"
                 >
-                  {title}
-                  <span className="text-body-small font-normal text-gray-500">{`(${numberOfItems})`}</span>
+                  {name}
+                  {/* <span className="text-body-small font-normal text-gray-500">{`(${numberOfItems})`}</span> */}
                 </Label>
               </ToggleGroupItem>
             </div>
@@ -92,7 +131,7 @@ export default async function Products() {
     {
       children: (
         <div className="flex flex-1 flex-col justify-center gap-y-1.5">
-          {Array.from({ length: maxRating })
+          {Array.from({ length: maxProductRating })
             .map((_value, index) => (
               // TODO: Hide some on selection.
               <div
@@ -128,17 +167,17 @@ export default async function Products() {
           type="single"
           className="flex flex-1 flex-row flex-wrap items-center justify-start gap-2"
         >
-          {Array.from({ length: numberOfPopularTags }).map((_value, index) => (
+          {allTags.map(({ id, tag, type }) => (
             <div
-              key={index}
+              key={id}
               className="flex items-center space-x-2 rounded-full bg-gray-50"
             >
               <ToggleGroupItem
-                value={tag.text}
-                id={`${tag.text}-${index}`}
+                value={tag}
+                id={id}
                 className="rounded-full text-body-small font-normal text-gray-900 hover:bg-primary hover:text-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
               >
-                {tag.text}
+                {tag}
               </ToggleGroupItem>
             </div>
           ))}
@@ -210,7 +249,7 @@ export default async function Products() {
               <div className="flex flex-1 flex-row justify-end">
                 <span className="text-body-medium font-normal text-gray-600">
                   <span className="text-body-medium font-semibold text-gray-900">
-                    52
+                    {productsCount}
                   </span>{" "}
                   Results Found
                 </span>
@@ -218,7 +257,7 @@ export default async function Products() {
             </div>
           </div>
           <div className="grid grid-cols-1 gap-4 min-[450px]:grid-cols-2 sm:grid-cols-3 lg:col-span-3 lg:col-start-2 lg:grid-cols-3 xl:col-span-4 xl:grid-cols-4">
-            {Array.from({ length: 20 }).map((_value, index) => (
+            {products?.map((product, index) => (
               <div key={index} className="col-span-1 row-span-1">
                 <BasicProductCard
                   key={index}

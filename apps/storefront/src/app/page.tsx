@@ -522,10 +522,13 @@ export default async function Home() {
   const products = Array.from({ length: totalProducts }).map(() => product);
 
   const categoriesToShow = 12;
-  const query = allCategories(
+  const categoriesQuery = allCategories(
     `first: ${categoriesToShow}, after: $cursor, filter: {store: {eq: "${env.NEXT_PUBLIC_STORE_ID}"}}, orderBy:{ name: AscNullsFirst }`
   );
-  const categories = await queryGraphql("categoriesCollection", query);
+  const categories = await queryGraphql(
+    "categoriesCollection",
+    categoriesQuery
+  );
 
   return (
     <div className="flex flex-1 flex-col">

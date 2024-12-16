@@ -1,5 +1,5 @@
 import { getClient } from "@/lib/apollo-client";
-import { type DocumentNode, gql } from "@apollo/client";
+import { type DocumentNode } from "@apollo/client";
 
 const client = getClient();
 
@@ -9,13 +9,7 @@ export async function queryGraphql(
 ) {
   try {
     // TODO: Response types. Check generated graphql types.
-    const {
-      // data: {
-      //   categoriesCollection: { edges },
-      // },
-      data,
-      error,
-    } = await client.query({
+    const { data, error } = await client.query({
       query,
     });
 

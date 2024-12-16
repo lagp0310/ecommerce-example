@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { baseSupabaseClient } from "@/app/providers/data/data-provider";
+import { baseSupabaseClient } from "@/providers/data/data-provider";
 
 export type UserData = Partial<
   Awaited<ReturnType<typeof baseSupabaseClient.auth.getUser>>["data"]["user"]

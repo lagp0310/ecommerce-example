@@ -4,7 +4,7 @@ import {
   nonProtectedPathnames,
   sessionCookieName,
 } from "@/constants/constants";
-import { baseSupabaseClient } from "@/app/providers/data/data-provider";
+import { baseSupabaseClient } from "@/providers/data/data-provider";
 
 export async function middleware(request: NextRequest) {
   const sessionCookie = request.cookies.get(sessionCookieName)?.value;

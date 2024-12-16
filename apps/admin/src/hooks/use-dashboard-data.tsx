@@ -1,4 +1,4 @@
-import { baseSupabaseClient } from "@/app/providers/data/data-provider";
+import { baseSupabaseClient } from "@/providers/data/data-provider";
 import type {
   DashboardDataResponse,
   OrderSummary,

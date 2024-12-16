@@ -1,8 +1,8 @@
 "use client";
 
 import React from "react";
-import { dataProviderClient } from "@/app/providers/data/data-provider.client";
-import { authProviderClient } from "@/app/providers/auth/auth-provider.client";
+import { dataProviderClient } from "@/providers/data/data-provider.client";
+import { authProviderClient } from "@/providers/auth/auth-provider.client";
 import { Refine } from "@refinedev/core";
 import routerProvider from "@refinedev/nextjs-router";
 import { ThemedLayoutV2, useNotificationProvider } from "@refinedev/antd";

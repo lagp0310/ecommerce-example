@@ -33,7 +33,7 @@ export function ProductPricing({
             },
             discountedPriceClasses
           )}
-        >{`${currencySymbol}${discountedPrice}`}</span>
+        >{`${currencySymbol}${discountedPrice.toFixed(2)}`}</span>
       ) : null}
       <span
         className={cn(
@@ -44,7 +44,7 @@ export function ProductPricing({
           },
           priceClasses
         )}
-      >{`${currencySymbol}${price}`}</span>
+      >{`${currencySymbol}${price.toFixed(2)}`}</span>
     </div>
   );
 }

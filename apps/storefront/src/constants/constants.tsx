@@ -143,4 +143,7 @@ export const getStoreHighlightsIcon = (icon: StoreHighlightIcon) => {
       return null;
   }
 };
+
 export const maxProductRating = 5;
+
+export const defaultMaxProductPrice = 99;

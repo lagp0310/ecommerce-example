@@ -8,7 +8,7 @@ import type {
 import { CurrencyDollarIcon, LanguageIcon } from "@heroicons/react/24/outline";
 import dayjs from "dayjs";
 import Image from "next/image";
-import freshFruitCategory from "@/public/images/fresh-fruit.png";
+import freshFruitCategory from "@/public/images/fresh-fruit-category.png";
 import greenAppleProduct from "@/public/images/green-apple-product.png";
 
 export const defaultAvatarImageWidth = 200;

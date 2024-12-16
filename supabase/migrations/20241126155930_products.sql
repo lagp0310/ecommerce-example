@@ -5,7 +5,7 @@ create table
     price double precision not null,
     discounted_price double precision null,
     currency uuid not null,
-    rating smallint null,
+    rating smallint null default '0'::smallint,
     created_at timestamp with time zone not null default (now() at time zone 'utc'::text),
     updated_at timestamp with time zone null,
     sku character varying not null,

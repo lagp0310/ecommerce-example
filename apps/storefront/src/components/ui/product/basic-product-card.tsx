@@ -13,6 +13,7 @@ import { ClientLink } from "@/components/navigation/client-link";
 import { ProductTag } from "./product-tag";
 import { ProductPricing } from "./product-pricing";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 type Props = React.HTMLProps<HTMLDivElement> & {
   cardClassname?: string;
@@ -29,9 +30,9 @@ export function BasicProductCard({
     slug,
     name,
     price,
-    currencySymbol,
     discountedPrice,
-    image,
+    currencies: { currencySymbol },
+    imageUrl,
     rating,
     totalRatings,
     generalTags,
@@ -65,7 +66,13 @@ export function BasicProductCard({
           ))}
         </div>
       ) : null}
-      <div className="mt-6 md:mt-2">{image}</div>
+      <Image
+        src={imageUrl}
+        alt={name}
+        width={180}
+        height={180}
+        className="mt-6 md:mt-2"
+      />
       <div className="flex flex-1 flex-row">
         <div className="flex flex-1 flex-col">
           <span className="line-clamp-1 truncate text-body-small font-normal text-gray-700">

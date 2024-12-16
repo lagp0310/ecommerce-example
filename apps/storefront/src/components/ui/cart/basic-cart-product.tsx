@@ -10,6 +10,7 @@ import {
 import { Button } from "@/components/ui/common/button";
 import { TrashIcon } from "@heroicons/react/24/outline";
 import { ProductPricing } from "@/components/ui/product/product-pricing";
+import Image from "next/image";
 
 type Props = React.HTMLProps<HTMLDivElement> & {
   actionsProps?: CartProductActionsProps;
@@ -20,7 +21,14 @@ type Props = React.HTMLProps<HTMLDivElement> & {
 
 export function BasicCartProduct({
   actionsProps,
-  product: { slug, name, price, currencySymbol, discountedPrice, image },
+  product: {
+    slug,
+    name,
+    price,
+    currencies: { currencySymbol },
+    discountedPrice,
+    imageUrl,
+  },
   toggleSidebar,
   isFirstOnList = false,
   ...props
@@ -33,7 +41,13 @@ export function BasicCartProduct({
         onClick={toggleSidebar}
       >
         <CartProduct {...props} className="flex flex-1 flex-row gap-4">
-          <div className="h-auto w-20 max-w-20 rounded-[10px]">{image}</div>
+          <Image
+            src={imageUrl}
+            alt={name}
+            width={100}
+            height={100}
+            className="h-auto w-20 max-w-20 rounded-[10px]"
+          />
           <div className="flex flex-1 flex-col justify-center gap-1">
             {name}
             <ProductPricing

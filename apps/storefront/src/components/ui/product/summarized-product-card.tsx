@@ -14,6 +14,7 @@ import { ClientLink } from "@/components/navigation/client-link";
 import { BannerCountdownWrapper } from "@/components/ui/banner/banner-countdown-wrapper";
 import { ProductTag } from "./product-tag";
 import { ProductPricing } from "./product-pricing";
+import Image from "next/image";
 
 type Props = {
   product: Product;
@@ -27,9 +28,9 @@ export function SummarizedProductCard({
     slug,
     name,
     price,
-    currencySymbol,
     discountedPrice,
-    image,
+    currencies: { currencySymbol },
+    imageUrl,
     rating,
     totalRatings,
     generalTags,
@@ -117,9 +118,13 @@ export function SummarizedProductCard({
           ))}
         </div>
       ) : null}
-      <div className="flex min-h-[250px] flex-1 flex-row justify-center">
-        {image}
-      </div>
+      <Image
+        src={imageUrl}
+        alt={name}
+        width={400}
+        height={400}
+        className="flex min-h-[250px] flex-1 flex-row justify-center"
+      />
     </React.Fragment>
   );
   const productNode = (

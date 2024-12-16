@@ -24,6 +24,7 @@ import type {
 } from "@/types/types";
 import { ArrowRightIcon, StarIcon } from "@heroicons/react/24/outline";
 import { StarIcon as FilledStarIcon } from "@heroicons/react/24/solid";
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
@@ -37,9 +38,9 @@ export default async function Product({
   const {
     name,
     price,
-    currencySymbol,
     discountedPrice,
-    image,
+    imageUrl,
+    currencies: { currencySymbol },
     rating,
     generalTags,
     discountTags,
@@ -88,9 +89,13 @@ export default async function Product({
     <div className="flex flex-1 flex-col items-center">
       <div className="flex max-w-7xl flex-1 flex-col px-6 py-8 xl:px-0">
         <div className="flex flex-1 flex-col gap-x-4 sm:flex-row">
-          <div className="flex flex-1 basis-1/2 flex-row items-center justify-center">
-            {image}
-          </div>
+          <Image
+            src={imageUrl}
+            alt={name}
+            width={500}
+            height={400}
+            className="flex flex-1 basis-1/2 flex-row items-center justify-center"
+          />
           <div className="flex basis-1/2 flex-col gap-6">
             <div className="flex flex-col justify-center gap-5 border-b border-gray-100 pb-5">
               <div className="flex flex-row flex-wrap items-center gap-4">

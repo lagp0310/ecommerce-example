@@ -518,7 +518,18 @@ export default async function Home() {
     popularProductsQuery
   );
 
-  const products = Array.from({ length: 10 }).map(() => product);
+  const featuredProductsToShow = 10;
+  const featuredProductsQuery = allProducts(
+    `first: ${featuredProductsToShow}, after: $cursor, 
+      filter: {
+        store: {eq: "${env.NEXT_PUBLIC_STORE_ID}"} 
+        available_quantity: { gt: 0 }},
+      orderBy: { render_order: AscNullsLast }`
+  );
+  const featuredProducts = await queryGraphql(
+    "productsCollection",
+    featuredProductsQuery
+  );
 
   const categoriesToShow = 12;
   const categoriesQuery = allCategories(
@@ -795,7 +806,7 @@ export default async function Home() {
           popularProductsCarouselRendererProps={
             featuredProductsCarouselRendererProps
           }
-          products={products}
+          products={featuredProducts}
         />
         <div className="w-full bg-[#F7F7F7] px-6 py-[60px] xl:px-0">
           <div className="flex flex-1 flex-row md:justify-center">

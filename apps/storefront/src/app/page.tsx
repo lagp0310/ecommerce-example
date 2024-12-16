@@ -50,7 +50,8 @@ import { ProductCarouselSection } from "@/components/ui/product/product-carousel
 import { queryGraphql } from "@/lib/server-query";
 import { allCategories } from "@/gql/queries/category/queries";
 import { env } from "@/lib/env";
-import { allStoreFeatures } from "@/gql/queries/store-features/queries";
+import { allStoreFeatures } from "@/gql/queries/store-feature/queries";
+import { allProducts } from "@/gql/queries/product/queries";
 
 export default async function Home() {
   const customerTestimonial: CustomerTestimonial = {
@@ -503,8 +504,21 @@ export default async function Home() {
       classNameTray: "h-[500px]",
     },
   };
-  const totalProducts = 10;
-  const products = Array.from({ length: totalProducts }).map(() => product);
+
+  const popularProductsToShow = 10;
+  const popularProductsQuery = allProducts(
+    `first: ${popularProductsToShow}, after: $cursor, 
+      filter: {
+        store: {eq: "${env.NEXT_PUBLIC_STORE_ID}"} 
+        available_quantity: { gt: 0 }},
+      orderBy: { render_order: AscNullsLast }`
+  );
+  const popularProducts = await queryGraphql(
+    "productsCollection",
+    popularProductsQuery
+  );
+
+  const products = Array.from({ length: 10 }).map(() => product);
 
   const categoriesToShow = 12;
   const categoriesQuery = allCategories(
@@ -644,7 +658,7 @@ export default async function Home() {
           popularProductsCarouselRendererProps={
             popularProductsCarouselRendererProps
           }
-          products={products}
+          products={popularProducts}
         />
         <Section className="mt-[60px] w-full px-6 md:mt-0 lg:flex lg:flex-1 lg:flex-col lg:items-center lg:gap-y-8 xl:px-0">
           <SectionContent className="w-full max-w-7xl lg:flex lg:flex-1 lg:flex-row lg:gap-x-6">

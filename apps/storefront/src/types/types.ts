@@ -59,9 +59,8 @@ export type Product = {
   name: string;
   price: number;
   discountedPrice?: number;
-  currencySymbol: string;
-  currencyCode: string;
-  image?: React.ReactNode;
+  currencies: { id: string; currencySymbol: string; currencyCode: string };
+  imageUrl: string;
   rating?: number;
   totalRatings?: number;
   generalTags?: ProductTag[];

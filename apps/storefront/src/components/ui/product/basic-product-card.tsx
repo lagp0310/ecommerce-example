@@ -56,7 +56,7 @@ export function BasicProductCard({
       )}
     >
       {shouldShowTags ? (
-        <div className="absolute left-3 top-3 z-20 flex flex-1 flex-row flex-wrap gap-x-2 gap-y-1 pr-12 text-body-tiny md:text-body-small">
+        <div className="absolute left-3 top-3 z-0 flex flex-1 flex-row flex-wrap gap-x-2 gap-y-1 pr-12 text-body-tiny md:text-body-small">
           {allTags.map((tag, index) => (
             <ProductTag
               key={index}

@@ -24,7 +24,6 @@ import {
   defaultSlideHeight,
   defaultSlideWidth,
   getStoreHighlightsIcon,
-  product,
 } from "@/constants/constants";
 import discountBanner from "@/public/images/discount-banner.png";
 import firstOfferBanner from "@/public/images/first-offer-banner.png";
@@ -518,6 +517,19 @@ export default async function Home() {
     popularProductsQuery
   );
 
+  const hotDealsProductsToShow = 12;
+  const hotDealsProductsQuery = allProducts(
+    `first: ${hotDealsProductsToShow}, after: $cursor, 
+      filter: {
+        store: {eq: "${env.NEXT_PUBLIC_STORE_ID}"} 
+        available_quantity: { gt: 0 }},
+      orderBy: { render_order: AscNullsLast }`
+  );
+  const hotDealsProducts = await queryGraphql(
+    "productsCollection",
+    hotDealsProductsQuery
+  );
+
   const featuredProductsToShow = 10;
   const featuredProductsQuery = allProducts(
     `first: ${featuredProductsToShow}, after: $cursor, 
@@ -720,7 +732,7 @@ export default async function Home() {
               <SectionContent className="grid w-full max-w-7xl md:grid-cols-4 md:gap-6 lg:grid-cols-5">
                 <CarouselProvider {...hotDealsCarouselProviderProps}>
                   <CarouselRenderer {...hotDealsCarouselRendererProps}>
-                    {Array.from({ length: 12 }).map((_value, index) => (
+                    {hotDealsProducts.map((product, index) => (
                       <SlideRenderer
                         key={index}
                         index={index}

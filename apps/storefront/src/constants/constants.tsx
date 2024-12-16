@@ -88,8 +88,8 @@ export const product: Product = {
   imageUrl: greenAppleProduct.src,
   rating: 4,
   totalRatings: 25,
-  generalTags: [{ text: "Top Seller", type: "info" }],
-  discountTags: [{ text: "50% Off", type: "danger" }],
+  generalTags: [{ id: "1", tag: "Top Seller", type: "info" }],
+  discountTags: [{ id: "2", tag: "50% Off", type: "danger" }],
   description:
     "Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla nibh diam, blandit vel consequat nec, ultrices et ipsum. Nulla varius magna a consequat pulvinar. ",
 };

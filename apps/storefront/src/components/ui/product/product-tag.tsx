@@ -4,11 +4,7 @@ import React from "react";
 
 type Props = React.HTMLProps<HTMLSpanElement> & { tag: TProductTag };
 
-export function ProductTag({
-  className,
-  tag: { text, type },
-  ...props
-}: Props) {
+export function ProductTag({ className, tag: { tag, type }, ...props }: Props) {
   return (
     <span
       className={cn(
@@ -21,7 +17,7 @@ export function ProductTag({
       )}
       {...props}
     >
-      {text}
+      {tag}
     </span>
   );
 }

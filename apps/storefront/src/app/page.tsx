@@ -51,6 +51,7 @@ import { allCategories } from "@/gql/queries/category/queries";
 import { env } from "@/lib/env";
 import { allStoreFeatures } from "@/gql/queries/store-feature/queries";
 import { allProducts } from "@/gql/queries/product/queries";
+import { parseProductTags } from "@/lib/utils";
 
 export default async function Home() {
   const customerTestimonial: CustomerTestimonial = {
@@ -512,10 +513,11 @@ export default async function Home() {
         available_quantity: { gt: 0 }},
       orderBy: { render_order: AscNullsLast }`
   );
-  const popularProducts = await queryGraphql(
+  const popularProductsResult = await queryGraphql(
     "productsCollection",
     popularProductsQuery
   );
+  const popularProducts = parseProductTags(popularProductsResult);
 
   const hotDealsProductsToShow = 12;
   const hotDealsProductsQuery = allProducts(
@@ -525,10 +527,11 @@ export default async function Home() {
         available_quantity: { gt: 0 }},
       orderBy: { render_order: AscNullsLast }`
   );
-  const hotDealsProducts = await queryGraphql(
+  const hotDealsProductsResult = await queryGraphql(
     "productsCollection",
     hotDealsProductsQuery
   );
+  const hotDealsProducts = parseProductTags(hotDealsProductsResult);
 
   const featuredProductsToShow = 10;
   const featuredProductsQuery = allProducts(
@@ -538,10 +541,11 @@ export default async function Home() {
         available_quantity: { gt: 0 }},
       orderBy: { render_order: AscNullsLast }`
   );
-  const featuredProducts = await queryGraphql(
+  const featuredProductsResult = await queryGraphql(
     "productsCollection",
     featuredProductsQuery
   );
+  const featuredProducts = parseProductTags(featuredProductsResult);
 
   const categoriesToShow = 12;
   const categoriesQuery = allCategories(

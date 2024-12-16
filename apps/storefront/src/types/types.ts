@@ -49,8 +49,9 @@ export type Category = {
 };
 
 export type ProductTag = {
-  text: string;
-  type?: string;
+  id: string;
+  tag: string;
+  type: string;
 };
 
 export type Product = {

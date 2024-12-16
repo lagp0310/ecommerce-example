@@ -21,6 +21,19 @@ export const allProducts = (params: string) => gql`
             }
             imageUrl: image_url
             rating
+            product_tagsCollection {
+              edges {
+                node {
+                  id
+                  tag
+                  isGeneralTag: is_general_tag
+                  isDiscountTag: is_discount_tag
+                  tagTypes: tag_types {
+                    type
+                  }
+                }
+              }
+            }
             createdAt: created_at
           }
         }

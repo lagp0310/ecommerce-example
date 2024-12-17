@@ -98,7 +98,7 @@ export const product: Product = {
 export const productsSortByOptions: BaseSelectOption[] = [
   {
     id: "39255263-b14d-4988-8d4e-a7aacad23aea",
-    name: "Latest",
+    name: "Most Recent",
     value: "latest",
     sortBy: "created_at",
     direction: "desc",

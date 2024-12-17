@@ -91,14 +91,14 @@ export function isRecordIdInSearchParamArray(
 export function updateSearchParam(
   paramName: string,
   searchParams: URLSearchParams,
-  recordId: string
+  value: string
 ) {
   const newSearchParams = new URLSearchParams(searchParams);
   const param = newSearchParams?.get(paramName)?.split(",");
-  const hasRecord = !!param?.find((value) => value === recordId);
+  const hasRecord = !!param?.find((value) => value === value);
 
   if (!param) {
-    newSearchParams.set(paramName, recordId);
+    newSearchParams.set(paramName, value);
     return newSearchParams;
   }
   if (param.length === 1 && hasRecord) {
@@ -107,12 +107,12 @@ export function updateSearchParam(
   }
 
   if (hasRecord) {
-    const newValue = param?.filter((value) => value !== recordId)?.join(",");
+    const newValue = param?.filter((value) => value !== value)?.join(",");
     if (newValue) {
       newSearchParams.set(paramName, newValue);
     }
   } else {
-    const newValue = param?.concat(recordId).join(",");
+    const newValue = param?.concat(value).join(",");
     if (newValue) {
       newSearchParams.set(paramName, newValue);
     }

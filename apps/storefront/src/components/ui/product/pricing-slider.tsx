@@ -24,7 +24,12 @@ export function PricingSlider({
 
   const handlePriceParamUpdate = React.useCallback(() => {
     const price = value.at(0);
-    if (!price) return;
+
+    if (!price || price === 0) {
+      const updatedSearchParams = new URLSearchParams(searchParams);
+      updatedSearchParams.delete("maxPrice");
+      return router.push(`${pathname}?${updatedSearchParams.toString()}`);
+    }
 
     const updatedSearchParams = updateSearchParam(
       "maxPrice",

@@ -2,8 +2,8 @@
 
 import React from "react";
 import { Slider } from "@/components/ui/common/slider";
-import { updateSearchParam } from "@/lib/utils";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { defaultMaxProductPrice } from "@/constants/constants";
 
 type Props = React.ComponentProps<typeof Slider> & {
   currencySymbol?: string;
@@ -13,6 +13,7 @@ export function PricingSlider({
   defaultValue = [0],
   min = 0,
   step = 1,
+  max = defaultMaxProductPrice,
   currencySymbol = "$",
   ...props
 }: Props) {
@@ -25,17 +26,8 @@ export function PricingSlider({
   const handlePriceParamUpdate = React.useCallback(() => {
     const price = value.at(0);
 
-    if (!price || price === 0) {
-      const updatedSearchParams = new URLSearchParams(searchParams);
-      updatedSearchParams.delete("maxPrice");
-      return router.push(`${pathname}?${updatedSearchParams.toString()}`);
-    }
-
-    const updatedSearchParams = updateSearchParam(
-      "maxPrice",
-      searchParams,
-      price.toString()
-    );
+    const updatedSearchParams = new URLSearchParams(searchParams);
+    updatedSearchParams.set("maxPrice", price?.toString() ?? max.toString());
 
     router.push(`${pathname}?${updatedSearchParams.toString()}`);
   }, [searchParams, value]);
@@ -44,7 +36,9 @@ export function PricingSlider({
     const updateParamsTimeout = setTimeout(handlePriceParamUpdate, 500);
 
     const currentSliderValue = value.at(0);
-    const maxPriceSearchParam = parseInt(searchParams.get("maxPrice") ?? "0");
+    const maxPriceSearchParam = parseInt(
+      searchParams.get("maxPrice") ?? max.toString()
+    );
     if (currentSliderValue === maxPriceSearchParam) {
       clearTimeout(updateParamsTimeout);
     }
@@ -56,6 +50,7 @@ export function PricingSlider({
     <React.Fragment>
       <Slider
         min={min}
+        max={max}
         step={step}
         defaultValue={defaultValue}
         onValueChange={setValue}

@@ -163,5 +163,5 @@ export const defaultProductsShowPerPage = 20;
 
 export const maxPagesToShow = 5;
 
-export const defaultSortBy = "latest";
+export const defaultSortBy = "created_at";
 export const defaultSortByDirection: SortByDirection = "desc";

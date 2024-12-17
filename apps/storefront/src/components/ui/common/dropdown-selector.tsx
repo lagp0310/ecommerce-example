@@ -61,8 +61,6 @@ export function DropdownSelector({
               newSearchParams.set("sortBy", sortBy);
               newSearchParams.set("sortByDirection", direction);
 
-              console.log(value, currentValue);
-
               return useNextLink ? (
                 <Link
                   key={index}

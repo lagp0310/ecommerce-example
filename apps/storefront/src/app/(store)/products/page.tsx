@@ -138,30 +138,23 @@ export default async function Products({
   const filters: ProductFilter[] = [
     {
       children: (
-        <ToggleGroup
-          type="single"
-          className="flex flex-1 flex-col items-start gap-2"
-        >
+        <div className="flex flex-1 flex-col items-start gap-1.5">
           {categories.map(({ id, name }) => (
-            <div key={id} className="flex gap-x-2 rounded-full">
-              <ToggleGroupItem
-                value={id}
-                id={id}
-                name={name}
-                className="flex w-full flex-row focus-active:bg-black pl-0 text-body-small font-normal text-gray-900 hover:bg-transparent hover:text-gray-900 data-[state=on]:bg-transparent"
+            <div
+              key={id}
+              className="flex gap-x-2 w-full flex-row focus-active:bg-black pl-0 text-body-small font-normal text-gray-900 hover:bg-transparent hover:text-gray-900 data-[state=on]:bg-transparent"
+            >
+              <Checkbox className="size-5 rounded-[3px] border border-gray-100 bg-white text-gray-900 outline-none data-[state=checked]:border-none data-[state=checked]:bg-primary data-[state=checked]:text-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none" />
+              <Label
+                htmlFor={id}
+                className="flex flex-1 flex-row justify-start items-center gap-x-1 text-body-small font-normal text-gray-900"
               >
-                <Checkbox className="size-5 rounded-[3px] border border-gray-100 bg-white text-gray-900 outline-none data-[state=checked]:border-none data-[state=checked]:bg-primary data-[state=checked]:text-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none" />
-                <Label
-                  htmlFor={id}
-                  className="flex flex-1 flex-row justify-start items-center gap-x-1 text-body-small font-normal text-gray-900"
-                >
-                  {name}
-                  {/* <span className="text-body-small font-normal text-gray-500">{`(${numberOfItems})`}</span> */}
-                </Label>
-              </ToggleGroupItem>
+                {name}
+                {/* <span className="text-body-small font-normal text-gray-500">{`(${numberOfItems})`}</span> */}
+              </Label>
             </div>
           ))}
-        </ToggleGroup>
+        </div>
       ),
       name: "Categories",
     },

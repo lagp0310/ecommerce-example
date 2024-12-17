@@ -88,7 +88,9 @@ export default async function Products({
     `first: ${productsToShow}, after: $cursor, 
         filter: {
           store: {eq: "${env.NEXT_PUBLIC_STORE_ID}"} 
-          available_quantity: { gt: 0 }},
+          available_quantity: { gt: 0 }
+          price: { lte: ${parseInt(maxPrice)} }
+        }
         orderBy: { ${sortBy}: ${sortByDirection === "asc" ? "AscNullsLast" : "DescNullsLast"} }`
   );
   const productsResult = await queryGraphql(

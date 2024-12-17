@@ -143,17 +143,17 @@ export default async function Products({
           className="flex flex-1 flex-col items-start gap-2"
         >
           {categories.map(({ id, name }) => (
-            <div key={id} className="flex space-x-2 rounded-full">
+            <div key={id} className="flex gap-x-2 rounded-full">
               <ToggleGroupItem
                 value={id}
                 id={id}
                 name={name}
-                className="focus-active:bg-black pl-0 text-body-small font-normal text-gray-900 hover:bg-transparent hover:text-gray-900 data-[state=on]:bg-transparent"
+                className="flex w-full flex-row focus-active:bg-black pl-0 text-body-small font-normal text-gray-900 hover:bg-transparent hover:text-gray-900 data-[state=on]:bg-transparent"
               >
                 <Checkbox className="size-5 rounded-[3px] border border-gray-100 bg-white text-gray-900 outline-none data-[state=checked]:border-none data-[state=checked]:bg-primary data-[state=checked]:text-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none" />
                 <Label
                   htmlFor={id}
-                  className="flex flex-1 flex-row items-center gap-x-1 text-body-small font-normal text-gray-900"
+                  className="flex flex-1 flex-row justify-start items-center gap-x-1 text-body-small font-normal text-gray-900"
                 >
                   {name}
                   {/* <span className="text-body-small font-normal text-gray-500">{`(${numberOfItems})`}</span> */}

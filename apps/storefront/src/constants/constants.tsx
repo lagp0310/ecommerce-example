@@ -5,6 +5,7 @@ import type {
   Category,
   Product,
   BaseSelectOption,
+  SortByDirection,
 } from "@/types/types";
 import { CurrencyDollarIcon, LanguageIcon } from "@heroicons/react/24/outline";
 import dayjs from "dayjs";
@@ -99,26 +100,36 @@ export const productsSortByOptions: BaseSelectOption[] = [
     id: "39255263-b14d-4988-8d4e-a7aacad23aea",
     name: "Latest",
     value: "latest",
+    sortBy: "created_at",
+    direction: "desc",
   },
   {
     id: "c892d873-ef89-4f07-8b7c-40f8fe3ae054",
     name: "Price (Low to High)",
     value: "price-low-to-high",
+    sortBy: "price",
+    direction: "asc",
   },
   {
     id: "ab88f847-1932-4a68-905e-59f71e8117a0",
     name: "Price (High to Low)",
     value: "price-high-to-low",
+    sortBy: "price",
+    direction: "desc",
   },
   {
     id: "01217011-0b06-4dff-8a56-0e707dc87365",
     name: "Rating (High to Low)",
     value: "rating-high-to-low",
+    sortBy: "rating",
+    direction: "desc",
   },
   {
     id: "6c32fb72-d62e-4c35-a9d0-2385ac3d6304",
     name: "Rating (Low to High)",
     value: "rating-low-to-high",
+    sortBy: "rating",
+    direction: "asc",
   },
 ];
 
@@ -151,3 +162,6 @@ export const defaultMaxProductPrice = 99;
 export const defaultProductsShowPerPage = 20;
 
 export const maxPagesToShow = 5;
+
+export const defaultSortBy = "latest";
+export const defaultSortByDirection: SortByDirection = "desc";

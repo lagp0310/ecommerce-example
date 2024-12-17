@@ -105,4 +105,8 @@ export type BaseSelectOption = {
   name: string;
   value: string;
   isDisabled?: boolean;
+  sortBy: string;
+  direction: SortByDirection;
 };
+
+export type SortByDirection = "asc" | "desc";

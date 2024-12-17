@@ -2,6 +2,8 @@ import React from "react";
 import {
   defaultMaxProductPrice,
   defaultProductsShowPerPage,
+  defaultSortBy,
+  defaultSortByDirection,
   maxPagesToShow,
   maxProductRating,
   productsSortByOptions,
@@ -43,18 +45,29 @@ import { env } from "@/lib/env";
 import { allProducts } from "@/gql/queries/product/queries";
 import { callDatabaseFunction } from "@/lib/call-database-function";
 import { redirect } from "next/navigation";
+import { SelectTrigger, SelectValue } from "@/components/ui/common/select";
 
 // TODO: Refactor to simplify this page when getting data. Also, Promise.all for all async calls.
 export default async function Products({
   searchParams,
 }: {
-  searchParams: Promise<{ page?: string; perPage?: string }>;
+  searchParams: Promise<Record<string, string> | string | URLSearchParams>;
 }) {
-  const { page, perPage } = await searchParams;
-  console.log(page, perPage);
-  if (!page || !perPage) {
+  const {
+    page,
+    perPage,
+    sortBy,
+    sortByDirection,
+    categories: categoriesSearchParam,
+    priceEnd,
+    priceStart,
+    ratingEnd,
+    ratingStart,
+    tags,
+  } = await searchParams;
+  if (!page || !perPage || !sortBy || !sortByDirection) {
     redirect(
-      `/products?page=1&perPage=${perPage || defaultProductsShowPerPage}`
+      `/products?page=1&perPage=${perPage || defaultProductsShowPerPage}&sortBy=${defaultSortBy}&sortByDirection=${defaultSortByDirection}`
     );
   }
 
@@ -73,7 +86,7 @@ export default async function Products({
         filter: {
           store: {eq: "${env.NEXT_PUBLIC_STORE_ID}"} 
           available_quantity: { gt: 0 }},
-        orderBy: { render_order: AscNullsLast }`
+        orderBy: { ${sortBy}: ${sortByDirection === "asc" ? "AscNullsLast" : "DescNullsLast"} }`
   );
   const productsResult = await queryGraphql(
     "productsCollection",
@@ -219,6 +232,11 @@ export default async function Products({
     },
   ];
 
+  const currentSortByValue = productsSortByOptions.find(
+    ({ sortBy: sortByOption, direction }) =>
+      sortByOption === sortBy && direction === sortByDirection
+  );
+
   return (
     <div className="flex flex-1 flex-col gap-y-8 px-6 py-8 xl:px-0">
       <div className="flex w-full flex-1 flex-col xl:items-center">
@@ -274,9 +292,16 @@ export default async function Products({
                   Sort by:
                 </span>
                 <DropdownSelector
+                  useNextLink
+                  currentValue={currentSortByValue?.value}
                   options={productsSortByOptions}
-                  defaultValue={productsSortByOptions.at(0)?.value}
-                />
+                  defaultValue={currentSortByValue?.value}
+                >
+                  <SelectTrigger className="w-fit gap-x-2 outline-none focus:ring-0 focus:ring-offset-0">
+                    {currentSortByValue?.name}
+                    <SelectValue placeholder={currentSortByValue?.value} />
+                  </SelectTrigger>
+                </DropdownSelector>
               </div>
               <div className="flex flex-1 flex-row justify-end">
                 <span className="text-body-medium font-normal text-gray-600">

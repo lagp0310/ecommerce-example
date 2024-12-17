@@ -66,13 +66,7 @@ export function Overview({ data }: Props) {
                   <span>{payload?.at(0)?.payload?.monthName}</span>
                 )}
                 formatter={(value) => (
-                  <span>{`${chartConfig.ordersTotal.label}: $${new Intl.NumberFormat(
-                    "en-US",
-                    {
-                      minimumFractionDigits: 2,
-                      maximumFractionDigits: 2,
-                    }
-                  ).format(parseFloat(value.toString()))}`}</span>
+                  <span>{`${chartConfig.ordersTotal.label}: $${parseFloat(value.toString()).toFixed(2)}`}</span>
                 )}
                 content={<ChartTooltipContent />}
               />

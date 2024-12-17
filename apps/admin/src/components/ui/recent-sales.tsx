@@ -32,11 +32,7 @@ export function RecentSales({ latestOrders }: Props) {
                     <p className="mb-0 text-sm">{email}</p>
                   </div>
                   <div className="flex flex-1 text-sm font-medium sm:justify-end sm:self-center">
-                    $
-                    {new Intl.NumberFormat("en-US", {
-                      minimumFractionDigits: 2,
-                      maximumFractionDigits: 2,
-                    }).format(result_orders_total)}
+                    ${result_orders_total.toFixed(2)}
                   </div>
                 </div>
               </div>

@@ -78,15 +78,9 @@ export default function DashboardPage() {
                   <CardContent>
                     {hasMonthlyRevenueData ? (
                       <React.Fragment>
-                        <div className="text-2xl font-bold">{`$${new Intl.NumberFormat(
-                          "en-US",
-                          {
-                            minimumFractionDigits: 2,
-                            maximumFractionDigits: 2,
-                          }
-                        ).format(
+                        <div className="text-2xl font-bold">{`$${(
                           dashboardMainMetrics?.result_orders_total ?? 0
-                        )}`}</div>
+                        ).toFixed(2)}`}</div>
                         <p className="text-xs">
                           {`${dashboardMainMetrics?.is_orders_amount_percentage_positive ? "+" : ""}${dashboardMainMetrics?.orders_amount_difference_percentage}% from last month`}
                         </p>
@@ -106,14 +100,7 @@ export default function DashboardPage() {
                   <CardContent>
                     {hasMonthlySubscriptionsData ? (
                       <React.Fragment>
-                        <div className="text-2xl font-bold">{`${new Intl.NumberFormat(
-                          "en-US",
-                          {
-                            maximumFractionDigits: 0,
-                          }
-                        ).format(
-                          dashboardMainMetrics?.result_customers_count ?? 0
-                        )}`}</div>
+                        <div className="text-2xl font-bold">{`${(dashboardMainMetrics?.result_customers_count ?? 0).toFixed(0)}`}</div>
                         <p className="text-xs">
                           {`${dashboardMainMetrics?.is_customers_difference_percentage_positive ? "+" : "-"}${dashboardMainMetrics?.customers_difference_percentage}% from last month`}
                         </p>
@@ -134,11 +121,9 @@ export default function DashboardPage() {
                     {hasMonthlyOrdersData ? (
                       <React.Fragment>
                         <div className="text-2xl font-bold">{`
-                        ${new Intl.NumberFormat("en-US", {
-                          maximumFractionDigits: 0,
-                        }).format(
+                        ${(
                           dashboardMainMetrics?.result_total_orders ?? 0
-                        )}`}</div>
+                        ).toFixed(0)}`}</div>
                         <p className="text-xs">
                           {`${dashboardMainMetrics?.is_orders_percentage_positive ? "+" : "-"}${dashboardMainMetrics?.orders_difference_percentage}% from last month`}
                         </p>

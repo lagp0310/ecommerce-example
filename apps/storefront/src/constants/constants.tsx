@@ -147,3 +147,7 @@ export const getStoreHighlightsIcon = (icon: StoreHighlightIcon) => {
 export const maxProductRating = 5;
 
 export const defaultMaxProductPrice = 99;
+
+export const defaultProductsShowPerPage = 20;
+
+export const maxPagesToShow = 5;

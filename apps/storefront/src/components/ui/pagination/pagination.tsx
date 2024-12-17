@@ -32,7 +32,7 @@ PaginationContent.displayName = "PaginationContent";
 
 const PaginationItem = React.forwardRef<
   HTMLLIElement,
-  React.ComponentProps<"li">
+  React.ComponentProps<"li"> & { disabled?: boolean }
 >(({ className, ...props }, ref) => (
   <li ref={ref} className={cn("", className)} {...props} />
 ));
@@ -40,7 +40,7 @@ PaginationItem.displayName = "PaginationItem";
 
 type PaginationLinkProps = {
   isActive?: boolean;
-} & Pick<ButtonProps, "size"> &
+} & Pick<ButtonProps, "size" | "disabled"> &
   React.ComponentProps<typeof Link>;
 
 const PaginationLink = ({ isActive, ...props }: PaginationLinkProps) => (

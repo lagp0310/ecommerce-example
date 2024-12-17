@@ -64,10 +64,8 @@ export default async function Products({
     sortBy,
     sortByDirection,
     categories: categoriesSearchParam,
-    priceEnd,
-    priceStart,
-    ratingEnd,
-    ratingStart,
+    maxPrice,
+    maxRating,
     tags,
   } = await searchParams;
   if (!page || !perPage || !sortBy || !sortByDirection) {
@@ -111,6 +109,7 @@ export default async function Products({
   const pricingSliderProps = {
     thumbClassName:
       "outline-none ring-0 focus-visible:ring-0 focus-visible:ring-offset-0",
+    defaultValue: [parseInt(maxPrice)],
     max:
       typeof maxProductsPrice === "number"
         ? maxProductsPrice

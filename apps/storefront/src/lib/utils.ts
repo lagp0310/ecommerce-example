@@ -66,3 +66,57 @@ export function parseProductTags(productsCollection?: object[]) {
     })
   );
 }
+
+export function isRecordIdInSearchParamArray(
+  paramValue: string,
+  recordId: string,
+  separator = ","
+) {
+  if (!paramValue) {
+    return false;
+  }
+
+  const paramValueArray = paramValue?.split(separator);
+
+  if (!Array.isArray(paramValueArray)) {
+    throw new Error(`paramValue should be a '${separator}' separated array`);
+  }
+  if (paramValueArray.length === 0) {
+    return false;
+  }
+
+  return !!paramValueArray.find((value) => value === recordId);
+}
+
+export function updateSearchParam(
+  paramName: string,
+  searchParams: URLSearchParams,
+  recordId: string
+) {
+  const newSearchParams = new URLSearchParams(searchParams);
+  const param = newSearchParams?.get(paramName)?.split(",");
+  const hasRecord = !!param?.find((value) => value === recordId);
+
+  if (!param) {
+    newSearchParams.set(paramName, recordId);
+    return newSearchParams;
+  }
+  if (param.length === 1 && hasRecord) {
+    newSearchParams.delete(paramName);
+    return newSearchParams;
+  }
+
+  if (hasRecord) {
+    const newValue = param?.filter((value) => value !== recordId)?.join(",");
+    if (newValue) {
+      newSearchParams.set(paramName, newValue);
+    }
+  } else {
+    const newValue = param?.concat(recordId).join(",");
+    if (newValue) {
+      newSearchParams.set(paramName, newValue);
+    }
+  }
+
+  return newSearchParams;
+}

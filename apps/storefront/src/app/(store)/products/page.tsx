@@ -10,7 +10,6 @@ import {
 } from "@/constants/constants";
 import { BasicProductCard } from "@/components/ui/product/basic-product-card";
 import type { ProductFilter } from "@/types/types";
-import { Label } from "@/components/ui/common/label";
 import { StarIcon } from "@heroicons/react/24/outline";
 import { StarIcon as FilledStarIcon } from "@heroicons/react/24/solid";
 import {
@@ -38,7 +37,11 @@ import {
 } from "@/components/ui/pagination/pagination";
 import { FiltersWrapper } from "@/components/ui/product/filters-wrapper";
 import { DialogHeader, DialogTitle } from "@/components/ui/common/dialog";
-import { cn, parseProductTags } from "@/lib/utils";
+import {
+  cn,
+  isRecordIdInSearchParamArray,
+  parseProductTags,
+} from "@/lib/utils";
 import { allCategories } from "@/gql/queries/category/queries";
 import { queryGraphql } from "@/lib/server-query";
 import { env } from "@/lib/env";
@@ -46,6 +49,8 @@ import { allProducts } from "@/gql/queries/product/queries";
 import { callDatabaseFunction } from "@/lib/call-database-function";
 import { redirect } from "next/navigation";
 import { SelectTrigger, SelectValue } from "@/components/ui/common/select";
+import { RemoveFormatting } from "lucide-react";
+import { CategoryFilterItemWrapper } from "@/components/ui/category/category-filter-item-wrapper";
 
 // TODO: Refactor to simplify this page when getting data. Also, Promise.all for all async calls.
 export default async function Products({
@@ -139,21 +144,27 @@ export default async function Products({
     {
       children: (
         <div className="flex flex-1 flex-col items-start gap-1.5">
-          {categories.map(({ id, name }) => (
-            <div
-              key={id}
-              className="flex gap-x-2 w-full flex-row focus-active:bg-black pl-0 text-body-small font-normal text-gray-900 hover:bg-transparent hover:text-gray-900 data-[state=on]:bg-transparent"
-            >
-              <Checkbox className="size-5 rounded-[3px] border border-gray-100 bg-white text-gray-900 outline-none data-[state=checked]:border-none data-[state=checked]:bg-primary data-[state=checked]:text-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none" />
-              <Label
+          {categories.map(({ id, name }) => {
+            const isChecked = isRecordIdInSearchParamArray(
+              categoriesSearchParam,
+              id
+            );
+
+            return (
+              <CategoryFilterItemWrapper
+                key={id}
+                categoryId={id}
+                checked={isChecked}
+                aria-checked={isChecked}
                 htmlFor={id}
+                wrapperClassName={cn("order-none", { "order-1": !isChecked })}
                 className="flex flex-1 flex-row justify-start items-center gap-x-1 text-body-small font-normal text-gray-900"
               >
                 {name}
                 {/* <span className="text-body-small font-normal text-gray-500">{`(${numberOfItems})`}</span> */}
-              </Label>
-            </div>
-          ))}
+              </CategoryFilterItemWrapper>
+            );
+          })}
         </div>
       ),
       name: "Categories",

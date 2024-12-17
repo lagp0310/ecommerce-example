@@ -49,8 +49,9 @@ import { allProducts } from "@/gql/queries/product/queries";
 import { callDatabaseFunction } from "@/lib/call-database-function";
 import { redirect } from "next/navigation";
 import { SelectTrigger, SelectValue } from "@/components/ui/common/select";
-import { RemoveFormatting } from "lucide-react";
 import { CategoryFilterItemWrapper } from "@/components/ui/category/category-filter-item-wrapper";
+import emptyListImage from "@/public/images/empty-products-list.png";
+import Image from "next/image";
 
 // TODO: Refactor to simplify this page when getting data. Also, Promise.all for all async calls.
 export default async function Products({
@@ -243,11 +244,13 @@ export default async function Products({
       sortByOption === sortBy && direction === sortByDirection
   );
 
+  const hasProducts = Array.isArray(products) && products.length > 0;
+
   return (
     <div className="flex flex-1 flex-col gap-y-8 px-6 py-8 xl:px-0">
       <div className="flex w-full flex-1 flex-col xl:items-center">
-        <div className="flex flex-col lg:flex-row max-w-7xl gap-8">
-          <div className="flex flex-1 flex-row lg:basis-1/4 w-full">
+        <div className="flex flex-col lg:flex-row max-w-7xl w-full gap-8">
+          <div className="flex flex-1 flex-row lg:basis-1/4 w-full lg:max-w-fit lg:min-w-[260px]">
             <div className="sticky top-8 w-full">
               <FiltersWrapper
                 wrapperClassname="flex flex-1 lg:hidden relative"
@@ -291,7 +294,7 @@ export default async function Products({
               ))}
             </div>
           </div>
-          <div className="flex flex-col gap-8">
+          <div className="flex flex-col gap-8 w-full">
             <div className="flex flex-1 flex-row items-center w-full max-h-fit">
               <div className="flex flex-1 w-full flex-row items-center">
                 <div className="flex flex-1 flex-row items-center gap-x-2">
@@ -321,80 +324,102 @@ export default async function Products({
                 </div>
               </div>
             </div>
-            <div className="grid grid-cols-1 gap-4 min-[450px]:grid-cols-2 sm:grid-cols-3 lg:col-span-3 lg:col-start-2 lg:grid-cols-3 xl:col-span-4 xl:grid-cols-4">
-              {products?.map((product, index) => (
-                <div key={index} className="col-span-1 row-span-1">
-                  <BasicProductCard
-                    key={index}
-                    product={product}
-                    isFirstOnList={index === 0}
+            <div className="grid grid-cols-1 gap-4 min-[450px]:grid-cols-2 sm:grid-cols-3 lg:col-span-3 lg:col-start-2 lg:grid-cols-3 xl:col-span-4 xl:grid-cols-4 h-full">
+              {hasProducts ? (
+                products?.map((product, index) => (
+                  <div key={index} className="col-span-1 row-span-1">
+                    <BasicProductCard
+                      key={index}
+                      product={product}
+                      isFirstOnList={index === 0}
+                    />
+                  </div>
+                ))
+              ) : (
+                <div className="flex flex-1 flex-col items-center justify-center w-full row-span-full col-span-full gap-y-4 py-20 h-full">
+                  <Image
+                    src={emptyListImage}
+                    alt="Empty Products List Image"
+                    width={320}
+                    height={250}
+                    className="h-[250px] w-[350px] object-contain"
                   />
+                  <h2 className="text-center text-heading-3 font-semibold text-gray-900">
+                    We couldn't find any products
+                  </h2>
+                  <p className="text-center font-normal text-body-medium text-gray-500">
+                    Try changing or removing some filters.
+                  </p>
                 </div>
-              ))}
+              )}
             </div>
             <div className="grid grid-cols-1 gap-4 lg:col-span-3 lg:col-start-2 xl:col-span-4 xl:col-start-2 xl:grid-cols-4">
-              <Pagination className="col-span-full flex flex-1 flex-row items-center justify-center gap-x-3">
-                <PaginationContent>
-                  <PaginationItem
-                    className="group/back-button rounded-full border border-neutral-100 hover:bg-primary hover:text-white aria-disabled:cursor-not-allowed aria-disabled:border-neutral-50 aria-disabled:bg-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none aria-disabled:hover:bg-none"
-                    aria-disabled={isPreviousButtonDisabled}
-                  >
-                    <PaginationPrevious
-                      href={previousHref}
-                      className="flex size-9 flex-1 flex-row items-center justify-center rounded-full px-0 text-gray-600 aria-disabled:text-gray-300 group-hover/back-button:bg-primary group-hover/back-button:aria-disabled:bg-white group-hover/back-button:font-semibold group-hover/back-button:text-white group-hover/back-button:aria-disabled:text-gray-300 aria-disabled:cursor-not-allowed aria-disabled:opacity-50 aria-disabled:hover:bg-white aria-disabled:pointer-events-none"
-                      disabled={isPreviousButtonDisabled}
+              {hasProducts ? (
+                <Pagination className="col-span-full flex flex-1 flex-row items-center justify-center gap-x-3">
+                  <PaginationContent>
+                    <PaginationItem
+                      className="group/back-button rounded-full border border-neutral-100 hover:bg-primary hover:text-white aria-disabled:cursor-not-allowed aria-disabled:border-neutral-50 aria-disabled:bg-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none aria-disabled:hover:bg-none"
                       aria-disabled={isPreviousButtonDisabled}
-                    />
-                  </PaginationItem>
-                  {Array.from({
-                    length:
-                      totalPages > maxPagesToShow ? maxPagesToShow : totalPages,
-                  }).map((_value, index) => (
-                    <React.Fragment key={index}>
-                      <PaginationItem
-                        key={index}
-                        className="group/page-item rounded-full hover:bg-primary hover:text-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
-                      >
-                        <PaginationLink
-                          href={`/products?page=${index + 1}&perPage=${perPage || defaultProductsShowPerPage}`}
-                          className="flex size-9 flex-1 flex-row items-center justify-center rounded-full bg-white p-0 text-body-medium font-normal text-gray-600 group-hover/page-item:bg-primary group-hover/page-item:font-semibold group-hover/page-item:text-white"
+                    >
+                      <PaginationPrevious
+                        href={previousHref}
+                        className="flex size-9 flex-1 flex-row items-center justify-center rounded-full px-0 text-gray-600 aria-disabled:text-gray-300 group-hover/back-button:bg-primary group-hover/back-button:aria-disabled:bg-white group-hover/back-button:font-semibold group-hover/back-button:text-white group-hover/back-button:aria-disabled:text-gray-300 aria-disabled:cursor-not-allowed aria-disabled:opacity-50 aria-disabled:hover:bg-white aria-disabled:pointer-events-none"
+                        disabled={isPreviousButtonDisabled}
+                        aria-disabled={isPreviousButtonDisabled}
+                      />
+                    </PaginationItem>
+                    {Array.from({
+                      length:
+                        totalPages > maxPagesToShow
+                          ? maxPagesToShow
+                          : totalPages,
+                    }).map((_value, index) => (
+                      <React.Fragment key={index}>
+                        <PaginationItem
+                          key={index}
+                          className="group/page-item rounded-full hover:bg-primary hover:text-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
                         >
-                          {index + 1}
-                        </PaginationLink>
-                      </PaginationItem>
-                      {index === maxPagesToShow - 1 ? (
-                        <React.Fragment>
-                          <PaginationItem>
-                            <PaginationEllipsis className="flex flex-1 flex-row items-center justify-center" />
-                          </PaginationItem>
-                          <PaginationItem
-                            key={index}
-                            className="group/page-item rounded-full hover:bg-primary hover:text-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
+                          <PaginationLink
+                            href={`/products?page=${index + 1}&perPage=${perPage || defaultProductsShowPerPage}`}
+                            className="flex size-9 flex-1 flex-row items-center justify-center rounded-full bg-white p-0 text-body-medium font-normal text-gray-600 group-hover/page-item:bg-primary group-hover/page-item:font-semibold group-hover/page-item:text-white"
                           >
-                            <PaginationLink
-                              href={`/products?page=${totalPages}&perPage=${perPage || defaultProductsShowPerPage}`}
-                              className="flex size-9 flex-1 flex-row items-center justify-center rounded-full bg-white p-0 text-body-medium font-normal text-gray-600 group-hover/page-item:bg-primary group-hover/page-item:font-semibold group-hover/page-item:text-white"
+                            {index + 1}
+                          </PaginationLink>
+                        </PaginationItem>
+                        {index === maxPagesToShow - 1 ? (
+                          <React.Fragment>
+                            <PaginationItem>
+                              <PaginationEllipsis className="flex flex-1 flex-row items-center justify-center" />
+                            </PaginationItem>
+                            <PaginationItem
+                              key={index}
+                              className="group/page-item rounded-full hover:bg-primary hover:text-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
                             >
-                              {totalPages}
-                            </PaginationLink>
-                          </PaginationItem>
-                        </React.Fragment>
-                      ) : null}
-                    </React.Fragment>
-                  ))}
-                  <PaginationItem
-                    className="group/next-button rounded-full border border-neutral-100 hover:bg-primary hover:text-white aria-disabled:cursor-not-allowed aria-disabled:border-neutral-50 aria-disabled:bg-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none aria-disabled:hover:bg-none"
-                    aria-disabled={isNextButtonDisabled}
-                  >
-                    <PaginationNext
-                      href={nextHref}
-                      className="flex size-9 flex-1 flex-row items-center justify-center rounded-full px-0 text-gray-600 aria-disabled:text-gray-300 group-hover/next-button:bg-primary group-hover/next-button:aria-disabled:bg-white group-hover/next-button:font-semibold group-hover/next-button:text-white group-hover/next-button:aria-disabled:text-gray-300 aria-disabled:cursor-not-allowed aria-disabled:opacity-50 aria-disabled:hover:bg-white aria-disabled:pointer-events-none"
-                      disabled={isNextButtonDisabled}
+                              <PaginationLink
+                                href={`/products?page=${totalPages}&perPage=${perPage || defaultProductsShowPerPage}`}
+                                className="flex size-9 flex-1 flex-row items-center justify-center rounded-full bg-white p-0 text-body-medium font-normal text-gray-600 group-hover/page-item:bg-primary group-hover/page-item:font-semibold group-hover/page-item:text-white"
+                              >
+                                {totalPages}
+                              </PaginationLink>
+                            </PaginationItem>
+                          </React.Fragment>
+                        ) : null}
+                      </React.Fragment>
+                    ))}
+                    <PaginationItem
+                      className="group/next-button rounded-full border border-neutral-100 hover:bg-primary hover:text-white aria-disabled:cursor-not-allowed aria-disabled:border-neutral-50 aria-disabled:bg-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none aria-disabled:hover:bg-none"
                       aria-disabled={isNextButtonDisabled}
-                    />
-                  </PaginationItem>
-                </PaginationContent>
-              </Pagination>
+                    >
+                      <PaginationNext
+                        href={nextHref}
+                        className="flex size-9 flex-1 flex-row items-center justify-center rounded-full px-0 text-gray-600 aria-disabled:text-gray-300 group-hover/next-button:bg-primary group-hover/next-button:aria-disabled:bg-white group-hover/next-button:font-semibold group-hover/next-button:text-white group-hover/next-button:aria-disabled:text-gray-300 aria-disabled:cursor-not-allowed aria-disabled:opacity-50 aria-disabled:hover:bg-white aria-disabled:pointer-events-none"
+                        disabled={isNextButtonDisabled}
+                        aria-disabled={isNextButtonDisabled}
+                      />
+                    </PaginationItem>
+                  </PaginationContent>
+                </Pagination>
+              ) : null}
             </div>
           </div>
         </div>

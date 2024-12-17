@@ -111,7 +111,7 @@ export default async function Products({
   const pricingSliderProps = {
     thumbClassName:
       "outline-none ring-0 focus-visible:ring-0 focus-visible:ring-offset-0",
-    defaultValue: [parseInt(maxPrice)],
+    defaultValue: [parseInt(maxPrice ?? maxProductsPrice)],
     max:
       typeof maxProductsPrice === "number"
         ? maxProductsPrice

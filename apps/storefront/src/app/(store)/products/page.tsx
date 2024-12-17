@@ -52,6 +52,7 @@ import { SelectTrigger, SelectValue } from "@/components/ui/common/select";
 import { CategoryFilterItemWrapper } from "@/components/ui/category/category-filter-item-wrapper";
 import emptyListImage from "@/public/images/empty-products-list.png";
 import Image from "next/image";
+import { RatingFilterItemWrapper } from "@/components/ui/product/rating-filter-item-wrapper";
 
 // TODO: Refactor to simplify this page when getting data. Also, Promise.all for all async calls.
 export default async function Products({
@@ -66,7 +67,7 @@ export default async function Products({
     sortByDirection,
     categories: categoriesSearchParam,
     maxPrice,
-    maxRating,
+    minRating,
     tags,
   } = await searchParams;
   if (!page || !perPage || !sortBy || !sortByDirection) {
@@ -92,6 +93,7 @@ export default async function Products({
           available_quantity: { gt: 0 }
           ${!!maxPrice ? `price: { lte: ${parseInt(maxPrice)} }` : ""}
           ${!!categoriesSearchParam ? `categories: { contains: [${categoriesSearchParam?.split(",")?.map((value: string) => `"${value}"`)}] }` : ""}
+          ${!!minRating ? `rating: { gte: ${parseInt(minRating)} }` : ""}
         }
         orderBy: { ${sortBy}: ${sortByDirection === "asc" ? "AscNullsLast" : "DescNullsLast"} }`
   );
@@ -184,30 +186,26 @@ export default async function Products({
       children: (
         <div className="flex flex-1 flex-col justify-center gap-y-1.5">
           {Array.from({ length: maxProductRating })
-            .map((_value, index) => (
-              // TODO: Hide some on selection.
-              <div
-                key={index}
-                className="group/rating flex flex-1 flex-row items-center gap-x-2"
-              >
-                <Checkbox className="size-5 rounded-[3px] border border-gray-100 bg-white text-gray-900 outline-none data-[state=checked]:border-none data-[state=checked]:bg-primary data-[state=checked]:text-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none" />
-                <Rating
-                  className="flex flex-row justify-end gap-x-0.5"
-                  rating={index + 1}
-                  emptyIcon={<StarIcon className="size-3 text-warning" />}
-                  filledIcon={
-                    <FilledStarIcon className="size-3 text-warning" />
+            .map((_value, index) => {
+              const parsedMinRating = parseInt(minRating);
+              const hasRatingSearchParam =
+                typeof minRating === "string" && !isNaN(parsedMinRating);
+              const isChecked =
+                hasRatingSearchParam && parsedMinRating === index + 1;
+
+              return (
+                <RatingFilterItemWrapper
+                  key={index}
+                  index={index}
+                  checked={isChecked}
+                  wrapperClassName={
+                    hasRatingSearchParam && parsedMinRating > index + 1
+                      ? "hidden"
+                      : ""
                   }
                 />
-                <span className="text-body-small font-normal text-gray-900">
-                  {new Intl.NumberFormat("en-US", {
-                    minimumFractionDigits: 1,
-                    maximumFractionDigits: 1,
-                  }).format(index + 1)}
-                  <span className="group-first/rating:hidden"> and up</span>
-                </span>
-              </div>
-            ))
+              );
+            })
             .reverse()}
         </div>
       ),

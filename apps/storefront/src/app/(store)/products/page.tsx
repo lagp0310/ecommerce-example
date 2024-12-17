@@ -89,7 +89,7 @@ export default async function Products({
         filter: {
           store: {eq: "${env.NEXT_PUBLIC_STORE_ID}"} 
           available_quantity: { gt: 0 }
-          price: { lte: ${parseInt(maxPrice)} }
+          ${!!maxPrice ? `price: { lte: ${parseInt(maxPrice)} }` : ""}
           ${!!categoriesSearchParam ? `categories: { contains: [${categoriesSearchParam?.split(",")?.map((value: string) => `"${value}"`)}] }` : ""}
         }
         orderBy: { ${sortBy}: ${sortByDirection === "asc" ? "AscNullsLast" : "DescNullsLast"} }`

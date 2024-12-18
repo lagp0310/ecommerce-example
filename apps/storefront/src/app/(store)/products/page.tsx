@@ -83,11 +83,14 @@ export default async function Products({
   const productsQuery = allProducts(
     `first: ${productsToShow}, after: $cursor, 
         filter: {
-          store: {eq: "${env.NEXT_PUBLIC_STORE_ID}"} 
-          available_quantity: { gt: 0 }
-          ${!!maxPrice ? `price: { lte: ${parseInt(maxPrice)} }` : ""}
-          ${!!categoriesSearchParam ? `categories: { contains: [${categoriesSearchParam?.split(",")?.map((value: string) => `"${value}"`)}] }` : ""}
-          ${!!minRating ? `rating: { gte: ${parseInt(minRating)} }` : ""}
+          store: {eq: "${env.NEXT_PUBLIC_STORE_ID}"},
+          available_quantity: { gt: 0 },
+          ${!!maxPrice ? `price: { lte: ${parseInt(maxPrice)} },` : ""}
+          ${!!minRating ? `rating: { gte: ${parseInt(minRating)} },` : ""}
+          or: [
+            ${!!categoriesSearchParam ? `${categoriesSearchParam?.split(",")?.map((value: string) => `{ categories: { contains: ["${value}"] } }`)},` : ""}
+            ${!!tags ? `${tags?.split(",")?.map((value: string) => `{ tags: { contains: ["${value}"] } }`)},` : ""}
+          ]
         }
         orderBy: { ${sortBy}: ${sortByDirection === "asc" ? "AscNullsLast" : "DescNullsLast"} }`
   );

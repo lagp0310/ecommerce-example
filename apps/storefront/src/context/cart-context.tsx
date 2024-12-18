@@ -213,18 +213,6 @@ export function CartContextProvider({ children, currentCart = null }: Props) {
         return handleDeleteLineItem(lineItemId);
       }
 
-      console.log({
-        filter: { id: { eq: lineItemId } },
-        lineItems: {
-          cart: cart?.id,
-          quantity,
-          price:
-            typeof product?.discountedPrice === "number"
-              ? product.discountedPrice
-              : product.price,
-          product: product.id,
-        },
-      });
       try {
         const { data: lineItemsData } = await mutateUpdateLineItems({
           variables: {

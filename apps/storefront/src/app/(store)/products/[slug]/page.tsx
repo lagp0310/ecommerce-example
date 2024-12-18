@@ -71,6 +71,7 @@ export default async function Product({
     description,
   } = product;
 
+  console.log(productId);
   const relatedProductsToShow = 10;
   const relatedProductsQuery = allProducts(
     `
@@ -79,6 +80,7 @@ export default async function Product({
       filter: {
         store: {eq: "${env.NEXT_PUBLIC_STORE_ID}"},
         available_quantity: { gt: 0 },
+        id: { neq: "${productId}" }
       }
       orderBy: { ${defaultSortBy}: ${defaultSortByDirection === "asc" ? "AscNullsLast" : "DescNullsLast"} }
     `

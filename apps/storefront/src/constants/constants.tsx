@@ -164,7 +164,7 @@ export const defaultSortBy = "render_order";
 export const defaultSortByDirection: SortByDirection = "asc";
 
 export const defaultCounterStep = 1;
-export const defaultCounterInitialValue = 0;
+export const defaultCounterInitialValue = 1;
 export const defaultMaxCounterValue = 99;
 
 // FIXME: This should be refactored where used. We should get the available currencies from

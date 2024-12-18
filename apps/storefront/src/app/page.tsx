@@ -652,7 +652,7 @@ export default async function Home() {
                     mobileMediaQuery="(max-width: 768px)"
                   >
                     <CategoryCard
-                      url={`/products?categoryIds=${id}`}
+                      url={`/products?page=1&perPage=${defaultProductsShowPerPage}&sortBy=${defaultSortBy}&sortByDirection=${defaultSortByDirection}&categories=${id}`}
                       className="flex flex-1 flex-col items-center justify-center gap-y-1.5 rounded-[5px] border border-gray-100 bg-white pb-6 pt-4 hover:border-soft-primary/45 hover:shadow-[0px_0px_12px_0px_rgba(132,209,135,0.32)] hover:shadow-soft-primary/60 motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none md:gap-y-4"
                     >
                       <Image

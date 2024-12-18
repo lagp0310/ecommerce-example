@@ -1,8 +1,7 @@
 -- Get Available Tags for Products given a Store.
 CREATE
 OR REPLACE FUNCTION get_all_product_tags (
-  IN store_id UUID,
-  OUT result_max_price DOUBLE PRECISION
+  IN store_id UUID
 ) RETURNS TABLE (
   id UUID,
   tag TEXT,

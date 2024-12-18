@@ -8,6 +8,11 @@ import {
 } from "@/components/ui/common/sidebar";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import {
+  defaultProductsShowPerPage,
+  defaultSortBy,
+  defaultSortByDirection,
+} from "@/constants/constants";
 
 export function SidebarLinksWrapper() {
   const pathname = usePathname();
@@ -19,7 +24,7 @@ export function SidebarLinksWrapper() {
     },
     {
       title: "Products",
-      url: "/products",
+      url: `/products?page=1&perPage=${defaultProductsShowPerPage}&sortBy=${defaultSortBy}&sortByDirection=${defaultSortByDirection}`,
     },
     {
       title: "About Us",

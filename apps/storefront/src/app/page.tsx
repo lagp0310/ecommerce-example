@@ -21,8 +21,11 @@ import { StoreHighlights } from "@/components/ui/store/store-highlights";
 import { SummarizedProductCard } from "@/components/ui/product/summarized-product-card";
 import {
   defaultCarouselInterval,
+  defaultProductsShowPerPage,
   defaultSlideHeight,
   defaultSlideWidth,
+  defaultSortBy,
+  defaultSortByDirection,
   getStoreHighlightsIcon,
 } from "@/constants/constants";
 import discountBanner from "@/public/images/discount-banner.png";
@@ -118,7 +121,7 @@ export default async function Home() {
           </span>
         </div>
         <ClientLink
-          href="/products"
+          href={`/products?page=1&perPage=${defaultProductsShowPerPage}&sortBy=${defaultSortBy}&sortByDirection=${defaultSortByDirection}`}
           className="group flex max-w-fit flex-row items-center gap-x-2 rounded-full bg-white px-5 py-3 text-body-small font-semibold leading-[120%] text-primary hover:bg-primary hover:text-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none md:text-body-medium"
         >
           Shop now
@@ -147,7 +150,7 @@ export default async function Home() {
           Only Fruits and Vegetables
         </span>
         <ClientLink
-          href="/products"
+          href={`/products?page=1&perPage=${defaultProductsShowPerPage}&sortBy=${defaultSortBy}&sortByDirection=${defaultSortByDirection}`}
           className="group flex max-w-fit flex-row items-center gap-x-2 rounded-full bg-primary px-5 py-3 text-body-small font-semibold leading-[120%] text-white hover:bg-white hover:text-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none md:text-body-medium"
         >
           Shop now
@@ -173,7 +176,7 @@ export default async function Home() {
           Special Products of the Month
         </h5>
         <ClientLink
-          href="/products"
+          href={`/products?page=1&perPage=${defaultProductsShowPerPage}&sortBy=${defaultSortBy}&sortByDirection=${defaultSortByDirection}`}
           className="group flex max-w-fit flex-row items-center gap-x-2 rounded-full px-5 py-3 text-body-small font-semibold leading-[120%] text-primary hover:bg-white hover:text-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none md:text-body-medium"
         >
           Shop now
@@ -407,7 +410,7 @@ export default async function Home() {
         </div>
         <div className="flex h-full flex-1 flex-row items-end">
           <ClientLink
-            href="/products"
+            href={`/products?page=1&perPage=${defaultProductsShowPerPage}&sortBy=${defaultSortBy}&sortByDirection=${defaultSortByDirection}`}
             className="group flex max-w-fit flex-row items-center gap-x-2 rounded-full bg-white px-5 py-3 text-body-small font-semibold leading-[120%] text-primary hover:bg-primary hover:text-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none md:text-body-medium"
           >
             Shop now{" "}
@@ -440,7 +443,7 @@ export default async function Home() {
         </span>
         <div className="flex h-full flex-1 flex-row items-end">
           <ClientLink
-            href="/products"
+            href={`/products?page=1&perPage=${defaultProductsShowPerPage}&sortBy=${defaultSortBy}&sortByDirection=${defaultSortByDirection}`}
             className="group flex max-w-fit flex-row items-center gap-x-2 rounded-full bg-white px-5 py-3 text-body-small font-semibold leading-[120%] text-primary hover:bg-primary hover:text-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none md:text-body-medium"
           >
             Shop now{" "}
@@ -476,7 +479,7 @@ export default async function Home() {
         </span>
         <div className="flex h-full flex-1 flex-row items-end">
           <ClientLink
-            href="/products"
+            href={`/products?page=1&perPage=${defaultProductsShowPerPage}&sortBy=${defaultSortBy}&sortByDirection=${defaultSortByDirection}`}
             className="group flex max-w-fit flex-row items-center gap-x-2 rounded-full bg-white px-5 py-3 text-body-small font-semibold leading-[120%] text-primary hover:bg-primary hover:text-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none md:text-body-medium"
           >
             Shop now{" "}
@@ -629,7 +632,7 @@ export default async function Home() {
               </h2>
               <div className="flex flex-1 flex-row justify-end">
                 <Link
-                  href="/products"
+                  href={`/products?page=1&perPage=${defaultProductsShowPerPage}&sortBy=${defaultSortBy}&sortByDirection=${defaultSortByDirection}`}
                   className="flex flex-row items-center justify-end gap-x-2 text-body-medium font-medium text-primary"
                 >
                   View All
@@ -724,7 +727,7 @@ export default async function Home() {
                   </h2>
                   <div className="flex flex-1 flex-row justify-end">
                     <Link
-                      href="/products"
+                      href={`/products?page=1&perPage=${defaultProductsShowPerPage}&sortBy=${defaultSortBy}&sortByDirection=${defaultSortByDirection}`}
                       className="flex flex-row items-center justify-end gap-x-2 text-body-medium font-medium text-primary"
                     >
                       View All
@@ -802,7 +805,7 @@ export default async function Home() {
                   Free Shipping and 30 days money-back guarantee.
                 </p>
                 <Link
-                  href="/products"
+                  href={`/products?page=1&perPage=${defaultProductsShowPerPage}&sortBy=${defaultSortBy}&sortByDirection=${defaultSortByDirection}`}
                   className="group flex max-w-fit flex-row items-center gap-x-2 rounded-full bg-primary px-5 py-3 text-body-small font-semibold leading-[120%] text-white hover:bg-white hover:text-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none md:text-body-medium"
                 >
                   Shop now{" "}

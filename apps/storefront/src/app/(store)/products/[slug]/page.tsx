@@ -13,8 +13,11 @@ import { ProductTitle } from "@/components/ui/product/product-title";
 import { Rating } from "@/components/ui/product/rating";
 import {
   defaultCarouselInterval,
+  defaultProductsShowPerPage,
   defaultSlideHeight,
   defaultSlideWidth,
+  defaultSortBy,
+  defaultSortByDirection,
   product,
 } from "@/constants/constants";
 import { cn } from "@/lib/utils";
@@ -165,7 +168,7 @@ export default async function Product({
             </h2>
             <div className="flex flex-1 flex-row justify-end">
               <Link
-                href="/products"
+                href={`/products?page=1&perPage=${defaultProductsShowPerPage}&sortBy=${defaultSortBy}&sortByDirection=${defaultSortByDirection}`}
                 className="flex flex-row items-center justify-end gap-x-2 text-body-medium font-medium text-primary"
               >
                 View All

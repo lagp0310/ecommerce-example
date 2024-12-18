@@ -35,7 +35,7 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination/pagination";
-import { FiltersWrapper } from "@/components/ui/product/filters-wrapper";
+import { FiltersDialogWrapper } from "@/components/ui/product/filters-dialog-wrapper";
 import { DialogHeader, DialogTitle } from "@/components/ui/common/dialog";
 import {
   cn,
@@ -250,7 +250,7 @@ export default async function Products({
         <div className="flex flex-col lg:flex-row max-w-7xl w-full gap-8">
           <div className="flex flex-1 flex-row lg:basis-1/4 w-full lg:max-w-fit lg:min-w-[260px]">
             <div className="sticky top-8 w-full">
-              <FiltersWrapper
+              <FiltersDialogWrapper
                 wrapperClassname="flex flex-1 lg:hidden relative"
                 contentClassname="rounded-[10px] max-w-[80vw] sm:max-w-[70vw] md:max-w-[60vw] overflow-y-auto max-h-[90vh]"
               >
@@ -273,7 +273,7 @@ export default async function Products({
                     </Accordion>
                   )
                 )}
-              </FiltersWrapper>
+              </FiltersDialogWrapper>
               {filters.map(({ children, name, initiallyCollapsed }, index) => (
                 <Accordion
                   key={index}

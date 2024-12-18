@@ -13,7 +13,7 @@ type Props = DialogProps & {
   contentClassname?: string;
 };
 
-export function FiltersWrapper({
+export function FiltersDialogWrapper({
   dialogTrigger = (
     <DialogTrigger className="group/filter-button flex w-full flex-row items-center justify-center gap-x-2 rounded-full border border-primary bg-white px-5 py-3 text-body-small font-semibold leading-[120%] text-primary outline-none hover:bg-primary hover:text-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none md:text-body-medium">
       Filters{" "}

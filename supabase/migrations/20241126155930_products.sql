@@ -1,3 +1,4 @@
+-- TODO: We've a product_tags table with all the tags data. We must have a single source of truth.
 create table
   public.products (
     id uuid not null default gen_random_uuid (),

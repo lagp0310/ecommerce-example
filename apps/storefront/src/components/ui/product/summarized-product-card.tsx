@@ -20,7 +20,7 @@ type Props = {
   product: Product;
   shouldShowProductTags?: boolean;
   shouldUseNextLink?: boolean;
-  isFirstOnList: boolean;
+  productCardClassName?: string;
 };
 
 export function SummarizedProductCard({
@@ -38,14 +38,11 @@ export function SummarizedProductCard({
   },
   shouldShowProductTags = true,
   shouldUseNextLink = true,
-  isFirstOnList,
+  productCardClassName,
 }: Props) {
   const allTags = generalTags?.concat(discountTags ?? []);
   const shouldShowTags =
-    Array.isArray(allTags) &&
-    allTags.length > 0 &&
-    shouldShowProductTags &&
-    isFirstOnList;
+    Array.isArray(allTags) && allTags.length > 0 && shouldShowProductTags;
   const productActions = (
     <div className="flex flex-row gap-x-2">
       <Button className="group flex size-8 flex-row items-center justify-center rounded-full bg-gray-50 hover:bg-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none">
@@ -73,11 +70,10 @@ export function SummarizedProductCard({
         })}
         priceClasses={cn({
           "text-body-xxl font-normal text-gray-400 leading-[150%] line-through truncate line-clamp-1":
-            discountedPrice && isFirstOnList,
+            discountedPrice,
           "text-body-medium font-medium text-gray-900 truncate line-clamp-1":
             !discountedPrice,
         })}
-        isFirstOnList={isFirstOnList}
       />
       {typeof rating === "number" ? (
         <div className="flex flex-row items-center gap-x-1">
@@ -133,9 +129,7 @@ export function SummarizedProductCard({
     <ProductCard
       className={cn(
         "h-full relative bg-white flex flex-1 flex-col justify-center border border-gray-100 gap-y-[6px] p-3 rounded-[5px] hover:border-soft-primary/45 hover:shadow-[0px_0px_12px_0px_rgba(132,209,135,0.32)] hover:shadow-soft-primary/60 col-span-1 motion-safe:transition motion-reduce:transition-none motion-safe:ease-linear motion-safe:duration-100",
-        {
-          "col-span-2 row-span-2": isFirstOnList,
-        }
+        productCardClassName
       )}
     >
       {shouldUseNextLink ? (

@@ -20,7 +20,6 @@ type Props = React.HTMLProps<HTMLDivElement> & {
   product: Product;
   shouldShowProductTags?: boolean;
   shouldUseNextLink?: boolean;
-  isFirstOnList: boolean;
 };
 
 export function BasicProductCard({
@@ -40,14 +39,10 @@ export function BasicProductCard({
   },
   shouldShowProductTags = true,
   shouldUseNextLink = true,
-  isFirstOnList,
 }: Props) {
   const allTags = generalTags?.concat(discountTags ?? []);
   const shouldShowTags =
-    Array.isArray(allTags) &&
-    allTags.length > 0 &&
-    shouldShowProductTags &&
-    isFirstOnList;
+    Array.isArray(allTags) && allTags.length > 0 && shouldShowProductTags;
   const productNode = (
     <ProductCard
       className={cn(
@@ -83,7 +78,6 @@ export function BasicProductCard({
             price={price}
             discountedPrice={discountedPrice}
             currencySymbol={currencySymbol}
-            isFirstOnList={isFirstOnList}
           />
           {typeof rating === "number" ? (
             <div className="flex flex-1 flex-row items-center gap-x-1">

@@ -16,7 +16,6 @@ type Props = React.HTMLProps<HTMLDivElement> & {
   actionsProps?: CartProductActionsProps;
   product: Product;
   toggleSidebar: () => void;
-  isFirstOnList?: boolean;
 };
 
 export function BasicCartProduct({
@@ -30,7 +29,6 @@ export function BasicCartProduct({
     imageUrl,
   },
   toggleSidebar,
-  isFirstOnList = false,
   ...props
 }: Props) {
   return (
@@ -61,11 +59,10 @@ export function BasicCartProduct({
               })}
               priceClasses={cn({
                 "font-normal text-gray-400 line-through truncate line-clamp-1":
-                  discountedPrice && isFirstOnList,
+                  discountedPrice,
                 "font-medium text-gray-900 truncate line-clamp-1":
                   !discountedPrice,
               })}
-              isFirstOnList={isFirstOnList}
             />
           </div>
         </CartProduct>

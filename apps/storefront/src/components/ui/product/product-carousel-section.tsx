@@ -72,11 +72,7 @@ export function ProductCarouselSection({
                 innerClassName="px-1 mx-auto"
                 mobileMediaQuery="(max-width: 768px)"
               >
-                <BasicProductCard
-                  product={product}
-                  isFirstOnList={index === 0}
-                  cardClassname="mt-2"
-                />
+                <BasicProductCard product={product} cardClassname="mt-2" />
               </SlideRenderer>
             ))}
           </CarouselRenderer>

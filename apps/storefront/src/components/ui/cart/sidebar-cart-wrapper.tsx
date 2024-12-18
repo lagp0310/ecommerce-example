@@ -67,7 +67,6 @@ export function SidebarCartWrapper({
                   key={index}
                   product={product}
                   toggleSidebar={toggleSidebar}
-                  isFirstOnList={index === 0}
                 />
                 <div className="w-full border-t border-gray-100/50 group-last/cart-product:hidden"></div>
               </div>

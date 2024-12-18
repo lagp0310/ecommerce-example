@@ -141,7 +141,6 @@ export default async function Product({
                         !!discountedPrice,
                     }
                   )}
-                  isFirstOnList
                 />
                 <div className="flex flex-1 flex-row flex-wrap items-center gap-2">
                   {discountTags?.map((tag, index) => (
@@ -189,7 +188,6 @@ export default async function Product({
                   >
                     <BasicProductCard
                       product={product}
-                      isFirstOnList={index === 0}
                       cardClassname="max-w-fit mt-2"
                     />
                   </SlideRenderer>

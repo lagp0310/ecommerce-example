@@ -748,13 +748,12 @@ export default async function Home() {
                             <div className="col-span-1 row-span-1 hidden md:col-span-2 md:row-span-2 md:block">
                               <SummarizedProductCard
                                 product={product}
-                                isFirstOnList={index === 0}
+                                productCardClassName="col-span-2 row-span-2"
                               />
                             </div>
                             <div className="block md:hidden">
                               <BasicProductCard
                                 product={product}
-                                isFirstOnList={index === 0}
                                 cardClassname="mt-2 md:mt-0"
                               />
                             </div>
@@ -762,7 +761,6 @@ export default async function Home() {
                         ) : (
                           <BasicProductCard
                             product={product}
-                            isFirstOnList={index === 0}
                             cardClassname="mt-2 md:mt-0"
                           />
                         )}

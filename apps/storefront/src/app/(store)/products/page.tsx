@@ -326,11 +326,7 @@ export default async function Products({
               {hasProducts ? (
                 products?.map((product, index) => (
                   <div key={index} className="col-span-1 row-span-1">
-                    <BasicProductCard
-                      key={index}
-                      product={product}
-                      isFirstOnList={index === 0}
-                    />
+                    <BasicProductCard key={index} product={product} />
                   </div>
                 ))
               ) : (

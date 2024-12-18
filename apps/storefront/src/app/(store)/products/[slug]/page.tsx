@@ -215,6 +215,7 @@ export default async function Product({
           </div>
         </div>
       </div>
+      {/* TODO: We could use the same section component from homepage instead. */}
       <Section className="flex w-full flex-1 flex-col items-center gap-y-8 px-6 xl:px-0">
         <SectionTitle className="w-full max-w-7xl">
           <div className="flex flex-1 flex-row">

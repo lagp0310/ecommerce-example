@@ -205,10 +205,10 @@ export default async function Product({
             <div className="flex flex-row items-center gap-3 pb-5 h-[50px]">
               <AddToCartWrapper
                 isProductInCart={isProductInCart}
-                wrapperClassName={cn("flex flex-row w-fit max-h-[50px]", {
+                wrapperClassName={cn("flex flex-row w-fit h-[45px]", {
                   "w-full": !isProductInCart,
                 })}
-                className="h-[50px] group flex flex-1 flex-row items-center justify-center gap-x-2 rounded-full bg-primary text-body-small font-semibold leading-6 text-white hover:border hover:border-primary hover:bg-white hover:text-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
+                className="h-[45px] group flex flex-1 flex-row items-center justify-center gap-x-2 rounded-full bg-primary text-body-small font-semibold leading-6 text-white hover:border hover:border-primary hover:bg-white hover:text-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
               >
                 Add to Cart
                 <ShoppingBagIcon className="size-5 group-hover:text-primary" />

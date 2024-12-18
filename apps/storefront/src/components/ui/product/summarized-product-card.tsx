@@ -44,7 +44,7 @@ export function SummarizedProductCard({
   const shouldShowTags =
     Array.isArray(allTags) && allTags.length > 0 && shouldShowProductTags;
   const productActions = (
-    <div className="flex flex-row gap-x-2">
+    <div className="flex flex-row gap-x-2 h-[45px]">
       {/* <Button className="group flex size-8 flex-row items-center justify-center rounded-full bg-gray-50 hover:bg-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none">
         <HeartIcon className="size-4 text-gray-900 group-hover:text-white" />
       </Button> */}

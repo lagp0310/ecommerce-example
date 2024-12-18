@@ -47,10 +47,6 @@ export function RatingFilterItemWrapper({
         value={(index + 1).toString()}
         className="h-5 w-5 ring-primary outline-none focus-visible:ring-8 focus-visible:ring-offset-0 border border-gray-200 aria-checked:border-primary text-primary"
       />
-      {/* <Checkbox
-        checked={checked}
-        className="size-5 rounded-[3px] border border-gray-100 bg-white text-gray-900 outline-none data-[state=checked]:border-none data-[state=checked]:bg-primary data-[state=checked]:text-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
-      /> */}
       <Rating
         className="flex flex-row justify-end gap-x-0.5"
         rating={index + 1}

@@ -1,5 +1,5 @@
 import { gql } from "@apollo/client";
-import { categoryFragment } from "./fragments";
+import { categoryFragment } from "../../fragments/category/fragments";
 
 export const allCategories = (params: string) => gql`
   query AllCategories($cursor: Cursor) {

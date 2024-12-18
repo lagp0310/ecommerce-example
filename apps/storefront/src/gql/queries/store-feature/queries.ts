@@ -1,5 +1,5 @@
 import { gql } from "@apollo/client";
-import { storeFeatureFragment } from "./fragments";
+import { storeFeatureFragment } from "@/gql/fragments/store-feature/fragments";
 
 export const allStoreFeatures = (params: string) => gql`
   query AllStoreFeatures($cursor: Cursor) {

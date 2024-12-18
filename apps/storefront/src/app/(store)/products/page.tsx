@@ -10,21 +10,14 @@ import {
 } from "@/constants/constants";
 import { BasicProductCard } from "@/components/ui/product/basic-product-card";
 import type { ProductFilter } from "@/types/types";
-import { StarIcon } from "@heroicons/react/24/outline";
-import { StarIcon as FilledStarIcon } from "@heroicons/react/24/solid";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/common/accordion";
-import { Rating } from "@/components/ui/product/rating";
-import { Checkbox } from "@/components/ui/common/checkbox";
 import { PricingSlider } from "@/components/ui/product/pricing-slider";
-import {
-  ToggleGroup,
-  ToggleGroupItem,
-} from "@/components/ui/common/toggle-group";
+import { ToggleGroup } from "@/components/ui/common/toggle-group";
 import { DropdownSelector } from "@/components/ui/common/dropdown-selector";
 import {
   Pagination,
@@ -53,6 +46,7 @@ import { CategoryFilterItemWrapper } from "@/components/ui/category/category-fil
 import emptyListImage from "@/public/images/empty-products-list.png";
 import Image from "next/image";
 import { RatingFilterItemWrapper } from "@/components/ui/product/rating-filter-item-wrapper";
+import { TagFilterItemWrapper } from "@/components/ui/product/tag-filter-item-wrapper";
 
 // TODO: Refactor to simplify this page when getting data. Also, Promise.all for all async calls.
 export default async function Products({
@@ -214,23 +208,25 @@ export default async function Products({
     {
       children: (
         <ToggleGroup
-          type="single"
+          type="multiple"
           className="flex flex-1 flex-row flex-wrap items-center justify-start gap-2"
         >
-          {allTags.map(({ id, tag, type }) => (
-            <div
-              key={id}
-              className="flex items-center space-x-2 rounded-full bg-gray-50"
-            >
-              <ToggleGroupItem
-                value={tag}
-                id={id}
-                className="rounded-full text-body-small font-normal text-gray-900 hover:bg-primary hover:text-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
-              >
-                {tag}
-              </ToggleGroupItem>
-            </div>
-          ))}
+          {allTags.map((tagItem, index) => {
+            const tagsArray = tags?.split(",");
+            const hasTagsSearchParam =
+              Array.isArray(tagsArray) && tagsArray.length > 0;
+            const isSelected =
+              hasTagsSearchParam && tagsArray?.includes(tagItem.id);
+
+            return (
+              <TagFilterItemWrapper
+                key={index}
+                tagItem={tagItem}
+                selected={isSelected}
+                wrapperClassName={cn("order-none", { "order-1": !isSelected })}
+              />
+            );
+          })}
         </ToggleGroup>
       ),
       name: "Popular Tags",

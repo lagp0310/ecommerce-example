@@ -682,12 +682,8 @@ export default async function Home() {
         </Section>
         <ProductCarouselSection
           sectionTitle="Popular Products"
-          popularProductsCarouselProviderProps={
-            popularProductsCarouselProviderProps
-          }
-          popularProductsCarouselRendererProps={
-            popularProductsCarouselRendererProps
-          }
+          carouselProviderProps={popularProductsCarouselProviderProps}
+          carouselRendererProps={popularProductsCarouselRendererProps}
           products={popularProducts}
         />
         <Section className="mt-[60px] w-full px-6 md:mt-0 lg:flex lg:flex-1 lg:flex-col lg:items-center lg:gap-y-8 xl:px-0">
@@ -817,12 +813,8 @@ export default async function Home() {
         </div>
         <ProductCarouselSection
           sectionTitle="Featured Products"
-          popularProductsCarouselProviderProps={
-            featuredProductsCarouselProviderProps
-          }
-          popularProductsCarouselRendererProps={
-            featuredProductsCarouselRendererProps
-          }
+          carouselProviderProps={featuredProductsCarouselProviderProps}
+          carouselRendererProps={featuredProductsCarouselRendererProps}
           products={featuredProducts}
         />
         <div className="w-full bg-[#F7F7F7] px-6 py-[60px] xl:px-0">

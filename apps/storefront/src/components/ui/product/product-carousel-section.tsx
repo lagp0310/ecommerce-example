@@ -26,8 +26,8 @@ type Props = {
   sectionTitle?: string;
   sectionRedirectURL?: string;
   sectionRedirectText?: string;
-  popularProductsCarouselProviderProps: CarouselProviderCustomProps;
-  popularProductsCarouselRendererProps: CarouselRendererProps;
+  carouselProviderProps: CarouselProviderCustomProps;
+  carouselRendererProps: CarouselRendererProps;
   products: Product[];
 };
 
@@ -35,8 +35,8 @@ export function ProductCarouselSection({
   sectionTitle,
   sectionRedirectURL = `/products?page=1&perPage=${defaultProductsShowPerPage}&sortBy=${defaultSortBy}&sortByDirection=${defaultSortByDirection}`,
   sectionRedirectText = "View All",
-  popularProductsCarouselProviderProps,
-  popularProductsCarouselRendererProps,
+  carouselProviderProps,
+  carouselRendererProps,
   products,
 }: Props) {
   const isValidURL =
@@ -68,8 +68,8 @@ export function ProductCarouselSection({
         </div>
       </SectionTitle>
       <SectionContent className="w-full max-w-7xl md:grid md:grid-cols-3 md:gap-6 lg:grid-cols-5">
-        <CarouselProvider {...popularProductsCarouselProviderProps}>
-          <CarouselRenderer {...popularProductsCarouselRendererProps}>
+        <CarouselProvider {...carouselProviderProps}>
+          <CarouselRenderer {...carouselRendererProps}>
             {products.map((product, index) => (
               <SlideRenderer
                 key={index}

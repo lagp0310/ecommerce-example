@@ -77,7 +77,7 @@ export function SidebarCartWrapper({
             Your cart is currently empty.
           </span>
         )}
-        <SheetFooter className="flex flex-1 basis-1/4 flex-col items-center gap-y-2 sm:flex-col sm:justify-end md:gap-y-4">
+        {/* <SheetFooter className="flex flex-1 basis-1/4 flex-col items-center gap-y-2 sm:flex-col sm:justify-end md:gap-y-4">
           <div className="w-full border-t border-gray-100/50"></div>
           <Link
             href={`/carts/${cartId}`}
@@ -93,7 +93,7 @@ export function SidebarCartWrapper({
           >
             Checkout
           </Link>
-        </SheetFooter>
+        </SheetFooter> */}
       </SheetContent>
     </CartSheet>
   );

@@ -71,7 +71,6 @@ export default async function Product({
     description,
   } = product;
 
-  console.log(productId);
   const relatedProductsToShow = 10;
   const relatedProductsQuery = allProducts(
     `

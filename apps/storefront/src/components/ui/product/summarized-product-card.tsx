@@ -45,9 +45,9 @@ export function SummarizedProductCard({
     Array.isArray(allTags) && allTags.length > 0 && shouldShowProductTags;
   const productActions = (
     <div className="flex flex-row gap-x-2">
-      <Button className="group flex size-8 flex-row items-center justify-center rounded-full bg-gray-50 hover:bg-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none">
+      {/* <Button className="group flex size-8 flex-row items-center justify-center rounded-full bg-gray-50 hover:bg-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none">
         <HeartIcon className="size-4 text-gray-900 group-hover:text-white" />
-      </Button>
+      </Button> */}
       <Button className="group flex flex-1 flex-row items-center justify-center gap-x-2 rounded-full bg-primary text-body-small font-semibold leading-6 text-white hover:border hover:border-primary hover:bg-white hover:text-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none">
         Add to Cart
         <ShoppingBagIcon className="size-4 group-hover:text-primary" />

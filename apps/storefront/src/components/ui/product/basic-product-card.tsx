@@ -103,11 +103,11 @@ export function BasicProductCard({
     <React.Fragment>
       {shouldUseNextLink ? (
         <div className={cn("relative", cardClassname)}>
-          <div className="absolute right-1.5 top-3 z-10 flex flex-1 flex-col gap-y-2 min-[400px]:right-3">
+          {/* <div className="absolute right-1.5 top-3 z-10 flex flex-1 flex-col gap-y-2 min-[400px]:right-3">
             <Button className="group flex size-8 flex-row items-center justify-center rounded-full border border-gray-50 bg-white hover:border-none hover:bg-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none">
               <HeartIcon className="size-4 text-gray-900 group-hover:text-white" />
             </Button>
-          </div>
+          </div> */}
           <ClientLink href={`/products/${slug}`} className="col-span-1">
             {productNode}
           </ClientLink>

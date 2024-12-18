@@ -166,3 +166,9 @@ export const defaultSortByDirection: SortByDirection = "asc";
 export const defaultCounterStep = 1;
 export const defaultCounterInitialValue = 0;
 export const defaultMaxCounterValue = 99;
+
+// FIXME: This should be refactored where used. We should get the available currencies from
+// the store and select the default one from the DB.
+export const defaultCurrencyId = "5afb804d-d96a-4c59-8d01-259d256a2e22";
+
+export const localStorageCartIdItemName = "cart-id";

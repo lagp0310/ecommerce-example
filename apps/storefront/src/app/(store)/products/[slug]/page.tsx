@@ -3,7 +3,6 @@ import { CarouselRenderer } from "@/components/carousel/carousel-renderer";
 import { DefaultDotGroup } from "@/components/carousel/default-dot-group";
 import { DotsRenderer } from "@/components/carousel/dots-renderer";
 import { SlideRenderer } from "@/components/carousel/slide-renderer";
-import { Button } from "@/components/ui/common/button";
 import { Section } from "@/components/ui/common/section";
 import { SectionContent } from "@/components/ui/common/section-content";
 import { SectionTitle } from "@/components/ui/common/section-title";
@@ -31,7 +30,6 @@ import type {
 } from "@/types/types";
 import {
   ArrowRightIcon,
-  HeartIcon,
   ShoppingBagIcon,
   StarIcon,
 } from "@heroicons/react/24/outline";
@@ -58,7 +56,9 @@ export default async function Product({
     `
   );
   const productResult = await queryGraphql("productsCollection", productQuery);
+  const product = parseProductTags(productResult)?.at(0);
   const {
+    id: productId,
     name,
     price,
     discountedPrice,
@@ -69,7 +69,7 @@ export default async function Product({
     discountTags,
     totalRatings,
     description,
-  } = parseProductTags(productResult)?.at(0);
+  } = product;
 
   const relatedProductsToShow = 10;
   const relatedProductsQuery = allProducts(
@@ -125,9 +125,6 @@ export default async function Product({
         "h-64 min-[420px]:h-72 min-[500px]:h-80 min-[580px]:h-[350px] sm:h-[300px] md:h-64 min-[860px]:h-72 lg:h-80 min-[1100px]:h-[350px] xl:h-80",
     },
   };
-
-  // FIXME: Remove after cart integration.
-  const isProductInCart = false;
 
   return (
     <div className="flex flex-1 flex-col items-center">
@@ -204,10 +201,8 @@ export default async function Product({
             </div>
             <div className="flex flex-row items-center gap-3 pb-5 h-[50px]">
               <AddToCartWrapper
-                isProductInCart={isProductInCart}
-                wrapperClassName={cn("flex flex-row w-fit h-[45px]", {
-                  "w-full": !isProductInCart,
-                })}
+                wrapperClassName={"flex flex-row w-fit h-[45px]"}
+                product={product}
                 className="h-[45px] group flex flex-1 flex-row items-center justify-center gap-x-2 rounded-full bg-primary text-body-small font-semibold leading-6 text-white hover:border hover:border-primary hover:bg-white hover:text-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
               >
                 Add to Cart

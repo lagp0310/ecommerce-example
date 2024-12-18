@@ -1,4 +1,4 @@
-import { lineItemFragment } from "@/gql/fragments/line-items/fragments";
+import { lineItemFragment } from "@/gql/fragments/line-item/fragments";
 import { gql } from "@apollo/client";
 
 export const createCart = gql`

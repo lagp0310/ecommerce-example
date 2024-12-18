@@ -7,12 +7,15 @@ import {
   defaultCounterStep,
   defaultMaxCounterValue,
 } from "@/constants/constants";
+import { useCart } from "@/context/cart-context";
+import type { Product } from "@/types/types";
 
 type Props = React.HTMLProps<HTMLDivElement> & {
+  lineItemId: string;
+  product: Product;
   initialValue?: number;
   step?: number;
   maxValue?: number;
-  onCountUpdate: (count: number) => void;
   countClassName?: string;
   minusChildren: React.ReactNode;
   moreChildren: React.ReactNode;
@@ -21,10 +24,11 @@ type Props = React.HTMLProps<HTMLDivElement> & {
 };
 
 export function Counter({
+  lineItemId,
+  product,
   initialValue = defaultCounterInitialValue,
   step = defaultCounterStep,
   maxValue = defaultMaxCounterValue,
-  onCountUpdate,
   countClassName,
   minusChildren,
   moreChildren,
@@ -32,17 +36,37 @@ export function Counter({
   moreClassName,
   ...props
 }: Props) {
-  const [count, setCount] = React.useState(initialValue);
-  const handleUpdateCount = React.useCallback(
-    (count: number) => {
-      if (count < 0) {
-        throw new Error(`count cannot be less than zero, got ${count}`);
-      }
+  const { lineItems, handleUpdateQuantity } = useCart();
 
-      setCount(count);
-      onCountUpdate(count);
+  const [count, setCount] = React.useState(initialValue);
+  React.useEffect(() => {
+    if (!Array.isArray(lineItems) || lineItems.length === 0) {
+      return;
+    }
+
+    const currentQuantity = lineItems?.find(
+      ({ id }) => id === lineItemId
+    )?.quantity;
+
+    if (currentQuantity) {
+      setCount(parseInt(currentQuantity));
+    }
+  }, [lineItems]);
+
+  const handleUpdateCount = React.useCallback(
+    async (count: number) => {
+      try {
+        if (count < 0) {
+          throw new Error(`count cannot be less than zero, got ${count}`);
+        }
+
+        setCount(count);
+        await handleUpdateQuantity(lineItemId, product, count);
+      } catch (error) {
+        console.error(error);
+      }
     },
-    [onCountUpdate]
+    [handleUpdateQuantity, lineItemId, product]
   );
   const isMinusButtonDisabled = React.useMemo(() => count <= 0, [count]);
   const isMoreButtonDisabled = React.useMemo(

@@ -7,6 +7,7 @@ import { validateEnvs } from "@/lib/env";
 import { DefaultLayout } from "@/components/ui/common/default-layout";
 import NextTopLoader from "nextjs-toploader";
 import { ApolloWrapper } from "@/context/apollo-context";
+import { CartContextProvider } from "@/context/cart-context";
 
 validateEnvs();
 
@@ -35,7 +36,9 @@ export default function RootLayout({
       <body className={`${poppins.className} antialiased`}>
         <NextTopLoader />
         <ApolloWrapper>
-          <DefaultLayout>{children}</DefaultLayout>
+          <CartContextProvider>
+            <DefaultLayout>{children}</DefaultLayout>
+          </CartContextProvider>
         </ApolloWrapper>
       </body>
     </html>

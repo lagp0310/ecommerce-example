@@ -17,6 +17,7 @@ create table
     slug text null,
     render_order bigint null,
     categories uuid[] null,
+    tags uuid[] null,
     constraint products_pkey primary key (id),
     constraint products_sku_key unique (sku),
     constraint products_currency_fkey foreign key (currency) references currencies (id) on update cascade on delete set null,

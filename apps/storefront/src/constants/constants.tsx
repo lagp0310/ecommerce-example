@@ -97,6 +97,13 @@ export const product: Product = {
 
 export const productsSortByOptions: BaseSelectOption[] = [
   {
+    id: "5b0af388-bc3d-482d-ba61-fe67d5715298",
+    name: "Store Order",
+    value: "store-order",
+    sortBy: "render_order",
+    direction: "asc",
+  },
+  {
     id: "39255263-b14d-4988-8d4e-a7aacad23aea",
     name: "Most Recent",
     value: "latest",
@@ -163,5 +170,5 @@ export const defaultProductsShowPerPage = 20;
 
 export const maxPagesToShow = 5;
 
-export const defaultSortBy = "created_at";
-export const defaultSortByDirection: SortByDirection = "desc";
+export const defaultSortBy = "render_order";
+export const defaultSortByDirection: SortByDirection = "asc";

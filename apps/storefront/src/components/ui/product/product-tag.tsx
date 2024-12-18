@@ -12,6 +12,7 @@ export function ProductTag({ className, tag: { tag, type }, ...props }: Props) {
         {
           "bg-blue-500 text-white": type === "info",
           "bg-danger text-white": type === "danger",
+          "bg-primary text-white": type === "success",
         },
         className
       )}

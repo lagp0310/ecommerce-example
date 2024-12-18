@@ -48,10 +48,11 @@ export type Category = {
   numberOfItems?: number;
 };
 
+export type ProductTagType = "info" | "danger" | "success";
 export type ProductTag = {
   id: string;
   tag: string;
-  type: string;
+  type: ProductTagType;
 };
 
 export type Product = {

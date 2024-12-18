@@ -68,13 +68,6 @@ export const secondsTransform = 60;
 export const minutesTransform = 60 * 60;
 export const daysTransform = minutesTransform * 24;
 
-export const category: Category = {
-  categoryId: "a55fef0a-230d-402f-b263-9fe44d226a9f",
-  image: <Image src={freshFruitCategory} alt="Category Image" />,
-  title: "Fresh Fruit",
-  url: "/products",
-  numberOfItems: 134,
-};
 export const product: Product = {
   id: "868b9f7f-620c-490c-9c8b-b45cccb4507f",
   slug: "ecobazar-green-apple-620c",

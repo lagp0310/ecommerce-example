@@ -3,9 +3,11 @@ import { CarouselRenderer } from "@/components/carousel/carousel-renderer";
 import { DefaultDotGroup } from "@/components/carousel/default-dot-group";
 import { DotsRenderer } from "@/components/carousel/dots-renderer";
 import { SlideRenderer } from "@/components/carousel/slide-renderer";
+import { Button } from "@/components/ui/common/button";
 import { Section } from "@/components/ui/common/section";
 import { SectionContent } from "@/components/ui/common/section-content";
 import { SectionTitle } from "@/components/ui/common/section-title";
+import { AddToCartWrapper } from "@/components/ui/product/add-to-cart-wrapper";
 import { BasicProductCard } from "@/components/ui/product/basic-product-card";
 import { ProductPricing } from "@/components/ui/product/product-pricing";
 import { ProductTag } from "@/components/ui/product/product-tag";
@@ -18,14 +20,21 @@ import {
   defaultSlideWidth,
   defaultSortBy,
   defaultSortByDirection,
-  product,
 } from "@/constants/constants";
-import { cn } from "@/lib/utils";
+import { allProducts } from "@/gql/queries/product/queries";
+import { env } from "@/lib/env";
+import { queryGraphql } from "@/lib/server-query";
+import { cn, parseProductTags } from "@/lib/utils";
 import type {
   CarouselProviderCustomProps,
   CarouselRendererProps,
 } from "@/types/types";
-import { ArrowRightIcon, StarIcon } from "@heroicons/react/24/outline";
+import {
+  ArrowRightIcon,
+  HeartIcon,
+  ShoppingBagIcon,
+  StarIcon,
+} from "@heroicons/react/24/outline";
 import { StarIcon as FilledStarIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
 import Link from "next/link";
@@ -36,8 +45,19 @@ export default async function Product({
 }: {
   params: Promise<{ slug: string }>;
 }) {
-  console.log(await params);
+  const { slug } = await params;
 
+  const productQuery = allProducts(
+    `
+      after: $cursor,
+      filter: {
+        slug: { eq: "${slug}" },
+        store: {eq: "${env.NEXT_PUBLIC_STORE_ID}"},
+      }
+      orderBy: { ${defaultSortBy}: ${defaultSortByDirection === "asc" ? "AscNullsLast" : "DescNullsLast"} }
+    `
+  );
+  const productResult = await queryGraphql("productsCollection", productQuery);
   const {
     name,
     price,
@@ -49,12 +69,30 @@ export default async function Product({
     discountTags,
     totalRatings,
     description,
-  } = product;
-  const relatedProductsLength = 10;
+  } = parseProductTags(productResult)?.at(0);
+
+  const relatedProductsToShow = 10;
+  const relatedProductsQuery = allProducts(
+    `
+      first: ${relatedProductsToShow}, 
+      after: $cursor,
+      filter: {
+        store: {eq: "${env.NEXT_PUBLIC_STORE_ID}"},
+        available_quantity: { gt: 0 },
+      }
+      orderBy: { ${defaultSortBy}: ${defaultSortByDirection === "asc" ? "AscNullsLast" : "DescNullsLast"} }
+    `
+  );
+  const relatedProductsResult = await queryGraphql(
+    "productsCollection",
+    relatedProductsQuery
+  );
+  const relatedProducts = parseProductTags(relatedProductsResult);
+
   const relatedProductsCarouselProviderProps: CarouselProviderCustomProps = {
     naturalSlideHeight: defaultSlideHeight,
     naturalSlideWidth: defaultSlideWidth,
-    totalSlides: relatedProductsLength,
+    totalSlides: relatedProducts?.length ?? 0,
     interval: defaultCarouselInterval,
     isPlaying: true,
     infinite: true,
@@ -88,17 +126,24 @@ export default async function Product({
     },
   };
 
+  // FIXME: Remove after cart integration.
+  const isProductInCart = false;
+
   return (
     <div className="flex flex-1 flex-col items-center">
       <div className="flex max-w-7xl flex-1 flex-col px-6 py-8 xl:px-0">
         <div className="flex flex-1 flex-col gap-x-4 sm:flex-row">
-          <Image
-            src={imageUrl}
-            alt={name}
-            width={500}
-            height={400}
-            className="flex flex-1 basis-1/2 flex-row items-center justify-center"
-          />
+          <div className="flex flex-1 basis-1/2 flex-row justify-center items-center">
+            <Image
+              src={imageUrl}
+              alt={name}
+              width={550}
+              height={550}
+              quality={100}
+              sizes="100vw"
+              className="max-h-52 max-w-52 md:max-h-64 md:max-w-64 lg:max-h-[550px] lg:max-w-[550px]"
+            />
+          </div>
           <div className="flex basis-1/2 flex-col gap-6">
             <div className="flex flex-col justify-center gap-5 border-b border-gray-100 pb-5">
               <div className="flex flex-row flex-wrap items-center gap-4">
@@ -124,9 +169,9 @@ export default async function Product({
                     <FilledStarIcon className="size-[18px] text-warning" />
                   }
                 />
-                <div className="items-center">
+                {/* <div className="items-center">
                   <span className="text-body-small font-normal text-gray-600">{`${totalRatings} Reviews`}</span>
-                </div>
+                </div> */}
               </div>
               <div className="flex flex-row items-center gap-4">
                 <ProductPricing
@@ -157,6 +202,21 @@ export default async function Product({
                 {description}
               </p>
             </div>
+            <div className="flex flex-row items-center gap-3 pb-5 h-[50px]">
+              <AddToCartWrapper
+                isProductInCart={isProductInCart}
+                wrapperClassName={cn("flex flex-row w-fit max-h-[50px]", {
+                  "w-full": !isProductInCart,
+                })}
+                className="h-[50px] group flex flex-1 flex-row items-center justify-center gap-x-2 rounded-full bg-primary text-body-small font-semibold leading-6 text-white hover:border hover:border-primary hover:bg-white hover:text-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
+              >
+                Add to Cart
+                <ShoppingBagIcon className="size-5 group-hover:text-primary" />
+              </AddToCartWrapper>
+              {/* <Button className="h-[50px] w-[50px] group flex flex-row items-center justify-center rounded-full bg-gray-50 hover:bg-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none">
+                <HeartIcon className="size-5 text-gray-900 group-hover:text-white" />
+              </Button> */}
+            </div>
           </div>
         </div>
       </div>
@@ -180,22 +240,20 @@ export default async function Product({
         <SectionContent className="w-full max-w-7xl">
           <CarouselProvider {...relatedProductsCarouselProviderProps}>
             <CarouselRenderer {...relatedProductsCarouselRendererProps}>
-              {Array.from({ length: relatedProductsLength }).map(
-                (_value, index) => (
-                  <SlideRenderer
-                    key={index}
-                    index={index}
-                    innerClassName="px-1 mx-auto"
-                    mobileMediaQuery="(max-width: 768px)"
-                    renderInDesktop
-                  >
-                    <BasicProductCard
-                      product={product}
-                      cardClassname="max-w-fit mt-2"
-                    />
-                  </SlideRenderer>
-                )
-              )}
+              {relatedProducts?.map((product, index) => (
+                <SlideRenderer
+                  key={index}
+                  index={index}
+                  innerClassName="px-1 mx-auto"
+                  mobileMediaQuery="(max-width: 768px)"
+                  renderInDesktop
+                >
+                  <BasicProductCard
+                    product={product}
+                    cardClassname="max-w-fit mt-2"
+                  />
+                </SlideRenderer>
+              ))}
             </CarouselRenderer>
             <DotsRenderer mobileMediaQuery="(max-width: 768px)" renderInDesktop>
               <DefaultDotGroup

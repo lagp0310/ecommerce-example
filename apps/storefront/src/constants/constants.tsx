@@ -2,15 +2,12 @@ import React from "react";
 import type {
   Language,
   Currency,
-  Category,
   Product,
   BaseSelectOption,
   SortByDirection,
 } from "@/types/types";
 import { CurrencyDollarIcon, LanguageIcon } from "@heroicons/react/24/outline";
 import dayjs from "dayjs";
-import Image from "next/image";
-import freshFruitCategory from "@/public/images/fresh-fruit-category.png";
 import greenAppleProduct from "@/public/images/green-apple-product.png";
 import { HeadphonesIcon } from "@/components/ui/icons/headphones";
 import { ShoppingBagCheckedIcon } from "@/components/ui/icons/shopping-bag-checked";
@@ -165,3 +162,7 @@ export const maxPagesToShow = 5;
 
 export const defaultSortBy = "render_order";
 export const defaultSortByDirection: SortByDirection = "asc";
+
+export const defaultCounterStep = 1;
+export const defaultCounterInitialValue = 0;
+export const defaultMaxCounterValue = 99;

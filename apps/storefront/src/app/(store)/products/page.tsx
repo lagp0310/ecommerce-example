@@ -144,8 +144,8 @@ export default async function Products({
         <div className="flex flex-1 flex-col items-start gap-1.5">
           {categories?.map(({ id, name }) => {
             const isChecked = isRecordIdInSearchParamArray(
-              categoriesSearchParam,
-              id
+              id,
+              categoriesSearchParam
             );
 
             return (

@@ -36,7 +36,15 @@ export function Counter({
   moreClassName,
   ...props
 }: Props) {
-  const { lineItems, handleUpdateQuantity } = useCart();
+  const {
+    lineItems,
+    handleUpdateQuantity,
+    isCreateCartLoading,
+    isCreateLineItemsLoading,
+    isDeleteLineItemsLoading,
+    isUpdateCartLoading,
+    isUpdateLineItemsLoading,
+  } = useCart();
 
   const [count, setCount] = React.useState(initialValue);
   React.useEffect(() => {
@@ -51,7 +59,7 @@ export function Counter({
     if (currentQuantity) {
       setCount(parseInt(currentQuantity));
     }
-  }, [lineItems]);
+  }, [lineItemId, lineItems]);
 
   const handleUpdateCount = React.useCallback(
     async (count: number) => {
@@ -68,10 +76,29 @@ export function Counter({
     },
     [handleUpdateQuantity, lineItemId, product]
   );
-  const isMinusButtonDisabled = React.useMemo(() => count <= 0, [count]);
+
+  const isLoading = React.useMemo(
+    () =>
+      isCreateCartLoading ||
+      isUpdateCartLoading ||
+      isCreateLineItemsLoading ||
+      isUpdateLineItemsLoading ||
+      isDeleteLineItemsLoading,
+    [
+      isCreateCartLoading,
+      isCreateLineItemsLoading,
+      isDeleteLineItemsLoading,
+      isUpdateCartLoading,
+      isUpdateLineItemsLoading,
+    ]
+  );
+  const isMinusButtonDisabled = React.useMemo(
+    () => count <= 0 || isLoading,
+    [count, isLoading]
+  );
   const isMoreButtonDisabled = React.useMemo(
-    () => count >= maxValue,
-    [count, maxValue]
+    () => count >= maxValue || isLoading,
+    [count, isLoading, maxValue]
   );
 
   return (

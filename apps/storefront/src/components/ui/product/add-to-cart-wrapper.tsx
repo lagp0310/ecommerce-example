@@ -23,7 +23,16 @@ export function AddToCartWrapper({
   product,
   ...buttonProps
 }: Props) {
-  const { cart, lineItems, handleAddToCart } = useCart();
+  const {
+    cart,
+    lineItems,
+    handleAddToCart,
+    isCreateCartLoading,
+    isUpdateCartLoading,
+    isCreateLineItemsLoading,
+    isUpdateLineItemsLoading,
+    isDeleteLineItemsLoading,
+  } = useCart();
 
   const wasGetLineItemIdSuccessful = React.useRef(false);
   const [lineItemId, setLineItemId] = React.useState<string | null>(null);
@@ -56,6 +65,23 @@ export function AddToCartWrapper({
     [showCounter, lineItemId]
   );
 
+  const isActionDisabled = React.useMemo(
+    () =>
+      !wasGetLineItemIdSuccessful.current ||
+      isCreateCartLoading ||
+      isUpdateCartLoading ||
+      isCreateLineItemsLoading ||
+      isUpdateLineItemsLoading ||
+      isDeleteLineItemsLoading,
+    [
+      isCreateCartLoading,
+      isCreateLineItemsLoading,
+      isDeleteLineItemsLoading,
+      isUpdateCartLoading,
+      isUpdateLineItemsLoading,
+    ]
+  );
+
   return (
     <div
       className={cn(wrapperClassName, {
@@ -66,7 +92,7 @@ export function AddToCartWrapper({
         <Button
           className="group flex flex-1 flex-row items-center justify-center gap-x-2 rounded-full bg-primary text-body-small font-semibold leading-6 text-white hover:border hover:border-primary hover:bg-white hover:text-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
           onClick={() => handleAddToCart(product)}
-          disabled={!wasGetLineItemIdSuccessful.current}
+          disabled={isActionDisabled}
           {...buttonProps}
         >
           {children}
@@ -86,7 +112,7 @@ export function AddToCartWrapper({
           }
           minusClassName="disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:border-gray-100 rounded-full border border-gray-100 p-4 flex flex-1 flex-row items-center justify-center group/minus-button hover:border-transparent hover:bg-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
           moreClassName="disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:border-gray-100 rounded-full border border-gray-100 p-4 flex flex-1 flex-row items-center justify-center group/more-button hover:border-transparent hover:bg-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
-          disabled={!wasGetLineItemIdSuccessful.current}
+          disabled={isActionDisabled}
         />
       ) : null}
     </div>

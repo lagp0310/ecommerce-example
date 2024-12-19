@@ -13,21 +13,19 @@ import { ProductTag } from "@/components/ui/product/product-tag";
 import { ProductTitle } from "@/components/ui/product/product-title";
 import { Rating } from "@/components/ui/product/rating";
 import {
-  defaultCarouselInterval,
   defaultProductsShowPerPage,
-  defaultSlideHeight,
-  defaultSlideWidth,
   defaultSortBy,
   defaultSortByDirection,
 } from "@/constants/constants";
+import {
+  relatedProductsCarouselProviderProps,
+  relatedProductsCarouselRendererProps,
+  relatedProductsToShow,
+} from "@/constants/product/constants";
 import { allProducts } from "@/gql/queries/product/queries";
 import { env } from "@/lib/env";
 import { queryGraphql } from "@/lib/server-query";
 import { cn, parseProductTags } from "@/lib/utils";
-import type {
-  CarouselProviderCustomProps,
-  CarouselRendererProps,
-} from "@/types/types";
 import {
   ArrowRightIcon,
   ShoppingBagIcon,
@@ -70,7 +68,6 @@ export default async function Product({
     description,
   } = product;
 
-  const relatedProductsToShow = 10;
   const relatedProductsResult = await queryGraphql(
     "productsCollection",
     allProducts,
@@ -88,43 +85,6 @@ export default async function Product({
     }
   );
   const relatedProducts = parseProductTags(relatedProductsResult);
-
-  const relatedProductsCarouselProviderProps: CarouselProviderCustomProps = {
-    naturalSlideHeight: defaultSlideHeight,
-    naturalSlideWidth: defaultSlideWidth,
-    totalSlides: relatedProducts?.length ?? 0,
-    interval: defaultCarouselInterval,
-    isPlaying: true,
-    infinite: true,
-    visibleSlides: 2,
-    renderInDesktop: true,
-    className:
-      "w-full h-64 min-[420px]:h-72 min-[500px]:h-80 min-[580px]:h-[350px] sm:h-[300px] md:h-64 min-[860px]:h-72 lg:h-80 min-[1100px]:h-[350px] xl:h-80 mb-16",
-    mobileMediaQuery: "(max-width: 768px)",
-    visibleSlidesSm: { mediaQuery: "(max-width: 640px)", visibleSlides: 2 },
-    visibleSlidesMd: {
-      mediaQuery: "(min-width: 641px) and (max-width: 768px)",
-      visibleSlides: 3,
-    },
-    visibleSlidesLg: {
-      mediaQuery: "(min-width: 769px) and (max-width: 1280px)",
-      visibleSlides: 4,
-    },
-    visibleSlidesXl: {
-      mediaQuery: "(min-width: 1281px)",
-      visibleSlides: 5,
-    },
-  };
-  const relatedProductsCarouselRendererProps: CarouselRendererProps = {
-    mobileMediaQuery: "(max-width: 768px)",
-    renderInDesktop: true,
-    carouselSliderProps: {
-      className:
-        "h-64 min-[420px]:h-72 min-[500px]:h-80 min-[580px]:h-[350px] sm:h-[300px] md:h-64 min-[860px]:h-72 lg:h-80 min-[1100px]:h-[350px] xl:h-80",
-      classNameTray:
-        "h-64 min-[420px]:h-72 min-[500px]:h-80 min-[580px]:h-[350px] sm:h-[300px] md:h-64 min-[860px]:h-72 lg:h-80 min-[1100px]:h-[350px] xl:h-80",
-    },
-  };
 
   return (
     <div className="flex flex-1 flex-col items-center">
@@ -234,7 +194,11 @@ export default async function Product({
           </div>
         </SectionTitle>
         <SectionContent className="w-full max-w-7xl">
-          <CarouselProvider {...relatedProductsCarouselProviderProps}>
+          <CarouselProvider
+            {...relatedProductsCarouselProviderProps(
+              relatedProducts?.length ?? 0
+            )}
+          >
             <CarouselRenderer {...relatedProductsCarouselRendererProps}>
               {relatedProducts?.map((product, index) => (
                 <SlideRenderer

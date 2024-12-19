@@ -34,7 +34,8 @@ export function AddToCartWrapper({
     isDeleteLineItemsLoading,
   } = useCart();
 
-  const wasGetLineItemIdSuccessful = React.useRef(false);
+  const [wasGetLineItemIdSuccessful, setWasGetLineItemIdSuccessful] =
+    React.useState(false);
   const [lineItemId, setLineItemId] = React.useState<string | null>(null);
   React.useEffect(() => {
     if (!cart?.id || !product.id) {
@@ -46,7 +47,7 @@ export function AddToCartWrapper({
       product_id: product.id,
     })
       .then(({ line_item_id: lineItemId }) => {
-        wasGetLineItemIdSuccessful.current = true;
+        setWasGetLineItemIdSuccessful(true);
         setLineItemId(lineItemId);
       })
       .catch((error) => {
@@ -55,7 +56,7 @@ export function AddToCartWrapper({
   }, [cart?.id, lineItems, product.id]);
 
   const [showCounter, setShowCounter] = React.useState(
-    !!lineItemId && wasGetLineItemIdSuccessful.current
+    !!lineItemId && wasGetLineItemIdSuccessful
   );
   React.useEffect(() => {
     setShowCounter(!!lineItemId);
@@ -67,7 +68,7 @@ export function AddToCartWrapper({
 
   const isActionDisabled = React.useMemo(
     () =>
-      !wasGetLineItemIdSuccessful.current ||
+      !wasGetLineItemIdSuccessful ||
       isCreateCartLoading ||
       isUpdateCartLoading ||
       isCreateLineItemsLoading ||
@@ -79,6 +80,7 @@ export function AddToCartWrapper({
       isDeleteLineItemsLoading,
       isUpdateCartLoading,
       isUpdateLineItemsLoading,
+      wasGetLineItemIdSuccessful,
     ]
   );
 

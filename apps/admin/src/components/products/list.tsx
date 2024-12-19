@@ -9,6 +9,7 @@ import {
   PencilSquareIcon,
   TrashIcon,
 } from "@heroicons/react/24/solid";
+import type { Category, ProductTag } from "@/types/types";
 
 export const ProductList = () => {
   const { tableProps } = useTable({
@@ -64,9 +65,9 @@ export const ProductList = () => {
           title="Categories"
           render={(_value, record) => {
             const categories = record?.categories;
-            const categoryTags = categories?.map(({ name }, index) => (
-              <Tag key={index}>{name}</Tag>
-            ));
+            const categoryTags = (categories as Category[])?.map(
+              ({ name }, index) => <Tag key={index}>{name}</Tag>
+            );
 
             return <div className="flex flex-wrap gap-y-1">{categoryTags}</div>;
           }}
@@ -76,7 +77,7 @@ export const ProductList = () => {
           title="Tags"
           render={(_value, record) => {
             const tagsArray = record?.tags;
-            const tags = tagsArray?.map(({ tag }, index) => (
+            const tags = (tagsArray as ProductTag[])?.map(({ tag }, index) => (
               <Tag key={index}>{tag}</Tag>
             ));
 

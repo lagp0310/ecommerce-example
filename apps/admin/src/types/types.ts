@@ -107,3 +107,14 @@ export type LineItem = {
   comment?: string;
   products?: Product;
 };
+
+export type Category = {
+  id: BaseKey;
+  name: string;
+  description?: string;
+};
+
+export type ProductTag = {
+  id: BaseKey;
+  tag: string;
+};

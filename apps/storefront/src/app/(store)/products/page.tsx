@@ -149,8 +149,8 @@ export default async function Products({
             );
 
             return (
+              <React.Suspense key={id}>
               <CategoryFilterItemWrapper
-                key={id}
                 categoryId={id}
                 checked={isChecked}
                 aria-checked={isChecked}
@@ -161,6 +161,7 @@ export default async function Products({
                 {name}
                 {/* <span className="text-body-small font-normal text-gray-500">{`(${numberOfItems})`}</span> */}
               </CategoryFilterItemWrapper>
+              </React.Suspense>
             );
           })}
         </div>
@@ -170,12 +171,14 @@ export default async function Products({
     {
       children: (
         <div className="flex flex-1 flex-col justify-center gap-6 pt-4">
+          <React.Suspense>
           <PricingSlider
             {...pricingSliderProps(
               parseInt(maxProductsPrice),
-              parseInt(maxPrice)
+                !!maxPrice ? parseInt(maxPrice) : null
             )}
           />
+          </React.Suspense>
         </div>
       ),
       name: "Price",
@@ -192,8 +195,8 @@ export default async function Products({
                 hasRatingSearchParam && parsedMinRating === index + 1;
 
               return (
+                <React.Suspense key={index}>
                 <RatingFilterItemWrapper
-                  key={index}
                   index={index}
                   checked={isChecked}
                   wrapperClassName={
@@ -202,6 +205,7 @@ export default async function Products({
                       : ""
                   }
                 />
+                </React.Suspense>
               );
             })
             .reverse()}
@@ -223,12 +227,15 @@ export default async function Products({
               hasTagsSearchParam && tagsArray?.includes(tagItem.id);
 
             return (
+              <React.Suspense key={index}>
               <TagFilterItemWrapper
-                key={index}
                 tagItem={tagItem}
                 selected={isSelected}
-                wrapperClassName={cn("order-none", { "order-1": !isSelected })}
+                  wrapperClassName={cn("order-none", {
+                    "order-1": !isSelected,
+                  })}
               />
+              </React.Suspense>
             );
           })}
         </ToggleGroup>
@@ -299,6 +306,7 @@ export default async function Products({
                   <span className="text-body-small font-normal text-gray-500">
                     Sort by:
                   </span>
+                  <React.Suspense>
                   <DropdownSelector
                     useNextLink
                     currentValue={currentSortByValue?.value}
@@ -311,6 +319,7 @@ export default async function Products({
                       <SelectValue placeholder={currentSortByValue?.value} />
                     </SelectTrigger>
                   </DropdownSelector>
+                  </React.Suspense>
                 </div>
                 <div className="flex flex-1 flex-row justify-end">
                   <span className="text-body-medium font-normal text-gray-600">

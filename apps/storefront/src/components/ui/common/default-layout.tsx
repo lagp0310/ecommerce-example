@@ -82,24 +82,26 @@ export function DefaultLayout({ children }: Props) {
               Store Location: Lincoln- 344, Illinois, Chicago, USA
             </span>
             <div className="flex flex-1 flex-row justify-end gap-x-4">
-              <DropdownSelector
-                options={availableLanguages}
-                defaultValue={languageValue}
-              >
-                <SelectTrigger className="flex max-h-5 w-fit flex-row items-center gap-x-2 border-none bg-transparent p-0 text-body-tiny font-normal text-green-gray-700 outline-none focus:ring-0 focus:ring-offset-0">
-                  {languageIcon}
-                  <SelectValue placeholder={languageName} />
-                </SelectTrigger>
-              </DropdownSelector>
-              <DropdownSelector
-                options={availableCurrencies}
-                defaultValue={currencyValue}
-              >
-                <SelectTrigger className="flex max-h-5 w-fit flex-row items-center gap-x-2 border-none bg-transparent p-0 text-body-tiny font-normal text-green-gray-700 outline-none focus:ring-0 focus:ring-offset-0">
-                  {currencyIcon}
-                  <SelectValue placeholder={currencyName} />
-                </SelectTrigger>
-              </DropdownSelector>
+              <React.Suspense>
+                <DropdownSelector
+                  options={availableLanguages}
+                  defaultValue={languageValue}
+                >
+                  <SelectTrigger className="flex max-h-5 w-fit flex-row items-center gap-x-2 border-none bg-transparent p-0 text-body-tiny font-normal text-green-gray-700 outline-none focus:ring-0 focus:ring-offset-0">
+                    {languageIcon}
+                    <SelectValue placeholder={languageName} />
+                  </SelectTrigger>
+                </DropdownSelector>
+                <DropdownSelector
+                  options={availableCurrencies}
+                  defaultValue={currencyValue}
+                >
+                  <SelectTrigger className="flex max-h-5 w-fit flex-row items-center gap-x-2 border-none bg-transparent p-0 text-body-tiny font-normal text-green-gray-700 outline-none focus:ring-0 focus:ring-offset-0">
+                    {currencyIcon}
+                    <SelectValue placeholder={currencyName} />
+                  </SelectTrigger>
+                </DropdownSelector>
+              </React.Suspense>
             </div>
           </div>
         </TopBar>

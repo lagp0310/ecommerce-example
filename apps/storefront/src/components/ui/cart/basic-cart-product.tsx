@@ -37,14 +37,7 @@ export function BasicCartProduct({
   toggleSidebar,
   ...props
 }: Props) {
-  const {
-    handleDeleteLineItem,
-    isCreateCartLoading,
-    isUpdateCartLoading,
-    isCreateLineItemsLoading,
-    isUpdateLineItemsLoading,
-    isDeleteLineItemsLoading,
-  } = useCart();
+  const { handleDeleteLineItem, isLoading } = useCart();
   const handleDeleteClick = React.useCallback(async () => {
     try {
       await handleDeleteLineItem(lineItemId);
@@ -52,21 +45,6 @@ export function BasicCartProduct({
       console.error(error);
     }
   }, [handleDeleteLineItem, lineItemId]);
-  const isLoading = React.useMemo(
-    () =>
-      isCreateCartLoading ||
-      isUpdateCartLoading ||
-      isCreateLineItemsLoading ||
-      isUpdateLineItemsLoading ||
-      isDeleteLineItemsLoading,
-    [
-      isCreateCartLoading,
-      isCreateLineItemsLoading,
-      isDeleteLineItemsLoading,
-      isUpdateCartLoading,
-      isUpdateLineItemsLoading,
-    ]
-  );
 
   return (
     <div className="flex flex-1 flex-row items-center gap-x-1">

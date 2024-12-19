@@ -34,6 +34,7 @@ type CartContext = {
   isCreateLineItemsLoading: boolean;
   isUpdateLineItemsLoading: boolean;
   isDeleteLineItemsLoading: boolean;
+  isLoading: boolean;
 };
 const CartContext = React.createContext<CartContext>({
   cart: null,
@@ -46,6 +47,7 @@ const CartContext = React.createContext<CartContext>({
   isCreateLineItemsLoading: false,
   isUpdateLineItemsLoading: false,
   isDeleteLineItemsLoading: false,
+  isLoading: false,
 });
 
 export function useCart() {
@@ -276,6 +278,22 @@ export function CartContextProvider({ children, currentCart = null }: Props) {
     [cart, handleDeleteLineItem, mutateUpdateLineItems, toast]
   );
 
+  const isLoading = React.useMemo(
+    () =>
+      isCreateCartLoading ||
+      isUpdateCartLoading ||
+      isCreateLineItemsLoading ||
+      isUpdateLineItemsLoading ||
+      isDeleteLineItemsLoading,
+    [
+      isCreateCartLoading,
+      isCreateLineItemsLoading,
+      isDeleteLineItemsLoading,
+      isUpdateCartLoading,
+      isUpdateLineItemsLoading,
+    ]
+  );
+
   const providerValue = React.useMemo(
     () => ({
       cart,
@@ -288,6 +306,7 @@ export function CartContextProvider({ children, currentCart = null }: Props) {
       isCreateLineItemsLoading,
       isUpdateLineItemsLoading,
       isDeleteLineItemsLoading,
+      isLoading,
     }),
     [
       cart,
@@ -300,6 +319,7 @@ export function CartContextProvider({ children, currentCart = null }: Props) {
       isCreateLineItemsLoading,
       isUpdateLineItemsLoading,
       isDeleteLineItemsLoading,
+      isLoading,
     ]
   );
 

@@ -15,24 +15,23 @@ type Props = Omit<React.HTMLProps<HTMLButtonElement>, "type"> & {
 } & {
   wrapperClassName?: string;
   product: Product;
+  counterWrapperClassName?: string;
+  countClassName?: string;
+  minusClassName?: string;
+  moreClassName?: string;
 };
 
 export function AddToCartWrapper({
   wrapperClassName,
   children,
   product,
+  counterWrapperClassName,
+  countClassName,
+  minusClassName,
+  moreClassName,
   ...buttonProps
 }: Props) {
-  const {
-    cart,
-    lineItems,
-    handleAddToCart,
-    isCreateCartLoading,
-    isUpdateCartLoading,
-    isCreateLineItemsLoading,
-    isUpdateLineItemsLoading,
-    isDeleteLineItemsLoading,
-  } = useCart();
+  const { cart, lineItems, handleAddToCart, isLoading } = useCart();
 
   const [wasGetLineItemIdSuccessful, setWasGetLineItemIdSuccessful] =
     React.useState(false);
@@ -41,7 +40,6 @@ export function AddToCartWrapper({
     if (!cart?.id || !product.id) {
       return;
     }
-
     callDatabaseFunction("get_line_item_id", {
       cart_id: cart?.id,
       product_id: product.id,
@@ -51,6 +49,7 @@ export function AddToCartWrapper({
         setLineItemId(lineItemId);
       })
       .catch((error) => {
+        console.log(error);
         throw new Error(error);
       });
   }, [cart?.id, lineItems, product.id]);
@@ -67,21 +66,8 @@ export function AddToCartWrapper({
   );
 
   const isActionDisabled = React.useMemo(
-    () =>
-      !wasGetLineItemIdSuccessful ||
-      isCreateCartLoading ||
-      isUpdateCartLoading ||
-      isCreateLineItemsLoading ||
-      isUpdateLineItemsLoading ||
-      isDeleteLineItemsLoading,
-    [
-      isCreateCartLoading,
-      isCreateLineItemsLoading,
-      isDeleteLineItemsLoading,
-      isUpdateCartLoading,
-      isUpdateLineItemsLoading,
-      wasGetLineItemIdSuccessful,
-    ]
+    () => !wasGetLineItemIdSuccessful || isLoading,
+    [isLoading, wasGetLineItemIdSuccessful]
   );
 
   return (
@@ -104,16 +90,22 @@ export function AddToCartWrapper({
         <Counter
           lineItemId={lineItemId}
           product={product}
-          className="flex flex-row gap-3 items-center justify-center"
-          countClassName="font-normal text-body-medium text-gray-900 w-full min-w-[12px] text-center"
+          className={cn(
+            "flex flex-row gap-3 items-center justify-center",
+            counterWrapperClassName
+          )}
+          countClassName={cn(
+            "font-normal text-body-medium text-gray-900 w-full min-w-[12px] text-center",
+            countClassName
+          )}
           minusChildren={
             <MinusIcon className="h-4 w-4 text-gray-900 group-hover/minus-button:text-white group-disabled/minus-button:text-gray-900" />
           }
           moreChildren={
             <PlusIcon className="h-4 w-4 text-gray-900 group-hover/more-button:text-white group-disabled/more-button:text-gray-900" />
           }
-          minusClassName="disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:border-gray-100 rounded-full border border-gray-100 p-4 flex flex-1 flex-row items-center justify-center group/minus-button hover:border-transparent hover:bg-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
-          moreClassName="disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:border-gray-100 rounded-full border border-gray-100 p-4 flex flex-1 flex-row items-center justify-center group/more-button hover:border-transparent hover:bg-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
+          minusClassName={minusClassName}
+          moreClassName={moreClassName}
           disabled={isActionDisabled}
         />
       ) : null}

@@ -45,7 +45,7 @@ export function RatingFilterItemWrapper({
       <RadioGroupItem
         checked={checked}
         value={(index + 1).toString()}
-        className="h-5 w-5 ring-primary outline-none focus-visible:ring-8 focus-visible:ring-offset-0 border border-gray-200 aria-checked:border-primary text-primary"
+        className="size-5 border border-gray-200 text-primary outline-none ring-primary focus-visible:ring-8 focus-visible:ring-offset-0 aria-checked:border-primary"
       />
       <Rating
         className="flex flex-row justify-end gap-x-0.5"

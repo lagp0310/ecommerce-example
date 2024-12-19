@@ -156,7 +156,7 @@ export default async function Products({
                 aria-checked={isChecked}
                 htmlFor={id}
                 wrapperClassName={cn("order-none", { "order-1": !isChecked })}
-                className="flex flex-1 flex-row justify-start items-center gap-x-1 text-body-small font-normal text-gray-900"
+                className="flex flex-1 flex-row items-center justify-start gap-x-1 text-body-small font-normal text-gray-900"
               >
                 {name}
                 {/* <span className="text-body-small font-normal text-gray-500">{`(${numberOfItems})`}</span> */}
@@ -247,8 +247,8 @@ export default async function Products({
   return (
     <div className="flex flex-1 flex-col gap-y-8 px-6 py-8 xl:px-0">
       <div className="flex w-full flex-1 flex-col xl:items-center">
-        <div className="flex flex-col lg:flex-row max-w-7xl w-full gap-8">
-          <div className="flex flex-1 flex-row lg:basis-1/4 w-full lg:max-w-fit lg:min-w-[260px]">
+        <div className="flex w-full max-w-7xl flex-col gap-8 lg:flex-row">
+          <div className="flex w-full flex-1 flex-row lg:min-w-[260px] lg:max-w-fit lg:basis-1/4">
             <div className="sticky top-8 w-full">
               <FiltersDialogWrapper
                 wrapperClassname="flex flex-1 lg:hidden relative"
@@ -292,9 +292,9 @@ export default async function Products({
               ))}
             </div>
           </div>
-          <div className="flex flex-col gap-8 w-full">
-            <div className="flex flex-1 flex-row items-center w-full max-h-fit">
-              <div className="flex flex-1 w-full flex-row items-center">
+          <div className="flex w-full flex-col gap-8">
+            <div className="flex max-h-fit w-full flex-1 flex-row items-center">
+              <div className="flex w-full flex-1 flex-row items-center">
                 <div className="flex flex-1 flex-row items-center gap-x-2">
                   <span className="text-body-small font-normal text-gray-500">
                     Sort by:
@@ -306,7 +306,7 @@ export default async function Products({
                     defaultValue={currentSortByValue?.value}
                     wrapperClassname="flex flex-1"
                   >
-                    <SelectTrigger className="w-fit gap-x-1 md:gap-x-2 outline-none focus:ring-0 focus:ring-offset-0 line-clamp-1 truncate flex flex-row">
+                    <SelectTrigger className="line-clamp-1 flex w-fit flex-row gap-x-1 truncate outline-none focus:ring-0 focus:ring-offset-0 md:gap-x-2">
                       {currentSortByValue?.name}
                       <SelectValue placeholder={currentSortByValue?.value} />
                     </SelectTrigger>
@@ -322,7 +322,7 @@ export default async function Products({
                 </div>
               </div>
             </div>
-            <div className="grid grid-cols-1 gap-4 min-[450px]:grid-cols-2 sm:grid-cols-3 lg:col-span-3 lg:col-start-2 lg:grid-cols-3 xl:col-span-4 xl:grid-cols-4 h-full">
+            <div className="grid h-full grid-cols-1 gap-4 min-[450px]:grid-cols-2 sm:grid-cols-3 lg:col-span-3 lg:col-start-2 lg:grid-cols-3 xl:col-span-4 xl:grid-cols-4">
               {hasProducts ? (
                 products.map((product, index) => (
                   <div key={index} className="col-span-1 row-span-1">
@@ -330,7 +330,7 @@ export default async function Products({
                   </div>
                 ))
               ) : (
-                <div className="flex flex-1 flex-col items-center justify-center w-full row-span-full col-span-full gap-y-4 py-20 h-full">
+                <div className="col-span-full row-span-full flex size-full flex-1 flex-col items-center justify-center gap-y-4 py-20">
                   <Image
                     src={emptyListImage}
                     alt="Empty Products List Image"
@@ -341,7 +341,7 @@ export default async function Products({
                   <h2 className="text-center text-heading-3 font-semibold text-gray-900">
                     We couldn&apos;t find any products
                   </h2>
-                  <p className="text-center font-normal text-body-medium text-gray-500">
+                  <p className="text-center text-body-medium font-normal text-gray-500">
                     Try changing or removing some filters.
                   </p>
                 </div>
@@ -352,12 +352,12 @@ export default async function Products({
                 <Pagination className="col-span-full flex flex-1 flex-row items-center justify-center gap-x-3">
                   <PaginationContent>
                     <PaginationItem
-                      className="group/back-button rounded-full border border-neutral-100 hover:bg-primary hover:text-white aria-disabled:cursor-not-allowed aria-disabled:border-neutral-50 aria-disabled:bg-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none aria-disabled:hover:bg-none"
+                      className="group/back-button rounded-full border border-neutral-100 hover:bg-primary hover:text-white aria-disabled:cursor-not-allowed aria-disabled:border-neutral-50 aria-disabled:bg-white aria-disabled:hover:bg-none motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
                       aria-disabled={isPreviousButtonDisabled}
                     >
                       <PaginationPrevious
                         href={previousHref}
-                        className="flex size-9 flex-1 flex-row items-center justify-center rounded-full px-0 text-gray-600 aria-disabled:text-gray-300 group-hover/back-button:bg-primary group-hover/back-button:aria-disabled:bg-white group-hover/back-button:font-semibold group-hover/back-button:text-white group-hover/back-button:aria-disabled:text-gray-300 aria-disabled:cursor-not-allowed aria-disabled:opacity-50 aria-disabled:hover:bg-white aria-disabled:pointer-events-none"
+                        className="flex size-9 flex-1 flex-row items-center justify-center rounded-full px-0 text-gray-600 group-hover/back-button:bg-primary group-hover/back-button:font-semibold group-hover/back-button:text-white aria-disabled:pointer-events-none aria-disabled:cursor-not-allowed aria-disabled:text-gray-300 aria-disabled:opacity-50 aria-disabled:hover:bg-white group-hover/back-button:aria-disabled:bg-white group-hover/back-button:aria-disabled:text-gray-300"
                         disabled={isPreviousButtonDisabled}
                         aria-disabled={isPreviousButtonDisabled}
                       />
@@ -401,12 +401,12 @@ export default async function Products({
                       </React.Fragment>
                     ))}
                     <PaginationItem
-                      className="group/next-button rounded-full border border-neutral-100 hover:bg-primary hover:text-white aria-disabled:cursor-not-allowed aria-disabled:border-neutral-50 aria-disabled:bg-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none aria-disabled:hover:bg-none"
+                      className="group/next-button rounded-full border border-neutral-100 hover:bg-primary hover:text-white aria-disabled:cursor-not-allowed aria-disabled:border-neutral-50 aria-disabled:bg-white aria-disabled:hover:bg-none motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
                       aria-disabled={isNextButtonDisabled}
                     >
                       <PaginationNext
                         href={nextHref}
-                        className="flex size-9 flex-1 flex-row items-center justify-center rounded-full px-0 text-gray-600 aria-disabled:text-gray-300 group-hover/next-button:bg-primary group-hover/next-button:aria-disabled:bg-white group-hover/next-button:font-semibold group-hover/next-button:text-white group-hover/next-button:aria-disabled:text-gray-300 aria-disabled:cursor-not-allowed aria-disabled:opacity-50 aria-disabled:hover:bg-white aria-disabled:pointer-events-none"
+                        className="flex size-9 flex-1 flex-row items-center justify-center rounded-full px-0 text-gray-600 group-hover/next-button:bg-primary group-hover/next-button:font-semibold group-hover/next-button:text-white aria-disabled:pointer-events-none aria-disabled:cursor-not-allowed aria-disabled:text-gray-300 aria-disabled:opacity-50 aria-disabled:hover:bg-white group-hover/next-button:aria-disabled:bg-white group-hover/next-button:aria-disabled:text-gray-300"
                         disabled={isNextButtonDisabled}
                         aria-disabled={isNextButtonDisabled}
                       />

@@ -84,11 +84,11 @@ export function BasicCartProduct({
       </Link>
       <CartProductActions {...actionsProps} className="flex flex-row gap-x-1">
         <Button
-          className="group -mr-2 rounded-full border-none p-2 hover:bg-gray-100/50 motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-white"
+          className="group -mr-2 rounded-full border-none p-2 hover:bg-gray-100/50 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
           onClick={handleDeleteClick}
           disabled={isLoading}
         >
-          <TrashIcon className="size-4 text-gray-900 group-hover:text-danger motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none group-disabled:group-hover:text-gray-900 group-disabled:transition-none" />
+          <TrashIcon className="size-4 text-gray-900 group-hover:text-danger group-disabled:transition-none group-disabled:group-hover:text-gray-900 motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none" />
         </Button>
       </CartProductActions>
     </div>

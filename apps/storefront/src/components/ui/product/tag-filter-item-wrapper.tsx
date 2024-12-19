@@ -36,7 +36,7 @@ export function TagFilterItemWrapper({
       <ToggleGroupItem
         value={tag}
         id={id}
-        className="rounded-full text-body-small font-normal text-gray-900 hover:bg-primary hover:text-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none data-[state=on]:bg-primary data-[state=on]:text-white"
+        className="rounded-full text-body-small font-normal text-gray-900 hover:bg-primary hover:text-white data-[state=on]:bg-primary data-[state=on]:text-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
         onClick={handleTagClick}
         data-state={selected ? "on" : "off"}
       >

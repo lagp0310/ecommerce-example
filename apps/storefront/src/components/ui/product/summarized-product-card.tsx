@@ -54,13 +54,13 @@ export function SummarizedProductCard({
   const shouldShowTags =
     Array.isArray(allTags) && allTags.length > 0 && shouldShowProductTags;
   const productActions = (
-    <div className="flex flex-row gap-x-2 h-[45px] justify-center w-full items-center">
+    <div className="flex h-[45px] w-full flex-row items-center justify-center gap-x-2">
       {/* <Button className="group flex size-8 flex-row items-center justify-center rounded-full bg-gray-50 hover:bg-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none">
         <HeartIcon className="size-4 text-gray-900 group-hover:text-white" />
       </Button> */}
       <AddToCartWrapper
         product={product}
-        className="w-full h-[45px] group flex flex-1 flex-row items-center justify-center gap-x-2 rounded-full bg-primary text-body-small font-semibold leading-6 text-white hover:border hover:border-primary hover:bg-white hover:text-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
+        className="group flex h-[45px] w-full flex-1 flex-row items-center justify-center gap-x-2 rounded-full bg-primary text-body-small font-semibold leading-6 text-white hover:border hover:border-primary hover:bg-white hover:text-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
         minusClassName="disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:border-gray-100 rounded-full border border-gray-100 p-2 flex flex-1 flex-row items-center justify-center group/minus-button hover:border-transparent hover:bg-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
         moreClassName="disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:border-gray-100 rounded-full border border-gray-100 p-2 flex flex-1 flex-row items-center justify-center group/more-button hover:border-transparent hover:bg-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
       >
@@ -136,7 +136,7 @@ export function SummarizedProductCard({
         alt={name}
         width={400}
         height={400}
-        className="flex min-h-[250px] flex-1 flex-row justify-center max-h-80 object-contain"
+        className="flex max-h-80 min-h-[250px] flex-1 flex-row justify-center object-contain"
       />
     </React.Fragment>
   );

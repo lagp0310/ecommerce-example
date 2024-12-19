@@ -99,10 +99,10 @@ export function AddToCartWrapper({
             countClassName
           )}
           minusChildren={
-            <MinusIcon className="h-4 w-4 text-gray-900 group-hover/minus-button:text-white group-disabled/minus-button:text-gray-900" />
+            <MinusIcon className="size-4 text-gray-900 group-hover/minus-button:text-white group-disabled/minus-button:text-gray-900" />
           }
           moreChildren={
-            <PlusIcon className="h-4 w-4 text-gray-900 group-hover/more-button:text-white group-disabled/more-button:text-gray-900" />
+            <PlusIcon className="size-4 text-gray-900 group-hover/more-button:text-white group-disabled/more-button:text-gray-900" />
           }
           minusClassName={minusClassName}
           moreClassName={moreClassName}

@@ -76,7 +76,7 @@ export function BasicProductCard({
         alt={name}
         width={180}
         height={180}
-        className="mt-6 md:mt-2 w-full"
+        className="mt-6 w-full md:mt-2"
       />
       <div className="flex flex-1 flex-row">
         <div className="flex flex-1 flex-col">
@@ -121,10 +121,10 @@ export function BasicProductCard({
           <ClientLink href={`/products/${slug}`} className="col-span-1">
             {productNode}
           </ClientLink>
-          <div className="absolute bottom-4 right-1.5 flex-1 flex-row items-center justify-end min-[400px]:right-3 hidden xl:flex">
+          <div className="absolute bottom-4 right-1.5 hidden flex-1 flex-row items-center justify-end min-[400px]:right-3 xl:flex">
             <AddToCartWrapper
               product={product}
-              className="group flex size-8 flex-row items-center justify-center rounded-full bg-gray-50 hover:bg-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-gray-50 disabled:transition-none"
+              className="group flex size-8 flex-row items-center justify-center rounded-full bg-gray-50 hover:bg-primary disabled:cursor-not-allowed disabled:opacity-50 disabled:transition-none disabled:hover:bg-gray-50 motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
               counterWrapperClassName="gap-2"
               minusClassName="disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:border-gray-100 rounded-full border border-gray-100 p-2 flex flex-1 flex-row items-center justify-center group/minus-button hover:border-transparent hover:bg-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
               moreClassName="disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:border-gray-100 rounded-full border border-gray-100 p-2 flex flex-1 flex-row items-center justify-center group/more-button hover:border-transparent hover:bg-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"

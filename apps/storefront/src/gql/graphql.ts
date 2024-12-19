@@ -225,15 +225,22 @@ export type Mutation = {
   deleteFrompaymentsCollection: PaymentsDeleteResponse;
   /** Deletes zero or more records from the `phone_numbers` collection */
   deleteFromphone_numbersCollection: Phone_NumbersDeleteResponse;
+  /** Deletes zero or more records from the `product_tags` collection */
+  deleteFromproduct_tagsCollection: Product_TagsDeleteResponse;
   /** Deletes zero or more records from the `products` collection */
   deleteFromproductsCollection: ProductsDeleteResponse;
   /** Deletes zero or more records from the `store_features` collection */
   deleteFromstore_featuresCollection: Store_FeaturesDeleteResponse;
   /** Deletes zero or more records from the `stores` collection */
   deleteFromstoresCollection: StoresDeleteResponse;
+  /** Deletes zero or more records from the `tag_types` collection */
+  deleteFromtag_typesCollection: Tag_TypesDeleteResponse;
   /** Deletes zero or more records from the `transactions` collection */
   deleteFromtransactionsCollection: TransactionsDeleteResponse;
+  get_line_item_id?: Maybe<Scalars['UUID']['output']>;
   get_monthly_users_info?: Maybe<Scalars['Int']['output']>;
+  get_products_count?: Maybe<Scalars['Int']['output']>;
+  get_products_max_price?: Maybe<Scalars['Float']['output']>;
   /** Adds one or more `banner_types` records to the collection */
   insertIntobanner_typesCollection?: Maybe<Banner_TypesInsertResponse>;
   /** Adds one or more `business_currency` records to the collection */
@@ -272,12 +279,16 @@ export type Mutation = {
   insertIntopaymentsCollection?: Maybe<PaymentsInsertResponse>;
   /** Adds one or more `phone_numbers` records to the collection */
   insertIntophone_numbersCollection?: Maybe<Phone_NumbersInsertResponse>;
+  /** Adds one or more `product_tags` records to the collection */
+  insertIntoproduct_tagsCollection?: Maybe<Product_TagsInsertResponse>;
   /** Adds one or more `products` records to the collection */
   insertIntoproductsCollection?: Maybe<ProductsInsertResponse>;
   /** Adds one or more `store_features` records to the collection */
   insertIntostore_featuresCollection?: Maybe<Store_FeaturesInsertResponse>;
   /** Adds one or more `stores` records to the collection */
   insertIntostoresCollection?: Maybe<StoresInsertResponse>;
+  /** Adds one or more `tag_types` records to the collection */
+  insertIntotag_typesCollection?: Maybe<Tag_TypesInsertResponse>;
   /** Adds one or more `transactions` records to the collection */
   insertIntotransactionsCollection?: Maybe<TransactionsInsertResponse>;
   /** Updates zero or more records in the `banner_types` collection */
@@ -318,12 +329,16 @@ export type Mutation = {
   updatepaymentsCollection: PaymentsUpdateResponse;
   /** Updates zero or more records in the `phone_numbers` collection */
   updatephone_numbersCollection: Phone_NumbersUpdateResponse;
+  /** Updates zero or more records in the `product_tags` collection */
+  updateproduct_tagsCollection: Product_TagsUpdateResponse;
   /** Updates zero or more records in the `products` collection */
   updateproductsCollection: ProductsUpdateResponse;
   /** Updates zero or more records in the `store_features` collection */
   updatestore_featuresCollection: Store_FeaturesUpdateResponse;
   /** Updates zero or more records in the `stores` collection */
   updatestoresCollection: StoresUpdateResponse;
+  /** Updates zero or more records in the `tag_types` collection */
+  updatetag_typesCollection: Tag_TypesUpdateResponse;
   /** Updates zero or more records in the `transactions` collection */
   updatetransactionsCollection: TransactionsUpdateResponse;
 };
@@ -463,6 +478,13 @@ export type MutationDeleteFromphone_NumbersCollectionArgs = {
 
 
 /** The root type for creating and mutating data */
+export type MutationDeleteFromproduct_TagsCollectionArgs = {
+  atMost?: Scalars['Int']['input'];
+  filter?: InputMaybe<Product_TagsFilter>;
+};
+
+
+/** The root type for creating and mutating data */
 export type MutationDeleteFromproductsCollectionArgs = {
   atMost?: Scalars['Int']['input'];
   filter?: InputMaybe<ProductsFilter>;
@@ -484,6 +506,13 @@ export type MutationDeleteFromstoresCollectionArgs = {
 
 
 /** The root type for creating and mutating data */
+export type MutationDeleteFromtag_TypesCollectionArgs = {
+  atMost?: Scalars['Int']['input'];
+  filter?: InputMaybe<Tag_TypesFilter>;
+};
+
+
+/** The root type for creating and mutating data */
 export type MutationDeleteFromtransactionsCollectionArgs = {
   atMost?: Scalars['Int']['input'];
   filter?: InputMaybe<TransactionsFilter>;
@@ -491,8 +520,27 @@ export type MutationDeleteFromtransactionsCollectionArgs = {
 
 
 /** The root type for creating and mutating data */
+export type MutationGet_Line_Item_IdArgs = {
+  cart_id: Scalars['UUID']['input'];
+  product_id: Scalars['UUID']['input'];
+};
+
+
+/** The root type for creating and mutating data */
 export type MutationGet_Monthly_Users_InfoArgs = {
   current_date_arg?: InputMaybe<Scalars['Datetime']['input']>;
+};
+
+
+/** The root type for creating and mutating data */
+export type MutationGet_Products_CountArgs = {
+  store_id: Scalars['String']['input'];
+};
+
+
+/** The root type for creating and mutating data */
+export type MutationGet_Products_Max_PriceArgs = {
+  store_id: Scalars['UUID']['input'];
 };
 
 
@@ -611,6 +659,12 @@ export type MutationInsertIntophone_NumbersCollectionArgs = {
 
 
 /** The root type for creating and mutating data */
+export type MutationInsertIntoproduct_TagsCollectionArgs = {
+  objects: Array<Product_TagsInsertInput>;
+};
+
+
+/** The root type for creating and mutating data */
 export type MutationInsertIntoproductsCollectionArgs = {
   objects: Array<ProductsInsertInput>;
 };
@@ -625,6 +679,12 @@ export type MutationInsertIntostore_FeaturesCollectionArgs = {
 /** The root type for creating and mutating data */
 export type MutationInsertIntostoresCollectionArgs = {
   objects: Array<StoresInsertInput>;
+};
+
+
+/** The root type for creating and mutating data */
+export type MutationInsertIntotag_TypesCollectionArgs = {
+  objects: Array<Tag_TypesInsertInput>;
 };
 
 
@@ -787,6 +847,14 @@ export type MutationUpdatephone_NumbersCollectionArgs = {
 
 
 /** The root type for creating and mutating data */
+export type MutationUpdateproduct_TagsCollectionArgs = {
+  atMost?: Scalars['Int']['input'];
+  filter?: InputMaybe<Product_TagsFilter>;
+  set: Product_TagsUpdateInput;
+};
+
+
+/** The root type for creating and mutating data */
 export type MutationUpdateproductsCollectionArgs = {
   atMost?: Scalars['Int']['input'];
   filter?: InputMaybe<ProductsFilter>;
@@ -807,6 +875,14 @@ export type MutationUpdatestoresCollectionArgs = {
   atMost?: Scalars['Int']['input'];
   filter?: InputMaybe<StoresFilter>;
   set: StoresUpdateInput;
+};
+
+
+/** The root type for creating and mutating data */
+export type MutationUpdatetag_TypesCollectionArgs = {
+  atMost?: Scalars['Int']['input'];
+  filter?: InputMaybe<Tag_TypesFilter>;
+  set: Tag_TypesUpdateInput;
 };
 
 
@@ -891,12 +967,16 @@ export type Query = {
   paymentsCollection?: Maybe<PaymentsConnection>;
   /** A pagable collection of type `phone_numbers` */
   phone_numbersCollection?: Maybe<Phone_NumbersConnection>;
+  /** A pagable collection of type `product_tags` */
+  product_tagsCollection?: Maybe<Product_TagsConnection>;
   /** A pagable collection of type `products` */
   productsCollection?: Maybe<ProductsConnection>;
   /** A pagable collection of type `store_features` */
   store_featuresCollection?: Maybe<Store_FeaturesConnection>;
   /** A pagable collection of type `stores` */
   storesCollection?: Maybe<StoresConnection>;
+  /** A pagable collection of type `tag_types` */
+  tag_typesCollection?: Maybe<Tag_TypesConnection>;
   /** A pagable collection of type `transactions` */
   transactionsCollection?: Maybe<TransactionsConnection>;
 };
@@ -1137,6 +1217,18 @@ export type QueryPhone_NumbersCollectionArgs = {
 
 
 /** The root type for querying data */
+export type QueryProduct_TagsCollectionArgs = {
+  after?: InputMaybe<Scalars['Cursor']['input']>;
+  before?: InputMaybe<Scalars['Cursor']['input']>;
+  filter?: InputMaybe<Product_TagsFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<Product_TagsOrderBy>>;
+};
+
+
+/** The root type for querying data */
 export type QueryProductsCollectionArgs = {
   after?: InputMaybe<Scalars['Cursor']['input']>;
   before?: InputMaybe<Scalars['Cursor']['input']>;
@@ -1169,6 +1261,18 @@ export type QueryStoresCollectionArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<Array<StoresOrderBy>>;
+};
+
+
+/** The root type for querying data */
+export type QueryTag_TypesCollectionArgs = {
+  after?: InputMaybe<Scalars['Cursor']['input']>;
+  before?: InputMaybe<Scalars['Cursor']['input']>;
+  filter?: InputMaybe<Tag_TypesFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<Tag_TypesOrderBy>>;
 };
 
 
@@ -2268,6 +2372,8 @@ export type Header_Banners = Node & {
   id: Scalars['UUID']['output'];
   /** Globally Unique Record Identifier */
   nodeId: Scalars['ID']['output'];
+  store: Scalars['UUID']['output'];
+  stores?: Maybe<Stores>;
   subtitle?: Maybe<Scalars['String']['output']>;
   subtitle_complement?: Maybe<Scalars['String']['output']>;
   subtitle_remark?: Maybe<Scalars['String']['output']>;
@@ -2309,6 +2415,7 @@ export type Header_BannersFilter = {
   not?: InputMaybe<Header_BannersFilter>;
   /** Returns true if at least one of its inner filters is true, otherwise returns false */
   or?: InputMaybe<Array<Header_BannersFilter>>;
+  store?: InputMaybe<UuidFilter>;
   subtitle?: InputMaybe<StringFilter>;
   subtitle_complement?: InputMaybe<StringFilter>;
   subtitle_remark?: InputMaybe<StringFilter>;
@@ -2323,6 +2430,7 @@ export type Header_BannersInsertInput = {
   cta_url?: InputMaybe<Scalars['String']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['UUID']['input']>;
+  store?: InputMaybe<Scalars['UUID']['input']>;
   subtitle?: InputMaybe<Scalars['String']['input']>;
   subtitle_complement?: InputMaybe<Scalars['String']['input']>;
   subtitle_remark?: InputMaybe<Scalars['String']['input']>;
@@ -2345,6 +2453,7 @@ export type Header_BannersOrderBy = {
   cta_url?: InputMaybe<OrderByDirection>;
   description?: InputMaybe<OrderByDirection>;
   id?: InputMaybe<OrderByDirection>;
+  store?: InputMaybe<OrderByDirection>;
   subtitle?: InputMaybe<OrderByDirection>;
   subtitle_complement?: InputMaybe<OrderByDirection>;
   subtitle_remark?: InputMaybe<OrderByDirection>;
@@ -2359,6 +2468,7 @@ export type Header_BannersUpdateInput = {
   cta_url?: InputMaybe<Scalars['String']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['UUID']['input']>;
+  store?: InputMaybe<Scalars['UUID']['input']>;
   subtitle?: InputMaybe<Scalars['String']['input']>;
   subtitle_complement?: InputMaybe<Scalars['String']['input']>;
   subtitle_remark?: InputMaybe<Scalars['String']['input']>;
@@ -2388,6 +2498,8 @@ export type Image_Banners = Node & {
   image_url?: Maybe<Scalars['String']['output']>;
   /** Globally Unique Record Identifier */
   nodeId: Scalars['ID']['output'];
+  store: Scalars['UUID']['output'];
+  stores?: Maybe<Stores>;
   title?: Maybe<Scalars['String']['output']>;
   updated_at?: Maybe<Scalars['Datetime']['output']>;
 };
@@ -2429,6 +2541,7 @@ export type Image_BannersFilter = {
   not?: InputMaybe<Image_BannersFilter>;
   /** Returns true if at least one of its inner filters is true, otherwise returns false */
   or?: InputMaybe<Array<Image_BannersFilter>>;
+  store?: InputMaybe<UuidFilter>;
   title?: InputMaybe<StringFilter>;
   updated_at?: InputMaybe<DatetimeFilter>;
 };
@@ -2443,6 +2556,7 @@ export type Image_BannersInsertInput = {
   header_remark?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['UUID']['input']>;
   image_url?: InputMaybe<Scalars['String']['input']>;
+  store?: InputMaybe<Scalars['UUID']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
   updated_at?: InputMaybe<Scalars['Datetime']['input']>;
 };
@@ -2465,6 +2579,7 @@ export type Image_BannersOrderBy = {
   header_remark?: InputMaybe<OrderByDirection>;
   id?: InputMaybe<OrderByDirection>;
   image_url?: InputMaybe<OrderByDirection>;
+  store?: InputMaybe<OrderByDirection>;
   title?: InputMaybe<OrderByDirection>;
   updated_at?: InputMaybe<OrderByDirection>;
 };
@@ -2479,6 +2594,7 @@ export type Image_BannersUpdateInput = {
   header_remark?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['UUID']['input']>;
   image_url?: InputMaybe<Scalars['String']['input']>;
+  store?: InputMaybe<Scalars['UUID']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
   updated_at?: InputMaybe<Scalars['Datetime']['input']>;
 };
@@ -2691,6 +2807,8 @@ export type Offer_Banners = Node & {
   id: Scalars['UUID']['output'];
   /** Globally Unique Record Identifier */
   nodeId: Scalars['ID']['output'];
+  store: Scalars['UUID']['output'];
+  stores?: Maybe<Stores>;
   subtitle?: Maybe<Scalars['String']['output']>;
   subtitle_remark?: Maybe<Scalars['String']['output']>;
   title?: Maybe<Scalars['String']['output']>;
@@ -2732,6 +2850,7 @@ export type Offer_BannersFilter = {
   not?: InputMaybe<Offer_BannersFilter>;
   /** Returns true if at least one of its inner filters is true, otherwise returns false */
   or?: InputMaybe<Array<Offer_BannersFilter>>;
+  store?: InputMaybe<UuidFilter>;
   subtitle?: InputMaybe<StringFilter>;
   subtitle_remark?: InputMaybe<StringFilter>;
   title?: InputMaybe<StringFilter>;
@@ -2746,6 +2865,7 @@ export type Offer_BannersInsertInput = {
   cta_url?: InputMaybe<Scalars['String']['input']>;
   header?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['UUID']['input']>;
+  store?: InputMaybe<Scalars['UUID']['input']>;
   subtitle?: InputMaybe<Scalars['String']['input']>;
   subtitle_remark?: InputMaybe<Scalars['String']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
@@ -2768,6 +2888,7 @@ export type Offer_BannersOrderBy = {
   cta_url?: InputMaybe<OrderByDirection>;
   header?: InputMaybe<OrderByDirection>;
   id?: InputMaybe<OrderByDirection>;
+  store?: InputMaybe<OrderByDirection>;
   subtitle?: InputMaybe<OrderByDirection>;
   subtitle_remark?: InputMaybe<OrderByDirection>;
   title?: InputMaybe<OrderByDirection>;
@@ -2782,6 +2903,7 @@ export type Offer_BannersUpdateInput = {
   cta_url?: InputMaybe<Scalars['String']['input']>;
   header?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['UUID']['input']>;
+  store?: InputMaybe<Scalars['UUID']['input']>;
   subtitle?: InputMaybe<Scalars['String']['input']>;
   subtitle_remark?: InputMaybe<Scalars['String']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
@@ -3256,9 +3378,113 @@ export type Phone_NumbersUpdateResponse = {
   records: Array<Phone_Numbers>;
 };
 
+export type Product_Tags = Node & {
+  __typename?: 'product_tags';
+  created_at: Scalars['Datetime']['output'];
+  id: Scalars['UUID']['output'];
+  is_discount_tag: Scalars['Boolean']['output'];
+  is_general_tag: Scalars['Boolean']['output'];
+  /** Globally Unique Record Identifier */
+  nodeId: Scalars['ID']['output'];
+  product: Scalars['UUID']['output'];
+  products?: Maybe<Products>;
+  tag: Scalars['String']['output'];
+  tag_types?: Maybe<Tag_Types>;
+  type: Scalars['UUID']['output'];
+  updated_at?: Maybe<Scalars['Datetime']['output']>;
+};
+
+export type Product_TagsConnection = {
+  __typename?: 'product_tagsConnection';
+  edges: Array<Product_TagsEdge>;
+  pageInfo: PageInfo;
+};
+
+export type Product_TagsDeleteResponse = {
+  __typename?: 'product_tagsDeleteResponse';
+  /** Count of the records impacted by the mutation */
+  affectedCount: Scalars['Int']['output'];
+  /** Array of records impacted by the mutation */
+  records: Array<Product_Tags>;
+};
+
+export type Product_TagsEdge = {
+  __typename?: 'product_tagsEdge';
+  cursor: Scalars['String']['output'];
+  node: Product_Tags;
+};
+
+export type Product_TagsFilter = {
+  /** Returns true only if all its inner filters are true, otherwise returns false */
+  and?: InputMaybe<Array<Product_TagsFilter>>;
+  created_at?: InputMaybe<DatetimeFilter>;
+  id?: InputMaybe<UuidFilter>;
+  is_discount_tag?: InputMaybe<BooleanFilter>;
+  is_general_tag?: InputMaybe<BooleanFilter>;
+  nodeId?: InputMaybe<IdFilter>;
+  /** Negates a filter */
+  not?: InputMaybe<Product_TagsFilter>;
+  /** Returns true if at least one of its inner filters is true, otherwise returns false */
+  or?: InputMaybe<Array<Product_TagsFilter>>;
+  product?: InputMaybe<UuidFilter>;
+  tag?: InputMaybe<StringFilter>;
+  type?: InputMaybe<UuidFilter>;
+  updated_at?: InputMaybe<DatetimeFilter>;
+};
+
+export type Product_TagsInsertInput = {
+  created_at?: InputMaybe<Scalars['Datetime']['input']>;
+  id?: InputMaybe<Scalars['UUID']['input']>;
+  is_discount_tag?: InputMaybe<Scalars['Boolean']['input']>;
+  is_general_tag?: InputMaybe<Scalars['Boolean']['input']>;
+  product?: InputMaybe<Scalars['UUID']['input']>;
+  tag?: InputMaybe<Scalars['String']['input']>;
+  type?: InputMaybe<Scalars['UUID']['input']>;
+  updated_at?: InputMaybe<Scalars['Datetime']['input']>;
+};
+
+export type Product_TagsInsertResponse = {
+  __typename?: 'product_tagsInsertResponse';
+  /** Count of the records impacted by the mutation */
+  affectedCount: Scalars['Int']['output'];
+  /** Array of records impacted by the mutation */
+  records: Array<Product_Tags>;
+};
+
+export type Product_TagsOrderBy = {
+  created_at?: InputMaybe<OrderByDirection>;
+  id?: InputMaybe<OrderByDirection>;
+  is_discount_tag?: InputMaybe<OrderByDirection>;
+  is_general_tag?: InputMaybe<OrderByDirection>;
+  product?: InputMaybe<OrderByDirection>;
+  tag?: InputMaybe<OrderByDirection>;
+  type?: InputMaybe<OrderByDirection>;
+  updated_at?: InputMaybe<OrderByDirection>;
+};
+
+export type Product_TagsUpdateInput = {
+  created_at?: InputMaybe<Scalars['Datetime']['input']>;
+  id?: InputMaybe<Scalars['UUID']['input']>;
+  is_discount_tag?: InputMaybe<Scalars['Boolean']['input']>;
+  is_general_tag?: InputMaybe<Scalars['Boolean']['input']>;
+  product?: InputMaybe<Scalars['UUID']['input']>;
+  tag?: InputMaybe<Scalars['String']['input']>;
+  type?: InputMaybe<Scalars['UUID']['input']>;
+  updated_at?: InputMaybe<Scalars['Datetime']['input']>;
+};
+
+export type Product_TagsUpdateResponse = {
+  __typename?: 'product_tagsUpdateResponse';
+  /** Count of the records impacted by the mutation */
+  affectedCount: Scalars['Int']['output'];
+  /** Array of records impacted by the mutation */
+  records: Array<Product_Tags>;
+};
+
 export type Products = Node & {
   __typename?: 'products';
   available_quantity?: Maybe<Scalars['BigInt']['output']>;
+  categories?: Maybe<Array<Maybe<Scalars['UUID']['output']>>>;
   created_at: Scalars['Datetime']['output'];
   currencies?: Maybe<Currencies>;
   currency: Scalars['UUID']['output'];
@@ -3272,11 +3498,14 @@ export type Products = Node & {
   /** Globally Unique Record Identifier */
   nodeId: Scalars['ID']['output'];
   price: Scalars['Float']['output'];
+  product_tagsCollection?: Maybe<Product_TagsConnection>;
   rating?: Maybe<Scalars['Int']['output']>;
+  render_order?: Maybe<Scalars['BigInt']['output']>;
   sku: Scalars['String']['output'];
   slug?: Maybe<Scalars['String']['output']>;
   store: Scalars['UUID']['output'];
   stores?: Maybe<Stores>;
+  tags?: Maybe<Array<Maybe<Scalars['UUID']['output']>>>;
   updated_at?: Maybe<Scalars['Datetime']['output']>;
 };
 
@@ -3289,6 +3518,17 @@ export type ProductsLine_ItemsCollectionArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<Array<Line_ItemsOrderBy>>;
+};
+
+
+export type ProductsProduct_TagsCollectionArgs = {
+  after?: InputMaybe<Scalars['Cursor']['input']>;
+  before?: InputMaybe<Scalars['Cursor']['input']>;
+  filter?: InputMaybe<Product_TagsFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<Product_TagsOrderBy>>;
 };
 
 export type ProductsConnection = {
@@ -3315,6 +3555,7 @@ export type ProductsFilter = {
   /** Returns true only if all its inner filters are true, otherwise returns false */
   and?: InputMaybe<Array<ProductsFilter>>;
   available_quantity?: InputMaybe<BigIntFilter>;
+  categories?: InputMaybe<UuidListFilter>;
   created_at?: InputMaybe<DatetimeFilter>;
   currency?: InputMaybe<UuidFilter>;
   description?: InputMaybe<StringFilter>;
@@ -3330,14 +3571,17 @@ export type ProductsFilter = {
   or?: InputMaybe<Array<ProductsFilter>>;
   price?: InputMaybe<FloatFilter>;
   rating?: InputMaybe<IntFilter>;
+  render_order?: InputMaybe<BigIntFilter>;
   sku?: InputMaybe<StringFilter>;
   slug?: InputMaybe<StringFilter>;
   store?: InputMaybe<UuidFilter>;
+  tags?: InputMaybe<UuidListFilter>;
   updated_at?: InputMaybe<DatetimeFilter>;
 };
 
 export type ProductsInsertInput = {
   available_quantity?: InputMaybe<Scalars['BigInt']['input']>;
+  categories?: InputMaybe<Array<InputMaybe<Scalars['UUID']['input']>>>;
   created_at?: InputMaybe<Scalars['Datetime']['input']>;
   currency?: InputMaybe<Scalars['UUID']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
@@ -3348,9 +3592,11 @@ export type ProductsInsertInput = {
   name?: InputMaybe<Scalars['String']['input']>;
   price?: InputMaybe<Scalars['Float']['input']>;
   rating?: InputMaybe<Scalars['Int']['input']>;
+  render_order?: InputMaybe<Scalars['BigInt']['input']>;
   sku?: InputMaybe<Scalars['String']['input']>;
   slug?: InputMaybe<Scalars['String']['input']>;
   store?: InputMaybe<Scalars['UUID']['input']>;
+  tags?: InputMaybe<Array<InputMaybe<Scalars['UUID']['input']>>>;
   updated_at?: InputMaybe<Scalars['Datetime']['input']>;
 };
 
@@ -3374,6 +3620,7 @@ export type ProductsOrderBy = {
   name?: InputMaybe<OrderByDirection>;
   price?: InputMaybe<OrderByDirection>;
   rating?: InputMaybe<OrderByDirection>;
+  render_order?: InputMaybe<OrderByDirection>;
   sku?: InputMaybe<OrderByDirection>;
   slug?: InputMaybe<OrderByDirection>;
   store?: InputMaybe<OrderByDirection>;
@@ -3382,6 +3629,7 @@ export type ProductsOrderBy = {
 
 export type ProductsUpdateInput = {
   available_quantity?: InputMaybe<Scalars['BigInt']['input']>;
+  categories?: InputMaybe<Array<InputMaybe<Scalars['UUID']['input']>>>;
   created_at?: InputMaybe<Scalars['Datetime']['input']>;
   currency?: InputMaybe<Scalars['UUID']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
@@ -3392,9 +3640,11 @@ export type ProductsUpdateInput = {
   name?: InputMaybe<Scalars['String']['input']>;
   price?: InputMaybe<Scalars['Float']['input']>;
   rating?: InputMaybe<Scalars['Int']['input']>;
+  render_order?: InputMaybe<Scalars['BigInt']['input']>;
   sku?: InputMaybe<Scalars['String']['input']>;
   slug?: InputMaybe<Scalars['String']['input']>;
   store?: InputMaybe<Scalars['UUID']['input']>;
+  tags?: InputMaybe<Array<InputMaybe<Scalars['UUID']['input']>>>;
   updated_at?: InputMaybe<Scalars['Datetime']['input']>;
 };
 
@@ -3410,10 +3660,11 @@ export type Store_Features = Node & {
   __typename?: 'store_features';
   created_at: Scalars['Datetime']['output'];
   description?: Maybe<Scalars['String']['output']>;
-  icon_url?: Maybe<Scalars['String']['output']>;
+  icon_name?: Maybe<Scalars['String']['output']>;
   id: Scalars['UUID']['output'];
   /** Globally Unique Record Identifier */
   nodeId: Scalars['ID']['output'];
+  render_order?: Maybe<Scalars['Int']['output']>;
   store: Scalars['UUID']['output'];
   stores?: Maybe<Stores>;
   title: Scalars['String']['output'];
@@ -3445,13 +3696,14 @@ export type Store_FeaturesFilter = {
   and?: InputMaybe<Array<Store_FeaturesFilter>>;
   created_at?: InputMaybe<DatetimeFilter>;
   description?: InputMaybe<StringFilter>;
-  icon_url?: InputMaybe<StringFilter>;
+  icon_name?: InputMaybe<StringFilter>;
   id?: InputMaybe<UuidFilter>;
   nodeId?: InputMaybe<IdFilter>;
   /** Negates a filter */
   not?: InputMaybe<Store_FeaturesFilter>;
   /** Returns true if at least one of its inner filters is true, otherwise returns false */
   or?: InputMaybe<Array<Store_FeaturesFilter>>;
+  render_order?: InputMaybe<IntFilter>;
   store?: InputMaybe<UuidFilter>;
   title?: InputMaybe<StringFilter>;
   updated_at?: InputMaybe<DatetimeFilter>;
@@ -3460,8 +3712,9 @@ export type Store_FeaturesFilter = {
 export type Store_FeaturesInsertInput = {
   created_at?: InputMaybe<Scalars['Datetime']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
-  icon_url?: InputMaybe<Scalars['String']['input']>;
+  icon_name?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['UUID']['input']>;
+  render_order?: InputMaybe<Scalars['Int']['input']>;
   store?: InputMaybe<Scalars['UUID']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
   updated_at?: InputMaybe<Scalars['Datetime']['input']>;
@@ -3478,8 +3731,9 @@ export type Store_FeaturesInsertResponse = {
 export type Store_FeaturesOrderBy = {
   created_at?: InputMaybe<OrderByDirection>;
   description?: InputMaybe<OrderByDirection>;
-  icon_url?: InputMaybe<OrderByDirection>;
+  icon_name?: InputMaybe<OrderByDirection>;
   id?: InputMaybe<OrderByDirection>;
+  render_order?: InputMaybe<OrderByDirection>;
   store?: InputMaybe<OrderByDirection>;
   title?: InputMaybe<OrderByDirection>;
   updated_at?: InputMaybe<OrderByDirection>;
@@ -3488,8 +3742,9 @@ export type Store_FeaturesOrderBy = {
 export type Store_FeaturesUpdateInput = {
   created_at?: InputMaybe<Scalars['Datetime']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
-  icon_url?: InputMaybe<Scalars['String']['input']>;
+  icon_name?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['UUID']['input']>;
+  render_order?: InputMaybe<Scalars['Int']['input']>;
   store?: InputMaybe<Scalars['UUID']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
   updated_at?: InputMaybe<Scalars['Datetime']['input']>;
@@ -3512,10 +3767,13 @@ export type Stores = Node & {
   coupon_codesCollection?: Maybe<Coupon_CodesConnection>;
   created_at: Scalars['Datetime']['output'];
   description?: Maybe<Scalars['String']['output']>;
+  header_bannersCollection?: Maybe<Header_BannersConnection>;
   id: Scalars['UUID']['output'];
+  image_bannersCollection?: Maybe<Image_BannersConnection>;
   name: Scalars['String']['output'];
   /** Globally Unique Record Identifier */
   nodeId: Scalars['ID']['output'];
+  offer_bannersCollection?: Maybe<Offer_BannersConnection>;
   payment_methodsCollection?: Maybe<Payment_MethodsConnection>;
   productsCollection?: Maybe<ProductsConnection>;
   store_featuresCollection?: Maybe<Store_FeaturesConnection>;
@@ -3553,6 +3811,39 @@ export type StoresCoupon_CodesCollectionArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<Array<Coupon_CodesOrderBy>>;
+};
+
+
+export type StoresHeader_BannersCollectionArgs = {
+  after?: InputMaybe<Scalars['Cursor']['input']>;
+  before?: InputMaybe<Scalars['Cursor']['input']>;
+  filter?: InputMaybe<Header_BannersFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<Header_BannersOrderBy>>;
+};
+
+
+export type StoresImage_BannersCollectionArgs = {
+  after?: InputMaybe<Scalars['Cursor']['input']>;
+  before?: InputMaybe<Scalars['Cursor']['input']>;
+  filter?: InputMaybe<Image_BannersFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<Image_BannersOrderBy>>;
+};
+
+
+export type StoresOffer_BannersCollectionArgs = {
+  after?: InputMaybe<Scalars['Cursor']['input']>;
+  before?: InputMaybe<Scalars['Cursor']['input']>;
+  filter?: InputMaybe<Offer_BannersFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<Offer_BannersOrderBy>>;
 };
 
 
@@ -3665,6 +3956,99 @@ export type StoresUpdateResponse = {
   affectedCount: Scalars['Int']['output'];
   /** Array of records impacted by the mutation */
   records: Array<Stores>;
+};
+
+export type Tag_Types = Node & {
+  __typename?: 'tag_types';
+  created_at: Scalars['Datetime']['output'];
+  id: Scalars['UUID']['output'];
+  /** Globally Unique Record Identifier */
+  nodeId: Scalars['ID']['output'];
+  product_tagsCollection?: Maybe<Product_TagsConnection>;
+  type: Scalars['String']['output'];
+  updated_at?: Maybe<Scalars['Datetime']['output']>;
+};
+
+
+export type Tag_TypesProduct_TagsCollectionArgs = {
+  after?: InputMaybe<Scalars['Cursor']['input']>;
+  before?: InputMaybe<Scalars['Cursor']['input']>;
+  filter?: InputMaybe<Product_TagsFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<Product_TagsOrderBy>>;
+};
+
+export type Tag_TypesConnection = {
+  __typename?: 'tag_typesConnection';
+  edges: Array<Tag_TypesEdge>;
+  pageInfo: PageInfo;
+};
+
+export type Tag_TypesDeleteResponse = {
+  __typename?: 'tag_typesDeleteResponse';
+  /** Count of the records impacted by the mutation */
+  affectedCount: Scalars['Int']['output'];
+  /** Array of records impacted by the mutation */
+  records: Array<Tag_Types>;
+};
+
+export type Tag_TypesEdge = {
+  __typename?: 'tag_typesEdge';
+  cursor: Scalars['String']['output'];
+  node: Tag_Types;
+};
+
+export type Tag_TypesFilter = {
+  /** Returns true only if all its inner filters are true, otherwise returns false */
+  and?: InputMaybe<Array<Tag_TypesFilter>>;
+  created_at?: InputMaybe<DatetimeFilter>;
+  id?: InputMaybe<UuidFilter>;
+  nodeId?: InputMaybe<IdFilter>;
+  /** Negates a filter */
+  not?: InputMaybe<Tag_TypesFilter>;
+  /** Returns true if at least one of its inner filters is true, otherwise returns false */
+  or?: InputMaybe<Array<Tag_TypesFilter>>;
+  type?: InputMaybe<StringFilter>;
+  updated_at?: InputMaybe<DatetimeFilter>;
+};
+
+export type Tag_TypesInsertInput = {
+  created_at?: InputMaybe<Scalars['Datetime']['input']>;
+  id?: InputMaybe<Scalars['UUID']['input']>;
+  type?: InputMaybe<Scalars['String']['input']>;
+  updated_at?: InputMaybe<Scalars['Datetime']['input']>;
+};
+
+export type Tag_TypesInsertResponse = {
+  __typename?: 'tag_typesInsertResponse';
+  /** Count of the records impacted by the mutation */
+  affectedCount: Scalars['Int']['output'];
+  /** Array of records impacted by the mutation */
+  records: Array<Tag_Types>;
+};
+
+export type Tag_TypesOrderBy = {
+  created_at?: InputMaybe<OrderByDirection>;
+  id?: InputMaybe<OrderByDirection>;
+  type?: InputMaybe<OrderByDirection>;
+  updated_at?: InputMaybe<OrderByDirection>;
+};
+
+export type Tag_TypesUpdateInput = {
+  created_at?: InputMaybe<Scalars['Datetime']['input']>;
+  id?: InputMaybe<Scalars['UUID']['input']>;
+  type?: InputMaybe<Scalars['String']['input']>;
+  updated_at?: InputMaybe<Scalars['Datetime']['input']>;
+};
+
+export type Tag_TypesUpdateResponse = {
+  __typename?: 'tag_typesUpdateResponse';
+  /** Count of the records impacted by the mutation */
+  affectedCount: Scalars['Int']['output'];
+  /** Array of records impacted by the mutation */
+  records: Array<Tag_Types>;
 };
 
 export type Transactions = Node & {

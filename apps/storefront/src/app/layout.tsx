@@ -8,6 +8,7 @@ import { DefaultLayout } from "@/components/ui/common/default-layout";
 import NextTopLoader from "nextjs-toploader";
 import { ApolloWrapper } from "@/context/apollo-context";
 import { CartContextProvider } from "@/context/cart-context";
+import { Toaster } from "@/components/ui/common/toaster";
 
 validateEnvs();
 
@@ -40,6 +41,7 @@ export default function RootLayout({
             <DefaultLayout>{children}</DefaultLayout>
           </CartContextProvider>
         </ApolloWrapper>
+        <Toaster />
       </body>
     </html>
   );

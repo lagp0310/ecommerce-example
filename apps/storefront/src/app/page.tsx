@@ -205,12 +205,14 @@ export default async function Home() {
   };
 
   const storeHighlightsToShow = 4;
-  const storeHighlightsQuery = allStoreFeatures(
-    `first: ${storeHighlightsToShow}, after: $cursor, filter: {store: {eq: "${env.NEXT_PUBLIC_STORE_ID}"}}, orderBy:{ render_order: AscNullsFirst }`
-  );
   const storeHighlights = await queryGraphql(
     "store_featuresCollection",
-    storeHighlightsQuery
+    allStoreFeatures,
+    {
+      first: storeHighlightsToShow,
+      filter: { store: { eq: env.NEXT_PUBLIC_STORE_ID } },
+      orderBy: { render_order: "AscNullsFirst" },
+    }
   );
   const highlightCarouselProviderProps: CarouselProviderCustomProps = {
     naturalSlideHeight: defaultSlideHeight,

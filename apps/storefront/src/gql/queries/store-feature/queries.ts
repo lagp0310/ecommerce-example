@@ -1,9 +1,25 @@
 import { gql } from "@apollo/client";
 import { storeFeatureFragment } from "@/gql/fragments/store-feature/fragments";
 
-export const allStoreFeatures = (params: string) => gql`
-  query AllStoreFeatures($cursor: Cursor) {
-    store_featuresCollection(${params}) {
+export const allStoreFeatures = gql`
+  query AllStoreFeatures(
+    $first: Int
+    $last: Int
+    $before: Cursor
+    $after: Cursor
+    $offset: Int
+    $filter: store_featuresFilter
+    $orderBy: [store_featuresOrderBy!]
+  ) {
+    store_featuresCollection(
+      first: $first
+      last: $last
+      before: $before
+      after: $after
+      offset: $offset
+      filter: $filter
+      orderBy: $orderBy
+    ) {
       edges {
         node {
           ...StoreFeatureFragment

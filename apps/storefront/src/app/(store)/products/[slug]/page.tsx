@@ -13,6 +13,7 @@ import { ProductTag } from "@/components/ui/product/product-tag";
 import { ProductTitle } from "@/components/ui/product/product-title";
 import { Rating } from "@/components/ui/product/rating";
 import {
+  defaultCurrencySymbol,
   defaultProductsShowPerPage,
   defaultSortBy,
   defaultSortByDirection,
@@ -22,10 +23,12 @@ import {
   relatedProductsCarouselRendererProps,
   relatedProductsToShow,
 } from "@/constants/product/constants";
+import type { Products } from "@/gql/graphql";
 import { allProducts } from "@/gql/queries/product/queries";
 import { env } from "@/lib/env";
 import { queryGraphql } from "@/lib/server-query";
 import { cn, parseProductTags } from "@/lib/utils";
+import type { TProduct } from "@/types/types";
 import {
   ArrowRightIcon,
   ShoppingBagIcon,
@@ -43,32 +46,35 @@ export default async function Product({
 }) {
   const { slug } = await params;
 
-  const productResult = await queryGraphql("productsCollection", allProducts, {
-    filter: {
-      slug: { eq: slug },
-      store: { eq: env.NEXT_PUBLIC_STORE_ID },
-    },
-    orderBy: {
-      [defaultSortBy]:
-        defaultSortByDirection === "asc" ? "AscNullsLast" : "DescNullsLast",
-    },
-  });
+  const productResult = await queryGraphql<Products[]>(
+    "productsCollection",
+    allProducts,
+    {
+      filter: {
+        slug: { eq: slug },
+        store: { eq: env.NEXT_PUBLIC_STORE_ID },
+      },
+      orderBy: {
+        [defaultSortBy]:
+          defaultSortByDirection === "asc" ? "AscNullsLast" : "DescNullsLast",
+      },
+    }
+  );
   const product = parseProductTags(productResult)?.at(0);
   const {
     id: productId,
     name,
     price,
-    discountedPrice,
-    imageUrl,
-    currencies: { currencySymbol },
+    discounted_price: discountedPrice,
+    image_url: imageUrl,
+    currencies,
     rating,
     generalTags,
     discountTags,
-    totalRatings,
     description,
-  } = product;
+  } = product as TProduct;
 
-  const relatedProductsResult = await queryGraphql(
+  const relatedProductsResult = await queryGraphql<Products[]>(
     "productsCollection",
     allProducts,
     {
@@ -91,15 +97,17 @@ export default async function Product({
       <div className="flex max-w-7xl flex-1 flex-col px-6 py-8 xl:px-0">
         <div className="flex flex-1 flex-col gap-x-4 sm:flex-row">
           <div className="flex flex-1 basis-1/2 flex-row items-center justify-center">
-            <Image
-              src={imageUrl}
-              alt={name}
-              width={550}
-              height={550}
-              quality={100}
-              sizes="100vw"
-              className="max-h-52 max-w-52 md:max-h-64 md:max-w-64 lg:max-h-[550px] lg:max-w-[550px]"
-            />
+            {typeof imageUrl === "string" ? (
+              <Image
+                src={imageUrl}
+                alt={name}
+                width={550}
+                height={550}
+                quality={100}
+                sizes="100vw"
+                className="max-h-52 max-w-52 md:max-h-64 md:max-w-64 lg:max-h-[550px] lg:max-w-[550px]"
+              />
+            ) : null}
           </div>
           <div className="flex basis-1/2 flex-col gap-6">
             <div className="flex flex-col justify-center gap-5 border-b border-gray-100 pb-5">
@@ -118,14 +126,18 @@ export default async function Product({
                 </div>
               </div>
               <div className="flex flex-row items-center gap-2">
-                <Rating
-                  className="flex flex-row justify-end gap-x-0.5"
-                  rating={rating}
-                  emptyIcon={<StarIcon className="size-[18px] text-warning" />}
-                  filledIcon={
-                    <FilledStarIcon className="size-[18px] text-warning" />
-                  }
-                />
+                {typeof rating === "number" ? (
+                  <Rating
+                    className="flex flex-row justify-end gap-x-0.5"
+                    rating={rating}
+                    emptyIcon={
+                      <StarIcon className="size-[18px] text-warning" />
+                    }
+                    filledIcon={
+                      <FilledStarIcon className="size-[18px] text-warning" />
+                    }
+                  />
+                ) : null}
                 {/* <div className="items-center">
                   <span className="text-body-small font-normal text-gray-600">{`${totalRatings} Reviews`}</span>
                 </div> */}
@@ -133,7 +145,7 @@ export default async function Product({
               <div className="flex flex-row items-center gap-4">
                 <ProductPricing
                   className="flex flex-row items-center gap-2"
-                  currencySymbol={currencySymbol}
+                  currencySymbol={currencies?.symbol ?? defaultCurrencySymbol}
                   price={price}
                   discountedPrice={discountedPrice}
                   discountedPriceClasses={cn(
@@ -160,16 +172,18 @@ export default async function Product({
               </p>
             </div>
             <div className="flex h-[45px] flex-row items-center gap-3 pb-5">
-              <AddToCartWrapper
-                wrapperClassName={"flex flex-row w-fit h-[45px]"}
-                product={product}
-                className="group flex h-[45px] flex-1 flex-row items-center justify-center gap-x-2 rounded-full bg-primary text-body-small font-semibold leading-6 text-white hover:border hover:border-primary hover:bg-white hover:text-primary disabled:cursor-not-allowed disabled:border-none disabled:opacity-50 disabled:transition-none disabled:hover:bg-primary disabled:hover:text-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
-                minusClassName="disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:border-gray-100 rounded-full border border-gray-100 p-4 flex flex-1 flex-row items-center justify-center group/minus-button hover:border-transparent hover:bg-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
-                moreClassName="disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:border-gray-100 rounded-full border border-gray-100 p-4 flex flex-1 flex-row items-center justify-center group/more-button hover:border-transparent hover:bg-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
-              >
-                Add to Cart
-                <ShoppingBagIcon className="size-5 group-hover:text-primary group-disabled:text-white" />
-              </AddToCartWrapper>
+              {!!product ? (
+                <AddToCartWrapper
+                  wrapperClassName={"flex flex-row w-fit h-[45px]"}
+                  product={product}
+                  className="group flex h-[45px] flex-1 flex-row items-center justify-center gap-x-2 rounded-full bg-primary text-body-small font-semibold leading-6 text-white hover:border hover:border-primary hover:bg-white hover:text-primary disabled:cursor-not-allowed disabled:border-none disabled:opacity-50 disabled:transition-none disabled:hover:bg-primary disabled:hover:text-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
+                  minusClassName="disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:border-gray-100 rounded-full border border-gray-100 p-4 flex flex-1 flex-row items-center justify-center group/minus-button hover:border-transparent hover:bg-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
+                  moreClassName="disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:border-gray-100 rounded-full border border-gray-100 p-4 flex flex-1 flex-row items-center justify-center group/more-button hover:border-transparent hover:bg-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
+                >
+                  Add to Cart
+                  <ShoppingBagIcon className="size-5 group-hover:text-primary group-disabled:text-white" />
+                </AddToCartWrapper>
+              ) : null}
               {/* <Button className="h-[50px] w-[50px] group flex flex-row items-center justify-center rounded-full bg-gray-50 hover:bg-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none">
                 <HeartIcon className="size-5 text-gray-900 group-hover:text-white" />
               </Button> */}

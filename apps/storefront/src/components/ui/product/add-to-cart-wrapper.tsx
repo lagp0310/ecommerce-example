@@ -23,7 +23,7 @@ export function AddToCartWrapper({
   product,
   ...buttonProps
 }: Props) {
-  const { cart, handleAddToCart } = useCart();
+  const { cart, lineItems, handleAddToCart } = useCart();
 
   const [lineItemId, setLineItemId] = React.useState<string | null>(null);
   React.useEffect(() => {
@@ -41,7 +41,7 @@ export function AddToCartWrapper({
       .catch((error) => {
         throw new Error(error);
       });
-  }, [cart?.id, product.id]);
+  }, [cart?.id, lineItems, product.id]);
 
   const [showCounter, setShowCounter] = React.useState(!!lineItemId);
   React.useEffect(() => {

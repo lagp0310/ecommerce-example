@@ -17,6 +17,7 @@ import type { Product } from "@/types/types";
 import isUUID from "validator/es/lib/isUUID";
 import { getCart as getCartQuery } from "@/gql/queries/cart/queries";
 import { allLineItems } from "@/gql/queries/line-item/queries";
+import { useToast } from "@/hooks/use-toast";
 
 type CartContext = {
   cart: Carts | null;
@@ -52,6 +53,7 @@ type Props = {
 };
 
 export function CartContextProvider({ children, currentCart = null }: Props) {
+  const { toast } = useToast();
   const [cart, setCart] = React.useState(currentCart);
   const [lineItems, setLineItems] = React.useState<Line_Items[]>([]);
   const [getCart] = useLazyQuery(getCartQuery);
@@ -176,6 +178,15 @@ export function CartContextProvider({ children, currentCart = null }: Props) {
           },
         });
 
+        const newLineItem =
+          lineItemsData?.insertIntoline_itemsCollection?.records?.at(0);
+        setLineItems((lineItems) => lineItems.concat(newLineItem));
+
+        toast({
+          duration: 5000,
+          description: `Added ${product.name} to Cart!`,
+        });
+
         if (!localStorageCartId) {
           window.localStorage.setItem(localStorageCartIdItemName, cartId);
         }
@@ -183,7 +194,7 @@ export function CartContextProvider({ children, currentCart = null }: Props) {
         console.error(error);
       }
     },
-    [cart?.id, mutateCreateCart, mutateCreateLineItems]
+    [cart?.id, mutateCreateCart, mutateCreateLineItems, toast]
   );
 
   const handleDeleteLineItem = React.useCallback(
@@ -194,11 +205,20 @@ export function CartContextProvider({ children, currentCart = null }: Props) {
             filter: { id: { eq: lineItemId } },
           },
         });
+
+        setLineItems((lineItems) =>
+          lineItems.filter(({ id }) => id != lineItemId)
+        );
+
+        toast({
+          duration: 5000,
+          description: "Product was removed from the Cart",
+        });
       } catch (error) {
         console.error(error);
       }
     },
-    [mutateDeleteLineItems]
+    [mutateDeleteLineItems, toast]
   );
 
   const handleUpdateQuantity = React.useCallback(
@@ -228,11 +248,22 @@ export function CartContextProvider({ children, currentCart = null }: Props) {
             },
           },
         });
+
+        const updatedLineItem =
+          lineItemsData?.updateline_itemsCollection?.records?.at(0);
+        setLineItems((lineItems) =>
+          lineItems.filter(({ id }) => id != lineItemId).concat(updatedLineItem)
+        );
+
+        toast({
+          duration: 5000,
+          description: "Quantity Updated",
+        });
       } catch (error) {
         console.error(error);
       }
     },
-    [cart, handleDeleteLineItem, mutateUpdateLineItems]
+    [cart, handleDeleteLineItem, mutateUpdateLineItems, toast]
   );
 
   const providerValue = React.useMemo(

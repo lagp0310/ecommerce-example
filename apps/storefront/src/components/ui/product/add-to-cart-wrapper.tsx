@@ -4,7 +4,7 @@ import React from "react";
 import { Button } from "@/components/ui/common/button";
 import { Counter } from "@/components/ui/product/counter";
 import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
-import type { TProduct } from "@/types/types";
+import type { GetLineItemIdResponse, TProduct } from "@/types/types";
 import { useCart } from "@/context/cart-context";
 import isUUID from "validator/es/lib/isUUID";
 import { callDatabaseFunction } from "@/lib/call-database-function";
@@ -40,13 +40,18 @@ export function AddToCartWrapper({
     if (!cart?.id || !product.id) {
       return;
     }
-    callDatabaseFunction("get_line_item_id", {
+
+    callDatabaseFunction<GetLineItemIdResponse>("get_line_item_id", {
       cart_id: cart?.id,
       product_id: product.id,
     })
-      .then(({ line_item_id: lineItemId }) => {
+      .then((response) => {
+        const lineItemId = response?.line_item_id;
         setWasGetLineItemIdSuccessful(true);
-        setLineItemId(lineItemId);
+
+        if (typeof lineItemId === "string") {
+          setLineItemId(lineItemId);
+        }
       })
       .catch((error) => {
         console.log(error);

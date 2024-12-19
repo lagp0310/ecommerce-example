@@ -99,6 +99,7 @@ export default async function Products({
 
   const productsResult = await queryGraphql("productsCollection", allProducts, {
     first: productsToShow,
+    offset: (page - 1) * productsToShow,
     filter: {
       store: { eq: env.NEXT_PUBLIC_STORE_ID },
       available_quantity: { gt: 0 },

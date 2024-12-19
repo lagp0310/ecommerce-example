@@ -551,13 +551,11 @@ export default async function Home() {
   const featuredProducts = parseProductTags(featuredProductsResult);
 
   const categoriesToShow = 12;
-  const categoriesQuery = allCategories(
-    `first: ${categoriesToShow}, after: $cursor, filter: {store: {eq: "${env.NEXT_PUBLIC_STORE_ID}"}}, orderBy:{ name: AscNullsFirst }`
-  );
-  const categories = await queryGraphql(
-    "categoriesCollection",
-    categoriesQuery
-  );
+  const categories = await queryGraphql("categoriesCollection", allCategories, {
+    first: categoriesToShow,
+    filter: { store: { eq: env.NEXT_PUBLIC_STORE_ID } },
+    orderBy: { name: "AscNullsFirst" },
+  });
 
   return (
     <div className="flex flex-1 flex-col">

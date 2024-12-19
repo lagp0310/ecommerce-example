@@ -71,37 +71,11 @@ export default async function Products({
   }
 
   const categoriesToShow = 30;
-  const categoriesQuery = allCategories(
-    `first: ${categoriesToShow}, after: $cursor, filter: {store: {eq: "${env.NEXT_PUBLIC_STORE_ID}"}}, orderBy:{ name: AscNullsFirst }`
-  );
-  const categories = await queryGraphql(
-    "categoriesCollection",
-    categoriesQuery
-  );
-
-  const productsToShow = 20;
-  const productsQuery = allProducts(
-    `
-      first: ${productsToShow}, 
-      after: $cursor,
-      filter: {
-        store: {eq: "${env.NEXT_PUBLIC_STORE_ID}"},
-        available_quantity: { gt: 0 },
-        ${!!maxPrice ? `price: { lte: ${parseInt(maxPrice)} },` : ""}
-        ${!!minRating ? `rating: { gte: ${parseInt(minRating)} },` : ""}
-        or: [
-          ${!!categoriesSearchParam ? `${categoriesSearchParam?.split(",")?.map((value: string) => `{ categories: { contains: ["${value}"] } }`)},` : ""}
-          ${!!tags ? `${tags?.split(",")?.map((value: string) => `{ tags: { contains: ["${value}"] } }`)},` : ""}
-        ],
-      }
-      orderBy: { ${sortBy}: ${sortByDirection === "asc" ? "AscNullsLast" : "DescNullsLast"} }
-    `
-  );
-  const productsResult = await queryGraphql(
-    "productsCollection",
-    productsQuery
-  );
-  const products = parseProductTags(productsResult);
+  const categories = await queryGraphql("categoriesCollection", allCategories, {
+    first: categoriesToShow,
+    filter: { store: { eq: env.NEXT_PUBLIC_STORE_ID } },
+    orderBy: { name: "AscNullsFirst" },
+  });
 
   const allTags = await callDatabaseFunction("get_all_product_tags", {
     store_id: env.NEXT_PUBLIC_STORE_ID,

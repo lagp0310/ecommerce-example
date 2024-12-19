@@ -5,12 +5,14 @@ const client = getClient();
 
 export async function queryGraphql(
   collectionName: string,
-  query: DocumentNode
+  query: DocumentNode,
+  variables?: any
 ) {
   try {
     // TODO: Response types. Check generated graphql types.
     const { data, error } = await client.query({
       query,
+      variables,
     });
 
     if (error) {

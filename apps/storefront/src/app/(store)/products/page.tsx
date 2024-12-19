@@ -53,7 +53,6 @@ import {
   productsToShow,
 } from "@/constants/product/constants";
 
-// TODO: Refactor to simplify this page when getting data. Also, Promise.all for all async calls.
 export default async function Products({
   searchParams,
 }: {

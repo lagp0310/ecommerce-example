@@ -63,8 +63,8 @@ importers:
         specifier: ^4.57.1
         version: 4.57.1(@tanstack/react-query@4.36.1(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(@types/react-dom@18.3.1)(@types/react@18.3.0)(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)
       '@refinedev/inferencer':
-        specifier: ^4.7.1
-        version: 4.7.1(d34c2vhueqdla3ogtewrcfgu2e)
+        specifier: ^5.0.1
+        version: 5.0.1(d34c2vhueqdla3ogtewrcfgu2e)
       '@refinedev/nextjs-router':
         specifier: ^6.2.1
         version: 6.2.1(@refinedev/core@4.57.1(@tanstack/react-query@4.36.1(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(@types/react-dom@18.3.1)(@types/react@18.3.0)(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(@types/react-dom@18.3.1)(@types/react@18.3.0)(next@15.0.3(@babel/core@7.25.2)(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)
@@ -2150,8 +2150,8 @@ packages:
       react: ^17.0.0 || ^18.0.0
       react-dom: ^17.0.0 || ^18.0.0
 
-  '@refinedev/inferencer@4.7.1':
-    resolution: {integrity: sha512-zoYDTr9bOeDD80PhTFKwX6VhIG/dG8N01KVdRgIBEvEBY+sMawAgX8td5la2TCWHhO0Hem9HCWGEQt/cL1iG0w==}
+  '@refinedev/inferencer@5.0.1':
+    resolution: {integrity: sha512-5FMLOJvbi0Ts6IB+lHm0wda3yNNXHudJhjJZIEMtNAfFz6iu/xO1QklMDaOwe/YpPUHEIGzsfLmtCMGTh2fa5A==}
     peerDependencies:
       '@ant-design/icons': ^5.5.1
       '@chakra-ui/react': ^2.5.1
@@ -2161,14 +2161,14 @@ packages:
       '@mantine/form': ^5.10.4
       '@mantine/hooks': ^5.10.4
       '@mantine/notifications': ^5.10.4
-      '@mui/lab': ^5.0.0-alpha.85
-      '@mui/material': ^5.14.2
-      '@mui/x-data-grid': ^6.6.0
+      '@mui/lab': ^6.0.0-beta.14
+      '@mui/material': ^6.1.7
+      '@mui/x-data-grid': ^7.22.2
       '@refinedev/antd': ^5.0.0
       '@refinedev/chakra-ui': ^2.0.0
       '@refinedev/core': ^4.54.0
       '@refinedev/mantine': ^2.0.0
-      '@refinedev/mui': ^5.0.0
+      '@refinedev/mui': ^6.0.0
       '@refinedev/react-hook-form': ^4.0.0
       '@refinedev/react-table': ^5.0.0
       '@tanstack/react-table': ^8.2.6
@@ -7901,7 +7901,7 @@ snapshots:
 
   '@emnapi/runtime@1.3.1':
     dependencies:
-      tslib: 2.7.0
+      tslib: 2.8.1
     optional: true
 
   '@emotion/hash@0.8.0': {}
@@ -9436,7 +9436,7 @@ snapshots:
     transitivePeerDependencies:
       - react-native
 
-  '@refinedev/inferencer@4.7.1(d34c2vhueqdla3ogtewrcfgu2e)':
+  '@refinedev/inferencer@5.0.1(d34c2vhueqdla3ogtewrcfgu2e)':
     dependencies:
       '@aliemir/react-live': 4.0.0(react@19.0.0-rc-66855b96-20241106)
       '@ant-design/icons': 5.5.1(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)
@@ -9455,7 +9455,7 @@ snapshots:
       react-dom: 19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106)
       react-markdown: 6.0.3(@types/react@18.3.0)(react@19.0.0-rc-66855b96-20241106)
       remark-gfm: 1.0.0
-      tslib: 2.7.0
+      tslib: 2.8.1
     optionalDependencies:
       '@refinedev/antd': 5.45.1(@refinedev/core@4.57.1(@tanstack/react-query@4.36.1(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(@types/react-dom@18.3.1)(@types/react@18.3.0)(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(@types/react-dom@18.3.1)(@types/react@18.3.0)(antd@5.22.1(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(dayjs@1.11.13)(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)
       '@refinedev/react-hook-form': 4.9.3(@refinedev/core@4.57.1(@tanstack/react-query@4.36.1(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(@types/react-dom@18.3.1)(@types/react@18.3.0)(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106))(@types/react-dom@18.3.1)(@types/react@18.3.0)(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react-hook-form@7.53.2(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)
@@ -9509,7 +9509,7 @@ snapshots:
       dayjs: 1.11.13
       react: 19.0.0-rc-66855b96-20241106
       react-dom: 19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106)
-      tslib: 2.7.0
+      tslib: 2.8.1
 
   '@repeaterjs/repeater@3.0.6': {}
 
@@ -10023,7 +10023,7 @@ snapshots:
 
   '@wry/context@0.7.4':
     dependencies:
-      tslib: 2.7.0
+      tslib: 2.8.1
 
   '@wry/equality@0.1.11':
     dependencies:
@@ -10298,11 +10298,11 @@ snapshots:
 
   ast-types@0.13.4:
     dependencies:
-      tslib: 2.7.0
+      tslib: 2.8.1
 
   ast-types@0.16.1:
     dependencies:
-      tslib: 2.7.0
+      tslib: 2.8.1
 
   astral-regex@2.0.0: {}
 
@@ -13958,7 +13958,7 @@ snapshots:
     dependencies:
       react: 19.0.0-rc-66855b96-20241106
       react-style-singleton: 2.2.1(@types/react@18.3.0)(react@19.0.0-rc-66855b96-20241106)
-      tslib: 2.7.0
+      tslib: 2.8.1
     optionalDependencies:
       '@types/react': 18.3.0
 
@@ -13986,7 +13986,7 @@ snapshots:
       get-nonce: 1.0.1
       invariant: 2.2.4
       react: 19.0.0-rc-66855b96-20241106
-      tslib: 2.7.0
+      tslib: 2.8.1
     optionalDependencies:
       '@types/react': 18.3.0
 
@@ -14038,7 +14038,7 @@ snapshots:
       esprima: 4.0.1
       source-map: 0.6.1
       tiny-invariant: 1.3.3
-      tslib: 2.7.0
+      tslib: 2.8.1
 
   recharts-scale@0.4.5:
     dependencies:
@@ -14677,7 +14677,7 @@ snapshots:
   synckit@0.9.1:
     dependencies:
       '@pkgr/core': 0.1.1
-      tslib: 2.7.0
+      tslib: 2.8.1
 
   tailwind-merge@2.5.4: {}
 
@@ -15032,7 +15032,7 @@ snapshots:
   use-callback-ref@1.3.2(@types/react@18.3.0)(react@19.0.0-rc-66855b96-20241106):
     dependencies:
       react: 19.0.0-rc-66855b96-20241106
-      tslib: 2.7.0
+      tslib: 2.8.1
     optionalDependencies:
       '@types/react': 18.3.0
 
@@ -15044,7 +15044,7 @@ snapshots:
     dependencies:
       detect-node-es: 1.1.0
       react: 19.0.0-rc-66855b96-20241106
-      tslib: 2.7.0
+      tslib: 2.8.1
     optionalDependencies:
       '@types/react': 18.3.0
 

@@ -3,7 +3,7 @@
 import React from "react";
 import { BaseRecord } from "@refinedev/core";
 import { useTable, List, EditButton, DeleteButton } from "@refinedev/antd";
-import { Table, Space } from "antd";
+import { Table, Space, Tag } from "antd";
 import {
   PlusIcon,
   PencilSquareIcon,
@@ -14,7 +14,8 @@ export const ProductList = () => {
   const { tableProps } = useTable({
     syncWithLocation: true,
     meta: {
-      select: "*, currencies(name, three_letter_code), stores(name)",
+      select:
+        "*, currencies(name, three_letter_code), stores(name), categories(name), tags(tag)",
     },
   });
 
@@ -58,6 +59,30 @@ export const ProductList = () => {
             <ImageField style={{ maxWidth: "100px" }} value={value} />
           )}
         /> */}
+        <Table.Column
+          dataIndex={["categories"]}
+          title="Categories"
+          render={(_value, record) => {
+            const categories = record?.categories;
+            const categoryTags = categories?.map(({ name }, index) => (
+              <Tag key={index}>{name}</Tag>
+            ));
+
+            return <div className="flex flex-wrap gap-y-1">{categoryTags}</div>;
+          }}
+        />
+        <Table.Column
+          dataIndex={["tags"]}
+          title="Tags"
+          render={(_value, record) => {
+            const tagsArray = record?.tags;
+            const tags = tagsArray?.map(({ tag }, index) => (
+              <Tag key={index}>{tag}</Tag>
+            ));
+
+            return <div className="flex flex-wrap gap-y-1">{tags}</div>;
+          }}
+        />
         <Table.Column
           title="Actions"
           dataIndex="actions"

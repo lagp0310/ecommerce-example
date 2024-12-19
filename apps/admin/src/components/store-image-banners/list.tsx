@@ -20,7 +20,7 @@ export const StoreImageBannerList = () => {
   const { tableProps } = useTable({
     syncWithLocation: true,
     meta: {
-      select: "*, banner_types(type)",
+      select: "*, banner_types(type), stores(name)",
     },
   });
 
@@ -31,6 +31,14 @@ export const StoreImageBannerList = () => {
     >
       <Table {...tableProps} rowKey="id">
         <Table.Column dataIndex="id" title="ID" />
+        <Table.Column
+          dataIndex={["store"]}
+          title="Store"
+          render={(_value, record) => {
+            const store = record?.stores;
+            return <span>{store?.name}</span>;
+          }}
+        />
         <Table.Column dataIndex="title" title="Title" />
         <Table.Column dataIndex="header" title="Header" />
         <Table.Column dataIndex="header_remark" title="Header Remark" />

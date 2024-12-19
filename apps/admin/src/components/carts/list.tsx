@@ -18,6 +18,7 @@ export const CartList = () => {
     <List>
       <Table {...tableProps} rowKey="id">
         <Table.Column dataIndex="id" title="ID" />
+        <Table.Column dataIndex="anonymous_id" title="Anonymous ID" />
         <Table.Column
           dataIndex={["customer"]}
           title="Customer"

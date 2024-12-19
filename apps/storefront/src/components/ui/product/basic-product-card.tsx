@@ -52,7 +52,7 @@ export function BasicProductCard({
     generalTags,
     discountTags,
     ...restProduct,
-  } as TProduct;
+  };
   const allTags = generalTags?.concat(discountTags ?? []);
   const shouldShowTags =
     Array.isArray(allTags) && allTags.length > 0 && shouldShowProductTags;

@@ -509,44 +509,47 @@ export default async function Home() {
   };
 
   const popularProductsToShow = 10;
-  const popularProductsQuery = allProducts(
-    `first: ${popularProductsToShow}, after: $cursor, 
-      filter: {
-        store: {eq: "${env.NEXT_PUBLIC_STORE_ID}"} 
-        available_quantity: { gt: 0 }},
-      orderBy: { render_order: AscNullsLast }`
-  );
   const popularProductsResult = await queryGraphql(
     "productsCollection",
-    popularProductsQuery
+    allProducts,
+    {
+      first: popularProductsToShow,
+      filter: {
+        store: { eq: env.NEXT_PUBLIC_STORE_ID },
+        available_quantity: { gt: 0 },
+      },
+      orderBy: { render_order: "AscNullsLast" },
+    }
   );
   const popularProducts = parseProductTags(popularProductsResult);
 
   const hotDealsProductsToShow = 12;
-  const hotDealsProductsQuery = allProducts(
-    `first: ${hotDealsProductsToShow}, after: $cursor, 
-      filter: {
-        store: {eq: "${env.NEXT_PUBLIC_STORE_ID}"} 
-        available_quantity: { gt: 0 }},
-      orderBy: { render_order: AscNullsLast }`
-  );
   const hotDealsProductsResult = await queryGraphql(
     "productsCollection",
-    hotDealsProductsQuery
+    allProducts,
+    {
+      first: hotDealsProductsToShow,
+      filter: {
+        store: { eq: env.NEXT_PUBLIC_STORE_ID },
+        available_quantity: { gt: 0 },
+      },
+      orderBy: { render_order: "AscNullsLast" },
+    }
   );
   const hotDealsProducts = parseProductTags(hotDealsProductsResult);
 
   const featuredProductsToShow = 10;
-  const featuredProductsQuery = allProducts(
-    `first: ${featuredProductsToShow}, after: $cursor, 
-      filter: {
-        store: {eq: "${env.NEXT_PUBLIC_STORE_ID}"} 
-        available_quantity: { gt: 0 }},
-      orderBy: { render_order: AscNullsLast }`
-  );
   const featuredProductsResult = await queryGraphql(
     "productsCollection",
-    featuredProductsQuery
+    allProducts,
+    {
+      first: featuredProductsToShow,
+      filter: {
+        store: { eq: env.NEXT_PUBLIC_STORE_ID },
+        available_quantity: { gt: 0 },
+      },
+      orderBy: { render_order: "AscNullsLast" },
+    }
   );
   const featuredProducts = parseProductTags(featuredProductsResult);
 
@@ -642,7 +645,7 @@ export default async function Home() {
           <SectionContent className="w-full max-w-7xl md:grid md:grid-cols-4 md:gap-6 lg:grid-cols-6">
             <CarouselProvider {...categoriesCarouselProviderProps}>
               <CarouselRenderer {...categoriesCarouselRendererProps}>
-                {categories.map(({ id, name, imageUrl }, index) => (
+                {categories?.map(({ id, name, imageUrl }, index) => (
                   <SlideRenderer
                     key={id}
                     index={index}

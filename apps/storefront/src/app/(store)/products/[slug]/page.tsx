@@ -45,17 +45,16 @@ export default async function Product({
 }) {
   const { slug } = await params;
 
-  const productQuery = allProducts(
-    `
-      after: $cursor,
-      filter: {
-        slug: { eq: "${slug}" },
-        store: {eq: "${env.NEXT_PUBLIC_STORE_ID}"},
-      }
-      orderBy: { ${defaultSortBy}: ${defaultSortByDirection === "asc" ? "AscNullsLast" : "DescNullsLast"} }
-    `
-  );
-  const productResult = await queryGraphql("productsCollection", productQuery);
+  const productResult = await queryGraphql("productsCollection", allProducts, {
+    filter: {
+      slug: { eq: slug },
+      store: { eq: env.NEXT_PUBLIC_STORE_ID },
+    },
+    orderBy: {
+      [defaultSortBy]:
+        defaultSortByDirection === "asc" ? "AscNullsLast" : "DescNullsLast",
+    },
+  });
   const product = parseProductTags(productResult)?.at(0);
   const {
     id: productId,
@@ -72,21 +71,21 @@ export default async function Product({
   } = product;
 
   const relatedProductsToShow = 10;
-  const relatedProductsQuery = allProducts(
-    `
-      first: ${relatedProductsToShow}, 
-      after: $cursor,
-      filter: {
-        store: {eq: "${env.NEXT_PUBLIC_STORE_ID}"},
-        available_quantity: { gt: 0 },
-        id: { neq: "${productId}" }
-      }
-      orderBy: { ${defaultSortBy}: ${defaultSortByDirection === "asc" ? "AscNullsLast" : "DescNullsLast"} }
-    `
-  );
   const relatedProductsResult = await queryGraphql(
     "productsCollection",
-    relatedProductsQuery
+    allProducts,
+    {
+      first: relatedProductsToShow,
+      filter: {
+        store: { eq: env.NEXT_PUBLIC_STORE_ID },
+        available_quantity: { gt: 0 },
+        id: { neq: productId },
+      },
+      orderBy: {
+        [defaultSortBy]:
+          defaultSortByDirection === "asc" ? "AscNullsLast" : "DescNullsLast",
+      },
+    }
   );
   const relatedProducts = parseProductTags(relatedProductsResult);
 

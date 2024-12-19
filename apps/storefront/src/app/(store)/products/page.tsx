@@ -102,6 +102,31 @@ export default async function Products({
     }
   );
 
+  const productsToShow = 20;
+  const productsResult = await queryGraphql("productsCollection", allProducts, {
+    first: productsToShow,
+    filter: {
+      store: { eq: env.NEXT_PUBLIC_STORE_ID },
+      available_quantity: { gt: 0 },
+      price: { lte: parseInt(maxPrice ?? maxProductsPrice) },
+      rating: { gte: parseInt(minRating ?? "0") },
+      or: [
+        categoriesSearchParam
+          ?.split(",")
+          ?.map((value: string) => ({ categories: { contains: [value] } })),
+        tags
+          ?.split(",")
+          ?.map((value: string) => ({ tags: { contains: [value] } })),
+      ]
+        .filter((value) => !!value)
+        .flatMap((value) => value),
+    },
+    orderBy: {
+      [sortBy]: sortByDirection === "asc" ? "AscNullsLast" : "DescNullsLast",
+    },
+  });
+  const products = parseProductTags(productsResult);
+
   const totalPages = Math.ceil(productsCount / defaultProductsShowPerPage);
   const isPreviousButtonDisabled = parseInt(page) === 1;
   const isNextButtonDisabled = parseInt(page) === totalPages;
@@ -300,7 +325,7 @@ export default async function Products({
             </div>
             <div className="grid grid-cols-1 gap-4 min-[450px]:grid-cols-2 sm:grid-cols-3 lg:col-span-3 lg:col-start-2 lg:grid-cols-3 xl:col-span-4 xl:grid-cols-4 h-full">
               {hasProducts ? (
-                products?.map((product, index) => (
+                products.map((product, index) => (
                   <div key={index} className="col-span-1 row-span-1">
                     <BasicProductCard key={index} product={product} />
                   </div>
@@ -315,7 +340,7 @@ export default async function Products({
                     className="h-[250px] w-[350px] object-contain"
                   />
                   <h2 className="text-center text-heading-3 font-semibold text-gray-900">
-                    We couldn't find any products
+                    We couldn&apos;t find any products
                   </h2>
                   <p className="text-center font-normal text-body-medium text-gray-500">
                     Try changing or removing some filters.

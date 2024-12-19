@@ -131,3 +131,5 @@ export const defaultMaxCounterValue = 99;
 export const defaultCurrencyId = "5afb804d-d96a-4c59-8d01-259d256a2e22";
 
 export const localStorageCartIdItemName = "cart-id";
+
+export const defaultCurrencySymbol = "$";

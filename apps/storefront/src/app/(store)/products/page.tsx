@@ -59,28 +59,23 @@ export default async function Products({
 }: {
   searchParams: Promise<Record<string, string> | string | URLSearchParams>;
 }) {
-  const {
-    page,
-    perPage,
-    sortBy,
-    sortByDirection,
-    categories: categoriesSearchParam,
-    maxPrice,
-    minRating,
-    tags,
-  } = await searchParams;
-  if (!page || !perPage || !sortBy || !sortByDirection) {
-    redirect(
-      `/products?page=1&perPage=${perPage || defaultProductsShowPerPage}&sortBy=${defaultSortBy}&sortByDirection=${defaultSortByDirection}`
-    );
-  }
-
   const [
+    {
+      page,
+      perPage,
+      sortBy,
+      sortByDirection,
+      categories: categoriesSearchParam,
+      maxPrice,
+      minRating,
+      tags,
+    },
     categories,
     allTags,
     { result_max_price: maxProductsPrice },
     { result_products_count: productsCount },
   ] = await Promise.all([
+    searchParams,
     queryGraphql("categoriesCollection", allCategories, {
       first: categoriesToShow,
       filter: { store: { eq: env.NEXT_PUBLIC_STORE_ID } },
@@ -96,6 +91,12 @@ export default async function Products({
       store_id: env.NEXT_PUBLIC_STORE_ID,
     }),
   ]);
+
+  if (!page || !perPage || !sortBy || !sortByDirection) {
+    redirect(
+      `/products?page=1&perPage=${perPage || defaultProductsShowPerPage}&sortBy=${defaultSortBy}&sortByDirection=${defaultSortByDirection}`
+    );
+  }
 
   const productsResult = await queryGraphql("productsCollection", allProducts, {
     first: productsToShow,
@@ -138,7 +139,6 @@ export default async function Products({
     );
   }
 
-  console.log(parseInt(maxProductsPrice), parseInt(maxPrice));
   const filters: ProductFilter[] = [
     {
       children: (

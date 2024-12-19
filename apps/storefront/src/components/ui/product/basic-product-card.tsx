@@ -1,12 +1,7 @@
 import { Product } from "@/types/types";
-import {
-  HeartIcon,
-  ShoppingBagIcon,
-  StarIcon,
-} from "@heroicons/react/24/outline";
+import { ShoppingBagIcon, StarIcon } from "@heroicons/react/24/outline";
 import { StarIcon as FilledStarIcon } from "@heroicons/react/24/solid";
 import React from "react";
-import { Button } from "@/components/ui/common/button";
 import { ProductCard } from "@/components/ui/product/product-card";
 import { Rating } from "@/components/ui/product/rating";
 import { ClientLink } from "@/components/navigation/client-link";
@@ -14,6 +9,7 @@ import { ProductTag } from "./product-tag";
 import { ProductPricing } from "./product-pricing";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
+import { AddToCartWrapper } from "@/components/ui/product/add-to-cart-wrapper";
 
 type Props = React.HTMLProps<HTMLDivElement> & {
   cardClassname?: string;
@@ -26,6 +22,7 @@ export function BasicProductCard({
   className,
   cardClassname = "",
   product: {
+    id,
     slug,
     name,
     price,
@@ -40,6 +37,19 @@ export function BasicProductCard({
   shouldShowProductTags = true,
   shouldUseNextLink = true,
 }: Props) {
+  const product = {
+    id,
+    slug,
+    name,
+    price,
+    discountedPrice,
+    currencies: { currencySymbol },
+    imageUrl,
+    rating,
+    totalRatings,
+    generalTags,
+    discountTags,
+  };
   const allTags = generalTags?.concat(discountTags ?? []);
   const shouldShowTags =
     Array.isArray(allTags) && allTags.length > 0 && shouldShowProductTags;
@@ -111,10 +121,16 @@ export function BasicProductCard({
           <ClientLink href={`/products/${slug}`} className="col-span-1">
             {productNode}
           </ClientLink>
-          <div className="absolute bottom-6 right-1.5 flex flex-1 flex-row items-center justify-end min-[400px]:right-3">
-            <Button className="group flex size-8 flex-row items-center justify-center rounded-full bg-gray-50 hover:bg-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none">
-              <ShoppingBagIcon className="size-4 text-gray-900 group-hover:text-white" />
-            </Button>
+          <div className="absolute bottom-4 right-1.5 flex-1 flex-row items-center justify-end min-[400px]:right-3 hidden xl:flex">
+            <AddToCartWrapper
+              product={product}
+              className="group flex size-8 flex-row items-center justify-center rounded-full bg-gray-50 hover:bg-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-gray-50 disabled:transition-none"
+              counterWrapperClassName="gap-2"
+              minusClassName="disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:border-gray-100 rounded-full border border-gray-100 p-2 flex flex-1 flex-row items-center justify-center group/minus-button hover:border-transparent hover:bg-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
+              moreClassName="disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:border-gray-100 rounded-full border border-gray-100 p-2 flex flex-1 flex-row items-center justify-center group/more-button hover:border-transparent hover:bg-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
+            >
+              <ShoppingBagIcon className="size-4 text-gray-900 group-hover:text-white group-disabled:group-hover:text-gray-900" />
+            </AddToCartWrapper>
           </div>
         </div>
       ) : (

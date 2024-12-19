@@ -159,7 +159,7 @@ export default async function Product({
                 {description}
               </p>
             </div>
-            <div className="flex flex-row items-center gap-3 pb-5 h-[50px]">
+            <div className="flex flex-row items-center gap-3 pb-5 h-[45px]">
               <AddToCartWrapper
                 wrapperClassName={"flex flex-row w-fit h-[45px]"}
                 product={product}

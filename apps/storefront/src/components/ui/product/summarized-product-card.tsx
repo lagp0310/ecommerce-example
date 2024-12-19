@@ -1,13 +1,8 @@
 import { cn } from "@/lib/utils";
 import { Product } from "@/types/types";
-import {
-  HeartIcon,
-  ShoppingBagIcon,
-  StarIcon,
-} from "@heroicons/react/24/outline";
+import { ShoppingBagIcon, StarIcon } from "@heroicons/react/24/outline";
 import { StarIcon as FilledStarIcon } from "@heroicons/react/24/solid";
 import React from "react";
-import { Button } from "@/components/ui/common/button";
 import { ProductCard } from "@/components/ui//product/product-card";
 import { Rating } from "@/components/ui/product/rating";
 import { ClientLink } from "@/components/navigation/client-link";
@@ -15,6 +10,7 @@ import { BannerCountdownWrapper } from "@/components/ui/banner/banner-countdown-
 import { ProductTag } from "./product-tag";
 import { ProductPricing } from "./product-pricing";
 import Image from "next/image";
+import { AddToCartWrapper } from "@/components/ui/product/add-to-cart-wrapper";
 
 type Props = {
   product: Product;
@@ -25,6 +21,7 @@ type Props = {
 
 export function SummarizedProductCard({
   product: {
+    id,
     slug,
     name,
     price,
@@ -40,18 +37,36 @@ export function SummarizedProductCard({
   shouldUseNextLink = true,
   productCardClassName,
 }: Props) {
+  const product = {
+    id,
+    slug,
+    name,
+    price,
+    discountedPrice,
+    currencies: { currencySymbol },
+    imageUrl,
+    rating,
+    totalRatings,
+    generalTags,
+    discountTags,
+  };
   const allTags = generalTags?.concat(discountTags ?? []);
   const shouldShowTags =
     Array.isArray(allTags) && allTags.length > 0 && shouldShowProductTags;
   const productActions = (
-    <div className="flex flex-row gap-x-2 h-[45px]">
+    <div className="flex flex-row gap-x-2 h-[45px] justify-center w-full items-center">
       {/* <Button className="group flex size-8 flex-row items-center justify-center rounded-full bg-gray-50 hover:bg-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none">
         <HeartIcon className="size-4 text-gray-900 group-hover:text-white" />
       </Button> */}
-      <Button className="group flex flex-1 flex-row items-center justify-center gap-x-2 rounded-full bg-primary text-body-small font-semibold leading-6 text-white hover:border hover:border-primary hover:bg-white hover:text-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none">
+      <AddToCartWrapper
+        product={product}
+        className="w-full h-[45px] group flex flex-1 flex-row items-center justify-center gap-x-2 rounded-full bg-primary text-body-small font-semibold leading-6 text-white hover:border hover:border-primary hover:bg-white hover:text-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
+        minusClassName="disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:border-gray-100 rounded-full border border-gray-100 p-2 flex flex-1 flex-row items-center justify-center group/minus-button hover:border-transparent hover:bg-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
+        moreClassName="disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:border-gray-100 rounded-full border border-gray-100 p-2 flex flex-1 flex-row items-center justify-center group/more-button hover:border-transparent hover:bg-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
+      >
         Add to Cart
-        <ShoppingBagIcon className="size-4 group-hover:text-primary" />
-      </Button>
+        <ShoppingBagIcon className="size-4 group-hover:text-primary group-disabled:group-hover:text-white" />
+      </AddToCartWrapper>
     </div>
   );
   const productData = (

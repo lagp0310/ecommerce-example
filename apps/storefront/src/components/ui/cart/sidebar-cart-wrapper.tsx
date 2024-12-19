@@ -62,17 +62,21 @@ export function SidebarCartWrapper({
         {hasProducts ? (
           <div className="flex h-full max-h-full flex-1 basis-full flex-col overflow-y-auto overflow-x-hidden pr-4">
             {lineItems.map(({ products, id, ...lineItem }) => (
-              <div key={id} className="group/cart-product flex flex-col">
-                <BasicCartProduct
-                  lineItem={{
-                    id,
-                    ...lineItem,
-                  }}
-                  product={products}
-                  toggleSidebar={toggleSidebar}
-                />
-                <div className="w-full border-t border-gray-100/50 group-last/cart-product:hidden"></div>
-              </div>
+              <React.Fragment key={id}>
+                {!!products ? (
+                  <div className="group/cart-product flex flex-col">
+                    <BasicCartProduct
+                      lineItem={{
+                        id,
+                        ...lineItem,
+                      }}
+                      product={products}
+                      toggleSidebar={toggleSidebar}
+                    />
+                    <div className="w-full border-t border-gray-100/50 group-last/cart-product:hidden"></div>
+                  </div>
+                ) : null}
+              </React.Fragment>
             ))}
           </div>
         ) : (

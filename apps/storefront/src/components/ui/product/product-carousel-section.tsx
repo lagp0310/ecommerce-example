@@ -13,7 +13,7 @@ import { CarouselProvider } from "@/components/carousel/carousel-provider";
 import type {
   CarouselProviderCustomProps,
   CarouselRendererProps,
-  Product,
+  TProduct,
 } from "@/types/types";
 import isURL from "validator/es/lib/isURL";
 import {
@@ -28,7 +28,7 @@ type Props = {
   sectionRedirectText?: string;
   carouselProviderProps: CarouselProviderCustomProps;
   carouselRendererProps: CarouselRendererProps;
-  products: Product[];
+  products: TProduct[];
 };
 
 export function ProductCarouselSection({

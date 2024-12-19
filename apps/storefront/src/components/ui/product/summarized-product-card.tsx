@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { Product } from "@/types/types";
+import type { TProduct } from "@/types/types";
 import { ShoppingBagIcon, StarIcon } from "@heroicons/react/24/outline";
 import { StarIcon as FilledStarIcon } from "@heroicons/react/24/solid";
 import React from "react";
@@ -11,9 +11,10 @@ import { ProductTag } from "./product-tag";
 import { ProductPricing } from "./product-pricing";
 import Image from "next/image";
 import { AddToCartWrapper } from "@/components/ui/product/add-to-cart-wrapper";
+import { defaultCurrencySymbol } from "@/constants/constants";
 
 type Props = {
-  product: Product;
+  product: TProduct;
   shouldShowProductTags?: boolean;
   shouldUseNextLink?: boolean;
   productCardClassName?: string;
@@ -25,13 +26,14 @@ export function SummarizedProductCard({
     slug,
     name,
     price,
-    discountedPrice,
-    currencies: { currencySymbol },
-    imageUrl,
+    discounted_price: discountedPrice,
+    currencies,
+    image_url: imageUrl,
     rating,
     totalRatings,
     generalTags,
     discountTags,
+    ...restProduct
   },
   shouldShowProductTags = true,
   shouldUseNextLink = true,
@@ -43,12 +45,13 @@ export function SummarizedProductCard({
     name,
     price,
     discountedPrice,
-    currencies: { currencySymbol },
+    currencies,
     imageUrl,
     rating,
     totalRatings,
     generalTags,
     discountTags,
+    ...restProduct,
   };
   const allTags = generalTags?.concat(discountTags ?? []);
   const shouldShowTags =
@@ -78,7 +81,7 @@ export function SummarizedProductCard({
         className="flex flex-row gap-x-2"
         price={price}
         discountedPrice={discountedPrice}
-        currencySymbol={currencySymbol}
+        currencySymbol={currencies?.symbol ?? defaultCurrencySymbol}
         discountedPriceClasses={cn({
           "text-body-xxl font-medium text-gray-900 truncate line-clamp-1":
             !discountedPrice,
@@ -131,13 +134,15 @@ export function SummarizedProductCard({
           ))}
         </div>
       ) : null}
-      <Image
-        src={imageUrl}
-        alt={name}
-        width={400}
-        height={400}
-        className="flex max-h-80 min-h-[250px] flex-1 flex-row justify-center object-contain"
-      />
+      {typeof imageUrl === "string" ? (
+        <Image
+          src={imageUrl}
+          alt={name}
+          width={400}
+          height={400}
+          className="flex max-h-80 min-h-[250px] flex-1 flex-row justify-center object-contain"
+        />
+      ) : null}
     </React.Fragment>
   );
   const productNode = (

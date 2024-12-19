@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import type { Product } from "@/types/types";
+import type { TProduct } from "@/types/types";
 import { CartProduct } from "./cart-product";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
@@ -15,11 +15,12 @@ import { ProductPricing } from "@/components/ui/product/product-pricing";
 import Image from "next/image";
 import { Line_Items } from "@/gql/graphql";
 import { useCart } from "@/context/cart-context";
+import { defaultCurrencySymbol } from "@/constants/constants";
 
 type Props = React.HTMLProps<HTMLDivElement> & {
   actionsProps?: CartProductActionsProps;
   lineItem: Line_Items;
-  product: Product;
+  product: TProduct;
   toggleSidebar: () => void;
 };
 
@@ -30,9 +31,9 @@ export function BasicCartProduct({
     slug,
     name,
     price,
-    currencies: { currencySymbol },
-    discountedPrice,
-    imageUrl,
+    currencies,
+    discounted_price: discountedPrice,
+    image_url: imageUrl,
   },
   toggleSidebar,
   ...props
@@ -54,20 +55,22 @@ export function BasicCartProduct({
         onClick={toggleSidebar}
       >
         <CartProduct {...props} className="flex flex-1 flex-row gap-4">
-          <Image
-            src={imageUrl}
-            alt={name}
-            width={100}
-            height={100}
-            className="h-auto w-20 max-w-20 rounded-[10px]"
-          />
+          {typeof imageUrl === "string" ? (
+            <Image
+              src={imageUrl}
+              alt={name}
+              width={100}
+              height={100}
+              className="h-auto w-20 max-w-20 rounded-[10px]"
+            />
+          ) : null}
           <div className="flex flex-1 flex-col justify-center gap-1">
             <span className="line-clamp-2">{`${name} (${quantity})`}</span>
             <ProductPricing
               className="flex flex-row items-center gap-x-2 text-body-small md:text-body-medium"
               price={price}
               discountedPrice={discountedPrice}
-              currencySymbol={currencySymbol}
+              currencySymbol={currencies?.symbol ?? defaultCurrencySymbol}
               discountedPriceClasses={cn({
                 "font-medium text-gray-900 truncate line-clamp-1":
                   !discountedPrice,

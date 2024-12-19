@@ -4,7 +4,7 @@ import React from "react";
 type Props = React.HTMLProps<HTMLDivElement> & {
   currencySymbol: string;
   price: number;
-  discountedPrice?: number;
+  discountedPrice?: number | null;
   priceClasses?: string;
   discountedPriceClasses?: string;
 };

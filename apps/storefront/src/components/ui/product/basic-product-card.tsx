@@ -1,19 +1,20 @@
-import { Product } from "@/types/types";
 import { ShoppingBagIcon, StarIcon } from "@heroicons/react/24/outline";
 import { StarIcon as FilledStarIcon } from "@heroicons/react/24/solid";
 import React from "react";
 import { ProductCard } from "@/components/ui/product/product-card";
 import { Rating } from "@/components/ui/product/rating";
 import { ClientLink } from "@/components/navigation/client-link";
-import { ProductTag } from "./product-tag";
-import { ProductPricing } from "./product-pricing";
+import { ProductTag } from "@/components/ui/product/product-tag";
+import { ProductPricing } from "@/components/ui/product/product-pricing";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { AddToCartWrapper } from "@/components/ui/product/add-to-cart-wrapper";
+import type { TProduct } from "@/types/types";
+import { defaultCurrencySymbol } from "@/constants/constants";
 
 type Props = React.HTMLProps<HTMLDivElement> & {
   cardClassname?: string;
-  product: Product;
+  product: TProduct;
   shouldShowProductTags?: boolean;
   shouldUseNextLink?: boolean;
 };
@@ -26,13 +27,14 @@ export function BasicProductCard({
     slug,
     name,
     price,
-    discountedPrice,
-    currencies: { currencySymbol },
-    imageUrl,
+    discounted_price: discountedPrice,
+    currencies,
+    image_url: imageUrl,
     rating,
     totalRatings,
     generalTags,
     discountTags,
+    ...restProduct
   },
   shouldShowProductTags = true,
   shouldUseNextLink = true,
@@ -42,14 +44,15 @@ export function BasicProductCard({
     slug,
     name,
     price,
-    discountedPrice,
-    currencies: { currencySymbol },
-    imageUrl,
+    discounted_price: discountedPrice,
+    currencies,
+    image_url: imageUrl,
     rating,
     totalRatings,
     generalTags,
     discountTags,
-  };
+    ...restProduct,
+  } as TProduct;
   const allTags = generalTags?.concat(discountTags ?? []);
   const shouldShowTags =
     Array.isArray(allTags) && allTags.length > 0 && shouldShowProductTags;
@@ -71,13 +74,15 @@ export function BasicProductCard({
           ))}
         </div>
       ) : null}
-      <Image
-        src={imageUrl}
-        alt={name}
-        width={180}
-        height={180}
-        className="mt-6 w-full md:mt-2"
-      />
+      {typeof imageUrl === "string" ? (
+        <Image
+          src={imageUrl}
+          alt={name}
+          width={180}
+          height={180}
+          className="mt-6 w-full md:mt-2"
+        />
+      ) : null}
       <div className="flex flex-1 flex-row">
         <div className="flex flex-1 flex-col">
           <span className="line-clamp-1 truncate text-body-small font-normal text-gray-700">
@@ -87,7 +92,7 @@ export function BasicProductCard({
             className="flex flex-1 flex-row gap-x-2 text-body-small md:text-body-medium"
             price={price}
             discountedPrice={discountedPrice}
-            currencySymbol={currencySymbol}
+            currencySymbol={currencies?.symbol ?? defaultCurrencySymbol}
           />
           {typeof rating === "number" ? (
             <div className="flex flex-1 flex-row items-center gap-x-1">

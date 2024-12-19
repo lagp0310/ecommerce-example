@@ -4,10 +4,10 @@ import React from "react";
 import { cn, updateSearchParam } from "@/lib/utils";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { ToggleGroupItem } from "@/components/ui/common/toggle-group";
-import type { ProductTag } from "@/types/types";
+import type { Product_Tags } from "@/gql/graphql";
 
 type Props = {
-  tagItem: ProductTag;
+  tagItem: Product_Tags;
   selected?: boolean;
   wrapperClassName?: string;
 };

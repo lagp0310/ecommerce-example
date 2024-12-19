@@ -9,6 +9,7 @@ import {
   secondsTransform,
   StoreHighlightIcon,
 } from "@/constants/constants";
+import type { Products } from "@/gql/graphql";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -40,41 +41,35 @@ export function parseRemainingTime(countDown: number) {
   };
 }
 
-export function parseProductTags(productsCollection?: object[]) {
+export function parseProductTags(productsCollection?: Products[] | null) {
   if (!productsCollection) return null;
 
   return productsCollection?.map(
     ({ product_tagsCollection, ...productRest }) => ({
       generalTags: product_tagsCollection?.edges
-        ?.filter(({ node: { isGeneralTag } }) => isGeneralTag)
-        .map(
-          ({
-            node: {
-              id,
-              tag,
-              tagTypes: { type },
-            },
-          }) => ({ id, tag, type })
-        ),
+        ?.filter(({ node: { is_general_tag: isGeneralTag } }) => isGeneralTag)
+        .map(({ node: { id, tag, tag_types } }) => ({
+          id,
+          tag,
+          type: tag_types?.type,
+        })),
       discountTags: product_tagsCollection?.edges
-        ?.filter(({ node: { isDiscountTag } }) => isDiscountTag)
-        .map(
-          ({
-            node: {
-              id,
-              tag,
-              tagTypes: { type },
-            },
-          }) => ({ id, tag, type })
-        ),
+        ?.filter(
+          ({ node: { is_discount_tag: isDiscountTag } }) => isDiscountTag
+        )
+        .map(({ node: { id, tag, tag_types } }) => ({
+          id,
+          tag,
+          type: tag_types?.type,
+        })),
       ...productRest,
     })
   );
 }
 
 export function isRecordIdInSearchParamArray(
-  paramValue: string,
   recordId: string,
+  paramValue?: string,
   separator = ","
 ) {
   if (!paramValue) {

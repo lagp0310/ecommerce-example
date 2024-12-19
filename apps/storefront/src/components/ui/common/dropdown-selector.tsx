@@ -58,8 +58,10 @@ export function DropdownSelector({
           {options.map(
             ({ name, value, isDisabled, sortBy, direction }, index) => {
               const newSearchParams = new URLSearchParams(searchParams);
-              newSearchParams.set("sortBy", sortBy);
-              newSearchParams.set("sortByDirection", direction);
+              if (sortBy && direction) {
+                newSearchParams.set("sortBy", sortBy);
+                newSearchParams.set("sortByDirection", direction);
+              }
 
               return useNextLink ? (
                 <Link

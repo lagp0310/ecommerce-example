@@ -8,11 +8,11 @@ import {
   defaultMaxCounterValue,
 } from "@/constants/constants";
 import { useCart } from "@/context/cart-context";
-import type { Product } from "@/types/types";
+import type { TProduct } from "@/types/types";
 
 type Props = React.HTMLProps<HTMLDivElement> & {
   lineItemId: string;
-  product: Product;
+  product: TProduct;
   initialValue?: number;
   step?: number;
   maxValue?: number;

@@ -30,7 +30,7 @@ export function PricingSlider({
     updatedSearchParams.set("maxPrice", price?.toString() ?? max.toString());
 
     router.push(`${pathname}?${updatedSearchParams.toString()}`);
-  }, [searchParams, value]);
+  }, [max, pathname, router, searchParams, value]);
 
   React.useEffect(() => {
     const updateParamsTimeout = setTimeout(handlePriceParamUpdate, 500);
@@ -44,7 +44,7 @@ export function PricingSlider({
     }
 
     return () => clearTimeout(updateParamsTimeout);
-  }, [handlePriceParamUpdate, value]);
+  }, [handlePriceParamUpdate, max, searchParams, value]);
 
   return (
     <React.Fragment>

@@ -1,6 +1,6 @@
 "use client";
 
-import { Line_Items, type Carts } from "@/gql/graphql";
+import type { Line_Items, Line_ItemsEdge, Carts } from "@/gql/graphql";
 import React from "react";
 import { useLazyQuery, useMutation } from "@apollo/client";
 import { createCart, updateCart } from "@/gql/mutations/cart/mutations";
@@ -13,7 +13,7 @@ import {
   deleteLineItems,
   updateLineItems,
 } from "@/gql/mutations/line-item/mutations";
-import type { Product } from "@/types/types";
+import type { TProduct } from "@/types/types";
 import isUUID from "validator/es/lib/isUUID";
 import { getCart as getCartQuery } from "@/gql/queries/cart/queries";
 import { allLineItems } from "@/gql/queries/line-item/queries";
@@ -22,10 +22,10 @@ import { useToast } from "@/hooks/use-toast";
 type CartContext = {
   cart: Carts | null;
   lineItems: Line_Items[];
-  handleAddToCart: (product: Product) => Promise<void>;
+  handleAddToCart: (product: TProduct) => Promise<void>;
   handleUpdateQuantity: (
     lineItemId: string,
-    product: Product,
+    product: TProduct,
     quantity: number
   ) => Promise<void>;
   handleDeleteLineItem: (lineItemId: string) => Promise<void>;
@@ -99,7 +99,9 @@ export function CartContextProvider({ children, currentCart = null }: Props) {
               line_itemsCollection: { edges },
             },
           }) => {
-            const lineItemsNode = edges?.map(({ node }) => node);
+            const lineItemsNode = (edges as Line_ItemsEdge[])?.map(
+              ({ node }) => node
+            );
             setLineItems(lineItemsNode);
           }
         )
@@ -109,50 +111,20 @@ export function CartContextProvider({ children, currentCart = null }: Props) {
     }
   }, [cart, getCart, getLineItems]);
 
-  const [
-    mutateCreateCart,
-    {
-      loading: isCreateCartLoading,
-      data: createCartData,
-      error: createCartError,
-    },
-  ] = useMutation(createCart);
-  const [
-    mutateUpdateCart,
-    {
-      loading: isUpdateCartLoading,
-      data: updateCartData,
-      error: updateCartError,
-    },
-  ] = useMutation(updateCart);
-
-  const [
-    mutateCreateLineItems,
-    {
-      loading: isCreateLineItemsLoading,
-      data: createLineItemsData,
-      error: createLineItemsError,
-    },
-  ] = useMutation(createLineItems);
-  const [
-    mutateUpdateLineItems,
-    {
-      loading: isUpdateLineItemsLoading,
-      data: updateLineItemsData,
-      error: updateLineItemsError,
-    },
-  ] = useMutation(updateLineItems);
-  const [
-    mutateDeleteLineItems,
-    {
-      loading: isDeleteLineItemsLoading,
-      data: deleteLineItemsData,
-      error: deleteLineItemsError,
-    },
-  ] = useMutation(deleteLineItems);
+  const [mutateCreateCart, { loading: isCreateCartLoading }] =
+    useMutation(createCart);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [_mutateUpdateCart, { loading: isUpdateCartLoading }] =
+    useMutation(updateCart);
+  const [mutateCreateLineItems, { loading: isCreateLineItemsLoading }] =
+    useMutation(createLineItems);
+  const [mutateUpdateLineItems, { loading: isUpdateLineItemsLoading }] =
+    useMutation(updateLineItems);
+  const [mutateDeleteLineItems, { loading: isDeleteLineItemsLoading }] =
+    useMutation(deleteLineItems);
 
   const handleAddToCart = React.useCallback(
-    async (product: Product) => {
+    async (product: TProduct) => {
       try {
         const localStorageCartId = window.localStorage.getItem(
           localStorageCartIdItemName
@@ -181,8 +153,8 @@ export function CartContextProvider({ children, currentCart = null }: Props) {
                 cart: cart?.id ?? cartId,
                 quantity: 1,
                 price:
-                  typeof product?.discountedPrice === "number"
-                    ? product.discountedPrice
+                  typeof product?.discounted_price === "number"
+                    ? product.discounted_price
                     : product.price,
                 product: product.id,
               },
@@ -212,7 +184,7 @@ export function CartContextProvider({ children, currentCart = null }: Props) {
   const handleDeleteLineItem = React.useCallback(
     async (lineItemId: string) => {
       try {
-        const { data: lineItemsData } = await mutateDeleteLineItems({
+        await mutateDeleteLineItems({
           variables: {
             filter: { id: { eq: lineItemId } },
           },
@@ -234,7 +206,7 @@ export function CartContextProvider({ children, currentCart = null }: Props) {
   );
 
   const handleUpdateQuantity = React.useCallback(
-    async (lineItemId: string, product: Product, quantity: number) => {
+    async (lineItemId: string, product: TProduct, quantity: number) => {
       if (!cart) {
         throw new Error(
           "Cannot update line items as cart is null or undefined"
@@ -253,8 +225,8 @@ export function CartContextProvider({ children, currentCart = null }: Props) {
               cart: cart?.id,
               quantity,
               price:
-                typeof product?.discountedPrice === "number"
-                  ? product.discountedPrice
+                typeof product?.discounted_price === "number"
+                  ? product.discounted_price
                   : product.price,
               product: product.id,
             },

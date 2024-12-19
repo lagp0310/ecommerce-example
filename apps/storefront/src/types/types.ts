@@ -2,6 +2,8 @@ import { CarouselProviderProps } from "pure-react-carousel";
 import { type Props as CarouselProps } from "@/components/carousel/carousel";
 import { MediaQuerySlide } from "@/hooks/use-visible-slides";
 import React from "react";
+import type { Products } from "@/gql/graphql";
+import type { OperationVariables } from "@apollo/client";
 
 export type Language = {
   id: string;
@@ -106,8 +108,16 @@ export type BaseSelectOption = {
   name: string;
   value: string;
   isDisabled?: boolean;
-  sortBy: string;
-  direction: SortByDirection;
+  sortBy?: string;
+  direction?: SortByDirection;
 };
 
 export type SortByDirection = "asc" | "desc";
+
+export type TProduct = Products & {
+  generalTags?: ProductTag[];
+  discountTags?: ProductTag[];
+  totalRatings?: number;
+};
+
+export type BaseOperationVariables = OperationVariables;

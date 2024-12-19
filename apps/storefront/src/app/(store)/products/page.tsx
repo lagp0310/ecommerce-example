@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  defaultMaxProductPrice,
   defaultProductsShowPerPage,
   defaultSortBy,
   defaultSortByDirection,
@@ -67,10 +66,10 @@ export default async function Products({
       categories: categoriesSearchParam,
       maxPrice,
       minRating,
-      tags,
+      tags: tagsSearchParam,
     },
     categories,
-    allTags,
+    tags,
     { result_max_price: maxProductsPrice },
     { result_products_count: productsCount },
   ] = await Promise.all([
@@ -109,7 +108,7 @@ export default async function Products({
         categoriesSearchParam
           ?.split(",")
           ?.map((value: string) => ({ categories: { contains: [value] } })),
-        tags
+        tagsSearchParam
           ?.split(",")
           ?.map((value: string) => ({ tags: { contains: [value] } })),
       ]
@@ -143,7 +142,7 @@ export default async function Products({
     {
       children: (
         <div className="flex flex-1 flex-col items-start gap-1.5">
-          {categories.map(({ id, name }) => {
+          {categories?.map(({ id, name }) => {
             const isChecked = isRecordIdInSearchParamArray(
               categoriesSearchParam,
               id
@@ -216,8 +215,8 @@ export default async function Products({
           type="multiple"
           className="flex flex-1 flex-row flex-wrap items-center justify-start gap-2"
         >
-          {allTags.map((tagItem, index) => {
-            const tagsArray = tags?.split(",");
+          {tags?.map((tagItem, index) => {
+            const tagsArray = tagsSearchParam?.split(",");
             const hasTagsSearchParam =
               Array.isArray(tagsArray) && tagsArray.length > 0;
             const isSelected =
@@ -258,7 +257,7 @@ export default async function Products({
                 <DialogHeader>
                   <DialogTitle>Filters</DialogTitle>
                 </DialogHeader>
-                {filters.map(
+                {filters?.map(
                   ({ children, name, initiallyCollapsed }, index) => (
                     <Accordion
                       key={index}
@@ -275,7 +274,7 @@ export default async function Products({
                   )
                 )}
               </FiltersDialogWrapper>
-              {filters.map(({ children, name, initiallyCollapsed }, index) => (
+              {filters?.map(({ children, name, initiallyCollapsed }, index) => (
                 <Accordion
                   key={index}
                   type="single"

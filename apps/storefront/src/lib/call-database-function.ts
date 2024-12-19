@@ -1,8 +1,8 @@
 import { dataProviderServer } from "@/providers/data/data-provider.server";
 
-export async function callDatabaseFunction(
+export async function callDatabaseFunction<T, Q = object>(
   functionName: string,
-  args?: object
+  args?: Q
 ) {
   try {
     const { data, error } = await dataProviderServer.rpc(functionName, args);
@@ -11,7 +11,7 @@ export async function callDatabaseFunction(
       throw new Error(error.message);
     }
 
-    return data;
+    return data as T;
   } catch (error) {
     console.error(error);
   }

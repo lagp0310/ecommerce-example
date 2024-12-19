@@ -2,9 +2,8 @@ import { CarouselProviderProps } from "pure-react-carousel";
 import { type Props as CarouselProps } from "@/components/carousel/carousel";
 import { MediaQuerySlide } from "@/hooks/use-visible-slides";
 import React from "react";
-import type { Products, Store_Features } from "@/gql/graphql";
+import type { Products } from "@/gql/graphql";
 import type { OperationVariables } from "@apollo/client";
-import type { StoreHighlightIcon } from "@/constants/constants";
 
 export type Language = {
   id: string;
@@ -123,6 +122,5 @@ export type TProduct = Products & {
 
 export type BaseOperationVariables = OperationVariables;
 
-export type StoreFeaturesResponse = (Omit<Store_Features, "icon_name"> & {
-  icon_name?: StoreHighlightIcon;
-})[];
+export type GetProductsMaxPriceResponse = { result_max_price: number };
+export type GetProductsCountResponse = { result_products_count: number };

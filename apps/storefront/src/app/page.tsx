@@ -17,6 +17,7 @@ import {
   defaultProductsShowPerPage,
   defaultSortBy,
   defaultSortByDirection,
+  StoreHighlightIcon,
 } from "@/constants/constants";
 import discountBanner from "@/public/images/discount-banner.png";
 import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/24/outline";
@@ -60,6 +61,11 @@ import {
   testimonialsCarouselRendererProps,
   totalCustomerTestimonials,
 } from "@/constants/homepage/constants";
+import {
+  Store_Features,
+  type Categories,
+  type Products as TProduct,
+} from "@/gql/graphql";
 
 export default async function Home() {
   const [
@@ -69,12 +75,16 @@ export default async function Home() {
     featuredProductsResult,
     categories,
   ] = await Promise.all([
-    queryGraphql("store_featuresCollection", allStoreFeatures, {
-      first: storeHighlightsToShow,
-      filter: { store: { eq: env.NEXT_PUBLIC_STORE_ID } },
-      orderBy: { render_order: "AscNullsFirst" },
-    }),
-    queryGraphql("productsCollection", allProducts, {
+    queryGraphql<Store_Features[]>(
+      "store_featuresCollection",
+      allStoreFeatures,
+      {
+        first: storeHighlightsToShow,
+        filter: { store: { eq: env.NEXT_PUBLIC_STORE_ID } },
+        orderBy: { render_order: "AscNullsFirst" },
+      }
+    ),
+    queryGraphql<TProduct[]>("productsCollection", allProducts, {
       first: popularProductsToShow,
       filter: {
         store: { eq: env.NEXT_PUBLIC_STORE_ID },
@@ -82,7 +92,7 @@ export default async function Home() {
       },
       orderBy: { render_order: "AscNullsLast" },
     }),
-    queryGraphql("productsCollection", allProducts, {
+    queryGraphql<TProduct[]>("productsCollection", allProducts, {
       first: hotDealsProductsToShow,
       filter: {
         store: { eq: env.NEXT_PUBLIC_STORE_ID },
@@ -90,7 +100,7 @@ export default async function Home() {
       },
       orderBy: { render_order: "AscNullsLast" },
     }),
-    queryGraphql("productsCollection", allProducts, {
+    queryGraphql<TProduct[]>("productsCollection", allProducts, {
       first: featuredProductsToShow,
       filter: {
         store: { eq: env.NEXT_PUBLIC_STORE_ID },
@@ -98,7 +108,7 @@ export default async function Home() {
       },
       orderBy: { render_order: "AscNullsLast" },
     }),
-    queryGraphql("categoriesCollection", allCategories, {
+    queryGraphql<Categories[]>("categoriesCollection", allCategories, {
       first: categoriesToShow,
       filter: { store: { eq: env.NEXT_PUBLIC_STORE_ID } },
       orderBy: { name: "AscNullsFirst" },
@@ -139,11 +149,11 @@ export default async function Home() {
       <div className="flex flex-1 px-6 md:justify-center xl:px-0">
         <StoreHighlights className="relative flex max-w-7xl flex-1 flex-col items-center justify-center rounded-lg p-6 shadow-[0px_8px_40px_0px_rgba(0,38,3,0.08)] md:flex-row md:flex-wrap md:gap-y-6 md:p-10 lg:flex-nowrap lg:items-start">
           <CarouselProvider
-            {...highlightCarouselProviderProps(storeHighlights?.length)}
+            {...highlightCarouselProviderProps(storeHighlights?.length ?? 0)}
           >
             <CarouselRenderer {...highlightCarouselRendererProps}>
               {storeHighlights?.map(
-                ({ id, description, iconName, title }, index) => (
+                ({ id, description, icon_name: iconName, title }, index) => (
                   <SlideRenderer
                     key={id}
                     index={index}
@@ -152,7 +162,9 @@ export default async function Home() {
                     mobileMediaQuery="(max-width: 768px)"
                   >
                     <StoreHighlight className="flex w-full flex-1 flex-row justify-center gap-x-4 md:basis-1/2">
-                      {getStoreHighlightsIcon(iconName)}
+                      {typeof iconName === "string"
+                        ? getStoreHighlightsIcon(iconName as StoreHighlightIcon)
+                        : null}
                       <div className="flex flex-1 flex-col gap-y-2">
                         <h3 className="text-body-medium font-semibold text-gray-900">
                           {title}
@@ -196,7 +208,7 @@ export default async function Home() {
           <SectionContent className="w-full max-w-7xl md:grid md:grid-cols-4 md:gap-6 lg:grid-cols-6">
             <CarouselProvider {...categoriesCarouselProviderProps}>
               <CarouselRenderer {...categoriesCarouselRendererProps}>
-                {categories?.map(({ id, name, imageUrl }, index) => (
+                {categories?.map(({ id, name, image_url: imageUrl }, index) => (
                   <SlideRenderer
                     key={id}
                     index={index}
@@ -207,15 +219,17 @@ export default async function Home() {
                       url={`/products?page=1&perPage=${defaultProductsShowPerPage}&sortBy=${defaultSortBy}&sortByDirection=${defaultSortByDirection}&categories=${id}`}
                       className="flex flex-1 flex-col items-center justify-center gap-y-1.5 rounded-[5px] border border-gray-100 bg-white pb-6 pt-4 hover:border-soft-primary/45 hover:shadow-[0px_0px_12px_0px_rgba(132,209,135,0.32)] hover:shadow-soft-primary/60 motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none md:gap-y-4"
                     >
-                      <Image
-                        src={imageUrl}
-                        alt={name}
-                        width={180}
-                        height={130}
-                        quality={100}
-                        sizes="100vw"
-                        className="h-[130px] w-full object-contain"
-                      />
+                      {typeof imageUrl === "string" ? (
+                        <Image
+                          src={imageUrl}
+                          alt={name}
+                          width={180}
+                          height={130}
+                          quality={100}
+                          sizes="100vw"
+                          className="h-[130px] w-full object-contain"
+                        />
+                      ) : null}
                       <span className="truncate whitespace-break-spaces text-center text-body-small font-medium text-gray-900 md:text-body-large">
                         {name}
                       </span>

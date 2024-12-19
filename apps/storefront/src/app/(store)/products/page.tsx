@@ -8,7 +8,11 @@ import {
   productsSortByOptions,
 } from "@/constants/constants";
 import { BasicProductCard } from "@/components/ui/product/basic-product-card";
-import type { ProductFilter } from "@/types/types";
+import type {
+  GetProductsCountResponse,
+  GetProductsMaxPriceResponse,
+  ProductFilter,
+} from "@/types/types";
 import {
   Accordion,
   AccordionContent,
@@ -51,11 +55,16 @@ import {
   pricingSliderProps,
   productsToShow,
 } from "@/constants/product/constants";
+import type {
+  Categories,
+  Product_Tags,
+  Products as TProduct,
+} from "@/gql/graphql";
 
 export default async function Products({
   searchParams,
 }: {
-  searchParams: Promise<Record<string, string> | string | URLSearchParams>;
+  searchParams: Promise<{ [key: string]: string | undefined }>;
 }) {
   const [
     {
@@ -70,25 +79,30 @@ export default async function Products({
     },
     categories,
     tags,
-    { result_max_price: maxProductsPrice },
-    { result_products_count: productsCount },
+    productsMaxPriceResponse,
+    productsCountResponse,
   ] = await Promise.all([
     searchParams,
-    queryGraphql("categoriesCollection", allCategories, {
+    queryGraphql<Categories[]>("categoriesCollection", allCategories, {
       first: categoriesToShow,
       filter: { store: { eq: env.NEXT_PUBLIC_STORE_ID } },
       orderBy: { name: "AscNullsFirst" },
     }),
-    callDatabaseFunction("get_all_product_tags", {
+    callDatabaseFunction<Product_Tags[]>("get_all_product_tags", {
       store_id: env.NEXT_PUBLIC_STORE_ID,
     }),
-    callDatabaseFunction("get_products_max_price", {
-      store_id: env.NEXT_PUBLIC_STORE_ID,
-    }),
-    callDatabaseFunction("get_products_count", {
+    callDatabaseFunction<GetProductsMaxPriceResponse>(
+      "get_products_max_price",
+      {
+        store_id: env.NEXT_PUBLIC_STORE_ID,
+      }
+    ),
+    callDatabaseFunction<GetProductsCountResponse>("get_products_count", {
       store_id: env.NEXT_PUBLIC_STORE_ID,
     }),
   ]);
+  const maxProductsPrice = productsMaxPriceResponse?.result_max_price;
+  const productsCount = productsCountResponse?.result_products_count;
 
   if (!page || !perPage || !sortBy || !sortByDirection) {
     redirect(
@@ -96,32 +110,42 @@ export default async function Products({
     );
   }
 
-  const productsResult = await queryGraphql("productsCollection", allProducts, {
-    first: productsToShow,
-    offset: (page - 1) * productsToShow,
-    filter: {
-      store: { eq: env.NEXT_PUBLIC_STORE_ID },
-      available_quantity: { gt: 0 },
-      price: { lte: parseInt(maxPrice ?? maxProductsPrice) },
-      rating: { gte: parseInt(minRating ?? "0") },
-      or: [
-        categoriesSearchParam
-          ?.split(",")
-          ?.map((value: string) => ({ categories: { contains: [value] } })),
-        tagsSearchParam
-          ?.split(",")
-          ?.map((value: string) => ({ tags: { contains: [value] } })),
-      ]
-        .filter((value) => !!value)
-        .flatMap((value) => value),
-    },
-    orderBy: {
-      [sortBy]: sortByDirection === "asc" ? "AscNullsLast" : "DescNullsLast",
-    },
-  });
+  const productsResult = await queryGraphql<TProduct[]>(
+    "productsCollection",
+    allProducts,
+    {
+      first: productsToShow,
+      offset: (parseInt(page) - 1) * productsToShow,
+      filter: {
+        store: { eq: env.NEXT_PUBLIC_STORE_ID },
+        available_quantity: { gt: 0 },
+        price: {
+          lte: !!maxProductsPrice
+            ? maxProductsPrice
+            : parseInt(maxPrice ?? "0"),
+        },
+        rating: { gte: parseInt(minRating ?? "0") },
+        or: [
+          categoriesSearchParam
+            ?.split(",")
+            ?.map((value: string) => ({ categories: { contains: [value] } })),
+          tagsSearchParam
+            ?.split(",")
+            ?.map((value: string) => ({ tags: { contains: [value] } })),
+        ]
+          .filter((value) => !!value)
+          .flatMap((value) => value as unknown),
+      },
+      orderBy: {
+        [sortBy]: sortByDirection === "asc" ? "AscNullsLast" : "DescNullsLast",
+      },
+    }
+  );
   const products = parseProductTags(productsResult);
 
-  const totalPages = Math.ceil(productsCount / defaultProductsShowPerPage);
+  const totalPages = Math.ceil(
+    (productsCount ?? 0) / defaultProductsShowPerPage
+  );
   const isPreviousButtonDisabled = parseInt(page) === 1;
   const isNextButtonDisabled = parseInt(page) === totalPages;
   const previousHref =
@@ -150,17 +174,17 @@ export default async function Products({
 
             return (
               <React.Suspense key={id}>
-              <CategoryFilterItemWrapper
-                categoryId={id}
-                checked={isChecked}
-                aria-checked={isChecked}
-                htmlFor={id}
-                wrapperClassName={cn("order-none", { "order-1": !isChecked })}
-                className="flex flex-1 flex-row items-center justify-start gap-x-1 text-body-small font-normal text-gray-900"
-              >
-                {name}
-                {/* <span className="text-body-small font-normal text-gray-500">{`(${numberOfItems})`}</span> */}
-              </CategoryFilterItemWrapper>
+                <CategoryFilterItemWrapper
+                  categoryId={id}
+                  checked={isChecked}
+                  aria-checked={isChecked}
+                  htmlFor={id}
+                  wrapperClassName={cn("order-none", { "order-1": !isChecked })}
+                  className="flex flex-1 flex-row items-center justify-start gap-x-1 text-body-small font-normal text-gray-900"
+                >
+                  {name}
+                  {/* <span className="text-body-small font-normal text-gray-500">{`(${numberOfItems})`}</span> */}
+                </CategoryFilterItemWrapper>
               </React.Suspense>
             );
           })}
@@ -172,12 +196,12 @@ export default async function Products({
       children: (
         <div className="flex flex-1 flex-col justify-center gap-6 pt-4">
           <React.Suspense>
-          <PricingSlider
-            {...pricingSliderProps(
-              parseInt(maxProductsPrice),
+            <PricingSlider
+              {...pricingSliderProps(
+                maxProductsPrice ?? 0,
                 !!maxPrice ? parseInt(maxPrice) : null
-            )}
-          />
+              )}
+            />
           </React.Suspense>
         </div>
       ),
@@ -188,7 +212,7 @@ export default async function Products({
         <div className="flex flex-1 flex-col justify-center gap-y-1.5">
           {Array.from({ length: maxProductRating })
             .map((_value, index) => {
-              const parsedMinRating = parseInt(minRating);
+              const parsedMinRating = parseInt(minRating ?? "0");
               const hasRatingSearchParam =
                 typeof minRating === "string" && !isNaN(parsedMinRating);
               const isChecked =
@@ -196,15 +220,15 @@ export default async function Products({
 
               return (
                 <React.Suspense key={index}>
-                <RatingFilterItemWrapper
-                  index={index}
-                  checked={isChecked}
-                  wrapperClassName={
-                    hasRatingSearchParam && parsedMinRating > index + 1
-                      ? "hidden"
-                      : ""
-                  }
-                />
+                  <RatingFilterItemWrapper
+                    index={index}
+                    checked={isChecked}
+                    wrapperClassName={
+                      hasRatingSearchParam && parsedMinRating > index + 1
+                        ? "hidden"
+                        : ""
+                    }
+                  />
                 </React.Suspense>
               );
             })
@@ -228,13 +252,13 @@ export default async function Products({
 
             return (
               <React.Suspense key={index}>
-              <TagFilterItemWrapper
-                tagItem={tagItem}
-                selected={isSelected}
+                <TagFilterItemWrapper
+                  tagItem={tagItem}
+                  selected={isSelected}
                   wrapperClassName={cn("order-none", {
                     "order-1": !isSelected,
                   })}
-              />
+                />
               </React.Suspense>
             );
           })}
@@ -307,18 +331,18 @@ export default async function Products({
                     Sort by:
                   </span>
                   <React.Suspense>
-                  <DropdownSelector
-                    useNextLink
-                    currentValue={currentSortByValue?.value}
-                    options={productsSortByOptions}
-                    defaultValue={currentSortByValue?.value}
-                    wrapperClassname="flex flex-1"
-                  >
-                    <SelectTrigger className="line-clamp-1 flex w-fit flex-row gap-x-1 truncate outline-none focus:ring-0 focus:ring-offset-0 md:gap-x-2">
-                      {currentSortByValue?.name}
-                      <SelectValue placeholder={currentSortByValue?.value} />
-                    </SelectTrigger>
-                  </DropdownSelector>
+                    <DropdownSelector
+                      useNextLink
+                      currentValue={currentSortByValue?.value}
+                      options={productsSortByOptions}
+                      defaultValue={currentSortByValue?.value}
+                      wrapperClassname="flex flex-1"
+                    >
+                      <SelectTrigger className="line-clamp-1 flex w-fit flex-row gap-x-1 truncate outline-none focus:ring-0 focus:ring-offset-0 md:gap-x-2">
+                        {currentSortByValue?.name}
+                        <SelectValue placeholder={currentSortByValue?.value} />
+                      </SelectTrigger>
+                    </DropdownSelector>
                   </React.Suspense>
                 </div>
                 <div className="flex flex-1 flex-row justify-end">

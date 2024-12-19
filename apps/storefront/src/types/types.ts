@@ -124,3 +124,4 @@ export type BaseOperationVariables = OperationVariables;
 
 export type GetProductsMaxPriceResponse = { result_max_price: number };
 export type GetProductsCountResponse = { result_products_count: number };
+export type GetLineItemIdResponse = { line_item_id: string };

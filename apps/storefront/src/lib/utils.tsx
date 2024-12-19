@@ -10,6 +10,7 @@ import {
   StoreHighlightIcon,
 } from "@/constants/constants";
 import type { Products } from "@/gql/graphql";
+import type { TProduct } from "@/types/types";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -42,9 +43,9 @@ export function parseRemainingTime(countDown: number) {
 }
 
 export function parseProductTags(productsCollection?: Products[] | null) {
-  if (!productsCollection) return null;
+  if (!productsCollection) return [];
 
-  return productsCollection?.map(
+  return productsCollection.map(
     ({ product_tagsCollection, ...productRest }) => ({
       generalTags: product_tagsCollection?.edges
         ?.filter(({ node: { is_general_tag: isGeneralTag } }) => isGeneralTag)
@@ -64,7 +65,7 @@ export function parseProductTags(productsCollection?: Products[] | null) {
         })),
       ...productRest,
     })
-  );
+  ) as TProduct[];
 }
 
 export function isRecordIdInSearchParamArray(

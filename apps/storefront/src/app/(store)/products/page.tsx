@@ -47,6 +47,11 @@ import emptyListImage from "@/public/images/empty-products-list.png";
 import Image from "next/image";
 import { RatingFilterItemWrapper } from "@/components/ui/product/rating-filter-item-wrapper";
 import { TagFilterItemWrapper } from "@/components/ui/product/tag-filter-item-wrapper";
+import {
+  categoriesToShow,
+  pricingSliderProps,
+  productsToShow,
+} from "@/constants/product/constants";
 
 // TODO: Refactor to simplify this page when getting data. Also, Promise.all for all async calls.
 export default async function Products({
@@ -70,39 +75,28 @@ export default async function Products({
     );
   }
 
-  const categoriesToShow = 30;
-  const categories = await queryGraphql("categoriesCollection", allCategories, {
-    first: categoriesToShow,
-    filter: { store: { eq: env.NEXT_PUBLIC_STORE_ID } },
-    orderBy: { name: "AscNullsFirst" },
-  });
-
-  const allTags = await callDatabaseFunction("get_all_product_tags", {
-    store_id: env.NEXT_PUBLIC_STORE_ID,
-  });
-  const { result_max_price: maxProductsPrice } = await callDatabaseFunction(
-    "get_products_max_price",
-    {
+  const [
+    categories,
+    allTags,
+    { result_max_price: maxProductsPrice },
+    { result_products_count: productsCount },
+  ] = await Promise.all([
+    queryGraphql("categoriesCollection", allCategories, {
+      first: categoriesToShow,
+      filter: { store: { eq: env.NEXT_PUBLIC_STORE_ID } },
+      orderBy: { name: "AscNullsFirst" },
+    }),
+    callDatabaseFunction("get_all_product_tags", {
       store_id: env.NEXT_PUBLIC_STORE_ID,
-    }
-  );
-  const pricingSliderProps = {
-    thumbClassName:
-      "outline-none ring-0 focus-visible:ring-0 focus-visible:ring-offset-0",
-    defaultValue: [parseInt(maxPrice ?? maxProductsPrice)],
-    max:
-      typeof maxProductsPrice === "number"
-        ? maxProductsPrice
-        : defaultMaxProductPrice,
-  };
-  const { result_products_count: productsCount } = await callDatabaseFunction(
-    "get_products_count",
-    {
+    }),
+    callDatabaseFunction("get_products_max_price", {
       store_id: env.NEXT_PUBLIC_STORE_ID,
-    }
-  );
+    }),
+    callDatabaseFunction("get_products_count", {
+      store_id: env.NEXT_PUBLIC_STORE_ID,
+    }),
+  ]);
 
-  const productsToShow = 20;
   const productsResult = await queryGraphql("productsCollection", allProducts, {
     first: productsToShow,
     filter: {
@@ -144,6 +138,7 @@ export default async function Products({
     );
   }
 
+  console.log(parseInt(maxProductsPrice), parseInt(maxPrice));
   const filters: ProductFilter[] = [
     {
       children: (
@@ -176,7 +171,12 @@ export default async function Products({
     {
       children: (
         <div className="flex flex-1 flex-col justify-center gap-6 pt-4">
-          <PricingSlider {...pricingSliderProps} />
+          <PricingSlider
+            {...pricingSliderProps(
+              parseInt(maxProductsPrice),
+              parseInt(maxPrice)
+            )}
+          />
         </div>
       ),
       name: "Price",

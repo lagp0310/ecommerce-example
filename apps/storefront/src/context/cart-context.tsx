@@ -29,6 +29,11 @@ type CartContext = {
     quantity: number
   ) => Promise<void>;
   handleDeleteLineItem: (lineItemId: string) => Promise<void>;
+  isCreateCartLoading: boolean;
+  isUpdateCartLoading: boolean;
+  isCreateLineItemsLoading: boolean;
+  isUpdateLineItemsLoading: boolean;
+  isDeleteLineItemsLoading: boolean;
 };
 const CartContext = React.createContext<CartContext>({
   cart: null,
@@ -36,6 +41,11 @@ const CartContext = React.createContext<CartContext>({
   handleAddToCart: async () => {},
   handleUpdateQuantity: async () => {},
   handleDeleteLineItem: async () => {},
+  isCreateCartLoading: false,
+  isUpdateCartLoading: false,
+  isCreateLineItemsLoading: false,
+  isUpdateLineItemsLoading: false,
+  isDeleteLineItemsLoading: false,
 });
 
 export function useCart() {
@@ -273,6 +283,11 @@ export function CartContextProvider({ children, currentCart = null }: Props) {
       handleAddToCart,
       handleUpdateQuantity,
       handleDeleteLineItem,
+      isCreateCartLoading,
+      isUpdateCartLoading,
+      isCreateLineItemsLoading,
+      isUpdateLineItemsLoading,
+      isDeleteLineItemsLoading,
     }),
     [
       cart,
@@ -280,6 +295,11 @@ export function CartContextProvider({ children, currentCart = null }: Props) {
       handleAddToCart,
       handleUpdateQuantity,
       handleDeleteLineItem,
+      isCreateCartLoading,
+      isUpdateCartLoading,
+      isCreateLineItemsLoading,
+      isUpdateLineItemsLoading,
+      isDeleteLineItemsLoading,
     ]
   );
 

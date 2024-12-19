@@ -17,7 +17,6 @@ import {
   defaultProductsShowPerPage,
   defaultSortBy,
   defaultSortByDirection,
-  getStoreHighlightsIcon,
 } from "@/constants/constants";
 import discountBanner from "@/public/images/discount-banner.png";
 import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/24/outline";
@@ -32,7 +31,7 @@ import { allCategories } from "@/gql/queries/category/queries";
 import { env } from "@/lib/env";
 import { allStoreFeatures } from "@/gql/queries/store-feature/queries";
 import { allProducts } from "@/gql/queries/product/queries";
-import { parseProductTags } from "@/lib/utils";
+import { getStoreHighlightsIcon, parseProductTags } from "@/lib/utils";
 import {
   brandIcons,
   categoriesCarouselProviderProps,

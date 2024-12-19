@@ -2,17 +2,11 @@ import React from "react";
 import type {
   Language,
   Currency,
-  Product,
   BaseSelectOption,
   SortByDirection,
 } from "@/types/types";
 import { CurrencyDollarIcon, LanguageIcon } from "@heroicons/react/24/outline";
 import dayjs from "dayjs";
-import greenAppleProduct from "@/public/images/green-apple-product.png";
-import { HeadphonesIcon } from "@/components/ui/icons/headphones";
-import { ShoppingBagCheckedIcon } from "@/components/ui/icons/shopping-bag-checked";
-import { BoxIcon } from "@/components/ui/icons/box";
-import { TruckIcon } from "@/components/ui/icons/truck";
 
 export const defaultAvatarImageWidth = 200;
 export const defaultAvatarImageHeight = 200;
@@ -116,21 +110,6 @@ export enum StoreHighlightIcon {
   SHOPPING_BAG_CHECKED_ICON = "ShoppingBagCheckedIcon",
   BOX_ICON = "BoxIcon",
 }
-
-export const getStoreHighlightsIcon = (icon: StoreHighlightIcon) => {
-  switch (icon) {
-    case StoreHighlightIcon.TRUCK_ICON:
-      return <TruckIcon className="size-10 text-primary" />;
-    case StoreHighlightIcon.HEADPHONES_ICON:
-      return <HeadphonesIcon className="size-10 text-primary" />;
-    case StoreHighlightIcon.SHOPPING_BAG_CHECKED_ICON:
-      return <ShoppingBagCheckedIcon className="size-10 text-primary" />;
-    case StoreHighlightIcon.BOX_ICON:
-      return <BoxIcon className="size-10 text-primary" />;
-    default:
-      return null;
-  }
-};
 
 export const maxProductRating = 5;
 

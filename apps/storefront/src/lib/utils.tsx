@@ -1,8 +1,13 @@
+import { BoxIcon } from "@/components/ui/icons/box";
+import { HeadphonesIcon } from "@/components/ui/icons/headphones";
+import { ShoppingBagCheckedIcon } from "@/components/ui/icons/shopping-bag-checked";
+import { TruckIcon } from "@/components/ui/icons/truck";
 import {
   intervalMs,
   daysTransform,
   minutesTransform,
   secondsTransform,
+  StoreHighlightIcon,
 } from "@/constants/constants";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
@@ -123,4 +128,19 @@ export function updateSearchParam(
   }
 
   return newSearchParams;
+}
+
+export function getStoreHighlightsIcon(icon: StoreHighlightIcon) {
+  switch (icon) {
+    case StoreHighlightIcon.TRUCK_ICON:
+      return <TruckIcon className="size-10 text-primary" />;
+    case StoreHighlightIcon.HEADPHONES_ICON:
+      return <HeadphonesIcon className="size-10 text-primary" />;
+    case StoreHighlightIcon.SHOPPING_BAG_CHECKED_ICON:
+      return <ShoppingBagCheckedIcon className="size-10 text-primary" />;
+    case StoreHighlightIcon.BOX_ICON:
+      return <BoxIcon className="size-10 text-primary" />;
+    default:
+      return null;
+  }
 }

@@ -36,9 +36,7 @@ export const deleteLineItems = gql`
       __typename
       affectedCount
       records {
-        records {
-          ...LineItemFragment
-        }
+        ...LineItemFragment
       }
     }
   }

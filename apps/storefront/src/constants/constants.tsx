@@ -65,26 +65,6 @@ export const secondsTransform = 60;
 export const minutesTransform = 60 * 60;
 export const daysTransform = minutesTransform * 24;
 
-export const product: Product = {
-  id: "868b9f7f-620c-490c-9c8b-b45cccb4507f",
-  slug: "ecobazar-green-apple-620c",
-  name: "Green Apple",
-  price: 20.99,
-  discountedPrice: 14.99,
-  currencies: {
-    id: "5afb804d-d96a-4c59-8d01-259d256a2e22",
-    currencySymbol: "$",
-    currencyCode: "USD",
-  },
-  imageUrl: greenAppleProduct.src,
-  rating: 4,
-  totalRatings: 25,
-  generalTags: [{ id: "1", tag: "Top Seller", type: "info" }],
-  discountTags: [{ id: "2", tag: "50% Off", type: "danger" }],
-  description:
-    "Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla nibh diam, blandit vel consequat nec, ultrices et ipsum. Nulla varius magna a consequat pulvinar. ",
-};
-
 export const productsSortByOptions: BaseSelectOption[] = [
   {
     id: "5b0af388-bc3d-482d-ba61-fe67d5715298",

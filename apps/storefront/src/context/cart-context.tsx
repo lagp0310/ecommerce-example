@@ -93,7 +93,7 @@ export function CartContextProvider({ children, currentCart = null }: Props) {
           throw new Error(error);
         });
     }
-  }, [getCart, getLineItems]);
+  }, [cart, getCart, getLineItems]);
 
   const [
     mutateCreateCart,

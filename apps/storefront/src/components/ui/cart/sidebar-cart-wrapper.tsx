@@ -8,10 +8,8 @@ import {
   SheetContent,
   SheetHeader,
   SheetTitle,
-  SheetFooter,
 } from "@/components/ui/common/sheet";
 import { ShoppingBagIcon } from "@heroicons/react/24/outline";
-import Link from "next/link";
 import { type DialogProps } from "@radix-ui/react-dialog";
 import {
   TooltipProvider,
@@ -19,11 +17,7 @@ import {
   TooltipTrigger,
   TooltipContent,
 } from "@/components/ui/common/tooltip";
-import { product } from "@/constants/constants";
-
-const cartId = "0e84b499-0047-4125-9f96-f44b7a793214";
-const numberOfProducts = 4;
-const hasProducts = numberOfProducts > 0;
+import { useCart } from "@/context/cart-context";
 
 type Props = {
   sheetProps?: DialogProps;
@@ -49,6 +43,12 @@ export function SidebarCartWrapper({
   sheetTitle = <SheetTitle className="text-left">My Shopping Cart</SheetTitle>,
   ...sheetProps
 }: Props) {
+  const { lineItems } = useCart();
+  const hasProducts = React.useMemo(
+    () => Array.isArray(lineItems) && lineItems.length > 0,
+    [lineItems]
+  );
+
   const [isOpen, setIsOpen] = React.useState(false);
   const toggleSidebar = React.useCallback(() => {
     setIsOpen((prevState) => !prevState);
@@ -61,11 +61,14 @@ export function SidebarCartWrapper({
         <SheetHeader>{sheetTitle}</SheetHeader>
         {hasProducts ? (
           <div className="flex h-full max-h-full flex-1 basis-full flex-col overflow-y-auto overflow-x-hidden pr-4">
-            {Array.from({ length: numberOfProducts }).map((_value, index) => (
-              <div key={index} className="group/cart-product flex flex-col">
+            {lineItems.map(({ products, id, ...lineItem }) => (
+              <div key={id} className="group/cart-product flex flex-col">
                 <BasicCartProduct
-                  key={index}
-                  product={product}
+                  lineItem={{
+                    id,
+                    ...lineItem,
+                  }}
+                  product={products}
                   toggleSidebar={toggleSidebar}
                 />
                 <div className="w-full border-t border-gray-100/50 group-last/cart-product:hidden"></div>

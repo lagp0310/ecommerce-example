@@ -25,6 +25,7 @@ export function AddToCartWrapper({
 }: Props) {
   const { cart, lineItems, handleAddToCart } = useCart();
 
+  const wasGetLineItemIdSuccessful = React.useRef(false);
   const [lineItemId, setLineItemId] = React.useState<string | null>(null);
   React.useEffect(() => {
     if (!cart?.id || !product.id) {
@@ -36,6 +37,7 @@ export function AddToCartWrapper({
       product_id: product.id,
     })
       .then(({ line_item_id: lineItemId }) => {
+        wasGetLineItemIdSuccessful.current = true;
         setLineItemId(lineItemId);
       })
       .catch((error) => {
@@ -43,7 +45,9 @@ export function AddToCartWrapper({
       });
   }, [cart?.id, lineItems, product.id]);
 
-  const [showCounter, setShowCounter] = React.useState(!!lineItemId);
+  const [showCounter, setShowCounter] = React.useState(
+    !!lineItemId && wasGetLineItemIdSuccessful.current
+  );
   React.useEffect(() => {
     setShowCounter(!!lineItemId);
   }, [lineItemId]);
@@ -62,6 +66,7 @@ export function AddToCartWrapper({
         <Button
           className="group flex flex-1 flex-row items-center justify-center gap-x-2 rounded-full bg-primary text-body-small font-semibold leading-6 text-white hover:border hover:border-primary hover:bg-white hover:text-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
           onClick={() => handleAddToCart(product)}
+          disabled={!wasGetLineItemIdSuccessful.current}
           {...buttonProps}
         >
           {children}
@@ -81,6 +86,7 @@ export function AddToCartWrapper({
           }
           minusClassName="disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:border-gray-100 rounded-full border border-gray-100 p-4 flex flex-1 flex-row items-center justify-center group/minus-button hover:border-transparent hover:bg-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
           moreClassName="disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:border-gray-100 rounded-full border border-gray-100 p-4 flex flex-1 flex-row items-center justify-center group/more-button hover:border-transparent hover:bg-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
+          disabled={!wasGetLineItemIdSuccessful.current}
         />
       ) : null}
     </div>

@@ -20,6 +20,7 @@ export const StoreFeatureCreate = () => {
 
   return (
     <Create
+      footerButtons={[]}
       title="Create Store Feature"
       saveButtonProps={{
         ...saveButtonProps,

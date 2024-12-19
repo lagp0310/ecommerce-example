@@ -24,6 +24,7 @@ export const StoreHeaderBannerEdit = () => {
 
   return (
     <Edit
+      footerButtons={[]}
       title="Edit Header Banner"
       saveButtonProps={{
         ...saveButtonProps,

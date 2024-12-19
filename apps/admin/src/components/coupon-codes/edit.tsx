@@ -29,6 +29,7 @@ export const CouponCodesEdit = () => {
 
   return (
     <Edit
+      footerButtons={[]}
       title="Edit Coupon Code"
       saveButtonProps={{
         ...saveButtonProps,

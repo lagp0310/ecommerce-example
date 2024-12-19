@@ -1,10 +1,9 @@
 "use client";
 
 import React from "react";
-import { BaseRecord } from "@refinedev/core";
-import { useTable, List, EditButton } from "@refinedev/antd";
-import { Table, Space } from "antd";
-import { PlusIcon, PencilSquareIcon } from "@heroicons/react/24/solid";
+import { useTable, List } from "@refinedev/antd";
+import { Table } from "antd";
+import { PlusIcon } from "@heroicons/react/24/solid";
 
 export const CurrencyList = () => {
   const { tableProps } = useTable({
@@ -20,7 +19,7 @@ export const CurrencyList = () => {
         <Table.Column dataIndex="name" title="Name" />
         <Table.Column dataIndex="three_letter_code" title="Three Letter Code" />
         <Table.Column dataIndex="numeric_id" title="Numeric ID" />
-        <Table.Column
+        {/* <Table.Column
           title="Actions"
           dataIndex="actions"
           render={(_, record: BaseRecord) => (
@@ -33,7 +32,7 @@ export const CurrencyList = () => {
               />
             </Space>
           )}
-        />
+        /> */}
       </Table>
     </List>
   );

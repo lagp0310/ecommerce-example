@@ -31,6 +31,7 @@ export const ProductEdit = () => {
 
   return (
     <Edit
+      footerButtons={[]}
       saveButtonProps={{
         ...saveButtonProps,
         className: "align-middle",

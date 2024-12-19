@@ -21,6 +21,7 @@ export const StoreHeaderBannerCreate = () => {
 
   return (
     <Create
+      footerButtons={[]}
       title="Create Header Banner"
       saveButtonProps={{
         ...saveButtonProps,

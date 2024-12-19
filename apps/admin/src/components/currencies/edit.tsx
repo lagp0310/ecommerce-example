@@ -14,6 +14,7 @@ export const CurrencyEdit = () => {
 
   return (
     <Edit
+      footerButtons={[]}
       saveButtonProps={{
         ...saveButtonProps,
         className: "align-middle",

@@ -25,6 +25,7 @@ export const CouponCodesCreate = () => {
 
   return (
     <Create
+      footerButtons={[]}
       title="Create Coupon Code"
       saveButtonProps={{
         ...saveButtonProps,

@@ -23,6 +23,7 @@ export const StoreEdit = () => {
 
   return (
     <Edit
+      footerButtons={[]}
       saveButtonProps={{
         ...saveButtonProps,
         className: "align-middle",

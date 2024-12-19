@@ -24,6 +24,7 @@ export const StoreImageBannerEdit = () => {
 
   return (
     <Edit
+      footerButtons={[]}
       title="Edit Image Banner"
       saveButtonProps={{
         ...saveButtonProps,

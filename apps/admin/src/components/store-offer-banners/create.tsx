@@ -21,6 +21,7 @@ export const StoreOfferBannerCreate = () => {
 
   return (
     <Create
+      footerButtons={[]}
       title="Create Offer Banner"
       saveButtonProps={{
         ...saveButtonProps,

@@ -24,6 +24,7 @@ export const PaymentMethodCreate = () => {
 
   return (
     <Create
+      footerButtons={[]}
       title="Create Payment Method"
       saveButtonProps={{
         ...saveButtonProps,

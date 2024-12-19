@@ -1,20 +1,9 @@
 "use client";
 
 import React from "react";
-import { BaseRecord } from "@refinedev/core";
-import {
-  useTable,
-  List,
-  EditButton,
-  DeleteButton,
-  ImageField,
-} from "@refinedev/antd";
-import { Table, Space } from "antd";
-import {
-  PlusIcon,
-  PencilSquareIcon,
-  TrashIcon,
-} from "@heroicons/react/24/solid";
+import { useTable, List, ImageField } from "@refinedev/antd";
+import { Table } from "antd";
+import { PlusIcon } from "@heroicons/react/24/solid";
 
 export const StoreFeatureList = () => {
   const { tableProps } = useTable({
@@ -48,7 +37,7 @@ export const StoreFeatureList = () => {
             <ImageField style={{ maxWidth: "100px" }} value={value} />
           )}
         />
-        <Table.Column
+        {/* <Table.Column
           title="Actions"
           dataIndex="actions"
           render={(_, record: BaseRecord) => (
@@ -67,7 +56,7 @@ export const StoreFeatureList = () => {
               />
             </Space>
           )}
-        />
+        /> */}
       </Table>
     </List>
   );

@@ -23,6 +23,7 @@ export const StoreFeatureEdit = () => {
 
   return (
     <Edit
+      footerButtons={[]}
       title="Edit Store Feature"
       saveButtonProps={{
         ...saveButtonProps,

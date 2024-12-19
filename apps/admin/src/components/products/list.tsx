@@ -1,14 +1,9 @@
 "use client";
 
 import React from "react";
-import { BaseRecord } from "@refinedev/core";
-import { useTable, List, EditButton, DeleteButton } from "@refinedev/antd";
-import { Table, Space, Tag } from "antd";
-import {
-  PlusIcon,
-  PencilSquareIcon,
-  TrashIcon,
-} from "@heroicons/react/24/solid";
+import { useTable, List } from "@refinedev/antd";
+import { Table, Tag } from "antd";
+import { PlusIcon } from "@heroicons/react/24/solid";
 import type { Category, ProductTag } from "@/types/types";
 
 export const ProductList = () => {
@@ -84,7 +79,7 @@ export const ProductList = () => {
             return <div className="flex flex-wrap gap-y-1">{tags}</div>;
           }}
         />
-        <Table.Column
+        {/* <Table.Column
           title="Actions"
           dataIndex="actions"
           render={(_, record: BaseRecord) => (
@@ -103,7 +98,7 @@ export const ProductList = () => {
               />
             </Space>
           )}
-        />
+        /> */}
       </Table>
     </List>
   );

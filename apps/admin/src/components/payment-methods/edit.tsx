@@ -28,6 +28,7 @@ export const PaymentMethodEdit = () => {
 
   return (
     <Edit
+      footerButtons={[]}
       title="Edit Payment Method"
       saveButtonProps={{
         ...saveButtonProps,

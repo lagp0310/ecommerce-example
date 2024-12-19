@@ -15,6 +15,7 @@ export const BannerTypeEdit = () => {
   return (
     <Edit
       title="Edit Banner Type"
+      footerButtons={[]}
       saveButtonProps={{
         ...saveButtonProps,
         className: "align-middle",

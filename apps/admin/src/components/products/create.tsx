@@ -27,6 +27,7 @@ export const ProductCreate = () => {
 
   return (
     <Create
+      footerButtons={[]}
       saveButtonProps={{
         ...saveButtonProps,
         icon: <FolderArrowDownIcon className="size-4 text-white" />,

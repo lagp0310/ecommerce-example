@@ -1,20 +1,9 @@
 "use client";
 
 import React from "react";
-import { BaseRecord } from "@refinedev/core";
-import {
-  useTable,
-  List,
-  EditButton,
-  DeleteButton,
-  BooleanField,
-} from "@refinedev/antd";
-import { Table, Space } from "antd";
-import {
-  PencilSquareIcon,
-  PlusIcon,
-  TrashIcon,
-} from "@heroicons/react/24/solid";
+import { useTable, List, BooleanField } from "@refinedev/antd";
+import { Table } from "antd";
+import { PlusIcon } from "@heroicons/react/24/solid";
 
 export const PaymentMethodList = () => {
   const { tableProps } = useTable({
@@ -58,7 +47,7 @@ export const PaymentMethodList = () => {
             </div>
           )}
         />
-        <Table.Column
+        {/* <Table.Column
           title="Actions"
           dataIndex="actions"
           render={(_, record: BaseRecord) => (
@@ -77,7 +66,7 @@ export const PaymentMethodList = () => {
               />
             </Space>
           )}
-        />
+        /> */}
       </Table>
     </List>
   );

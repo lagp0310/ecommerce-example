@@ -1,17 +1,30 @@
 "use client";
 
 import React from "react";
-import { useTable, List } from "@refinedev/antd";
+import { useTable, List, useSelect } from "@refinedev/antd";
 import { Table, Tag } from "antd";
 import { PlusIcon } from "@heroicons/react/24/solid";
 import type { Category, ProductTag } from "@/types/types";
+import { cn } from "@/lib/utils";
 
 export const ProductList = () => {
   const { tableProps } = useTable({
     syncWithLocation: true,
     meta: {
-      select:
-        "*, currencies(name, three_letter_code), stores(name), categories(name), tags(tag)",
+      select: "*, currencies(name, three_letter_code), stores(name)",
+    },
+  });
+  const {
+    query: { data: categoriesData },
+  } = useSelect({
+    resource: "categories",
+  });
+  const {
+    query: { data: tagsData },
+  } = useSelect({
+    resource: "product_tags",
+    meta: {
+      select: "*, type(type)",
     },
   });
 
@@ -59,8 +72,10 @@ export const ProductList = () => {
         <Table.Column
           dataIndex={["categories"]}
           title="Categories"
-          render={(_value, record) => {
-            const categories = record?.categories;
+          render={(value) => {
+            const categories = categoriesData?.data?.filter(({ id }) =>
+              value?.includes(id)
+            );
             const categoryTags = (categories as Category[])?.map(
               ({ name }, index) => <Tag key={index}>{name}</Tag>
             );
@@ -71,11 +86,27 @@ export const ProductList = () => {
         <Table.Column
           dataIndex={["tags"]}
           title="Tags"
-          render={(_value, record) => {
-            const tagsArray = record?.tags;
-            const tags = (tagsArray as ProductTag[])?.map(({ tag }, index) => (
-              <Tag key={index}>{tag}</Tag>
-            ));
+          render={(value) => {
+            const tagsList = tagsData?.data?.filter(({ id }) =>
+              value?.includes(id)
+            );
+            const tags = (tagsList as ProductTag[])?.map(
+              ({ tag, type }, index) => (
+                <Tag
+                  key={index}
+                  className={cn(
+                    "font-normal rounded-[4px] px-2 py-[3px] truncate whitespace-break-spaces capitalize",
+                    {
+                      "bg-blue-500 text-white": type?.type === "info",
+                      "bg-danger text-white": type?.type === "danger",
+                      "bg-success text-white": type?.type === "success",
+                    }
+                  )}
+                >
+                  {tag}
+                </Tag>
+              )
+            );
 
             return <div className="flex flex-wrap gap-y-1">{tags}</div>;
           }}

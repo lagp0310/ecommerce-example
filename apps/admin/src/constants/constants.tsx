@@ -195,6 +195,18 @@ export const refineResources = [
     },
   },
   {
+    name: "product_tags",
+    list: "/admin/product-tags",
+    create: "/admin/product-tags/create",
+    edit: "/admin/product-tags/edit/:id",
+    meta: {
+      canDelete: true,
+      label: "Product Tags",
+      singularLabel: "Product Tag",
+      groupName: "products",
+    },
+  },
+  {
     name: "stores",
     list: "/admin/stores",
     create: "/admin/stores/create",
@@ -216,6 +228,18 @@ export const refineResources = [
       label: "Store Features",
       singularLabel: "Store Feature",
       groupName: "stores",
+    },
+  },
+  {
+    name: "tag_types",
+    list: "/admin/tag-types",
+    create: "/admin/tag-types/create",
+    edit: "/admin/tag-types/edit/:id",
+    meta: {
+      canDelete: true,
+      label: "Tag Types",
+      singularLabel: "Tag Type",
+      groupName: "products",
     },
   },
   {

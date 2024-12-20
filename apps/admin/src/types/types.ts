@@ -117,4 +117,5 @@ export type Category = {
 export type ProductTag = {
   id: BaseKey;
   tag: string;
+  type?: { type?: string };
 };

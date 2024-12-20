@@ -3,7 +3,7 @@ import React from "react";
 
 type Props = React.HTMLProps<HTMLDivElement> & {
   currencySymbol: string;
-  quantity: number;
+  quantity?: number;
   price: number;
   discountedPrice?: number | null;
   priceClasses?: string;
@@ -25,12 +25,14 @@ export function ProductPricing({
 }: Props) {
   return (
     <div {...props}>
-      <span
-        className={cn(
-          "hidden font-normal text-body-small text-gray-500",
-          quantityClasses
-        )}
-      >{`${quantity} x`}</span>
+      {typeof quantity === "number" ? (
+        <span
+          className={cn(
+            "hidden font-normal text-body-small text-gray-500",
+            quantityClasses
+          )}
+        >{`${quantity} x`}</span>
+      ) : null}
       {!!discountedPrice ? (
         <span
           className={cn(

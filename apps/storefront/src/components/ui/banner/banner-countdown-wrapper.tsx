@@ -6,9 +6,10 @@ import { BannerCountdown } from "@/components/ui/banner/banner-countdown";
 import dayjs from "dayjs";
 import utcPlugin from "dayjs/plugin/utc";
 import { cn } from "@/lib/utils";
-import { offerEndDate } from "@/constants/constants";
 
 dayjs.extend(utcPlugin);
+
+const defaultOfferEndDate = dayjs().add(6, "hours").toDate();
 
 type Props = React.HTMLProps<HTMLDivElement> & {
   endDate?: Date;
@@ -18,7 +19,7 @@ type Props = React.HTMLProps<HTMLDivElement> & {
 };
 
 export function BannerCountdownWrapper({
-  endDate = offerEndDate,
+  endDate = defaultOfferEndDate,
   semicolonClasses,
   timeClasses,
   timeUnitClasses,

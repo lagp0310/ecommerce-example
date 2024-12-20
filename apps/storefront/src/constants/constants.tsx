@@ -6,7 +6,6 @@ import type {
   SortByDirection,
 } from "@/types/types";
 import { CurrencyDollarIcon, LanguageIcon } from "@heroicons/react/24/outline";
-import dayjs from "dayjs";
 
 export const defaultAvatarImageWidth = 200;
 export const defaultAvatarImageHeight = 200;
@@ -51,8 +50,6 @@ export const {
   value: currencyValue,
   icon: currencyIcon,
 } = availableCurrencies.at(0)!;
-
-export const offerEndDate = dayjs().add(6, "hours").toDate();
 
 export const intervalMs = 1000;
 export const secondsTransform = 60;

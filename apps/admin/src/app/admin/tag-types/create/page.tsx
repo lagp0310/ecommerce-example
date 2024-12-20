@@ -1,5 +1,10 @@
+import React from "react";
 import { TagTypeCreate } from "@/components/tag-types";
 
 export default function TagTypeCreatePage() {
-  return <TagTypeCreate />;
+  return (
+    <React.Suspense>
+      <TagTypeCreate />
+    </React.Suspense>
+  );
 }

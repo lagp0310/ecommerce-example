@@ -1,5 +1,10 @@
+import React from "react";
 import { TagTypeEdit } from "@/components/tag-types";
 
 export default function TagTypeEditPage() {
-  return <TagTypeEdit />;
+  return (
+    <React.Suspense>
+      <TagTypeEdit />
+    </React.Suspense>
+  );
 }

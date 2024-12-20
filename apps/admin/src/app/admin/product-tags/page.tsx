@@ -1,5 +1,10 @@
+import React from "react";
 import { ProductTagList } from "@/components/product-tags";
 
 export default function ProductTagListPage() {
-  return <ProductTagList />;
+  return (
+    <React.Suspense>
+      <ProductTagList />
+    </React.Suspense>
+  );
 }

@@ -1,16 +1,16 @@
+import type { Node } from "@/gql/graphql";
 import { getClient } from "@/lib/apollo-client";
-import { type DocumentNode } from "@apollo/client";
+import type { BaseOperationVariables } from "@/types/types";
+import type { OperationVariables, DocumentNode } from "@apollo/client";
 
 const client = getClient();
 
-export async function queryGraphql(
-  collectionName: string,
-  query: DocumentNode,
-  variables?: any
-) {
+export async function queryGraphql<
+  T,
+  Q extends OperationVariables = BaseOperationVariables,
+>(collectionName: string, query: DocumentNode, variables?: Q) {
   try {
-    // TODO: Response types. Check generated graphql types.
-    const { data, error } = await client.query({
+    const { data, error } = await client.query<T, Q>({
       query,
       variables,
     });
@@ -19,7 +19,9 @@ export async function queryGraphql(
       throw new Error(error?.message);
     }
 
-    const result = data[collectionName]?.edges?.map(({ node }) => node);
+    // @ts-expect-error: Correct indexing should be checked by caller.
+    const collection = data[collectionName] as { edges?: { node?: Node }[] };
+    const result = collection?.edges?.map(({ node }) => node) as T;
 
     return result;
   } catch (error) {

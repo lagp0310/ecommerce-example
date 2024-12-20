@@ -46,6 +46,7 @@ type Action =
   | {
       type: ActionType["DISMISS_TOAST"];
       toastId?: ToasterToast["id"];
+      delay?: number;
     }
   | {
       type: ActionType["REMOVE_TOAST"];
@@ -58,7 +59,7 @@ interface State {
 
 const toastTimeouts = new Map<string, ReturnType<typeof setTimeout>>();
 
-const addToRemoveQueue = (toastId: string) => {
+const addToRemoveQueue = (toastId: string, delay = TOAST_REMOVE_DELAY) => {
   if (toastTimeouts.has(toastId)) {
     return;
   }
@@ -69,7 +70,7 @@ const addToRemoveQueue = (toastId: string) => {
       type: "REMOVE_TOAST",
       toastId: toastId,
     });
-  }, TOAST_REMOVE_DELAY);
+  }, delay);
 
   toastTimeouts.set(toastId, timeout);
 };
@@ -91,15 +92,15 @@ export const reducer = (state: State, action: Action): State => {
       };
 
     case "DISMISS_TOAST": {
-      const { toastId } = action;
+      const { toastId, delay } = action;
 
       // ! Side effects ! - This could be extracted into a dismissToast() action,
       // but I'll keep it here for simplicity
       if (toastId) {
-        addToRemoveQueue(toastId);
+        addToRemoveQueue(toastId, delay);
       } else {
         state.toasts.forEach((toast) => {
-          addToRemoveQueue(toast.id);
+          addToRemoveQueue(toast.id, delay);
         });
       }
 
@@ -115,6 +116,7 @@ export const reducer = (state: State, action: Action): State => {
         ),
       };
     }
+
     case "REMOVE_TOAST":
       if (action.toastId === undefined) {
         return {
@@ -187,7 +189,8 @@ function useToast() {
   return {
     ...state,
     toast,
-    dismiss: (toastId?: string) => dispatch({ type: "DISMISS_TOAST", toastId }),
+    dismiss: (toastId?: string, delay?: number) =>
+      dispatch({ type: "DISMISS_TOAST", toastId, delay }),
   };
 }
 

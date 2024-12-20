@@ -20,6 +20,7 @@ import {
 import { Bars3Icon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import isURL from "validator/es/lib/isURL";
+import { useToast } from "@/hooks/use-toast";
 
 const SIDEBAR_COOKIE_NAME = "sidebar:state";
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
@@ -265,7 +266,17 @@ const SidebarTrigger = React.forwardRef<
   React.ElementRef<typeof Button>,
   React.ComponentProps<typeof Button>
 >(({ className, onClick, ...props }, ref) => {
-  const { toggleSidebar } = useSidebar();
+  const { toasts, dismiss } = useToast();
+  const { openMobile, toggleSidebar } = useSidebar();
+
+  React.useEffect(() => {
+    if (!openMobile) {
+      return;
+    }
+
+    const openToasts = toasts?.filter(({ open }) => open);
+    openToasts?.forEach(({ id }) => dismiss(id, 100));
+  }, [dismiss, openMobile, toasts]);
 
   return (
     <Button

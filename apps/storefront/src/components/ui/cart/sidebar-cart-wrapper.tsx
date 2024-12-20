@@ -18,6 +18,7 @@ import {
   TooltipContent,
 } from "@/components/ui/common/tooltip";
 import { useCart } from "@/context/cart-context";
+import { useToast } from "@/hooks/use-toast";
 
 type Props = {
   sheetProps?: DialogProps;
@@ -53,6 +54,16 @@ export function SidebarCartWrapper({
   const toggleSidebar = React.useCallback(() => {
     setIsOpen((prevState) => !prevState);
   }, []);
+
+  const { toasts, dismiss } = useToast();
+  React.useEffect(() => {
+    if (!isOpen) {
+      return;
+    }
+
+    const openToasts = toasts?.filter(({ open }) => open);
+    openToasts?.forEach(({ id }) => dismiss(id, 100));
+  }, [dismiss, isOpen, toasts]);
 
   return (
     <CartSheet {...sheetProps} open={isOpen} onOpenChange={setIsOpen}>

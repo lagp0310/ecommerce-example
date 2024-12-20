@@ -1,19 +1,27 @@
 import { Skeleton } from "@/components/ui/common/skeleton";
-import { defaultCarouselProductSkeletons } from "@/constants/product/constants";
+import {
+  defaultCarouselProductSkeletons,
+  productSkeletonFields,
+} from "@/constants/product/constants";
 import React from "react";
 
 export default function Loading() {
   return (
     <div className="my-6 flex flex-1 flex-col gap-y-6">
       <div className="flex flex-1 flex-row items-center justify-center px-6 xl:px-0">
-        <section className="grid w-full max-w-7xl gap-6 lg:grid-cols-3 lg:grid-rows-2">
-          <Skeleton className="col-span-2 row-span-2 h-[550px] w-full rounded-[10px]" />
-          <Skeleton className="col-span-1 row-span-1 h-auto w-full rounded-[10px]" />
-          <Skeleton className="col-span-1 row-span-1 h-auto w-full rounded-[10px]" />
+        <section className="flex flex-1 flex-row w-full max-w-7xl gap-6">
+          <Skeleton className="h-[550px] w-full rounded-[10px] basis-1/2" />
+          <div className="flex flex-1 flex-col gap-y-6 basis-1/2">
+            {Array.from({ length: productSkeletonFields }).map(
+              (_value, index) => (
+                <Skeleton
+                  key={index}
+                  className="h-[30px] w-full rounded-[10px]"
+                />
+              )
+            )}
+          </div>
         </section>
-      </div>
-      <div className="flex flex-1 flex-row items-center justify-center">
-        <Skeleton className="h-[150px] w-full rounded-[10px] max-w-7xl" />
       </div>
       <div className="flex flex-1 flex-col justify-center gap-y-6">
         <div className="flex flex-1 flex-row w-full justify-center items-center">

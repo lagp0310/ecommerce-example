@@ -65,3 +65,6 @@ export const relatedProductsCarouselRendererProps: CarouselRendererProps = {
       "h-64 min-[420px]:h-72 min-[500px]:h-80 min-[580px]:h-[350px] sm:h-[300px] md:h-64 min-[860px]:h-72 lg:h-80 min-[1100px]:h-[350px] xl:h-80",
   },
 };
+
+export const defaultCarouselProductSkeletons = 5;
+export const productSkeletonFields = 4;

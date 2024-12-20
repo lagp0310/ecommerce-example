@@ -481,3 +481,5 @@ export const offerBannersCarouselRendererProps: CarouselRendererProps = {
     classNameTray: "h-[500px]",
   },
 };
+
+export const defaultProductSkeletons = 5;

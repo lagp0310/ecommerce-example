@@ -58,9 +58,11 @@ export function BasicCartProduct({
             />
           ) : null}
           <div className="flex flex-1 flex-col justify-center gap-1">
-            <span className="line-clamp-2">{`${name} (${quantity})`}</span>
+            <span className="line-clamp-2">{name}</span>
             <ProductPricing
-              className="flex flex-row items-center gap-x-2 text-body-small md:text-body-medium"
+              className="flex flex-row items-center gap-x-1 text-body-small md:text-body-medium"
+              quantity={parseInt(quantity)}
+              quantityClasses="flex"
               price={price}
               discountedPrice={discountedPrice}
               currencySymbol={currencies?.symbol ?? defaultCurrencySymbol}
@@ -74,6 +76,7 @@ export function BasicCartProduct({
                 "font-medium text-gray-900 truncate line-clamp-1":
                   !discountedPrice,
               })}
+              showFinalPriceOnly
             />
           </div>
         </CartProduct>

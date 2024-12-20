@@ -105,7 +105,7 @@ export function DefaultLayout({ children }: Props) {
             </div>
           </div>
         </TopBar>
-        <div className="flex flex-row items-center justify-center bg-white px-6 shadow-sm">
+        <div className="flex flex-row items-center justify-center bg-white px-6 shadow-sm sticky top-0 z-50">
           <Navbar className="flex max-w-7xl flex-1 flex-row items-center justify-center gap-x-2 py-6 lg:gap-x-0">
             <NavigationMenu className="hidden max-w-full basis-1/3 flex-row items-center justify-start gap-x-2 lg:flex lg:gap-x-0">
               <NavigationMenuList>

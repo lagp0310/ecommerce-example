@@ -1,7 +1,9 @@
 import type { CodegenConfig } from "@graphql-codegen/cli";
 import { addTypenameSelectionDocumentTransform } from "@graphql-codegen/client-preset";
 
-const config: CodegenConfig = {
+type NonNullableSchema = Required<Pick<CodegenConfig, "schema">>["schema"];
+
+const config: Omit<CodegenConfig, "schema"> & NonNullableSchema = {
   schema: {
     [`${process.env.NEXT_PUBLIC_SUPABASE_URL}/graphql/v1`]: {
       headers: {

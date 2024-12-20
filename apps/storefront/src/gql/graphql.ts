@@ -237,7 +237,6 @@ export type Mutation = {
   deleteFromtag_typesCollection: Tag_TypesDeleteResponse;
   /** Deletes zero or more records from the `transactions` collection */
   deleteFromtransactionsCollection: TransactionsDeleteResponse;
-  get_line_item_id?: Maybe<Scalars['UUID']['output']>;
   get_monthly_users_info?: Maybe<Scalars['Int']['output']>;
   get_products_count?: Maybe<Scalars['Int']['output']>;
   get_products_max_price?: Maybe<Scalars['Float']['output']>;
@@ -516,13 +515,6 @@ export type MutationDeleteFromtag_TypesCollectionArgs = {
 export type MutationDeleteFromtransactionsCollectionArgs = {
   atMost?: Scalars['Int']['input'];
   filter?: InputMaybe<TransactionsFilter>;
-};
-
-
-/** The root type for creating and mutating data */
-export type MutationGet_Line_Item_IdArgs = {
-  cart_id: Scalars['UUID']['input'];
-  product_id: Scalars['UUID']['input'];
 };
 
 

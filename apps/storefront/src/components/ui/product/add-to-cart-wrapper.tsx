@@ -4,10 +4,9 @@ import React from "react";
 import { Button } from "@/components/ui/common/button";
 import { Counter } from "@/components/ui/product/counter";
 import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
-import type { GetLineItemIdResponse, TProduct } from "@/types/types";
+import type { TProduct } from "@/types/types";
 import { useCart } from "@/context/cart-context";
 import isUUID from "validator/es/lib/isUUID";
-import { callDatabaseFunction } from "@/lib/call-database-function";
 import { cn } from "@/lib/utils";
 
 type Props = Omit<React.HTMLProps<HTMLButtonElement>, "type"> & {
@@ -31,7 +30,8 @@ export function AddToCartWrapper({
   moreClassName,
   ...buttonProps
 }: Props) {
-  const { cart, lineItems, handleAddToCart, isLoading } = useCart();
+  const { cart, lineItems, getCartLineItemId, handleAddToCart, isLoading } =
+    useCart();
 
   const [wasGetLineItemIdSuccessful, setWasGetLineItemIdSuccessful] =
     React.useState(false);
@@ -41,23 +41,10 @@ export function AddToCartWrapper({
       return;
     }
 
-    callDatabaseFunction<GetLineItemIdResponse>("get_line_item_id", {
-      cart_id: cart?.id,
-      product_id: product.id,
-    })
-      .then((response) => {
-        const lineItemId = response?.line_item_id;
-        setWasGetLineItemIdSuccessful(true);
-
-        if (typeof lineItemId === "string") {
-          setLineItemId(lineItemId);
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-        throw new Error(error);
-      });
-  }, [cart?.id, lineItems, product.id]);
+    const lineItemId = getCartLineItemId(product.id);
+    setWasGetLineItemIdSuccessful(true);
+    setLineItemId(lineItemId);
+  }, [cart?.id, lineItems, getCartLineItemId, product.id]);
 
   const [showCounter, setShowCounter] = React.useState(
     !!lineItemId && wasGetLineItemIdSuccessful

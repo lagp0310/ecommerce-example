@@ -22,6 +22,7 @@ import { useToast } from "@/hooks/use-toast";
 type CartContext = {
   cart: Carts | null;
   lineItems: Line_Items[];
+  getCartLineItemId: (productId: string) => string | null;
   handleAddToCart: (product: TProduct) => Promise<void>;
   handleUpdateQuantity: (
     lineItemId: string,
@@ -39,6 +40,9 @@ type CartContext = {
 const CartContext = React.createContext<CartContext>({
   cart: null,
   lineItems: [],
+  getCartLineItemId: () => {
+    return null;
+  },
   handleAddToCart: async () => {},
   handleUpdateQuantity: async () => {},
   handleDeleteLineItem: async () => {},
@@ -122,6 +126,19 @@ export function CartContextProvider({ children, currentCart = null }: Props) {
     useMutation(updateLineItems);
   const [mutateDeleteLineItems, { loading: isDeleteLineItemsLoading }] =
     useMutation(deleteLineItems);
+
+  const getCartLineItemId = React.useCallback(
+    (productId: string) => {
+      if (!lineItems) return null;
+
+      const lineItemId = lineItems.find(
+        ({ products }) => products?.id === productId
+      )?.id;
+
+      return lineItemId ?? null;
+    },
+    [lineItems]
+  );
 
   const handleAddToCart = React.useCallback(
     async (product: TProduct) => {
@@ -270,6 +287,7 @@ export function CartContextProvider({ children, currentCart = null }: Props) {
     () => ({
       cart,
       lineItems,
+      getCartLineItemId,
       handleAddToCart,
       handleUpdateQuantity,
       handleDeleteLineItem,
@@ -283,6 +301,7 @@ export function CartContextProvider({ children, currentCart = null }: Props) {
     [
       cart,
       lineItems,
+      getCartLineItemId,
       handleAddToCart,
       handleUpdateQuantity,
       handleDeleteLineItem,

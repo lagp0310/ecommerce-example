@@ -54,7 +54,7 @@ export function AddToCartWrapper({
         }
       })
       .catch((error) => {
-        console.log(error);
+        console.error(error);
         throw new Error(error);
       });
   }, [cart?.id, lineItems, product.id]);

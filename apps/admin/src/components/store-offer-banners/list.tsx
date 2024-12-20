@@ -15,6 +15,7 @@ export const StoreOfferBannerList = () => {
 
   return (
     <List
+      headerButtons={[]}
       title="Store Offer Banners"
       createButtonProps={{ icon: <PlusIcon className="size-4 text-white" /> }}
     >

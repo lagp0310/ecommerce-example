@@ -15,6 +15,7 @@ export const CouponCodesList = () => {
 
   return (
     <List
+      headerButtons={[]}
       title="Coupon Codes"
       createButtonProps={{ icon: <PlusIcon className="size-4 text-white" /> }}
     >

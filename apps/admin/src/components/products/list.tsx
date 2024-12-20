@@ -17,6 +17,7 @@ export const ProductList = () => {
 
   return (
     <List
+      headerButtons={[]}
       createButtonProps={{
         icon: <PlusIcon className="size-4 text-white" />,
       }}

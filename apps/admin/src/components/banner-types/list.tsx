@@ -13,6 +13,7 @@ export const BannerTypeList = () => {
   return (
     <List
       title="Banner Types"
+      headerButtons={[]}
       createButtonProps={{ icon: <PlusIcon className="size-4 text-white" /> }}
     >
       <Table {...tableProps} rowKey="id">

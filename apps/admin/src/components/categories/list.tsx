@@ -15,6 +15,7 @@ export const CategoryList = () => {
 
   return (
     <List
+      headerButtons={[]}
       createButtonProps={{ icon: <PlusIcon className="size-4 text-white" /> }}
     >
       <Table {...tableProps} rowKey="id">

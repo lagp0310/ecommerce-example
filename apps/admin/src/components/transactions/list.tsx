@@ -10,7 +10,7 @@ export const TransactionList = () => {
   });
 
   return (
-    <List>
+    <List headerButtons={[]}>
       <Table {...tableProps} rowKey="id">
         <Table.Column dataIndex="id" title="ID" />
         <Table.Column

@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { useTable, List, ImageField } from "@refinedev/antd";
+import { useTable, List } from "@refinedev/antd";
 import { Table } from "antd";
 import { PlusIcon } from "@heroicons/react/24/solid";
 
@@ -15,6 +15,7 @@ export const StoreFeatureList = () => {
 
   return (
     <List
+      headerButtons={[]}
       title="Store Features"
       createButtonProps={{ icon: <PlusIcon className="size-4 text-white" /> }}
     >
@@ -30,13 +31,6 @@ export const StoreFeatureList = () => {
         />
         <Table.Column dataIndex="title" title="Title" />
         <Table.Column dataIndex="description" title="Description" />
-        <Table.Column
-          dataIndex={["icon_url"]}
-          title="Icon"
-          render={(value: string) => (
-            <ImageField style={{ maxWidth: "100px" }} value={value} />
-          )}
-        />
         {/* <Table.Column
           title="Actions"
           dataIndex="actions"

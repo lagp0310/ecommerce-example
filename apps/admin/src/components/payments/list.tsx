@@ -10,7 +10,7 @@ export const PaymentList = () => {
   });
 
   return (
-    <List>
+    <List headerButtons={[]}>
       <Table {...tableProps} rowKey="id">
         <Table.Column dataIndex="id" title="ID" />
         <Table.Column

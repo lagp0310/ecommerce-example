@@ -12,6 +12,7 @@ export const PaymentMethodTypeList = () => {
 
   return (
     <List
+      headerButtons={[]}
       title="Payment Method Types"
       createButtonProps={{ icon: <PlusIcon className="size-4 text-white" /> }}
     >

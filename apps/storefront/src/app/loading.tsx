@@ -13,19 +13,19 @@ export default function Loading() {
         </section>
       </div>
       <div className="flex flex-1 flex-row items-center justify-center">
-        <Skeleton className="h-[150px] w-full rounded-[10px] max-w-7xl" />
+        <Skeleton className="h-[150px] w-full max-w-7xl rounded-[10px]" />
       </div>
       <div className="flex flex-1 flex-col justify-center gap-y-6">
-        <div className="flex flex-1 flex-row w-full justify-center items-center">
-          <Skeleton className="w-full h-[50px] max-w-7xl" />
+        <div className="flex w-full flex-1 flex-row items-center justify-center">
+          <Skeleton className="h-[50px] w-full max-w-7xl" />
         </div>
         <div className="flex flex-1 flex-row items-center justify-center">
-          <div className="flex flex-1 flex-row items-center justify-center max-w-7xl">
+          <div className="flex max-w-7xl flex-1 flex-row items-center justify-center">
             {Array.from({ length: defaultCarouselProductSkeletons }).map(
               (_value, index) => (
                 <div
                   key={index}
-                  className="flex size-full flex-1 flex-row items-center justify-evenly group/product-skeleton ml-4 first:ml-0"
+                  className="group/product-skeleton ml-4 flex size-full flex-1 flex-row items-center justify-evenly first:ml-0"
                 >
                   <Skeleton className="h-[280px] w-full rounded-[10px]" />
                 </div>

@@ -61,11 +61,8 @@ import {
   testimonialsCarouselRendererProps,
   totalCustomerTestimonials,
 } from "@/constants/homepage/constants";
-import {
-  Store_Features,
-  type Categories,
-  type Products as TProduct,
-} from "@/gql/graphql";
+import type { Products as TProduct } from "@/gql/graphql";
+import type { CategoryResponse, StoreFeatureResponse } from "@/types/types";
 
 export default async function Home() {
   const [
@@ -75,7 +72,7 @@ export default async function Home() {
     featuredProductsResult,
     categories,
   ] = await Promise.all([
-    queryGraphql<Store_Features[]>(
+    queryGraphql<StoreFeatureResponse[]>(
       "store_featuresCollection",
       allStoreFeatures,
       {
@@ -108,7 +105,7 @@ export default async function Home() {
       },
       orderBy: { render_order: "AscNullsLast" },
     }),
-    queryGraphql<Categories[]>("categoriesCollection", allCategories, {
+    queryGraphql<CategoryResponse[]>("categoriesCollection", allCategories, {
       first: categoriesToShow,
       filter: { store: { eq: env.NEXT_PUBLIC_STORE_ID } },
       orderBy: { name: "AscNullsFirst" },
@@ -153,7 +150,7 @@ export default async function Home() {
           >
             <CarouselRenderer {...highlightCarouselRendererProps}>
               {storeHighlights?.map(
-                ({ id, description, icon_name: iconName, title }, index) => (
+                ({ id, description, iconName, title }, index) => (
                   <SlideRenderer
                     key={id}
                     index={index}
@@ -208,7 +205,7 @@ export default async function Home() {
           <SectionContent className="w-full max-w-7xl md:grid md:grid-cols-4 md:gap-6 lg:grid-cols-6">
             <CarouselProvider {...categoriesCarouselProviderProps}>
               <CarouselRenderer {...categoriesCarouselRendererProps}>
-                {categories?.map(({ id, name, image_url: imageUrl }, index) => (
+                {categories?.map(({ id, name, imageUrl }, index) => (
                   <SlideRenderer
                     key={id}
                     index={index}

@@ -27,14 +27,7 @@ type Props = React.HTMLProps<HTMLDivElement> & {
 export function BasicCartProduct({
   actionsProps,
   lineItem: { id: lineItemId, quantity },
-  product: {
-    slug,
-    name,
-    price,
-    currencies,
-    discounted_price: discountedPrice,
-    image_url: imageUrl,
-  },
+  product: { slug, name, price, currencies, discountedPrice, imageUrl },
   toggleSidebar,
   ...props
 }: Props) {

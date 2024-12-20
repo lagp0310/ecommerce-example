@@ -153,8 +153,8 @@ export function CartContextProvider({ children, currentCart = null }: Props) {
                 cart: cart?.id ?? cartId,
                 quantity: 1,
                 price:
-                  typeof product?.discounted_price === "number"
-                    ? product.discounted_price
+                  typeof product?.discountedPrice === "number"
+                    ? product.discountedPrice
                     : product.price,
                 product: product.id,
               },
@@ -225,8 +225,8 @@ export function CartContextProvider({ children, currentCart = null }: Props) {
               cart: cart?.id,
               quantity,
               price:
-                typeof product?.discounted_price === "number"
-                  ? product.discounted_price
+                typeof product?.discountedPrice === "number"
+                  ? product.discountedPrice
                   : product.price,
               product: product.id,
             },

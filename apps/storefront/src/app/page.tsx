@@ -61,8 +61,11 @@ import {
   testimonialsCarouselRendererProps,
   totalCustomerTestimonials,
 } from "@/constants/homepage/constants";
-import type { Products as TProduct } from "@/gql/graphql";
-import type { CategoryResponse, StoreFeatureResponse } from "@/types/types";
+import type {
+  CategoryResponse,
+  ProductCollectionResponse,
+  StoreFeatureResponse,
+} from "@/types/types";
 
 export default async function Home() {
   const [
@@ -81,7 +84,7 @@ export default async function Home() {
         orderBy: { render_order: "AscNullsFirst" },
       }
     ),
-    queryGraphql<TProduct[]>("productsCollection", allProducts, {
+    queryGraphql<ProductCollectionResponse>("productsCollection", allProducts, {
       first: popularProductsToShow,
       filter: {
         store: { eq: env.NEXT_PUBLIC_STORE_ID },
@@ -89,7 +92,7 @@ export default async function Home() {
       },
       orderBy: { render_order: "AscNullsLast" },
     }),
-    queryGraphql<TProduct[]>("productsCollection", allProducts, {
+    queryGraphql<ProductCollectionResponse>("productsCollection", allProducts, {
       first: hotDealsProductsToShow,
       filter: {
         store: { eq: env.NEXT_PUBLIC_STORE_ID },
@@ -97,7 +100,7 @@ export default async function Home() {
       },
       orderBy: { render_order: "AscNullsLast" },
     }),
-    queryGraphql<TProduct[]>("productsCollection", allProducts, {
+    queryGraphql<ProductCollectionResponse>("productsCollection", allProducts, {
       first: featuredProductsToShow,
       filter: {
         store: { eq: env.NEXT_PUBLIC_STORE_ID },
@@ -112,9 +115,9 @@ export default async function Home() {
     }),
   ]);
 
-  const popularProducts = parseProductTags(popularProductsResult);
-  const hotDealsProducts = parseProductTags(hotDealsProductsResult);
-  const featuredProducts = parseProductTags(featuredProductsResult);
+  const popularProducts = parseProductTags(popularProductsResult?.edges);
+  const hotDealsProducts = parseProductTags(hotDealsProductsResult?.edges);
+  const featuredProducts = parseProductTags(featuredProductsResult?.edges);
 
   return (
     <div className="flex flex-1 flex-col">

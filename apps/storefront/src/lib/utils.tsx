@@ -9,8 +9,7 @@ import {
   secondsTransform,
   StoreHighlightIcon,
 } from "@/constants/constants";
-import type { Products } from "@/gql/graphql";
-import type { TProduct } from "@/types/types";
+import type { ProductsResponse, TProduct } from "@/types/types";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -42,26 +41,26 @@ export function parseRemainingTime(countDown: number) {
   };
 }
 
-export function parseProductTags(productsCollection?: Products[] | null) {
+export function parseProductTags(
+  productsCollection?: ProductsResponse[] | null
+) {
   if (!productsCollection) return [];
 
   return productsCollection.map(
     ({ product_tagsCollection, ...productRest }) => ({
       generalTags: product_tagsCollection?.edges
-        ?.filter(({ node: { is_general_tag: isGeneralTag } }) => isGeneralTag)
-        .map(({ node: { id, tag, tag_types } }) => ({
+        ?.filter(({ node: { isGeneralTag } }) => isGeneralTag)
+        .map(({ node: { id, tag, tagTypes } }) => ({
           id,
           tag,
-          type: tag_types?.type,
+          type: tagTypes?.type,
         })),
       discountTags: product_tagsCollection?.edges
-        ?.filter(
-          ({ node: { is_discount_tag: isDiscountTag } }) => isDiscountTag
-        )
-        .map(({ node: { id, tag, tag_types } }) => ({
+        ?.filter(({ node: { isDiscountTag } }) => isDiscountTag)
+        .map(({ node: { id, tag, tagTypes } }) => ({
           id,
           tag,
-          type: tag_types?.type,
+          type: tagTypes?.type,
         })),
       ...productRest,
     })

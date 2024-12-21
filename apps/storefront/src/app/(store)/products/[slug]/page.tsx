@@ -23,12 +23,11 @@ import {
   relatedProductsCarouselRendererProps,
   relatedProductsToShow,
 } from "@/constants/product/constants";
-import type { Products } from "@/gql/graphql";
 import { allProducts } from "@/gql/queries/product/queries";
 import { env } from "@/lib/env";
 import { queryGraphql } from "@/lib/server-query";
 import { cn, parseProductTags } from "@/lib/utils";
-import type { TProduct } from "@/types/types";
+import type { ProductCollectionResponse, TProduct } from "@/types/types";
 import {
   ArrowRightIcon,
   ShoppingBagIcon,
@@ -46,7 +45,7 @@ export default async function Product({
 }) {
   const { slug } = await params;
 
-  const productResult = await queryGraphql<Products[]>(
+  const productResult = await queryGraphql<ProductCollectionResponse>(
     "productsCollection",
     allProducts,
     {
@@ -60,7 +59,7 @@ export default async function Product({
       },
     }
   );
-  const product = parseProductTags(productResult)?.at(0);
+  const product = parseProductTags(productResult?.edges)?.at(0);
   const {
     id: productId,
     name,
@@ -74,7 +73,7 @@ export default async function Product({
     description,
   } = product as TProduct;
 
-  const relatedProductsResult = await queryGraphql<Products[]>(
+  const relatedProductsResult = await queryGraphql<ProductCollectionResponse>(
     "productsCollection",
     allProducts,
     {
@@ -90,7 +89,7 @@ export default async function Product({
       },
     }
   );
-  const relatedProducts = parseProductTags(relatedProductsResult);
+  const relatedProducts = parseProductTags(relatedProductsResult?.edges);
 
   return (
     <div className="flex flex-1 flex-col items-center">

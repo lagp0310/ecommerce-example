@@ -11,6 +11,7 @@ import { BasicProductCard } from "@/components/ui/product/basic-product-card";
 import type {
   GetProductsCountResponse,
   GetProductsMaxPriceResponse,
+  ProductCollectionResponse,
   ProductFilter,
 } from "@/types/types";
 import {
@@ -55,11 +56,7 @@ import {
   pricingSliderProps,
   productsToShow,
 } from "@/constants/product/constants";
-import type {
-  Categories,
-  Product_Tags,
-  Products as TProduct,
-} from "@/gql/graphql";
+import type { Categories, Product_Tags } from "@/gql/graphql";
 
 export default async function Products({
   searchParams,
@@ -110,7 +107,7 @@ export default async function Products({
     );
   }
 
-  const productsResult = await queryGraphql<TProduct[]>(
+  const productsResult = await queryGraphql<ProductCollectionResponse>(
     "productsCollection",
     allProducts,
     {
@@ -141,7 +138,7 @@ export default async function Products({
       },
     }
   );
-  const products = parseProductTags(productsResult);
+  const products = parseProductTags(productsResult?.edges);
 
   const totalPages = Math.ceil(
     (productsCount ?? 0) / defaultProductsShowPerPage

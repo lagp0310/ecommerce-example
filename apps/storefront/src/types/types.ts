@@ -2,7 +2,16 @@ import { CarouselProviderProps } from "pure-react-carousel";
 import { type Props as CarouselProps } from "@/components/carousel/carousel";
 import { MediaQuerySlide } from "@/hooks/use-visible-slides";
 import React from "react";
-import type { Categories, Products, Store_Features } from "@/gql/graphql";
+import type {
+  Categories,
+  Product_Tags,
+  Product_TagsConnection,
+  Product_TagsEdge,
+  Products,
+  ProductsConnection,
+  Store_Features,
+  Tag_Types,
+} from "@/gql/graphql";
 import type { OperationVariables } from "@apollo/client";
 
 export type Language = {
@@ -132,4 +141,22 @@ export type StoreFeatureResponse = Omit<Store_Features, "icon_name"> & {
 };
 export type CategoryResponse = Omit<Categories, "image_url"> & {
   imageUrl?: string;
+};
+
+export type ProductTagsResponse = Omit<
+  Product_Tags,
+  "is_general_tag" | "is_discount_tag" | "tag_types"
+> & { isGeneralTag: boolean; isDiscountTag: boolean; tagTypes?: Tag_Types };
+export type ProductTagsEdgeResponse = Omit<Product_TagsEdge, "node"> & {
+  node: ProductTagsResponse;
+};
+export type ProductTagsConnectionResponse = Omit<
+  Product_TagsConnection,
+  "edges"
+> & { edges: Array<ProductTagsEdgeResponse> };
+export type ProductsResponse = Omit<Products, "product_tagsCollection"> & {
+  product_tagsCollection?: ProductTagsConnectionResponse;
+};
+export type ProductCollectionResponse = Omit<ProductsConnection, "edges"> & {
+  edges: Array<ProductsResponse>;
 };

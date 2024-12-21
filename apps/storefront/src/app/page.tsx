@@ -76,7 +76,7 @@ export default async function Home() {
     categories,
   ] = await Promise.all([
     queryGraphql<StoreFeatureResponse[]>(
-      "store_featuresCollection",
+      "storeFeaturesCollection",
       allStoreFeatures,
       {
         first: storeHighlightsToShow,

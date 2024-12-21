@@ -9,7 +9,7 @@ import type {
   Product_TagsEdge,
   Products,
   Store_Features,
-  Tag_Types,
+  Tag_Types as TagTypes,
 } from "@/gql/graphql";
 import type { OperationVariables } from "@apollo/client";
 
@@ -145,7 +145,7 @@ export type CategoryResponse = Omit<Categories, "image_url"> & {
 export type ProductTagsResponse = Omit<
   Product_Tags,
   "is_general_tag" | "is_discount_tag" | "tag_types"
-> & { isGeneralTag: boolean; isDiscountTag: boolean; tagTypes?: Tag_Types };
+> & { isGeneralTag: boolean; isDiscountTag: boolean; tagTypes?: TagTypes };
 export type ProductTagsEdgeResponse = Omit<Product_TagsEdge, "node"> & {
   node: ProductTagsResponse;
 };
@@ -154,5 +154,5 @@ export type ProductTagsConnectionResponse = Omit<
   "edges"
 > & { edges: Array<ProductTagsEdgeResponse> };
 export type ProductsResponse = Omit<Products, "product_tagsCollection"> & {
-  product_tagsCollection?: ProductTagsConnectionResponse;
+  productTagsCollection?: ProductTagsConnectionResponse;
 };

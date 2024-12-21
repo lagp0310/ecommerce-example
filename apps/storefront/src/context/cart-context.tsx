@@ -100,7 +100,7 @@ export function CartContextProvider({ children, currentCart = null }: Props) {
         .then(
           ({
             data: {
-              line_itemsCollection: { edges },
+              lineItemsCollection: { edges },
             },
           }) => {
             const lineItemsNode = (edges as Line_ItemsEdge[])?.map(
@@ -162,7 +162,7 @@ export function CartContextProvider({ children, currentCart = null }: Props) {
           cartData = cartDataResponse;
         }
 
-        const cartId = cartData?.insertIntocartsCollection?.records?.at(0)?.id;
+        const cartId = cartData?.insertIntoCartsCollection?.records?.at(0)?.id;
         const { data: lineItemsData } = await mutateCreateLineItems({
           variables: {
             lineItems: [
@@ -180,7 +180,7 @@ export function CartContextProvider({ children, currentCart = null }: Props) {
         });
 
         const newLineItem =
-          lineItemsData?.insertIntoline_itemsCollection?.records?.at(0);
+          lineItemsData?.insertIntoLineItemsCollection?.records?.at(0);
         setLineItems((lineItems) => lineItems.concat(newLineItem));
 
         toast({
@@ -251,7 +251,7 @@ export function CartContextProvider({ children, currentCart = null }: Props) {
         });
 
         const updatedLineItem =
-          lineItemsData?.updateline_itemsCollection?.records?.at(0);
+          lineItemsData?.updateLineItemsCollection?.records?.at(0);
         setLineItems((lineItems) =>
           lineItems.filter(({ id }) => id != lineItemId).concat(updatedLineItem)
         );

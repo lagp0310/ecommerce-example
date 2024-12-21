@@ -3,7 +3,9 @@ import { gql } from "@apollo/client";
 
 export const createLineItems = gql`
   mutation CreateLineItems($lineItems: [line_itemsInsertInput!]!) {
-    insertIntoline_itemsCollection(objects: $lineItems) {
+    insertIntoLineItemsCollection: insertIntoline_itemsCollection(
+      objects: $lineItems
+    ) {
       __typename
       affectedCount
       records {
@@ -19,7 +21,10 @@ export const updateLineItems = gql`
     $lineItems: line_itemsUpdateInput!
     $filter: line_itemsFilter
   ) {
-    updateline_itemsCollection(set: $lineItems, filter: $filter) {
+    updateLineItemsCollection: updateline_itemsCollection(
+      set: $lineItems
+      filter: $filter
+    ) {
       __typename
       affectedCount
       records {
@@ -32,7 +37,9 @@ export const updateLineItems = gql`
 
 export const deleteLineItems = gql`
   mutation DeleteLineItems($filter: line_itemsFilter) {
-    deleteFromline_itemsCollection(filter: $filter) {
+    deleteFromLineItemsCollection: deleteFromline_itemsCollection(
+      filter: $filter
+    ) {
       __typename
       affectedCount
       records {

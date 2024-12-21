@@ -47,15 +47,15 @@ export function parseProductTags(
   if (!productsCollection) return [];
 
   return productsCollection.map(
-    ({ product_tagsCollection, ...productRest }) => ({
-      generalTags: product_tagsCollection?.edges
+    ({ productTagsCollection, ...productRest }) => ({
+      generalTags: productTagsCollection?.edges
         ?.filter(({ node: { isGeneralTag } }) => isGeneralTag)
         .map(({ node: { id, tag, tagTypes } }) => ({
           id,
           tag,
           type: tagTypes?.type,
         })),
-      discountTags: product_tagsCollection?.edges
+      discountTags: productTagsCollection?.edges
         ?.filter(({ node: { isDiscountTag } }) => isDiscountTag)
         .map(({ node: { id, tag, tagTypes } }) => ({
           id,

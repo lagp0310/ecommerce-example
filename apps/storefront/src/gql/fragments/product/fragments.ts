@@ -18,7 +18,7 @@ export const productFragment = gql`
     }
     imageUrl: image_url
     rating
-    product_tagsCollection {
+    productTagsCollection: product_tagsCollection {
       edges {
         node {
           id

@@ -56,7 +56,7 @@ import {
   pricingSliderProps,
   productsToShow,
 } from "@/constants/product/constants";
-import type { Categories, Product_Tags } from "@/gql/graphql";
+import type { Categories, Product_Tags as ProductTag } from "@/gql/graphql";
 
 export default async function Products({
   searchParams,
@@ -85,7 +85,7 @@ export default async function Products({
       filter: { store: { eq: env.NEXT_PUBLIC_STORE_ID } },
       orderBy: { name: "AscNullsFirst" },
     }),
-    callDatabaseFunction<Product_Tags[]>("get_all_product_tags", {
+    callDatabaseFunction<ProductTag[]>("get_all_product_tags", {
       store_id: env.NEXT_PUBLIC_STORE_ID,
     }),
     callDatabaseFunction<GetProductsMaxPriceResponse>(

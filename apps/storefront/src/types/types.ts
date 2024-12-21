@@ -4,12 +4,12 @@ import { MediaQuerySlide } from "@/hooks/use-visible-slides";
 import React from "react";
 import type {
   Categories,
-  Product_Tags,
-  Product_TagsConnection,
-  Product_TagsEdge,
-  Products,
-  Store_Features,
-  Tag_Types as TagTypes,
+  Product_Tags as ProductTagResponse,
+  Product_TagsConnection as ProductTagConnection,
+  Product_TagsEdge as ProductTagEdge,
+  Products as ProductResponse,
+  Store_Features as StoreFeature,
+  Tag_Types as TagType,
 } from "@/gql/graphql";
 import type { OperationVariables } from "@apollo/client";
 
@@ -122,7 +122,10 @@ export type BaseSelectOption = {
 
 export type SortByDirection = "asc" | "desc";
 
-export type TProduct = Omit<Products, "image_url" | "discounted_price"> & {
+export type TProduct = Omit<
+  ProductResponse,
+  "image_url" | "discounted_price"
+> & {
   discountedPrice?: number;
   imageUrl?: string;
   generalTags?: ProductTag[];
@@ -135,7 +138,7 @@ export type BaseOperationVariables = OperationVariables;
 export type GetProductsMaxPriceResponse = { result_max_price: number };
 export type GetProductsCountResponse = { result_products_count: number };
 
-export type StoreFeatureResponse = Omit<Store_Features, "icon_name"> & {
+export type StoreFeatureResponse = Omit<StoreFeature, "icon_name"> & {
   iconName?: string;
 };
 export type CategoryResponse = Omit<Categories, "image_url"> & {
@@ -143,16 +146,19 @@ export type CategoryResponse = Omit<Categories, "image_url"> & {
 };
 
 export type ProductTagsResponse = Omit<
-  Product_Tags,
+  ProductTagResponse,
   "is_general_tag" | "is_discount_tag" | "tag_types"
-> & { isGeneralTag: boolean; isDiscountTag: boolean; tagTypes?: TagTypes };
-export type ProductTagsEdgeResponse = Omit<Product_TagsEdge, "node"> & {
+> & { isGeneralTag: boolean; isDiscountTag: boolean; tagTypes?: TagType };
+export type ProductTagsEdgeResponse = Omit<ProductTagEdge, "node"> & {
   node: ProductTagsResponse;
 };
 export type ProductTagsConnectionResponse = Omit<
-  Product_TagsConnection,
+  ProductTagConnection,
   "edges"
 > & { edges: Array<ProductTagsEdgeResponse> };
-export type ProductsResponse = Omit<Products, "product_tagsCollection"> & {
+export type ProductsResponse = Omit<
+  ProductResponse,
+  "product_tagsCollection"
+> & {
   productTagsCollection?: ProductTagsConnectionResponse;
 };

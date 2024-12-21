@@ -1,6 +1,10 @@
 "use client";
 
-import type { Line_Items, Line_ItemsEdge, Carts } from "@/gql/graphql";
+import type {
+  Line_Items as LineItem,
+  Line_ItemsEdge as LineItemEdge,
+  Carts as Cart,
+} from "@/gql/graphql";
 import React from "react";
 import { useLazyQuery, useMutation } from "@apollo/client";
 import { createCart, updateCart } from "@/gql/mutations/cart/mutations";
@@ -20,8 +24,8 @@ import { allLineItems } from "@/gql/queries/line-item/queries";
 import { useToast } from "@/hooks/use-toast";
 
 type CartContext = {
-  cart: Carts | null;
-  lineItems: Line_Items[];
+  cart: Cart | null;
+  lineItems: LineItem[];
   getCartLineItemId: (productId: string) => string | null;
   handleAddToCart: (product: TProduct) => Promise<void>;
   handleUpdateQuantity: (
@@ -65,13 +69,13 @@ export function useCart() {
 
 type Props = {
   children: React.ReactNode;
-  currentCart?: Carts | null;
+  currentCart?: Cart | null;
 };
 
 export function CartContextProvider({ children, currentCart = null }: Props) {
   const { toast } = useToast();
   const [cart, setCart] = React.useState(currentCart);
-  const [lineItems, setLineItems] = React.useState<Line_Items[]>([]);
+  const [lineItems, setLineItems] = React.useState<LineItem[]>([]);
   const [getCart] = useLazyQuery(getCartQuery);
   const [getLineItems] = useLazyQuery(allLineItems);
   React.useEffect(() => {
@@ -103,7 +107,7 @@ export function CartContextProvider({ children, currentCart = null }: Props) {
               lineItemsCollection: { edges },
             },
           }) => {
-            const lineItemsNode = (edges as Line_ItemsEdge[])?.map(
+            const lineItemsNode = (edges as LineItemEdge[])?.map(
               ({ node }) => node
             );
             setLineItems(lineItemsNode);

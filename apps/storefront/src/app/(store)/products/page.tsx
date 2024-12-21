@@ -117,9 +117,10 @@ export default async function Products({
         store: { eq: env.NEXT_PUBLIC_STORE_ID },
         available_quantity: { gt: 0 },
         price: {
-          lte: !!maxProductsPrice
-            ? maxProductsPrice
-            : parseInt(maxPrice ?? "0"),
+          lte:
+            !!maxPrice && !isNaN(parseInt(maxPrice))
+              ? parseInt(maxPrice)
+              : (maxProductsPrice ?? defaultMaxProductPrice),
         },
         rating: { gte: parseInt(minRating ?? "0") },
         or: [

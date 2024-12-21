@@ -277,7 +277,7 @@ export default async function Products({
       <div className="flex w-full flex-1 flex-col xl:items-center">
         <div className="flex w-full max-w-7xl flex-col gap-8 lg:flex-row">
           <div className="flex w-full flex-1 flex-row lg:min-w-[260px] lg:max-w-fit lg:basis-1/4">
-            <div className="sticky top-8 w-full">
+            <div className="w-full">
               <FiltersDialogWrapper
                 wrapperClassname="flex flex-1 lg:hidden relative"
                 contentClassname="rounded-[10px] max-w-[80vw] sm:max-w-[70vw] md:max-w-[60vw] overflow-y-auto max-h-[90vh]"
@@ -302,22 +302,28 @@ export default async function Products({
                   )
                 )}
               </FiltersDialogWrapper>
-              {filters?.map(({ children, name, initiallyCollapsed }, index) => (
-                <Accordion
-                  key={index}
-                  type="single"
-                  collapsible
-                  defaultValue={!initiallyCollapsed ? name : undefined}
-                  className="hidden lg:grid"
-                >
-                  <AccordionItem value={name}>
-                    <AccordionTrigger className={cn({ "pt-0": index === 0 })}>
-                      {name}
-                    </AccordionTrigger>
-                    <AccordionContent>{children}</AccordionContent>
-                  </AccordionItem>
-                </Accordion>
-              ))}
+              <div className="sticky top-28">
+                {filters?.map(
+                  ({ children, name, initiallyCollapsed }, index) => (
+                    <Accordion
+                      key={index}
+                      type="single"
+                      collapsible
+                      defaultValue={!initiallyCollapsed ? name : undefined}
+                      className="hidden lg:grid"
+                    >
+                      <AccordionItem value={name}>
+                        <AccordionTrigger
+                          className={cn({ "pt-0": index === 0 })}
+                        >
+                          {name}
+                        </AccordionTrigger>
+                        <AccordionContent>{children}</AccordionContent>
+                      </AccordionItem>
+                    </Accordion>
+                  )
+                )}
+              </div>
             </div>
           </div>
           <div className="flex w-full flex-col gap-8">

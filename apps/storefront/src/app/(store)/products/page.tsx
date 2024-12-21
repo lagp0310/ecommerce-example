@@ -11,8 +11,8 @@ import { BasicProductCard } from "@/components/ui/product/basic-product-card";
 import type {
   GetProductsCountResponse,
   GetProductsMaxPriceResponse,
-  ProductCollectionResponse,
   ProductFilter,
+  ProductsResponse,
 } from "@/types/types";
 import {
   Accordion,
@@ -107,7 +107,7 @@ export default async function Products({
     );
   }
 
-  const productsResult = await queryGraphql<ProductCollectionResponse>(
+  const productsResult = await queryGraphql<ProductsResponse[]>(
     "productsCollection",
     allProducts,
     {
@@ -138,7 +138,7 @@ export default async function Products({
       },
     }
   );
-  const products = parseProductTags(productsResult?.edges);
+  const products = parseProductTags(productsResult);
 
   const totalPages = Math.ceil(
     (productsCount ?? 0) / defaultProductsShowPerPage

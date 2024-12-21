@@ -8,7 +8,6 @@ import type {
   Product_TagsConnection,
   Product_TagsEdge,
   Products,
-  ProductsConnection,
   Store_Features,
   Tag_Types,
 } from "@/gql/graphql";
@@ -156,7 +155,4 @@ export type ProductTagsConnectionResponse = Omit<
 > & { edges: Array<ProductTagsEdgeResponse> };
 export type ProductsResponse = Omit<Products, "product_tagsCollection"> & {
   product_tagsCollection?: ProductTagsConnectionResponse;
-};
-export type ProductCollectionResponse = Omit<ProductsConnection, "edges"> & {
-  edges: Array<ProductsResponse>;
 };

@@ -38,6 +38,7 @@ export function AddToCartWrapper({
   const [lineItemId, setLineItemId] = React.useState<string | null>(null);
   React.useEffect(() => {
     if (!cart?.id || !product.id) {
+      setWasGetLineItemIdSuccessful(true);
       return;
     }
 

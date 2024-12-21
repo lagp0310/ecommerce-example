@@ -33,7 +33,10 @@ type CartContext = {
     product: TProduct,
     quantity: number
   ) => Promise<void>;
-  handleDeleteLineItem: (lineItemId: string) => Promise<void>;
+  handleDeleteLineItem: (
+    lineItemId: string,
+    showToast?: boolean
+  ) => Promise<void>;
   isCreateCartLoading: boolean;
   isUpdateCartLoading: boolean;
   isCreateLineItemsLoading: boolean;
@@ -203,7 +206,7 @@ export function CartContextProvider({ children, currentCart = null }: Props) {
   );
 
   const handleDeleteLineItem = React.useCallback(
-    async (lineItemId: string) => {
+    async (lineItemId: string, showToast = true) => {
       try {
         await mutateDeleteLineItems({
           variables: {
@@ -215,10 +218,12 @@ export function CartContextProvider({ children, currentCart = null }: Props) {
           lineItems.filter(({ id }) => id != lineItemId)
         );
 
-        toast({
-          duration: 5000,
-          description: "Product was removed from the Cart",
-        });
+        if (showToast) {
+          toast({
+            duration: 5000,
+            description: "Product was removed from the Cart",
+          });
+        }
       } catch (error) {
         console.error(error);
       }

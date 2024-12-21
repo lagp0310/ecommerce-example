@@ -34,7 +34,7 @@ export function BasicCartProduct({
   const { handleDeleteLineItem, isLoading } = useCart();
   const handleDeleteClick = React.useCallback(async () => {
     try {
-      await handleDeleteLineItem(lineItemId);
+      await handleDeleteLineItem(lineItemId, false);
     } catch (error) {
       console.error(error);
     }

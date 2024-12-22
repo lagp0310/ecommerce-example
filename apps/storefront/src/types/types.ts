@@ -109,6 +109,8 @@ export type ProductFilter = {
   name: string;
   initiallyCollapsed?: boolean;
   children: React.ReactNode;
+  action?: React.ReactNode;
+  actionClassName?: string;
 };
 
 export type BaseSelectOption = {

@@ -17,9 +17,7 @@ export const pricingSliderProps = (
 ) => ({
   thumbClassName:
     "outline-none ring-0 focus-visible:ring-0 focus-visible:ring-offset-0",
-  defaultValue: isNaN(maxPrice ?? NaN)
-    ? [maxProductsPrice]
-    : [maxPrice ?? defaultMaxProductPrice],
+  defaultValue: [maxPrice ?? maxProductsPrice ?? defaultMaxProductPrice],
   max:
     typeof maxProductsPrice === "number"
       ? maxProductsPrice
@@ -68,3 +66,10 @@ export const relatedProductsCarouselRendererProps: CarouselRendererProps = {
 
 export const defaultCarouselProductSkeletons = 5;
 export const productSkeletonFields = 4;
+
+export const resetFiltersRemoveParams = [
+  "categories",
+  "maxPrice",
+  "minRating",
+  "tags",
+];

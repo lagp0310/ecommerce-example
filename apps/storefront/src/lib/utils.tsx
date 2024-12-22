@@ -139,3 +139,28 @@ export function getStoreHighlightsIcon(icon: StoreHighlightIcon) {
       return null;
   }
 }
+
+export function removeParamFromURL(
+  searchParams: URLSearchParams,
+  paramName: string,
+  paramValue?: string
+) {
+  const updatedSearchParams = new URLSearchParams(searchParams);
+  updatedSearchParams.delete(paramName, paramValue);
+
+  return updatedSearchParams.toString();
+}
+
+export function removeParamsFromURL(
+  searchParams: URLSearchParams,
+  paramNames: string[]
+) {
+  if (!Array.isArray(paramNames) || paramNames.length === 0) {
+    throw new Error("paramNames must be an array and cannot be empty");
+  }
+
+  const updatedSearchParams = new URLSearchParams(searchParams);
+  paramNames.forEach((paramName) => updatedSearchParams.delete(paramName));
+
+  return updatedSearchParams.toString();
+}

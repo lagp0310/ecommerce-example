@@ -4,6 +4,7 @@ import React from "react";
 import { Slider } from "@/components/ui/common/slider";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { defaultMaxProductPrice } from "@/constants/constants";
+import { useSlider } from "@/context/slider-context";
 
 type Props = React.ComponentProps<typeof Slider> & {
   currencySymbol?: string;
@@ -17,8 +18,7 @@ export function PricingSlider({
   currencySymbol = "$",
   ...props
 }: Props) {
-  const [value, setValue] = React.useState(defaultValue);
-
+  const { value, setValue } = useSlider();
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -33,6 +33,8 @@ export function PricingSlider({
   }, [max, pathname, router, searchParams, value]);
 
   React.useEffect(() => {
+    // Timeout to avoid page requests every time the slider changes value
+    // when the slider is dragged.
     const updateParamsTimeout = setTimeout(handlePriceParamUpdate, 500);
 
     const currentSliderValue = value.at(0);

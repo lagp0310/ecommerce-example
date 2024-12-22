@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  defaultMaxProductPrice,
   defaultProductsShowPerPage,
   defaultSortBy,
   defaultSortByDirection,
@@ -57,6 +58,9 @@ import {
   productsToShow,
 } from "@/constants/product/constants";
 import type { Categories, Product_Tags as ProductTag } from "@/gql/graphql";
+import { ResetFilterWrapper } from "@/components/ui/product/reset-filter-wrapper";
+import { SliderContextProvider } from "@/context/slider-context";
+import { PriceFilterResetWrapper } from "@/components/ui/product/price-filter-reset-wrapper";
 
 export default async function Products({
   searchParams,
@@ -101,9 +105,9 @@ export default async function Products({
   const maxProductsPrice = productsMaxPriceResponse?.result_max_price;
   const productsCount = productsCountResponse?.result_products_count;
 
-  if (!page || !perPage || !sortBy || !sortByDirection) {
+  if (!page || !perPage || !sortBy || !sortByDirection || !maxPrice) {
     redirect(
-      `/products?page=1&perPage=${perPage || defaultProductsShowPerPage}&sortBy=${defaultSortBy}&sortByDirection=${defaultSortByDirection}`
+      `/products?page=1&perPage=${perPage || defaultProductsShowPerPage}&sortBy=${defaultSortBy}&sortByDirection=${defaultSortByDirection}&maxPrice=${maxPrice ?? maxProductsPrice ?? defaultMaxProductPrice}`
     );
   }
 
@@ -156,7 +160,7 @@ export default async function Products({
       : `/products?page=${parseInt(page) - 1}&perPage=${perPage || defaultProductsShowPerPage}`;
   if (parseInt(page) > totalPages) {
     redirect(
-      `/products?page=1&perPage=${perPage || defaultProductsShowPerPage}`
+      `/products?page=1&perPage=${perPage || defaultProductsShowPerPage}&sortBy=${defaultSortBy}&sortByDirection=${defaultSortByDirection}&maxPrice=${maxPrice ?? maxProductsPrice ?? defaultMaxProductPrice}`
     );
   }
 
@@ -189,21 +193,44 @@ export default async function Products({
         </div>
       ),
       name: "Categories",
+      action: (
+        <ResetFilterWrapper
+          paramNameToRemove="categories"
+          className="max-w-fit group/reset-filters-button flex w-full flex-row items-center justify-end bg-white text-body-small font-normal leading-[120%] text-gray-700 outline-none motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none md:text-body-medium hover:underline mr-3"
+        >
+          Clear
+        </ResetFilterWrapper>
+      ),
+      actionClassName: "flex flex-1 flex-row justify-end max-w-fit",
     },
     {
       children: (
         <div className="flex flex-1 flex-col justify-center gap-6 pt-4">
           <React.Suspense>
-            <PricingSlider
-              {...pricingSliderProps(
-                maxProductsPrice ?? 0,
-                !!maxPrice ? parseInt(maxPrice) : null
-              )}
-            />
+            <SliderContextProvider
+              initialValue={[maxProductsPrice ?? defaultMaxProductPrice]}
+              currentValue={[maxProductsPrice ?? defaultMaxProductPrice]}
+            >
+              <PricingSlider
+                {...pricingSliderProps(
+                  maxProductsPrice ?? defaultMaxProductPrice,
+                  !!maxPrice ? parseInt(maxPrice) : (maxProductsPrice ?? null)
+                )}
+              />
+            </SliderContextProvider>
           </React.Suspense>
         </div>
       ),
       name: "Price",
+      action: (
+        <PriceFilterResetWrapper
+          paramNameToRemove="maxPrice"
+          className="max-w-fit group/reset-filters-button flex w-full flex-row items-center justify-end bg-white text-body-small font-normal leading-[120%] text-gray-700 outline-none motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none md:text-body-medium hover:underline mr-3"
+        >
+          Clear
+        </PriceFilterResetWrapper>
+      ),
+      actionClassName: "flex flex-1 flex-row justify-end max-w-fit",
     },
     {
       children: (
@@ -234,6 +261,15 @@ export default async function Products({
         </div>
       ),
       name: "Rating",
+      action: (
+        <ResetFilterWrapper
+          paramNameToRemove="minRating"
+          className="max-w-fit group/reset-filters-button flex w-full flex-row items-center justify-end bg-white text-body-small font-normal leading-[120%] text-gray-700 outline-none motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none md:text-body-medium hover:underline mr-3"
+        >
+          Clear
+        </ResetFilterWrapper>
+      ),
+      actionClassName: "flex flex-1 flex-row justify-end max-w-fit",
     },
     {
       children: (
@@ -263,6 +299,15 @@ export default async function Products({
         </ToggleGroup>
       ),
       name: "Popular Tags",
+      action: (
+        <ResetFilterWrapper
+          paramNameToRemove="tags"
+          className="max-w-fit group/reset-filters-button flex w-full flex-row items-center justify-end bg-white text-body-small font-normal leading-[120%] text-gray-700 outline-none motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none md:text-body-medium hover:underline mr-3"
+        >
+          Clear
+        </ResetFilterWrapper>
+      ),
+      actionClassName: "flex flex-1 flex-row justify-end max-w-fit",
     },
   ];
 
@@ -287,7 +332,10 @@ export default async function Products({
                   <DialogTitle>Filters</DialogTitle>
                 </DialogHeader>
                 {filters?.map(
-                  ({ children, name, initiallyCollapsed }, index) => (
+                  (
+                    { children, name, initiallyCollapsed, ...triggerProps },
+                    index
+                  ) => (
                     <Accordion
                       key={index}
                       type="single"
@@ -296,7 +344,9 @@ export default async function Products({
                       className="grid"
                     >
                       <AccordionItem value={name}>
-                        <AccordionTrigger>{name}</AccordionTrigger>
+                        <AccordionTrigger {...triggerProps}>
+                          {name}
+                        </AccordionTrigger>
                         <AccordionContent>{children}</AccordionContent>
                       </AccordionItem>
                     </Accordion>
@@ -305,7 +355,10 @@ export default async function Products({
               </FiltersDialogWrapper>
               <div className="sticky top-28">
                 {filters?.map(
-                  ({ children, name, initiallyCollapsed }, index) => (
+                  (
+                    { children, name, initiallyCollapsed, ...triggerProps },
+                    index
+                  ) => (
                     <Accordion
                       key={index}
                       type="single"
@@ -315,7 +368,10 @@ export default async function Products({
                     >
                       <AccordionItem value={name}>
                         <AccordionTrigger
-                          className={cn({ "pt-0": index === 0 })}
+                          className={cn({
+                            "pt-0": index === 0,
+                          })}
+                          {...triggerProps}
                         >
                           {name}
                         </AccordionTrigger>

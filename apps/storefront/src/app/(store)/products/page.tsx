@@ -5,23 +5,13 @@ import {
   defaultSortBy,
   defaultSortByDirection,
   maxPagesToShow,
-  maxProductRating,
   productsSortByOptions,
 } from "@/constants/constants";
 import { BasicProductCard } from "@/components/ui/product/basic-product-card";
 import type {
   GetProductsMaxPriceResponse,
-  ProductFilter,
   ProductsResponse,
 } from "@/types/types";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/common/accordion";
-import { PricingSlider } from "@/components/ui/product/pricing-slider";
-import { ToggleGroup } from "@/components/ui/common/toggle-group";
 import { DropdownSelector } from "@/components/ui/common/dropdown-selector";
 import {
   Pagination,
@@ -34,12 +24,7 @@ import {
 } from "@/components/ui/pagination/pagination";
 import { FiltersDialogWrapper } from "@/components/ui/product/filters-dialog-wrapper";
 import { DialogHeader, DialogTitle } from "@/components/ui/common/dialog";
-import {
-  cn,
-  getPricingSliderProps,
-  isRecordIdInSearchParamArray,
-  parseProductTags,
-} from "@/lib/utils";
+import { parseProductTags } from "@/lib/utils";
 import { allCategories } from "@/gql/queries/category/queries";
 import { queryGraphql } from "@/lib/server-query";
 import { env } from "@/lib/env";
@@ -47,19 +32,18 @@ import { allProducts } from "@/gql/queries/product/queries";
 import { callDatabaseFunction } from "@/lib/call-database-function";
 import { redirect } from "next/navigation";
 import { SelectTrigger, SelectValue } from "@/components/ui/common/select";
-import { CategoryFilterItemWrapper } from "@/components/ui/category/category-filter-item-wrapper";
 import emptyListImage from "@/public/images/empty-products-list.png";
 import Image from "next/image";
-import { RatingFilterItemWrapper } from "@/components/ui/product/rating-filter-item-wrapper";
-import { TagFilterItemWrapper } from "@/components/ui/product/tag-filter-item-wrapper";
 import {
   categoriesToShow,
+  filterComponents,
+  getProductFilters,
   productsToShow,
 } from "@/constants/product/constants";
-import type { Categories, Product_Tags as ProductTag } from "@/gql/graphql";
-import { ResetFilterWrapper } from "@/components/ui/product/reset-filter-wrapper";
-import { SliderContextProvider } from "@/context/slider-context";
-import { PriceFilterResetWrapper } from "@/components/ui/product/price-filter-reset-wrapper";
+import type {
+  Categories as Category,
+  Product_Tags as ProductTag,
+} from "@/gql/graphql";
 
 export default async function Products({
   searchParams,
@@ -82,7 +66,7 @@ export default async function Products({
     productsMaxPriceResponse,
   ] = await Promise.all([
     searchParams,
-    queryGraphql<Categories[]>("categoriesCollection", allCategories, {
+    queryGraphql<Category[]>("categoriesCollection", allCategories, {
       first: categoriesToShow,
       filter: { store: { eq: env.NEXT_PUBLIC_STORE_ID } },
       orderBy: { name: "AscNullsFirst" },
@@ -161,156 +145,15 @@ export default async function Products({
     );
   }
 
-  const filters: ProductFilter[] = [
-    {
-      children: (
-        <div className="flex flex-1 flex-col items-start gap-1.5">
-          {categories?.map(({ id, name }) => {
-            const isChecked = isRecordIdInSearchParamArray(
-              id,
-              categoriesSearchParam
-            );
-
-            return (
-              <React.Suspense key={id}>
-                <CategoryFilterItemWrapper
-                  categoryId={id}
-                  checked={isChecked}
-                  aria-checked={isChecked}
-                  htmlFor={id}
-                  wrapperClassName={cn("order-none", { "order-1": !isChecked })}
-                  className="flex flex-1 flex-row items-center justify-start gap-x-1 text-body-small font-normal text-gray-900"
-                >
-                  {name}
-                  {/* <span className="text-body-small font-normal text-gray-500">{`(${numberOfItems})`}</span> */}
-                </CategoryFilterItemWrapper>
-              </React.Suspense>
-            );
-          })}
-        </div>
-      ),
-      name: "Categories",
-      action: (
-        <ResetFilterWrapper
-          paramNameToRemove="categories"
-          className="group/reset-filters-button mr-3 flex w-full max-w-fit flex-row items-center justify-end bg-white text-body-small font-normal leading-[120%] text-gray-700 outline-none hover:underline motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none md:text-body-medium"
-        >
-          Clear
-        </ResetFilterWrapper>
-      ),
-      actionClassName: "flex flex-1 flex-row justify-end max-w-fit",
-    },
-    {
-      children: (
-        <div className="flex flex-1 flex-col justify-center gap-6 pt-4">
-          <React.Suspense>
-            <SliderContextProvider
-              initialValue={maxProductsPrice ?? defaultMaxProductPrice}
-              paramName="maxPrice"
-            >
-              <PricingSlider
-                {...getPricingSliderProps(
-                  maxProductsPrice ?? defaultMaxProductPrice,
-                  !!maxPrice ? parseInt(maxPrice) : (maxProductsPrice ?? null)
-                )}
-              />
-            </SliderContextProvider>
-          </React.Suspense>
-        </div>
-      ),
-      name: "Price",
-      action: (
-        <PriceFilterResetWrapper
-          paramNameToRemove="maxPrice"
-          className="group/reset-filters-button mr-3 flex w-full max-w-fit flex-row items-center justify-end bg-white text-body-small font-normal leading-[120%] text-gray-700 outline-none hover:underline motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none md:text-body-medium"
-        >
-          Clear
-        </PriceFilterResetWrapper>
-      ),
-      actionClassName: "flex flex-1 flex-row justify-end max-w-fit",
-      forceMount: true,
-      styles: {
-        "--radix-collapsible-content-height": "85px",
-      },
-    },
-    {
-      children: (
-        <div className="flex flex-1 flex-col justify-center gap-y-1.5">
-          {Array.from({ length: maxProductRating })
-            .map((_value, index) => {
-              const parsedMinRating = parseInt(minRating ?? "0");
-              const hasRatingSearchParam =
-                typeof minRating === "string" && !isNaN(parsedMinRating);
-              const isChecked =
-                hasRatingSearchParam && parsedMinRating === index + 1;
-
-              return (
-                <React.Suspense key={index}>
-                  <RatingFilterItemWrapper
-                    index={index}
-                    checked={isChecked}
-                    wrapperClassName={
-                      hasRatingSearchParam && parsedMinRating > index + 1
-                        ? "hidden"
-                        : ""
-                    }
-                  />
-                </React.Suspense>
-              );
-            })
-            .reverse()}
-        </div>
-      ),
-      name: "Rating",
-      action: (
-        <ResetFilterWrapper
-          paramNameToRemove="minRating"
-          className="group/reset-filters-button mr-3 flex w-full max-w-fit flex-row items-center justify-end bg-white text-body-small font-normal leading-[120%] text-gray-700 outline-none hover:underline motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none md:text-body-medium"
-        >
-          Clear
-        </ResetFilterWrapper>
-      ),
-      actionClassName: "flex flex-1 flex-row justify-end max-w-fit",
-    },
-    {
-      children: (
-        <ToggleGroup
-          type="multiple"
-          className="flex flex-1 flex-row flex-wrap items-center justify-start gap-2"
-        >
-          {tags?.map((tagItem, index) => {
-            const tagsArray = tagsSearchParam?.split(",");
-            const hasTagsSearchParam =
-              Array.isArray(tagsArray) && tagsArray.length > 0;
-            const isSelected =
-              hasTagsSearchParam && tagsArray?.includes(tagItem.id);
-
-            return (
-              <React.Suspense key={index}>
-                <TagFilterItemWrapper
-                  tagItem={tagItem}
-                  selected={isSelected}
-                  wrapperClassName={cn("order-none", {
-                    "order-1": !isSelected,
-                  })}
-                />
-              </React.Suspense>
-            );
-          })}
-        </ToggleGroup>
-      ),
-      name: "Popular Tags",
-      action: (
-        <ResetFilterWrapper
-          paramNameToRemove="tags"
-          className="group/reset-filters-button mr-3 flex w-full max-w-fit flex-row items-center justify-end bg-white text-body-small font-normal leading-[120%] text-gray-700 outline-none hover:underline motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none md:text-body-medium"
-        >
-          Clear
-        </ResetFilterWrapper>
-      ),
-      actionClassName: "flex flex-1 flex-row justify-end max-w-fit",
-    },
-  ];
+  const filters = getProductFilters(
+    categories,
+    tags,
+    maxProductsPrice,
+    !!maxPrice ? parseInt(maxPrice) : null,
+    !!minRating ? parseInt(minRating) : null,
+    categoriesSearchParam,
+    tagsSearchParam
+  );
 
   const currentSortByValue = productsSortByOptions.find(
     ({ sortBy: sortByOption, direction }) =>
@@ -318,53 +161,6 @@ export default async function Products({
   );
 
   const hasProducts = Array.isArray(products) && products.length > 0;
-
-  const filterComponents = (accordionRootClassName = "hidden lg:grid") => (
-    <React.Fragment>
-      {filters?.map(
-        (
-          {
-            children,
-            name,
-            initiallyCollapsed,
-            forceMount,
-            styles,
-            ...triggerProps
-          },
-          index
-        ) => (
-          <Accordion
-            key={index}
-            type="single"
-            collapsible
-            defaultValue={!initiallyCollapsed ? name : undefined}
-            className={accordionRootClassName}
-          >
-            <AccordionItem value={name} className="group/accordion-item h-auto">
-              <AccordionTrigger
-                className={cn({
-                  "pt-0": index === 0,
-                })}
-                {...triggerProps}
-              >
-                {name}
-              </AccordionTrigger>
-              <AccordionContent
-                forceMount={forceMount}
-                className={cn({
-                  "group-data-[state=closed]/accordion-item:hidden transition-all group-data-[state=closed]/accordion-item:animate-accordion-down":
-                    forceMount,
-                })}
-                style={forceMount ? styles : undefined}
-              >
-                {children}
-              </AccordionContent>
-            </AccordionItem>
-          </Accordion>
-        )
-      )}
-    </React.Fragment>
-  );
 
   return (
     <div className="flex flex-1 flex-col gap-y-8 px-6 py-8 xl:px-0">
@@ -379,9 +175,9 @@ export default async function Products({
                 <DialogHeader>
                   <DialogTitle>Filters</DialogTitle>
                 </DialogHeader>
-                {filterComponents("grid")}
+                {filterComponents(filters, "grid")}
               </FiltersDialogWrapper>
-              <div className="sticky top-28">{filterComponents()}</div>
+              <div className="sticky top-28">{filterComponents(filters)}</div>
             </div>
           </div>
           <div className="flex w-full flex-col gap-8">

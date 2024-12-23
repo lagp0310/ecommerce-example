@@ -193,7 +193,7 @@ export default async function Products({
       action: (
         <ResetFilterWrapper
           paramNameToRemove="categories"
-          className="max-w-fit group/reset-filters-button flex w-full flex-row items-center justify-end bg-white text-body-small font-normal leading-[120%] text-gray-700 outline-none motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none md:text-body-medium hover:underline mr-3"
+          className="group/reset-filters-button mr-3 flex w-full max-w-fit flex-row items-center justify-end bg-white text-body-small font-normal leading-[120%] text-gray-700 outline-none hover:underline motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none md:text-body-medium"
         >
           Clear
         </ResetFilterWrapper>
@@ -222,7 +222,7 @@ export default async function Products({
       action: (
         <PriceFilterResetWrapper
           paramNameToRemove="maxPrice"
-          className="max-w-fit group/reset-filters-button flex w-full flex-row items-center justify-end bg-white text-body-small font-normal leading-[120%] text-gray-700 outline-none motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none md:text-body-medium hover:underline mr-3"
+          className="group/reset-filters-button mr-3 flex w-full max-w-fit flex-row items-center justify-end bg-white text-body-small font-normal leading-[120%] text-gray-700 outline-none hover:underline motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none md:text-body-medium"
         >
           Clear
         </PriceFilterResetWrapper>
@@ -265,7 +265,7 @@ export default async function Products({
       action: (
         <ResetFilterWrapper
           paramNameToRemove="minRating"
-          className="max-w-fit group/reset-filters-button flex w-full flex-row items-center justify-end bg-white text-body-small font-normal leading-[120%] text-gray-700 outline-none motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none md:text-body-medium hover:underline mr-3"
+          className="group/reset-filters-button mr-3 flex w-full max-w-fit flex-row items-center justify-end bg-white text-body-small font-normal leading-[120%] text-gray-700 outline-none hover:underline motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none md:text-body-medium"
         >
           Clear
         </ResetFilterWrapper>
@@ -303,7 +303,7 @@ export default async function Products({
       action: (
         <ResetFilterWrapper
           paramNameToRemove="tags"
-          className="max-w-fit group/reset-filters-button flex w-full flex-row items-center justify-end bg-white text-body-small font-normal leading-[120%] text-gray-700 outline-none motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none md:text-body-medium hover:underline mr-3"
+          className="group/reset-filters-button mr-3 flex w-full max-w-fit flex-row items-center justify-end bg-white text-body-small font-normal leading-[120%] text-gray-700 outline-none hover:underline motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none md:text-body-medium"
         >
           Clear
         </ResetFilterWrapper>

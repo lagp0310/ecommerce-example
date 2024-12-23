@@ -84,9 +84,25 @@ export default async function Products({
   const maxProductsPrice = productsMaxPriceResponse?.result_max_price;
 
   if (!page || !perPage || !sortBy || !sortByDirection || !maxPrice) {
-    redirect(
-      `/products?page=1&perPage=${perPage || defaultProductsShowPerPage}&sortBy=${defaultSortBy}&sortByDirection=${defaultSortByDirection}&maxPrice=${maxPrice ?? maxProductsPrice ?? defaultMaxProductPrice}`
-    );
+    const updatedSearchParams = new URLSearchParams({
+      page: "1",
+      perPage: (perPage ?? defaultProductsShowPerPage).toString(),
+      sortBy: defaultSortBy,
+      sortByDirection: sortByDirection ?? defaultSortByDirection,
+      maxPrice: (
+        maxPrice ??
+        maxProductsPrice ??
+        defaultMaxProductPrice
+      ).toString(),
+    });
+    if (!!categoriesSearchParam) {
+      updatedSearchParams.set("categories", categoriesSearchParam);
+    }
+    if (!!tagsSearchParam) {
+      updatedSearchParams.set("tags", tagsSearchParam);
+    }
+
+    redirect(`/products?${updatedSearchParams.toString()}`);
   }
 
   const productsResult = await queryGraphql<ProductsResponse[]>(
@@ -140,9 +156,25 @@ export default async function Products({
       ? `/products?page=${page}&perPage=${perPage || defaultProductsShowPerPage}`
       : `/products?page=${parseInt(page) - 1}&perPage=${perPage || defaultProductsShowPerPage}`;
   if (productsCount > 0 && currentPage > totalPages) {
-    redirect(
-      `/products?page=1&perPage=${perPage || defaultProductsShowPerPage}&sortBy=${defaultSortBy}&sortByDirection=${defaultSortByDirection}&maxPrice=${maxPrice ?? maxProductsPrice ?? defaultMaxProductPrice}`
-    );
+    const updatedSearchParams = new URLSearchParams({
+      page: "1",
+      perPage: (perPage ?? defaultProductsShowPerPage).toString(),
+      sortBy: defaultSortBy,
+      sortByDirection: sortByDirection ?? defaultSortByDirection,
+      maxPrice: (
+        maxPrice ??
+        maxProductsPrice ??
+        defaultMaxProductPrice
+      ).toString(),
+    });
+    if (!!categoriesSearchParam) {
+      updatedSearchParams.set("categories", categoriesSearchParam);
+    }
+    if (!!tagsSearchParam) {
+      updatedSearchParams.set("tags", tagsSearchParam);
+    }
+
+    redirect(`/products?${updatedSearchParams.toString()}`);
   }
 
   const filters = getProductFilters(

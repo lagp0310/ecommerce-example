@@ -3,15 +3,15 @@ import { gql } from "@apollo/client";
 export const cartFragment = gql`
   fragment CartFragment on carts {
     id
-    anonymous_id
-    created_at
-    updated_at
+    anonymousId: anonymous_id
+    createdAt: created_at
+    updatedAt: updated_at
     customers {
       id
-      first_name
-      last_name
-      billing_address
-      shipping_address
+      firstName: first_name
+      lastName: last_name
+      billingAddress: billing_address
+      shippingAddress: shipping_address
     }
     stores {
       id
@@ -19,7 +19,7 @@ export const cartFragment = gql`
     }
     currencies {
       id
-      three_letter_code
+      currencyCode: three_letter_code
       symbol
     }
   }

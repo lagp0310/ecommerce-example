@@ -1,26 +1,17 @@
 import React from "react";
 import {
+  defaultMaxProductPrice,
   defaultProductsShowPerPage,
   defaultSortBy,
   defaultSortByDirection,
   maxPagesToShow,
-  maxProductRating,
   productsSortByOptions,
 } from "@/constants/constants";
 import { BasicProductCard } from "@/components/ui/product/basic-product-card";
 import type {
-  GetProductsCountResponse,
   GetProductsMaxPriceResponse,
-  ProductFilter,
+  ProductsResponse,
 } from "@/types/types";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/common/accordion";
-import { PricingSlider } from "@/components/ui/product/pricing-slider";
-import { ToggleGroup } from "@/components/ui/common/toggle-group";
 import { DropdownSelector } from "@/components/ui/common/dropdown-selector";
 import {
   Pagination,
@@ -33,11 +24,7 @@ import {
 } from "@/components/ui/pagination/pagination";
 import { FiltersDialogWrapper } from "@/components/ui/product/filters-dialog-wrapper";
 import { DialogHeader, DialogTitle } from "@/components/ui/common/dialog";
-import {
-  cn,
-  isRecordIdInSearchParamArray,
-  parseProductTags,
-} from "@/lib/utils";
+import { parseProductTags } from "@/lib/utils";
 import { allCategories } from "@/gql/queries/category/queries";
 import { queryGraphql } from "@/lib/server-query";
 import { env } from "@/lib/env";
@@ -45,20 +32,17 @@ import { allProducts } from "@/gql/queries/product/queries";
 import { callDatabaseFunction } from "@/lib/call-database-function";
 import { redirect } from "next/navigation";
 import { SelectTrigger, SelectValue } from "@/components/ui/common/select";
-import { CategoryFilterItemWrapper } from "@/components/ui/category/category-filter-item-wrapper";
 import emptyListImage from "@/public/images/empty-products-list.png";
 import Image from "next/image";
-import { RatingFilterItemWrapper } from "@/components/ui/product/rating-filter-item-wrapper";
-import { TagFilterItemWrapper } from "@/components/ui/product/tag-filter-item-wrapper";
 import {
   categoriesToShow,
-  pricingSliderProps,
+  filterComponents,
+  getProductFilters,
   productsToShow,
 } from "@/constants/product/constants";
 import type {
-  Categories,
-  Product_Tags,
-  Products as TProduct,
+  Categories as Category,
+  Product_Tags as ProductTag,
 } from "@/gql/graphql";
 
 export default async function Products({
@@ -80,15 +64,14 @@ export default async function Products({
     categories,
     tags,
     productsMaxPriceResponse,
-    productsCountResponse,
   ] = await Promise.all([
     searchParams,
-    queryGraphql<Categories[]>("categoriesCollection", allCategories, {
+    queryGraphql<Category[]>("categoriesCollection", allCategories, {
       first: categoriesToShow,
       filter: { store: { eq: env.NEXT_PUBLIC_STORE_ID } },
       orderBy: { name: "AscNullsFirst" },
     }),
-    callDatabaseFunction<Product_Tags[]>("get_all_product_tags", {
+    callDatabaseFunction<ProductTag[]>("get_all_product_tags", {
       store_id: env.NEXT_PUBLIC_STORE_ID,
     }),
     callDatabaseFunction<GetProductsMaxPriceResponse>(
@@ -97,32 +80,29 @@ export default async function Products({
         store_id: env.NEXT_PUBLIC_STORE_ID,
       }
     ),
-    callDatabaseFunction<GetProductsCountResponse>("get_products_count", {
-      store_id: env.NEXT_PUBLIC_STORE_ID,
-    }),
   ]);
   const maxProductsPrice = productsMaxPriceResponse?.result_max_price;
-  const productsCount = productsCountResponse?.result_products_count;
 
-  if (!page || !perPage || !sortBy || !sortByDirection) {
+  if (!page || !perPage || !sortBy || !sortByDirection || !maxPrice) {
     redirect(
-      `/products?page=1&perPage=${perPage || defaultProductsShowPerPage}&sortBy=${defaultSortBy}&sortByDirection=${defaultSortByDirection}`
+      `/products?page=1&perPage=${perPage || defaultProductsShowPerPage}&sortBy=${defaultSortBy}&sortByDirection=${defaultSortByDirection}&maxPrice=${maxPrice ?? maxProductsPrice ?? defaultMaxProductPrice}`
     );
   }
 
-  const productsResult = await queryGraphql<TProduct[]>(
+  const productsResult = await queryGraphql<ProductsResponse[]>(
     "productsCollection",
     allProducts,
     {
       first: productsToShow,
-      offset: (parseInt(page) - 1) * productsToShow,
+      offset: ((!!page ? parseInt(page) : 1) - 1) * productsToShow,
       filter: {
         store: { eq: env.NEXT_PUBLIC_STORE_ID },
         available_quantity: { gt: 0 },
         price: {
-          lte: !!maxProductsPrice
-            ? maxProductsPrice
-            : parseInt(maxPrice ?? "0"),
+          lte:
+            !!maxPrice && !isNaN(parseInt(maxPrice))
+              ? parseInt(maxPrice)
+              : (maxProductsPrice ?? defaultMaxProductPrice),
         },
         rating: { gte: parseInt(minRating ?? "0") },
         or: [
@@ -137,15 +117,18 @@ export default async function Products({
           .flatMap((value) => value as unknown),
       },
       orderBy: {
-        [sortBy]: sortByDirection === "asc" ? "AscNullsLast" : "DescNullsLast",
+        [sortBy ?? defaultSortBy]:
+          (sortByDirection ?? defaultSortByDirection) === "asc"
+            ? "AscNullsLast"
+            : "DescNullsLast",
       },
     }
   );
+  const productsCount = productsResult?.length ?? 0;
   const products = parseProductTags(productsResult);
 
-  const totalPages = Math.ceil(
-    (productsCount ?? 0) / defaultProductsShowPerPage
-  );
+  const currentPage = parseInt(page);
+  const totalPages = Math.ceil(productsCount / defaultProductsShowPerPage);
   const isPreviousButtonDisabled = parseInt(page) === 1;
   const isNextButtonDisabled = parseInt(page) === totalPages;
   const previousHref =
@@ -156,117 +139,21 @@ export default async function Products({
     parseInt(page) === totalPages
       ? `/products?page=${page}&perPage=${perPage || defaultProductsShowPerPage}`
       : `/products?page=${parseInt(page) - 1}&perPage=${perPage || defaultProductsShowPerPage}`;
-  if (parseInt(page) > totalPages) {
+  if (productsCount > 0 && currentPage > totalPages) {
     redirect(
-      `/products?page=1&perPage=${perPage || defaultProductsShowPerPage}`
+      `/products?page=1&perPage=${perPage || defaultProductsShowPerPage}&sortBy=${defaultSortBy}&sortByDirection=${defaultSortByDirection}&maxPrice=${maxPrice ?? maxProductsPrice ?? defaultMaxProductPrice}`
     );
   }
 
-  const filters: ProductFilter[] = [
-    {
-      children: (
-        <div className="flex flex-1 flex-col items-start gap-1.5">
-          {categories?.map(({ id, name }) => {
-            const isChecked = isRecordIdInSearchParamArray(
-              id,
-              categoriesSearchParam
-            );
-
-            return (
-              <React.Suspense key={id}>
-                <CategoryFilterItemWrapper
-                  categoryId={id}
-                  checked={isChecked}
-                  aria-checked={isChecked}
-                  htmlFor={id}
-                  wrapperClassName={cn("order-none", { "order-1": !isChecked })}
-                  className="flex flex-1 flex-row items-center justify-start gap-x-1 text-body-small font-normal text-gray-900"
-                >
-                  {name}
-                  {/* <span className="text-body-small font-normal text-gray-500">{`(${numberOfItems})`}</span> */}
-                </CategoryFilterItemWrapper>
-              </React.Suspense>
-            );
-          })}
-        </div>
-      ),
-      name: "Categories",
-    },
-    {
-      children: (
-        <div className="flex flex-1 flex-col justify-center gap-6 pt-4">
-          <React.Suspense>
-            <PricingSlider
-              {...pricingSliderProps(
-                maxProductsPrice ?? 0,
-                !!maxPrice ? parseInt(maxPrice) : null
-              )}
-            />
-          </React.Suspense>
-        </div>
-      ),
-      name: "Price",
-    },
-    {
-      children: (
-        <div className="flex flex-1 flex-col justify-center gap-y-1.5">
-          {Array.from({ length: maxProductRating })
-            .map((_value, index) => {
-              const parsedMinRating = parseInt(minRating ?? "0");
-              const hasRatingSearchParam =
-                typeof minRating === "string" && !isNaN(parsedMinRating);
-              const isChecked =
-                hasRatingSearchParam && parsedMinRating === index + 1;
-
-              return (
-                <React.Suspense key={index}>
-                  <RatingFilterItemWrapper
-                    index={index}
-                    checked={isChecked}
-                    wrapperClassName={
-                      hasRatingSearchParam && parsedMinRating > index + 1
-                        ? "hidden"
-                        : ""
-                    }
-                  />
-                </React.Suspense>
-              );
-            })
-            .reverse()}
-        </div>
-      ),
-      name: "Rating",
-    },
-    {
-      children: (
-        <ToggleGroup
-          type="multiple"
-          className="flex flex-1 flex-row flex-wrap items-center justify-start gap-2"
-        >
-          {tags?.map((tagItem, index) => {
-            const tagsArray = tagsSearchParam?.split(",");
-            const hasTagsSearchParam =
-              Array.isArray(tagsArray) && tagsArray.length > 0;
-            const isSelected =
-              hasTagsSearchParam && tagsArray?.includes(tagItem.id);
-
-            return (
-              <React.Suspense key={index}>
-                <TagFilterItemWrapper
-                  tagItem={tagItem}
-                  selected={isSelected}
-                  wrapperClassName={cn("order-none", {
-                    "order-1": !isSelected,
-                  })}
-                />
-              </React.Suspense>
-            );
-          })}
-        </ToggleGroup>
-      ),
-      name: "Popular Tags",
-    },
-  ];
+  const filters = getProductFilters(
+    categories,
+    tags,
+    maxProductsPrice,
+    !!maxPrice ? parseInt(maxPrice) : null,
+    !!minRating ? parseInt(minRating) : null,
+    categoriesSearchParam,
+    tagsSearchParam
+  );
 
   const currentSortByValue = productsSortByOptions.find(
     ({ sortBy: sortByOption, direction }) =>
@@ -280,7 +167,7 @@ export default async function Products({
       <div className="flex w-full flex-1 flex-col xl:items-center">
         <div className="flex w-full max-w-7xl flex-col gap-8 lg:flex-row">
           <div className="flex w-full flex-1 flex-row lg:min-w-[260px] lg:max-w-fit lg:basis-1/4">
-            <div className="sticky top-8 w-full">
+            <div className="w-full">
               <FiltersDialogWrapper
                 wrapperClassname="flex flex-1 lg:hidden relative"
                 contentClassname="rounded-[10px] max-w-[80vw] sm:max-w-[70vw] md:max-w-[60vw] overflow-y-auto max-h-[90vh]"
@@ -288,39 +175,9 @@ export default async function Products({
                 <DialogHeader>
                   <DialogTitle>Filters</DialogTitle>
                 </DialogHeader>
-                {filters?.map(
-                  ({ children, name, initiallyCollapsed }, index) => (
-                    <Accordion
-                      key={index}
-                      type="single"
-                      collapsible
-                      defaultValue={!initiallyCollapsed ? name : undefined}
-                      className="grid"
-                    >
-                      <AccordionItem value={name}>
-                        <AccordionTrigger>{name}</AccordionTrigger>
-                        <AccordionContent>{children}</AccordionContent>
-                      </AccordionItem>
-                    </Accordion>
-                  )
-                )}
+                {filterComponents(filters, "grid")}
               </FiltersDialogWrapper>
-              {filters?.map(({ children, name, initiallyCollapsed }, index) => (
-                <Accordion
-                  key={index}
-                  type="single"
-                  collapsible
-                  defaultValue={!initiallyCollapsed ? name : undefined}
-                  className="hidden lg:grid"
-                >
-                  <AccordionItem value={name}>
-                    <AccordionTrigger className={cn({ "pt-0": index === 0 })}>
-                      {name}
-                    </AccordionTrigger>
-                    <AccordionContent>{children}</AccordionContent>
-                  </AccordionItem>
-                </Accordion>
-              ))}
+              <div className="sticky top-28">{filterComponents(filters)}</div>
             </div>
           </div>
           <div className="flex w-full flex-col gap-8">

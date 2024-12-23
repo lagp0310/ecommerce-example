@@ -1,6 +1,10 @@
 "use client";
 
-import type { Line_Items, Line_ItemsEdge, Carts } from "@/gql/graphql";
+import type {
+  Line_Items as LineItem,
+  Line_ItemsEdge as LineItemEdge,
+  Carts as Cart,
+} from "@/gql/graphql";
 import React from "react";
 import { useLazyQuery, useMutation } from "@apollo/client";
 import { createCart, updateCart } from "@/gql/mutations/cart/mutations";
@@ -20,8 +24,8 @@ import { allLineItems } from "@/gql/queries/line-item/queries";
 import { useToast } from "@/hooks/use-toast";
 
 type CartContext = {
-  cart: Carts | null;
-  lineItems: Line_Items[];
+  cart: Cart | null;
+  lineItems: LineItem[];
   getCartLineItemId: (productId: string) => string | null;
   handleAddToCart: (product: TProduct) => Promise<void>;
   handleUpdateQuantity: (
@@ -29,7 +33,10 @@ type CartContext = {
     product: TProduct,
     quantity: number
   ) => Promise<void>;
-  handleDeleteLineItem: (lineItemId: string) => Promise<void>;
+  handleDeleteLineItem: (
+    lineItemId: string,
+    showToast?: boolean
+  ) => Promise<void>;
   isCreateCartLoading: boolean;
   isUpdateCartLoading: boolean;
   isCreateLineItemsLoading: boolean;
@@ -65,13 +72,13 @@ export function useCart() {
 
 type Props = {
   children: React.ReactNode;
-  currentCart?: Carts | null;
+  currentCart?: Cart | null;
 };
 
 export function CartContextProvider({ children, currentCart = null }: Props) {
   const { toast } = useToast();
   const [cart, setCart] = React.useState(currentCart);
-  const [lineItems, setLineItems] = React.useState<Line_Items[]>([]);
+  const [lineItems, setLineItems] = React.useState<LineItem[]>([]);
   const [getCart] = useLazyQuery(getCartQuery);
   const [getLineItems] = useLazyQuery(allLineItems);
   React.useEffect(() => {
@@ -100,10 +107,10 @@ export function CartContextProvider({ children, currentCart = null }: Props) {
         .then(
           ({
             data: {
-              line_itemsCollection: { edges },
+              lineItemsCollection: { edges },
             },
           }) => {
-            const lineItemsNode = (edges as Line_ItemsEdge[])?.map(
+            const lineItemsNode = (edges as LineItemEdge[])?.map(
               ({ node }) => node
             );
             setLineItems(lineItemsNode);
@@ -162,7 +169,7 @@ export function CartContextProvider({ children, currentCart = null }: Props) {
           cartData = cartDataResponse;
         }
 
-        const cartId = cartData?.insertIntocartsCollection?.records?.at(0)?.id;
+        const cartId = cartData?.insertIntoCartsCollection?.records?.at(0)?.id;
         const { data: lineItemsData } = await mutateCreateLineItems({
           variables: {
             lineItems: [
@@ -180,7 +187,7 @@ export function CartContextProvider({ children, currentCart = null }: Props) {
         });
 
         const newLineItem =
-          lineItemsData?.insertIntoline_itemsCollection?.records?.at(0);
+          lineItemsData?.insertIntoLineItemsCollection?.records?.at(0);
         setLineItems((lineItems) => lineItems.concat(newLineItem));
 
         toast({
@@ -199,7 +206,7 @@ export function CartContextProvider({ children, currentCart = null }: Props) {
   );
 
   const handleDeleteLineItem = React.useCallback(
-    async (lineItemId: string) => {
+    async (lineItemId: string, showToast = true) => {
       try {
         await mutateDeleteLineItems({
           variables: {
@@ -211,10 +218,12 @@ export function CartContextProvider({ children, currentCart = null }: Props) {
           lineItems.filter(({ id }) => id != lineItemId)
         );
 
-        toast({
-          duration: 5000,
-          description: "Product was removed from the Cart",
-        });
+        if (showToast) {
+          toast({
+            duration: 5000,
+            description: "Product was removed from the Cart",
+          });
+        }
       } catch (error) {
         console.error(error);
       }
@@ -251,7 +260,7 @@ export function CartContextProvider({ children, currentCart = null }: Props) {
         });
 
         const updatedLineItem =
-          lineItemsData?.updateline_itemsCollection?.records?.at(0);
+          lineItemsData?.updateLineItemsCollection?.records?.at(0);
         setLineItems((lineItems) =>
           lineItems.filter(({ id }) => id != lineItemId).concat(updatedLineItem)
         );

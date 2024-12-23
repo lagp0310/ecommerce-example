@@ -38,6 +38,7 @@ export function AddToCartWrapper({
   const [lineItemId, setLineItemId] = React.useState<string | null>(null);
   React.useEffect(() => {
     if (!cart?.id || !product.id) {
+      setWasGetLineItemIdSuccessful(true);
       return;
     }
 
@@ -84,7 +85,7 @@ export function AddToCartWrapper({
           lineItemId={lineItemId}
           product={product}
           className={cn(
-            "flex flex-row gap-3 items-center justify-center",
+            "hidden min-[1080px]:flex flex-row gap-3 items-center justify-center",
             counterWrapperClassName
           )}
           countClassName={cn(

@@ -13,13 +13,13 @@ import { Button } from "@/components/ui/common/button";
 import { TrashIcon } from "@heroicons/react/24/outline";
 import { ProductPricing } from "@/components/ui/product/product-pricing";
 import Image from "next/image";
-import { Line_Items } from "@/gql/graphql";
+import { Line_Items as LineItem } from "@/gql/graphql";
 import { useCart } from "@/context/cart-context";
 import { defaultCurrencySymbol } from "@/constants/constants";
 
 type Props = React.HTMLProps<HTMLDivElement> & {
   actionsProps?: CartProductActionsProps;
-  lineItem: Line_Items;
+  lineItem: LineItem;
   product: TProduct;
   toggleSidebar: () => void;
 };
@@ -34,7 +34,7 @@ export function BasicCartProduct({
   const { handleDeleteLineItem, isLoading } = useCart();
   const handleDeleteClick = React.useCallback(async () => {
     try {
-      await handleDeleteLineItem(lineItemId);
+      await handleDeleteLineItem(lineItemId, false);
     } catch (error) {
       console.error(error);
     }

@@ -8,9 +8,9 @@ import {
   minutesTransform,
   secondsTransform,
   StoreHighlightIcon,
+  defaultMaxProductPrice,
 } from "@/constants/constants";
-import type { Products } from "@/gql/graphql";
-import type { TProduct } from "@/types/types";
+import type { ProductsResponse, TProduct } from "@/types/types";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -42,26 +42,26 @@ export function parseRemainingTime(countDown: number) {
   };
 }
 
-export function parseProductTags(productsCollection?: Products[] | null) {
+export function parseProductTags(
+  productsCollection?: ProductsResponse[] | null
+) {
   if (!productsCollection) return [];
 
   return productsCollection.map(
-    ({ product_tagsCollection, ...productRest }) => ({
-      generalTags: product_tagsCollection?.edges
-        ?.filter(({ node: { is_general_tag: isGeneralTag } }) => isGeneralTag)
-        .map(({ node: { id, tag, tag_types } }) => ({
+    ({ productTagsCollection, ...productRest }) => ({
+      generalTags: productTagsCollection?.edges
+        ?.filter(({ node: { isGeneralTag } }) => isGeneralTag)
+        .map(({ node: { id, tag, tagTypes } }) => ({
           id,
           tag,
-          type: tag_types?.type,
+          type: tagTypes?.type,
         })),
-      discountTags: product_tagsCollection?.edges
-        ?.filter(
-          ({ node: { is_discount_tag: isDiscountTag } }) => isDiscountTag
-        )
-        .map(({ node: { id, tag, tag_types } }) => ({
+      discountTags: productTagsCollection?.edges
+        ?.filter(({ node: { isDiscountTag } }) => isDiscountTag)
+        .map(({ node: { id, tag, tagTypes } }) => ({
           id,
           tag,
-          type: tag_types?.type,
+          type: tagTypes?.type,
         })),
       ...productRest,
     })
@@ -139,4 +139,41 @@ export function getStoreHighlightsIcon(icon: StoreHighlightIcon) {
     default:
       return null;
   }
+}
+
+export function removeParamFromURL(
+  searchParams: URLSearchParams,
+  paramName: string,
+  paramValue?: string
+) {
+  const updatedSearchParams = new URLSearchParams(searchParams);
+  updatedSearchParams.delete(paramName, paramValue);
+
+  return updatedSearchParams.toString();
+}
+
+export function removeParamsFromURL(
+  searchParams: URLSearchParams,
+  paramNames: string[]
+) {
+  if (!Array.isArray(paramNames) || paramNames.length === 0) {
+    throw new Error("paramNames must be an array and cannot be empty");
+  }
+
+  const updatedSearchParams = new URLSearchParams(searchParams);
+  paramNames.forEach((paramName) => updatedSearchParams.delete(paramName));
+
+  return updatedSearchParams.toString();
+}
+
+export function getPricingSliderProps(
+  maxProductsPrice: number,
+  maxPrice: number | null
+) {
+  return {
+    thumbClassName:
+      "outline-none ring-0 focus-visible:ring-0 focus-visible:ring-offset-0",
+    defaultValue: [maxPrice ?? maxProductsPrice ?? defaultMaxProductPrice],
+    max: maxProductsPrice,
+  };
 }

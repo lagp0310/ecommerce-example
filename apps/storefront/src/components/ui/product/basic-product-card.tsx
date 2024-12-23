@@ -126,7 +126,7 @@ export function BasicProductCard({
           <ClientLink href={`/products/${slug}`} className="col-span-1">
             {productNode}
           </ClientLink>
-          <div className="absolute bottom-4 right-1.5 hidden flex-1 flex-row items-center justify-end min-[400px]:right-3 xl:flex">
+          <div className="absolute bottom-4 right-3 flex-1 flex-row items-center justify-end">
             <AddToCartWrapper
               product={product}
               className="group flex size-8 flex-row items-center justify-center rounded-full bg-gray-50 hover:bg-primary disabled:cursor-not-allowed disabled:opacity-50 disabled:transition-none disabled:hover:bg-gray-50 motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"

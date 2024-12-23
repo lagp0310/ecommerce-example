@@ -61,8 +61,11 @@ import {
   testimonialsCarouselRendererProps,
   totalCustomerTestimonials,
 } from "@/constants/homepage/constants";
-import type { Products as TProduct } from "@/gql/graphql";
-import type { CategoryResponse, StoreFeatureResponse } from "@/types/types";
+import type {
+  CategoryResponse,
+  ProductsResponse,
+  StoreFeatureResponse,
+} from "@/types/types";
 
 export default async function Home() {
   const [
@@ -73,7 +76,7 @@ export default async function Home() {
     categories,
   ] = await Promise.all([
     queryGraphql<StoreFeatureResponse[]>(
-      "store_featuresCollection",
+      "storeFeaturesCollection",
       allStoreFeatures,
       {
         first: storeHighlightsToShow,
@@ -81,7 +84,7 @@ export default async function Home() {
         orderBy: { render_order: "AscNullsFirst" },
       }
     ),
-    queryGraphql<TProduct[]>("productsCollection", allProducts, {
+    queryGraphql<ProductsResponse[]>("productsCollection", allProducts, {
       first: popularProductsToShow,
       filter: {
         store: { eq: env.NEXT_PUBLIC_STORE_ID },
@@ -89,7 +92,7 @@ export default async function Home() {
       },
       orderBy: { render_order: "AscNullsLast" },
     }),
-    queryGraphql<TProduct[]>("productsCollection", allProducts, {
+    queryGraphql<ProductsResponse[]>("productsCollection", allProducts, {
       first: hotDealsProductsToShow,
       filter: {
         store: { eq: env.NEXT_PUBLIC_STORE_ID },
@@ -97,7 +100,7 @@ export default async function Home() {
       },
       orderBy: { render_order: "AscNullsLast" },
     }),
-    queryGraphql<TProduct[]>("productsCollection", allProducts, {
+    queryGraphql<ProductsResponse[]>("productsCollection", allProducts, {
       first: featuredProductsToShow,
       filter: {
         store: { eq: env.NEXT_PUBLIC_STORE_ID },

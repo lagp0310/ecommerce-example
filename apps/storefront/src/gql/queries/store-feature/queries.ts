@@ -11,7 +11,7 @@ export const allStoreFeatures = gql`
     $filter: store_featuresFilter
     $orderBy: [store_featuresOrderBy!]
   ) {
-    store_featuresCollection(
+    storeFeaturesCollection: store_featuresCollection(
       first: $first
       last: $last
       before: $before

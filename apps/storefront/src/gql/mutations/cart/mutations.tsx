@@ -3,12 +3,12 @@ import { gql } from "@apollo/client";
 
 export const createCart = gql`
   mutation CreateCart($cart: [cartsInsertInput!]!) {
-    insertIntocartsCollection(objects: $cart) {
+    insertIntoCartsCollection: insertIntocartsCollection(objects: $cart) {
       __typename
       affectedCount
       records {
         id
-        line_itemsCollection {
+        lineItemsCollection: line_itemsCollection {
           edges {
             node {
               ...LineItemFragment
@@ -27,12 +27,12 @@ export const createCart = gql`
 
 export const updateCart = gql`
   mutation UpdateCart($cart: cartsUpdateInput!, $filter: cartsFilter) {
-    updatecartsCollection(set: $cart, filter: $filter) {
+    updateCartsCollection: updatecartsCollection(set: $cart, filter: $filter) {
       __typename
       affectedCount
       records {
         id
-        line_itemsCollection {
+        lineItemsCollection: line_itemsCollection {
           edges {
             node {
               ...LineItemFragment

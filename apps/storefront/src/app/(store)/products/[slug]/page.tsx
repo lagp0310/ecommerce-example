@@ -23,12 +23,11 @@ import {
   relatedProductsCarouselRendererProps,
   relatedProductsToShow,
 } from "@/constants/product/constants";
-import type { Products } from "@/gql/graphql";
 import { allProducts } from "@/gql/queries/product/queries";
 import { env } from "@/lib/env";
 import { queryGraphql } from "@/lib/server-query";
 import { cn, parseProductTags } from "@/lib/utils";
-import type { TProduct } from "@/types/types";
+import type { ProductsResponse, TProduct } from "@/types/types";
 import {
   ArrowRightIcon,
   ShoppingBagIcon,
@@ -46,7 +45,7 @@ export default async function Product({
 }) {
   const { slug } = await params;
 
-  const productResult = await queryGraphql<Products[]>(
+  const productResult = await queryGraphql<ProductsResponse[]>(
     "productsCollection",
     allProducts,
     {
@@ -74,7 +73,7 @@ export default async function Product({
     description,
   } = product as TProduct;
 
-  const relatedProductsResult = await queryGraphql<Products[]>(
+  const relatedProductsResult = await queryGraphql<ProductsResponse[]>(
     "productsCollection",
     allProducts,
     {

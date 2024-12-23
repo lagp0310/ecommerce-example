@@ -5,8 +5,6 @@ import { useIsMobile } from "@/hooks/use-is-mobile";
 import { type Props as SlideProps, Slide } from "./slide";
 import { defaultMobileMediaQuery } from "@/constants/constants";
 
-// TODO: Refactor this into a single type object as optional carousel
-// props for all the components using renderInDesktop and mobileMediaQuery.
 type Props = React.PropsWithChildren<SlideProps> & {
   renderInDesktop?: boolean;
   mobileMediaQuery?: string;

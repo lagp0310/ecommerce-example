@@ -37,6 +37,7 @@ import { FiltersDialogWrapper } from "@/components/ui/product/filters-dialog-wra
 import { DialogHeader, DialogTitle } from "@/components/ui/common/dialog";
 import {
   cn,
+  getPricingSliderProps,
   isRecordIdInSearchParamArray,
   parseProductTags,
 } from "@/lib/utils";
@@ -54,7 +55,6 @@ import { RatingFilterItemWrapper } from "@/components/ui/product/rating-filter-i
 import { TagFilterItemWrapper } from "@/components/ui/product/tag-filter-item-wrapper";
 import {
   categoriesToShow,
-  pricingSliderProps,
   productsToShow,
 } from "@/constants/product/constants";
 import type { Categories, Product_Tags as ProductTag } from "@/gql/graphql";
@@ -212,7 +212,7 @@ export default async function Products({
               currentValue={[maxProductsPrice ?? defaultMaxProductPrice]}
             >
               <PricingSlider
-                {...pricingSliderProps(
+                {...getPricingSliderProps(
                   maxProductsPrice ?? defaultMaxProductPrice,
                   !!maxPrice ? parseInt(maxPrice) : (maxProductsPrice ?? null)
                 )}

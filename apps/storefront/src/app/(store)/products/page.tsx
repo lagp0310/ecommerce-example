@@ -10,7 +10,6 @@ import {
 } from "@/constants/constants";
 import { BasicProductCard } from "@/components/ui/product/basic-product-card";
 import type {
-  GetProductsCountResponse,
   GetProductsMaxPriceResponse,
   ProductFilter,
   ProductsResponse,
@@ -81,7 +80,6 @@ export default async function Products({
     categories,
     tags,
     productsMaxPriceResponse,
-    productsCountResponse,
   ] = await Promise.all([
     searchParams,
     queryGraphql<Categories[]>("categoriesCollection", allCategories, {
@@ -98,25 +96,15 @@ export default async function Products({
         store_id: env.NEXT_PUBLIC_STORE_ID,
       }
     ),
-    callDatabaseFunction<GetProductsCountResponse>("get_products_count", {
-      store_id: env.NEXT_PUBLIC_STORE_ID,
-    }),
   ]);
   const maxProductsPrice = productsMaxPriceResponse?.result_max_price;
-  const productsCount = productsCountResponse?.result_products_count;
-
-  if (!page || !perPage || !sortBy || !sortByDirection || !maxPrice) {
-    redirect(
-      `/products?page=1&perPage=${perPage || defaultProductsShowPerPage}&sortBy=${defaultSortBy}&sortByDirection=${defaultSortByDirection}&maxPrice=${maxPrice ?? maxProductsPrice ?? defaultMaxProductPrice}`
-    );
-  }
 
   const productsResult = await queryGraphql<ProductsResponse[]>(
     "productsCollection",
     allProducts,
     {
       first: productsToShow,
-      offset: (parseInt(page) - 1) * productsToShow,
+      offset: ((!!page ? parseInt(page) : 1) - 1) * productsToShow,
       filter: {
         store: { eq: env.NEXT_PUBLIC_STORE_ID },
         available_quantity: { gt: 0 },
@@ -139,15 +127,23 @@ export default async function Products({
           .flatMap((value) => value as unknown),
       },
       orderBy: {
-        [sortBy]: sortByDirection === "asc" ? "AscNullsLast" : "DescNullsLast",
+        [sortBy ?? defaultSortBy]:
+          (sortByDirection ?? defaultSortByDirection) === "asc"
+            ? "AscNullsLast"
+            : "DescNullsLast",
       },
     }
   );
+  const productsCount = productsResult?.length ?? 0;
   const products = parseProductTags(productsResult);
 
-  const totalPages = Math.ceil(
-    (productsCount ?? 0) / defaultProductsShowPerPage
-  );
+  if (!page || !perPage || !sortBy || !sortByDirection || !maxPrice) {
+    redirect(
+      `/products?page=1&perPage=${perPage || defaultProductsShowPerPage}&sortBy=${defaultSortBy}&sortByDirection=${defaultSortByDirection}&maxPrice=${maxPrice ?? maxProductsPrice ?? defaultMaxProductPrice}`
+    );
+  }
+
+  const totalPages = Math.ceil(productsCount / defaultProductsShowPerPage);
   const isPreviousButtonDisabled = parseInt(page) === 1;
   const isNextButtonDisabled = parseInt(page) === totalPages;
   const previousHref =

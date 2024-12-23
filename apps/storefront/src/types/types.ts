@@ -140,7 +140,6 @@ export type TProduct = Omit<
 export type BaseOperationVariables = OperationVariables;
 
 export type GetProductsMaxPriceResponse = { result_max_price: number };
-export type GetProductsCountResponse = { result_products_count: number };
 
 export type StoreFeatureResponse = Omit<StoreFeature, "icon_name"> & {
   iconName?: string;

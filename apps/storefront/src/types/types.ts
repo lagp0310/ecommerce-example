@@ -111,6 +111,8 @@ export type ProductFilter = {
   children: React.ReactNode;
   action?: React.ReactNode;
   actionClassName?: string;
+  forceMount?: true;
+  styles?: React.CSSProperties & { [key: string]: string };
 };
 
 export type BaseSelectOption = {

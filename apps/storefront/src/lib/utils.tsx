@@ -8,6 +8,7 @@ import {
   minutesTransform,
   secondsTransform,
   StoreHighlightIcon,
+  defaultMaxProductPrice,
 } from "@/constants/constants";
 import type { ProductsResponse, TProduct } from "@/types/types";
 import { clsx, type ClassValue } from "clsx";
@@ -163,4 +164,19 @@ export function removeParamsFromURL(
   paramNames.forEach((paramName) => updatedSearchParams.delete(paramName));
 
   return updatedSearchParams.toString();
+}
+
+export function getPricingSliderProps(
+  maxProductsPrice: number,
+  maxPrice: number | null
+) {
+  return {
+    thumbClassName:
+      "outline-none ring-0 focus-visible:ring-0 focus-visible:ring-offset-0",
+    defaultValue: [maxPrice ?? maxProductsPrice ?? defaultMaxProductPrice],
+    max:
+      typeof maxProductsPrice === "number"
+        ? maxProductsPrice
+        : defaultMaxProductPrice,
+  };
 }

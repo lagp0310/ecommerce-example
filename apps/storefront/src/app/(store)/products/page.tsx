@@ -231,6 +231,10 @@ export default async function Products({
         </PriceFilterResetWrapper>
       ),
       actionClassName: "flex flex-1 flex-row justify-end max-w-fit",
+      forceMount: true,
+      styles: {
+        "--radix-collapsible-content-height": "85px",
+      },
     },
     {
       children: (
@@ -318,6 +322,53 @@ export default async function Products({
 
   const hasProducts = Array.isArray(products) && products.length > 0;
 
+  const filterComponents = (accordionRootClassName = "hidden lg:grid") => (
+    <React.Fragment>
+      {filters?.map(
+        (
+          {
+            children,
+            name,
+            initiallyCollapsed,
+            forceMount,
+            styles,
+            ...triggerProps
+          },
+          index
+        ) => (
+          <Accordion
+            key={index}
+            type="single"
+            collapsible
+            defaultValue={!initiallyCollapsed ? name : undefined}
+            className={accordionRootClassName}
+          >
+            <AccordionItem value={name} className="group/accordion-item h-auto">
+              <AccordionTrigger
+                className={cn({
+                  "pt-0": index === 0,
+                })}
+                {...triggerProps}
+              >
+                {name}
+              </AccordionTrigger>
+              <AccordionContent
+                forceMount={forceMount}
+                className={cn({
+                  "group-data-[state=closed]/accordion-item:hidden transition-all group-data-[state=closed]/accordion-item:animate-accordion-down":
+                    forceMount,
+                })}
+                style={forceMount ? styles : undefined}
+              >
+                {children}
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+        )
+      )}
+    </React.Fragment>
+  );
+
   return (
     <div className="flex flex-1 flex-col gap-y-8 px-6 py-8 xl:px-0">
       <div className="flex w-full flex-1 flex-col xl:items-center">
@@ -331,56 +382,9 @@ export default async function Products({
                 <DialogHeader>
                   <DialogTitle>Filters</DialogTitle>
                 </DialogHeader>
-                {filters?.map(
-                  (
-                    { children, name, initiallyCollapsed, ...triggerProps },
-                    index
-                  ) => (
-                    <Accordion
-                      key={index}
-                      type="single"
-                      collapsible
-                      defaultValue={!initiallyCollapsed ? name : undefined}
-                      className="grid"
-                    >
-                      <AccordionItem value={name}>
-                        <AccordionTrigger {...triggerProps}>
-                          {name}
-                        </AccordionTrigger>
-                        <AccordionContent>{children}</AccordionContent>
-                      </AccordionItem>
-                    </Accordion>
-                  )
-                )}
+                {filterComponents("grid")}
               </FiltersDialogWrapper>
-              <div className="sticky top-28">
-                {filters?.map(
-                  (
-                    { children, name, initiallyCollapsed, ...triggerProps },
-                    index
-                  ) => (
-                    <Accordion
-                      key={index}
-                      type="single"
-                      collapsible
-                      defaultValue={!initiallyCollapsed ? name : undefined}
-                      className="hidden lg:grid"
-                    >
-                      <AccordionItem value={name}>
-                        <AccordionTrigger
-                          className={cn({
-                            "pt-0": index === 0,
-                          })}
-                          {...triggerProps}
-                        >
-                          {name}
-                        </AccordionTrigger>
-                        <AccordionContent>{children}</AccordionContent>
-                      </AccordionItem>
-                    </Accordion>
-                  )
-                )}
-              </div>
+              <div className="sticky top-28">{filterComponents()}</div>
             </div>
           </div>
           <div className="flex w-full flex-col gap-8">

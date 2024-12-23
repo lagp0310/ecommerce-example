@@ -1,14 +1,15 @@
 "use client";
 
+import { useSearchParams } from "next/navigation";
 import React from "react";
 
 type SliderContext = {
-  value: number[];
-  setValue: React.Dispatch<React.SetStateAction<number[]>>;
+  value: number;
+  setValue: React.Dispatch<React.SetStateAction<number>>;
   resetSliderValue: () => void;
 };
 const SliderContext = React.createContext<SliderContext>({
-  value: [0],
+  value: 0,
   setValue: () => {},
   resetSliderValue: () => {},
 });
@@ -24,16 +25,26 @@ export function useSlider() {
 
 type Props = {
   children: React.ReactNode;
-  initialValue: number[];
-  currentValue?: number[];
+  initialValue: number;
+  paramName: string;
 };
 
 export function SliderContextProvider({
   children,
   initialValue,
-  currentValue = [0],
+  paramName,
 }: Props) {
-  const [value, setValue] = React.useState(currentValue);
+  const searchParams = useSearchParams();
+  const priceSearchParamValue = React.useMemo(
+    () => parseInt(searchParams.get(paramName) ?? initialValue.toString()),
+    [initialValue, paramName, searchParams]
+  );
+
+  const [value, setValue] = React.useState(priceSearchParamValue);
+
+  React.useEffect(() => {
+    setValue(priceSearchParamValue);
+  }, [priceSearchParamValue]);
 
   const resetSliderValue = React.useCallback(() => {
     setValue(initialValue);

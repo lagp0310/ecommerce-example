@@ -208,8 +208,8 @@ export default async function Products({
         <div className="flex flex-1 flex-col justify-center gap-6 pt-4">
           <React.Suspense>
             <SliderContextProvider
-              initialValue={[maxProductsPrice ?? defaultMaxProductPrice]}
-              currentValue={[maxProductsPrice ?? defaultMaxProductPrice]}
+              initialValue={maxProductsPrice ?? defaultMaxProductPrice}
+              paramName="maxPrice"
             >
               <PricingSlider
                 {...getPricingSliderProps(

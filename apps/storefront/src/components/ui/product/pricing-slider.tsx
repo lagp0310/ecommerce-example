@@ -11,42 +11,33 @@ type Props = React.ComponentProps<typeof Slider> & {
 };
 
 export function PricingSlider({
-  defaultValue = [0],
   min = 0,
   step = 1,
   max = defaultMaxProductPrice,
   currencySymbol = "$",
   ...props
 }: Props) {
-  const { value, setValue } = useSlider();
+  const { value: price, setValue } = useSlider();
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const router = useRouter();
 
   const handlePriceParamUpdate = React.useCallback(() => {
-    const price = value.at(0);
-
     const updatedSearchParams = new URLSearchParams(searchParams);
     updatedSearchParams.set("maxPrice", price?.toString() ?? max.toString());
 
     router.push(`${pathname}?${updatedSearchParams.toString()}`);
-  }, [max, pathname, router, searchParams, value]);
+  }, [max, pathname, price, router, searchParams]);
 
   React.useEffect(() => {
-    // Timeout to avoid page requests every time the slider changes value
+    // Small delay to avoid page requests every time the slider changes value
     // when the slider is dragged.
     const updateParamsTimeout = setTimeout(handlePriceParamUpdate, 500);
 
-    const currentSliderValue = value.at(0);
-    const maxPriceSearchParam = parseInt(
-      searchParams.get("maxPrice") ?? max.toString()
-    );
-    if (currentSliderValue === maxPriceSearchParam) {
+    return () => {
       clearTimeout(updateParamsTimeout);
-    }
-
-    return () => clearTimeout(updateParamsTimeout);
-  }, [handlePriceParamUpdate, max, searchParams, value]);
+    };
+  }, [handlePriceParamUpdate, searchParams]);
 
   return (
     <React.Fragment>
@@ -54,14 +45,13 @@ export function PricingSlider({
         min={min}
         max={max}
         step={step}
-        defaultValue={defaultValue}
-        onValueChange={setValue}
+        onValueChange={(value) => setValue(value?.at(0) ?? 0)}
         {...props}
       />
       <span className="text-body-small font-normal text-gray-700">
         Price:
         <span className="text-body-small font-medium text-gray-900">
-          {` ${currencySymbol}0 - ${currencySymbol}${value}`}
+          {` ${currencySymbol}0 - ${currencySymbol}${price}`}
         </span>
       </span>
     </React.Fragment>

@@ -174,9 +174,6 @@ export function getPricingSliderProps(
     thumbClassName:
       "outline-none ring-0 focus-visible:ring-0 focus-visible:ring-offset-0",
     defaultValue: [maxPrice ?? maxProductsPrice ?? defaultMaxProductPrice],
-    max:
-      typeof maxProductsPrice === "number"
-        ? maxProductsPrice
-        : defaultMaxProductPrice,
+    max: maxProductsPrice,
   };
 }

@@ -99,6 +99,12 @@ export default async function Products({
   ]);
   const maxProductsPrice = productsMaxPriceResponse?.result_max_price;
 
+  if (!page || !perPage || !sortBy || !sortByDirection || !maxPrice) {
+    redirect(
+      `/products?page=1&perPage=${perPage || defaultProductsShowPerPage}&sortBy=${defaultSortBy}&sortByDirection=${defaultSortByDirection}&maxPrice=${maxPrice ?? maxProductsPrice ?? defaultMaxProductPrice}`
+    );
+  }
+
   const productsResult = await queryGraphql<ProductsResponse[]>(
     "productsCollection",
     allProducts,
@@ -137,12 +143,7 @@ export default async function Products({
   const productsCount = productsResult?.length ?? 0;
   const products = parseProductTags(productsResult);
 
-  if (!page || !perPage || !sortBy || !sortByDirection || !maxPrice) {
-    redirect(
-      `/products?page=1&perPage=${perPage || defaultProductsShowPerPage}&sortBy=${defaultSortBy}&sortByDirection=${defaultSortByDirection}&maxPrice=${maxPrice ?? maxProductsPrice ?? defaultMaxProductPrice}`
-    );
-  }
-
+  const currentPage = parseInt(page);
   const totalPages = Math.ceil(productsCount / defaultProductsShowPerPage);
   const isPreviousButtonDisabled = parseInt(page) === 1;
   const isNextButtonDisabled = parseInt(page) === totalPages;
@@ -154,7 +155,7 @@ export default async function Products({
     parseInt(page) === totalPages
       ? `/products?page=${page}&perPage=${perPage || defaultProductsShowPerPage}`
       : `/products?page=${parseInt(page) - 1}&perPage=${perPage || defaultProductsShowPerPage}`;
-  if (parseInt(page) > totalPages) {
+  if (productsCount > 0 && currentPage > totalPages) {
     redirect(
       `/products?page=1&perPage=${perPage || defaultProductsShowPerPage}&sortBy=${defaultSortBy}&sortByDirection=${defaultSortByDirection}&maxPrice=${maxPrice ?? maxProductsPrice ?? defaultMaxProductPrice}`
     );

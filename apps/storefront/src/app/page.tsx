@@ -345,15 +345,15 @@ export default async function Home() {
         </div>
         <div className="w-full">
           <Section className="flex flex-1 flex-row justify-center px-6 xl:px-0">
-            <Banner className="relative flex max-w-7xl flex-1 flex-col items-end gap-y-4 rounded-[10px]">
-              <div className="absolute top-0 flex h-[250px] w-full rounded-[10px] bg-gradient-to-r from-black/60 to-black/0 md:hidden"></div>
+            <Banner className="relative flex max-w-7xl flex-1 flex-col items-end gap-y-4 rounded-ten">
+              <div className="absolute top-0 flex h-[250px] w-full rounded-ten bg-gradient-to-r from-black/60 to-black/0 md:hidden"></div>
               <Image
                 src={discountBanner}
                 alt="Offer Banner"
                 placeholder="blur"
                 quality={100}
                 sizes="100vw"
-                className="h-[250px] w-full rounded-[10px] object-cover md:h-[300px] lg:h-auto"
+                className="h-[250px] w-full rounded-ten object-cover md:h-[300px] lg:h-auto"
               />
               <div className="absolute left-6 flex h-full flex-col items-start justify-center gap-y-2 md:right-12 md:gap-y-4">
                 <span className="text-body-medium font-normal uppercase leading-[100%] text-white">

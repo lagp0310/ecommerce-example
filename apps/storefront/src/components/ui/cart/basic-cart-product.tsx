@@ -54,7 +54,7 @@ export function BasicCartProduct({
               alt={name}
               width={100}
               height={100}
-              className="h-auto w-20 max-w-20 rounded-[10px]"
+              className="h-auto w-20 max-w-20 rounded-ten"
             />
           ) : null}
           <div className="flex flex-1 flex-col justify-center gap-1">

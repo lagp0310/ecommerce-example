@@ -99,14 +99,14 @@ export function SidebarCartWrapper({
           <div className="w-full border-t border-gray-100/50"></div>
           <Link
             href={`/carts/${cartId}`}
-            className="w-full rounded-[10px] border border-gray-100/50 px-5 py-3 text-center text-body-small font-normal leading-[120%] text-gray-900 hover:bg-green-gray-100/50 motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none md:text-body-medium"
+            className="w-full rounded-ten border border-gray-100/50 px-5 py-3 text-center text-body-small font-normal leading-[120%] text-gray-900 hover:bg-green-gray-100/50 motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none md:text-body-medium"
             onClick={toggleSidebar}
           >
             View Cart
           </Link>
           <Link
             href={`/checkout/${cartId}`}
-            className="w-full rounded-[10px] border border-gray-100/50 bg-primary px-5 py-3 text-center text-body-small font-normal leading-[120%] text-white hover:bg-hard-primary/100 motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none md:text-body-medium"
+            className="w-full rounded-ten border border-gray-100/50 bg-primary px-5 py-3 text-center text-body-small font-normal leading-[120%] text-white hover:bg-hard-primary/100 motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none md:text-body-medium"
             onClick={toggleSidebar}
           >
             Checkout

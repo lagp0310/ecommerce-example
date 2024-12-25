@@ -71,19 +71,16 @@ export const brandIcons = [
 ];
 
 export const headerBanners = [
-  <Banner
-    key={0}
-    className="relative rounded-[10px] md:col-span-2 md:row-span-2"
-  >
+  <Banner key={0} className="relative rounded-ten md:col-span-2 md:row-span-2">
     <Image
       src={headerBigBanner}
       alt="Header Banner"
       placeholder="blur"
       quality={100}
       sizes="100vw"
-      className="h-[300px] w-full rounded-[10px] object-cover sm:h-[400px] lg:h-auto"
+      className="h-[300px] w-full rounded-ten object-cover sm:h-[400px] lg:h-auto"
     />
-    <div className="absolute left-0 top-0 size-full rounded-[10px] bg-gradient-to-br from-black/60 to-black/0"></div>
+    <div className="absolute left-0 top-0 size-full rounded-ten bg-gradient-to-br from-black/60 to-black/0"></div>
     <div className="absolute top-0 flex h-full flex-1 flex-col justify-center gap-y-2 px-6 md:gap-y-7 md:px-12">
       <h2 className="text-body-xxl font-semibold text-white md:text-heading-2">
         Fresh and Healthy Organic Food
@@ -108,15 +105,15 @@ export const headerBanners = [
       </ClientLink>
     </div>
   </Banner>,
-  <Banner key={1} className="relative col-span-1 rounded-[10px]">
-    <div className="absolute left-0 top-0 size-full rounded-[10px] bg-gradient-to-r from-white/60 via-white/50 to-white/30"></div>
+  <Banner key={1} className="relative col-span-1 rounded-ten">
+    <div className="absolute left-0 top-0 size-full rounded-ten bg-gradient-to-r from-white/60 via-white/50 to-white/30"></div>
     <Image
       src={headerSecondBanner}
       alt="Second Header Banner"
       placeholder="blur"
       quality={100}
       sizes="100vw"
-      className="h-[300px] w-full rounded-[10px] object-cover sm:h-[400px] lg:h-auto"
+      className="h-[300px] w-full rounded-ten object-cover sm:h-[400px] lg:h-auto"
     />
     <div className="absolute left-0 top-0 flex h-full flex-1 flex-col justify-center gap-y-6 px-8">
       <span className="text-body-small font-medium uppercase leading-[100%] text-gray-900">
@@ -137,16 +134,16 @@ export const headerBanners = [
       </ClientLink>
     </div>
   </Banner>,
-  <Banner key={2} className="relative col-span-1 rounded-[10px]">
+  <Banner key={2} className="relative col-span-1 rounded-ten">
     <Image
       src={headerThirdBanner}
       alt="Third Header Banner"
       placeholder="blur"
       quality={100}
       sizes="100vw"
-      className="h-[300px] w-full rounded-[10px] object-cover sm:h-[400px] lg:h-auto"
+      className="h-[300px] w-full rounded-ten object-cover sm:h-[400px] lg:h-auto"
     />
-    <div className="absolute left-0 top-0 size-full rounded-[10px] bg-green-gray-900/80"></div>
+    <div className="absolute left-0 top-0 size-full rounded-ten bg-green-gray-900/80"></div>
     <div className="absolute left-0 top-0 flex size-full flex-1 flex-col items-center justify-center gap-y-6 px-6 md:gap-y-8 md:px-12">
       <span className="text-center text-body-small font-medium uppercase leading-[100%] text-white">
         Best Deal
@@ -363,7 +360,7 @@ export const offerBanners = [
       placeholder="blur"
       quality={100}
       sizes="100vw"
-      className="h-[500px] w-full rounded-[10px] object-cover lg:h-auto"
+      className="h-[500px] w-full rounded-ten object-cover lg:h-auto"
     />
     <div className="absolute left-0 top-10 flex h-[230px] w-full flex-1 flex-col items-center gap-y-4">
       <span className="text-body-small font-normal uppercase leading-[100%] text-white">
@@ -403,7 +400,7 @@ export const offerBanners = [
       placeholder="blur"
       quality={100}
       sizes="100vw"
-      className="h-[500px] w-full rounded-[10px] object-cover lg:h-auto"
+      className="h-[500px] w-full rounded-ten object-cover lg:h-auto"
     />
     <div className="absolute left-0 top-10 flex h-[230px] w-full flex-1 flex-col items-center gap-y-4">
       <span className="text-body-small font-normal uppercase leading-[100%] text-white">
@@ -436,7 +433,7 @@ export const offerBanners = [
       placeholder="blur"
       quality={100}
       sizes="100vw"
-      className="h-[500px] w-full rounded-[10px] object-cover lg:h-auto"
+      className="h-[500px] w-full rounded-ten object-cover lg:h-auto"
     />
     <div className="absolute left-0 top-10 flex h-[230px] w-full flex-1 flex-col items-center gap-y-4">
       <span className="text-body-small font-normal uppercase leading-[100%] text-gray-900">

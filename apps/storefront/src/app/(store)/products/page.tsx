@@ -202,7 +202,7 @@ export default async function Products({
             <div className="w-full">
               <FiltersDialogWrapper
                 wrapperClassname="flex flex-1 lg:hidden relative"
-                contentClassname="rounded-[10px] max-w-[80vw] sm:max-w-[70vw] md:max-w-[60vw] overflow-y-auto max-h-[90vh]"
+                contentClassname="rounded-ten max-w-[80vw] sm:max-w-[70vw] md:max-w-[60vw] overflow-y-auto max-h-[90vh]"
               >
                 <DialogHeader>
                   <DialogTitle>Filters</DialogTitle>

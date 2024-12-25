@@ -1,7 +1,7 @@
 import React from "react";
 
-type Props = React.HTMLProps<HTMLDivElement>;
+type Props = React.HTMLProps<HTMLHeadingElement>;
 
 export function SectionTitle({ ...props }: Props) {
-  return <div {...props}></div>;
+  return <h5 {...props}></h5>;
 }

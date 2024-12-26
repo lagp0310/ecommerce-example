@@ -10,6 +10,7 @@ import type {
   Products as ProductResponse,
   Store_Features as StoreFeature,
   Tag_Types as TagType,
+  Line_Items as LineItem,
 } from "@/gql/graphql";
 import type { OperationVariables } from "@apollo/client";
 
@@ -164,4 +165,11 @@ export type ProductsResponse = Omit<
   "product_tagsCollection"
 > & {
   productTagsCollection?: ProductTagsConnectionResponse;
+};
+export type LineItemWithProduct = Omit<LineItem, "products"> & {
+  products: TProduct;
+};
+export type CartTableColumns = LineItemWithProduct & {
+  subtotal: number;
+  actions: React.ReactNode;
 };

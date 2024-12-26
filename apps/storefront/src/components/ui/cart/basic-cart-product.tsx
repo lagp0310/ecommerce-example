@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import type { TProduct } from "@/types/types";
 import { CartProduct } from "./cart-product";
@@ -9,13 +7,11 @@ import {
   CartProductActions,
   type Props as CartProductActionsProps,
 } from "./cart-product-actions";
-import { Button } from "@/components/ui/common/button";
-import { TrashIcon } from "@heroicons/react/24/outline";
 import { ProductPricing } from "@/components/ui/product/product-pricing";
 import Image from "next/image";
 import { Line_Items as LineItem } from "@/gql/graphql";
-import { useCart } from "@/context/cart-context";
 import { defaultCurrencySymbol } from "@/constants/constants";
+import { DeleteProductButton } from "./delete-product-button";
 
 type Props = React.HTMLProps<HTMLDivElement> & {
   actionsProps?: CartProductActionsProps;
@@ -31,15 +27,6 @@ export function BasicCartProduct({
   toggleSidebar,
   ...props
 }: Props) {
-  const { handleDeleteLineItem, isLoading } = useCart();
-  const handleDeleteClick = React.useCallback(async () => {
-    try {
-      await handleDeleteLineItem(lineItemId, false);
-    } catch (error) {
-      console.error(error);
-    }
-  }, [handleDeleteLineItem, lineItemId]);
-
   return (
     <div className="flex flex-1 flex-row items-center gap-x-1">
       <Link
@@ -82,13 +69,10 @@ export function BasicCartProduct({
         </CartProduct>
       </Link>
       <CartProductActions {...actionsProps} className="flex flex-row gap-x-1">
-        <Button
+        <DeleteProductButton
           className="group -mr-2 rounded-full border-none p-2 hover:bg-gray-100/50 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
-          onClick={handleDeleteClick}
-          disabled={isLoading}
-        >
-          <TrashIcon className="size-4 text-gray-900 group-hover:text-danger group-disabled:transition-none group-disabled:group-hover:text-gray-900 motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none" />
-        </Button>
+          lineItemId={lineItemId}
+        />
       </CartProductActions>
     </div>
   );

@@ -13,7 +13,7 @@ export type TableHeadProps = React.HTMLProps<HTMLTableSectionElement>;
 export type TableBodyProps = React.HTMLProps<HTMLTableSectionElement>;
 export type TableFooterProps = React.HTMLProps<HTMLTableSectionElement>;
 
-type Props<T = unknown> = {
+export type Props<T = unknown> = {
   columns: ColumnDef<T, any>[];
   defaultData: T[];
 } & {
@@ -42,43 +42,37 @@ export function Table({
   return (
     <table {...tableProps}>
       <thead {...tableHeadProps}>
-        {table.getHeaderGroups().map((headerGroup) => (
-          <tr key={headerGroup.id}>
-            {headerGroup.headers.map((header) => (
-              <th key={header.id}>
-                {header.isPlaceholder
+        {table.getHeaderGroups().map(({ headers, id }) => (
+          <tr key={id}>
+            {headers.map(({ id, isPlaceholder, column, getContext }) => (
+              <th key={id}>
+                {isPlaceholder
                   ? null
-                  : flexRender(
-                      header.column.columnDef.header,
-                      header.getContext()
-                    )}
+                  : flexRender(column.columnDef.header, getContext())}
               </th>
             ))}
           </tr>
         ))}
       </thead>
       <tbody {...tableBodyProps}>
-        {table.getRowModel().rows.map((row) => (
-          <tr key={row.id}>
-            {row.getVisibleCells().map((cell) => (
-              <td key={cell.id}>
-                {flexRender(cell.column.columnDef.cell, cell.getContext())}
+        {table.getRowModel().rows.map(({ id, getVisibleCells }) => (
+          <tr key={id}>
+            {getVisibleCells().map(({ column, getContext, id }) => (
+              <td key={id}>
+                {flexRender(column.columnDef.cell, getContext())}
               </td>
             ))}
           </tr>
         ))}
       </tbody>
       <tfoot {...tableFooterProps}>
-        {table.getFooterGroups().map((footerGroup) => (
-          <tr key={footerGroup.id}>
-            {footerGroup.headers.map((header) => (
-              <th key={header.id}>
-                {header.isPlaceholder
+        {table.getFooterGroups().map(({ headers, id }) => (
+          <tr key={id}>
+            {headers.map(({ column, getContext, id, isPlaceholder }) => (
+              <th key={id}>
+                {isPlaceholder
                   ? null
-                  : flexRender(
-                      header.column.columnDef.footer,
-                      header.getContext()
-                    )}
+                  : flexRender(column.columnDef.footer, getContext())}
               </th>
             ))}
           </tr>

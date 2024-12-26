@@ -8,6 +8,7 @@ import {
   SheetContent,
   SheetHeader,
   SheetTitle,
+  SheetFooter,
 } from "@/components/ui/common/sheet";
 import { ShoppingBagIcon } from "@heroicons/react/24/outline";
 import { type DialogProps } from "@radix-ui/react-dialog";
@@ -19,6 +20,8 @@ import {
 } from "@/components/ui/common/tooltip";
 import { useCart } from "@/context/cart-context";
 import { useToast } from "@/hooks/use-toast";
+import Link from "next/link";
+import isUUID from "validator/es/lib/isUUID";
 
 type Props = {
   sheetProps?: DialogProps;
@@ -44,7 +47,11 @@ export function SidebarCartWrapper({
   sheetTitle = <SheetTitle className="text-left">My Shopping Cart</SheetTitle>,
   ...sheetProps
 }: Props) {
-  const { lineItems } = useCart();
+  const { cart, lineItems } = useCart();
+  const cartId = React.useMemo(
+    () => (typeof cart?.id === "string" && isUUID(cart.id) ? cart.id : null),
+    [cart?.id]
+  );
   const hasProducts = React.useMemo(
     () => Array.isArray(lineItems) && lineItems.length > 0,
     [lineItems]
@@ -95,23 +102,27 @@ export function SidebarCartWrapper({
             Your cart is currently empty.
           </span>
         )}
-        {/* <SheetFooter className="flex flex-1 basis-1/4 flex-col items-center gap-y-2 sm:flex-col sm:justify-end md:gap-y-4">
+        <SheetFooter className="flex flex-1 basis-1/4 flex-col items-center gap-y-2 sm:flex-col sm:justify-end md:gap-y-4">
           <div className="w-full border-t border-gray-100/50"></div>
-          <Link
-            href={`/carts/${cartId}`}
-            className="w-full rounded-ten border border-gray-100/50 px-5 py-3 text-center text-body-small font-normal leading-[120%] text-gray-900 hover:bg-green-gray-100/50 motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none md:text-body-medium"
-            onClick={toggleSidebar}
-          >
-            View Cart
-          </Link>
-          <Link
-            href={`/checkout/${cartId}`}
-            className="w-full rounded-ten border border-gray-100/50 bg-primary px-5 py-3 text-center text-body-small font-normal leading-[120%] text-white hover:bg-hard-primary/100 motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none md:text-body-medium"
-            onClick={toggleSidebar}
-          >
-            Checkout
-          </Link>
-        </SheetFooter> */}
+          {!!cartId ? (
+            <React.Fragment>
+              <Link
+                href={`/carts/${cartId}`}
+                className="w-full rounded-ten border border-gray-100/50 px-5 py-3 text-center text-body-small font-normal leading-[120%] text-gray-900 hover:bg-green-gray-100/50 motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none md:text-body-medium"
+                onClick={toggleSidebar}
+              >
+                View Cart
+              </Link>
+              <Link
+                href={`/checkout/${cartId}`}
+                className="w-full rounded-ten border border-gray-100/50 bg-primary px-5 py-3 text-center text-body-small font-normal leading-[120%] text-white hover:bg-hard-primary/100 motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none md:text-body-medium"
+                onClick={toggleSidebar}
+              >
+                Checkout
+              </Link>
+            </React.Fragment>
+          ) : null}
+        </SheetFooter>
       </SheetContent>
     </CartSheet>
   );

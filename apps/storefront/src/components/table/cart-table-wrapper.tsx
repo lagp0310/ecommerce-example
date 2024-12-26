@@ -3,6 +3,7 @@
 import React from "react";
 import {
   Table,
+  Props as AllTableProps,
   type TableHeadProps,
   type TableProps,
 } from "@/components/table/table";
@@ -54,7 +55,7 @@ export function CartTableWrapper({ ...props }: Props) {
       }),
       columnHelper.accessor("price", {
         header: () => (
-          <span className="text-left uppercase font-medium text-body-small text-gray-500 flex flex-1">
+          <span className="text-left uppercase font-medium text-body-small text-gray-500 flex-1">
             Price
           </span>
         ),
@@ -96,7 +97,7 @@ export function CartTableWrapper({ ...props }: Props) {
       // FIXME: This does not update on quantity updates. We have to do a refresh.
       columnHelper.accessor("subtotal", {
         header: () => (
-          <span className="text-left uppercase font-medium text-body-small text-gray-500 flex flex-1">
+          <span className="text-left uppercase font-medium text-body-small text-gray-500 flex-1">
             Subtotal
           </span>
         ),
@@ -139,7 +140,7 @@ export function CartTableWrapper({ ...props }: Props) {
       "rounded-ten border border-gray-100 border-separate border-spacing-6 w-full",
   };
   const tableHeadProps: TableHeadProps = {};
-  const allTableProps = {
+  const allTableProps: AllTableProps = {
     columns,
     tableProps,
     tableHeadProps,

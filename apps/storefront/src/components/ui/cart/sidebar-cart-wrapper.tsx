@@ -22,6 +22,7 @@ import { useCart } from "@/context/cart-context";
 import { useToast } from "@/hooks/use-toast";
 import Link from "next/link";
 import isUUID from "validator/es/lib/isUUID";
+import { DeleteProductButton } from "@/components/ui/cart/delete-product-button";
 
 type Props = {
   sheetProps?: DialogProps;
@@ -90,6 +91,12 @@ export function SidebarCartWrapper({
                       }}
                       product={products}
                       toggleSidebar={toggleSidebar}
+                      actions={
+                        <DeleteProductButton
+                          className="group -mr-2 rounded-full border-none p-2 hover:bg-gray-100/50 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
+                          lineItemId={id}
+                        />
+                      }
                     />
                     <div className="w-full border-t border-gray-100/50 group-last/cart-product:hidden"></div>
                   </div>

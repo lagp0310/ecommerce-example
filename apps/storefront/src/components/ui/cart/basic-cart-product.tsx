@@ -1,38 +1,42 @@
 import React from "react";
 import type { TProduct } from "@/types/types";
-import { CartProduct } from "./cart-product";
+import { CartProduct } from "@/components/ui/cart/cart-product";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import {
   CartProductActions,
   type Props as CartProductActionsProps,
-} from "./cart-product-actions";
+} from "@/components/ui/cart/cart-product-actions";
 import { ProductPricing } from "@/components/ui/product/product-pricing";
 import Image from "next/image";
 import { Line_Items as LineItem } from "@/gql/graphql";
 import { defaultCurrencySymbol } from "@/constants/constants";
-import { DeleteProductButton } from "./delete-product-button";
 
 type Props = React.HTMLProps<HTMLDivElement> & {
   actionsProps?: CartProductActionsProps;
   lineItem: LineItem;
   product: TProduct;
-  toggleSidebar: () => void;
+  toggleSidebar?: () => void;
+  actions?: React.ReactNode;
 };
 
 export function BasicCartProduct({
   actionsProps,
-  lineItem: { id: lineItemId, quantity },
+  lineItem: { quantity },
   product: { slug, name, price, currencies, discountedPrice, imageUrl },
   toggleSidebar,
+  actions,
   ...props
 }: Props) {
+  const hasActions = !!actions;
+  const onProductClick = !!toggleSidebar ? toggleSidebar : undefined;
+
   return (
     <div className="flex flex-1 flex-row items-center gap-x-1">
       <Link
         href={`/products/${slug}`}
         className="flex flex-1 flex-row gap-x-1"
-        onClick={toggleSidebar}
+        onClick={onProductClick}
       >
         <CartProduct {...props} className="flex flex-1 flex-row gap-4">
           {typeof imageUrl === "string" ? (
@@ -68,12 +72,14 @@ export function BasicCartProduct({
           </div>
         </CartProduct>
       </Link>
-      <CartProductActions {...actionsProps} className="flex flex-row gap-x-1">
-        <DeleteProductButton
-          className="group -mr-2 rounded-full border-none p-2 hover:bg-gray-100/50 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
-          lineItemId={lineItemId}
-        />
-      </CartProductActions>
+      {hasActions ? (
+        <CartProductActions
+          {...actionsProps}
+          className={cn("flex flex-row gap-x-1", actionsProps?.className)}
+        >
+          {actions}
+        </CartProductActions>
+      ) : null}
     </div>
   );
 }

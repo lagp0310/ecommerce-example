@@ -14,7 +14,7 @@ export type TableBodyProps = React.HTMLProps<HTMLTableSectionElement>;
 export type TableFooterProps = React.HTMLProps<HTMLTableSectionElement>;
 
 export type Props<T = unknown> = {
-  columns: ColumnDef<T, any>[];
+  columns: ColumnDef<T, unknown>[];
   tableData: T[];
 } & {
   tableProps?: TableProps;

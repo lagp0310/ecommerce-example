@@ -17,7 +17,6 @@ import { DeleteProductButton } from "@/components/ui/cart/delete-product-button"
 
 type Props = { defaultData: LineItemWithProduct[] };
 
-// TODO: Empty records table.
 export function CartTableWrapper({ ...props }: Props) {
   const columnHelper = React.useMemo(
     () => createColumnHelper<CartTableColumns>(),

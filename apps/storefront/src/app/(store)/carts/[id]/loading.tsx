@@ -12,8 +12,8 @@ export default function Loading() {
       <div className="flex flex-1 flex-col justify-center gap-y-6 px-6 xl:px-0">
         <div className="flex flex-1 flex-row items-center justify-center">
           <div className="flex max-w-7xl flex-1 flex-row items-center justify-center gap-6">
-            <Skeleton className="h-80 w-full rounded-ten basis-2/3" />
-            <Skeleton className="h-80 w-full rounded-ten basis-1/3" />
+            <Skeleton className="h-80 w-full basis-2/3 rounded-ten" />
+            <Skeleton className="h-80 w-full basis-1/3 rounded-ten" />
           </div>
         </div>
       </div>

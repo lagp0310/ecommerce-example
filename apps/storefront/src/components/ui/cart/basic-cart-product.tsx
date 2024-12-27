@@ -40,7 +40,7 @@ export function BasicCartProduct({
       >
         <CartProduct
           {...props}
-          className="flex flex-1 flex-row gap-4 items-center"
+          className="flex flex-1 flex-row items-center gap-4"
         >
           {typeof imageUrl === "string" ? (
             <Image
@@ -48,7 +48,7 @@ export function BasicCartProduct({
               alt={name}
               width={100}
               height={100}
-              className="h-auto w-10 min-[430px]:w-20 rounded-ten"
+              className="h-auto w-10 rounded-ten min-[430px]:w-20"
             />
           ) : null}
           <div className="flex flex-1 flex-col justify-center gap-1">

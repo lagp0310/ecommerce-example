@@ -11,7 +11,7 @@ type Props = SectionProps & { sectionTitle?: React.ReactNode };
 export function CartSummary({
   children,
   sectionTitle = (
-    <SectionTitle className="font-medium text-body-xl text-gray-900">
+    <SectionTitle className="text-body-xl font-medium text-gray-900">
       Cart Total
     </SectionTitle>
   ),

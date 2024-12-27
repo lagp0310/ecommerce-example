@@ -31,7 +31,7 @@ export function CartTableWrapper({ ...props }: Props) {
     () => [
       columnHelper.accessor("product", {
         header: () => (
-          <span className="text-left uppercase font-medium text-body-small text-gray-500 flex flex-1">
+          <span className="flex flex-1 text-left text-body-small font-medium uppercase text-gray-500">
             Product
           </span>
         ),
@@ -53,7 +53,7 @@ export function CartTableWrapper({ ...props }: Props) {
                   className="h-auto w-20 max-w-20 rounded-ten"
                 />
               ) : null}
-              <span className="font-normal text-body-medium text-gray-900">
+              <span className="text-body-medium font-normal text-gray-900">
                 {name}
               </span>
             </React.Fragment>
@@ -64,12 +64,12 @@ export function CartTableWrapper({ ...props }: Props) {
               {hasValidUrl ? (
                 <Link
                   href={productUrl}
-                  className="flex flex-1 flex-row gap-3 items-center"
+                  className="flex flex-1 flex-row items-center gap-3"
                 >
                   {productComponent}
                 </Link>
               ) : (
-                <div className="flex flex-1 flex-row gap-3 items-center">
+                <div className="flex flex-1 flex-row items-center gap-3">
                   {productComponent}
                 </div>
               )}
@@ -79,7 +79,7 @@ export function CartTableWrapper({ ...props }: Props) {
       }),
       columnHelper.accessor("price", {
         header: () => (
-          <span className="text-left uppercase font-medium text-body-small text-gray-500 flex flex-1">
+          <span className="flex flex-1 text-left text-body-small font-medium uppercase text-gray-500">
             Price
           </span>
         ),
@@ -90,7 +90,7 @@ export function CartTableWrapper({ ...props }: Props) {
           const prefixedPrice = `${currencyPrefix}${finalPrice.toFixed(2)}`;
 
           return (
-            <span className="font-normal text-body-medium text-gray-900">
+            <span className="text-body-medium font-normal text-gray-900">
               {prefixedPrice}
             </span>
           );
@@ -98,7 +98,7 @@ export function CartTableWrapper({ ...props }: Props) {
       }),
       columnHelper.accessor("quantity", {
         header: () => (
-          <span className="text-left uppercase font-medium text-body-small text-gray-500 flex flex-1">
+          <span className="flex flex-1 text-left text-body-small font-medium uppercase text-gray-500">
             Quantity
           </span>
         ),
@@ -125,7 +125,7 @@ export function CartTableWrapper({ ...props }: Props) {
       }),
       columnHelper.accessor("subtotal", {
         header: () => (
-          <span className="text-left uppercase font-medium text-body-small text-gray-500 flex flex-1">
+          <span className="flex flex-1 text-left text-body-small font-medium uppercase text-gray-500">
             Subtotal
           </span>
         ),
@@ -138,7 +138,7 @@ export function CartTableWrapper({ ...props }: Props) {
           const prefixedSubtotal = `${currencyPrefix}${productSubtotal}`;
 
           return (
-            <span className="font-normal text-body-medium text-gray-900">
+            <span className="text-body-medium font-normal text-gray-900">
               {prefixedSubtotal}
             </span>
           );

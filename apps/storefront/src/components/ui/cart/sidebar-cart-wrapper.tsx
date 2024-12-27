@@ -92,7 +92,7 @@ export function SidebarCartWrapper({
   return (
     <CartSheet {...sheetProps} open={isOpen} onOpenChange={setIsOpen}>
       <div className="relative">
-        <div className="absolute -top-2.5 left-3 size-5 rounded-full bg-primary text-white text-body-tiny font-normal flex flex-1 flex-row items-center justify-center">
+        <div className="absolute -top-2.5 left-3 flex size-5 flex-1 flex-row items-center justify-center rounded-full bg-primary text-body-tiny font-normal text-white">
           {cartProductsCount}
         </div>
         {sheetTrigger}
@@ -100,7 +100,7 @@ export function SidebarCartWrapper({
       <SheetContent className="flex flex-1 flex-col gap-y-4">
         <SheetHeader>{sheetTitle}</SheetHeader>
         {hasProducts ? (
-          <div className="flex h-full max-h-full flex-1 basis-full flex-col overflow-y-auto overflow-x-hidden pr-4 gap-y-2">
+          <div className="flex h-full max-h-full flex-1 basis-full flex-col gap-y-2 overflow-y-auto overflow-x-hidden pr-4">
             {lineItems.map(({ products, id, ...lineItem }) => (
               <React.Fragment key={id}>
                 {!!products ? (

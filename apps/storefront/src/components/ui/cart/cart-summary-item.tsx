@@ -12,9 +12,9 @@ export function CartSummaryItem({ label, value, className, ...props }: Props) {
       )}
       {...props}
     >
-      <span className="font-normal text-body-small text-gray-700">{label}</span>
-      <div className="flex flex-1 flex-row w-full justify-end">
-        <span className="font-medium text-body-small text-gray-900">
+      <span className="text-body-small font-normal text-gray-700">{label}</span>
+      <div className="flex w-full flex-1 flex-row justify-end">
+        <span className="text-body-small font-medium text-gray-900">
           {value}
         </span>
       </div>

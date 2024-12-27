@@ -68,12 +68,12 @@ export default async function Cart({
   return (
     <div className="flex flex-1 flex-col gap-y-8 px-6 py-8 xl:px-0">
       <div className="flex w-full flex-1 flex-col xl:items-center">
-        <div className="flex flex-1 flex-col w-full max-w-7xl gap-y-8">
-          <h5 className="font-semibold text-heading-5 text-gray-900 text-left">
+        <div className="flex w-full max-w-7xl flex-1 flex-col gap-y-8">
+          <h5 className="text-left text-heading-5 font-semibold text-gray-900">
             My Shopping Cart
           </h5>
-          <div className="flex flex-1 flex-col lg:flex-row gap-6">
-            <div className="flex md:hidden flex-1 flex-col gap-y-2 border border-gray-100 rounded-ten p-6">
+          <div className="flex flex-1 flex-col gap-6 lg:flex-row">
+            <div className="flex flex-1 flex-col gap-y-2 rounded-ten border border-gray-100 p-6 md:hidden">
               {hasLineItems ? (
                 <React.Fragment>
                   {lineItems.map(({ products: product, id, ...lineItem }) => (
@@ -115,10 +115,10 @@ export default async function Cart({
                 </span>
               )}
             </div>
-            <div className="hidden md:flex flex-1 flex-col w-full basis-2/3">
+            <div className="hidden w-full flex-1 basis-2/3 flex-col md:flex">
               <CartTableWrapper tableData={tableData} />
             </div>
-            <CartSummary className="flex flex-1 basis-1/3 w-full">
+            <CartSummary className="flex w-full flex-1 basis-1/3">
               {cartTotalSummary.map(
                 ({ currencySymbol, name, label, value }) => {
                   const parsedValue =

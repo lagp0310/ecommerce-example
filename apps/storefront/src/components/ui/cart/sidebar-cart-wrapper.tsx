@@ -24,6 +24,7 @@ import Link from "next/link";
 import isUUID from "validator/es/lib/isUUID";
 import { DeleteProductButton } from "@/components/ui/cart/delete-product-button";
 import { usePathname } from "next/navigation";
+import { lineItemsQuantityCounter } from "@/lib/utils";
 
 type Props = {
   sheetProps?: DialogProps;
@@ -80,9 +81,22 @@ export function SidebarCartWrapper({
     [pathname]
   );
 
+  const cartProductsCount = React.useMemo(
+    () =>
+      Array.isArray(lineItems)
+        ? lineItems.reduce(lineItemsQuantityCounter, 0)
+        : 0,
+    [lineItems]
+  );
+
   return (
     <CartSheet {...sheetProps} open={isOpen} onOpenChange={setIsOpen}>
-      {sheetTrigger}
+      <div className="relative">
+        <div className="absolute -top-2.5 left-3 size-5 rounded-full bg-primary text-white text-body-tiny font-normal flex flex-1 flex-row items-center justify-center">
+          {cartProductsCount}
+        </div>
+        {sheetTrigger}
+      </div>
       <SheetContent className="flex flex-1 flex-col gap-y-4">
         <SheetHeader>{sheetTitle}</SheetHeader>
         {hasProducts ? (

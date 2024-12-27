@@ -10,6 +10,7 @@ import {
   StoreHighlightIcon,
   defaultMaxProductPrice,
 } from "@/constants/constants";
+import type { Line_Items as LineItem } from "@/gql/graphql";
 import type { ProductsResponse, TProduct } from "@/types/types";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
@@ -176,4 +177,16 @@ export function getPricingSliderProps(
     defaultValue: [maxPrice ?? maxProductsPrice ?? defaultMaxProductPrice],
     max: maxProductsPrice,
   };
+}
+
+export function lineItemsQuantityCounter(previous: number, current: LineItem) {
+  const currentQuantity = parseInt(current.quantity);
+
+  if (!currentQuantity || isNaN(currentQuantity)) {
+    throw new Error(
+      `Number '${current.quantity}' could not be parsed to integer`
+    );
+  }
+
+  return previous + currentQuantity;
 }

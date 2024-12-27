@@ -17,6 +17,8 @@ import {
 import { ShoppingBagIcon } from "@heroicons/react/24/outline";
 import { CartProductActions } from "@/components/ui/cart/cart-product-actions";
 import { DeleteProductButton } from "@/components/ui/cart/delete-product-button";
+import Link from "next/link";
+import isURL from "validator/es/lib/isURL";
 
 type Props = { tableData: LineItemWithProduct[] };
 
@@ -34,10 +36,14 @@ export function CartTableWrapper({ ...props }: Props) {
           </span>
         ),
         cell: ({ row }) => {
-          const { name, imageUrl } = row.original.products;
-
-          return (
-            <div className="flex flex-1 flex-row gap-3 items-center">
+          const { name, imageUrl, slug } = row.original.products;
+          const hasSlug = typeof slug === "string" && slug.length > 0;
+          const productUrl = `/products/${slug}`;
+          const hasValidUrl =
+            hasSlug &&
+            isURL(productUrl, { require_host: false, require_protocol: false });
+          const productComponent = (
+            <React.Fragment>
               {typeof imageUrl === "string" ? (
                 <Image
                   src={imageUrl}
@@ -50,7 +56,24 @@ export function CartTableWrapper({ ...props }: Props) {
               <span className="font-normal text-body-medium text-gray-900">
                 {name}
               </span>
-            </div>
+            </React.Fragment>
+          );
+
+          return (
+            <React.Fragment>
+              {hasValidUrl ? (
+                <Link
+                  href={productUrl}
+                  className="flex flex-1 flex-row gap-3 items-center"
+                >
+                  {productComponent}
+                </Link>
+              ) : (
+                <div className="flex flex-1 flex-row gap-3 items-center">
+                  {productComponent}
+                </div>
+              )}
+            </React.Fragment>
           );
         },
       }),

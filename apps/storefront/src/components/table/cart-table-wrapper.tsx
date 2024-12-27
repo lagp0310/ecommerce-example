@@ -54,7 +54,7 @@ export function CartTableWrapper({ ...props }: Props) {
       }),
       columnHelper.accessor("price", {
         header: () => (
-          <span className="text-left uppercase font-medium text-body-small text-gray-500 flex-1">
+          <span className="text-left uppercase font-medium text-body-small text-gray-500 flex flex-1">
             Price
           </span>
         ),
@@ -96,7 +96,7 @@ export function CartTableWrapper({ ...props }: Props) {
       // FIXME: This does not update on quantity updates. We have to do a refresh.
       columnHelper.accessor("subtotal", {
         header: () => (
-          <span className="text-left uppercase font-medium text-body-small text-gray-500 flex-1">
+          <span className="text-left uppercase font-medium text-body-small text-gray-500 flex flex-1">
             Subtotal
           </span>
         ),

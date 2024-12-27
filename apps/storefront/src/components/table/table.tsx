@@ -43,7 +43,10 @@ export function Table({
     getCoreRowModel: getCoreRowModel(),
   });
 
-  const hasRows = React.useMemo(() => table.getRowCount() > 0, [table]);
+  const hasRows = React.useMemo(
+    () => tableData.length > 0 && table.getRowCount() > 0,
+    [table, tableData.length]
+  );
 
   return (
     <table {...tableProps}>

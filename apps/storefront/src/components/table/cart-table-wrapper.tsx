@@ -135,7 +135,7 @@ export function CartTableWrapper({ ...props }: Props) {
 
   const tableProps: TableProps = {
     className:
-      "rounded-ten border border-gray-100 border-separate border-spacing-6 w-full h-full",
+      "rounded-ten border border-gray-100 border-separate border-spacing-6 w-full",
   };
   const allTableProps: AllTableProps = {
     columns,

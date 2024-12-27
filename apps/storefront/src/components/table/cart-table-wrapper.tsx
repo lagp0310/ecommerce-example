@@ -3,18 +3,17 @@
 import React from "react";
 import {
   Table,
-  Props as AllTableProps,
-  type TableHeadProps,
+  type Props as AllTableProps,
   type TableProps,
 } from "@/components/table/table";
 import { createColumnHelper } from "@tanstack/react-table";
 import type { CartTableColumns, LineItemWithProduct } from "@/types/types";
 import Image from "next/image";
 import { defaultCurrencySymbol } from "@/constants/constants";
-import { AddToCartWrapper } from "../ui/product/add-to-cart-wrapper";
+import { AddToCartWrapper } from "@/components/ui/product/add-to-cart-wrapper";
 import { ShoppingBagIcon } from "@heroicons/react/24/outline";
-import { CartProductActions } from "../ui/cart/cart-product-actions";
-import { DeleteProductButton } from "../ui/cart/delete-product-button";
+import { CartProductActions } from "@/components/ui/cart/cart-product-actions";
+import { DeleteProductButton } from "@/components/ui/cart/delete-product-button";
 
 type Props = { defaultData: LineItemWithProduct[] };
 
@@ -137,13 +136,11 @@ export function CartTableWrapper({ ...props }: Props) {
 
   const tableProps: TableProps = {
     className:
-      "rounded-ten border border-gray-100 border-separate border-spacing-6 w-full",
+      "rounded-ten border border-gray-100 border-separate border-spacing-6 w-full h-full",
   };
-  const tableHeadProps: TableHeadProps = {};
   const allTableProps: AllTableProps = {
     columns,
     tableProps,
-    tableHeadProps,
     ...props,
   };
 

@@ -39,6 +39,8 @@ export function Table({
     getCoreRowModel: getCoreRowModel(),
   });
 
+  const hasRows = React.useMemo(() => table.getRowCount() > 0, [table]);
+
   return (
     <table {...tableProps}>
       <thead {...tableHeadProps}>
@@ -55,15 +57,25 @@ export function Table({
         ))}
       </thead>
       <tbody {...tableBodyProps}>
-        {table.getRowModel().rows.map(({ id, getVisibleCells }) => (
-          <tr key={id}>
-            {getVisibleCells().map(({ column, getContext, id }) => (
-              <td key={id}>
-                {flexRender(column.columnDef.cell, getContext())}
-              </td>
-            ))}
+        {hasRows ? (
+          table.getRowModel().rows.map(({ id, getVisibleCells }) => (
+            <tr key={id}>
+              {getVisibleCells().map(({ column, getContext, id }) => (
+                <td key={id}>
+                  {flexRender(column.columnDef.cell, getContext())}
+                </td>
+              ))}
+            </tr>
+          ))
+        ) : (
+          <tr>
+            <td className="flex flex-1 flex-row">
+              <span className="text-body-medium font-normal text-gray-900">
+                Your cart is currently empty.
+              </span>
+            </td>
           </tr>
-        ))}
+        )}
       </tbody>
       <tfoot {...tableFooterProps}>
         {table.getFooterGroups().map(({ headers, id }) => (

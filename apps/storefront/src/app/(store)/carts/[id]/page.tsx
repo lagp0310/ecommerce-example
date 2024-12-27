@@ -49,7 +49,7 @@ export default async function Cart({
   ];
 
   const hasLineItems = Array.isArray(lineItems) && lineItems.length > 0;
-  const defaultTableData = lineItems ?? [];
+  const tableData = lineItems ?? [];
 
   return (
     <div className="flex flex-1 flex-col gap-y-8 px-6 py-8 xl:px-0">
@@ -104,7 +104,7 @@ export default async function Cart({
               )}
             </div>
             <div className="hidden md:flex flex-1 flex-col w-full basis-2/3">
-              <CartTableWrapper defaultData={defaultTableData} />
+              <CartTableWrapper tableData={tableData} />
             </div>
             <CartSummary className="flex flex-1 basis-1/3 w-full">
               {cartTotalSummary.map(

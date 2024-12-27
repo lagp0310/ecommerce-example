@@ -15,7 +15,7 @@ import { ShoppingBagIcon } from "@heroicons/react/24/outline";
 import { CartProductActions } from "@/components/ui/cart/cart-product-actions";
 import { DeleteProductButton } from "@/components/ui/cart/delete-product-button";
 
-type Props = { defaultData: LineItemWithProduct[] };
+type Props = { tableData: LineItemWithProduct[] };
 
 export function CartTableWrapper({ ...props }: Props) {
   const columnHelper = React.useMemo(

@@ -15,7 +15,7 @@ export type TableFooterProps = React.HTMLProps<HTMLTableSectionElement>;
 
 export type Props<T = unknown> = {
   columns: ColumnDef<T, any>[];
-  defaultData: T[];
+  tableData: T[];
 } & {
   tableProps?: TableProps;
   tableHeadProps?: TableHeadProps;
@@ -25,13 +25,17 @@ export type Props<T = unknown> = {
 
 export function Table({
   columns,
-  defaultData,
+  tableData,
   tableProps,
   tableHeadProps,
   tableBodyProps,
   tableFooterProps,
 }: Props) {
-  const [data, setData] = React.useState(() => [...defaultData]);
+  const [data, setData] = React.useState(() => [...tableData]);
+
+  React.useEffect(() => {
+    setData(tableData);
+  }, [tableData]);
 
   const table = useReactTable({
     data,

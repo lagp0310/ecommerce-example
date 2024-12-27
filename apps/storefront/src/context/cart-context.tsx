@@ -167,6 +167,10 @@ export function CartContextProvider({ children, currentCart = null }: Props) {
             },
           });
           cartData = cartDataResponse;
+
+          const cartObject =
+            cartData?.insertIntoCartsCollection?.records?.at(0);
+          setCart(cartObject);
         }
 
         const cartId = cartData?.insertIntoCartsCollection?.records?.at(0)?.id;

@@ -7,6 +7,10 @@ import { queryGraphql } from "@/lib/server-query";
 import type { LineItemWithProduct } from "@/types/types";
 import React from "react";
 import { CartTableWrapper } from "@/components/table/cart-table-wrapper";
+import { BasicCartProduct } from "@/components/ui/cart/basic-cart-product";
+import { DeleteProductButton } from "@/components/ui/cart/delete-product-button";
+import { AddToCartWrapper } from "@/components/ui/product/add-to-cart-wrapper";
+import { ShoppingBagIcon } from "@heroicons/react/24/outline";
 
 export default async function Cart({
   params,
@@ -44,6 +48,9 @@ export default async function Cart({
     { name: "total", label: "Total", currencySymbol: "$", value: 90.0 },
   ];
 
+  const hasLineItems = Array.isArray(lineItems) && lineItems.length > 0;
+  const defaultTableData = lineItems ?? [];
+
   return (
     <div className="flex flex-1 flex-col gap-y-8 px-6 py-8 xl:px-0">
       <div className="flex w-full flex-1 flex-col xl:items-center">
@@ -52,8 +59,52 @@ export default async function Cart({
             My Shopping Cart
           </h5>
           <div className="flex flex-1 flex-col lg:flex-row gap-6">
-            <div className="flex flex-1 w-full basis-2/3">
-              <CartTableWrapper defaultData={lineItems ?? []} />
+            <div className="flex md:hidden flex-1 flex-col gap-y-2 border border-gray-100 rounded-ten p-6">
+              {hasLineItems ? (
+                <React.Fragment>
+                  {lineItems.map(({ products, id, ...lineItem }) => (
+                    <React.Fragment key={id}>
+                      {!!products ? (
+                        <div className="group/cart-product flex flex-col">
+                          <BasicCartProduct
+                            lineItem={{
+                              id,
+                              ...lineItem,
+                            }}
+                            product={products}
+                            actions={
+                              <React.Fragment>
+                                <AddToCartWrapper
+                                  counterWrapperClassName="flex"
+                                  product={products}
+                                  className="group flex flex-1 flex-row items-center justify-center gap-x-2 rounded-full bg-primary text-body-small font-semibold leading-6 text-white hover:border hover:border-primary hover:bg-white hover:text-primary disabled:cursor-not-allowed disabled:border-none disabled:opacity-50 disabled:transition-none disabled:hover:bg-primary disabled:hover:text-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
+                                  minusClassName="!p-2 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:border-gray-100 rounded-full border border-gray-100 p-4 flex flex-1 flex-row items-center justify-center group/minus-button hover:border-transparent hover:bg-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
+                                  moreClassName="!p-2 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:border-gray-100 rounded-full border border-gray-100 p-4 flex flex-1 flex-row items-center justify-center group/more-button hover:border-transparent hover:bg-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
+                                >
+                                  Add to Cart
+                                  <ShoppingBagIcon className="size-5 group-hover:text-primary group-disabled:text-white" />
+                                </AddToCartWrapper>
+                                <DeleteProductButton
+                                  className="group -mr-2 rounded-full border-none p-2 hover:bg-gray-100/50 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
+                                  lineItemId={id}
+                                />
+                              </React.Fragment>
+                            }
+                          />
+                          <div className="mt-1 w-full border-t border-gray-100/50 group-last/cart-product:hidden"></div>
+                        </div>
+                      ) : null}
+                    </React.Fragment>
+                  ))}
+                </React.Fragment>
+              ) : (
+                <span className="text-body-medium font-normal text-gray-900">
+                  Your cart is currently empty.
+                </span>
+              )}
+            </div>
+            <div className="hidden md:flex flex-1 flex-col w-full basis-2/3">
+              <CartTableWrapper defaultData={defaultTableData} />
             </div>
             <CartSummary className="flex flex-1 basis-1/3 w-full">
               {cartTotalSummary.map(

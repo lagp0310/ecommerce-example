@@ -113,6 +113,7 @@ export function CartTableWrapper({ ...props }: Props) {
             moreClassName:
               "!p-2 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:border-gray-100 rounded-full border border-gray-100 p-4 flex flex-1 flex-row items-center justify-center group/more-button hover:border-transparent hover:bg-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none",
             refreshAfterUpdate: true,
+            hideAddToCart: true,
           };
 
           return (

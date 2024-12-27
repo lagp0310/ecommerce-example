@@ -8,6 +8,7 @@ import type { TProduct } from "@/types/types";
 import { useCart } from "@/context/cart-context";
 import isUUID from "validator/es/lib/isUUID";
 import { cn } from "@/lib/utils";
+import { Skeleton } from "@/components/ui/common/skeleton";
 
 export type Props = Omit<React.HTMLProps<HTMLButtonElement>, "type"> & {
   type?: "button" | "reset" | "submit";
@@ -19,6 +20,7 @@ export type Props = Omit<React.HTMLProps<HTMLButtonElement>, "type"> & {
   minusClassName?: string;
   moreClassName?: string;
   refreshAfterUpdate?: boolean;
+  hideAddToCart?: boolean;
 };
 
 export function AddToCartWrapper({
@@ -30,6 +32,7 @@ export function AddToCartWrapper({
   minusClassName,
   moreClassName,
   refreshAfterUpdate = false,
+  hideAddToCart = false,
   ...buttonProps
 }: Props) {
   const { cart, lineItems, getCartLineItemId, handleAddToCart, isLoading } =
@@ -116,7 +119,14 @@ export function AddToCartWrapper({
         "w-full": !lineItemId,
       })}
     >
-      {!showCounter ? <Button {...allButtonProps}>{children}</Button> : null}
+      {!showCounter && !hideAddToCart ? (
+        <Button {...allButtonProps}>{children}</Button>
+      ) : null}
+      {!hasAllCounterProps && hideAddToCart ? (
+        <React.Fragment>
+          <Skeleton className="h-[30px] w-full" />
+        </React.Fragment>
+      ) : null}
       {hasAllCounterProps ? (
         // @ts-expect-error: lineItemId is validated above in hasAllCounterProps
         <Counter {...counterProps} />

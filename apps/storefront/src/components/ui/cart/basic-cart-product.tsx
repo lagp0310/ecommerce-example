@@ -32,20 +32,23 @@ export function BasicCartProduct({
   const onProductClick = !!toggleSidebar ? toggleSidebar : undefined;
 
   return (
-    <div className="flex flex-1 flex-row items-center gap-x-1">
+    <div className="flex flex-1 flex-row items-center gap-x-2">
       <Link
         href={`/products/${slug}`}
         className="flex flex-1 flex-row gap-x-1"
         onClick={onProductClick}
       >
-        <CartProduct {...props} className="flex flex-1 flex-row gap-4">
+        <CartProduct
+          {...props}
+          className="flex flex-1 flex-row gap-4 items-center"
+        >
           {typeof imageUrl === "string" ? (
             <Image
               src={imageUrl}
               alt={name}
               width={100}
               height={100}
-              className="h-auto w-20 max-w-20 rounded-ten"
+              className="h-auto w-10 min-[430px]:w-20 rounded-ten"
             />
           ) : null}
           <div className="flex flex-1 flex-col justify-center gap-1">

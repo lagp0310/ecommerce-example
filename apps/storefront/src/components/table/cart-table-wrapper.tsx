@@ -99,7 +99,6 @@ export function CartTableWrapper({ ...props }: Props) {
           );
         },
       }),
-      // FIXME: This does not update on quantity updates. We have to do a refresh.
       columnHelper.accessor("subtotal", {
         header: () => (
           <span className="text-left uppercase font-medium text-body-small text-gray-500 flex flex-1">

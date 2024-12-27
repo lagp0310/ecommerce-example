@@ -79,7 +79,7 @@ export function SidebarCartWrapper({
       <SheetContent className="flex flex-1 flex-col gap-y-4">
         <SheetHeader>{sheetTitle}</SheetHeader>
         {hasProducts ? (
-          <div className="flex h-full max-h-full flex-1 basis-full flex-col overflow-y-auto overflow-x-hidden pr-4">
+          <div className="flex h-full max-h-full flex-1 basis-full flex-col overflow-y-auto overflow-x-hidden pr-4 gap-y-2">
             {lineItems.map(({ products, id, ...lineItem }) => (
               <React.Fragment key={id}>
                 {!!products ? (
@@ -98,7 +98,7 @@ export function SidebarCartWrapper({
                         />
                       }
                     />
-                    <div className="w-full border-t border-gray-100/50 group-last/cart-product:hidden"></div>
+                    <div className="mt-1 w-full border-t border-gray-100/50 group-last/cart-product:hidden"></div>
                   </div>
                 ) : null}
               </React.Fragment>

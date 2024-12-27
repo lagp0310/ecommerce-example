@@ -32,7 +32,6 @@ export function NavigationLinksWrapper() {
   const navigationLinks: NavigationLink[] = React.useMemo(
     () => [
       {
-        groupName: "home",
         // title: "Home",
         content: (
           // <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
@@ -115,12 +114,12 @@ export function NavigationLinksWrapper() {
             href="/"
             legacyBehavior
             passHref
-            className="flex w-full flex-1 flex-row group-hover/home:rounded-md group-hover/home:bg-green-gray-100/50"
+            className="flex w-full flex-1 flex-row group-hover/menu-item:rounded-md group-hover/menu-item:bg-green-gray-100/50"
           >
             <NavigationMenuLink
               data-active={pathname === "/"}
               className={cn(
-                "flex flex-row justify-center gap-x-1 items-center text-body-small font-medium text-gray-500 hover:!text-gray-900 cursor-pointer data-[active=true]:text-gray-900 data-[active=true]:!bg-green-gray-100/50 data-[active=false]:!bg-white group-hover/home:!bg-green-gray-100/50 group-hover/home:!rounded-md",
+                "flex flex-row justify-center gap-x-1 items-center text-body-small font-medium text-gray-500 hover:!text-gray-900 cursor-pointer data-[active=true]:text-gray-900 data-[active=true]:!bg-green-gray-100/50 data-[active=false]:!bg-white group-hover/menu-item:!bg-green-gray-100/50 group-hover/menu-item:!rounded-md",
                 navigationMenuTriggerStyle()
               )}
             >
@@ -131,7 +130,6 @@ export function NavigationLinksWrapper() {
         // isDropdown: true,
       },
       {
-        groupName: "products",
         // title: "Products",
         content: (
           // <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
@@ -160,12 +158,12 @@ export function NavigationLinksWrapper() {
             href={`/products?page=1&perPage=${defaultProductsShowPerPage}&sortBy=${defaultSortBy}&sortByDirection=${defaultSortByDirection}`}
             legacyBehavior
             passHref
-            className="flex w-full flex-1 flex-row group-hover/products:rounded-md group-hover/products:bg-green-gray-100/50"
+            className="flex w-full flex-1 flex-row group-hover/menu-item:rounded-md group-hover/menu-item:bg-green-gray-100/50"
           >
             <NavigationMenuLink
               data-active={pathname === "/products"}
               className={cn(
-                "flex flex-row justify-center gap-x-1 items-center text-body-small font-medium text-gray-500 hover:!text-gray-900 cursor-pointer data-[active=true]:text-gray-900 data-[active=true]:!bg-green-gray-100/50 data-[active=false]:!bg-white group-hover/products:!bg-green-gray-100/50 group-hover/products:!rounded-md",
+                "flex flex-row justify-center gap-x-1 items-center text-body-small font-medium text-gray-500 hover:!text-gray-900 cursor-pointer data-[active=true]:text-gray-900 data-[active=true]:!bg-green-gray-100/50 data-[active=false]:!bg-white group-hover/menu-item:!bg-green-gray-100/50 group-hover/menu-item:!rounded-md",
                 navigationMenuTriggerStyle()
               )}
             >
@@ -176,18 +174,17 @@ export function NavigationLinksWrapper() {
         // isDropdown: true,
       },
       // {
-      //   groupName: "about-us",
       //   content: (
       //     <ClientLink
       //       href="/about-us"
       //       legacyBehavior
       //       passHref
-      //       className="flex w-full flex-1 flex-row group-hover/about-us:rounded-md group-hover/about-us:bg-green-gray-100/50"
+      //       className="flex w-full flex-1 flex-row group-hover/menu-item:rounded-md group-hover/menu-item:bg-green-gray-100/50"
       //     >
       //       <NavigationMenuLink
       //         data-active={pathname === "/about-us"}
       //         className={cn(
-      //           "flex flex-row justify-center gap-x-1 items-center text-body-small font-medium text-gray-500 hover:!text-gray-900 cursor-pointer data-[active=true]:text-gray-900 data-[active=true]:!bg-green-gray-100/50 data-[active=false]:!bg-white group-hover/about-us:!bg-green-gray-100/50 group-hover/about-us:!rounded-md",
+      //           "flex flex-row justify-center gap-x-1 items-center text-body-small font-medium text-gray-500 hover:!text-gray-900 cursor-pointer data-[active=true]:text-gray-900 data-[active=true]:!bg-green-gray-100/50 data-[active=false]:!bg-white group-hover/menu-item:!bg-green-gray-100/50 group-hover/menu-item:!rounded-md",
       //           navigationMenuTriggerStyle()
       //         )}
       //       >
@@ -202,26 +199,23 @@ export function NavigationLinksWrapper() {
 
   return (
     <React.Fragment>
-      {navigationLinks.map(
-        ({ content, title, groupName, isDropdown = false }, index) => (
-          <NavigationMenuItem
-            key={index}
-            // eslint-disable-next-line tailwindcss/no-custom-classname
-            className={`group/${groupName} flex flex-1 flex-row text-body-small font-medium hover:rounded-md motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none`}
-          >
-            {isDropdown ? (
-              <NavigationMenuTrigger className="cursor-pointer text-body-small font-medium text-gray-500 hover:!text-gray-900">
-                {title}
-              </NavigationMenuTrigger>
-            ) : null}
-            {isDropdown ? (
-              <NavigationMenuContent>{content}</NavigationMenuContent>
-            ) : (
-              content
-            )}
-          </NavigationMenuItem>
-        )
-      )}
+      {navigationLinks.map(({ content, title, isDropdown = false }, index) => (
+        <NavigationMenuItem
+          key={index}
+          className="group/menu-item flex flex-1 flex-row text-body-small font-medium hover:rounded-md motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
+        >
+          {isDropdown ? (
+            <NavigationMenuTrigger className="cursor-pointer text-body-small font-medium text-gray-500 hover:!text-gray-900">
+              {title}
+            </NavigationMenuTrigger>
+          ) : null}
+          {isDropdown ? (
+            <NavigationMenuContent>{content}</NavigationMenuContent>
+          ) : (
+            content
+          )}
+        </NavigationMenuItem>
+      ))}
     </React.Fragment>
   );
 }

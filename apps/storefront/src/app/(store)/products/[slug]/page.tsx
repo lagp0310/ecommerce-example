@@ -170,12 +170,15 @@ export default async function Product({
                 {description}
               </p>
             </div>
-            <div className="flex h-[45px] flex-row items-center gap-3 pb-5">
+            <div className="flex h-[30px] md:h-[45px] flex-row items-center gap-3 pb-5">
               {!!product ? (
                 <AddToCartWrapper
-                  wrapperClassName={"flex flex-row w-fit h-[45px]"}
+                  wrapperClassName={
+                    "flex flex-row w-fit h-[30px] md:h-[45px] mt-3 md:mt-0"
+                  }
+                  counterWrapperClassName="flex"
                   product={product}
-                  className="group flex h-[45px] flex-1 flex-row items-center justify-center gap-x-2 rounded-full bg-primary text-body-small font-semibold leading-6 text-white hover:border hover:border-primary hover:bg-white hover:text-primary disabled:cursor-not-allowed disabled:border-none disabled:opacity-50 disabled:transition-none disabled:hover:bg-primary disabled:hover:text-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
+                  className="group flex h-[30px] md:h-[45px] flex-1 flex-row items-center justify-center gap-x-2 rounded-full bg-primary text-body-small font-semibold leading-6 text-white hover:border hover:border-primary hover:bg-white hover:text-primary disabled:cursor-not-allowed disabled:border-none disabled:opacity-50 disabled:transition-none disabled:hover:bg-primary disabled:hover:text-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
                   minusClassName="disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:border-gray-100 rounded-full border border-gray-100 p-4 flex flex-1 flex-row items-center justify-center group/minus-button hover:border-transparent hover:bg-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
                   moreClassName="disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:border-gray-100 rounded-full border border-gray-100 p-4 flex flex-1 flex-row items-center justify-center group/more-button hover:border-transparent hover:bg-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
                 >

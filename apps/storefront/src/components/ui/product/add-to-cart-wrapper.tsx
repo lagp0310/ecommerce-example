@@ -81,7 +81,7 @@ export function AddToCartWrapper({
       ) : null}
       {hasAllCounterProps ? (
         <Counter
-          // @ts-expect-error: lineItemId is validated above
+          // @ts-expect-error: lineItemId is validated above in hasAllCounterProps
           lineItemId={lineItemId}
           product={product}
           className={cn(

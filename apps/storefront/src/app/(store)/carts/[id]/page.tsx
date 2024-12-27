@@ -87,6 +87,7 @@ export default async function Cart({
                                 <DeleteProductButton
                                   className="group -mr-2 rounded-full border-none p-2 hover:bg-gray-100/50 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
                                   lineItemId={id}
+                                  refreshAfterDelete
                                 />
                               </React.Fragment>
                             }

@@ -23,6 +23,7 @@ import { useToast } from "@/hooks/use-toast";
 import Link from "next/link";
 import isUUID from "validator/es/lib/isUUID";
 import { DeleteProductButton } from "@/components/ui/cart/delete-product-button";
+import { usePathname } from "next/navigation";
 
 type Props = {
   sheetProps?: DialogProps;
@@ -73,6 +74,12 @@ export function SidebarCartWrapper({
     openToasts?.forEach(({ id }) => dismiss(id, 100));
   }, [dismiss, isOpen, toasts]);
 
+  const pathname = usePathname();
+  const isCartPage = React.useMemo(
+    () => pathname.startsWith("/cart"),
+    [pathname]
+  );
+
   return (
     <CartSheet {...sheetProps} open={isOpen} onOpenChange={setIsOpen}>
       {sheetTrigger}
@@ -95,6 +102,7 @@ export function SidebarCartWrapper({
                         <DeleteProductButton
                           className="group -mr-2 rounded-full border-none p-2 hover:bg-gray-100/50 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
                           lineItemId={id}
+                          refreshAfterDelete={isCartPage}
                         />
                       }
                     />

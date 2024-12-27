@@ -9,6 +9,7 @@ import {
 } from "@/constants/constants";
 import { useCart } from "@/context/cart-context";
 import type { TProduct } from "@/types/types";
+import { useRouter } from "next/navigation";
 
 type Props = React.HTMLProps<HTMLDivElement> & {
   lineItemId: string;
@@ -21,6 +22,7 @@ type Props = React.HTMLProps<HTMLDivElement> & {
   moreChildren: React.ReactNode;
   minusClassName?: string;
   moreClassName?: string;
+  refreshAfterUpdate?: boolean;
 };
 
 export function Counter({
@@ -34,8 +36,11 @@ export function Counter({
   moreChildren,
   minusClassName,
   moreClassName,
+  refreshAfterUpdate = false,
   ...props
 }: Props) {
+  const router = useRouter();
+
   const { lineItems, handleUpdateQuantity, isLoading } = useCart();
 
   const [count, setCount] = React.useState(initialValue);
@@ -62,11 +67,15 @@ export function Counter({
 
         setCount(count);
         await handleUpdateQuantity(lineItemId, product, count);
+
+        if (refreshAfterUpdate) {
+          router.refresh();
+        }
       } catch (error) {
         console.error(error);
       }
     },
-    [handleUpdateQuantity, lineItemId, product]
+    [handleUpdateQuantity, lineItemId, product, refreshAfterUpdate, router]
   );
 
   const isMinusButtonDisabled = React.useMemo(

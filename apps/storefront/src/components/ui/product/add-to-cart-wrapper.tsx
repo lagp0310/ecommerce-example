@@ -18,6 +18,7 @@ type Props = Omit<React.HTMLProps<HTMLButtonElement>, "type"> & {
   countClassName?: string;
   minusClassName?: string;
   moreClassName?: string;
+  refreshAfterUpdate?: boolean;
 };
 
 export function AddToCartWrapper({
@@ -28,6 +29,7 @@ export function AddToCartWrapper({
   countClassName,
   minusClassName,
   moreClassName,
+  refreshAfterUpdate = false,
   ...buttonProps
 }: Props) {
   const { cart, lineItems, getCartLineItemId, handleAddToCart, isLoading } =
@@ -101,6 +103,7 @@ export function AddToCartWrapper({
           minusClassName={minusClassName}
           moreClassName={moreClassName}
           disabled={isActionDisabled}
+          refreshAfterUpdate={refreshAfterUpdate}
         />
       ) : null}
     </div>

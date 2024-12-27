@@ -9,7 +9,7 @@ import { useCart } from "@/context/cart-context";
 import isUUID from "validator/es/lib/isUUID";
 import { cn } from "@/lib/utils";
 
-type Props = Omit<React.HTMLProps<HTMLButtonElement>, "type"> & {
+export type Props = Omit<React.HTMLProps<HTMLButtonElement>, "type"> & {
   type?: "button" | "reset" | "submit";
 } & {
   wrapperClassName?: string;

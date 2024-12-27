@@ -10,7 +10,10 @@ import { BannerCountdownWrapper } from "@/components/ui/banner/banner-countdown-
 import { ProductTag } from "./product-tag";
 import { ProductPricing } from "./product-pricing";
 import Image from "next/image";
-import { AddToCartWrapper } from "@/components/ui/product/add-to-cart-wrapper";
+import {
+  AddToCartWrapper,
+  type Props as AddToCartWrapperProps,
+} from "@/components/ui/product/add-to-cart-wrapper";
 import { defaultCurrencySymbol } from "@/constants/constants";
 
 type Props = {
@@ -56,17 +59,21 @@ export function SummarizedProductCard({
   const allTags = generalTags?.concat(discountTags ?? []);
   const shouldShowTags =
     Array.isArray(allTags) && allTags.length > 0 && shouldShowProductTags;
+  const addToCartWrapperProps: AddToCartWrapperProps = {
+    product,
+    className:
+      "group flex h-[45px] w-full flex-1 flex-row items-center justify-center gap-x-2 rounded-full bg-primary text-body-small font-semibold leading-6 text-white hover:border hover:border-primary hover:bg-white hover:text-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none",
+    minusClassName:
+      "disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:border-gray-100 rounded-full border border-gray-100 p-2 flex flex-1 flex-row items-center justify-center group/minus-button hover:border-transparent hover:bg-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none",
+    moreClassName:
+      "disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:border-gray-100 rounded-full border border-gray-100 p-2 flex flex-1 flex-row items-center justify-center group/more-button hover:border-transparent hover:bg-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none",
+  };
   const productActions = (
     <div className="flex h-[45px] w-full flex-row items-center justify-center gap-x-2">
       {/* <Button className="group flex size-8 flex-row items-center justify-center rounded-full bg-gray-50 hover:bg-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none">
         <HeartIcon className="size-4 text-gray-900 group-hover:text-white" />
       </Button> */}
-      <AddToCartWrapper
-        product={product}
-        className="group flex h-[45px] w-full flex-1 flex-row items-center justify-center gap-x-2 rounded-full bg-primary text-body-small font-semibold leading-6 text-white hover:border hover:border-primary hover:bg-white hover:text-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
-        minusClassName="disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:border-gray-100 rounded-full border border-gray-100 p-2 flex flex-1 flex-row items-center justify-center group/minus-button hover:border-transparent hover:bg-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
-        moreClassName="disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:border-gray-100 rounded-full border border-gray-100 p-2 flex flex-1 flex-row items-center justify-center group/more-button hover:border-transparent hover:bg-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
-      >
+      <AddToCartWrapper {...addToCartWrapperProps}>
         Add to Cart
         <ShoppingBagIcon className="size-4 group-hover:text-primary group-disabled:group-hover:text-white" />
       </AddToCartWrapper>

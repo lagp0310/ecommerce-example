@@ -9,7 +9,10 @@ import React from "react";
 import { CartTableWrapper } from "@/components/table/cart-table-wrapper";
 import { BasicCartProduct } from "@/components/ui/cart/basic-cart-product";
 import { DeleteProductButton } from "@/components/ui/cart/delete-product-button";
-import { AddToCartWrapper } from "@/components/ui/product/add-to-cart-wrapper";
+import {
+  AddToCartWrapper,
+  type Props as AddToCartWrapperProps,
+} from "@/components/ui/product/add-to-cart-wrapper";
 import { ShoppingBagIcon } from "@heroicons/react/24/outline";
 
 export default async function Cart({
@@ -51,6 +54,16 @@ export default async function Cart({
   const hasLineItems = Array.isArray(lineItems) && lineItems.length > 0;
   const tableData = lineItems ?? [];
 
+  const addToCartWrapperProps: Partial<AddToCartWrapperProps> = {
+    counterWrapperClassName: "flex",
+    className:
+      "group flex flex-1 flex-row items-center justify-center gap-x-2 rounded-full bg-primary text-body-small font-semibold leading-6 text-white hover:border hover:border-primary hover:bg-white hover:text-primary disabled:cursor-not-allowed disabled:border-none disabled:opacity-50 disabled:transition-none disabled:hover:bg-primary disabled:hover:text-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none",
+    minusClassName:
+      "!p-2 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:border-gray-100 rounded-full border border-gray-100 p-4 flex flex-1 flex-row items-center justify-center group/minus-button hover:border-transparent hover:bg-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none",
+    moreClassName:
+      "!p-2 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:border-gray-100 rounded-full border border-gray-100 p-4 flex flex-1 flex-row items-center justify-center group/more-button hover:border-transparent hover:bg-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none",
+  };
+
   return (
     <div className="flex flex-1 flex-col gap-y-8 px-6 py-8 xl:px-0">
       <div className="flex w-full flex-1 flex-col xl:items-center">
@@ -62,24 +75,21 @@ export default async function Cart({
             <div className="flex md:hidden flex-1 flex-col gap-y-2 border border-gray-100 rounded-ten p-6">
               {hasLineItems ? (
                 <React.Fragment>
-                  {lineItems.map(({ products, id, ...lineItem }) => (
+                  {lineItems.map(({ products: product, id, ...lineItem }) => (
                     <React.Fragment key={id}>
-                      {!!products ? (
+                      {!!product ? (
                         <div className="group/cart-product flex flex-col">
                           <BasicCartProduct
                             lineItem={{
                               id,
                               ...lineItem,
                             }}
-                            product={products}
+                            product={product}
                             actions={
                               <React.Fragment>
                                 <AddToCartWrapper
-                                  counterWrapperClassName="flex"
-                                  product={products}
-                                  className="group flex flex-1 flex-row items-center justify-center gap-x-2 rounded-full bg-primary text-body-small font-semibold leading-6 text-white hover:border hover:border-primary hover:bg-white hover:text-primary disabled:cursor-not-allowed disabled:border-none disabled:opacity-50 disabled:transition-none disabled:hover:bg-primary disabled:hover:text-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
-                                  minusClassName="!p-2 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:border-gray-100 rounded-full border border-gray-100 p-4 flex flex-1 flex-row items-center justify-center group/minus-button hover:border-transparent hover:bg-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
-                                  moreClassName="!p-2 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:border-gray-100 rounded-full border border-gray-100 p-4 flex flex-1 flex-row items-center justify-center group/more-button hover:border-transparent hover:bg-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
+                                  {...addToCartWrapperProps}
+                                  product={product}
                                 >
                                   Add to Cart
                                   <ShoppingBagIcon className="size-5 group-hover:text-primary group-disabled:text-white" />

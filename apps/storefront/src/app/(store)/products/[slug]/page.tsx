@@ -6,7 +6,10 @@ import { SlideRenderer } from "@/components/carousel/slide-renderer";
 import { Section } from "@/components/ui/common/section";
 import { SectionContent } from "@/components/ui/common/section-content";
 import { SectionTitle } from "@/components/ui/common/section-title";
-import { AddToCartWrapper } from "@/components/ui/product/add-to-cart-wrapper";
+import {
+  AddToCartWrapper,
+  type Props as AddToCartWrapperProps,
+} from "@/components/ui/product/add-to-cart-wrapper";
 import { BasicProductCard } from "@/components/ui/product/basic-product-card";
 import { ProductPricing } from "@/components/ui/product/product-pricing";
 import { ProductTag } from "@/components/ui/product/product-tag";
@@ -91,6 +94,17 @@ export default async function Product({
   );
   const relatedProducts = parseProductTags(relatedProductsResult);
 
+  const addToCartWrapperProps: Partial<AddToCartWrapperProps> = {
+    wrapperClassName: "flex flex-row w-fit h-[30px] md:h-[45px] mt-3 md:mt-0",
+    counterWrapperClassName: "flex",
+    className:
+      "group flex h-[30px] md:h-[45px] flex-1 flex-row items-center justify-center gap-x-2 rounded-full bg-primary text-body-small font-semibold leading-6 text-white hover:border hover:border-primary hover:bg-white hover:text-primary disabled:cursor-not-allowed disabled:border-none disabled:opacity-50 disabled:transition-none disabled:hover:bg-primary disabled:hover:text-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none",
+    minusClassName:
+      "disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:border-gray-100 rounded-full border border-gray-100 p-4 flex flex-1 flex-row items-center justify-center group/minus-button hover:border-transparent hover:bg-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none",
+    moreClassName:
+      "disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:border-gray-100 rounded-full border border-gray-100 p-4 flex flex-1 flex-row items-center justify-center group/more-button hover:border-transparent hover:bg-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none",
+  };
+
   return (
     <div className="flex flex-1 flex-col items-center">
       <div className="flex max-w-7xl flex-1 flex-col px-6 py-8 xl:px-0">
@@ -172,16 +186,7 @@ export default async function Product({
             </div>
             <div className="flex h-[30px] md:h-[45px] flex-row items-center gap-3 pb-5">
               {!!product ? (
-                <AddToCartWrapper
-                  wrapperClassName={
-                    "flex flex-row w-fit h-[30px] md:h-[45px] mt-3 md:mt-0"
-                  }
-                  counterWrapperClassName="flex"
-                  product={product}
-                  className="group flex h-[30px] md:h-[45px] flex-1 flex-row items-center justify-center gap-x-2 rounded-full bg-primary text-body-small font-semibold leading-6 text-white hover:border hover:border-primary hover:bg-white hover:text-primary disabled:cursor-not-allowed disabled:border-none disabled:opacity-50 disabled:transition-none disabled:hover:bg-primary disabled:hover:text-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
-                  minusClassName="disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:border-gray-100 rounded-full border border-gray-100 p-4 flex flex-1 flex-row items-center justify-center group/minus-button hover:border-transparent hover:bg-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
-                  moreClassName="disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:border-gray-100 rounded-full border border-gray-100 p-4 flex flex-1 flex-row items-center justify-center group/more-button hover:border-transparent hover:bg-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
-                >
+                <AddToCartWrapper {...addToCartWrapperProps} product={product}>
                   Add to Cart
                   <ShoppingBagIcon className="size-5 group-hover:text-primary group-disabled:text-white" />
                 </AddToCartWrapper>

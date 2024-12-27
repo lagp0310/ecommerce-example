@@ -8,7 +8,10 @@ import { ProductTag } from "@/components/ui/product/product-tag";
 import { ProductPricing } from "@/components/ui/product/product-pricing";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
-import { AddToCartWrapper } from "@/components/ui/product/add-to-cart-wrapper";
+import {
+  AddToCartWrapper,
+  type Props as AddToCartWrapperProps,
+} from "@/components/ui/product/add-to-cart-wrapper";
 import type { TProduct } from "@/types/types";
 import { defaultCurrencySymbol } from "@/constants/constants";
 
@@ -114,6 +117,17 @@ export function BasicProductCard({
     </ProductCard>
   );
 
+  const addToCartWrapperProps: AddToCartWrapperProps = {
+    product,
+    className:
+      "group flex size-8 flex-row items-center justify-center rounded-full bg-gray-50 hover:bg-primary disabled:cursor-not-allowed disabled:opacity-50 disabled:transition-none disabled:hover:bg-gray-50 motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none",
+    counterWrapperClassName: "gap-2",
+    minusClassName:
+      "disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:border-gray-100 rounded-full border border-gray-100 p-2 flex flex-1 flex-row items-center justify-center group/minus-button hover:border-transparent hover:bg-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none",
+    moreClassName:
+      "disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:border-gray-100 rounded-full border border-gray-100 p-2 flex flex-1 flex-row items-center justify-center group/more-button hover:border-transparent hover:bg-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none",
+  };
+
   return (
     <React.Fragment>
       {shouldUseNextLink ? (
@@ -127,13 +141,7 @@ export function BasicProductCard({
             {productNode}
           </ClientLink>
           <div className="absolute bottom-4 right-3 flex-1 flex-row items-center justify-end">
-            <AddToCartWrapper
-              product={product}
-              className="group flex size-8 flex-row items-center justify-center rounded-full bg-gray-50 hover:bg-primary disabled:cursor-not-allowed disabled:opacity-50 disabled:transition-none disabled:hover:bg-gray-50 motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
-              counterWrapperClassName="gap-2"
-              minusClassName="disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:border-gray-100 rounded-full border border-gray-100 p-2 flex flex-1 flex-row items-center justify-center group/minus-button hover:border-transparent hover:bg-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
-              moreClassName="disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:border-gray-100 rounded-full border border-gray-100 p-2 flex flex-1 flex-row items-center justify-center group/more-button hover:border-transparent hover:bg-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
-            >
+            <AddToCartWrapper {...addToCartWrapperProps}>
               <ShoppingBagIcon className="size-4 text-gray-900 group-hover:text-white group-disabled:group-hover:text-gray-900" />
             </AddToCartWrapper>
           </div>

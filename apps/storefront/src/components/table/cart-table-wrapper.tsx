@@ -10,7 +10,10 @@ import { createColumnHelper } from "@tanstack/react-table";
 import type { CartTableColumns, LineItemWithProduct } from "@/types/types";
 import Image from "next/image";
 import { defaultCurrencySymbol } from "@/constants/constants";
-import { AddToCartWrapper } from "@/components/ui/product/add-to-cart-wrapper";
+import {
+  AddToCartWrapper,
+  type Props as AddToCartWrapperProps,
+} from "@/components/ui/product/add-to-cart-wrapper";
 import { ShoppingBagIcon } from "@heroicons/react/24/outline";
 import { CartProductActions } from "@/components/ui/cart/cart-product-actions";
 import { DeleteProductButton } from "@/components/ui/cart/delete-product-button";
@@ -78,16 +81,19 @@ export function CartTableWrapper({ ...props }: Props) {
         ),
         cell: ({ row }) => {
           const product = row.original.products;
+          const addToCartWrapperProps: Partial<AddToCartWrapperProps> = {
+            counterWrapperClassName: "flex gap-2 w-fit",
+            className:
+              "group flex size-8 flex-1 flex-row items-center justify-center gap-x-2 rounded-full bg-primary text-body-small font-semibold leading-6 text-white hover:border hover:border-primary hover:bg-white hover:text-primary disabled:cursor-not-allowed disabled:border-none disabled:opacity-50 disabled:transition-none disabled:hover:bg-primary disabled:hover:text-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none",
+            minusClassName:
+              "!p-2 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:border-gray-100 rounded-full border border-gray-100 p-4 flex flex-1 flex-row items-center justify-center group/minus-button hover:border-transparent hover:bg-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none",
+            moreClassName:
+              "!p-2 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:border-gray-100 rounded-full border border-gray-100 p-4 flex flex-1 flex-row items-center justify-center group/more-button hover:border-transparent hover:bg-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none",
+            refreshAfterUpdate: true,
+          };
 
           return (
-            <AddToCartWrapper
-              product={product}
-              counterWrapperClassName="flex gap-2 w-fit"
-              className="group flex size-8 flex-1 flex-row items-center justify-center gap-x-2 rounded-full bg-primary text-body-small font-semibold leading-6 text-white hover:border hover:border-primary hover:bg-white hover:text-primary disabled:cursor-not-allowed disabled:border-none disabled:opacity-50 disabled:transition-none disabled:hover:bg-primary disabled:hover:text-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
-              minusClassName="!p-2 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:border-gray-100 rounded-full border border-gray-100 p-4 flex flex-1 flex-row items-center justify-center group/minus-button hover:border-transparent hover:bg-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
-              moreClassName="!p-2 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:border-gray-100 rounded-full border border-gray-100 p-4 flex flex-1 flex-row items-center justify-center group/more-button hover:border-transparent hover:bg-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
-              refreshAfterUpdate
-            >
+            <AddToCartWrapper {...addToCartWrapperProps} product={product}>
               <ShoppingBagIcon className="size-4 text-gray-900 group-hover:text-white group-disabled:group-hover:text-gray-900" />
             </AddToCartWrapper>
           );

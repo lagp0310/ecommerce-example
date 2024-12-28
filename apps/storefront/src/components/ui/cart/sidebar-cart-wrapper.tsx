@@ -28,6 +28,9 @@ import isUUID from "validator/es/lib/isUUID";
 import { DeleteProductButton } from "@/components/ui/cart/delete-product-button";
 import { usePathname } from "next/navigation";
 import { lineItemsQuantityCounter } from "@/lib/utils";
+import { CartSummary } from "@/components/ui/cart/cart-summary";
+import { CartSummaryItem } from "@/components/ui/cart/cart-summary-item";
+import type { CartSummaryField } from "@/types/types";
 
 type Props = {
   sheetProps?: DialogProps;
@@ -53,7 +56,7 @@ export function SidebarCartWrapper({
   sheetTitle = <SheetTitle className="text-left">My Shopping Cart</SheetTitle>,
   ...sheetProps
 }: Props) {
-  const { cart, lineItems } = useCart();
+  const { cart, lineItems, cartSummary } = useCart();
   const cartId = React.useMemo(
     () => (typeof cart?.id === "string" && isUUID(cart.id) ? cart.id : null),
     [cart?.id]
@@ -90,6 +93,41 @@ export function SidebarCartWrapper({
         ? lineItems.reduce(lineItemsQuantityCounter, 0)
         : 0,
     [lineItems]
+  );
+
+  const cartTotalSummary: CartSummaryField[] = React.useMemo(
+    () => [
+      {
+        name: "subtotal",
+        label: "Subtotal",
+        currencySymbol: "$",
+        value: cartSummary.subtotal,
+      },
+      {
+        name: "shipping",
+        label: "Shipping",
+        currencySymbol: "$",
+        value: cartSummary.shipping,
+      },
+      {
+        name: "taxes",
+        label: "Taxes",
+        currencySymbol: "$",
+        value: cartSummary.taxes,
+      },
+      {
+        name: "total",
+        label: "Total",
+        currencySymbol: "$",
+        value: cartSummary.total,
+      },
+    ],
+    [
+      cartSummary.shipping,
+      cartSummary.subtotal,
+      cartSummary.taxes,
+      cartSummary.total,
+    ]
   );
 
   return (
@@ -139,7 +177,26 @@ export function SidebarCartWrapper({
           </span>
         )}
         <SheetFooter className="flex flex-1 basis-1/4 flex-col items-center gap-y-2 sm:flex-col sm:justify-end md:gap-y-4">
-          <div className="w-full border-t border-gray-100/50"></div>
+          <CartSummary
+            className="flex w-full flex-1 basis-1/3 border-none max-h-fit top-0 p-0 gap-y-0"
+            sectionTitle={null}
+          >
+            <div className="w-full border-t border-gray-100/50"></div>
+            {cartTotalSummary?.map(({ currencySymbol, name, label, value }) => {
+              const parsedValue =
+                typeof value === "number" ? value.toFixed(2).toString() : value;
+              const valuePrefix =
+                typeof currencySymbol === "string" ? currencySymbol : null;
+
+              return (
+                <CartSummaryItem
+                  key={name}
+                  label={label}
+                  value={`${valuePrefix ?? ""}${parsedValue}`}
+                />
+              );
+            })}
+          </CartSummary>
           {!!cartId ? (
             <React.Fragment>
               <Link

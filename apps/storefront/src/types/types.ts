@@ -185,3 +185,9 @@ export type CartSummaryField = {
   currencySymbol: string;
   value: string | number;
 };
+export type CartSummary = {
+  subtotal: number;
+  shipping: number;
+  taxes: number;
+  total: number;
+};

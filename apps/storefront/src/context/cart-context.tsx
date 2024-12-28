@@ -17,15 +17,22 @@ import {
   deleteLineItems,
   updateLineItems,
 } from "@/gql/mutations/line-item/mutations";
-import type { TProduct } from "@/types/types";
+import type {
+  CartSummary,
+  GetCartSummaryResponse,
+  TProduct,
+} from "@/types/types";
 import isUUID from "validator/es/lib/isUUID";
 import { getCart as getCartQuery } from "@/gql/queries/cart/queries";
 import { allLineItems } from "@/gql/queries/line-item/queries";
 import { useToast } from "@/hooks/use-toast";
+import { dataProviderClient } from "@/providers/data/data-provider.client";
+import { initialCartSummary } from "@/constants/cart/constants";
 
 type CartContext = {
   cart: Cart | null;
   lineItems: LineItem[];
+  cartSummary: CartSummary;
   getCartLineItemId: (productId: string) => string | null;
   handleAddToCart: (product: TProduct) => Promise<void>;
   handleUpdateQuantity: (
@@ -47,6 +54,7 @@ type CartContext = {
 const CartContext = React.createContext<CartContext>({
   cart: null,
   lineItems: [],
+  cartSummary: initialCartSummary,
   getCartLineItemId: () => {
     return null;
   },
@@ -79,6 +87,8 @@ export function CartContextProvider({ children, currentCart = null }: Props) {
   const { toast } = useToast();
   const [cart, setCart] = React.useState(currentCart);
   const [lineItems, setLineItems] = React.useState<LineItem[]>([]);
+  const [summaryData, setSummaryData] =
+    React.useState<CartSummary>(initialCartSummary);
   const [getCart] = useLazyQuery(getCartQuery);
   const [getLineItems] = useLazyQuery(allLineItems);
   React.useEffect(() => {
@@ -118,6 +128,32 @@ export function CartContextProvider({ children, currentCart = null }: Props) {
         )
         .catch((error) => {
           throw new Error(error);
+        });
+
+      dataProviderClient
+        .rpc("get_cart_summary_data", {
+          cart_id: cartId,
+        })
+        .then(({ data, error }) => {
+          if (error) {
+            throw new Error(error?.message);
+          }
+          if (!data) {
+            throw new Error("Summary cart data is empty");
+          }
+
+          const {
+            subtotal_result,
+            shipping_result,
+            taxes_result,
+            total_result,
+          } = data as GetCartSummaryResponse;
+          setSummaryData({
+            subtotal: subtotal_result,
+            shipping: shipping_result,
+            taxes: taxes_result,
+            total: total_result,
+          });
         });
     }
   }, [cart, getCart, getLineItems]);
@@ -300,6 +336,7 @@ export function CartContextProvider({ children, currentCart = null }: Props) {
     () => ({
       cart,
       lineItems,
+      cartSummary: summaryData,
       getCartLineItemId,
       handleAddToCart,
       handleUpdateQuantity,
@@ -314,6 +351,7 @@ export function CartContextProvider({ children, currentCart = null }: Props) {
     [
       cart,
       lineItems,
+      summaryData,
       getCartLineItemId,
       handleAddToCart,
       handleUpdateQuantity,

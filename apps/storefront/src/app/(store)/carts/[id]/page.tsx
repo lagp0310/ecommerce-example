@@ -4,7 +4,11 @@ import type { Carts as CartResponse } from "@/gql/graphql";
 import { getCart as getCartQuery } from "@/gql/queries/cart/queries";
 import { allLineItems } from "@/gql/queries/line-item/queries";
 import { queryGraphql } from "@/lib/server-query";
-import type { LineItemWithProduct } from "@/types/types";
+import type {
+  CartSummaryField,
+  GetCartSummaryResponse,
+  LineItemWithProduct,
+} from "@/types/types";
 import React from "react";
 import { CartTableWrapper } from "@/components/table/cart-table-wrapper";
 import {
@@ -17,6 +21,7 @@ import {
   type Props as AddToCartWrapperProps,
 } from "@/components/ui/product/add-to-cart-wrapper";
 import { ShoppingBagIcon } from "@heroicons/react/24/outline";
+import { callDatabaseFunction } from "@/lib/call-database-function";
 
 export default async function Cart({
   params,
@@ -25,7 +30,7 @@ export default async function Cart({
 }) {
   const { id: cartId } = await params;
   // FIXME: The user should have permissions to get this cart.
-  const [cart, lineItems] = await Promise.all([
+  const [cart, lineItems, cartSummary] = await Promise.all([
     queryGraphql<CartResponse>(
       "cartsCollection",
       getCartQuery,
@@ -43,15 +48,36 @@ export default async function Cart({
       },
       "no-cache"
     ),
+    callDatabaseFunction<GetCartSummaryResponse>("get_cart_summary_data", {
+      cart_id: cartId,
+    }),
   ]);
 
-  // TODO: Get summarized data from backend.
-  // TODO: Type for this.
-  const cartTotalSummary = [
-    { name: "subtotal", label: "Subtotal", currencySymbol: "$", value: 84.0 },
-    { name: "shipping", label: "Shipping", currencySymbol: "$", value: 0.0 },
-    { name: "taxes", label: "Taxes", currencySymbol: "$", value: 6.0 },
-    { name: "total", label: "Total", currencySymbol: "$", value: 90.0 },
+  const cartTotalSummary: CartSummaryField[] = [
+    {
+      name: "subtotal",
+      label: "Subtotal",
+      currencySymbol: "$",
+      value: cartSummary?.subtotal_result ?? 0,
+    },
+    {
+      name: "shipping",
+      label: "Shipping",
+      currencySymbol: "$",
+      value: cartSummary?.shipping_result ?? 0,
+    },
+    {
+      name: "taxes",
+      label: "Taxes",
+      currencySymbol: "$",
+      value: cartSummary?.taxes_result ?? 0,
+    },
+    {
+      name: "total",
+      label: "Total",
+      currencySymbol: "$",
+      value: cartSummary?.total_result ?? 0,
+    },
   ];
 
   const hasLineItems = Array.isArray(lineItems) && lineItems.length > 0;

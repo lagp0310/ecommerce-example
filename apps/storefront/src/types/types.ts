@@ -172,3 +172,16 @@ export type CartTableColumns = LineItemWithProduct & {
   subtotal: number;
   actions: React.ReactNode;
 };
+
+export type GetCartSummaryResponse = {
+  subtotal_result: number;
+  shipping_result: number;
+  taxes_result: number;
+  total_result: number;
+};
+export type CartSummaryField = {
+  name: "subtotal" | "shipping" | "taxes" | "total";
+  label: string;
+  currencySymbol: string;
+  value: string | number;
+};

@@ -12,11 +12,7 @@ import {
 } from "./navigation-menu";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-import {
-  defaultProductsShowPerPage,
-  defaultSortBy,
-  defaultSortByDirection,
-} from "@/constants/constants";
+import { defaultProductsSearchParams } from "@/constants/product/constants";
 
 export function NavigationLinksWrapper() {
   const pathname = usePathname();
@@ -48,7 +44,7 @@ export function NavigationLinksWrapper() {
           //     </NavigationMenuLink>
           //   </li>
           //   <ListItem
-          //     href={`/products?page=1&perPage=${defaultProductsShowPerPage}&sortBy=${defaultSortBy}&sortByDirection=${defaultSortByDirection}`}
+          //     href={`/products?${defaultProductsSearchParams.toString()}`}
           //     title="Products"
           //     className="relative z-10 hover:bg-green-gray-900/65 hover:text-white"
           //     backgroundImage={
@@ -146,7 +142,7 @@ export function NavigationLinksWrapper() {
           //   ))}
           // </ul>
           <ClientLink
-            href={`/products?page=1&perPage=${defaultProductsShowPerPage}&sortBy=${defaultSortBy}&sortByDirection=${defaultSortByDirection}`}
+            href={`/products?${defaultProductsSearchParams.toString()}`}
             legacyBehavior
             passHref
             className="flex w-full flex-1 flex-row group-hover/menu-item:rounded-md group-hover/menu-item:bg-green-gray-100/50"

@@ -20,11 +20,11 @@ import { ProductTitle } from "@/components/ui/product/product-title";
 import { Rating } from "@/components/ui/product/rating";
 import {
   defaultCurrencySymbol,
-  defaultProductsShowPerPage,
   defaultSortBy,
   defaultSortByDirection,
 } from "@/constants/constants";
 import {
+  defaultProductsSearchParams,
   relatedProductsCarouselProviderProps,
   relatedProductsCarouselRendererProps,
   relatedProductsToShow,
@@ -206,7 +206,7 @@ export default async function Product({
             </h2>
             <div className="flex flex-1 flex-row justify-end">
               <Link
-                href={`/products?page=1&perPage=${defaultProductsShowPerPage}&sortBy=${defaultSortBy}&sortByDirection=${defaultSortByDirection}`}
+                href={`/products?${defaultProductsSearchParams.toString()}`}
                 className="flex flex-row items-center justify-end gap-x-2 text-body-medium font-medium text-primary"
               >
                 View All

@@ -13,12 +13,7 @@ import { SectionTitle } from "@/components/ui/common/section-title";
 import { StoreHighlight } from "@/components/ui/store/store-highlight";
 import { StoreHighlights } from "@/components/ui/store/store-highlights";
 import { SummarizedProductCard } from "@/components/ui/product/summarized-product-card";
-import {
-  defaultProductsShowPerPage,
-  defaultSortBy,
-  defaultSortByDirection,
-  StoreHighlightIcon,
-} from "@/constants/constants";
+import { StoreHighlightIcon } from "@/constants/constants";
 import discountBanner from "@/public/images/discount-banner.png";
 import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
@@ -66,6 +61,7 @@ import type {
   ProductsResponse,
   StoreFeatureResponse,
 } from "@/types/types";
+import { defaultProductsSearchParams } from "@/constants/product/constants";
 
 export default async function Home() {
   const [
@@ -196,7 +192,7 @@ export default async function Home() {
               </h2>
               <div className="flex flex-1 flex-row justify-end">
                 <Link
-                  href={`/products?page=1&perPage=${defaultProductsShowPerPage}&sortBy=${defaultSortBy}&sortByDirection=${defaultSortByDirection}`}
+                  href={`/products?${defaultProductsSearchParams.toString()}`}
                   className="flex flex-row items-center justify-end gap-x-2 text-body-medium font-medium text-primary"
                 >
                   View All
@@ -208,34 +204,41 @@ export default async function Home() {
           <SectionContent className="w-full max-w-7xl md:grid md:grid-cols-4 md:gap-6 lg:grid-cols-6">
             <CarouselProvider {...categoriesCarouselProviderProps}>
               <CarouselRenderer {...categoriesCarouselRendererProps}>
-                {categories?.map(({ id, name, imageUrl }, index) => (
-                  <SlideRenderer
-                    key={id}
-                    index={index}
-                    innerClassName="px-1 mx-auto"
-                    mobileMediaQuery="(max-width: 768px)"
-                  >
-                    <CategoryCard
-                      url={`/products?page=1&perPage=${defaultProductsShowPerPage}&sortBy=${defaultSortBy}&sortByDirection=${defaultSortByDirection}&categories=${id}`}
-                      className="flex flex-1 flex-col items-center justify-center gap-y-1.5 rounded-[5px] border border-gray-100 bg-white pb-6 pt-4 hover:border-soft-primary/45 hover:shadow-[0px_0px_12px_0px_rgba(132,209,135,0.32)] hover:shadow-soft-primary/60 motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none md:gap-y-4"
+                {categories?.map(({ id, name, imageUrl }, index) => {
+                  const categoriesSearchParams = new URLSearchParams(
+                    defaultProductsSearchParams
+                  );
+                  categoriesSearchParams.set("categories", id);
+
+                  return (
+                    <SlideRenderer
+                      key={id}
+                      index={index}
+                      innerClassName="px-1 mx-auto"
+                      mobileMediaQuery="(max-width: 768px)"
                     >
-                      {typeof imageUrl === "string" ? (
-                        <Image
-                          src={imageUrl}
-                          alt={name}
-                          width={180}
-                          height={130}
-                          quality={100}
-                          sizes="100vw"
-                          className="h-[130px] w-full object-contain"
-                        />
-                      ) : null}
-                      <span className="truncate whitespace-break-spaces text-center text-body-small font-medium text-gray-900 md:text-body-large">
-                        {name}
-                      </span>
-                    </CategoryCard>
-                  </SlideRenderer>
-                ))}
+                      <CategoryCard
+                        url={`/products?${categoriesSearchParams.toString()}`}
+                        className="flex flex-1 flex-col items-center justify-center gap-y-1.5 rounded-[5px] border border-gray-100 bg-white pb-6 pt-4 hover:border-soft-primary/45 hover:shadow-[0px_0px_12px_0px_rgba(132,209,135,0.32)] hover:shadow-soft-primary/60 motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none md:gap-y-4"
+                      >
+                        {typeof imageUrl === "string" ? (
+                          <Image
+                            src={imageUrl}
+                            alt={name}
+                            width={180}
+                            height={130}
+                            quality={100}
+                            sizes="100vw"
+                            className="h-[130px] w-full object-contain"
+                          />
+                        ) : null}
+                        <span className="truncate whitespace-break-spaces text-center text-body-small font-medium text-gray-900 md:text-body-large">
+                          {name}
+                        </span>
+                      </CategoryCard>
+                    </SlideRenderer>
+                  );
+                })}
               </CarouselRenderer>
               <DotsRenderer mobileMediaQuery="(max-width: 768px)">
                 <DefaultDotGroup
@@ -289,7 +292,7 @@ export default async function Home() {
                   </h2>
                   <div className="flex flex-1 flex-row justify-end">
                     <Link
-                      href={`/products?page=1&perPage=${defaultProductsShowPerPage}&sortBy=${defaultSortBy}&sortByDirection=${defaultSortByDirection}`}
+                      href={`/products?${defaultProductsSearchParams.toString()}`}
                       className="flex flex-row items-center justify-end gap-x-2 text-body-medium font-medium text-primary"
                     >
                       View All
@@ -367,7 +370,7 @@ export default async function Home() {
                   Free Shipping and 30 days money-back guarantee.
                 </p>
                 <Link
-                  href={`/products?page=1&perPage=${defaultProductsShowPerPage}&sortBy=${defaultSortBy}&sortByDirection=${defaultSortByDirection}`}
+                  href={`/products?${defaultProductsSearchParams.toString()}`}
                   className="group flex max-w-fit flex-row items-center gap-x-2 rounded-full bg-primary px-5 py-3 text-body-small font-semibold leading-[120%] text-white hover:bg-white hover:text-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none md:text-body-medium"
                 >
                   Shop now{" "}

@@ -12,9 +12,6 @@ import type {
   CarouselRendererProps,
 } from "@/types/types";
 import {
-  defaultProductsShowPerPage,
-  defaultSortBy,
-  defaultSortByDirection,
   defaultSlideHeight,
   defaultSlideWidth,
   defaultCarouselInterval,
@@ -28,6 +25,7 @@ import { BannerCountdownWrapper } from "@/components/ui/banner/banner-countdown-
 import firstOfferBanner from "@/public/images/first-offer-banner.png";
 import secondOfferBanner from "@/public/images/second-offer-banner.png";
 import thirdOfferBanner from "@/public/images/third-offer-banner.png";
+import { defaultProductsSearchParams } from "../product/constants";
 
 export const storeHighlightsToShow = 4;
 export const popularProductsToShow = 10;
@@ -97,7 +95,7 @@ export const headerBanners = [
         </span>
       </div>
       <ClientLink
-        href={`/products?page=1&perPage=${defaultProductsShowPerPage}&sortBy=${defaultSortBy}&sortByDirection=${defaultSortByDirection}`}
+        href={`/products?${defaultProductsSearchParams.toString()}`}
         className="group flex max-w-fit flex-row items-center gap-x-2 rounded-full bg-white px-5 py-3 text-body-small font-semibold leading-[120%] text-primary hover:bg-primary hover:text-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none md:text-body-medium"
       >
         Shop now
@@ -126,7 +124,7 @@ export const headerBanners = [
         Only Fruits and Vegetables
       </span>
       <ClientLink
-        href={`/products?page=1&perPage=${defaultProductsShowPerPage}&sortBy=${defaultSortBy}&sortByDirection=${defaultSortByDirection}`}
+        href={`/products?${defaultProductsSearchParams.toString()}`}
         className="group flex max-w-fit flex-row items-center gap-x-2 rounded-full bg-primary px-5 py-3 text-body-small font-semibold leading-[120%] text-white hover:bg-white hover:text-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none md:text-body-medium"
       >
         Shop now
@@ -152,7 +150,7 @@ export const headerBanners = [
         Special Products of the Month
       </h5>
       <ClientLink
-        href={`/products?page=1&perPage=${defaultProductsShowPerPage}&sortBy=${defaultSortBy}&sortByDirection=${defaultSortByDirection}`}
+        href={`/products?${defaultProductsSearchParams.toString()}`}
         className="group flex max-w-fit flex-row items-center gap-x-2 rounded-full px-5 py-3 text-body-small font-semibold leading-[120%] text-primary hover:bg-white hover:text-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none md:text-body-medium"
       >
         Shop now
@@ -381,7 +379,7 @@ export const offerBanners = [
       </div>
       <div className="flex h-full flex-1 flex-row items-end">
         <ClientLink
-          href={`/products?page=1&perPage=${defaultProductsShowPerPage}&sortBy=${defaultSortBy}&sortByDirection=${defaultSortByDirection}`}
+          href={`${defaultProductsSearchParams.toString()}`}
           className="group flex max-w-fit flex-row items-center gap-x-2 rounded-full bg-white px-5 py-3 text-body-small font-semibold leading-[120%] text-primary hover:bg-primary hover:text-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none md:text-body-medium"
         >
           Shop now{" "}
@@ -414,7 +412,7 @@ export const offerBanners = [
       </span>
       <div className="flex h-full flex-1 flex-row items-end">
         <ClientLink
-          href={`/products?page=1&perPage=${defaultProductsShowPerPage}&sortBy=${defaultSortBy}&sortByDirection=${defaultSortByDirection}`}
+          href={`/products?${defaultProductsSearchParams.toString()}`}
           className="group flex max-w-fit flex-row items-center gap-x-2 rounded-full bg-white px-5 py-3 text-body-small font-semibold leading-[120%] text-primary hover:bg-primary hover:text-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none md:text-body-medium"
         >
           Shop now{" "}
@@ -450,7 +448,7 @@ export const offerBanners = [
       </span>
       <div className="flex h-full flex-1 flex-row items-end">
         <ClientLink
-          href={`/products?page=1&perPage=${defaultProductsShowPerPage}&sortBy=${defaultSortBy}&sortByDirection=${defaultSortByDirection}`}
+          href={`/products?${defaultProductsSearchParams.toString()}`}
           className="group flex max-w-fit flex-row items-center gap-x-2 rounded-full bg-white px-5 py-3 text-body-small font-semibold leading-[120%] text-primary hover:bg-primary hover:text-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none md:text-body-medium"
         >
           Shop now{" "}

@@ -24,7 +24,7 @@ import {
 } from "@/components/ui/pagination/pagination";
 import { FiltersDialogWrapper } from "@/components/ui/product/filters-dialog-wrapper";
 import { DialogHeader, DialogTitle } from "@/components/ui/common/dialog";
-import { parseProductTags } from "@/lib/utils";
+import { getNonNullURLParams, parseProductTags } from "@/lib/utils";
 import { allCategories } from "@/gql/queries/category/queries";
 import { queryGraphql } from "@/lib/server-query";
 import { env } from "@/lib/env";
@@ -95,6 +95,7 @@ export default async function Products({
         defaultMaxProductPrice
       ).toString(),
     });
+
     if (!!categoriesSearchParam) {
       updatedSearchParams.set("categories", categoriesSearchParam);
     }
@@ -147,14 +148,25 @@ export default async function Products({
   const totalPages = Math.ceil(productsCount / defaultProductsShowPerPage);
   const isPreviousButtonDisabled = parseInt(page) === 1;
   const isNextButtonDisabled = parseInt(page) === totalPages;
-  const previousHref =
-    parseInt(page) === 1
-      ? `/products?page=${page}&perPage=${perPage || defaultProductsShowPerPage}`
-      : `/products?page=${parseInt(page) - 1}&perPage=${perPage || defaultProductsShowPerPage}`;
-  const nextHref =
-    parseInt(page) === totalPages
-      ? `/products?page=${page}&perPage=${perPage || defaultProductsShowPerPage}`
-      : `/products?page=${parseInt(page) - 1}&perPage=${perPage || defaultProductsShowPerPage}`;
+  const commonSearchParams = {
+    perPage: (perPage || defaultProductsShowPerPage).toString(),
+    sortBy,
+    sortByDirection,
+    maxPrice,
+    minRating,
+    categories: categoriesSearchParam,
+    tags: tagsSearchParam,
+  };
+  const previousPageSearchParams = getNonNullURLParams({
+    page: (parseInt(page) - 1).toString(),
+    ...commonSearchParams,
+  });
+  const nextPageSearchParams = getNonNullURLParams({
+    page: (parseInt(page) + 1).toString(),
+    ...commonSearchParams,
+  });
+  const previousHref = `/products?${previousPageSearchParams.toString()}`;
+  const nextHref = `/products?${nextPageSearchParams.toString()}`;
   if (productsCount > 0 && currentPage > totalPages) {
     const updatedSearchParams = new URLSearchParams({
       page: "1",
@@ -167,6 +179,7 @@ export default async function Products({
         defaultMaxProductPrice
       ).toString(),
     });
+
     if (!!categoriesSearchParam) {
       updatedSearchParams.set("categories", categoriesSearchParam);
     }
@@ -289,39 +302,61 @@ export default async function Products({
                         totalPages > maxPagesToShow
                           ? maxPagesToShow
                           : totalPages,
-                    }).map((_value, index) => (
-                      <React.Fragment key={index}>
-                        <PaginationItem
-                          key={index}
-                          className="group/page-item rounded-full hover:bg-primary hover:text-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
-                        >
-                          <PaginationLink
-                            href={`/products?page=${index + 1}&perPage=${perPage || defaultProductsShowPerPage}`}
-                            className="flex size-9 flex-1 flex-row items-center justify-center rounded-full bg-white p-0 text-body-medium font-normal text-gray-600 group-hover/page-item:bg-primary group-hover/page-item:font-semibold group-hover/page-item:text-white"
+                    }).map((_value, index) => {
+                      const commonSearchParams = {
+                        perPage: (
+                          perPage || defaultProductsShowPerPage
+                        ).toString(),
+                        sortBy,
+                        sortByDirection,
+                        maxPrice,
+                        minRating,
+                        categories: categoriesSearchParam,
+                        tags: tagsSearchParam,
+                      };
+                      const paginationSearchParams = getNonNullURLParams({
+                        page: (index + 1).toString(),
+                        ...commonSearchParams,
+                      });
+                      const totalPagesSearchParams = getNonNullURLParams({
+                        page: totalPages.toString(),
+                        ...commonSearchParams,
+                      });
+
+                      return (
+                        <React.Fragment key={index}>
+                          <PaginationItem
+                            key={index}
+                            className="group/page-item rounded-full hover:bg-primary hover:text-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
                           >
-                            {index + 1}
-                          </PaginationLink>
-                        </PaginationItem>
-                        {index === maxPagesToShow - 1 ? (
-                          <React.Fragment>
-                            <PaginationItem>
-                              <PaginationEllipsis className="flex flex-1 flex-row items-center justify-center" />
-                            </PaginationItem>
-                            <PaginationItem
-                              key={index}
-                              className="group/page-item rounded-full hover:bg-primary hover:text-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
+                            <PaginationLink
+                              href={`/products?${paginationSearchParams.toString()}`}
+                              className="flex size-9 flex-1 flex-row items-center justify-center rounded-full bg-white p-0 text-body-medium font-normal text-gray-600 group-hover/page-item:bg-primary group-hover/page-item:font-semibold group-hover/page-item:text-white"
                             >
-                              <PaginationLink
-                                href={`/products?page=${totalPages}&perPage=${perPage || defaultProductsShowPerPage}`}
-                                className="flex size-9 flex-1 flex-row items-center justify-center rounded-full bg-white p-0 text-body-medium font-normal text-gray-600 group-hover/page-item:bg-primary group-hover/page-item:font-semibold group-hover/page-item:text-white"
+                              {index + 1}
+                            </PaginationLink>
+                          </PaginationItem>
+                          {index === maxPagesToShow - 1 ? (
+                            <React.Fragment>
+                              <PaginationItem>
+                                <PaginationEllipsis className="flex flex-1 flex-row items-center justify-center" />
+                              </PaginationItem>
+                              <PaginationItem
+                                key={index}
+                                className="group/page-item rounded-full hover:bg-primary hover:text-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
                               >
-                                {totalPages}
-                              </PaginationLink>
-                            </PaginationItem>
-                          </React.Fragment>
-                        ) : null}
-                      </React.Fragment>
-                    ))}
+                                <PaginationLink
+                                  href={`/products?${totalPagesSearchParams.toString()}`}
+                                  className="flex size-9 flex-1 flex-row items-center justify-center rounded-full bg-white p-0 text-body-medium font-normal text-gray-600 group-hover/page-item:bg-primary group-hover/page-item:font-semibold group-hover/page-item:text-white"
+                                >
+                                  {totalPages}
+                                </PaginationLink>
+                              </PaginationItem>
+                            </React.Fragment>
+                          ) : null}
+                        </React.Fragment>
+                      );
+                    })}
                     <PaginationItem
                       className="group/next-button rounded-full border border-neutral-100 hover:bg-primary hover:text-white aria-disabled:cursor-not-allowed aria-disabled:border-neutral-50 aria-disabled:bg-white aria-disabled:hover:bg-none motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
                       aria-disabled={isNextButtonDisabled}

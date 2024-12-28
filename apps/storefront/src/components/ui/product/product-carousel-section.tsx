@@ -16,11 +16,7 @@ import type {
   TProduct,
 } from "@/types/types";
 import isURL from "validator/es/lib/isURL";
-import {
-  defaultProductsShowPerPage,
-  defaultSortBy,
-  defaultSortByDirection,
-} from "@/constants/constants";
+import { defaultProductsSearchParams } from "@/constants/product/constants";
 
 type Props = {
   sectionTitle?: string;
@@ -33,7 +29,7 @@ type Props = {
 
 export function ProductCarouselSection({
   sectionTitle,
-  sectionRedirectURL = `/products?page=1&perPage=${defaultProductsShowPerPage}&sortBy=${defaultSortBy}&sortByDirection=${defaultSortByDirection}`,
+  sectionRedirectURL = `/products?${defaultProductsSearchParams.toString()}`,
   sectionRedirectText = "View All",
   carouselProviderProps,
   carouselRendererProps,

@@ -190,3 +190,15 @@ export function lineItemsQuantityCounter(previous: number, current: LineItem) {
 
   return previous + currentQuantity;
 }
+
+export function getNonNullURLParams(
+  currentParams: Record<string, string | undefined>
+) {
+  const nonNullSearchParams = Object.fromEntries(
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    Object.entries(currentParams).filter(([_, value]) => !!value)
+  ) as { [key: string]: string };
+  const paginationSearchParams = new URLSearchParams(nonNullSearchParams);
+
+  return paginationSearchParams;
+}

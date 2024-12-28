@@ -8,29 +8,28 @@ import {
 } from "@/components/ui/common/sidebar";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-import {
-  defaultProductsShowPerPage,
-  defaultSortBy,
-  defaultSortByDirection,
-} from "@/constants/constants";
+import { defaultProductsSearchParams } from "@/constants/product/constants";
 
 export function SidebarLinksWrapper() {
   const pathname = usePathname();
 
-  const items = [
-    {
-      title: "Home",
-      url: "/",
-    },
-    {
-      title: "Products",
-      url: `/products?page=1&perPage=${defaultProductsShowPerPage}&sortBy=${defaultSortBy}&sortByDirection=${defaultSortByDirection}`,
-    },
-    {
-      title: "About Us",
-      url: "/about-us",
-    },
-  ];
+  const items = React.useMemo(
+    () => [
+      {
+        title: "Home",
+        url: "/",
+      },
+      {
+        title: "Products",
+        url: `/products?${defaultProductsSearchParams.toString()}`,
+      },
+      {
+        title: "About Us",
+        url: "/about-us",
+      },
+    ],
+    []
+  );
 
   return (
     <SidebarMenu>

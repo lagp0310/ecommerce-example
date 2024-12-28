@@ -2,8 +2,11 @@ import React from "react";
 import {
   defaultCarouselInterval,
   defaultMaxProductPrice,
+  defaultProductsShowPerPage,
   defaultSlideHeight,
   defaultSlideWidth,
+  defaultSortBy,
+  defaultSortByDirection,
   maxProductRating,
 } from "@/constants/constants";
 import type {
@@ -307,3 +310,10 @@ export const filterComponents = (
     )}
   </React.Fragment>
 );
+
+export const defaultProductsSearchParams = new URLSearchParams({
+  page: "1",
+  perPage: defaultProductsShowPerPage.toString(),
+  sortBy: defaultSortBy,
+  sortByDirection: defaultSortByDirection,
+});

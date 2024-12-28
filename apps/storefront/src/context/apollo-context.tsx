@@ -17,18 +17,19 @@ function makeClient() {
       apiKey: process.env.NEXT_PUBLIC_SUPABASE_KEY!,
     },
   });
+  const link =
+    typeof window === "undefined"
+      ? ApolloLink.from([
+          new SSRMultipartLink({
+            stripDefer: true,
+          }),
+          httpLink,
+        ])
+      : httpLink;
 
   return new NextSSRApolloClient({
     cache: new NextSSRInMemoryCache(),
-    link:
-      typeof window === "undefined"
-        ? ApolloLink.from([
-            new SSRMultipartLink({
-              stripDefer: true,
-            }),
-            httpLink,
-          ])
-        : httpLink,
+    link,
   });
 }
 

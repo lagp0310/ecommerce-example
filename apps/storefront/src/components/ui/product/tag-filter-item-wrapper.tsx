@@ -24,6 +24,17 @@ export function TagFilterItemWrapper({
     const updatedSearchParams = updateSearchParam("tags", searchParams, id);
     router.push(`${pathname}?${updatedSearchParams.toString()}`);
   }, [id, pathname, router, searchParams]);
+  const groupItemProps = React.useMemo(
+    () => ({
+      value: tag,
+      id,
+      className:
+        "rounded-full text-body-small font-normal text-gray-900 hover:bg-primary hover:text-white data-[state=on]:bg-primary data-[state=on]:text-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none",
+      onClick: handleTagClick,
+      "data-state": selected ? "on" : "off",
+    }),
+    [handleTagClick, id, selected, tag]
+  );
 
   return (
     <div
@@ -33,15 +44,7 @@ export function TagFilterItemWrapper({
         wrapperClassName
       )}
     >
-      <ToggleGroupItem
-        value={tag}
-        id={id}
-        className="rounded-full text-body-small font-normal text-gray-900 hover:bg-primary hover:text-white data-[state=on]:bg-primary data-[state=on]:text-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
-        onClick={handleTagClick}
-        data-state={selected ? "on" : "off"}
-      >
-        {tag}
-      </ToggleGroupItem>
+      <ToggleGroupItem {...groupItemProps}>{tag}</ToggleGroupItem>
     </div>
   );
 }

@@ -1,8 +1,11 @@
 "use client";
 
 import React from "react";
-import { BasicCartProduct } from "./basic-cart-product";
-import { CartSheet } from "./cart-sheet";
+import {
+  BasicCartProduct,
+  type Props as CartProductProps,
+} from "@/components/ui/cart/basic-cart-product";
+import { CartSheet } from "@/components/ui/cart/cart-sheet";
 import {
   SheetTrigger,
   SheetContent,
@@ -101,30 +104,34 @@ export function SidebarCartWrapper({
         <SheetHeader>{sheetTitle}</SheetHeader>
         {hasProducts ? (
           <div className="flex h-full max-h-full flex-1 basis-full flex-col gap-y-2 overflow-y-auto overflow-x-hidden pr-4">
-            {lineItems.map(({ products, id, ...lineItem }) => (
-              <React.Fragment key={id}>
-                {!!products ? (
-                  <div className="group/cart-product flex flex-col">
-                    <BasicCartProduct
-                      lineItem={{
-                        id,
-                        ...lineItem,
-                      }}
-                      product={products}
-                      toggleSidebar={toggleSidebar}
-                      actions={
-                        <DeleteProductButton
-                          className="group -mr-2 rounded-full border-none p-2 hover:bg-gray-100/50 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
-                          lineItemId={id}
-                          refreshAfterDelete={isCartPage}
-                        />
-                      }
-                    />
-                    <div className="mt-1 w-full border-t border-gray-100/50 group-last/cart-product:hidden"></div>
-                  </div>
-                ) : null}
-              </React.Fragment>
-            ))}
+            {lineItems.map(({ products: product, id, ...lineItem }) => {
+              if (!product) {
+                return null;
+              }
+
+              const cartProductProps: CartProductProps = {
+                lineItem: {
+                  id,
+                  ...lineItem,
+                },
+                product,
+                toggleSidebar,
+                actions: (
+                  <DeleteProductButton
+                    className="group -mr-2 rounded-full border-none p-2 hover:bg-gray-100/50 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
+                    lineItemId={id}
+                    refreshAfterDelete={isCartPage}
+                  />
+                ),
+              };
+
+              return (
+                <div key={id} className="group/cart-product flex flex-col">
+                  <BasicCartProduct {...cartProductProps} />
+                  <div className="mt-1 w-full border-t border-gray-100/50 group-last/cart-product:hidden"></div>
+                </div>
+              );
+            })}
           </div>
         ) : (
           <span className="text-body-medium font-normal text-gray-900">

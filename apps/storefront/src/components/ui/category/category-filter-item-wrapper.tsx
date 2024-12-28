@@ -6,7 +6,7 @@ import { Label, LabelProps } from "@/components/ui/common/label";
 import { cn, updateSearchParam } from "@/lib/utils";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
-type Props = LabelProps & {
+export type Props = LabelProps & {
   wrapperClassName?: string;
   checked?: boolean;
   categoryId: string;

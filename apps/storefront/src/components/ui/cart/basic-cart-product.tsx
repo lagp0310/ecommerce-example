@@ -7,12 +7,15 @@ import {
   CartProductActions,
   type Props as CartProductActionsProps,
 } from "@/components/ui/cart/cart-product-actions";
-import { ProductPricing } from "@/components/ui/product/product-pricing";
+import {
+  ProductPricing,
+  type Props as ProductPricingProps,
+} from "@/components/ui/product/product-pricing";
 import Image from "next/image";
 import { Line_Items as LineItem } from "@/gql/graphql";
 import { defaultCurrencySymbol } from "@/constants/constants";
 
-type Props = React.HTMLProps<HTMLDivElement> & {
+export type Props = React.HTMLProps<HTMLDivElement> & {
   actionsProps?: CartProductActionsProps;
   lineItem: LineItem;
   product: TProduct;
@@ -30,6 +33,25 @@ export function BasicCartProduct({
 }: Props) {
   const hasActions = !!actions;
   const onProductClick = !!toggleSidebar ? toggleSidebar : undefined;
+
+  const productPricingProps: ProductPricingProps = {
+    className:
+      "flex flex-row items-center gap-x-1 text-body-small md:text-body-medium",
+    quantity: parseInt(quantity),
+    quantityClasses: "flex",
+    price,
+    discountedPrice,
+    currencySymbol: currencies?.symbol ?? defaultCurrencySymbol,
+    discountedPriceClasses: cn({
+      "font-medium text-gray-900 truncate line-clamp-1": !discountedPrice,
+    }),
+    priceClasses: cn({
+      "font-normal text-gray-400 line-through truncate line-clamp-1":
+        discountedPrice,
+      "font-medium text-gray-900 truncate line-clamp-1": !discountedPrice,
+    }),
+    showFinalPriceOnly: true,
+  };
 
   return (
     <div className="flex flex-1 flex-row items-center gap-x-2">
@@ -53,25 +75,7 @@ export function BasicCartProduct({
           ) : null}
           <div className="flex flex-1 flex-col justify-center gap-1">
             <span className="line-clamp-2">{name}</span>
-            <ProductPricing
-              className="flex flex-row items-center gap-x-1 text-body-small md:text-body-medium"
-              quantity={parseInt(quantity)}
-              quantityClasses="flex"
-              price={price}
-              discountedPrice={discountedPrice}
-              currencySymbol={currencies?.symbol ?? defaultCurrencySymbol}
-              discountedPriceClasses={cn({
-                "font-medium text-gray-900 truncate line-clamp-1":
-                  !discountedPrice,
-              })}
-              priceClasses={cn({
-                "font-normal text-gray-400 line-through truncate line-clamp-1":
-                  discountedPrice,
-                "font-medium text-gray-900 truncate line-clamp-1":
-                  !discountedPrice,
-              })}
-              showFinalPriceOnly
-            />
+            <ProductPricing {...productPricingProps} />
           </div>
         </CartProduct>
       </Link>

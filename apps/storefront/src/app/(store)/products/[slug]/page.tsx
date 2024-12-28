@@ -11,7 +11,10 @@ import {
   type Props as AddToCartWrapperProps,
 } from "@/components/ui/product/add-to-cart-wrapper";
 import { BasicProductCard } from "@/components/ui/product/basic-product-card";
-import { ProductPricing } from "@/components/ui/product/product-pricing";
+import {
+  ProductPricing,
+  type Props as ProductPricingProps,
+} from "@/components/ui/product/product-pricing";
 import { ProductTag } from "@/components/ui/product/product-tag";
 import { ProductTitle } from "@/components/ui/product/product-title";
 import { Rating } from "@/components/ui/product/rating";
@@ -104,6 +107,17 @@ export default async function Product({
     moreClassName:
       "disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:border-gray-100 rounded-full border border-gray-100 p-4 flex flex-1 flex-row items-center justify-center group/more-button hover:border-transparent hover:bg-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none",
   };
+  const productPricingProps: ProductPricingProps = {
+    className: "flex flex-row items-center gap-2",
+    currencySymbol: currencies?.symbol ?? defaultCurrencySymbol,
+    price,
+    discountedPrice,
+    discountedPriceClasses: cn("font-medium text-body-xxl text-hard-primary"),
+    priceClasses: cn("font-medium text-body-xxl text-hard-primary", {
+      "font-normal leading-[150%] text-body-xl text-gray-300":
+        !!discountedPrice,
+    }),
+  };
 
   return (
     <div className="flex flex-1 flex-col items-center">
@@ -156,22 +170,7 @@ export default async function Product({
                 </div> */}
               </div>
               <div className="flex flex-row items-center gap-4">
-                <ProductPricing
-                  className="flex flex-row items-center gap-2"
-                  currencySymbol={currencies?.symbol ?? defaultCurrencySymbol}
-                  price={price}
-                  discountedPrice={discountedPrice}
-                  discountedPriceClasses={cn(
-                    "font-medium text-body-xxl text-hard-primary"
-                  )}
-                  priceClasses={cn(
-                    "font-medium text-body-xxl text-hard-primary",
-                    {
-                      "font-normal leading-[150%] text-body-xl text-gray-300":
-                        !!discountedPrice,
-                    }
-                  )}
-                />
+                <ProductPricing {...productPricingProps} />
                 <div className="flex flex-1 flex-row flex-wrap items-center gap-2">
                   {discountTags?.map((tag, index) => (
                     <ProductTag key={index} tag={tag} />

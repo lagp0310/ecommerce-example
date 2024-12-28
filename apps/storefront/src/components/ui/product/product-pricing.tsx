@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import React from "react";
 
-type Props = React.HTMLProps<HTMLDivElement> & {
+export type Props = React.HTMLProps<HTMLDivElement> & {
   currencySymbol: string;
   quantity?: number;
   price: number;

@@ -39,19 +39,28 @@ export function PricingSlider({
     };
   }, [handlePriceParamUpdate, searchParams]);
 
+  const sliderText = React.useMemo(
+    () => ` ${currencySymbol}0 - ${currencySymbol}${price}`,
+    [currencySymbol, price]
+  );
+  const sliderProps = React.useMemo(
+    () => ({
+      min,
+      max,
+      step,
+      onValueChange: (value: number[]) => setValue(value?.at(0) ?? 0),
+      ...props,
+    }),
+    [max, min, props, setValue, step]
+  );
+
   return (
     <React.Fragment>
-      <Slider
-        min={min}
-        max={max}
-        step={step}
-        onValueChange={(value) => setValue(value?.at(0) ?? 0)}
-        {...props}
-      />
+      <Slider {...sliderProps} />
       <span className="text-body-small font-normal text-gray-700">
         Price:
         <span className="text-body-small font-medium text-gray-900">
-          {` ${currencySymbol}0 - ${currencySymbol}${price}`}
+          {sliderText}
         </span>
       </span>
     </React.Fragment>

@@ -33,7 +33,10 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/common/accordion";
-import { CategoryFilterItemWrapper } from "@/components/ui/category/category-filter-item-wrapper";
+import {
+  CategoryFilterItemWrapper,
+  type Props as CategoryFilterItemProps,
+} from "@/components/ui/category/category-filter-item-wrapper";
 
 export const categoriesToShow = 30;
 export const productsToShow = 20;
@@ -113,17 +116,19 @@ export const getProductFilters: (
             id,
             categoriesSearchParam
           );
+          const itemProps: CategoryFilterItemProps = {
+            categoryId: id,
+            checked: isChecked,
+            "aria-checked": isChecked,
+            htmlFor: id,
+            wrapperClassName: cn("order-none", { "order-1": !isChecked }),
+            className:
+              "flex flex-1 flex-row items-center justify-start gap-x-1 text-body-small font-normal text-gray-900",
+          };
 
           return (
             <React.Suspense key={id}>
-              <CategoryFilterItemWrapper
-                categoryId={id}
-                checked={isChecked}
-                aria-checked={isChecked}
-                htmlFor={id}
-                wrapperClassName={cn("order-none", { "order-1": !isChecked })}
-                className="flex flex-1 flex-row items-center justify-start gap-x-1 text-body-small font-normal text-gray-900"
-              >
+              <CategoryFilterItemWrapper {...itemProps}>
                 {name}
                 {/* <span className="text-body-small font-normal text-gray-500">{`(${numberOfItems})`}</span> */}
               </CategoryFilterItemWrapper>

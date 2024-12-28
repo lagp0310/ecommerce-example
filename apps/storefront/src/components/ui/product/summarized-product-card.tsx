@@ -8,7 +8,10 @@ import { Rating } from "@/components/ui/product/rating";
 import { ClientLink } from "@/components/navigation/client-link";
 import { BannerCountdownWrapper } from "@/components/ui/banner/banner-countdown-wrapper";
 import { ProductTag } from "./product-tag";
-import { ProductPricing } from "./product-pricing";
+import {
+  ProductPricing,
+  type Props as ProductPricingProps,
+} from "./product-pricing";
 import Image from "next/image";
 import {
   AddToCartWrapper,
@@ -79,27 +82,28 @@ export function SummarizedProductCard({
       </AddToCartWrapper>
     </div>
   );
+  const productPricingProps: ProductPricingProps = {
+    className: "flex flex-row gap-x-2",
+    price,
+    discountedPrice,
+    currencySymbol: currencies?.symbol ?? defaultCurrencySymbol,
+    discountedPriceClasses: cn({
+      "text-body-xxl font-medium text-gray-900 truncate line-clamp-1":
+        !discountedPrice,
+    }),
+    priceClasses: cn({
+      "text-body-xxl font-normal text-gray-400 leading-[150%] line-through truncate line-clamp-1":
+        discountedPrice,
+      "text-body-medium font-medium text-gray-900 truncate line-clamp-1":
+        !discountedPrice,
+    }),
+  };
   const productData = (
     <React.Fragment>
       <span className="line-clamp-2 truncate text-body-large font-normal text-hard-primary">
         {name}
       </span>
-      <ProductPricing
-        className="flex flex-row gap-x-2"
-        price={price}
-        discountedPrice={discountedPrice}
-        currencySymbol={currencies?.symbol ?? defaultCurrencySymbol}
-        discountedPriceClasses={cn({
-          "text-body-xxl font-medium text-gray-900 truncate line-clamp-1":
-            !discountedPrice,
-        })}
-        priceClasses={cn({
-          "text-body-xxl font-normal text-gray-400 leading-[150%] line-through truncate line-clamp-1":
-            discountedPrice,
-          "text-body-medium font-medium text-gray-900 truncate line-clamp-1":
-            !discountedPrice,
-        })}
-      />
+      <ProductPricing {...productPricingProps} />
       {typeof rating === "number" ? (
         <div className="flex flex-row items-center gap-x-1">
           <Rating

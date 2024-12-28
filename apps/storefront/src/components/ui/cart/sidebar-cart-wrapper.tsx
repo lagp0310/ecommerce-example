@@ -178,7 +178,7 @@ export function SidebarCartWrapper({
         )}
         <SheetFooter className="flex flex-1 basis-1/4 flex-col items-center gap-y-2 sm:flex-col sm:justify-end md:gap-y-4">
           <CartSummary
-            className="flex w-full flex-1 basis-1/3 border-none max-h-fit top-0 p-0 gap-y-0"
+            className="top-0 flex max-h-fit w-full flex-1 basis-1/3 gap-y-0 border-none p-0"
             sectionTitle={null}
           >
             <div className="w-full border-t border-gray-100/50"></div>

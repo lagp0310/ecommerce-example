@@ -129,34 +129,36 @@ export function CartContextProvider({ children, currentCart = null }: Props) {
         .catch((error) => {
           throw new Error(error);
         });
-
-      dataProviderClient
-        .rpc("get_cart_summary_data", {
-          cart_id: cartId,
-        })
-        .then(({ data, error }) => {
-          if (error) {
-            throw new Error(error?.message);
-          }
-          if (!data) {
-            throw new Error("Summary cart data is empty");
-          }
-
-          const {
-            subtotal_result,
-            shipping_result,
-            taxes_result,
-            total_result,
-          } = data as GetCartSummaryResponse;
-          setSummaryData({
-            subtotal: subtotal_result,
-            shipping: shipping_result,
-            taxes: taxes_result,
-            total: total_result,
-          });
-        });
     }
   }, [cart, getCart, getLineItems]);
+
+  React.useEffect(() => {
+    if (!cart?.id) {
+      return;
+    }
+
+    dataProviderClient
+      .rpc("get_cart_summary_data", {
+        cart_id: cart?.id,
+      })
+      .then(({ data, error }) => {
+        if (error) {
+          throw new Error(error?.message);
+        }
+        if (!data) {
+          throw new Error("Summary cart data is empty");
+        }
+
+        const { subtotal_result, shipping_result, taxes_result, total_result } =
+          data as GetCartSummaryResponse;
+        setSummaryData({
+          subtotal: subtotal_result,
+          shipping: shipping_result,
+          taxes: taxes_result,
+          total: total_result,
+        });
+      });
+  }, [cart, lineItems]);
 
   const [mutateCreateCart, { loading: isCreateCartLoading }] =
     useMutation(createCart);

@@ -21,14 +21,6 @@ import {
 export function NavigationLinksWrapper() {
   const pathname = usePathname();
 
-  // const navigationCategories: NavigationCategory[] = Array.from({
-  //   length: 6,
-  // }).map(() => ({
-  //   title: "Fresh Fruit",
-  //   href: "/products",
-  //   description:
-  //     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam egestas faucibus est at dapibus. Quisque.",
-  // }));
   const navigationLinks: NavigationLink[] = React.useMemo(
     () => [
       {
@@ -127,7 +119,6 @@ export function NavigationLinksWrapper() {
             </NavigationMenuLink>
           </ClientLink>
         ),
-        // isDropdown: true,
       },
       {
         // title: "Products",
@@ -171,7 +162,6 @@ export function NavigationLinksWrapper() {
             </NavigationMenuLink>
           </ClientLink>
         ),
-        // isDropdown: true,
       },
       // {
       //   content: (

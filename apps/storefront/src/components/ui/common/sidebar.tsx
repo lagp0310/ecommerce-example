@@ -7,7 +7,7 @@ import { VariantProps, cva } from "class-variance-authority";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/common/button";
-import { Input } from "@/components/ui/common/input";
+import { Input } from "@/components/form/input";
 import { Separator } from "@/components/ui/common/separator";
 import { Sheet, SheetContent } from "@/components/ui/common/sheet";
 import { Skeleton } from "@/components/ui/common/skeleton";

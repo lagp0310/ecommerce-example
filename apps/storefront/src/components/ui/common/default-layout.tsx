@@ -6,7 +6,7 @@ import { NavbarLink } from "@/components/navigation/navbar-link";
 import { TopBar } from "@/components/ui/common/top-bar";
 import { MapPinIcon, PhoneIcon, UserIcon } from "@heroicons/react/24/outline";
 import { NewsletterSubscribe } from "@/components/ui/marketing/newsletter-subscribe";
-import { Input } from "@/components/ui/common/input";
+import { Input } from "@/components/form/input";
 import { FooterContent } from "@/components/ui/common/footer-content";
 import Link from "next/link";
 import { FacebookIcon } from "@/components/ui/icons/brands/facebook";

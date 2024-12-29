@@ -12,7 +12,7 @@ import {
 import type {
   CarouselProviderCustomProps,
   CarouselRendererProps,
-  ProductFilter,
+  BaseAccordionItem,
 } from "@/types/types";
 import {
   Categories as Category,
@@ -102,7 +102,7 @@ export const getProductFilters: (
   minRating?: number | null,
   categoriesSearchParam?: string,
   tagsSearchParam?: string
-) => ProductFilter[] = (
+) => BaseAccordionItem[] = (
   categories,
   tags,
   maxProductsPrice,
@@ -262,7 +262,7 @@ export const getProductFilters: (
 ];
 
 export const filterComponents = (
-  filters: ProductFilter[],
+  filters: BaseAccordionItem[],
   accordionRootClassName = "hidden lg:grid"
 ) => (
   <React.Fragment>

@@ -9,9 +9,14 @@ import {
   secondsTransform,
   StoreHighlightIcon,
   defaultMaxProductPrice,
+  defaultCurrencySymbol,
 } from "@/constants/constants";
 import type { Line_Items as LineItem } from "@/gql/graphql";
-import type { ProductsResponse, TProduct } from "@/types/types";
+import type {
+  CartSummaryField,
+  ProductsResponse,
+  TProduct,
+} from "@/types/types";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -201,4 +206,39 @@ export function getNonNullURLParams(
   const paginationSearchParams = new URLSearchParams(nonNullSearchParams);
 
   return paginationSearchParams;
+}
+
+export function getCartSummaryItems(
+  subtotal = 0,
+  shipping = 0,
+  taxes = 0,
+  total = 0,
+  currencySymbol = defaultCurrencySymbol
+): CartSummaryField[] {
+  return [
+    {
+      name: "subtotal",
+      label: "Subtotal",
+      currencySymbol,
+      value: subtotal,
+    },
+    {
+      name: "shipping",
+      label: "Shipping",
+      currencySymbol,
+      value: shipping,
+    },
+    {
+      name: "taxes",
+      label: "Taxes",
+      currencySymbol,
+      value: taxes,
+    },
+    {
+      name: "total",
+      label: "Total",
+      currencySymbol,
+      value: total,
+    },
+  ];
 }

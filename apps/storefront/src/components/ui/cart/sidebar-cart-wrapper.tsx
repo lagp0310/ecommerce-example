@@ -27,7 +27,7 @@ import Link from "next/link";
 import isUUID from "validator/es/lib/isUUID";
 import { DeleteProductButton } from "@/components/ui/cart/delete-product-button";
 import { usePathname } from "next/navigation";
-import { lineItemsQuantityCounter } from "@/lib/utils";
+import { getCartSummaryItems, lineItemsQuantityCounter } from "@/lib/utils";
 import { CartSummary } from "@/components/ui/cart/cart-summary";
 import { CartSummaryItem } from "@/components/ui/cart/cart-summary-item";
 import type { CartSummaryField } from "@/types/types";
@@ -96,32 +96,13 @@ export function SidebarCartWrapper({
   );
 
   const cartTotalSummary: CartSummaryField[] = React.useMemo(
-    () => [
-      {
-        name: "subtotal",
-        label: "Subtotal",
-        currencySymbol: "$",
-        value: cartSummary.subtotal,
-      },
-      {
-        name: "shipping",
-        label: "Shipping",
-        currencySymbol: "$",
-        value: cartSummary.shipping,
-      },
-      {
-        name: "taxes",
-        label: "Taxes",
-        currencySymbol: "$",
-        value: cartSummary.taxes,
-      },
-      {
-        name: "total",
-        label: "Total",
-        currencySymbol: "$",
-        value: cartSummary.total,
-      },
-    ],
+    () =>
+      getCartSummaryItems(
+        cartSummary.subtotal,
+        cartSummary.shipping,
+        cartSummary.taxes,
+        cartSummary.total
+      ),
     [
       cartSummary.shipping,
       cartSummary.subtotal,

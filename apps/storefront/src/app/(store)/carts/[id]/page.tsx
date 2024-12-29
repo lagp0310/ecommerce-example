@@ -22,6 +22,7 @@ import {
 } from "@/components/ui/product/add-to-cart-wrapper";
 import { ShoppingBagIcon } from "@heroicons/react/24/outline";
 import { callDatabaseFunction } from "@/lib/call-database-function";
+import { getCartSummaryItems } from "@/lib/utils";
 
 export default async function Cart({
   params,
@@ -29,6 +30,7 @@ export default async function Cart({
   params: Promise<{ id: string }>;
 }) {
   const { id: cartId } = await params;
+
   // FIXME: The user should have permissions to get this cart.
   const [cart, lineItems, cartSummary] = await Promise.all([
     queryGraphql<CartResponse>(
@@ -53,32 +55,12 @@ export default async function Cart({
     }),
   ]);
 
-  const cartTotalSummary: CartSummaryField[] = [
-    {
-      name: "subtotal",
-      label: "Subtotal",
-      currencySymbol: "$",
-      value: cartSummary?.subtotal_result ?? 0,
-    },
-    {
-      name: "shipping",
-      label: "Shipping",
-      currencySymbol: "$",
-      value: cartSummary?.shipping_result ?? 0,
-    },
-    {
-      name: "taxes",
-      label: "Taxes",
-      currencySymbol: "$",
-      value: cartSummary?.taxes_result ?? 0,
-    },
-    {
-      name: "total",
-      label: "Total",
-      currencySymbol: "$",
-      value: cartSummary?.total_result ?? 0,
-    },
-  ];
+  const cartTotalSummary: CartSummaryField[] = getCartSummaryItems(
+    cartSummary?.subtotal_result,
+    cartSummary?.shipping_result,
+    cartSummary?.taxes_result,
+    cartSummary?.total_result
+  );
 
   const hasLineItems = Array.isArray(lineItems) && lineItems.length > 0;
   const tableData = lineItems ?? [];

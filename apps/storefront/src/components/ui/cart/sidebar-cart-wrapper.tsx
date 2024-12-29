@@ -111,6 +111,11 @@ export function SidebarCartWrapper({
     ]
   );
 
+  const isCheckoutActionDisabled = React.useMemo(
+    () => !cartId || cartProductsCount === 0,
+    [cartId, cartProductsCount]
+  );
+
   return (
     <CartSheet {...sheetProps} open={isOpen} onOpenChange={setIsOpen}>
       <div className="relative">
@@ -189,8 +194,9 @@ export function SidebarCartWrapper({
               </Link>
               <Link
                 href={`/checkout/${cartId}`}
-                className="w-full rounded-ten border border-gray-100/50 bg-primary px-5 py-3 text-center text-body-small font-normal leading-[120%] text-white hover:bg-hard-primary/100 motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none md:text-body-medium"
+                className="w-full rounded-ten border border-gray-100/50 bg-primary px-5 py-3 text-center text-body-small font-normal leading-[120%] text-white hover:bg-hard-primary/100 motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none md:text-body-medium aria-disabled:cursor-not-allowed aria-disabled:opacity-50 aria-disabled:pointer-events-none"
                 onClick={toggleSidebar}
+                aria-disabled={isCheckoutActionDisabled}
               >
                 Checkout
               </Link>

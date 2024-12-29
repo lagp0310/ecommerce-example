@@ -140,24 +140,28 @@ export default async function Cart({
               <CartTableWrapper tableData={tableData} />
             </div>
             <CartSummary className="flex w-full flex-1 basis-1/3">
-              {cartTotalSummary.map(
-                ({ currencySymbol, name, label, value }) => {
-                  const parsedValue =
-                    typeof value === "number"
-                      ? value.toFixed(2).toString()
-                      : value;
-                  const valuePrefix =
-                    typeof currencySymbol === "string" ? currencySymbol : null;
+              <div className="flex flex-1 flex-col gap-y-2">
+                {cartTotalSummary.map(
+                  ({ currencySymbol, name, label, value }) => {
+                    const parsedValue =
+                      typeof value === "number"
+                        ? value.toFixed(2).toString()
+                        : value;
+                    const valuePrefix =
+                      typeof currencySymbol === "string"
+                        ? currencySymbol
+                        : null;
 
-                  return (
-                    <CartSummaryItem
-                      key={name}
-                      label={label}
-                      value={`${valuePrefix ?? ""}${parsedValue}`}
-                    />
-                  );
-                }
-              )}
+                    return (
+                      <CartSummaryItem
+                        key={name}
+                        label={label}
+                        value={`${valuePrefix ?? ""}${parsedValue}`}
+                      />
+                    );
+                  }
+                )}
+              </div>
               {isCartIdValid ? (
                 <Link
                   href={`/checkout/${cartId}`}

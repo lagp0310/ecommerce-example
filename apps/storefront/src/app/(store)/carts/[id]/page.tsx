@@ -48,7 +48,6 @@ export default async function Cart({
       allLineItems,
       {
         filter: { cart: { eq: cartId } },
-        cache: "no-store",
       },
       "no-cache"
     ),

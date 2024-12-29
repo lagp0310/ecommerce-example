@@ -5,6 +5,7 @@ import { Form } from "@/components/form/form";
 import { Input } from "@/components/form/input";
 import { Label } from "@/components/form/label";
 import React from "react";
+import { Checkbox } from "../common/checkbox";
 
 type Props = {};
 
@@ -164,13 +165,11 @@ export function CheckoutForm({ ...props }: Props) {
         htmlFor="ship-different-address"
         className="flex flex-row gap-2 w-full items-center"
       >
-        {/* FIXME: Checkbox styling as in products page. */}
-        <Input
+        <Checkbox
           id="ship-different-address"
           name="ship-different-address"
-          type="checkbox"
           aria-required={false}
-          className="size-5 rounded-[3px] border border-gray-100 bg-white text-gray-900 placeholder:text-gray-400 placeholder:font-normal placeholder:text-body-medium placeholder:leading-[130%] outline-none p-3 data-[state=checked]:border-none data-[state=checked]:bg-primary data-[state=checked]:text-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
+          className="size-5 rounded-[3px] border border-gray-100 bg-white text-gray-900 outline-none data-[state=checked]:border-none data-[state=checked]:bg-primary data-[state=checked]:text-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
         />
         <span className="font-normal text-body-small text-gray-900">
           Ship to a different address

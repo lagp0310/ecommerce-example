@@ -3,7 +3,7 @@ import {
   Section,
   type Props as SectionProps,
 } from "@/components/ui/common/section";
-import { SectionTitle } from "../common/section-title";
+import { SectionTitle } from "@/components/ui/common/section-title";
 import { cn } from "@/lib/utils";
 
 type Props = SectionProps & { sectionTitle?: React.ReactNode };

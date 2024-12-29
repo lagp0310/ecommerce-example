@@ -11,7 +11,15 @@ export const getCart = gql`
     $filter: cartsFilter
     $orderBy: [cartsOrderBy!]
   ) {
-    cartsCollection(filter: $filter) {
+    cartsCollection(
+      first: $first
+      last: $last
+      before: $before
+      after: $after
+      offset: $offset
+      filter: $filter
+      orderBy: $orderBy
+    ) {
       edges {
         node {
           ...CartFragment

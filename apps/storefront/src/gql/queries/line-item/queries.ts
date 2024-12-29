@@ -11,7 +11,15 @@ export const allLineItems = gql`
     $filter: line_itemsFilter
     $orderBy: [line_itemsOrderBy!]
   ) {
-    lineItemsCollection: line_itemsCollection(filter: $filter) {
+    lineItemsCollection: line_itemsCollection(
+      first: $first
+      last: $last
+      before: $before
+      after: $after
+      offset: $offset
+      filter: $filter
+      orderBy: $orderBy
+    ) {
       edges {
         node {
           ...LineItemFragment

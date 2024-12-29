@@ -18,7 +18,10 @@ export function CheckoutForm({ ...props }: Props) {
     <Form action={createOrder} className="flex flex-1 flex-col gap-4">
       <div className="flex flex-1 flex-col gap-4">
         <div className="flex flex-1 flex-row flex-wrap md:flex-nowrap gap-4">
-          <Label htmlFor="first-name" className="flex flex-col gap-y-2 w-full">
+          <Label
+            htmlFor="first-name"
+            className="flex flex-col gap-y-2 w-full cursor-pointer"
+          >
             <span className="font-normal text-body-small text-gray-900">
               First Name<span className="text-danger"> *</span>
             </span>
@@ -32,7 +35,10 @@ export function CheckoutForm({ ...props }: Props) {
               className="focus:ring-2 focus:ring-primary/50 placeholder:text-gray-400 placeholder:font-normal placeholder:text-body-medium placeholder:leading-[130%] rounded-six border border-gray-100 outline-none p-3 motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
             />
           </Label>
-          <Label htmlFor="last-name" className="flex flex-col gap-y-2 w-full">
+          <Label
+            htmlFor="last-name"
+            className="flex flex-col gap-y-2 w-full cursor-pointer"
+          >
             <span className="font-normal text-body-small text-gray-900">
               Last Name<span className="text-danger"> *</span>
             </span>
@@ -48,7 +54,7 @@ export function CheckoutForm({ ...props }: Props) {
           </Label>
           <Label
             htmlFor="company-name"
-            className="flex flex-col gap-y-2 w-full"
+            className="flex flex-col gap-y-2 w-full cursor-pointer"
           >
             <span className="font-normal text-body-small text-gray-900">
               {`Company Name (Optional)`}
@@ -66,7 +72,7 @@ export function CheckoutForm({ ...props }: Props) {
         <div className="flex flex-1 flex-row gap-4">
           <Label
             htmlFor="street-address"
-            className="flex flex-col gap-y-2 w-full"
+            className="flex flex-col gap-y-2 w-full cursor-pointer"
           >
             <span className="font-normal text-body-small text-gray-900">
               Street Address<span className="text-danger"> *</span>
@@ -84,22 +90,25 @@ export function CheckoutForm({ ...props }: Props) {
         </div>
         <div className="flex flex-1 flex-row flex-wrap md:flex-nowrap gap-4">
           <Label
-            htmlFor="country-region"
-            className="flex flex-col gap-y-2 w-full"
+            htmlFor="country"
+            className="flex flex-col gap-y-2 w-full cursor-pointer"
           >
             <span className="font-normal text-body-small text-gray-900">
-              Country / Region<span className="text-danger"> *</span>
+              Country<span className="text-danger"> *</span>
             </span>
             <Input
-              id="country-region"
-              name="country-region"
+              id="country"
+              name="country"
               placeholder="Select"
               required
               aria-required
               className="focus:ring-2 focus:ring-primary/50 placeholder:text-gray-400 placeholder:font-normal placeholder:text-body-medium placeholder:leading-[130%] rounded-six border border-gray-100 outline-none p-3 motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
             />
           </Label>
-          <Label htmlFor="state" className="flex flex-col gap-y-2 w-full">
+          <Label
+            htmlFor="state"
+            className="flex flex-col gap-y-2 w-full cursor-pointer"
+          >
             <span className="font-normal text-body-small text-gray-900">
               State<span className="text-danger"> *</span>
             </span>
@@ -112,7 +121,10 @@ export function CheckoutForm({ ...props }: Props) {
               className="focus:ring-2 focus:ring-primary/50 placeholder:text-gray-400 placeholder:font-normal placeholder:text-body-medium placeholder:leading-[130%] rounded-six border border-gray-100 outline-none p-3 motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
             />
           </Label>
-          <Label htmlFor="zip-code" className="flex flex-col gap-y-2 w-full">
+          <Label
+            htmlFor="zip-code"
+            className="flex flex-col gap-y-2 w-full cursor-pointer"
+          >
             <span className="font-normal text-body-small text-gray-900">
               ZIP Code<span className="text-danger"> *</span>
             </span>
@@ -128,7 +140,10 @@ export function CheckoutForm({ ...props }: Props) {
           </Label>
         </div>
         <div className="flex flex-1 flex-row flex-wrap md:flex-nowrap gap-4">
-          <Label htmlFor="email" className="flex flex-col gap-y-2 w-full">
+          <Label
+            htmlFor="email"
+            className="flex flex-col gap-y-2 w-full cursor-pointer"
+          >
             <span className="font-normal text-body-small text-gray-900">
               Email<span className="text-danger"> *</span>
             </span>
@@ -144,7 +159,7 @@ export function CheckoutForm({ ...props }: Props) {
           </Label>
           <Label
             htmlFor="phone-number"
-            className="flex flex-col gap-y-2 w-full"
+            className="flex flex-col gap-y-2 w-full cursor-pointer"
           >
             <span className="font-normal text-body-small text-gray-900">
               Phone Number<span className="text-danger"> *</span>
@@ -171,7 +186,7 @@ export function CheckoutForm({ ...props }: Props) {
           aria-required={false}
           className="size-5 rounded-[3px] border border-gray-100 bg-white text-gray-900 outline-none data-[state=checked]:border-none data-[state=checked]:bg-primary data-[state=checked]:text-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
         />
-        <span className="font-normal text-body-small text-gray-900">
+        <span className="font-normal text-body-small text-gray-900 w-fit">
           Ship to a different address
         </span>
       </Label>

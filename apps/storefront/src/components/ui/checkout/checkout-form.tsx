@@ -163,7 +163,7 @@ export function CheckoutForm({ ...props }: Props) {
       </div>
       <Label
         htmlFor="ship-different-address"
-        className="flex flex-row gap-2 w-full items-center"
+        className="flex flex-row gap-2 w-fit items-center"
       >
         <Checkbox
           id="ship-different-address"

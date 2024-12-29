@@ -23,6 +23,8 @@ import {
 import { ShoppingBagIcon } from "@heroicons/react/24/outline";
 import { callDatabaseFunction } from "@/lib/call-database-function";
 import { getCartSummaryItems } from "@/lib/utils";
+import Link from "next/link";
+import isUUID from "validator/es/lib/isUUID";
 
 export default async function Cart({
   params,
@@ -75,6 +77,8 @@ export default async function Cart({
       "!p-2 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:border-gray-100 rounded-full border border-gray-100 p-4 flex flex-1 flex-row items-center justify-center group/more-button hover:border-transparent hover:bg-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none",
     hideAddToCart: true,
   };
+
+  const isCartIdValid = typeof cartId === "string" && isUUID(cartId);
 
   return (
     <div className="flex flex-1 flex-col gap-y-8 px-6 py-8 xl:px-0">
@@ -155,6 +159,14 @@ export default async function Cart({
                   );
                 }
               )}
+              {isCartIdValid ? (
+                <Link
+                  href={`/checkout/${cartId}`}
+                  className="mt-3 py-3 flex flex-1 flex-row items-center justify-center gap-x-2 rounded-full bg-primary text-body-small font-semibold leading-6 text-white border border-primary hover:bg-white hover:text-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
+                >
+                  Proceed to Checkout
+                </Link>
+              ) : null}
             </CartSummary>
           </div>
         </div>

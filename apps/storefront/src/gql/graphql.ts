@@ -197,6 +197,10 @@ export type Mutation = {
   deleteFromcartsCollection: CartsDeleteResponse;
   /** Deletes zero or more records from the `categories` collection */
   deleteFromcategoriesCollection: CategoriesDeleteResponse;
+  /** Deletes zero or more records from the `countries` collection */
+  deleteFromcountriesCollection: CountriesDeleteResponse;
+  /** Deletes zero or more records from the `country_states` collection */
+  deleteFromcountry_statesCollection: Country_StatesDeleteResponse;
   /** Deletes zero or more records from the `coupon_codes` collection */
   deleteFromcoupon_codesCollection: Coupon_CodesDeleteResponse;
   /** Deletes zero or more records from the `currencies` collection */
@@ -237,8 +241,9 @@ export type Mutation = {
   deleteFromtag_typesCollection: Tag_TypesDeleteResponse;
   /** Deletes zero or more records from the `transactions` collection */
   deleteFromtransactionsCollection: TransactionsDeleteResponse;
+  /** Deletes zero or more records from the `zip_codes` collection */
+  deleteFromzip_codesCollection: Zip_CodesDeleteResponse;
   get_monthly_users_info?: Maybe<Scalars['Int']['output']>;
-  get_products_count?: Maybe<Scalars['Int']['output']>;
   get_products_max_price?: Maybe<Scalars['Float']['output']>;
   /** Adds one or more `banner_types` records to the collection */
   insertIntobanner_typesCollection?: Maybe<Banner_TypesInsertResponse>;
@@ -250,6 +255,10 @@ export type Mutation = {
   insertIntocartsCollection?: Maybe<CartsInsertResponse>;
   /** Adds one or more `categories` records to the collection */
   insertIntocategoriesCollection?: Maybe<CategoriesInsertResponse>;
+  /** Adds one or more `countries` records to the collection */
+  insertIntocountriesCollection?: Maybe<CountriesInsertResponse>;
+  /** Adds one or more `country_states` records to the collection */
+  insertIntocountry_statesCollection?: Maybe<Country_StatesInsertResponse>;
   /** Adds one or more `coupon_codes` records to the collection */
   insertIntocoupon_codesCollection?: Maybe<Coupon_CodesInsertResponse>;
   /** Adds one or more `currencies` records to the collection */
@@ -290,6 +299,8 @@ export type Mutation = {
   insertIntotag_typesCollection?: Maybe<Tag_TypesInsertResponse>;
   /** Adds one or more `transactions` records to the collection */
   insertIntotransactionsCollection?: Maybe<TransactionsInsertResponse>;
+  /** Adds one or more `zip_codes` records to the collection */
+  insertIntozip_codesCollection?: Maybe<Zip_CodesInsertResponse>;
   /** Updates zero or more records in the `banner_types` collection */
   updatebanner_typesCollection: Banner_TypesUpdateResponse;
   /** Updates zero or more records in the `business_currency` collection */
@@ -300,6 +311,10 @@ export type Mutation = {
   updatecartsCollection: CartsUpdateResponse;
   /** Updates zero or more records in the `categories` collection */
   updatecategoriesCollection: CategoriesUpdateResponse;
+  /** Updates zero or more records in the `countries` collection */
+  updatecountriesCollection: CountriesUpdateResponse;
+  /** Updates zero or more records in the `country_states` collection */
+  updatecountry_statesCollection: Country_StatesUpdateResponse;
   /** Updates zero or more records in the `coupon_codes` collection */
   updatecoupon_codesCollection: Coupon_CodesUpdateResponse;
   /** Updates zero or more records in the `currencies` collection */
@@ -340,6 +355,8 @@ export type Mutation = {
   updatetag_typesCollection: Tag_TypesUpdateResponse;
   /** Updates zero or more records in the `transactions` collection */
   updatetransactionsCollection: TransactionsUpdateResponse;
+  /** Updates zero or more records in the `zip_codes` collection */
+  updatezip_codesCollection: Zip_CodesUpdateResponse;
 };
 
 
@@ -375,6 +392,20 @@ export type MutationDeleteFromcartsCollectionArgs = {
 export type MutationDeleteFromcategoriesCollectionArgs = {
   atMost?: Scalars['Int']['input'];
   filter?: InputMaybe<CategoriesFilter>;
+};
+
+
+/** The root type for creating and mutating data */
+export type MutationDeleteFromcountriesCollectionArgs = {
+  atMost?: Scalars['Int']['input'];
+  filter?: InputMaybe<CountriesFilter>;
+};
+
+
+/** The root type for creating and mutating data */
+export type MutationDeleteFromcountry_StatesCollectionArgs = {
+  atMost?: Scalars['Int']['input'];
+  filter?: InputMaybe<Country_StatesFilter>;
 };
 
 
@@ -519,14 +550,15 @@ export type MutationDeleteFromtransactionsCollectionArgs = {
 
 
 /** The root type for creating and mutating data */
-export type MutationGet_Monthly_Users_InfoArgs = {
-  current_date_arg?: InputMaybe<Scalars['Datetime']['input']>;
+export type MutationDeleteFromzip_CodesCollectionArgs = {
+  atMost?: Scalars['Int']['input'];
+  filter?: InputMaybe<Zip_CodesFilter>;
 };
 
 
 /** The root type for creating and mutating data */
-export type MutationGet_Products_CountArgs = {
-  store_id: Scalars['String']['input'];
+export type MutationGet_Monthly_Users_InfoArgs = {
+  current_date_arg?: InputMaybe<Scalars['Datetime']['input']>;
 };
 
 
@@ -563,6 +595,18 @@ export type MutationInsertIntocartsCollectionArgs = {
 /** The root type for creating and mutating data */
 export type MutationInsertIntocategoriesCollectionArgs = {
   objects: Array<CategoriesInsertInput>;
+};
+
+
+/** The root type for creating and mutating data */
+export type MutationInsertIntocountriesCollectionArgs = {
+  objects: Array<CountriesInsertInput>;
+};
+
+
+/** The root type for creating and mutating data */
+export type MutationInsertIntocountry_StatesCollectionArgs = {
+  objects: Array<Country_StatesInsertInput>;
 };
 
 
@@ -687,6 +731,12 @@ export type MutationInsertIntotransactionsCollectionArgs = {
 
 
 /** The root type for creating and mutating data */
+export type MutationInsertIntozip_CodesCollectionArgs = {
+  objects: Array<Zip_CodesInsertInput>;
+};
+
+
+/** The root type for creating and mutating data */
 export type MutationUpdatebanner_TypesCollectionArgs = {
   atMost?: Scalars['Int']['input'];
   filter?: InputMaybe<Banner_TypesFilter>;
@@ -723,6 +773,22 @@ export type MutationUpdatecategoriesCollectionArgs = {
   atMost?: Scalars['Int']['input'];
   filter?: InputMaybe<CategoriesFilter>;
   set: CategoriesUpdateInput;
+};
+
+
+/** The root type for creating and mutating data */
+export type MutationUpdatecountriesCollectionArgs = {
+  atMost?: Scalars['Int']['input'];
+  filter?: InputMaybe<CountriesFilter>;
+  set: CountriesUpdateInput;
+};
+
+
+/** The root type for creating and mutating data */
+export type MutationUpdatecountry_StatesCollectionArgs = {
+  atMost?: Scalars['Int']['input'];
+  filter?: InputMaybe<Country_StatesFilter>;
+  set: Country_StatesUpdateInput;
 };
 
 
@@ -885,6 +951,14 @@ export type MutationUpdatetransactionsCollectionArgs = {
   set: TransactionsUpdateInput;
 };
 
+
+/** The root type for creating and mutating data */
+export type MutationUpdatezip_CodesCollectionArgs = {
+  atMost?: Scalars['Int']['input'];
+  filter?: InputMaybe<Zip_CodesFilter>;
+  set: Zip_CodesUpdateInput;
+};
+
 export type Node = {
   /** Retrieves a record by `ID` */
   nodeId: Scalars['ID']['output'];
@@ -929,6 +1003,10 @@ export type Query = {
   cartsCollection?: Maybe<CartsConnection>;
   /** A pagable collection of type `categories` */
   categoriesCollection?: Maybe<CategoriesConnection>;
+  /** A pagable collection of type `countries` */
+  countriesCollection?: Maybe<CountriesConnection>;
+  /** A pagable collection of type `country_states` */
+  country_statesCollection?: Maybe<Country_StatesConnection>;
   /** A pagable collection of type `coupon_codes` */
   coupon_codesCollection?: Maybe<Coupon_CodesConnection>;
   /** A pagable collection of type `currencies` */
@@ -971,6 +1049,8 @@ export type Query = {
   tag_typesCollection?: Maybe<Tag_TypesConnection>;
   /** A pagable collection of type `transactions` */
   transactionsCollection?: Maybe<TransactionsConnection>;
+  /** A pagable collection of type `zip_codes` */
+  zip_codesCollection?: Maybe<Zip_CodesConnection>;
 };
 
 
@@ -1031,6 +1111,30 @@ export type QueryCategoriesCollectionArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<Array<CategoriesOrderBy>>;
+};
+
+
+/** The root type for querying data */
+export type QueryCountriesCollectionArgs = {
+  after?: InputMaybe<Scalars['Cursor']['input']>;
+  before?: InputMaybe<Scalars['Cursor']['input']>;
+  filter?: InputMaybe<CountriesFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<CountriesOrderBy>>;
+};
+
+
+/** The root type for querying data */
+export type QueryCountry_StatesCollectionArgs = {
+  after?: InputMaybe<Scalars['Cursor']['input']>;
+  before?: InputMaybe<Scalars['Cursor']['input']>;
+  filter?: InputMaybe<Country_StatesFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<Country_StatesOrderBy>>;
 };
 
 
@@ -1277,6 +1381,18 @@ export type QueryTransactionsCollectionArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<Array<TransactionsOrderBy>>;
+};
+
+
+/** The root type for querying data */
+export type QueryZip_CodesCollectionArgs = {
+  after?: InputMaybe<Scalars['Cursor']['input']>;
+  before?: InputMaybe<Scalars['Cursor']['input']>;
+  filter?: InputMaybe<Zip_CodesFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<Zip_CodesOrderBy>>;
 };
 
 /** Boolean expression comparing fields on type "String" */
@@ -1893,6 +2009,213 @@ export type CategoriesUpdateResponse = {
   affectedCount: Scalars['Int']['output'];
   /** Array of records impacted by the mutation */
   records: Array<Categories>;
+};
+
+export type Countries = Node & {
+  __typename?: 'countries';
+  alpha_2: Scalars['String']['output'];
+  country_code: Scalars['String']['output'];
+  country_statesCollection?: Maybe<Country_StatesConnection>;
+  created_at: Scalars['Datetime']['output'];
+  id: Scalars['UUID']['output'];
+  name: Scalars['String']['output'];
+  /** Globally Unique Record Identifier */
+  nodeId: Scalars['ID']['output'];
+  updated_at?: Maybe<Scalars['Datetime']['output']>;
+};
+
+
+export type CountriesCountry_StatesCollectionArgs = {
+  after?: InputMaybe<Scalars['Cursor']['input']>;
+  before?: InputMaybe<Scalars['Cursor']['input']>;
+  filter?: InputMaybe<Country_StatesFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<Country_StatesOrderBy>>;
+};
+
+export type CountriesConnection = {
+  __typename?: 'countriesConnection';
+  edges: Array<CountriesEdge>;
+  pageInfo: PageInfo;
+};
+
+export type CountriesDeleteResponse = {
+  __typename?: 'countriesDeleteResponse';
+  /** Count of the records impacted by the mutation */
+  affectedCount: Scalars['Int']['output'];
+  /** Array of records impacted by the mutation */
+  records: Array<Countries>;
+};
+
+export type CountriesEdge = {
+  __typename?: 'countriesEdge';
+  cursor: Scalars['String']['output'];
+  node: Countries;
+};
+
+export type CountriesFilter = {
+  alpha_2?: InputMaybe<StringFilter>;
+  /** Returns true only if all its inner filters are true, otherwise returns false */
+  and?: InputMaybe<Array<CountriesFilter>>;
+  country_code?: InputMaybe<StringFilter>;
+  created_at?: InputMaybe<DatetimeFilter>;
+  id?: InputMaybe<UuidFilter>;
+  name?: InputMaybe<StringFilter>;
+  nodeId?: InputMaybe<IdFilter>;
+  /** Negates a filter */
+  not?: InputMaybe<CountriesFilter>;
+  /** Returns true if at least one of its inner filters is true, otherwise returns false */
+  or?: InputMaybe<Array<CountriesFilter>>;
+  updated_at?: InputMaybe<DatetimeFilter>;
+};
+
+export type CountriesInsertInput = {
+  alpha_2?: InputMaybe<Scalars['String']['input']>;
+  country_code?: InputMaybe<Scalars['String']['input']>;
+  created_at?: InputMaybe<Scalars['Datetime']['input']>;
+  id?: InputMaybe<Scalars['UUID']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  updated_at?: InputMaybe<Scalars['Datetime']['input']>;
+};
+
+export type CountriesInsertResponse = {
+  __typename?: 'countriesInsertResponse';
+  /** Count of the records impacted by the mutation */
+  affectedCount: Scalars['Int']['output'];
+  /** Array of records impacted by the mutation */
+  records: Array<Countries>;
+};
+
+export type CountriesOrderBy = {
+  alpha_2?: InputMaybe<OrderByDirection>;
+  country_code?: InputMaybe<OrderByDirection>;
+  created_at?: InputMaybe<OrderByDirection>;
+  id?: InputMaybe<OrderByDirection>;
+  name?: InputMaybe<OrderByDirection>;
+  updated_at?: InputMaybe<OrderByDirection>;
+};
+
+export type CountriesUpdateInput = {
+  alpha_2?: InputMaybe<Scalars['String']['input']>;
+  country_code?: InputMaybe<Scalars['String']['input']>;
+  created_at?: InputMaybe<Scalars['Datetime']['input']>;
+  id?: InputMaybe<Scalars['UUID']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  updated_at?: InputMaybe<Scalars['Datetime']['input']>;
+};
+
+export type CountriesUpdateResponse = {
+  __typename?: 'countriesUpdateResponse';
+  /** Count of the records impacted by the mutation */
+  affectedCount: Scalars['Int']['output'];
+  /** Array of records impacted by the mutation */
+  records: Array<Countries>;
+};
+
+export type Country_States = Node & {
+  __typename?: 'country_states';
+  countries?: Maybe<Countries>;
+  country: Scalars['UUID']['output'];
+  created_at: Scalars['Datetime']['output'];
+  id: Scalars['UUID']['output'];
+  name: Scalars['String']['output'];
+  /** Globally Unique Record Identifier */
+  nodeId: Scalars['ID']['output'];
+  short_name: Scalars['String']['output'];
+  updated_at?: Maybe<Scalars['Datetime']['output']>;
+  zip_codesCollection?: Maybe<Zip_CodesConnection>;
+};
+
+
+export type Country_StatesZip_CodesCollectionArgs = {
+  after?: InputMaybe<Scalars['Cursor']['input']>;
+  before?: InputMaybe<Scalars['Cursor']['input']>;
+  filter?: InputMaybe<Zip_CodesFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<Zip_CodesOrderBy>>;
+};
+
+export type Country_StatesConnection = {
+  __typename?: 'country_statesConnection';
+  edges: Array<Country_StatesEdge>;
+  pageInfo: PageInfo;
+};
+
+export type Country_StatesDeleteResponse = {
+  __typename?: 'country_statesDeleteResponse';
+  /** Count of the records impacted by the mutation */
+  affectedCount: Scalars['Int']['output'];
+  /** Array of records impacted by the mutation */
+  records: Array<Country_States>;
+};
+
+export type Country_StatesEdge = {
+  __typename?: 'country_statesEdge';
+  cursor: Scalars['String']['output'];
+  node: Country_States;
+};
+
+export type Country_StatesFilter = {
+  /** Returns true only if all its inner filters are true, otherwise returns false */
+  and?: InputMaybe<Array<Country_StatesFilter>>;
+  country?: InputMaybe<UuidFilter>;
+  created_at?: InputMaybe<DatetimeFilter>;
+  id?: InputMaybe<UuidFilter>;
+  name?: InputMaybe<StringFilter>;
+  nodeId?: InputMaybe<IdFilter>;
+  /** Negates a filter */
+  not?: InputMaybe<Country_StatesFilter>;
+  /** Returns true if at least one of its inner filters is true, otherwise returns false */
+  or?: InputMaybe<Array<Country_StatesFilter>>;
+  short_name?: InputMaybe<StringFilter>;
+  updated_at?: InputMaybe<DatetimeFilter>;
+};
+
+export type Country_StatesInsertInput = {
+  country?: InputMaybe<Scalars['UUID']['input']>;
+  created_at?: InputMaybe<Scalars['Datetime']['input']>;
+  id?: InputMaybe<Scalars['UUID']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  short_name?: InputMaybe<Scalars['String']['input']>;
+  updated_at?: InputMaybe<Scalars['Datetime']['input']>;
+};
+
+export type Country_StatesInsertResponse = {
+  __typename?: 'country_statesInsertResponse';
+  /** Count of the records impacted by the mutation */
+  affectedCount: Scalars['Int']['output'];
+  /** Array of records impacted by the mutation */
+  records: Array<Country_States>;
+};
+
+export type Country_StatesOrderBy = {
+  country?: InputMaybe<OrderByDirection>;
+  created_at?: InputMaybe<OrderByDirection>;
+  id?: InputMaybe<OrderByDirection>;
+  name?: InputMaybe<OrderByDirection>;
+  short_name?: InputMaybe<OrderByDirection>;
+  updated_at?: InputMaybe<OrderByDirection>;
+};
+
+export type Country_StatesUpdateInput = {
+  country?: InputMaybe<Scalars['UUID']['input']>;
+  created_at?: InputMaybe<Scalars['Datetime']['input']>;
+  id?: InputMaybe<Scalars['UUID']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  short_name?: InputMaybe<Scalars['String']['input']>;
+  updated_at?: InputMaybe<Scalars['Datetime']['input']>;
+};
+
+export type Country_StatesUpdateResponse = {
+  __typename?: 'country_statesUpdateResponse';
+  /** Count of the records impacted by the mutation */
+  affectedCount: Scalars['Int']['output'];
+  /** Array of records impacted by the mutation */
+  records: Array<Country_States>;
 };
 
 export type Coupon_Codes = Node & {
@@ -4128,4 +4451,101 @@ export type TransactionsUpdateResponse = {
   affectedCount: Scalars['Int']['output'];
   /** Array of records impacted by the mutation */
   records: Array<Transactions>;
+};
+
+export type Zip_Codes = Node & {
+  __typename?: 'zip_codes';
+  city: Scalars['String']['output'];
+  country_states?: Maybe<Country_States>;
+  county: Scalars['String']['output'];
+  created_at: Scalars['Datetime']['output'];
+  id: Scalars['UUID']['output'];
+  /** Globally Unique Record Identifier */
+  nodeId: Scalars['ID']['output'];
+  state: Scalars['UUID']['output'];
+  updated_at?: Maybe<Scalars['Datetime']['output']>;
+  zip_code: Scalars['String']['output'];
+};
+
+export type Zip_CodesConnection = {
+  __typename?: 'zip_codesConnection';
+  edges: Array<Zip_CodesEdge>;
+  pageInfo: PageInfo;
+};
+
+export type Zip_CodesDeleteResponse = {
+  __typename?: 'zip_codesDeleteResponse';
+  /** Count of the records impacted by the mutation */
+  affectedCount: Scalars['Int']['output'];
+  /** Array of records impacted by the mutation */
+  records: Array<Zip_Codes>;
+};
+
+export type Zip_CodesEdge = {
+  __typename?: 'zip_codesEdge';
+  cursor: Scalars['String']['output'];
+  node: Zip_Codes;
+};
+
+export type Zip_CodesFilter = {
+  /** Returns true only if all its inner filters are true, otherwise returns false */
+  and?: InputMaybe<Array<Zip_CodesFilter>>;
+  city?: InputMaybe<StringFilter>;
+  county?: InputMaybe<StringFilter>;
+  created_at?: InputMaybe<DatetimeFilter>;
+  id?: InputMaybe<UuidFilter>;
+  nodeId?: InputMaybe<IdFilter>;
+  /** Negates a filter */
+  not?: InputMaybe<Zip_CodesFilter>;
+  /** Returns true if at least one of its inner filters is true, otherwise returns false */
+  or?: InputMaybe<Array<Zip_CodesFilter>>;
+  state?: InputMaybe<UuidFilter>;
+  updated_at?: InputMaybe<DatetimeFilter>;
+  zip_code?: InputMaybe<StringFilter>;
+};
+
+export type Zip_CodesInsertInput = {
+  city?: InputMaybe<Scalars['String']['input']>;
+  county?: InputMaybe<Scalars['String']['input']>;
+  created_at?: InputMaybe<Scalars['Datetime']['input']>;
+  id?: InputMaybe<Scalars['UUID']['input']>;
+  state?: InputMaybe<Scalars['UUID']['input']>;
+  updated_at?: InputMaybe<Scalars['Datetime']['input']>;
+  zip_code?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type Zip_CodesInsertResponse = {
+  __typename?: 'zip_codesInsertResponse';
+  /** Count of the records impacted by the mutation */
+  affectedCount: Scalars['Int']['output'];
+  /** Array of records impacted by the mutation */
+  records: Array<Zip_Codes>;
+};
+
+export type Zip_CodesOrderBy = {
+  city?: InputMaybe<OrderByDirection>;
+  county?: InputMaybe<OrderByDirection>;
+  created_at?: InputMaybe<OrderByDirection>;
+  id?: InputMaybe<OrderByDirection>;
+  state?: InputMaybe<OrderByDirection>;
+  updated_at?: InputMaybe<OrderByDirection>;
+  zip_code?: InputMaybe<OrderByDirection>;
+};
+
+export type Zip_CodesUpdateInput = {
+  city?: InputMaybe<Scalars['String']['input']>;
+  county?: InputMaybe<Scalars['String']['input']>;
+  created_at?: InputMaybe<Scalars['Datetime']['input']>;
+  id?: InputMaybe<Scalars['UUID']['input']>;
+  state?: InputMaybe<Scalars['UUID']['input']>;
+  updated_at?: InputMaybe<Scalars['Datetime']['input']>;
+  zip_code?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type Zip_CodesUpdateResponse = {
+  __typename?: 'zip_codesUpdateResponse';
+  /** Count of the records impacted by the mutation */
+  affectedCount: Scalars['Int']['output'];
+  /** Array of records impacted by the mutation */
+  records: Array<Zip_Codes>;
 };

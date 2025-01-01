@@ -174,7 +174,9 @@ export function CartContextProvider({ children, currentCart = null }: Props) {
 
   const getCartLineItemId = React.useCallback(
     (productId: string) => {
-      if (!lineItems) return null;
+      if (!lineItems) {
+        return null;
+      }
 
       const lineItemId = lineItems.find(
         ({ products }) => products?.id === productId

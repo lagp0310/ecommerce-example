@@ -211,6 +211,6 @@ export type PaymentMethodsResponse = Omit<
   paymentMethodTypeId: string;
   paymentMethodTypes: PaymentMethodTypeResponse;
   storeId: string;
-  createdAt: string;
-  updatedAt: string;
+  createdAt?: string;
+  updatedAt?: string;
 };

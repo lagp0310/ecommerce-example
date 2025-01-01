@@ -10,8 +10,6 @@ export const paymentMethodFragment = gql`
     paymentMethodTypes: payment_method_types {
       ...PaymentMethodTypeFragment
     }
-    createdAt: created_at
-    updatedAt: updated_at
   }
   ${paymentMethodTypeFragment}
 `;

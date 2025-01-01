@@ -12,10 +12,11 @@ import {
   defaultCurrencySymbol,
 } from "@/constants/constants";
 import type { Line_Items as LineItem } from "@/gql/graphql";
-import type {
-  CartSummaryField,
-  ProductsResponse,
-  TProduct,
+import {
+  PaymentMethodEnum,
+  type CartSummaryField,
+  type ProductsResponse,
+  type TProduct,
 } from "@/types/types";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
@@ -241,4 +242,21 @@ export function getCartSummaryItems(
       value: total,
     },
   ];
+}
+
+export function getPaymentMethodValue(value?: string) {
+  if (!value) {
+    return null;
+  }
+
+  switch (value) {
+    case "Cash":
+      return PaymentMethodEnum.CASH;
+    case "Credit Card":
+      return PaymentMethodEnum.CREDIT_CARD;
+    case "Debit Card":
+      return PaymentMethodEnum.DEBIT_CARD;
+    default:
+      throw new Error(`'${value}' payment method is not in enum`);
+  }
 }

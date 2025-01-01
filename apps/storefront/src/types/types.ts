@@ -219,3 +219,9 @@ export type GetParsedOptionsResponse = Pick<
   BaseSelectOption,
   "id" | "name" | "value"
 >[];
+
+export enum PaymentMethodEnum {
+  CASH = "Cash",
+  CREDIT_CARD = "Credit Card",
+  DEBIT_CARD = "Debit Card",
+}

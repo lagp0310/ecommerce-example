@@ -5,6 +5,7 @@ import { Form } from "@/components/form/form";
 import { Input } from "@/components/form/input";
 import { Label } from "@/components/form/label";
 import React from "react";
+import { PatternFormat } from "react-number-format";
 
 export type Props = {};
 
@@ -60,7 +61,7 @@ export function CardForm({}: Props) {
             <span className="font-normal text-body-small text-gray-900">
               Card Number<span className="text-danger"> *</span>
             </span>
-            <Input
+            <PatternFormat
               id="card-number"
               name="card-number"
               placeholder="Card Number"
@@ -68,6 +69,8 @@ export function CardForm({}: Props) {
               required
               aria-required
               className="focus:ring-2 focus:ring-primary/50 placeholder:text-gray-400 placeholder:font-normal placeholder:text-body-small placeholder:leading-[130%] rounded-six border border-gray-100 outline-none p-3 motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
+              customInput={Input}
+              format="####-####-####-####"
             />
           </Label>
           <Label
@@ -77,15 +80,16 @@ export function CardForm({}: Props) {
             <span className="font-normal text-body-small text-gray-900">
               CVC<span className="text-danger"> *</span>
             </span>
-            <Input
+            <PatternFormat
               id="cvc"
               name="cvc"
               placeholder="CVC"
               type="password"
-              maxLength={3}
               required
               aria-required
               className="focus:ring-2 focus:ring-primary/50 placeholder:text-gray-400 placeholder:font-normal placeholder:text-body-small placeholder:leading-[130%] rounded-six border border-gray-100 outline-none p-3 motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
+              customInput={Input}
+              format="###"
             />
           </Label>
         </div>

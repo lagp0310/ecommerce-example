@@ -279,6 +279,9 @@ importers:
       react-dom:
         specifier: 19.0.0-rc-66855b96-20241106
         version: 19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106)
+      react-number-format:
+        specifier: ^5.4.2
+        version: 5.4.2(react-dom@19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106))(react@19.0.0-rc-66855b96-20241106)
       tailwind-merge:
         specifier: ^2.5.4
         version: 2.5.4

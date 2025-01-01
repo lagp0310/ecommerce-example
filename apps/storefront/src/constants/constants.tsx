@@ -130,3 +130,10 @@ export const defaultCurrencyId = "5afb804d-d96a-4c59-8d01-259d256a2e22";
 export const localStorageCartIdItemName = "cart-id";
 
 export const defaultCurrencySymbol = "$";
+
+export const availableStateIds = [
+  "118ffad1-4e01-4492-96ef-a27b5a5fecf9",
+  "470d20ee-2c88-448f-b012-36512f3dbfc7",
+  "e9036bd6-176d-4af4-9245-89420d00464f",
+  "fa474cac-ab81-4a06-a581-ee595bbc6c8c",
+];

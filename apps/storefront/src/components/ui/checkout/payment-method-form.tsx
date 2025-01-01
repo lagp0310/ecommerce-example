@@ -72,7 +72,7 @@ export function PaymentMethodForm({ paymentMethods }: Props) {
           { hidden: currentValue != PaymentMethodEnum.CREDIT_CARD }
         )}
       >
-        <CardForm />
+        <CardForm htmlNamePrefix="credit-card" />
       </div>
       <div
         className={cn(
@@ -80,7 +80,7 @@ export function PaymentMethodForm({ paymentMethods }: Props) {
           { hidden: currentValue != PaymentMethodEnum.DEBIT_CARD }
         )}
       >
-        <CardForm />
+        <CardForm htmlNamePrefix="debit-card" />
       </div>
     </div>
   );

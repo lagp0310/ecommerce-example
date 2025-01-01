@@ -11,12 +11,18 @@ import { ComboboxContextProvider } from "@/context/combobox-context";
 import { ComboboxLabel } from "@/components/form/combobox-label";
 
 export type Props = {
+  htmlNamePrefix: string;
   countries: GetParsedOptionsResponse;
   countryStates: GetParsedOptionsResponse;
   zipCodes: GetParsedOptionsResponse;
 };
 
-export function AddressForm({ countries, countryStates, zipCodes }: Props) {
+export function AddressForm({
+  htmlNamePrefix,
+  countries,
+  countryStates,
+  zipCodes,
+}: Props) {
   // TODO: Client and Server validation.
   // TODO: Error states.
   // TODO: Autofill data if the user is signed in.
@@ -35,15 +41,15 @@ export function AddressForm({ countries, countryStates, zipCodes }: Props) {
       <div className="flex flex-1 flex-col gap-4">
         <div className="flex flex-1 flex-row flex-wrap md:flex-nowrap gap-4">
           <Label
-            htmlFor="first-name"
+            htmlFor={`${htmlNamePrefix}-first-name`}
             className="flex flex-col gap-y-2 w-full cursor-pointer"
           >
             <span className="font-normal text-body-small text-gray-900">
               First Name<span className="text-danger"> *</span>
             </span>
             <Input
-              id="first-name"
-              name="first-name"
+              id={`${htmlNamePrefix}-first-name`}
+              name={`${htmlNamePrefix}-first-name`}
               placeholder="First Name"
               type="text"
               required
@@ -52,15 +58,15 @@ export function AddressForm({ countries, countryStates, zipCodes }: Props) {
             />
           </Label>
           <Label
-            htmlFor="last-name"
+            htmlFor={`${htmlNamePrefix}-last-name`}
             className="flex flex-col gap-y-2 w-full cursor-pointer"
           >
             <span className="font-normal text-body-small text-gray-900">
               Last Name<span className="text-danger"> *</span>
             </span>
             <Input
-              id="last-name"
-              name="last-name"
+              id={`${htmlNamePrefix}-last-name`}
+              name={`${htmlNamePrefix}-last-name`}
               placeholder="Last Name"
               type="text"
               required
@@ -69,15 +75,15 @@ export function AddressForm({ countries, countryStates, zipCodes }: Props) {
             />
           </Label>
           <Label
-            htmlFor="company-name"
+            htmlFor={`${htmlNamePrefix}-company-name`}
             className="flex flex-col gap-y-2 w-full cursor-pointer"
           >
             <span className="font-normal text-body-small text-gray-900">
               {`Company Name (Optional)`}
             </span>
             <Input
-              id="company-name"
-              name="company-name"
+              id={`${htmlNamePrefix}-company-name`}
+              name={`${htmlNamePrefix}-company-name`}
               placeholder="Company Name"
               type="text"
               aria-required={false}
@@ -87,15 +93,15 @@ export function AddressForm({ countries, countryStates, zipCodes }: Props) {
         </div>
         <div className="flex flex-1 flex-row gap-4">
           <Label
-            htmlFor="street-address"
+            htmlFor={`${htmlNamePrefix}-street-address`}
             className="flex flex-col gap-y-2 w-full cursor-pointer"
           >
             <span className="font-normal text-body-small text-gray-900">
               Street Address<span className="text-danger"> *</span>
             </span>
             <Input
-              id="street-address"
-              name="street-address"
+              id={`${htmlNamePrefix}-street-address`}
+              name={`${htmlNamePrefix}-street-address`}
               placeholder="Street Address"
               type="text"
               required
@@ -107,7 +113,7 @@ export function AddressForm({ countries, countryStates, zipCodes }: Props) {
         <div className="flex flex-1 flex-row flex-wrap md:flex-nowrap gap-4 max-h-fit">
           <ComboboxContextProvider paramName="countryId">
             <ComboboxLabel
-              htmlFor="country"
+              htmlFor={`${htmlNamePrefix}-country`}
               className="flex flex-col gap-y-2 w-full cursor-pointer"
             >
               <span className="font-normal text-body-small text-gray-900">
@@ -125,7 +131,7 @@ export function AddressForm({ countries, countryStates, zipCodes }: Props) {
           </ComboboxContextProvider>
           <ComboboxContextProvider paramName="countryStateId">
             <ComboboxLabel
-              htmlFor="state"
+              htmlFor={`${htmlNamePrefix}-state`}
               className="flex flex-col gap-y-2 w-full cursor-pointer"
             >
               <span className="font-normal text-body-small text-gray-900">
@@ -144,7 +150,7 @@ export function AddressForm({ countries, countryStates, zipCodes }: Props) {
           </ComboboxContextProvider>
           <ComboboxContextProvider paramName="zipCodeId">
             <ComboboxLabel
-              htmlFor="zip-code"
+              htmlFor={`${htmlNamePrefix}-zip-code`}
               className="flex flex-col gap-y-2 w-full cursor-pointer"
             >
               <span className="font-normal text-body-small text-gray-900">
@@ -164,15 +170,15 @@ export function AddressForm({ countries, countryStates, zipCodes }: Props) {
         </div>
         <div className="flex flex-1 flex-row flex-wrap md:flex-nowrap gap-4">
           <Label
-            htmlFor="email"
+            htmlFor={`${htmlNamePrefix}-email`}
             className="flex flex-col gap-y-2 w-full cursor-pointer"
           >
             <span className="font-normal text-body-small text-gray-900">
               Email<span className="text-danger"> *</span>
             </span>
             <Input
-              id="email"
-              name="email"
+              id={`${htmlNamePrefix}-email`}
+              name={`${htmlNamePrefix}-email`}
               placeholder="Email Address"
               type="email"
               required
@@ -181,15 +187,15 @@ export function AddressForm({ countries, countryStates, zipCodes }: Props) {
             />
           </Label>
           <Label
-            htmlFor="phone-number"
+            htmlFor={`${htmlNamePrefix}-phone-number`}
             className="flex flex-col gap-y-2 w-full cursor-pointer"
           >
             <span className="font-normal text-body-small text-gray-900">
               Phone Number<span className="text-danger"> *</span>
             </span>
             <Input
-              id="phone-number"
-              name="phone-number"
+              id={`${htmlNamePrefix}-phone-number`}
+              name={`${htmlNamePrefix}-phone-number`}
               placeholder="Phone Number"
               type="tel"
               required

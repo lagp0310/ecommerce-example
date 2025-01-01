@@ -7,9 +7,9 @@ import { Label } from "@/components/form/label";
 import React from "react";
 import { PatternFormat } from "react-number-format";
 
-export type Props = {};
+export type Props = { htmlNamePrefix: string };
 
-export function CardForm({}: Props) {
+export function CardForm({ htmlNamePrefix }: Props) {
   // TODO: Client and Server validation.
   // TODO: Error states.
   // TODO: Autofill data if the user is signed in.
@@ -19,15 +19,15 @@ export function CardForm({}: Props) {
       <div className="flex flex-1 flex-col gap-4">
         <div className="flex flex-1 flex-row flex-wrap md:flex-nowrap gap-4">
           <Label
-            htmlFor="first-name"
+            htmlFor={`${htmlNamePrefix}-first-name`}
             className="flex flex-col gap-y-2 w-full cursor-pointer"
           >
             <span className="font-normal text-body-small text-gray-900">
               First Name<span className="text-danger"> *</span>
             </span>
             <Input
-              id="first-name"
-              name="first-name"
+              id={`${htmlNamePrefix}-first-name`}
+              name={`${htmlNamePrefix}-first-name`}
               placeholder="First Name"
               type="text"
               required
@@ -36,15 +36,15 @@ export function CardForm({}: Props) {
             />
           </Label>
           <Label
-            htmlFor="last-name"
+            htmlFor={`${htmlNamePrefix}-last-name`}
             className="flex flex-col gap-y-2 w-full cursor-pointer"
           >
             <span className="font-normal text-body-small text-gray-900">
               Last Name<span className="text-danger"> *</span>
             </span>
             <Input
-              id="last-name"
-              name="last-name"
+              id={`${htmlNamePrefix}-last-name`}
+              name={`${htmlNamePrefix}-last-name`}
               placeholder="Last Name"
               type="text"
               required
@@ -55,15 +55,15 @@ export function CardForm({}: Props) {
         </div>
         <div className="flex flex-1 flex-row flex-wrap md:flex-nowrap gap-4">
           <Label
-            htmlFor="card-number"
+            htmlFor={`${htmlNamePrefix}-card-number`}
             className="flex flex-col gap-y-2 w-full cursor-pointer"
           >
             <span className="font-normal text-body-small text-gray-900">
               Card Number<span className="text-danger"> *</span>
             </span>
             <PatternFormat
-              id="card-number"
-              name="card-number"
+              id={`${htmlNamePrefix}-card-number`}
+              name={`${htmlNamePrefix}-card-number`}
               placeholder="Card Number"
               type="text"
               required
@@ -74,15 +74,15 @@ export function CardForm({}: Props) {
             />
           </Label>
           <Label
-            htmlFor="cvc"
+            htmlFor={`${htmlNamePrefix}-cvc`}
             className="flex flex-col gap-y-2 w-full cursor-pointer"
           >
             <span className="font-normal text-body-small text-gray-900">
               CVC<span className="text-danger"> *</span>
             </span>
             <PatternFormat
-              id="cvc"
-              name="cvc"
+              id={`${htmlNamePrefix}-cvc`}
+              name={`${htmlNamePrefix}-cvc`}
               placeholder="CVC"
               type="password"
               required

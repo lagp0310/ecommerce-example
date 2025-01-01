@@ -23,7 +23,7 @@ export function CheckoutForm({ ...formProps }: Props) {
 
   return (
     <div className="flex flex-1 flex-col gap-4">
-      <AddressForm {...formProps} />
+      <AddressForm {...formProps} htmlNamePrefix="billing" />
       <Label
         htmlFor="ship-different-address"
         className="flex flex-row gap-2 w-fit items-center"
@@ -46,7 +46,7 @@ export function CheckoutForm({ ...formProps }: Props) {
           { hidden: !showShippingAddressForm }
         )}
       >
-        <AddressForm {...formProps} />
+        <AddressForm {...formProps} htmlNamePrefix="shipping" />
       </div>
     </div>
   );

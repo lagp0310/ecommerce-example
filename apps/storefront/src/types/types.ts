@@ -214,3 +214,8 @@ export type PaymentMethodsResponse = Omit<
   createdAt?: string;
   updatedAt?: string;
 };
+
+export type GetParsedOptionsResponse = Pick<
+  BaseSelectOption,
+  "id" | "name" | "value"
+>[];

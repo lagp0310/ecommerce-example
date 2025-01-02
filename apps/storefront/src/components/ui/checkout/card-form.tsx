@@ -19,7 +19,7 @@ import { PatternFormat } from "react-number-format";
 export type Props = { htmlNamePrefix: string };
 
 export function CardForm({ htmlNamePrefix }: Props) {
-  // TODO: Client and Server validation.
+  // TODO: Server validation.
   // TODO: Autofill data if the user is signed in.
 
   const {

@@ -90,6 +90,7 @@ export function CardForm({ htmlNamePrefix }: Props) {
               className="focus:ring-2 focus:ring-primary/50 placeholder:text-gray-400 placeholder:font-normal placeholder:text-body-small placeholder:leading-[130%] rounded-six border border-gray-100 outline-none p-3 motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
               customInput={Input}
               format="###"
+              valueIsNumericString
             />
           </Label>
         </div>

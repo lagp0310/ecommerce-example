@@ -14,11 +14,12 @@ import { useForm, type SubmitHandler } from "react-hook-form";
 import {
   type AddressForm,
   type AddressFormComboboxKeys,
+  type AddressFormInputKeys,
   addressFormSchema,
-  type CustomOnValueChange,
 } from "@/types/form/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FieldError } from "@/components/form/field-error";
+import { useFormUtils } from "@/hooks/use-form-utils";
 
 export type Props = {
   htmlNamePrefix: string;
@@ -48,6 +49,9 @@ export function AddressForm({
       console.log(data);
     },
     []
+  );
+  const { handleInputChange } = useFormUtils<AddressForm, AddressFormInputKeys>(
+    setValue
   );
 
   const isCountryStateSelectorDisabled = React.useMemo(
@@ -83,16 +87,6 @@ export function AddressForm({
       onValueChange("countryStateId", newValue);
     },
     [onValueChange]
-  );
-
-  const handleInputChange: CustomOnValueChange = React.useCallback(
-    (name, values, _sourceInfo, useFormattedValue = true) => {
-      const inputValue = useFormattedValue
-        ? values.formattedValue
-        : values.value;
-      setValue(name, inputValue);
-    },
-    [setValue]
   );
 
   return (

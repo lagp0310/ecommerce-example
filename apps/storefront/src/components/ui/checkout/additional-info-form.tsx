@@ -26,6 +26,7 @@ export function AdditionalInfoForm({ ...props }: Props) {
               name="order-notes"
               placeholder="Notes about your order, e.g. special notes for delivery."
               aria-required={false}
+              maxLength={5000}
               className="focus:ring-2 focus:ring-primary/50 resize-y min-h-[100px] max-h-[500px] placeholder:text-gray-400 placeholder:font-normal placeholder:text-body-medium placeholder:leading-[130%] rounded-six border border-gray-100 outline-none p-3 motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
             />
           </Label>

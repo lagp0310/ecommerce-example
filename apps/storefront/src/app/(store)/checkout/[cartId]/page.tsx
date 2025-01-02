@@ -121,7 +121,6 @@ export default async function Checkout({
   const checkoutFormProps: CheckoutFormProps = {
     countries: countries ?? [],
     countryStates: countryStates ?? [],
-    zipCodes: zipCodes ?? [],
   };
   const checkoutForms: BaseAccordionItem[] = [
     {

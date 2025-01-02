@@ -10,7 +10,6 @@ import { cn } from "@/lib/utils";
 export type Props = {
   countries: GetParsedOptionsResponse;
   countryStates: GetParsedOptionsResponse;
-  zipCodes: GetParsedOptionsResponse;
 };
 
 export function CheckoutForm({ ...formProps }: Props) {

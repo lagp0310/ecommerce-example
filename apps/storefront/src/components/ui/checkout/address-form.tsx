@@ -9,19 +9,18 @@ import type { GetParsedOptionsResponse } from "@/types/types";
 import { CheckoutComboboxWrapper } from "@/components/ui/checkout/checkbout-combobox-wrapper";
 import { ComboboxContextProvider } from "@/context/combobox-context";
 import { ComboboxLabel } from "@/components/form/combobox-label";
+import { PatternFormat } from "react-number-format";
 
 export type Props = {
   htmlNamePrefix: string;
   countries: GetParsedOptionsResponse;
   countryStates: GetParsedOptionsResponse;
-  zipCodes: GetParsedOptionsResponse;
 };
 
 export function AddressForm({
   htmlNamePrefix,
   countries,
   countryStates,
-  zipCodes,
 }: Props) {
   // TODO: Client and Server validation.
   // TODO: Error states.
@@ -30,10 +29,6 @@ export function AddressForm({
   const isCountryStateSelectorDisabled = React.useMemo(
     () => !Array.isArray(countryStates) || countryStates.length === 0,
     [countryStates]
-  );
-  const isZipCodeSelectorDisabled = React.useMemo(
-    () => !Array.isArray(zipCodes) || zipCodes.length === 0,
-    [zipCodes]
   );
 
   return (
@@ -148,25 +143,26 @@ export function AddressForm({
               />
             </ComboboxLabel>
           </ComboboxContextProvider>
-          <ComboboxContextProvider paramName="zipCodeId">
-            <ComboboxLabel
-              htmlFor={`${htmlNamePrefix}-zip-code`}
-              className="flex flex-col gap-y-2 w-full cursor-pointer"
-            >
-              <span className="font-normal text-body-small text-gray-900">
-                ZIP Code<span className="text-danger"> *</span>
-              </span>
-              <CheckoutComboboxWrapper
-                searchParamName="zipCodeId"
-                options={zipCodes}
-                emptyValueText="Select a Zip Code..."
-                commandInputProps={{ placeholder: "Search a Zip Code..." }}
-                noOptionFoundText="No Zip Code was found."
-                buttonClassName="w-full flex flex-1 flex-row gap-x-2 max-h-fit aria-expanded:ring-2 aria-expanded:ring-primary/50 placeholder:text-gray-400 placeholder:font-normal placeholder:text-body-small placeholder:leading-[130%] rounded-six border border-gray-100 outline-none p-3 motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
-                isDisabled={isZipCodeSelectorDisabled}
-              />
-            </ComboboxLabel>
-          </ComboboxContextProvider>
+          <Label
+            htmlFor={`${htmlNamePrefix}-zip-code`}
+            className="flex flex-col gap-y-2 w-full cursor-pointer"
+          >
+            <span className="font-normal text-body-small text-gray-900">
+              ZIP Code<span className="text-danger"> *</span>
+            </span>
+            <PatternFormat
+              id={`${htmlNamePrefix}-zip-code`}
+              name={`${htmlNamePrefix}-zip-code`}
+              placeholder="ZIP Code"
+              type="text"
+              required
+              aria-required
+              className="focus:ring-2 focus:ring-primary/50 placeholder:text-gray-400 placeholder:font-normal placeholder:text-body-small placeholder:leading-[130%] rounded-six border border-gray-100 outline-none p-3 motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
+              customInput={Input}
+              format="#####"
+              valueIsNumericString
+            />
+          </Label>
         </div>
         <div className="flex flex-1 flex-row flex-wrap md:flex-nowrap gap-4">
           <Label

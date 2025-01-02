@@ -64,7 +64,7 @@ export function PaymentMethodForm({ paymentMethods }: Props) {
           { hidden: currentValue != PaymentMethodEnum.CASH }
         )}
       >
-        <CashForm />
+        <CashForm htmlNamePrefix="cash" />
       </div>
       <div
         className={cn(

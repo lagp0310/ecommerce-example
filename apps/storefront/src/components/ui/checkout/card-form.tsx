@@ -20,8 +20,6 @@ export type Props = { htmlNamePrefix: string };
 
 export function CardForm({ htmlNamePrefix }: Props) {
   // TODO: Server validation.
-  // TODO: Autofill data if the user is signed in and have card data saved
-  // (save it with a 3rd party).
 
   const {
     formState: { errors },

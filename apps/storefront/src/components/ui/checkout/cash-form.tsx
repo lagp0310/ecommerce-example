@@ -99,7 +99,7 @@ export function CashForm({ htmlNamePrefix }: Props) {
             </span>
             <NumericFormat
               onValueChange={handleAmountChange}
-              id={`${htmlNamePrefix}-first-name`}
+              id={`${htmlNamePrefix}-pay-amount`}
               placeholder="Amount"
               type="text"
               aria-required

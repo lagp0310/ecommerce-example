@@ -2,7 +2,10 @@
 
 import { Form } from "@/components/form/form";
 import { Label } from "@/components/form/label";
-import { Textarea } from "@/components/form/textarea";
+import {
+  Textarea,
+  type Props as TextareaProps,
+} from "@/components/form/textarea";
 import { cn } from "@/lib/utils";
 import React from "react";
 import { type SubmitHandler, useForm } from "react-hook-form";
@@ -29,6 +32,23 @@ export function AdditionalInfoForm({ className, ...props }: Props) {
     []
   );
 
+  const textareaProps: TextareaProps = React.useMemo(
+    () => ({
+      id: "order-notes",
+      placeholder: "Notes about your order, e.g. special notes for delivery.",
+      "aria-required": false,
+      maxLength: 2000,
+      className: cn(
+        "data-invalid:ring-2 data-invalid:ring-danger focus:ring-2 focus:ring-primary/50 resize-y min-h-[100px] max-h-[500px] placeholder:text-gray-400 placeholder:font-normal placeholder:text-body-medium placeholder:leading-[130%] rounded-six border border-gray-100 outline-none p-3 motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none",
+        className
+      ),
+      "data-invalid": !!errors.orderNotes,
+      ...props,
+      ...register("orderNotes"),
+    }),
+    [className, errors.orderNotes, props, register]
+  );
+
   return (
     <Form
       onSubmit={handleSubmit(onSubmit)}
@@ -43,19 +63,7 @@ export function AdditionalInfoForm({ className, ...props }: Props) {
             <span className="font-normal text-body-small text-gray-900">
               {`Order Notes (Optional)`}
             </span>
-            <Textarea
-              id="order-notes"
-              placeholder="Notes about your order, e.g. special notes for delivery."
-              aria-required={false}
-              maxLength={2000}
-              className={cn(
-                "data-invalid:ring-2 data-invalid:ring-danger focus:ring-2 focus:ring-primary/50 resize-y min-h-[100px] max-h-[500px] placeholder:text-gray-400 placeholder:font-normal placeholder:text-body-medium placeholder:leading-[130%] rounded-six border border-gray-100 outline-none p-3 motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none",
-                className
-              )}
-              data-invalid={!!errors.orderNotes}
-              {...props}
-              {...register("orderNotes")}
-            />
+            <Textarea {...textareaProps} />
             <FieldError error={errors.orderNotes} />
           </Label>
         </div>

@@ -1,7 +1,10 @@
 "use client";
 
 import React from "react";
-import { Button } from "@/components/ui/common/button";
+import {
+  Button,
+  type Props as ButtonProps,
+} from "@/components/ui/common/button";
 import {
   Command,
   CommandEmpty,
@@ -70,21 +73,25 @@ export function ComboboxWrapper({
     () => currentValue?.name ?? emptyValueText,
     [currentValue, emptyValueText]
   );
+  const buttonProps: ButtonProps = React.useMemo(
+    () => ({
+      role: "combobox",
+      "aria-expanded": open,
+      className: cn(
+        "items-center justify-between disabled:cursor-not-allowed disabled:opacity-50",
+        buttonClassName
+      ),
+      disabled: isDisabled,
+      "aria-disabled": isDisabled,
+      "data-invalid": isInvalid,
+    }),
+    [buttonClassName, isDisabled, isInvalid, open]
+  );
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
-        <Button
-          role="combobox"
-          aria-expanded={open}
-          className={cn(
-            "items-center justify-between disabled:cursor-not-allowed disabled:opacity-50",
-            buttonClassName
-          )}
-          disabled={isDisabled}
-          aria-disabled={isDisabled}
-          data-invalid={isInvalid}
-        >
+        <Button {...buttonProps}>
           {buttonText}
           <ChevronUpDownIcon className="h-4 w-4 shrink-0 opacity-50" />
         </Button>

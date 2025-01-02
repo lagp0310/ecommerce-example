@@ -32,6 +32,7 @@ export type Props = {
   buttonClassName?: string;
   isDisabled?: boolean;
   onValueChangeCallback?: (newValue: string) => void;
+  isInvalid?: boolean;
 };
 
 export function ComboboxWrapper({
@@ -44,6 +45,7 @@ export function ComboboxWrapper({
   buttonClassName,
   isDisabled = false,
   onValueChangeCallback,
+  isInvalid = false,
 }: Props) {
   const { open, setOpen, value, setValue } = useCombobox();
 
@@ -81,6 +83,7 @@ export function ComboboxWrapper({
           )}
           disabled={isDisabled}
           aria-disabled={isDisabled}
+          data-invalid={isInvalid}
         >
           {buttonText}
           <ChevronUpDownIcon className="h-4 w-4 shrink-0 opacity-50" />

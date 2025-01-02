@@ -77,8 +77,8 @@ export type AddressFormInputKeys = keyof Omit<
   "countryId" | "countryStateId"
 >;
 
-export type CustomOnValueChange = (
-  name: AddressFormInputKeys,
+export type CustomOnValueChange<T> = (
+  name: T,
   values: NumberFormatValues,
   sourceInfo: SourceInfo,
   useFormattedValue?: boolean

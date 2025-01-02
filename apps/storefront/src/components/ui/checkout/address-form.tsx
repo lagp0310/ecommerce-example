@@ -191,7 +191,7 @@ export function AddressForm({
             <span className="font-normal text-body-small text-gray-900">
               Phone Number<span className="text-danger"> *</span>
             </span>
-            <Input
+            <PatternFormat
               id={`${htmlNamePrefix}-phone-number`}
               name={`${htmlNamePrefix}-phone-number`}
               placeholder="Phone Number"
@@ -199,6 +199,9 @@ export function AddressForm({
               required
               aria-required
               className="focus:ring-2 focus:ring-primary/50 placeholder:text-gray-400 placeholder:font-normal placeholder:text-body-small placeholder:leading-[130%] rounded-six border border-gray-100 outline-none p-3 motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
+              customInput={Input}
+              format="+1 (###) ###-####"
+              valueIsNumericString
             />
           </Label>
         </div>

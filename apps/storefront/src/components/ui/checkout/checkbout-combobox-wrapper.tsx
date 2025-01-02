@@ -7,7 +7,9 @@ import {
 } from "@/components/ui/common/combobox-wrapper";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
-type Props = ComboboxProps & { searchParamName?: string };
+type Props = Omit<ComboboxProps, "onValueChangeCallback"> & {
+  searchParamName?: string;
+};
 
 export function CheckoutComboboxWrapper({
   searchParamName,

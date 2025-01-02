@@ -1,0 +1,84 @@
+import { type NumberFormatValues, type SourceInfo } from "react-number-format";
+import isMobilePhone from "validator/es/lib/isMobilePhone";
+import { z } from "zod";
+
+export const addressFormSchema = z.object({
+  firstName: z
+    .string({
+      required_error: "First Name is required",
+      invalid_type_error: "First Name must be a string",
+    })
+    .max(30, "First Name cannot be more than 30 characters long")
+    .regex(/^[a-zA-Z]+$/i, "First Name can only contain letters"),
+  lastName: z
+    .string({
+      required_error: "Last Name is required",
+      invalid_type_error: "Last Name must be a string",
+    })
+    .max(30, "Last Name cannot be more than 30 characters long")
+    .regex(/^[a-zA-Z]+$/i, "Last Name can only contain letters"),
+  companyName: z
+    .string({
+      invalid_type_error: "Company Name must be a string",
+    })
+    .max(50, "Company Name cannot be more than 50 characters long")
+    .optional(),
+  streetAddress: z
+    .string({
+      required_error: "Street Address is required",
+      invalid_type_error: "Street Address must be a string",
+    })
+    .max(500, "Street Address cannot be more than 500 characters long")
+    .min(1, "Street Address cannot be empty"),
+  countryId: z
+    .string({
+      required_error: "Country is required",
+      invalid_type_error: "Country must be a string",
+    })
+    .uuid({ message: "Country is invalid" }),
+  countryStateId: z
+    .string({
+      required_error: "Country State is required",
+      invalid_type_error: "Country State must be a string",
+    })
+    .uuid({ message: "Country State is invalid" }),
+  zipCode: z
+    .string({
+      required_error: "ZIP Code is required",
+      invalid_type_error: "ZIP Code must be a string",
+    })
+    .length(5, "ZIP Code must be 5 characters long")
+    .regex(/^[0-9]{5}$/, "ZIP Code must contain numbers only"),
+  email: z
+    .string({
+      required_error: "Email is required",
+      invalid_type_error: "Email must be a string",
+    })
+    .email()
+    .max(50, "Email cannot be more than 50 characters long"),
+  phoneNumber: z
+    .string({
+      required_error: "Phone Number is required",
+      invalid_type_error: "Phone Number must be a string",
+    })
+    .length(17, "Phone Number must be 17 characters long")
+    .refine((phoneNumber) => isMobilePhone(phoneNumber, "en-US"), {
+      message: "Phone Number is invalid",
+    }),
+});
+export type AddressForm = z.infer<typeof addressFormSchema>;
+export type AddressFormComboboxKeys = keyof Pick<
+  AddressForm,
+  "countryId" | "countryStateId"
+>;
+export type AddressFormInputKeys = keyof Omit<
+  AddressForm,
+  "countryId" | "countryStateId"
+>;
+
+export type CustomOnValueChange = (
+  name: AddressFormInputKeys,
+  values: NumberFormatValues,
+  sourceInfo: SourceInfo,
+  useFormattedValue?: boolean
+) => void;

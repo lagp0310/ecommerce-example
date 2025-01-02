@@ -1,6 +1,5 @@
 "use client";
 
-import { Form } from "@/components/form/form";
 import { PaymentMethodEnum, type PaymentMethodsResponse } from "@/types/types";
 import React from "react";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/common/radio-group";
@@ -11,7 +10,7 @@ import { CardForm } from "@/components/ui/checkout/card-form";
 
 export type Props = { paymentMethods: PaymentMethodsResponse[] };
 
-export function PaymentMethodForm({ paymentMethods }: Props) {
+export function PaymentMethodSelector({ paymentMethods }: Props) {
   const defaultRadioValue = React.useMemo(
     () => getPaymentMethodValue(paymentMethods.at(0)?.paymentMethodTypes?.type),
     [paymentMethods]
@@ -21,7 +20,7 @@ export function PaymentMethodForm({ paymentMethods }: Props) {
 
   return (
     <div className="flex flex-1 flex-col gap-4">
-      <Form className="flex flex-1 flex-col gap-4">
+      <div className="flex flex-1 flex-col gap-4">
         <div className="flex flex-col gap-4">
           {!!currentValue && !!defaultRadioValue ? (
             <RadioGroup
@@ -57,7 +56,7 @@ export function PaymentMethodForm({ paymentMethods }: Props) {
             </RadioGroup>
           ) : null}
         </div>
-      </Form>
+      </div>
       <div
         className={cn(
           "flex motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none",

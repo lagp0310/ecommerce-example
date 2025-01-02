@@ -27,9 +27,9 @@ import {
 import { AdditionalInfoForm } from "@/components/ui/checkout/additional-info-form";
 import { Button } from "@/components/ui/common/button";
 import {
-  PaymentMethodForm,
-  type Props as PaymentMethodFormProps,
-} from "@/components/ui/checkout/payment-method-form";
+  PaymentMethodSelector,
+  type Props as PaymentMethodSelectorProps,
+} from "@/components/ui/checkout/payment-method-selector";
 import { allPaymentMethods } from "@/gql/queries/payment-method/queries";
 import {
   Accordion,
@@ -108,7 +108,7 @@ export default async function Checkout({
 
   const hasLineItems = Array.isArray(lineItems) && lineItems.length > 0;
 
-  const paymentMethodFormProps: PaymentMethodFormProps = {
+  const paymentMethodFormProps: PaymentMethodSelectorProps = {
     paymentMethods: storePaymentMethods ?? [],
   };
   const checkoutFormProps: CheckoutFormProps = {
@@ -126,7 +126,7 @@ export default async function Checkout({
     },
     {
       name: "Payment Information",
-      children: <PaymentMethodForm {...paymentMethodFormProps} />,
+      children: <PaymentMethodSelector {...paymentMethodFormProps} />,
       forceMount: true,
       // styles: {
       //   "--radix-collapsible-content-height": "37px",

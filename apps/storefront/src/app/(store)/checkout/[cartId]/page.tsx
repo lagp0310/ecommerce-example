@@ -57,7 +57,6 @@ export default async function Checkout({
     cartSummary,
     countries,
     countryStates,
-    zipCodes,
   ] = await Promise.all([
     queryGraphql<CartResponse>(
       "cartsCollection",
@@ -96,12 +95,6 @@ export default async function Checkout({
       ? callDatabaseFunction<GetParsedOptionsResponse>(
           "get_parsed_country_state_options_with_states",
           { country_id: countryId, state_ids: availableStateIds }
-        )
-      : [],
-    !!countryStateId
-      ? callDatabaseFunction<GetParsedOptionsResponse>(
-          "get_parsed_zip_code_options",
-          { state_id: countryStateId }
         )
       : [],
   ]);

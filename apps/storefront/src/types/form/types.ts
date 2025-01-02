@@ -35,13 +35,13 @@ export const addressFormSchema = z.object({
       required_error: "Country is required",
       invalid_type_error: "Country must be a string",
     })
-    .uuid({ message: "Country is invalid" }),
+    .uuid("Country is invalid"),
   countryStateId: z
     .string({
       required_error: "Country State is required",
       invalid_type_error: "Country State must be a string",
     })
-    .uuid({ message: "Country State is invalid" }),
+    .uuid("Country State is invalid"),
   zipCode: z
     .string({
       required_error: "ZIP Code is required",
@@ -54,7 +54,7 @@ export const addressFormSchema = z.object({
       required_error: "Email is required",
       invalid_type_error: "Email must be a string",
     })
-    .email()
+    .email("Email is invalid")
     .max(50, "Email cannot be more than 50 characters long"),
   phoneNumber: z
     .string({
@@ -62,9 +62,10 @@ export const addressFormSchema = z.object({
       invalid_type_error: "Phone Number must be a string",
     })
     .length(17, "Phone Number must be 17 characters long")
-    .refine((phoneNumber) => isMobilePhone(phoneNumber, "en-US"), {
-      message: "Phone Number is invalid",
-    }),
+    .refine(
+      (phoneNumber) => isMobilePhone(phoneNumber, "en-US"),
+      "Phone Number is invalid"
+    ),
 });
 export type AddressForm = z.infer<typeof addressFormSchema>;
 export type AddressFormComboboxKeys = keyof Pick<

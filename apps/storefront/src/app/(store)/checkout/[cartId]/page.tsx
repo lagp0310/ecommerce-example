@@ -15,11 +15,15 @@ import type {
   BaseAccordionItem,
   CartSummaryField,
   GetCartSummaryResponse,
+  GetParsedOptionsResponse,
   LineItemWithProduct,
   PaymentMethodsResponse,
 } from "@/types/types";
 import React from "react";
-import { CheckoutForm } from "@/components/ui/checkout/checkout-form";
+import {
+  CheckoutForm,
+  type Props as CheckoutFormProps,
+} from "@/components/ui/checkout/checkout-form";
 import { AdditionalInfoForm } from "@/components/ui/checkout/additional-info-form";
 import { Button } from "@/components/ui/common/button";
 import {
@@ -33,49 +37,74 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/common/accordion";
+import { availableStateIds } from "@/constants/constants";
 
 export default async function Checkout({
   params,
+  searchParams,
 }: {
   params: Promise<{ cartId: string }>;
+  searchParams: Promise<{ [key: string]: string | undefined }>;
 }) {
   const { cartId } = await params;
+  const { countryId, countryStateId } = await searchParams;
 
   // FIXME: The user should have permissions to get this cart.
-  const [cart, lineItems, storePaymentMethods, cartSummary] = await Promise.all(
-    [
-      queryGraphql<CartResponse>(
-        "cartsCollection",
-        getCartQuery,
-        {
-          filter: { id: { eq: cartId } },
+  const [
+    cart,
+    lineItems,
+    storePaymentMethods,
+    cartSummary,
+    countries,
+    countryStates,
+    zipCodes,
+  ] = await Promise.all([
+    queryGraphql<CartResponse>(
+      "cartsCollection",
+      getCartQuery,
+      {
+        filter: { id: { eq: cartId } },
+      },
+      "no-cache"
+    ),
+    queryGraphql<LineItemWithProduct[]>(
+      "lineItemsCollection",
+      allLineItems,
+      {
+        filter: { cart: { eq: cartId } },
+      },
+      "no-cache"
+    ),
+    queryGraphql<PaymentMethodsResponse[]>(
+      "paymentMethodsCollection",
+      allPaymentMethods,
+      {
+        filter: {
+          store: { eq: process.env.NEXT_PUBLIC_STORE_ID },
+          is_active: { eq: true },
         },
-        "no-cache"
-      ),
-      queryGraphql<LineItemWithProduct[]>(
-        "lineItemsCollection",
-        allLineItems,
-        {
-          filter: { cart: { eq: cartId } },
-        },
-        "no-cache"
-      ),
-      queryGraphql<PaymentMethodsResponse[]>(
-        "paymentMethodsCollection",
-        allPaymentMethods,
-        {
-          filter: {
-            store: { eq: process.env.NEXT_PUBLIC_STORE_ID },
-            is_active: { eq: true },
-          },
-        },
-        "no-cache"
-      ),
-      callDatabaseFunction<GetCartSummaryResponse>("get_cart_summary_data", {
-        cart_id: cartId,
-      }),
-    ]
-  );
+      },
+      "no-cache"
+    ),
+    callDatabaseFunction<GetCartSummaryResponse>("get_cart_summary_data", {
+      cart_id: cartId,
+    }),
+    callDatabaseFunction<GetParsedOptionsResponse>(
+      "get_parsed_country_options"
+    ),
+    !!countryId
+      ? callDatabaseFunction<GetParsedOptionsResponse>(
+          "get_parsed_country_state_options_with_states",
+          { country_id: countryId, state_ids: availableStateIds }
+        )
+      : [],
+    !!countryStateId
+      ? callDatabaseFunction<GetParsedOptionsResponse>(
+          "get_parsed_zip_code_options",
+          { state_id: countryStateId }
+        )
+      : [],
+  ]);
 
   const cartTotalSummary: CartSummaryField[] = getCartSummaryItems(
     cartSummary?.subtotal_result,
@@ -89,11 +118,15 @@ export default async function Checkout({
   const paymentMethodFormProps: PaymentMethodFormProps = {
     paymentMethods: storePaymentMethods ?? [],
   };
-
+  const checkoutFormProps: CheckoutFormProps = {
+    countries: countries ?? [],
+    countryStates: countryStates ?? [],
+    zipCodes: zipCodes ?? [],
+  };
   const checkoutForms: BaseAccordionItem[] = [
     {
       name: "Billing Information",
-      children: <CheckoutForm />,
+      children: <CheckoutForm {...checkoutFormProps} />,
       forceMount: true,
       // styles: {
       //   "--radix-collapsible-content-height": "401px",

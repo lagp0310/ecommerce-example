@@ -199,7 +199,7 @@ export function CartContextProvider({ children, currentCart = null }: Props) {
           // FIXME: Add customer (id) on variables when login is ready.
           const { data: cartDataResponse } = await mutateCreateCart({
             variables: {
-              cart: {
+              carts: {
                 // FIXME: Get env from validated file.
                 store: process.env.NEXT_PUBLIC_STORE_ID,
                 currency: defaultCurrencyId,

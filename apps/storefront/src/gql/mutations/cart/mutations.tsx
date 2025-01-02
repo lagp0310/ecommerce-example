@@ -2,8 +2,8 @@ import { lineItemFragment } from "@/gql/fragments/line-item/fragments";
 import { gql } from "@apollo/client";
 
 export const createCart = gql`
-  mutation CreateCart($cart: [cartsInsertInput!]!) {
-    insertIntoCartsCollection: insertIntocartsCollection(objects: $cart) {
+  mutation CreateCart($carts: [cartsInsertInput!]!) {
+    insertIntoCartsCollection: insertIntocartsCollection(objects: $carts) {
       __typename
       affectedCount
       records {

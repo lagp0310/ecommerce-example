@@ -32,12 +32,14 @@ type Props = {
   children: React.ReactNode;
   defaultOption?: BaseSelectOption;
   paramName?: string;
+  onValueChange?: (newValue: string) => void;
 };
 
 export function ComboboxContextProvider({
   children,
   defaultOption,
   paramName,
+  onValueChange,
 }: Props) {
   const searchParams = useSearchParams();
   const searchParamValue = React.useMemo(
@@ -47,6 +49,12 @@ export function ComboboxContextProvider({
 
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState(defaultOption?.value ?? "");
+
+  React.useEffect(() => {
+    if (onValueChange) {
+      onValueChange(value);
+    }
+  }, [onValueChange, value]);
 
   React.useEffect(() => {
     if (searchParamValue) {

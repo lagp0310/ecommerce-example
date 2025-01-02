@@ -106,9 +106,16 @@ export function CardForm({ htmlNamePrefix }: Props) {
       valueIsNumericString: true,
       "data-invalid": !!errors.cvc,
       onValueChange: (...args) => handleInputChange("cvc", ...args, false),
+      ...commonPatternFormatProps,
       ...register("cvc"),
     }),
-    [errors.cvc, handleInputChange, htmlNamePrefix, register]
+    [
+      commonPatternFormatProps,
+      errors.cvc,
+      handleInputChange,
+      htmlNamePrefix,
+      register,
+    ]
   );
 
   return (

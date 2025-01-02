@@ -59,7 +59,6 @@ export function CashForm({ htmlNamePrefix }: Props) {
     () => ({
       customInput: Input,
       allowLeadingZeros: true,
-      allowNegative: false,
       decimalSeparator: ".",
       fixedDecimalScale: true,
       decimalScale: 2,
@@ -94,6 +93,7 @@ export function CashForm({ htmlNamePrefix }: Props) {
               aria-required
               className="data-invalid:ring-2 data-invalid:ring-danger w-full md:w-fit focus:ring-2 focus:ring-primary/50 placeholder:text-gray-400 placeholder:font-normal placeholder:text-body-small placeholder:leading-[130%] rounded-six border border-gray-100 outline-none p-3 motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
               data-invalid={!!errors.payAmount}
+              allowNegative={false}
               {...commonNumericFormatProps}
               {...register("payAmount")}
             />
@@ -115,6 +115,7 @@ export function CashForm({ htmlNamePrefix }: Props) {
               disabled
               aria-disabled
               className="w-full md:w-fit focus:ring-2 focus:ring-primary/50 placeholder:text-gray-400 placeholder:font-normal placeholder:text-body-small placeholder:leading-[130%] rounded-six border border-gray-100 outline-none p-3 motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none cursor-default"
+              allowNegative
               {...commonNumericFormatProps}
             />
           </Label>

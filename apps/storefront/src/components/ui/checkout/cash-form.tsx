@@ -20,12 +20,13 @@ export type Props = { htmlNamePrefix: string };
 
 export function CashForm({ htmlNamePrefix }: Props) {
   // TODO: Server validation.
-  // TODO: Autofill data if the user is signed in.
 
   const {
+    clearErrors,
     formState: { errors },
     handleSubmit,
     register,
+    setError,
     setValue,
   } = useForm<CashForm>({
     resolver: zodResolver(cashFormSchema),
@@ -49,11 +50,22 @@ export function CashForm({ htmlNamePrefix }: Props) {
         return;
       }
 
-      setChange(floatValue - cartTotal);
+      const difference = floatValue - cartTotal;
+      setChange(difference);
       setValue("payAmount", floatValue);
     },
     [cartTotal, setValue]
   );
+  React.useEffect(() => {
+    if (change < 0) {
+      setError("payAmount", {
+        message: `Amount cannot be less than $${cartTotal}`,
+        type: "onChange",
+      });
+    } else {
+      clearErrors("payAmount");
+    }
+  }, [clearErrors, setError, change, cartTotal]);
 
   const commonNumericFormatProps: NumericFormatProps = React.useMemo(
     () => ({
@@ -91,7 +103,7 @@ export function CashForm({ htmlNamePrefix }: Props) {
               placeholder="Amount"
               type="text"
               aria-required
-              className="data-invalid:ring-2 data-invalid:ring-danger w-full md:w-fit focus:ring-2 focus:ring-primary/50 placeholder:text-gray-400 placeholder:font-normal placeholder:text-body-small placeholder:leading-[130%] rounded-six border border-gray-100 outline-none p-3 motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
+              className="data-invalid:ring-2 data-invalid:ring-danger w-full focus:ring-2 focus:ring-primary/50 placeholder:text-gray-400 placeholder:font-normal placeholder:text-body-small placeholder:leading-[130%] rounded-six border border-gray-100 outline-none p-3 motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
               data-invalid={!!errors.payAmount}
               allowNegative={false}
               {...commonNumericFormatProps}
@@ -114,7 +126,7 @@ export function CashForm({ htmlNamePrefix }: Props) {
               type="text"
               disabled
               aria-disabled
-              className="w-full md:w-fit focus:ring-2 focus:ring-primary/50 placeholder:text-gray-400 placeholder:font-normal placeholder:text-body-small placeholder:leading-[130%] rounded-six border border-gray-100 outline-none p-3 motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none cursor-default"
+              className="w-full focus:ring-2 focus:ring-primary/50 placeholder:text-gray-400 placeholder:font-normal placeholder:text-body-small placeholder:leading-[130%] rounded-six border border-gray-100 outline-none p-3 motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none cursor-default"
               allowNegative
               {...commonNumericFormatProps}
             />

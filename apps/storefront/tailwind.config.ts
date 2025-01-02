@@ -106,6 +106,9 @@ export default {
         ten: "10px",
         six: "6px",
       },
+      data: {
+        invalid: "invalid=true",
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],

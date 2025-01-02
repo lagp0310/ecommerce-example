@@ -1,4 +1,5 @@
 import { type NumberFormatValues, type SourceInfo } from "react-number-format";
+import { isCreditCard } from "validator";
 import isMobilePhone from "validator/es/lib/isMobilePhone";
 import { z } from "zod";
 
@@ -93,3 +94,45 @@ export const additionalInfoFormSchema = z.object({
     .max(2000, "Order Notes cannot be more than 2000 characters long"),
 });
 export type AdditionalInfoForm = z.infer<typeof additionalInfoFormSchema>;
+
+export const cashFormSchema = z.object({
+  payAmount: z
+    .number({
+      invalid_type_error: "Field must be a number",
+      required_error: "Field is required",
+    })
+    .positive("Number must be positive"),
+});
+export type CashForm = z.infer<typeof cashFormSchema>;
+
+export const cardFormSchema = z.object({
+  firstName: z
+    .string({
+      required_error: "First Name is required",
+      invalid_type_error: "First Name must be a string",
+    })
+    .max(30, "First Name cannot be more than 30 characters long")
+    .regex(/^[a-zA-Z]+$/i, "First Name can only contain letters"),
+  lastName: z
+    .string({
+      required_error: "Last Name is required",
+      invalid_type_error: "Last Name must be a string",
+    })
+    .max(30, "Last Name cannot be more than 30 characters long")
+    .regex(/^[a-zA-Z]+$/i, "Last Name can only contain letters"),
+  cardNumber: z
+    .string({
+      invalid_type_error: "Card Number must be a string",
+      required_error: "Card Number is required",
+    })
+    .refine((value) => isCreditCard(value), "Card Number is invalid"),
+  cvc: z
+    .string({
+      required_error: "CVC is required",
+      invalid_type_error: "CVC must be a string",
+    })
+    .length(3, "CVC must be 3 characters long")
+    .regex(/^[0-9]{3}$/, "CVC must contain numbers only"),
+});
+export type CardForm = z.infer<typeof cardFormSchema>;
+export type CardFormInputKeys = keyof CardForm;

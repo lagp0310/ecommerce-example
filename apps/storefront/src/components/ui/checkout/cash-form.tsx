@@ -1,11 +1,15 @@
 "use client";
 
 import { createOrder } from "@/app/(store)/checkout/actions";
+import { FieldError } from "@/components/form/field-error";
 import { Form } from "@/components/form/form";
 import { Input } from "@/components/form/input";
 import { Label } from "@/components/form/label";
 import { useCart } from "@/context/cart-context";
+import { cashFormSchema, type CashForm } from "@/types/form/types";
+import { zodResolver } from "@hookform/resolvers/zod";
 import React from "react";
+import { type SubmitHandler, useForm } from "react-hook-form";
 import {
   type NumberFormatValues,
   NumericFormat,
@@ -15,9 +19,20 @@ import {
 export type Props = { htmlNamePrefix: string };
 
 export function CashForm({ htmlNamePrefix }: Props) {
-  // TODO: Client and Server validation.
-  // TODO: Error states.
+  // TODO: Server validation.
   // TODO: Autofill data if the user is signed in.
+
+  const {
+    formState: { errors },
+    handleSubmit,
+    register,
+    setValue,
+  } = useForm<CashForm>({
+    resolver: zodResolver(cashFormSchema),
+  });
+  const onSubmit: SubmitHandler<CashForm> = React.useCallback(async (data) => {
+    console.log(data);
+  }, []);
 
   const { cartSummary } = useCart();
   const cartTotal = React.useMemo(
@@ -35,8 +50,9 @@ export function CashForm({ htmlNamePrefix }: Props) {
       }
 
       setChange(floatValue - cartTotal);
+      setValue("payAmount", floatValue);
     },
-    [cartTotal]
+    [cartTotal, setValue]
   );
 
   const commonNumericFormatProps: NumericFormatProps = React.useMemo(
@@ -54,7 +70,12 @@ export function CashForm({ htmlNamePrefix }: Props) {
   );
 
   return (
-    <Form action={createOrder} className="flex flex-1 flex-col gap-4">
+    <Form
+      action={createOrder}
+      onSubmit={handleSubmit(onSubmit)}
+      className="flex flex-1 flex-col gap-4"
+    >
+      <input type="submit" />
       <div className="flex flex-1 flex-col gap-4">
         <div className="flex flex-1 flex-row flex-wrap md:flex-nowrap gap-4">
           <Label
@@ -68,14 +89,15 @@ export function CashForm({ htmlNamePrefix }: Props) {
             <NumericFormat
               onValueChange={handleAmountChange}
               id={`${htmlNamePrefix}-first-name`}
-              name={`${htmlNamePrefix}-first-name`}
               placeholder="Amount"
               type="text"
-              required
               aria-required
-              className="w-full md:w-fit focus:ring-2 focus:ring-primary/50 placeholder:text-gray-400 placeholder:font-normal placeholder:text-body-small placeholder:leading-[130%] rounded-six border border-gray-100 outline-none p-3 motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
+              className="data-invalid:ring-2 data-invalid:ring-danger w-full md:w-fit focus:ring-2 focus:ring-primary/50 placeholder:text-gray-400 placeholder:font-normal placeholder:text-body-small placeholder:leading-[130%] rounded-six border border-gray-100 outline-none p-3 motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
+              data-invalid={!!errors.payAmount}
               {...commonNumericFormatProps}
+              {...register("payAmount")}
             />
+            <FieldError error={errors.payAmount} />
           </Label>
           <Label
             htmlFor={`${htmlNamePrefix}-change`}

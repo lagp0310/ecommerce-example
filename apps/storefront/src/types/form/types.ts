@@ -82,3 +82,13 @@ export type CustomOnValueChange = (
   sourceInfo: SourceInfo,
   useFormattedValue?: boolean
 ) => void;
+
+export const additionalInfoFormSchema = z.object({
+  orderNotes: z
+    .string({
+      required_error: "Order Notes is required",
+      invalid_type_error: "Order Notes must be a string",
+    })
+    .max(2000, "Order Notes cannot be more than 2000 characters long"),
+});
+export type AdditionalInfoForm = z.infer<typeof additionalInfoFormSchema>;

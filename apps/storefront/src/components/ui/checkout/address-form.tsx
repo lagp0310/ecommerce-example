@@ -31,7 +31,7 @@ export function AddressForm({
   countries,
   countryStates,
 }: Props) {
-  // TODO: Client and Server validation.
+  // TODO: Server validation.
   // TODO: Autofill data if the user is signed in.
 
   const {

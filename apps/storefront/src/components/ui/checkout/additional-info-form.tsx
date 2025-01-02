@@ -8,13 +8,18 @@ import React from "react";
 import { type SubmitHandler, useForm } from "react-hook-form";
 import { addressFormSchema, type AdditionalInfoForm } from "@/types/form/types";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { FieldError } from "@/components/form/field-error";
 
 type Props = React.HTMLProps<HTMLTextAreaElement>;
 
 export function AdditionalInfoForm({ className, ...props }: Props) {
   // TODO: Server validation.
 
-  const { register, handleSubmit } = useForm<AdditionalInfoForm>({
+  const {
+    formState: { errors },
+    register,
+    handleSubmit,
+  } = useForm<AdditionalInfoForm>({
     resolver: zodResolver(addressFormSchema),
   });
   const onSubmit: SubmitHandler<AdditionalInfoForm> = React.useCallback(
@@ -44,12 +49,14 @@ export function AdditionalInfoForm({ className, ...props }: Props) {
               aria-required={false}
               maxLength={2000}
               className={cn(
-                "focus:ring-2 focus:ring-primary/50 resize-y min-h-[100px] max-h-[500px] placeholder:text-gray-400 placeholder:font-normal placeholder:text-body-medium placeholder:leading-[130%] rounded-six border border-gray-100 outline-none p-3 motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none",
+                "data-invalid:ring-2 data-invalid:ring-danger focus:ring-2 focus:ring-primary/50 resize-y min-h-[100px] max-h-[500px] placeholder:text-gray-400 placeholder:font-normal placeholder:text-body-medium placeholder:leading-[130%] rounded-six border border-gray-100 outline-none p-3 motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none",
                 className
               )}
+              data-invalid={!!errors.orderNotes}
               {...props}
               {...register("orderNotes")}
             />
+            <FieldError error={errors.orderNotes} />
           </Label>
         </div>
       </div>

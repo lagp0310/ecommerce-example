@@ -2,14 +2,17 @@
 
 import { createOrder } from "@/app/(store)/checkout/actions";
 import { Form } from "@/components/form/form";
-import { Input } from "@/components/form/input";
+import { Input, type Props as InputProps } from "@/components/form/input";
 import { Label } from "@/components/form/label";
 import React from "react";
 import type { GetParsedOptionsResponse } from "@/types/types";
-import { CheckoutComboboxWrapper } from "@/components/ui/checkout/checkbout-combobox-wrapper";
+import {
+  CheckoutComboboxWrapper,
+  type Props as ComboboxWrapperProps,
+} from "@/components/ui/checkout/checkbout-combobox-wrapper";
 import { ComboboxContextProvider } from "@/context/combobox-context";
 import { ComboboxLabel } from "@/components/form/combobox-label";
-import { PatternFormat } from "react-number-format";
+import { PatternFormat, type PatternFormatProps } from "react-number-format";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import {
   type AddressForm,
@@ -89,6 +92,159 @@ export function AddressForm({
     [onValueChange]
   );
 
+  const commonInputProps: InputProps = React.useMemo(
+    () => ({
+      className:
+        "data-invalid:ring-2 data-invalid:ring-danger focus:ring-2 focus:ring-primary/50 placeholder:text-gray-400 placeholder:font-normal placeholder:text-body-small placeholder:leading-[130%] rounded-six border border-gray-100 outline-none p-3 motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none",
+    }),
+    []
+  );
+  const firstNameInputProps: InputProps = React.useMemo(
+    () => ({
+      id: `${htmlNamePrefix}-first-name`,
+      placeholder: "First Name",
+      type: "text",
+      "data-invalid": !!errors.firstName,
+      "aria-required": true,
+      ...commonInputProps,
+      ...register("firstName"),
+    }),
+    [commonInputProps, errors.firstName, htmlNamePrefix, register]
+  );
+  const lastNameInputProps: InputProps = React.useMemo(
+    () => ({
+      id: `${htmlNamePrefix}-last-name`,
+      placeholder: "Last Name",
+      type: "text",
+      "data-invalid": !!errors.lastName,
+      "aria-required": true,
+      ...commonInputProps,
+      ...register("lastName"),
+    }),
+    [commonInputProps, errors.lastName, htmlNamePrefix, register]
+  );
+  const companyNameInputProps: InputProps = React.useMemo(
+    () => ({
+      id: `${htmlNamePrefix}-company-name`,
+      placeholder: "Company Name",
+      type: "text",
+      "data-invalid": !!errors.companyName,
+      "aria-required": false,
+      ...commonInputProps,
+      ...register("companyName"),
+    }),
+    [commonInputProps, errors.companyName, htmlNamePrefix, register]
+  );
+  const streetAddressInputProps: InputProps = React.useMemo(
+    () => ({
+      id: `${htmlNamePrefix}-street-address`,
+      placeholder: "Street Address",
+      type: "text",
+      "aria-required": true,
+      "data-invalid": !!errors.streetAddress,
+      ...commonInputProps,
+      ...register("streetAddress"),
+    }),
+    [commonInputProps, errors.streetAddress, htmlNamePrefix, register]
+  );
+  const commonComboboxProps: Partial<ComboboxWrapperProps> = React.useMemo(
+    () => ({
+      buttonClassName:
+        "data-invalid:ring-2 data-invalid:ring-danger w-full flex flex-1 flex-row gap-x-2 max-h-fit aria-expanded:ring-2 aria-expanded:ring-primary/50 placeholder:text-gray-400 placeholder:font-normal placeholder:text-body-small placeholder:leading-[130%] rounded-six border border-gray-100 outline-none p-3 motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none",
+    }),
+    []
+  );
+  const countryComboboxProps: ComboboxWrapperProps = React.useMemo(
+    () => ({
+      searchParamName: "countryId",
+      options: countries,
+      emptyValueText: "Select a Country...",
+      commandInputProps: { placeholder: "Search a Country..." },
+      noOptionFoundText: "No Country was found.",
+      isInvalid: !!errors.countryId,
+      ...commonComboboxProps,
+    }),
+    [commonComboboxProps, countries, errors.countryId]
+  );
+  const countryStateComboboxProps: ComboboxWrapperProps = React.useMemo(
+    () => ({
+      searchParamName: "countryStateId",
+      options: countryStates,
+      emptyValueText: "Select a State...",
+      commandInputProps: { placeholder: "Search a State..." },
+      noOptionFoundText: "No State was found.",
+      isDisabled: isCountryStateSelectorDisabled,
+      isInvalid: isCountryStateInvalid,
+      ...commonComboboxProps,
+    }),
+    [
+      commonComboboxProps,
+      countryStates,
+      isCountryStateInvalid,
+      isCountryStateSelectorDisabled,
+    ]
+  );
+  const commonPatternFormatProps: Partial<PatternFormatProps> = React.useMemo(
+    () => ({
+      className:
+        "data-invalid:ring-2 data-invalid:ring-danger focus:ring-2 focus:ring-primary/50 placeholder:text-gray-400 placeholder:font-normal placeholder:text-body-small placeholder:leading-[130%] rounded-six border border-gray-100 outline-none p-3 motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none",
+      "aria-required": true,
+      customInput: Input,
+      valueIsNumericString: true,
+    }),
+    []
+  );
+  const zipCodeInputProps: PatternFormatProps = React.useMemo(
+    () => ({
+      id: `${htmlNamePrefix}-zip-code`,
+      placeholder: "ZIP Code",
+      type: "text",
+      format: "#####",
+      onValueChange: (...args) => handleInputChange("zipCode", ...args, false),
+      "data-invalid": !!errors.zipCode,
+      ...commonPatternFormatProps,
+      ...register("zipCode"),
+    }),
+    [
+      commonPatternFormatProps,
+      errors.zipCode,
+      handleInputChange,
+      htmlNamePrefix,
+      register,
+    ]
+  );
+  const emailInputProps: InputProps = React.useMemo(
+    () => ({
+      id: `${htmlNamePrefix}-email`,
+      placeholder: "Email Address",
+      type: "email",
+      "aria-required": true,
+      "data-invalid": !!errors.email,
+      ...commonInputProps,
+      ...register("email"),
+    }),
+    [commonInputProps, errors.email, htmlNamePrefix, register]
+  );
+  const phoneNumberInputProps: PatternFormatProps = React.useMemo(
+    () => ({
+      id: `${htmlNamePrefix}-phone-number`,
+      placeholder: "Phone Number",
+      type: "tel",
+      format: "+1 (###) ###-####",
+      onValueChange: (...args) => handleInputChange("phoneNumber", ...args),
+      "data-invalid": !!errors.phoneNumber,
+      ...commonPatternFormatProps,
+      ...register("phoneNumber"),
+    }),
+    [
+      commonPatternFormatProps,
+      errors.phoneNumber,
+      handleInputChange,
+      htmlNamePrefix,
+      register,
+    ]
+  );
+
   return (
     <Form
       action={createOrder}
@@ -105,15 +261,7 @@ export function AddressForm({
             <span className="font-normal text-body-small text-gray-900">
               First Name<span className="text-danger"> *</span>
             </span>
-            <Input
-              id={`${htmlNamePrefix}-first-name`}
-              placeholder="First Name"
-              type="text"
-              aria-required
-              className="data-invalid:ring-2 data-invalid:ring-danger focus:ring-2 focus:ring-primary/50 placeholder:text-gray-400 placeholder:font-normal placeholder:text-body-small placeholder:leading-[130%] rounded-six border border-gray-100 outline-none p-3 motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
-              data-invalid={!!errors.firstName}
-              {...register("firstName")}
-            />
+            <Input {...firstNameInputProps} />
             <FieldError error={errors.firstName} />
           </Label>
           <Label
@@ -123,15 +271,7 @@ export function AddressForm({
             <span className="font-normal text-body-small text-gray-900">
               Last Name<span className="text-danger"> *</span>
             </span>
-            <Input
-              id={`${htmlNamePrefix}-last-name`}
-              placeholder="Last Name"
-              type="text"
-              aria-required
-              className="data-invalid:ring-2 data-invalid:ring-danger focus:ring-2 focus:ring-primary/50 placeholder:text-gray-400 placeholder:font-normal placeholder:text-body-small placeholder:leading-[130%] rounded-six border border-gray-100 outline-none p-3 motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
-              data-invalid={!!errors.lastName}
-              {...register("lastName")}
-            />
+            <Input {...lastNameInputProps} />
             <FieldError error={errors.lastName} />
           </Label>
           <Label
@@ -141,15 +281,7 @@ export function AddressForm({
             <span className="font-normal text-body-small text-gray-900">
               {`Company Name (Optional)`}
             </span>
-            <Input
-              id={`${htmlNamePrefix}-company-name`}
-              placeholder="Company Name"
-              type="text"
-              aria-required={false}
-              className="data-invalid:ring-2 data-invalid:ring-danger focus:ring-2 focus:ring-primary/50 placeholder:text-gray-400 placeholder:font-normal placeholder:text-body-small placeholder:leading-[130%] rounded-six border border-gray-100 outline-none p-3 motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
-              data-invalid={!!errors.companyName}
-              {...register("companyName")}
-            />
+            <Input {...companyNameInputProps} />
             <FieldError error={errors.companyName} />
           </Label>
         </div>
@@ -161,15 +293,7 @@ export function AddressForm({
             <span className="font-normal text-body-small text-gray-900">
               Street Address<span className="text-danger"> *</span>
             </span>
-            <Input
-              id={`${htmlNamePrefix}-street-address`}
-              placeholder="Street Address"
-              type="text"
-              aria-required
-              className="data-invalid:ring-2 data-invalid:ring-danger focus:ring-2 focus:ring-primary/50 placeholder:text-gray-400 placeholder:font-normal placeholder:text-body-small placeholder:leading-[130%] rounded-six border border-gray-100 outline-none p-3 motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
-              data-invalid={!!errors.streetAddress}
-              {...register("streetAddress")}
-            />
+            <Input {...streetAddressInputProps} />
             <FieldError error={errors.streetAddress} />
           </Label>
         </div>
@@ -186,15 +310,7 @@ export function AddressForm({
               <span className="font-normal text-body-small text-gray-900">
                 Country<span className="text-danger"> *</span>
               </span>
-              <CheckoutComboboxWrapper
-                searchParamName="countryId"
-                options={countries}
-                emptyValueText="Select a Country..."
-                commandInputProps={{ placeholder: "Search a Country..." }}
-                noOptionFoundText="No Country was found."
-                buttonClassName="data-invalid:ring-2 data-invalid:ring-danger w-full flex flex-1 flex-row gap-x-2 max-h-fit aria-expanded:ring-2 aria-expanded:ring-primary/50 placeholder:text-gray-400 placeholder:font-normal placeholder:text-body-small placeholder:leading-[130%] rounded-six border border-gray-100 outline-none p-3 motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
-                isInvalid={!!errors.countryId}
-              />
+              <CheckoutComboboxWrapper {...countryComboboxProps} />
               <FieldError error={errors.countryId} />
             </ComboboxLabel>
           </ComboboxContextProvider>
@@ -212,16 +328,7 @@ export function AddressForm({
               <span className="font-normal text-body-small text-gray-900">
                 State<span className="text-danger"> *</span>
               </span>
-              <CheckoutComboboxWrapper
-                searchParamName="countryStateId"
-                options={countryStates}
-                emptyValueText="Select a State..."
-                commandInputProps={{ placeholder: "Search a State..." }}
-                noOptionFoundText="No State was found."
-                buttonClassName="data-invalid:ring-2 data-invalid:ring-danger w-full flex flex-1 flex-row gap-x-2 max-h-fit aria-expanded:ring-2 aria-expanded:ring-primary/50 placeholder:text-gray-400 placeholder:font-normal placeholder:text-body-small placeholder:leading-[130%] rounded-six border border-gray-100 outline-none p-3 motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
-                isDisabled={isCountryStateSelectorDisabled}
-                isInvalid={isCountryStateInvalid}
-              />
+              <CheckoutComboboxWrapper {...countryStateComboboxProps} />
               {!isCountryStateSelectorDisabled ? (
                 <FieldError error={errors.countryStateId} />
               ) : null}
@@ -234,21 +341,7 @@ export function AddressForm({
             <span className="font-normal text-body-small text-gray-900">
               ZIP Code<span className="text-danger"> *</span>
             </span>
-            <PatternFormat
-              id={`${htmlNamePrefix}-zip-code`}
-              placeholder="ZIP Code"
-              type="text"
-              aria-required
-              className="data-invalid:ring-2 data-invalid:ring-danger focus:ring-2 focus:ring-primary/50 placeholder:text-gray-400 placeholder:font-normal placeholder:text-body-small placeholder:leading-[130%] rounded-six border border-gray-100 outline-none p-3 motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
-              customInput={Input}
-              format="#####"
-              valueIsNumericString
-              onValueChange={(...args) =>
-                handleInputChange("zipCode", ...args, false)
-              }
-              data-invalid={!!errors.zipCode}
-              {...register("zipCode")}
-            />
+            <PatternFormat {...zipCodeInputProps} />
             <FieldError error={errors.zipCode} />
           </Label>
         </div>
@@ -260,15 +353,7 @@ export function AddressForm({
             <span className="font-normal text-body-small text-gray-900">
               Email<span className="text-danger"> *</span>
             </span>
-            <Input
-              id={`${htmlNamePrefix}-email`}
-              placeholder="Email Address"
-              type="email"
-              aria-required
-              className="data-invalid:ring-2 data-invalid:ring-danger focus:ring-2 focus:ring-primary/50 placeholder:text-gray-400 placeholder:font-normal placeholder:text-body-small placeholder:leading-[130%] rounded-six border border-gray-100 outline-none p-3 motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
-              data-invalid={!!errors.email}
-              {...register("email")}
-            />
+            <Input {...emailInputProps} />
             <FieldError error={errors.email} />
           </Label>
           <Label
@@ -278,21 +363,7 @@ export function AddressForm({
             <span className="font-normal text-body-small text-gray-900">
               Phone Number<span className="text-danger"> *</span>
             </span>
-            <PatternFormat
-              id={`${htmlNamePrefix}-phone-number`}
-              placeholder="Phone Number"
-              type="tel"
-              aria-required
-              className="data-invalid:ring-2 data-invalid:ring-danger focus:ring-2 focus:ring-primary/50 placeholder:text-gray-400 placeholder:font-normal placeholder:text-body-small placeholder:leading-[130%] rounded-six border border-gray-100 outline-none p-3 motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
-              customInput={Input}
-              format="+1 (###) ###-####"
-              valueIsNumericString
-              onValueChange={(...args) =>
-                handleInputChange("phoneNumber", ...args)
-              }
-              data-invalid={!!errors.phoneNumber}
-              {...register("phoneNumber")}
-            />
+            <PatternFormat {...phoneNumberInputProps} />
             <FieldError error={errors.phoneNumber} />
           </Label>
         </div>

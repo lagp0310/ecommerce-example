@@ -79,6 +79,44 @@ export function CashForm({ htmlNamePrefix }: Props) {
     }),
     []
   );
+  const payAmountProps: NumericFormatProps = React.useMemo(
+    () => ({
+      onValueChange: handleAmountChange,
+      id: `${htmlNamePrefix}-pay-amount`,
+      placeholder: "Amount",
+      type: "text",
+      "aria-required": true,
+      className:
+        "data-invalid:ring-2 data-invalid:ring-danger w-full focus:ring-2 focus:ring-primary/50 placeholder:text-gray-400 placeholder:font-normal placeholder:text-body-small placeholder:leading-[130%] rounded-six border border-gray-100 outline-none p-3 motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none",
+      "data-invalid": !!errors.payAmount,
+      allowNegative: false,
+      ...commonNumericFormatProps,
+      ...register("payAmount"),
+    }),
+    [
+      commonNumericFormatProps,
+      errors.payAmount,
+      handleAmountChange,
+      htmlNamePrefix,
+      register,
+    ]
+  );
+  const changeProps: NumericFormatProps = React.useMemo(
+    () => ({
+      value: change,
+      id: `${htmlNamePrefix}-change`,
+      name: `${htmlNamePrefix}-change`,
+      placeholder: "Amount",
+      type: "text",
+      disabled: true,
+      "aria-disabled": true,
+      className:
+        "w-full focus:ring-2 focus:ring-primary/50 placeholder:text-gray-400 placeholder:font-normal placeholder:text-body-small placeholder:leading-[130%] rounded-six border border-gray-100 outline-none p-3 motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none cursor-default",
+      allowNegative: true,
+      ...commonNumericFormatProps,
+    }),
+    [change, commonNumericFormatProps, htmlNamePrefix]
+  );
 
   return (
     <Form
@@ -97,18 +135,7 @@ export function CashForm({ htmlNamePrefix }: Props) {
               {`I'll pay...`}
               <span className="text-danger"> *</span>
             </span>
-            <NumericFormat
-              onValueChange={handleAmountChange}
-              id={`${htmlNamePrefix}-pay-amount`}
-              placeholder="Amount"
-              type="text"
-              aria-required
-              className="data-invalid:ring-2 data-invalid:ring-danger w-full focus:ring-2 focus:ring-primary/50 placeholder:text-gray-400 placeholder:font-normal placeholder:text-body-small placeholder:leading-[130%] rounded-six border border-gray-100 outline-none p-3 motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
-              data-invalid={!!errors.payAmount}
-              allowNegative={false}
-              {...commonNumericFormatProps}
-              {...register("payAmount")}
-            />
+            <NumericFormat {...payAmountProps} />
             <FieldError error={errors.payAmount} />
           </Label>
           <Label
@@ -118,18 +145,7 @@ export function CashForm({ htmlNamePrefix }: Props) {
             <span className="font-normal text-body-small text-gray-900">
               {`Your change`}
             </span>
-            <NumericFormat
-              value={change}
-              id={`${htmlNamePrefix}-change`}
-              name={`${htmlNamePrefix}-change`}
-              placeholder="Amount"
-              type="text"
-              disabled
-              aria-disabled
-              className="w-full focus:ring-2 focus:ring-primary/50 placeholder:text-gray-400 placeholder:font-normal placeholder:text-body-small placeholder:leading-[130%] rounded-six border border-gray-100 outline-none p-3 motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none cursor-default"
-              allowNegative
-              {...commonNumericFormatProps}
-            />
+            <NumericFormat {...changeProps} />
           </Label>
         </div>
       </div>

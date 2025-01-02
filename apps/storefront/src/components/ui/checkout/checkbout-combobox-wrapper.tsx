@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/common/combobox-wrapper";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
-type Props = Omit<ComboboxProps, "onValueChangeCallback"> & {
+export type Props = Omit<ComboboxProps, "onValueChangeCallback"> & {
   searchParamName?: string;
 };
 

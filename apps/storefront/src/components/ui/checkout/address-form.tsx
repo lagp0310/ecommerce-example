@@ -128,6 +128,8 @@ export function AddressForm({
             <ComboboxLabel
               htmlFor={`${htmlNamePrefix}-state`}
               className="flex flex-col gap-y-2 w-full cursor-pointer"
+              disabled={isCountryStateSelectorDisabled}
+              aria-disabled={isCountryStateSelectorDisabled}
             >
               <span className="font-normal text-body-small text-gray-900">
                 State<span className="text-danger"> *</span>

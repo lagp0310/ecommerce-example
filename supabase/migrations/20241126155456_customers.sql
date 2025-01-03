@@ -7,7 +7,5 @@ create table
     updated_at timestamp with time zone null,
     birth_date date null,
     password text null,
-    billing_address text not null,
-    shipping_address text not null,
     constraint customers_pkey primary key (id)
   ) tablespace pg_default;

@@ -225,3 +225,6 @@ export enum PaymentMethodEnum {
   CREDIT_CARD = "Credit Card",
   DEBIT_CARD = "Debit Card",
 }
+
+export type GetProductIdsByTagsResponse = { id: string }[];
+export type GetProductIdsByCategoriesResponse = { id: string }[];

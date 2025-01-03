@@ -9,6 +9,8 @@ import {
 } from "@/constants/constants";
 import { BasicProductCard } from "@/components/ui/product/basic-product-card";
 import type {
+  GetProductIdsByCategoriesResponse,
+  GetProductIdsByTagsResponse,
   GetProductsMaxPriceResponse,
   ProductsResponse,
 } from "@/types/types";
@@ -50,22 +52,23 @@ export default async function Products({
 }: {
   searchParams: Promise<{ [key: string]: string | undefined }>;
 }) {
+  const {
+    page,
+    perPage,
+    sortBy,
+    sortByDirection,
+    categories: categoriesSearchParam,
+    maxPrice,
+    minRating,
+    tags: tagsSearchParam,
+  } = await searchParams;
   const [
-    {
-      page,
-      perPage,
-      sortBy,
-      sortByDirection,
-      categories: categoriesSearchParam,
-      maxPrice,
-      minRating,
-      tags: tagsSearchParam,
-    },
     categories,
     tags,
     productsMaxPriceResponse,
+    categoryProductIds,
+    tagProductIds,
   ] = await Promise.all([
-    searchParams,
     queryGraphql<Category[]>("categoriesCollection", allCategories, {
       first: categoriesToShow,
       filter: { store: { eq: env.NEXT_PUBLIC_STORE_ID } },
@@ -80,6 +83,24 @@ export default async function Products({
         store_id: env.NEXT_PUBLIC_STORE_ID,
       }
     ),
+    !!categoriesSearchParam
+      ? callDatabaseFunction<GetProductIdsByCategoriesResponse>(
+          "get_product_ids_by_category_ids",
+          {
+            store_id: env.NEXT_PUBLIC_STORE_ID,
+            category_ids: categoriesSearchParam.split(","),
+          }
+        )
+      : null,
+    !!tagsSearchParam
+      ? callDatabaseFunction<GetProductIdsByTagsResponse>(
+          "get_product_ids_by_tags",
+          {
+            store_id: env.NEXT_PUBLIC_STORE_ID,
+            tag_ids: tagsSearchParam.split(","),
+          }
+        )
+      : null,
   ]);
   const maxProductsPrice = productsMaxPriceResponse?.result_max_price;
 
@@ -113,22 +134,30 @@ export default async function Products({
       first: productsToShow,
       offset: ((!!page ? parseInt(page) : 1) - 1) * productsToShow,
       filter: {
-        store: { eq: env.NEXT_PUBLIC_STORE_ID },
-        available_quantity: { gt: 0 },
-        price: {
-          lte:
-            !!maxPrice && !isNaN(parseInt(maxPrice))
-              ? parseInt(maxPrice)
-              : (maxProductsPrice ?? defaultMaxProductPrice),
-        },
-        rating: { gte: parseInt(minRating ?? "0") },
         or: [
-          categoriesSearchParam
-            ?.split(",")
-            ?.map((value: string) => ({ categories: { contains: [value] } })),
-          tagsSearchParam
-            ?.split(",")
-            ?.map((value: string) => ({ tags: { contains: [value] } })),
+          {
+            and: [
+              { store: { eq: env.NEXT_PUBLIC_STORE_ID } },
+              { available_quantity: { gt: 0 } },
+              {
+                price: {
+                  lte:
+                    !!maxPrice && !isNaN(parseInt(maxPrice))
+                      ? parseInt(maxPrice)
+                      : (maxProductsPrice ?? defaultMaxProductPrice),
+                },
+              },
+              { rating: { gte: parseInt(minRating ?? "0") } },
+              !!categoryProductIds
+                ? { id: { in: categoryProductIds.map(({ id }) => id) } }
+                : null,
+            ]
+              .filter((value) => !!value)
+              .flatMap((value) => value as unknown),
+          },
+          !!tagProductIds
+            ? { id: { in: tagProductIds.map(({ id }) => id) } }
+            : null,
         ]
           .filter((value) => !!value)
           .flatMap((value) => value as unknown),

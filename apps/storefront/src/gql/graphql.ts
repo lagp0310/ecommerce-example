@@ -231,6 +231,8 @@ export type Mutation = {
   deleteFrompaymentsCollection: PaymentsDeleteResponse;
   /** Deletes zero or more records from the `phone_numbers` collection */
   deleteFromphone_numbersCollection: Phone_NumbersDeleteResponse;
+  /** Deletes zero or more records from the `product_category` collection */
+  deleteFromproduct_categoryCollection: Product_CategoryDeleteResponse;
   /** Deletes zero or more records from the `product_tag` collection */
   deleteFromproduct_tagCollection: Product_TagDeleteResponse;
   /** Deletes zero or more records from the `product_tags` collection */
@@ -293,6 +295,8 @@ export type Mutation = {
   insertIntopaymentsCollection?: Maybe<PaymentsInsertResponse>;
   /** Adds one or more `phone_numbers` records to the collection */
   insertIntophone_numbersCollection?: Maybe<Phone_NumbersInsertResponse>;
+  /** Adds one or more `product_category` records to the collection */
+  insertIntoproduct_categoryCollection?: Maybe<Product_CategoryInsertResponse>;
   /** Adds one or more `product_tag` records to the collection */
   insertIntoproduct_tagCollection?: Maybe<Product_TagInsertResponse>;
   /** Adds one or more `product_tags` records to the collection */
@@ -353,6 +357,8 @@ export type Mutation = {
   updatepaymentsCollection: PaymentsUpdateResponse;
   /** Updates zero or more records in the `phone_numbers` collection */
   updatephone_numbersCollection: Phone_NumbersUpdateResponse;
+  /** Updates zero or more records in the `product_category` collection */
+  updateproduct_categoryCollection: Product_CategoryUpdateResponse;
   /** Updates zero or more records in the `product_tag` collection */
   updateproduct_tagCollection: Product_TagUpdateResponse;
   /** Updates zero or more records in the `product_tags` collection */
@@ -523,6 +529,13 @@ export type MutationDeleteFrompaymentsCollectionArgs = {
 export type MutationDeleteFromphone_NumbersCollectionArgs = {
   atMost?: Scalars['Int']['input'];
   filter?: InputMaybe<Phone_NumbersFilter>;
+};
+
+
+/** The root type for creating and mutating data */
+export type MutationDeleteFromproduct_CategoryCollectionArgs = {
+  atMost?: Scalars['Int']['input'];
+  filter?: InputMaybe<Product_CategoryFilter>;
 };
 
 
@@ -723,6 +736,12 @@ export type MutationInsertIntopaymentsCollectionArgs = {
 /** The root type for creating and mutating data */
 export type MutationInsertIntophone_NumbersCollectionArgs = {
   objects: Array<Phone_NumbersInsertInput>;
+};
+
+
+/** The root type for creating and mutating data */
+export type MutationInsertIntoproduct_CategoryCollectionArgs = {
+  objects: Array<Product_CategoryInsertInput>;
 };
 
 
@@ -951,6 +970,14 @@ export type MutationUpdatephone_NumbersCollectionArgs = {
 
 
 /** The root type for creating and mutating data */
+export type MutationUpdateproduct_CategoryCollectionArgs = {
+  atMost?: Scalars['Int']['input'];
+  filter?: InputMaybe<Product_CategoryFilter>;
+  set: Product_CategoryUpdateInput;
+};
+
+
+/** The root type for creating and mutating data */
 export type MutationUpdateproduct_TagCollectionArgs = {
   atMost?: Scalars['Int']['input'];
   filter?: InputMaybe<Product_TagFilter>;
@@ -1093,6 +1120,8 @@ export type Query = {
   paymentsCollection?: Maybe<PaymentsConnection>;
   /** A pagable collection of type `phone_numbers` */
   phone_numbersCollection?: Maybe<Phone_NumbersConnection>;
+  /** A pagable collection of type `product_category` */
+  product_categoryCollection?: Maybe<Product_CategoryConnection>;
   /** A pagable collection of type `product_tag` */
   product_tagCollection?: Maybe<Product_TagConnection>;
   /** A pagable collection of type `product_tags` */
@@ -1379,6 +1408,18 @@ export type QueryPhone_NumbersCollectionArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<Array<Phone_NumbersOrderBy>>;
+};
+
+
+/** The root type for querying data */
+export type QueryProduct_CategoryCollectionArgs = {
+  after?: InputMaybe<Scalars['Cursor']['input']>;
+  before?: InputMaybe<Scalars['Cursor']['input']>;
+  filter?: InputMaybe<Product_CategoryFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<Product_CategoryOrderBy>>;
 };
 
 
@@ -2005,9 +2046,21 @@ export type Categories = Node & {
   name: Scalars['String']['output'];
   /** Globally Unique Record Identifier */
   nodeId: Scalars['ID']['output'];
+  product_categoryCollection?: Maybe<Product_CategoryConnection>;
   store?: Maybe<Scalars['UUID']['output']>;
   stores?: Maybe<Stores>;
   updated_at?: Maybe<Scalars['Datetime']['output']>;
+};
+
+
+export type CategoriesProduct_CategoryCollectionArgs = {
+  after?: InputMaybe<Scalars['Cursor']['input']>;
+  before?: InputMaybe<Scalars['Cursor']['input']>;
+  filter?: InputMaybe<Product_CategoryFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<Product_CategoryOrderBy>>;
 };
 
 export type CategoriesConnection = {
@@ -3920,6 +3973,94 @@ export type Phone_NumbersUpdateResponse = {
   records: Array<Phone_Numbers>;
 };
 
+export type Product_Category = Node & {
+  __typename?: 'product_category';
+  categories?: Maybe<Categories>;
+  category: Scalars['UUID']['output'];
+  created_at: Scalars['Datetime']['output'];
+  id: Scalars['UUID']['output'];
+  /** Globally Unique Record Identifier */
+  nodeId: Scalars['ID']['output'];
+  product: Scalars['UUID']['output'];
+  products?: Maybe<Products>;
+  updated_at?: Maybe<Scalars['Datetime']['output']>;
+};
+
+export type Product_CategoryConnection = {
+  __typename?: 'product_categoryConnection';
+  edges: Array<Product_CategoryEdge>;
+  pageInfo: PageInfo;
+};
+
+export type Product_CategoryDeleteResponse = {
+  __typename?: 'product_categoryDeleteResponse';
+  /** Count of the records impacted by the mutation */
+  affectedCount: Scalars['Int']['output'];
+  /** Array of records impacted by the mutation */
+  records: Array<Product_Category>;
+};
+
+export type Product_CategoryEdge = {
+  __typename?: 'product_categoryEdge';
+  cursor: Scalars['String']['output'];
+  node: Product_Category;
+};
+
+export type Product_CategoryFilter = {
+  /** Returns true only if all its inner filters are true, otherwise returns false */
+  and?: InputMaybe<Array<Product_CategoryFilter>>;
+  category?: InputMaybe<UuidFilter>;
+  created_at?: InputMaybe<DatetimeFilter>;
+  id?: InputMaybe<UuidFilter>;
+  nodeId?: InputMaybe<IdFilter>;
+  /** Negates a filter */
+  not?: InputMaybe<Product_CategoryFilter>;
+  /** Returns true if at least one of its inner filters is true, otherwise returns false */
+  or?: InputMaybe<Array<Product_CategoryFilter>>;
+  product?: InputMaybe<UuidFilter>;
+  updated_at?: InputMaybe<DatetimeFilter>;
+};
+
+export type Product_CategoryInsertInput = {
+  category?: InputMaybe<Scalars['UUID']['input']>;
+  created_at?: InputMaybe<Scalars['Datetime']['input']>;
+  id?: InputMaybe<Scalars['UUID']['input']>;
+  product?: InputMaybe<Scalars['UUID']['input']>;
+  updated_at?: InputMaybe<Scalars['Datetime']['input']>;
+};
+
+export type Product_CategoryInsertResponse = {
+  __typename?: 'product_categoryInsertResponse';
+  /** Count of the records impacted by the mutation */
+  affectedCount: Scalars['Int']['output'];
+  /** Array of records impacted by the mutation */
+  records: Array<Product_Category>;
+};
+
+export type Product_CategoryOrderBy = {
+  category?: InputMaybe<OrderByDirection>;
+  created_at?: InputMaybe<OrderByDirection>;
+  id?: InputMaybe<OrderByDirection>;
+  product?: InputMaybe<OrderByDirection>;
+  updated_at?: InputMaybe<OrderByDirection>;
+};
+
+export type Product_CategoryUpdateInput = {
+  category?: InputMaybe<Scalars['UUID']['input']>;
+  created_at?: InputMaybe<Scalars['Datetime']['input']>;
+  id?: InputMaybe<Scalars['UUID']['input']>;
+  product?: InputMaybe<Scalars['UUID']['input']>;
+  updated_at?: InputMaybe<Scalars['Datetime']['input']>;
+};
+
+export type Product_CategoryUpdateResponse = {
+  __typename?: 'product_categoryUpdateResponse';
+  /** Count of the records impacted by the mutation */
+  affectedCount: Scalars['Int']['output'];
+  /** Array of records impacted by the mutation */
+  records: Array<Product_Category>;
+};
+
 export type Product_Tag = Node & {
   __typename?: 'product_tag';
   created_at: Scalars['Datetime']['output'];
@@ -4133,6 +4274,7 @@ export type Products = Node & {
   /** Globally Unique Record Identifier */
   nodeId: Scalars['ID']['output'];
   price: Scalars['Float']['output'];
+  product_categoryCollection?: Maybe<Product_CategoryConnection>;
   product_tagCollection?: Maybe<Product_TagConnection>;
   rating?: Maybe<Scalars['Int']['output']>;
   render_order?: Maybe<Scalars['BigInt']['output']>;
@@ -4152,6 +4294,17 @@ export type ProductsLine_ItemsCollectionArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<Array<Line_ItemsOrderBy>>;
+};
+
+
+export type ProductsProduct_CategoryCollectionArgs = {
+  after?: InputMaybe<Scalars['Cursor']['input']>;
+  before?: InputMaybe<Scalars['Cursor']['input']>;
+  filter?: InputMaybe<Product_CategoryFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<Product_CategoryOrderBy>>;
 };
 
 

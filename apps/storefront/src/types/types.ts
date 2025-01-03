@@ -154,10 +154,13 @@ export type ProductTagsResponse = Omit<
   ProductTagResponse,
   "is_general_tag" | "is_discount_tag" | "tag_types"
 > & { isGeneralTag: boolean; isDiscountTag: boolean; tagTypes?: TagType };
-export type ProductTagsEdgeResponse = Omit<ProductTagEdge, "node"> & {
-  node: ProductTagsResponse;
+export type ProductNode = Omit<ProductTagEdge, "product_tags"> & {
+  productTags: ProductTagsResponse;
 };
-export type ProductTagsConnectionResponse = Omit<
+export type ProductTagsEdgeResponse = Omit<ProductTagEdge, "node"> & {
+  node: ProductNode;
+};
+export type ProductTagConnectionResponse = Omit<
   ProductTagConnection,
   "edges"
 > & { edges: Array<ProductTagsEdgeResponse> };
@@ -165,7 +168,7 @@ export type ProductsResponse = Omit<
   ProductResponse,
   "product_tagsCollection"
 > & {
-  productTagsCollection?: ProductTagsConnectionResponse;
+  allTags?: ProductTagConnectionResponse;
 };
 export type LineItemWithProduct = Omit<LineItem, "products"> & {
   products: TProduct;

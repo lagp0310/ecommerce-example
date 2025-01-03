@@ -49,30 +49,54 @@ export function parseRemainingTime(countDown: number) {
   };
 }
 
+// TODO: Parse should be done in the backend to send ready to render
+// data to the frontend.
 export function parseProductTags(
   productsCollection?: ProductsResponse[] | null
 ) {
   if (!productsCollection) return [];
 
-  return productsCollection.map(
-    ({ productTagsCollection, ...productRest }) => ({
-      generalTags: productTagsCollection?.edges
-        ?.filter(({ node: { isGeneralTag } }) => isGeneralTag)
-        .map(({ node: { id, tag, tagTypes } }) => ({
+  return productsCollection.map(({ allTags, ...productRest }) => ({
+    generalTags: allTags?.edges
+      ?.filter(
+        ({
+          node: {
+            productTags: { isGeneralTag },
+          },
+        }) => isGeneralTag
+      )
+      .map(
+        ({
+          node: {
+            productTags: { id, tag, tagTypes },
+          },
+        }) => ({
           id,
           tag,
           type: tagTypes?.type,
-        })),
-      discountTags: productTagsCollection?.edges
-        ?.filter(({ node: { isDiscountTag } }) => isDiscountTag)
-        .map(({ node: { id, tag, tagTypes } }) => ({
+        })
+      ),
+    discountTags: allTags?.edges
+      ?.filter(
+        ({
+          node: {
+            productTags: { isDiscountTag },
+          },
+        }) => isDiscountTag
+      )
+      .map(
+        ({
+          node: {
+            productTags: { id, tag, tagTypes },
+          },
+        }) => ({
           id,
           tag,
           type: tagTypes?.type,
-        })),
-      ...productRest,
-    })
-  ) as TProduct[];
+        })
+      ),
+    ...productRest,
+  })) as TProduct[];
 }
 
 export function isRecordIdInSearchParamArray(

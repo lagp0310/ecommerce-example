@@ -2,7 +2,7 @@ create table
   public.phone_numbers (
     id uuid not null default gen_random_uuid (),
     phone_number character varying not null,
-    customer uuid null,
+    customer uuid not null,
     created_at timestamp with time zone not null default (now() at time zone 'utc'::text),
     updated_at timestamp with time zone null,
     constraint phone_numbers_pkey primary key (id),

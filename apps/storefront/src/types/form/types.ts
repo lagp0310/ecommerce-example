@@ -9,6 +9,7 @@ export const addressFormSchema = z.object({
       required_error: "First Name is required",
       invalid_type_error: "First Name must be a string",
     })
+    .min(1, "First Name is required")
     .max(30, "First Name cannot be more than 30 characters long")
     .regex(/^[a-zA-Z]+$/i, "First Name can only contain letters"),
   lastName: z
@@ -16,6 +17,7 @@ export const addressFormSchema = z.object({
       required_error: "Last Name is required",
       invalid_type_error: "Last Name must be a string",
     })
+    .min(1, "Last Name is required")
     .max(30, "Last Name cannot be more than 30 characters long")
     .regex(/^[a-zA-Z]+$/i, "Last Name can only contain letters"),
   companyName: z
@@ -29,6 +31,7 @@ export const addressFormSchema = z.object({
       required_error: "Street Address is required",
       invalid_type_error: "Street Address must be a string",
     })
+    .min(1, "Street Address is required")
     .max(500, "Street Address cannot be more than 500 characters long")
     .min(1, "Street Address cannot be empty"),
   countryId: z
@@ -36,13 +39,13 @@ export const addressFormSchema = z.object({
       required_error: "Country is required",
       invalid_type_error: "Country must be a string",
     })
-    .uuid("Country is invalid"),
+    .uuid("Country is required"),
   countryStateId: z
     .string({
       required_error: "Country State is required",
       invalid_type_error: "Country State must be a string",
     })
-    .uuid("Country State is invalid"),
+    .uuid("Country State is required"),
   zipCode: z
     .string({
       required_error: "ZIP Code is required",
@@ -56,6 +59,7 @@ export const addressFormSchema = z.object({
       invalid_type_error: "Email must be a string",
     })
     .email("Email is invalid")
+    .min(1, "Email is required")
     .max(50, "Email cannot be more than 50 characters long"),
   phoneNumber: z
     .string({

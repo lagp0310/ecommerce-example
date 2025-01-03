@@ -4120,7 +4120,6 @@ export type Product_TagsUpdateResponse = {
 export type Products = Node & {
   __typename?: 'products';
   available_quantity?: Maybe<Scalars['BigInt']['output']>;
-  categories?: Maybe<Array<Maybe<Scalars['UUID']['output']>>>;
   created_at: Scalars['Datetime']['output'];
   currencies?: Maybe<Currencies>;
   currency: Scalars['UUID']['output'];
@@ -4141,7 +4140,6 @@ export type Products = Node & {
   slug?: Maybe<Scalars['String']['output']>;
   store: Scalars['UUID']['output'];
   stores?: Maybe<Stores>;
-  tags?: Maybe<Array<Maybe<Scalars['UUID']['output']>>>;
   updated_at?: Maybe<Scalars['Datetime']['output']>;
 };
 
@@ -4191,7 +4189,6 @@ export type ProductsFilter = {
   /** Returns true only if all its inner filters are true, otherwise returns false */
   and?: InputMaybe<Array<ProductsFilter>>;
   available_quantity?: InputMaybe<BigIntFilter>;
-  categories?: InputMaybe<UuidListFilter>;
   created_at?: InputMaybe<DatetimeFilter>;
   currency?: InputMaybe<UuidFilter>;
   description?: InputMaybe<StringFilter>;
@@ -4211,13 +4208,11 @@ export type ProductsFilter = {
   sku?: InputMaybe<StringFilter>;
   slug?: InputMaybe<StringFilter>;
   store?: InputMaybe<UuidFilter>;
-  tags?: InputMaybe<UuidListFilter>;
   updated_at?: InputMaybe<DatetimeFilter>;
 };
 
 export type ProductsInsertInput = {
   available_quantity?: InputMaybe<Scalars['BigInt']['input']>;
-  categories?: InputMaybe<Array<InputMaybe<Scalars['UUID']['input']>>>;
   created_at?: InputMaybe<Scalars['Datetime']['input']>;
   currency?: InputMaybe<Scalars['UUID']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
@@ -4232,7 +4227,6 @@ export type ProductsInsertInput = {
   sku?: InputMaybe<Scalars['String']['input']>;
   slug?: InputMaybe<Scalars['String']['input']>;
   store?: InputMaybe<Scalars['UUID']['input']>;
-  tags?: InputMaybe<Array<InputMaybe<Scalars['UUID']['input']>>>;
   updated_at?: InputMaybe<Scalars['Datetime']['input']>;
 };
 
@@ -4265,7 +4259,6 @@ export type ProductsOrderBy = {
 
 export type ProductsUpdateInput = {
   available_quantity?: InputMaybe<Scalars['BigInt']['input']>;
-  categories?: InputMaybe<Array<InputMaybe<Scalars['UUID']['input']>>>;
   created_at?: InputMaybe<Scalars['Datetime']['input']>;
   currency?: InputMaybe<Scalars['UUID']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
@@ -4280,7 +4273,6 @@ export type ProductsUpdateInput = {
   sku?: InputMaybe<Scalars['String']['input']>;
   slug?: InputMaybe<Scalars['String']['input']>;
   store?: InputMaybe<Scalars['UUID']['input']>;
-  tags?: InputMaybe<Array<InputMaybe<Scalars['UUID']['input']>>>;
   updated_at?: InputMaybe<Scalars['Datetime']['input']>;
 };
 

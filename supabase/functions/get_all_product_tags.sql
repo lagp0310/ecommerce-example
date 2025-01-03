@@ -1,7 +1,7 @@
 -- Get Available Tags for Products given a Store.
 CREATE
 OR REPLACE FUNCTION get_all_product_tags (
-  IN store_id UUID
+  store_id UUID
 ) RETURNS TABLE (
   id UUID,
   tag TEXT,
@@ -14,11 +14,12 @@ OR REPLACE FUNCTION get_all_product_tags (
   tag_types.type
 FROM
   products,
+  product_tag,
   product_tags,
   tag_types
 WHERE
   products.store = store_id
-  AND product_tags.product = products.id
+  AND product_tag.product = products.id
   AND product_tags.type = tag_types.id;
     END;
     $get_all_product_tags$ language plpgsql;

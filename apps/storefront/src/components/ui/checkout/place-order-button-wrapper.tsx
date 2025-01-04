@@ -34,7 +34,7 @@ export function PlaceOrderButtonWrapper({ ...props }: Props) {
     const cartId = cart?.id;
 
     if (!cartId) {
-      throw new Error("Cart could not be found");
+      throw new Error("Cart is null or undefined");
     }
 
     const isAdditionalInfoFormValid = await additionalInfoForm.trigger();

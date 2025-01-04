@@ -7,11 +7,12 @@ import {
 } from "@/components/ui/common/button";
 import { useCart } from "@/context/cart-context";
 import { useCashForm } from "@/context/cash-form-context";
-import { useCardForm } from "@/context/card-form-context";
 import { useAdditionalInfoForm } from "@/context/additional-info-form-context";
 import { useBillingAddressForm } from "@/context/billing-address-form-context";
 import { useShippingAddressForm } from "@/context/shipping-address-form-context";
 import { createOrderAction } from "@/app/(store)/checkout/actions";
+import { useCreditCardForm } from "@/context/credit-card-form-context";
+import { useDebitCardForm } from "@/context/debit-card-form-context";
 
 type Props = ButtonProps;
 
@@ -23,7 +24,10 @@ export function PlaceOrderButtonWrapper({ ...props }: Props) {
   const { form: shippingAddressForm, onSubmit: onShippingAddressFormSubmit } =
     useShippingAddressForm();
   const { form: cashForm, onSubmit: onCashFormSubmit } = useCashForm();
-  const { form: cardForm, onSubmit: onCardFormSubmit } = useCardForm();
+  const { form: debitCardForm, onSubmit: onDebitCardFormSubmit } =
+    useDebitCardForm();
+  const { form: creditCardForm, onSubmit: onCreditCardFormSubmit } =
+    useCreditCardForm();
   const { form: additionalInfoForm } = useAdditionalInfoForm();
 
   const submitAllForms = React.useCallback(async () => {
@@ -49,7 +53,8 @@ export function PlaceOrderButtonWrapper({ ...props }: Props) {
       billingAddressForm.handleSubmit(onBillingAddressFormSubmit)(),
       shippingAddressForm.handleSubmit(onShippingAddressFormSubmit)(),
       cashForm.handleSubmit(onCashFormSubmit)(),
-      cardForm.handleSubmit(onCardFormSubmit)(),
+      debitCardForm.handleSubmit(onDebitCardFormSubmit)(),
+      creditCardForm.handleSubmit(onCreditCardFormSubmit)(),
       createOrderAction({
         cart: cartId,
         notes: additionalInfoForm.getValues("orderNotes"),
@@ -66,12 +71,14 @@ export function PlaceOrderButtonWrapper({ ...props }: Props) {
   }, [
     additionalInfoForm,
     billingAddressForm,
-    cardForm,
     cart?.id,
     cashForm,
+    creditCardForm,
+    debitCardForm,
     onBillingAddressFormSubmit,
-    onCardFormSubmit,
     onCashFormSubmit,
+    onCreditCardFormSubmit,
+    onDebitCardFormSubmit,
     onShippingAddressFormSubmit,
     shippingAddressForm,
   ]);

@@ -187,3 +187,8 @@ export type AddressFormContext = {
   form: UseFormReturn<AddressForm>;
   onSubmit: SubmitHandler<AddressForm>;
 };
+
+export type CardFormContext = {
+  form: UseFormReturn<CardForm>;
+  onSubmit: SubmitHandler<CardForm>;
+};

@@ -4,37 +4,9 @@ import { processCardPaymentAction } from "@/app/(store)/checkout/actions";
 import { type CardForm, cardFormSchema } from "@/types/form/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import React from "react";
-import {
-  type SubmitHandler,
-  useForm,
-  type UseFormReturn,
-} from "react-hook-form";
-
-type CardFormContext = {
-  form: UseFormReturn<CardForm>;
-  onSubmit: SubmitHandler<CardForm>;
-};
-const CardFormContext = React.createContext<CardFormContext>({
-  form: {} as UseFormReturn<CardForm>,
-  onSubmit: () => {},
-});
+import { type SubmitHandler, useForm } from "react-hook-form";
 
 export function useCardForm() {
-  const context = React.useContext(CardFormContext);
-  if (!context) {
-    throw new Error(
-      "useCardForm must be used within a CardFormContextProvider."
-    );
-  }
-
-  return context;
-}
-
-type Props = {
-  children: React.ReactNode;
-};
-
-export function CardFormContextProvider({ children }: Props) {
   const [isPending, startTransition] = React.useTransition();
 
   const { ...form } = useForm<CardForm>({
@@ -58,9 +30,10 @@ export function CardFormContextProvider({ children }: Props) {
     [form, onSubmit]
   );
 
-  return (
-    <CardFormContext.Provider value={providerValue}>
-      {children}
-    </CardFormContext.Provider>
-  );
+  return {
+    isPending,
+    form,
+    onSubmit,
+    providerValue,
+  };
 }

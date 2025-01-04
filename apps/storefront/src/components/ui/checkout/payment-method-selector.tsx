@@ -7,10 +7,15 @@ import { Label } from "@/components/form/label";
 import { CashForm } from "@/components/ui/checkout/cash-form";
 import { cn, getPaymentMethodValue } from "@/lib/utils";
 import { CardForm } from "@/components/ui/checkout/card-form";
+import { useDebitCardForm } from "@/context/debit-card-form-context";
+import { useCreditCardForm } from "@/context/credit-card-form-context";
 
 export type Props = { paymentMethods: PaymentMethodsResponse[] };
 
 export function PaymentMethodSelector({ paymentMethods }: Props) {
+  const debitCardContextValue = useDebitCardForm();
+  const creditCardContextValue = useCreditCardForm();
+
   const defaultRadioValue = React.useMemo(
     () => getPaymentMethodValue(paymentMethods.at(0)?.paymentMethodTypes?.type),
     [paymentMethods]
@@ -71,7 +76,7 @@ export function PaymentMethodSelector({ paymentMethods }: Props) {
           { hidden: currentValue != PaymentMethodEnum.CREDIT_CARD }
         )}
       >
-        <CardForm htmlNamePrefix="credit-card" />
+        <CardForm htmlNamePrefix="credit-card" {...creditCardContextValue} />
       </div>
       <div
         className={cn(
@@ -79,7 +84,7 @@ export function PaymentMethodSelector({ paymentMethods }: Props) {
           { hidden: currentValue != PaymentMethodEnum.DEBIT_CARD }
         )}
       >
-        <CardForm htmlNamePrefix="debit-card" />
+        <CardForm htmlNamePrefix="debit-card" {...debitCardContextValue} />
       </div>
     </div>
   );

@@ -4,31 +4,34 @@ import { FieldError } from "@/components/form/field-error";
 import { Form } from "@/components/form/form";
 import { Input, type Props as InputProps } from "@/components/form/input";
 import { Label } from "@/components/form/label";
-import { useCardForm } from "@/context/card-form-context";
 import { useCart } from "@/context/cart-context";
 import { useFormUtils } from "@/hooks/use-form-utils";
-import { type CardFormInputKeys, type CardForm } from "@/types/form/types";
+import type {
+  CardFormInputKeys,
+  CardForm,
+  CardFormContext,
+} from "@/types/form/types";
 import React from "react";
 import { PatternFormat, type PatternFormatProps } from "react-number-format";
 
-export type Props = { htmlNamePrefix: string };
+export type Props = CardFormContext & { htmlNamePrefix: string };
 
-export function CardForm({ htmlNamePrefix }: Props) {
+export function CardForm({
+  htmlNamePrefix,
+  form: {
+    formState: { errors },
+    handleSubmit,
+    register,
+    setValue,
+  },
+  onSubmit,
+}: Props) {
   const { cartSummary } = useCart();
   const cartTotal = React.useMemo(
     () => parseFloat(cartSummary.total.toFixed(2)),
     [cartSummary.total]
   );
 
-  const {
-    form: {
-      formState: { errors },
-      handleSubmit,
-      register,
-      setValue,
-    },
-    onSubmit,
-  } = useCardForm();
   const { handleInputChange } = useFormUtils<CardForm, CardFormInputKeys>(
     setValue
   );

@@ -1,27 +1,19 @@
 "use client";
 
-import { processCardPaymentAction } from "@/app/(store)/checkout/actions";
 import { FieldError } from "@/components/form/field-error";
 import { Form } from "@/components/form/form";
 import { Input, type Props as InputProps } from "@/components/form/input";
 import { Label } from "@/components/form/label";
+import { useCardForm } from "@/context/card-form-context";
 import { useCart } from "@/context/cart-context";
 import { useFormUtils } from "@/hooks/use-form-utils";
-import {
-  type CardFormInputKeys,
-  cardFormSchema,
-  type CardForm,
-} from "@/types/form/types";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { type CardFormInputKeys, type CardForm } from "@/types/form/types";
 import React from "react";
-import { type SubmitHandler, useForm } from "react-hook-form";
 import { PatternFormat, type PatternFormatProps } from "react-number-format";
 
 export type Props = { htmlNamePrefix: string };
 
 export function CardForm({ htmlNamePrefix }: Props) {
-  const [isPending, startTransition] = React.useTransition();
-
   const { cartSummary } = useCart();
   const cartTotal = React.useMemo(
     () => parseFloat(cartSummary.total.toFixed(2)),
@@ -29,28 +21,14 @@ export function CardForm({ htmlNamePrefix }: Props) {
   );
 
   const {
-    formState: { errors },
-    handleSubmit,
-    register,
-    setValue,
-  } = useForm<CardForm>({
-    resolver: zodResolver(cardFormSchema),
-    defaultValues: {
-      amount: cartTotal,
+    form: {
+      formState: { errors },
+      handleSubmit,
+      register,
+      setValue,
     },
-  });
-  const onSubmit: SubmitHandler<CardForm> = React.useCallback(async (data) => {
-    try {
-      startTransition(async () => {
-        const response = await processCardPaymentAction({
-          ...data,
-        });
-        console.log(response);
-      });
-    } catch (error) {
-      throw new Error("Submit error on Address Form");
-    }
-  }, []);
+    onSubmit,
+  } = useCardForm();
   const { handleInputChange } = useFormUtils<CardForm, CardFormInputKeys>(
     setValue
   );

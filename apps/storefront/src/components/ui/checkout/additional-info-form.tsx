@@ -8,23 +8,19 @@ import {
 } from "@/components/form/textarea";
 import { cn } from "@/lib/utils";
 import React from "react";
-import { useForm } from "react-hook-form";
-import {
-  additionalInfoFormSchema,
-  type AdditionalInfoForm,
-} from "@/types/form/types";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { type AdditionalInfoForm } from "@/types/form/types";
 import { FieldError } from "@/components/form/field-error";
+import { useAdditionalInfoForm } from "@/context/additional-info-form-context";
 
 type Props = React.HTMLProps<HTMLTextAreaElement>;
 
 export function AdditionalInfoForm({ className, ...props }: Props) {
   const {
-    formState: { errors },
-    register,
-  } = useForm<AdditionalInfoForm>({
-    resolver: zodResolver(additionalInfoFormSchema),
-  });
+    form: {
+      formState: { errors },
+      register,
+    },
+  } = useAdditionalInfoForm();
 
   const textareaProps: TextareaProps = React.useMemo(
     () => ({

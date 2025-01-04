@@ -1,15 +1,13 @@
 "use client";
 
-import { processCashPaymentAction } from "@/app/(store)/checkout/actions";
 import { FieldError } from "@/components/form/field-error";
 import { Form } from "@/components/form/form";
 import { Input } from "@/components/form/input";
 import { Label } from "@/components/form/label";
 import { useCart } from "@/context/cart-context";
-import { cashFormSchema, type CashForm } from "@/types/form/types";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { useCashForm } from "@/context/cash-form-context";
+import { type CashForm } from "@/types/form/types";
 import React from "react";
-import { type SubmitHandler, useForm } from "react-hook-form";
 import {
   type NumberFormatValues,
   NumericFormat,
@@ -19,30 +17,17 @@ import {
 export type Props = { htmlNamePrefix: string };
 
 export function CashForm({ htmlNamePrefix }: Props) {
-  const [isPending, startTransition] = React.useTransition();
-
   const {
-    clearErrors,
-    formState: { errors },
-    handleSubmit,
-    register,
-    setError,
-    setValue,
-  } = useForm<CashForm>({
-    resolver: zodResolver(cashFormSchema),
-  });
-  const onSubmit: SubmitHandler<CashForm> = React.useCallback(async (data) => {
-    try {
-      startTransition(async () => {
-        const response = await processCashPaymentAction({
-          ...data,
-        });
-        console.log(response);
-      });
-    } catch (error) {
-      throw new Error("Submit error on Address Form");
-    }
-  }, []);
+    form: {
+      clearErrors,
+      formState: { errors },
+      handleSubmit,
+      register,
+      setError,
+      setValue,
+    },
+    onSubmit,
+  } = useCashForm();
 
   const { cartSummary } = useCart();
   const cartTotal = React.useMemo(
@@ -132,7 +117,6 @@ export function CashForm({ htmlNamePrefix }: Props) {
       onSubmit={handleSubmit(onSubmit)}
       className="flex flex-1 flex-col gap-4"
     >
-      <input type="submit" />
       <div className="flex flex-1 flex-col gap-4">
         <div className="flex flex-1 flex-row flex-wrap md:flex-nowrap gap-4">
           <Label

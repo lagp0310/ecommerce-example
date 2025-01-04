@@ -1,6 +1,6 @@
 "use client";
 
-import { createOrder } from "@/app/(store)/checkout/actions";
+import { saveAddressInformationAction } from "@/app/(store)/checkout/actions";
 import { Form } from "@/components/form/form";
 import { Input, type Props as InputProps } from "@/components/form/input";
 import { Label } from "@/components/form/label";
@@ -23,20 +23,26 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FieldError } from "@/components/form/field-error";
 import { useFormUtils } from "@/hooks/use-form-utils";
+import { Button } from "@/components/ui/common/button";
 
 export type Props = {
+  customerId: string;
+  addressTypeId: string;
   htmlNamePrefix: string;
   countries: GetParsedOptionsResponse;
   countryStates: GetParsedOptionsResponse;
 };
 
 export function AddressForm({
+  customerId,
+  addressTypeId,
   htmlNamePrefix,
   countries,
   countryStates,
 }: Props) {
-  // TODO: Server validation.
   // TODO: Autofill data if the user is signed in.
+
+  const [isPending, startTransition] = React.useTransition();
 
   const {
     clearErrors,
@@ -46,10 +52,18 @@ export function AddressForm({
     setValue,
   } = useForm<AddressForm>({
     resolver: zodResolver(addressFormSchema),
+    defaultValues: { addressTypeId, customerId },
   });
   const onSubmit: SubmitHandler<AddressForm> = React.useCallback(
     async (data) => {
-      console.log(data);
+      try {
+        startTransition(async () => {
+          const response = await saveAddressInformationAction(data);
+          console.log(response);
+        });
+      } catch (error) {
+        throw new Error("Submit error on Address Form");
+      }
     },
     []
   );
@@ -247,11 +261,9 @@ export function AddressForm({
 
   return (
     <Form
-      action={createOrder}
       onSubmit={handleSubmit(onSubmit)}
       className="flex flex-1 flex-col gap-4"
     >
-      <input type="submit" />
       <div className="flex flex-1 flex-col gap-4">
         <div className="flex flex-1 flex-row flex-wrap md:flex-nowrap gap-4">
           <Label
@@ -367,6 +379,14 @@ export function AddressForm({
             <FieldError error={errors.phoneNumber} />
           </Label>
         </div>
+      </div>
+      <div className="flex flex-row justify-end">
+        <Button
+          type="submit"
+          className="mt-3 p-3 flex flex-row items-center justify-center gap-x-2 rounded-full bg-primary text-body-small font-semibold leading-6 text-white border border-primary hover:bg-white hover:text-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
+        >
+          Continue
+        </Button>
       </div>
     </Form>
   );

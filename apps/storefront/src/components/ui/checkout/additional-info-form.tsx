@@ -8,7 +8,7 @@ import {
 } from "@/components/form/textarea";
 import { cn } from "@/lib/utils";
 import React from "react";
-import { type SubmitHandler, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import {
   additionalInfoFormSchema,
   type AdditionalInfoForm,
@@ -19,21 +19,12 @@ import { FieldError } from "@/components/form/field-error";
 type Props = React.HTMLProps<HTMLTextAreaElement>;
 
 export function AdditionalInfoForm({ className, ...props }: Props) {
-  // TODO: Server validation.
-
   const {
     formState: { errors },
     register,
-    handleSubmit,
   } = useForm<AdditionalInfoForm>({
     resolver: zodResolver(additionalInfoFormSchema),
   });
-  const onSubmit: SubmitHandler<AdditionalInfoForm> = React.useCallback(
-    async (data) => {
-      console.log(data);
-    },
-    []
-  );
 
   const textareaProps: TextareaProps = React.useMemo(
     () => ({
@@ -53,10 +44,7 @@ export function AdditionalInfoForm({ className, ...props }: Props) {
   );
 
   return (
-    <Form
-      onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-1 flex-col gap-4"
-    >
+    <Form className="flex flex-1 flex-col gap-4">
       <div className="flex flex-1 flex-col gap-4">
         <div className="flex flex-1 flex-row gap-4">
           <Label

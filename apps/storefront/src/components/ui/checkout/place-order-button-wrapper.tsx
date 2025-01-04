@@ -38,11 +38,11 @@ export function PlaceOrderButtonWrapper({ ...props }: Props) {
     }
 
     const isAdditionalInfoFormValid = await additionalInfoForm.trigger();
-
     if (!isAdditionalInfoFormValid) {
       throw new Error("Additional Info Form is not valid");
     }
 
+    // FIXME: Validate payment method depending on current selection.
     const [
       billingFormAddressResponse,
       shippingFormAddressResponse,

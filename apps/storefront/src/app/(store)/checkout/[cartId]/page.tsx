@@ -12,6 +12,7 @@ import { callDatabaseFunction } from "@/lib/call-database-function";
 import { queryGraphql } from "@/lib/server-query";
 import { cn, getCartSummaryItems } from "@/lib/utils";
 import type {
+  AddressTypesResponse,
   BaseAccordionItem,
   CartSummaryField,
   GetCartSummaryResponse,
@@ -25,7 +26,6 @@ import {
   type Props as CheckoutFormProps,
 } from "@/components/ui/checkout/checkout-form";
 import { AdditionalInfoForm } from "@/components/ui/checkout/additional-info-form";
-import { Button } from "@/components/ui/common/button";
 import {
   PaymentMethodSelector,
   type Props as PaymentMethodSelectorProps,
@@ -38,6 +38,8 @@ import {
   AccordionTrigger,
 } from "@/components/ui/common/accordion";
 import { availableStateIds } from "@/constants/constants";
+import { allCustomerAddressTypes } from "@/gql/queries/customer-address-type/queries";
+import { PlaceOrderButtonWrapper } from "@/components/ui/checkout/place-order-button-wrapper";
 
 export default async function Checkout({
   params,
@@ -57,6 +59,7 @@ export default async function Checkout({
     cartSummary,
     countries,
     countryStates,
+    customerAddressTypes,
   ] = await Promise.all([
     queryGraphql<CartResponse>(
       "cartsCollection",
@@ -97,6 +100,12 @@ export default async function Checkout({
           { country_id: countryId, state_ids: availableStateIds }
         )
       : [],
+    queryGraphql<AddressTypesResponse[]>(
+      "customerAddressTypesCollection",
+      allCustomerAddressTypes,
+      {},
+      "no-cache"
+    ),
   ]);
 
   const cartTotalSummary: CartSummaryField[] = getCartSummaryItems(
@@ -112,6 +121,9 @@ export default async function Checkout({
     paymentMethods: storePaymentMethods ?? [],
   };
   const checkoutFormProps: CheckoutFormProps = {
+    // FIXME: Dynamic ID for customer after login/sign up is ready.
+    customerId: "cc1293d9-9090-4cd5-b8bd-804777d7302a",
+    customerAddressTypes: customerAddressTypes ?? [],
     countries: countries ?? [],
     countryStates: countryStates ?? [],
   };
@@ -254,9 +266,9 @@ export default async function Checkout({
                   }
                 )}
               </div>
-              <Button className="mt-3 py-3 flex flex-1 flex-row items-center justify-center gap-x-2 rounded-full bg-primary text-body-small font-semibold leading-6 text-white border border-primary hover:bg-white hover:text-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none">
+              <PlaceOrderButtonWrapper className="mt-3 py-3 flex flex-1 flex-row items-center justify-center gap-x-2 rounded-full bg-primary text-body-small font-semibold leading-6 text-white border border-primary hover:bg-white hover:text-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none">
                 Place Order
-              </Button>
+              </PlaceOrderButtonWrapper>
             </CartSummary>
           </div>
         </div>

@@ -7,8 +7,6 @@ export const customerAddressFragment = gql`
     firstName: first_name
     lastName: last_name
     companyName: company_name
-    countryId: country
-    countryStateId: country_state
     zipCode: zip_code
     email
     phoneNumber: phone_number

@@ -13,6 +13,7 @@ import type {
   Line_Items as LineItem,
   Payment_Methods as PaymentMethodResponse,
   Payment_Method_Types as PaymentMethodType,
+  Customer_Address_Types as CustomerAddressType,
 } from "@/gql/graphql";
 import type { OperationVariables } from "@apollo/client";
 
@@ -231,3 +232,8 @@ export enum PaymentMethodEnum {
 
 export type GetProductIdsByTagsResponse = { id: string }[];
 export type GetProductIdsByCategoriesResponse = { id: string }[];
+
+export type AddressTypesResponse = Omit<
+  CustomerAddressType,
+  "created_at" | "updated_at"
+> & { createdAt?: string; updatedAt?: string };

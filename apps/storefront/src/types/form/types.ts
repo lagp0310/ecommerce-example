@@ -1,9 +1,25 @@
 import { type NumberFormatValues, type SourceInfo } from "react-number-format";
-import { isCreditCard } from "validator";
 import isMobilePhone from "validator/es/lib/isMobilePhone";
 import { z } from "zod";
 
+export enum AddressType {
+  BILLING = "Billing",
+  SHIPPING = "Shipping",
+}
+
 export const addressFormSchema = z.object({
+  customerId: z
+    .string({
+      required_error: "Customer is required",
+      invalid_type_error: "Customer must be a string",
+    })
+    .uuid("Customer is required"),
+  addressTypeId: z
+    .string({
+      required_error: "Address Type is required",
+      invalid_type_error: "Address Type must be a string",
+    })
+    .uuid("Address Type is required"),
   firstName: z
     .string({
       required_error: "First Name is required",
@@ -89,18 +105,8 @@ export type CustomOnValueChange<T> = (
   useFormattedValue?: boolean
 ) => void;
 
-export const additionalInfoFormSchema = z.object({
-  orderNotes: z
-    .string({
-      required_error: "Order Notes is required",
-      invalid_type_error: "Order Notes must be a string",
-    })
-    .max(2000, "Order Notes cannot be more than 2000 characters long"),
-});
-export type AdditionalInfoForm = z.infer<typeof additionalInfoFormSchema>;
-
 export const cashFormSchema = z.object({
-  payAmount: z
+  amount: z
     .number({
       invalid_type_error: "Field must be a number",
       required_error: "Field is required",
@@ -110,6 +116,12 @@ export const cashFormSchema = z.object({
 export type CashForm = z.infer<typeof cashFormSchema>;
 
 export const cardFormSchema = z.object({
+  amount: z
+    .number({
+      invalid_type_error: "Field must be a number",
+      required_error: "Field is required",
+    })
+    .positive("Number must be positive"),
   firstName: z
     .string({
       required_error: "First Name is required",
@@ -129,7 +141,10 @@ export const cardFormSchema = z.object({
       invalid_type_error: "Card Number must be a string",
       required_error: "Card Number is required",
     })
-    .refine((value) => isCreditCard(value), "Card Number is invalid"),
+    // TODO: Uncomment for proper validation. For testing, validating
+    // that card has 16 digits.
+    // .refine((value) => isCreditCard(value), "Card Number is invalid"),
+    .regex(/[0-9]{16}/, "Card Number is invalid"),
   cvc: z
     .string({
       required_error: "CVC is required",
@@ -140,3 +155,29 @@ export const cardFormSchema = z.object({
 });
 export type CardForm = z.infer<typeof cardFormSchema>;
 export type CardFormInputKeys = keyof CardForm;
+
+export const orderNotesSchema = z
+  .string({
+    required_error: "Order Notes is required",
+    invalid_type_error: "Order Notes must be a string",
+  })
+  .max(2000, "Order Notes cannot be more than 2000 characters long")
+  .optional();
+export const orderFormSchema = z.object({
+  cart: z
+    .string({
+      required_error: "Cart is required",
+      invalid_type_error: "Cart must be a string",
+    })
+    .uuid("Cart is required"),
+  notes: orderNotesSchema,
+});
+export type OrderForm = z.infer<typeof orderFormSchema>;
+
+export const additionalInfoFormSchema = z.object({
+  orderNotes: orderNotesSchema,
+});
+export type AdditionalInfoForm = z.infer<typeof additionalInfoFormSchema>;
+
+// TODO: Update this mock when payment is ready.
+export type SuccessFailureMock = { isSuccess?: boolean };

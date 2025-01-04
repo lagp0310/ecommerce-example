@@ -284,3 +284,21 @@ export function getPaymentMethodValue(value?: string) {
       throw new Error(`'${value}' payment method is not in enum`);
   }
 }
+
+export function getParsedErrorMessage(
+  error: unknown,
+  fallbackMessage = "Request failed"
+) {
+  const hasErrorMessage =
+    !!error &&
+    typeof error === "object" &&
+    "message" in error &&
+    typeof error.message === "string";
+  const parsedMessage = hasErrorMessage
+    ? JSON.parse(error.message as string)
+        ?.map(({ message }: { message: string }) => message)
+        ?.join("\n")
+    : fallbackMessage;
+
+  return parsedMessage;
+}

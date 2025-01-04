@@ -10,9 +10,14 @@ import type {
   AddressTypesResponse,
   GetParsedOptionsResponse,
 } from "@/types/types";
-import { AddressForm } from "@/components/ui/checkout/address-form";
 import { cn } from "@/lib/utils";
 import { AddressType } from "@/types/form/types";
+import {
+  AddressForm,
+  type Props as AddressFormProps,
+} from "@/components/ui/checkout/address-form";
+import { useBillingAddressForm } from "@/context/billing-address-form-context";
+import { useShippingAddressForm } from "@/context/shipping-address-form-context";
 
 export type Props = {
   customerId: string;
@@ -25,6 +30,9 @@ export function CheckoutForm({ customerAddressTypes, ...formProps }: Props) {
   // TODO: Client and Server validation.
   // TODO: Error states.
   // TODO: Autofill data if the user is signed in.
+
+  const billingContextValue = useBillingAddressForm();
+  const shippingContextValue = useShippingAddressForm();
 
   const [showShippingAddressForm, setShowShippingAddressForm] =
     React.useState(false);
@@ -57,12 +65,22 @@ export function CheckoutForm({ customerAddressTypes, ...formProps }: Props) {
     [customerAddressTypes]
   );
 
+  const billingAddressFormProps: Omit<AddressFormProps, "addressTypeId"> = {
+    ...formProps,
+    htmlNamePrefix: "billing",
+    ...billingContextValue,
+  };
+  const shippingAddressFormProps: Omit<AddressFormProps, "addressTypeId"> = {
+    ...formProps,
+    htmlNamePrefix: "shipping",
+    ...shippingContextValue,
+  };
+
   return (
     <div className="flex flex-1 flex-col gap-4">
       {!!billingAddressTypeId ? (
         <AddressForm
-          {...formProps}
-          htmlNamePrefix="billing"
+          {...billingAddressFormProps}
           addressTypeId={billingAddressTypeId}
         />
       ) : null}
@@ -83,8 +101,7 @@ export function CheckoutForm({ customerAddressTypes, ...formProps }: Props) {
       >
         {!!shippingAddressTypeId ? (
           <AddressForm
-            {...formProps}
-            htmlNamePrefix="shipping"
+            {...shippingAddressFormProps}
             addressTypeId={shippingAddressTypeId}
           />
         ) : null}

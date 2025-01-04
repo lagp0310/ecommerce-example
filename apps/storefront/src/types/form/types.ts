@@ -1,3 +1,4 @@
+import type { SubmitHandler, UseFormReturn } from "react-hook-form";
 import { type NumberFormatValues, type SourceInfo } from "react-number-format";
 import isMobilePhone from "validator/es/lib/isMobilePhone";
 import { z } from "zod";
@@ -181,3 +182,8 @@ export type AdditionalInfoForm = z.infer<typeof additionalInfoFormSchema>;
 
 // TODO: Update this mock when payment is ready.
 export type SuccessFailureMock = { isSuccess?: boolean };
+
+export type AddressFormContext = {
+  form: UseFormReturn<AddressForm>;
+  onSubmit: SubmitHandler<AddressForm>;
+};

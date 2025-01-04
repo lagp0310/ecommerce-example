@@ -1,6 +1,5 @@
 "use client";
 
-import { saveAddressInformationAction } from "@/app/(store)/checkout/actions";
 import { Form } from "@/components/form/form";
 import { Input, type Props as InputProps } from "@/components/form/input";
 import { Label } from "@/components/form/label";
@@ -13,19 +12,17 @@ import {
 import { ComboboxContextProvider } from "@/context/combobox-context";
 import { ComboboxLabel } from "@/components/form/combobox-label";
 import { PatternFormat, type PatternFormatProps } from "react-number-format";
-import { useForm, type SubmitHandler } from "react-hook-form";
-import {
-  type AddressForm,
-  type AddressFormComboboxKeys,
-  type AddressFormInputKeys,
-  addressFormSchema,
+import type {
+  AddressFormContext,
+  AddressForm,
+  AddressFormComboboxKeys,
+  AddressFormInputKeys,
 } from "@/types/form/types";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { FieldError } from "@/components/form/field-error";
 import { useFormUtils } from "@/hooks/use-form-utils";
 import { Button } from "@/components/ui/common/button";
 
-export type Props = {
+export type Props = AddressFormContext & {
   customerId: string;
   addressTypeId: string;
   htmlNamePrefix: string;
@@ -39,34 +36,22 @@ export function AddressForm({
   htmlNamePrefix,
   countries,
   countryStates,
-}: Props) {
-  // TODO: Autofill data if the user is signed in.
-
-  const [isPending, startTransition] = React.useTransition();
-
-  const {
+  form: {
     clearErrors,
     register,
     handleSubmit,
     formState: { errors },
     setValue,
-  } = useForm<AddressForm>({
-    resolver: zodResolver(addressFormSchema),
-    defaultValues: { addressTypeId, customerId },
-  });
-  const onSubmit: SubmitHandler<AddressForm> = React.useCallback(
-    async (data) => {
-      try {
-        startTransition(async () => {
-          const response = await saveAddressInformationAction(data);
-          console.log(response);
-        });
-      } catch (error) {
-        throw new Error("Submit error on Address Form");
-      }
-    },
-    []
-  );
+  },
+  onSubmit,
+}: Props) {
+  // TODO: Autofill data if the user is signed in.
+
+  React.useEffect(() => {
+    setValue("addressTypeId", addressTypeId);
+    setValue("customerId", customerId);
+  }, [addressTypeId, customerId, setValue]);
+
   const { handleInputChange } = useFormUtils<AddressForm, AddressFormInputKeys>(
     setValue
   );

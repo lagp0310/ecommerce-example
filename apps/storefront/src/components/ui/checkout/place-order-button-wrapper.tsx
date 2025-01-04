@@ -5,30 +5,53 @@ import {
   Button,
   type Props as ButtonProps,
 } from "@/components/ui/common/button";
-import { createOrderAction } from "@/app/(store)/checkout/actions";
 import { useCart } from "@/context/cart-context";
+import { useCashForm } from "@/context/cash-form-context";
+import { useCardForm } from "@/context/card-form-context";
+import { useAdditionalInfoForm } from "@/context/additional-info-form-context";
+import { useBillingAddressForm } from "@/context/billing-address-form-context";
+import { useShippingAddressForm } from "@/context/shipping-address-form-context";
 
 type Props = ButtonProps;
 
-// FIXME: This should submit all the checkout forms, validate them, call server actions and if everything is OK, then we call create order.
 export function PlaceOrderButtonWrapper({ ...props }: Props) {
   const { cart } = useCart();
 
-  return (
-    <Button
-      {...props}
-      onClick={async () => {
-        const cartId = cart?.id;
+  const { form: billingAddressForm, onSubmit: onBillingAddressFormSubmit } =
+    useBillingAddressForm();
+  const { form: shippingAddressForm, onSubmit: onShippingAddressFormSubmit } =
+    useShippingAddressForm();
+  const { form: cashForm, onSubmit: onCashFormSubmit } = useCashForm();
+  const { form: cardForm, onSubmit: onCardFormSubmit } = useCardForm();
+  const { form: additionalInfoForm } = useAdditionalInfoForm();
 
-        if (!cartId) {
-          throw new Error("Cart could not be found");
-        }
+  const submitAllForms = React.useCallback(async () => {
+    const cartId = cart?.id;
 
-        const response = await createOrderAction({
-          cart: cartId,
-        });
-        console.log(response);
-      }}
-    />
-  );
+    if (!cartId) {
+      throw new Error("Cart could not be found");
+    }
+
+    // const response = await createOrderAction({
+    //   cart: cartId,
+    // });
+    // console.log(response);
+
+    billingAddressForm.handleSubmit(onBillingAddressFormSubmit)();
+    shippingAddressForm.handleSubmit(onShippingAddressFormSubmit)();
+    cashForm.handleSubmit(onCashFormSubmit)();
+    cardForm.handleSubmit(onCardFormSubmit)();
+  }, [
+    billingAddressForm,
+    cardForm,
+    cart?.id,
+    cashForm,
+    onBillingAddressFormSubmit,
+    onCardFormSubmit,
+    onCashFormSubmit,
+    onShippingAddressFormSubmit,
+    shippingAddressForm,
+  ]);
+
+  return <Button {...props} onClick={submitAllForms} />;
 }

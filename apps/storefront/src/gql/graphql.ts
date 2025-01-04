@@ -205,6 +205,8 @@ export type Mutation = {
   deleteFromcoupon_codesCollection: Coupon_CodesDeleteResponse;
   /** Deletes zero or more records from the `currencies` collection */
   deleteFromcurrenciesCollection: CurrenciesDeleteResponse;
+  /** Deletes zero or more records from the `customer_address_types` collection */
+  deleteFromcustomer_address_typesCollection: Customer_Address_TypesDeleteResponse;
   /** Deletes zero or more records from the `customer_addresses` collection */
   deleteFromcustomer_addressesCollection: Customer_AddressesDeleteResponse;
   /** Deletes zero or more records from the `customers` collection */
@@ -269,6 +271,8 @@ export type Mutation = {
   insertIntocoupon_codesCollection?: Maybe<Coupon_CodesInsertResponse>;
   /** Adds one or more `currencies` records to the collection */
   insertIntocurrenciesCollection?: Maybe<CurrenciesInsertResponse>;
+  /** Adds one or more `customer_address_types` records to the collection */
+  insertIntocustomer_address_typesCollection?: Maybe<Customer_Address_TypesInsertResponse>;
   /** Adds one or more `customer_addresses` records to the collection */
   insertIntocustomer_addressesCollection?: Maybe<Customer_AddressesInsertResponse>;
   /** Adds one or more `customers` records to the collection */
@@ -331,6 +335,8 @@ export type Mutation = {
   updatecoupon_codesCollection: Coupon_CodesUpdateResponse;
   /** Updates zero or more records in the `currencies` collection */
   updatecurrenciesCollection: CurrenciesUpdateResponse;
+  /** Updates zero or more records in the `customer_address_types` collection */
+  updatecustomer_address_typesCollection: Customer_Address_TypesUpdateResponse;
   /** Updates zero or more records in the `customer_addresses` collection */
   updatecustomer_addressesCollection: Customer_AddressesUpdateResponse;
   /** Updates zero or more records in the `customers` collection */
@@ -438,6 +444,13 @@ export type MutationDeleteFromcoupon_CodesCollectionArgs = {
 export type MutationDeleteFromcurrenciesCollectionArgs = {
   atMost?: Scalars['Int']['input'];
   filter?: InputMaybe<CurrenciesFilter>;
+};
+
+
+/** The root type for creating and mutating data */
+export type MutationDeleteFromcustomer_Address_TypesCollectionArgs = {
+  atMost?: Scalars['Int']['input'];
+  filter?: InputMaybe<Customer_Address_TypesFilter>;
 };
 
 
@@ -662,6 +675,12 @@ export type MutationInsertIntocurrenciesCollectionArgs = {
 
 
 /** The root type for creating and mutating data */
+export type MutationInsertIntocustomer_Address_TypesCollectionArgs = {
+  objects: Array<Customer_Address_TypesInsertInput>;
+};
+
+
+/** The root type for creating and mutating data */
 export type MutationInsertIntocustomer_AddressesCollectionArgs = {
   objects: Array<Customer_AddressesInsertInput>;
 };
@@ -862,6 +881,14 @@ export type MutationUpdatecurrenciesCollectionArgs = {
   atMost?: Scalars['Int']['input'];
   filter?: InputMaybe<CurrenciesFilter>;
   set: CurrenciesUpdateInput;
+};
+
+
+/** The root type for creating and mutating data */
+export type MutationUpdatecustomer_Address_TypesCollectionArgs = {
+  atMost?: Scalars['Int']['input'];
+  filter?: InputMaybe<Customer_Address_TypesFilter>;
+  set: Customer_Address_TypesUpdateInput;
 };
 
 
@@ -1092,6 +1119,8 @@ export type Query = {
   coupon_codesCollection?: Maybe<Coupon_CodesConnection>;
   /** A pagable collection of type `currencies` */
   currenciesCollection?: Maybe<CurrenciesConnection>;
+  /** A pagable collection of type `customer_address_types` */
+  customer_address_typesCollection?: Maybe<Customer_Address_TypesConnection>;
   /** A pagable collection of type `customer_addresses` */
   customer_addressesCollection?: Maybe<Customer_AddressesConnection>;
   /** A pagable collection of type `customers` */
@@ -1246,6 +1275,18 @@ export type QueryCurrenciesCollectionArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<Array<CurrenciesOrderBy>>;
+};
+
+
+/** The root type for querying data */
+export type QueryCustomer_Address_TypesCollectionArgs = {
+  after?: InputMaybe<Scalars['Cursor']['input']>;
+  before?: InputMaybe<Scalars['Cursor']['input']>;
+  filter?: InputMaybe<Customer_Address_TypesFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<Customer_Address_TypesOrderBy>>;
 };
 
 
@@ -2606,8 +2647,102 @@ export type CurrenciesUpdateResponse = {
   records: Array<Currencies>;
 };
 
+export type Customer_Address_Types = Node & {
+  __typename?: 'customer_address_types';
+  created_at: Scalars['Datetime']['output'];
+  customer_addressesCollection?: Maybe<Customer_AddressesConnection>;
+  id: Scalars['UUID']['output'];
+  /** Globally Unique Record Identifier */
+  nodeId: Scalars['ID']['output'];
+  type: Scalars['String']['output'];
+  updated_at?: Maybe<Scalars['Datetime']['output']>;
+};
+
+
+export type Customer_Address_TypesCustomer_AddressesCollectionArgs = {
+  after?: InputMaybe<Scalars['Cursor']['input']>;
+  before?: InputMaybe<Scalars['Cursor']['input']>;
+  filter?: InputMaybe<Customer_AddressesFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<Customer_AddressesOrderBy>>;
+};
+
+export type Customer_Address_TypesConnection = {
+  __typename?: 'customer_address_typesConnection';
+  edges: Array<Customer_Address_TypesEdge>;
+  pageInfo: PageInfo;
+};
+
+export type Customer_Address_TypesDeleteResponse = {
+  __typename?: 'customer_address_typesDeleteResponse';
+  /** Count of the records impacted by the mutation */
+  affectedCount: Scalars['Int']['output'];
+  /** Array of records impacted by the mutation */
+  records: Array<Customer_Address_Types>;
+};
+
+export type Customer_Address_TypesEdge = {
+  __typename?: 'customer_address_typesEdge';
+  cursor: Scalars['String']['output'];
+  node: Customer_Address_Types;
+};
+
+export type Customer_Address_TypesFilter = {
+  /** Returns true only if all its inner filters are true, otherwise returns false */
+  and?: InputMaybe<Array<Customer_Address_TypesFilter>>;
+  created_at?: InputMaybe<DatetimeFilter>;
+  id?: InputMaybe<UuidFilter>;
+  nodeId?: InputMaybe<IdFilter>;
+  /** Negates a filter */
+  not?: InputMaybe<Customer_Address_TypesFilter>;
+  /** Returns true if at least one of its inner filters is true, otherwise returns false */
+  or?: InputMaybe<Array<Customer_Address_TypesFilter>>;
+  type?: InputMaybe<StringFilter>;
+  updated_at?: InputMaybe<DatetimeFilter>;
+};
+
+export type Customer_Address_TypesInsertInput = {
+  created_at?: InputMaybe<Scalars['Datetime']['input']>;
+  id?: InputMaybe<Scalars['UUID']['input']>;
+  type?: InputMaybe<Scalars['String']['input']>;
+  updated_at?: InputMaybe<Scalars['Datetime']['input']>;
+};
+
+export type Customer_Address_TypesInsertResponse = {
+  __typename?: 'customer_address_typesInsertResponse';
+  /** Count of the records impacted by the mutation */
+  affectedCount: Scalars['Int']['output'];
+  /** Array of records impacted by the mutation */
+  records: Array<Customer_Address_Types>;
+};
+
+export type Customer_Address_TypesOrderBy = {
+  created_at?: InputMaybe<OrderByDirection>;
+  id?: InputMaybe<OrderByDirection>;
+  type?: InputMaybe<OrderByDirection>;
+  updated_at?: InputMaybe<OrderByDirection>;
+};
+
+export type Customer_Address_TypesUpdateInput = {
+  created_at?: InputMaybe<Scalars['Datetime']['input']>;
+  id?: InputMaybe<Scalars['UUID']['input']>;
+  type?: InputMaybe<Scalars['String']['input']>;
+  updated_at?: InputMaybe<Scalars['Datetime']['input']>;
+};
+
+export type Customer_Address_TypesUpdateResponse = {
+  __typename?: 'customer_address_typesUpdateResponse';
+  /** Count of the records impacted by the mutation */
+  affectedCount: Scalars['Int']['output'];
+  /** Array of records impacted by the mutation */
+  records: Array<Customer_Address_Types>;
+};
+
 export type Customer_Addresses = Node & {
   __typename?: 'customer_addresses';
+  address_type: Scalars['UUID']['output'];
   company_name?: Maybe<Scalars['String']['output']>;
   countries?: Maybe<Countries>;
   country: Scalars['UUID']['output'];
@@ -2615,9 +2750,12 @@ export type Customer_Addresses = Node & {
   country_states?: Maybe<Country_States>;
   created_at: Scalars['Datetime']['output'];
   customer: Scalars['UUID']['output'];
+  customer_address_types?: Maybe<Customer_Address_Types>;
   customers?: Maybe<Customers>;
   email: Scalars['String']['output'];
+  first_name: Scalars['String']['output'];
   id: Scalars['UUID']['output'];
+  last_name: Scalars['String']['output'];
   /** Globally Unique Record Identifier */
   nodeId: Scalars['ID']['output'];
   phone_number: Scalars['String']['output'];
@@ -2647,6 +2785,7 @@ export type Customer_AddressesEdge = {
 };
 
 export type Customer_AddressesFilter = {
+  address_type?: InputMaybe<UuidFilter>;
   /** Returns true only if all its inner filters are true, otherwise returns false */
   and?: InputMaybe<Array<Customer_AddressesFilter>>;
   company_name?: InputMaybe<StringFilter>;
@@ -2655,7 +2794,9 @@ export type Customer_AddressesFilter = {
   created_at?: InputMaybe<DatetimeFilter>;
   customer?: InputMaybe<UuidFilter>;
   email?: InputMaybe<StringFilter>;
+  first_name?: InputMaybe<StringFilter>;
   id?: InputMaybe<UuidFilter>;
+  last_name?: InputMaybe<StringFilter>;
   nodeId?: InputMaybe<IdFilter>;
   /** Negates a filter */
   not?: InputMaybe<Customer_AddressesFilter>;
@@ -2668,13 +2809,16 @@ export type Customer_AddressesFilter = {
 };
 
 export type Customer_AddressesInsertInput = {
+  address_type?: InputMaybe<Scalars['UUID']['input']>;
   company_name?: InputMaybe<Scalars['String']['input']>;
   country?: InputMaybe<Scalars['UUID']['input']>;
   country_state?: InputMaybe<Scalars['UUID']['input']>;
   created_at?: InputMaybe<Scalars['Datetime']['input']>;
   customer?: InputMaybe<Scalars['UUID']['input']>;
   email?: InputMaybe<Scalars['String']['input']>;
+  first_name?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['UUID']['input']>;
+  last_name?: InputMaybe<Scalars['String']['input']>;
   phone_number?: InputMaybe<Scalars['String']['input']>;
   street_address?: InputMaybe<Scalars['String']['input']>;
   updated_at?: InputMaybe<Scalars['Datetime']['input']>;
@@ -2690,13 +2834,16 @@ export type Customer_AddressesInsertResponse = {
 };
 
 export type Customer_AddressesOrderBy = {
+  address_type?: InputMaybe<OrderByDirection>;
   company_name?: InputMaybe<OrderByDirection>;
   country?: InputMaybe<OrderByDirection>;
   country_state?: InputMaybe<OrderByDirection>;
   created_at?: InputMaybe<OrderByDirection>;
   customer?: InputMaybe<OrderByDirection>;
   email?: InputMaybe<OrderByDirection>;
+  first_name?: InputMaybe<OrderByDirection>;
   id?: InputMaybe<OrderByDirection>;
+  last_name?: InputMaybe<OrderByDirection>;
   phone_number?: InputMaybe<OrderByDirection>;
   street_address?: InputMaybe<OrderByDirection>;
   updated_at?: InputMaybe<OrderByDirection>;
@@ -2704,13 +2851,16 @@ export type Customer_AddressesOrderBy = {
 };
 
 export type Customer_AddressesUpdateInput = {
+  address_type?: InputMaybe<Scalars['UUID']['input']>;
   company_name?: InputMaybe<Scalars['String']['input']>;
   country?: InputMaybe<Scalars['UUID']['input']>;
   country_state?: InputMaybe<Scalars['UUID']['input']>;
   created_at?: InputMaybe<Scalars['Datetime']['input']>;
   customer?: InputMaybe<Scalars['UUID']['input']>;
   email?: InputMaybe<Scalars['String']['input']>;
+  first_name?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['UUID']['input']>;
+  last_name?: InputMaybe<Scalars['String']['input']>;
   phone_number?: InputMaybe<Scalars['String']['input']>;
   street_address?: InputMaybe<Scalars['String']['input']>;
   updated_at?: InputMaybe<Scalars['Datetime']['input']>;

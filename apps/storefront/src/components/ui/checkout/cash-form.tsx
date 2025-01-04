@@ -1,6 +1,6 @@
 "use client";
 
-import { createOrder } from "@/app/(store)/checkout/actions";
+import { processCashPaymentAction } from "@/app/(store)/checkout/actions";
 import { FieldError } from "@/components/form/field-error";
 import { Form } from "@/components/form/form";
 import { Input } from "@/components/form/input";
@@ -19,7 +19,7 @@ import {
 export type Props = { htmlNamePrefix: string };
 
 export function CashForm({ htmlNamePrefix }: Props) {
-  // TODO: Server validation.
+  const [isPending, startTransition] = React.useTransition();
 
   const {
     clearErrors,
@@ -32,7 +32,16 @@ export function CashForm({ htmlNamePrefix }: Props) {
     resolver: zodResolver(cashFormSchema),
   });
   const onSubmit: SubmitHandler<CashForm> = React.useCallback(async (data) => {
-    console.log(data);
+    try {
+      startTransition(async () => {
+        const response = await processCashPaymentAction({
+          ...data,
+        });
+        console.log(response);
+      });
+    } catch (error) {
+      throw new Error("Submit error on Address Form");
+    }
   }, []);
 
   const { cartSummary } = useCart();
@@ -52,18 +61,18 @@ export function CashForm({ htmlNamePrefix }: Props) {
 
       const difference = floatValue - cartTotal;
       setChange(difference);
-      setValue("payAmount", floatValue);
+      setValue("amount", floatValue);
     },
     [cartTotal, setValue]
   );
   React.useEffect(() => {
     if (change < 0) {
-      setError("payAmount", {
+      setError("amount", {
         message: `Amount cannot be less than $${cartTotal}`,
         type: "onChange",
       });
     } else {
-      clearErrors("payAmount");
+      clearErrors("amount");
     }
   }, [clearErrors, setError, change, cartTotal]);
 
@@ -79,7 +88,7 @@ export function CashForm({ htmlNamePrefix }: Props) {
     }),
     []
   );
-  const payAmountProps: NumericFormatProps = React.useMemo(
+  const amountProps: NumericFormatProps = React.useMemo(
     () => ({
       onValueChange: handleAmountChange,
       id: `${htmlNamePrefix}-pay-amount`,
@@ -88,14 +97,14 @@ export function CashForm({ htmlNamePrefix }: Props) {
       "aria-required": true,
       className:
         "data-invalid:ring-2 data-invalid:ring-danger w-full focus:ring-2 focus:ring-primary/50 placeholder:text-gray-400 placeholder:font-normal placeholder:text-body-small placeholder:leading-[130%] rounded-six border border-gray-100 outline-none p-3 motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none",
-      "data-invalid": !!errors.payAmount,
+      "data-invalid": !!errors.amount,
       allowNegative: false,
       ...commonNumericFormatProps,
-      ...register("payAmount"),
+      ...register("amount"),
     }),
     [
       commonNumericFormatProps,
-      errors.payAmount,
+      errors.amount,
       handleAmountChange,
       htmlNamePrefix,
       register,
@@ -120,7 +129,6 @@ export function CashForm({ htmlNamePrefix }: Props) {
 
   return (
     <Form
-      action={createOrder}
       onSubmit={handleSubmit(onSubmit)}
       className="flex flex-1 flex-col gap-4"
     >
@@ -135,8 +143,8 @@ export function CashForm({ htmlNamePrefix }: Props) {
               {`I'll pay...`}
               <span className="text-danger"> *</span>
             </span>
-            <NumericFormat {...payAmountProps} />
-            <FieldError error={errors.payAmount} />
+            <NumericFormat {...amountProps} />
+            <FieldError error={errors.amount} />
           </Label>
           <Label
             htmlFor={`${htmlNamePrefix}-change`}

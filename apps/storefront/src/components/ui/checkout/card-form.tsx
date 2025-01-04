@@ -1,10 +1,11 @@
 "use client";
 
-import { createOrder } from "@/app/(store)/checkout/actions";
+import { processCardPaymentAction } from "@/app/(store)/checkout/actions";
 import { FieldError } from "@/components/form/field-error";
 import { Form } from "@/components/form/form";
 import { Input, type Props as InputProps } from "@/components/form/input";
 import { Label } from "@/components/form/label";
+import { useCart } from "@/context/cart-context";
 import { useFormUtils } from "@/hooks/use-form-utils";
 import {
   type CardFormInputKeys,
@@ -19,7 +20,13 @@ import { PatternFormat, type PatternFormatProps } from "react-number-format";
 export type Props = { htmlNamePrefix: string };
 
 export function CardForm({ htmlNamePrefix }: Props) {
-  // TODO: Server validation.
+  const [isPending, startTransition] = React.useTransition();
+
+  const { cartSummary } = useCart();
+  const cartTotal = React.useMemo(
+    () => parseFloat(cartSummary.total.toFixed(2)),
+    [cartSummary.total]
+  );
 
   const {
     formState: { errors },
@@ -28,13 +35,28 @@ export function CardForm({ htmlNamePrefix }: Props) {
     setValue,
   } = useForm<CardForm>({
     resolver: zodResolver(cardFormSchema),
+    defaultValues: {
+      amount: cartTotal,
+    },
   });
   const onSubmit: SubmitHandler<CardForm> = React.useCallback(async (data) => {
-    console.log(data);
+    try {
+      startTransition(async () => {
+        const response = await processCardPaymentAction({
+          ...data,
+        });
+        console.log(response);
+      });
+    } catch (error) {
+      throw new Error("Submit error on Address Form");
+    }
   }, []);
   const { handleInputChange } = useFormUtils<CardForm, CardFormInputKeys>(
     setValue
   );
+  React.useEffect(() => {
+    setValue("amount", cartTotal);
+  }, [cartTotal, setValue]);
 
   const commonInputProps: InputProps = React.useMemo(
     () => ({
@@ -118,11 +140,9 @@ export function CardForm({ htmlNamePrefix }: Props) {
 
   return (
     <Form
-      action={createOrder}
       onSubmit={handleSubmit(onSubmit)}
       className="flex flex-1 flex-col gap-4"
     >
-      <input type="submit" />
       <div className="flex flex-1 flex-col gap-4">
         <div className="flex flex-1 flex-row flex-wrap md:flex-nowrap gap-4">
           <Label

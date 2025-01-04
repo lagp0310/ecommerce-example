@@ -9,7 +9,10 @@ import {
 import { cn } from "@/lib/utils";
 import React from "react";
 import { type SubmitHandler, useForm } from "react-hook-form";
-import { addressFormSchema, type AdditionalInfoForm } from "@/types/form/types";
+import {
+  additionalInfoFormSchema,
+  type AdditionalInfoForm,
+} from "@/types/form/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FieldError } from "@/components/form/field-error";
 
@@ -23,7 +26,7 @@ export function AdditionalInfoForm({ className, ...props }: Props) {
     register,
     handleSubmit,
   } = useForm<AdditionalInfoForm>({
-    resolver: zodResolver(addressFormSchema),
+    resolver: zodResolver(additionalInfoFormSchema),
   });
   const onSubmit: SubmitHandler<AdditionalInfoForm> = React.useCallback(
     async (data) => {

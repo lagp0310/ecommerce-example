@@ -29,6 +29,9 @@ export function CardForm({ htmlNamePrefix }: Props) {
     },
     onSubmit,
   } = useCardForm();
+  React.useEffect(() => {
+    setValue("amount", cartTotal);
+  }, [cartTotal, setValue]);
   const { handleInputChange } = useFormUtils<CardForm, CardFormInputKeys>(
     setValue
   );

@@ -29,7 +29,7 @@ export async function queryGraphql<
       throw new Error(error?.message);
     }
 
-    // @ts-expect-error: Correct indexing should be checked by caller.
+    // @ts-expect-error: Correct indexing should be checked by the caller.
     const collection = data[collectionName] as { edges?: { node?: Node }[] };
     const result = collection?.edges?.map(({ node }) => node) as T;
 

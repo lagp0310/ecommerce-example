@@ -11,6 +11,7 @@ import { useCardForm } from "@/context/card-form-context";
 import { useAdditionalInfoForm } from "@/context/additional-info-form-context";
 import { useBillingAddressForm } from "@/context/billing-address-form-context";
 import { useShippingAddressForm } from "@/context/shipping-address-form-context";
+import { createOrderAction } from "@/app/(store)/checkout/actions";
 
 type Props = ButtonProps;
 
@@ -32,16 +33,38 @@ export function PlaceOrderButtonWrapper({ ...props }: Props) {
       throw new Error("Cart could not be found");
     }
 
-    // const response = await createOrderAction({
-    //   cart: cartId,
-    // });
-    // console.log(response);
+    const isAdditionalInfoFormValid = await additionalInfoForm.trigger();
 
-    billingAddressForm.handleSubmit(onBillingAddressFormSubmit)();
-    shippingAddressForm.handleSubmit(onShippingAddressFormSubmit)();
-    cashForm.handleSubmit(onCashFormSubmit)();
-    cardForm.handleSubmit(onCardFormSubmit)();
+    if (!isAdditionalInfoFormValid) {
+      throw new Error("Additional Info Form is not valid");
+    }
+
+    const [
+      billingFormAddressResponse,
+      shippingFormAddressResponse,
+      cashFormResponse,
+      cardFormResponse,
+      createOrderResponse,
+    ] = await Promise.all([
+      billingAddressForm.handleSubmit(onBillingAddressFormSubmit)(),
+      shippingAddressForm.handleSubmit(onShippingAddressFormSubmit)(),
+      cashForm.handleSubmit(onCashFormSubmit)(),
+      cardForm.handleSubmit(onCardFormSubmit)(),
+      createOrderAction({
+        cart: cartId,
+        notes: additionalInfoForm.getValues("orderNotes"),
+      }),
+    ]);
+
+    console.log(
+      billingFormAddressResponse,
+      shippingFormAddressResponse,
+      cashFormResponse,
+      cardFormResponse,
+      createOrderResponse
+    );
   }, [
+    additionalInfoForm,
     billingAddressForm,
     cardForm,
     cart?.id,

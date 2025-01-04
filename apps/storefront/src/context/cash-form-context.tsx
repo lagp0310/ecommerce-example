@@ -20,7 +20,7 @@ const CashFormContext = React.createContext<CashFormContext>({
 });
 
 export function useCashForm() {
-  const context = React.useContext<Required<CashFormContext>>(CashFormContext);
+  const context = React.useContext(CashFormContext);
   if (!context) {
     throw new Error(
       "useCashForm must be used within a CashFormContextProvider."

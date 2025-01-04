@@ -17,9 +17,7 @@ const AdditionalInfoFormContext =
   });
 
 export function useAdditionalInfoForm() {
-  const context = React.useContext<Required<AdditionalInfoFormContext>>(
-    AdditionalInfoFormContext
-  );
+  const context = React.useContext(AdditionalInfoFormContext);
   if (!context) {
     throw new Error(
       "useAdditionalInfoForm must be used within a AdditionalInfoFormContextProvider."

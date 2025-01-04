@@ -20,7 +20,7 @@ const CardFormContext = React.createContext<CardFormContext>({
 });
 
 export function useCardForm() {
-  const context = React.useContext<Required<CardFormContext>>(CardFormContext);
+  const context = React.useContext(CardFormContext);
   if (!context) {
     throw new Error(
       "useCardForm must be used within a CardFormContextProvider."

@@ -14,7 +14,7 @@ import Link from "next/link";
 import { usePathname, useSearchParams } from "next/navigation";
 import { CheckIcon } from "@heroicons/react/24/outline";
 
-type Props = SelectProps & {
+export type Props = SelectProps & {
   useNextLink?: boolean;
   placeholder?: string;
   currentValue?: string;

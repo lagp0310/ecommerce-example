@@ -66,7 +66,7 @@ export function DropdownSelector({
               return useNextLink ? (
                 <Link
                   key={index}
-                  href={`${pathname}?${newSearchParams}`}
+                  href={`${pathname}?${newSearchParams.toString()}`}
                   className="group/select-link relative flex w-full cursor-pointer items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none hover:bg-gray-50 focus:bg-neutral-100 focus:text-neutral-900 disabled:cursor-not-allowed aria-selected:bg-gray-50 data-[disabled]:pointer-events-none data-[disabled]:opacity-50 dark:focus:bg-neutral-800 dark:focus:text-neutral-50"
                   aria-selected={currentValue === value}
                 >

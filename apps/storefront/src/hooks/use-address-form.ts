@@ -1,6 +1,6 @@
 "use client";
 
-import { saveAddressInformationAction } from "@/app/(store)/checkout/actions";
+import { saveAddressInformationAction } from "@/actions/customer-address/actions";
 import { addressFormSchema, type AddressForm } from "@/types/form/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import React from "react";

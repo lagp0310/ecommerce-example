@@ -1,6 +1,6 @@
 "use client";
 
-import { processCashPaymentAction } from "@/app/(store)/checkout/actions";
+import { processCashPaymentAction } from "@/actions/payment/actions";
 import { type CashForm, cashFormSchema } from "@/types/form/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import React from "react";

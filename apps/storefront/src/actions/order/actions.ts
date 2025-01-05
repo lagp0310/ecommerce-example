@@ -1,0 +1,47 @@
+"use server";
+
+import { createOrder } from "@/gql/mutations/order/mutations";
+import { mutateGraphql } from "@/lib/server-mutate";
+import { getParsedErrorMessage } from "@/lib/utils";
+import {
+  orderFormSchema,
+  type OrderForm,
+  type SuccessFailureMock,
+} from "@/types/form/types";
+
+// TODO: Revalidate cache after operations.
+
+export async function createOrderAction({
+  isSuccess = true,
+  ...orderData
+}: OrderForm & SuccessFailureMock) {
+  try {
+    if (!isSuccess) {
+      throw new Error("Order Creation Failed");
+    }
+
+    // TODO: Types.
+    const orderCreationResponse = await mutateGraphql(
+      "insertIntoOrdersCollection",
+      createOrder,
+      { orders: [orderData] }
+    );
+
+    await orderFormSchema.parseAsync(orderData);
+
+    return {
+      message: "Order Creation Successful",
+      code: "ORDER_CREATION_SUCCESS",
+      order: orderCreationResponse,
+      continue: true,
+    };
+  } catch (error) {
+    const parsedMessage = getParsedErrorMessage(error, "Order Creation Failed");
+
+    return {
+      message: parsedMessage,
+      code: "ORDER_CREATION_FAILURE",
+      continue: false,
+    };
+  }
+}

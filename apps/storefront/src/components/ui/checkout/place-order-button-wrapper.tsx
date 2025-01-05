@@ -10,9 +10,9 @@ import { useCashForm } from "@/context/cash-form-context";
 import { useAdditionalInfoForm } from "@/context/additional-info-form-context";
 import { useBillingAddressForm } from "@/context/billing-address-form-context";
 import { useShippingAddressForm } from "@/context/shipping-address-form-context";
-import { createOrderAction } from "@/app/(store)/checkout/actions";
 import { useCreditCardForm } from "@/context/credit-card-form-context";
 import { useDebitCardForm } from "@/context/debit-card-form-context";
+import { createOrderAction } from "@/actions/order/actions";
 
 type Props = ButtonProps;
 

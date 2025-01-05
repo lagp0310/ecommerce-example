@@ -1,4 +1,5 @@
 import { gql } from "@apollo/client";
+import { lineItemFragment } from "@/gql/fragments/line-item/fragments";
 
 export const cartFragment = gql`
   fragment CartFragment on carts {
@@ -13,7 +14,15 @@ export const cartFragment = gql`
       currencyCode: three_letter_code
       symbol
     }
+    lineItemsCollection: line_itemsCollection {
+      edges {
+        node {
+          ...LineItemFragment
+        }
+      }
+    }
     createdAt: created_at
     updatedAt: updated_at
   }
+  ${lineItemFragment}
 `;

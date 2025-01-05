@@ -14,6 +14,8 @@ import type {
   Payment_Methods as PaymentMethodResponse,
   Payment_Method_Types as PaymentMethodType,
   Customer_Address_Types as CustomerAddressType,
+  Line_ItemsEdge as LineItemEdge,
+  Carts as Cart,
 } from "@/gql/graphql";
 import type { OperationVariables } from "@apollo/client";
 
@@ -170,6 +172,12 @@ export type ProductsResponse = Omit<
   "product_tagsCollection"
 > & {
   allTags?: ProductTagConnectionResponse;
+};
+export type CartLineItemsCollectionEdge = Omit<LineItemEdge, "node"> & {
+  node: LineItemWithProduct;
+};
+export type CartResponse = Omit<Cart, "line_itemsCollection"> & {
+  lineItemsCollection?: { edges: CartLineItemsCollectionEdge[] };
 };
 export type LineItemWithProduct = Omit<LineItem, "products"> & {
   products: TProduct;

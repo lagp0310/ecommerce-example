@@ -24,7 +24,6 @@ import type {
 } from "@/types/types";
 import isUUID from "validator/es/lib/isUUID";
 import { getCart as getCartQuery } from "@/gql/queries/cart/queries";
-import { allLineItems } from "@/gql/queries/line-item/queries";
 import { useToast } from "@/hooks/use-toast";
 import { dataProviderClient } from "@/providers/data/data-provider.client";
 import { initialCartSummary } from "@/constants/cart/constants";
@@ -90,7 +89,6 @@ export function CartContextProvider({ children, currentCart = null }: Props) {
   const [summaryData, setSummaryData] =
     React.useState<CartSummary>(initialCartSummary);
   const [getCart] = useLazyQuery(getCartQuery);
-  const [getLineItems] = useLazyQuery(allLineItems);
   React.useEffect(() => {
     if (!!cart) {
       return;
@@ -106,31 +104,19 @@ export function CartContextProvider({ children, currentCart = null }: Props) {
             },
           }) => {
             const cartNode = edges?.at(0)?.node;
-            setCart(cartNode);
-          }
-        )
-        .catch((error) => {
-          throw new Error(error);
-        });
+            const lineItemsNodes = (
+              cartNode?.lineItemsCollection?.edges as LineItemEdge[]
+            )?.map(({ node }) => node);
 
-      getLineItems({ variables: { filter: { cart: { eq: cartId } } } })
-        .then(
-          ({
-            data: {
-              lineItemsCollection: { edges },
-            },
-          }) => {
-            const lineItemsNode = (edges as LineItemEdge[])?.map(
-              ({ node }) => node
-            );
-            setLineItems(lineItemsNode);
+            setCart(cartNode);
+            setLineItems(lineItemsNodes);
           }
         )
         .catch((error) => {
           throw new Error(error);
         });
     }
-  }, [cart, getCart, getLineItems]);
+  }, [cart, getCart]);
 
   React.useEffect(() => {
     if (!cart?.id) {

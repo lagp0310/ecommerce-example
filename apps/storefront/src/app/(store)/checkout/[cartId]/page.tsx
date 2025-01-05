@@ -5,19 +5,17 @@ import {
 import { CartSummary } from "@/components/ui/cart/cart-summary";
 import { CartSummaryItem } from "@/components/ui/cart/cart-summary-item";
 import { SectionTitle } from "@/components/ui/common/section-title";
-import type { Carts as CartResponse } from "@/gql/graphql";
 import { getCart as getCartQuery } from "@/gql/queries/cart/queries";
-import { allLineItems } from "@/gql/queries/line-item/queries";
 import { callDatabaseFunction } from "@/lib/call-database-function";
 import { queryGraphql } from "@/lib/server-query";
 import { cn, getCartSummaryItems } from "@/lib/utils";
 import type {
   AddressTypesResponse,
   BaseAccordionItem,
+  CartResponse,
   CartSummaryField,
   GetCartSummaryResponse,
   GetParsedOptionsResponse,
-  LineItemWithProduct,
   PaymentMethodsResponse,
 } from "@/types/types";
 import React from "react";
@@ -60,26 +58,17 @@ export default async function Checkout({
   // FIXME: The user should have permissions to get this cart.
   const [
     cart,
-    lineItems,
     storePaymentMethods,
     cartSummary,
     countries,
     countryStates,
     customerAddressTypes,
   ] = await Promise.all([
-    queryGraphql<CartResponse>(
+    queryGraphql<CartResponse[]>(
       "cartsCollection",
       getCartQuery,
       {
         filter: { id: { eq: cartId } },
-      },
-      "no-cache"
-    ),
-    queryGraphql<LineItemWithProduct[]>(
-      "lineItemsCollection",
-      allLineItems,
-      {
-        filter: { cart: { eq: cartId } },
       },
       "no-cache"
     ),
@@ -113,7 +102,9 @@ export default async function Checkout({
       "no-cache"
     ),
   ]);
-
+  const lineItems = cart
+    ?.at(0)
+    ?.lineItemsCollection?.edges?.map(({ node }) => node);
   const cartTotalSummary: CartSummaryField[] = getCartSummaryItems(
     cartSummary?.subtotal_result,
     cartSummary?.shipping_result,

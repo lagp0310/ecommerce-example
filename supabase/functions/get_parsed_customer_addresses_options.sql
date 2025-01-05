@@ -13,7 +13,7 @@ RETURN QUERY SELECT
     ')'
   ) AS name,
   customer_addresses.id AS value,
-  JSONB_OBJECT(ARRAY[CONCAT(key_name_prefix, 'AddressId')], ARRAY[customer_addresses.id]::TEXT[]) AS additional_search_params
+  JSONB_OBJECT(ARRAY[CONCAT(key_name_prefix, 'AddressId'), CONCAT(key_name_prefix, 'CountryId'), CONCAT(key_name_prefix, 'CountryStateId')], ARRAY[customer_addresses.id, customer_addresses.country, customer_addresses.country_state]::TEXT[]) AS additional_search_params
 FROM
   customer_addresses
 WHERE

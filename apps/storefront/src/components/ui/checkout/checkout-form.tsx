@@ -49,8 +49,9 @@ export function CheckoutForm({
   const billingContextValue = useBillingAddressForm();
   const shippingContextValue = useShippingAddressForm();
 
-  const [showShippingAddressForm, setShowShippingAddressForm] =
-    React.useState(false);
+  const [showShippingAddressForm, setShowShippingAddressForm] = React.useState(
+    !!currentShippingAddressId
+  );
 
   const checkboxProps: CheckboxProps = React.useMemo(
     () => ({

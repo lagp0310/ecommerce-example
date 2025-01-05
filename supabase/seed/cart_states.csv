@@ -1,0 +1,6 @@
+state,state_code,description
+Initial, INITIAL, Cart is created and active for shopping
+Partially Paid, PARTIALLY_PAID, Cart has payments that did not cover the complete cart's amount and cannot be modified, only payments can be added
+Paid, PAID, Cart was completely paid
+Ordered, ORDERED, Cart is part of an order and cannot be modified
+Cancelled, CANCELLED, Cart was cancelled after being part of an order

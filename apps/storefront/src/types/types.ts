@@ -16,6 +16,10 @@ import type {
   Customer_Address_Types as CustomerAddressType,
   Line_ItemsEdge as LineItemEdge,
   Carts as Cart,
+  Customer_Addresses as CustomerAddress,
+  Country_States as CountryState,
+  Customers as Customer,
+  Customer_AddressesEdge as CustomerAddressEdge,
 } from "@/gql/graphql";
 import type { OperationVariables } from "@apollo/client";
 
@@ -228,10 +232,14 @@ export type PaymentMethodsResponse = Omit<
   updatedAt?: string;
 };
 
-export type GetParsedOptionsResponse = Pick<
+export type GetParsedOptionsResponse = (Pick<
   BaseSelectOption,
   "id" | "name" | "value"
->[];
+> & { additional_search_params?: object })[];
+export type GetParsedOptionsRenamedResponse = Omit<
+  GetParsedOptionsResponse,
+  "additional_search_params"
+> & { additionalSearchParams?: object };
 
 export enum PaymentMethodEnum {
   CASH = "Cash",
@@ -246,3 +254,55 @@ export type AddressTypesResponse = Omit<
   CustomerAddressType,
   "created_at" | "updated_at"
 > & { createdAt?: string; updatedAt?: string };
+export type CountryStateResponse = Omit<
+  CountryState,
+  "created_at" | "short_name" | "updated_at"
+> & { createdAt?: string; shortName: string; updatedAt?: string };
+export type CustomerAddressResponse = Omit<
+  CustomerAddress,
+  | "address_type"
+  | "company_name"
+  | "country_state"
+  | "country_states"
+  | "created_at"
+  | "customer_address_types"
+  | "first_name"
+  | "last_name"
+  | "phone_number"
+  | "street_address"
+  | "updated_at"
+  | "zip_code"
+> & {
+  addressType: string;
+  companyName?: string;
+  countryState: string;
+  countryStates?: CountryStateResponse;
+  createdAt?: string;
+  customerAddressTypes?: AddressTypesResponse;
+  firstName: string;
+  lastName: string;
+  phoneNumber: string;
+  streetAddress: string;
+  updatedAt?: string;
+  zipCode: string;
+};
+
+export type CustomerAddressesCollection = Omit<CustomerAddressEdge, "node"> & {
+  node: CustomerAddressResponse;
+};
+export type CustomerResponse = Omit<
+  Customer,
+  | "customer_addressesCollection"
+  | "birth_date"
+  | "created_at"
+  | "first_name"
+  | "last_name"
+  | "updated_at"
+> & {
+  customerAddresses?: { edges: CustomerAddressesCollection[] };
+  birthDate?: string;
+  createdAt?: string;
+  firstName: string;
+  lastName: string;
+  updatedAt?: string;
+};

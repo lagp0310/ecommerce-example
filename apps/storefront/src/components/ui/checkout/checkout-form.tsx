@@ -7,28 +7,43 @@ import {
   type Props as CheckboxProps,
 } from "@/components/ui/common/checkbox";
 import type {
-  AddressTypesResponse,
+  GetParsedOptionsRenamedResponse,
   GetParsedOptionsResponse,
 } from "@/types/types";
 import { cn } from "@/lib/utils";
-import { AddressType } from "@/types/form/types";
 import {
   AddressForm,
   type Props as AddressFormProps,
 } from "@/components/ui/checkout/address-form";
 import { useBillingAddressForm } from "@/context/billing-address-form-context";
 import { useShippingAddressForm } from "@/context/shipping-address-form-context";
+import {
+  AddressSelectorWrapper,
+  type Props as AddressSelectorWrapperProps,
+} from "@/components/ui/checkout/address-selector-wrapper";
 
 export type Props = {
-  customerId: string;
-  customerAddressTypes: AddressTypesResponse[];
-  countries: GetParsedOptionsResponse;
-  countryStates: GetParsedOptionsResponse;
+  currentBillingAddressId?: string;
+  billingCustomerAddresses?: GetParsedOptionsRenamedResponse;
+  currentShippingAddressId?: string;
+  shippingCustomerAddresses?: GetParsedOptionsRenamedResponse;
+  billingCountries: GetParsedOptionsResponse;
+  shippingCountries: GetParsedOptionsResponse;
+  billingCountryStates: GetParsedOptionsResponse;
+  shippingCountryStates: GetParsedOptionsResponse;
 };
 
-export function CheckoutForm({ customerAddressTypes, ...formProps }: Props) {
-  // TODO: Client and Server validation.
-  // TODO: Error states.
+export function CheckoutForm({
+  currentBillingAddressId,
+  billingCustomerAddresses = [],
+  currentShippingAddressId,
+  shippingCustomerAddresses = [],
+  billingCountries,
+  shippingCountries,
+  billingCountryStates,
+  shippingCountryStates,
+  ...formProps
+}: Props) {
   // TODO: Autofill data if the user is signed in.
 
   const billingContextValue = useBillingAddressForm();
@@ -50,40 +65,47 @@ export function CheckoutForm({ customerAddressTypes, ...formProps }: Props) {
     [showShippingAddressForm, setShowShippingAddressForm]
   );
 
-  const billingAddressTypeId = React.useMemo(
-    () =>
-      customerAddressTypes.find(
-        ({ type }) => type.toLowerCase() === AddressType.BILLING.toLowerCase()
-      )?.id,
-    [customerAddressTypes]
-  );
-  const shippingAddressTypeId = React.useMemo(
-    () =>
-      customerAddressTypes.find(
-        ({ type }) => type.toLowerCase() === AddressType.SHIPPING.toLowerCase()
-      )?.id,
-    [customerAddressTypes]
-  );
-
   const billingAddressFormProps: Omit<AddressFormProps, "addressTypeId"> = {
     ...formProps,
+    countrySearchParamName: "billingCountryId",
+    countryStateSearchParamName: "billingCountryStateId",
+    countries: billingCountries,
+    countryStates: billingCountryStates,
     htmlNamePrefix: "billing",
     ...billingContextValue,
   };
   const shippingAddressFormProps: Omit<AddressFormProps, "addressTypeId"> = {
     ...formProps,
+    countrySearchParamName: "shippingCountryId",
+    countryStateSearchParamName: "shippingCountryStateId",
+    countries: shippingCountries,
+    countryStates: shippingCountryStates,
     htmlNamePrefix: "shipping",
     ...shippingContextValue,
   };
 
+  const commonAddressSelectorWrapperProps: Omit<
+    AddressSelectorWrapperProps,
+    "options"
+  > = {
+    useNextLink: true,
+    wrapperClassname: "flex flex-1",
+  };
+  const billingAddressSelectorWrapperProps: AddressSelectorWrapperProps = {
+    options: billingCustomerAddresses,
+    currentValue: currentBillingAddressId,
+    ...commonAddressSelectorWrapperProps,
+  };
+  const shippingAddressSelectorWrapperProps: AddressSelectorWrapperProps = {
+    options: shippingCustomerAddresses,
+    currentValue: currentShippingAddressId,
+    ...commonAddressSelectorWrapperProps,
+  };
+
   return (
     <div className="flex flex-1 flex-col gap-4">
-      {!!billingAddressTypeId ? (
-        <AddressForm
-          {...billingAddressFormProps}
-          addressTypeId={billingAddressTypeId}
-        />
-      ) : null}
+      <AddressSelectorWrapper {...billingAddressSelectorWrapperProps} />
+      <AddressForm {...billingAddressFormProps} />
       <Label
         htmlFor="ship-different-address"
         className="flex flex-row gap-2 w-fit items-center"
@@ -95,16 +117,12 @@ export function CheckoutForm({ customerAddressTypes, ...formProps }: Props) {
       </Label>
       <div
         className={cn(
-          "flex motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none",
+          "flex flex-col gap-4 motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none",
           { hidden: !showShippingAddressForm }
         )}
       >
-        {!!shippingAddressTypeId ? (
-          <AddressForm
-            {...shippingAddressFormProps}
-            addressTypeId={shippingAddressTypeId}
-          />
-        ) : null}
+        <AddressSelectorWrapper {...shippingAddressSelectorWrapperProps} />
+        <AddressForm {...shippingAddressFormProps} />
       </div>
     </div>
   );

@@ -286,6 +286,20 @@ export type CustomerAddressResponse = Omit<
   updatedAt?: string;
   zipCode: string;
 };
+export type FormCustomerAddressResponse = Omit<
+  CustomerAddressResponse,
+  | "addressType"
+  | "countryState"
+  | "countryStates"
+  | "createdAt"
+  | "customerAddressTypes"
+  | "updatedAt"
+> & {
+  addressTypeId: string;
+  countryStateId: string;
+  countryId: string;
+  customerId: string;
+};
 
 export type CustomerAddressesCollection = Omit<CustomerAddressEdge, "node"> & {
   node: CustomerAddressResponse;

@@ -22,12 +22,18 @@ export function useBillingAddressForm() {
   return context;
 }
 
-type Props = {
+export type Props = {
   children: React.ReactNode;
+  addressTypeId: string;
+  currentValues?: AddressForm;
 };
 
-export function BillingAddressFormContextProvider({ children }: Props) {
-  const { providerValue } = useAddressForm();
+export function BillingAddressFormContextProvider({
+  children,
+  addressTypeId,
+  currentValues,
+}: Props) {
+  const { providerValue } = useAddressForm(addressTypeId, currentValues);
 
   return (
     <BillingAddressFormContext.Provider value={providerValue}>

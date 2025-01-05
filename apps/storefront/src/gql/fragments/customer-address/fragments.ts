@@ -28,3 +28,20 @@ export const customerAddressFragment = gql`
     updatedAt: updated_at
   }
 `;
+
+export const customerAddressFormFragment = gql`
+  fragment CustomerAddressFormFragment on customer_addresses {
+    id
+    streetAddress: street_address
+    firstName: first_name
+    lastName: last_name
+    companyName: company_name
+    zipCode: zip_code
+    email
+    phoneNumber: phone_number
+    countryId: country
+    countryStateId: country_state
+    addressTypeId: address_type
+    customerId: customer
+  }
+`;

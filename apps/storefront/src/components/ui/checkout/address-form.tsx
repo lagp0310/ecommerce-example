@@ -23,22 +23,23 @@ import { useFormUtils } from "@/hooks/use-form-utils";
 import { Button } from "@/components/ui/common/button";
 
 export type Props = AddressFormContext & {
-  customerId: string;
-  addressTypeId: string;
+  countrySearchParamName: string;
+  countryStateSearchParamName: string;
   htmlNamePrefix: string;
   countries: GetParsedOptionsResponse;
   countryStates: GetParsedOptionsResponse;
 };
 
 export function AddressForm({
-  customerId,
-  addressTypeId,
+  countrySearchParamName,
+  countryStateSearchParamName,
   htmlNamePrefix,
   countries,
   countryStates,
   form: {
     clearErrors,
     register,
+    getValues,
     handleSubmit,
     formState: { errors },
     setValue,
@@ -46,11 +47,6 @@ export function AddressForm({
   onSubmit,
 }: Props) {
   // TODO: Autofill data if the user is signed in.
-
-  React.useEffect(() => {
-    setValue("addressTypeId", addressTypeId);
-    setValue("customerId", customerId);
-  }, [addressTypeId, customerId, setValue]);
 
   const { handleInputChange } = useFormUtils<AddressForm, AddressFormInputKeys>(
     setValue
@@ -155,7 +151,7 @@ export function AddressForm({
   );
   const countryComboboxProps: ComboboxWrapperProps = React.useMemo(
     () => ({
-      searchParamName: "countryId",
+      searchParamName: countrySearchParamName,
       options: countries,
       emptyValueText: "Select a Country...",
       commandInputProps: { placeholder: "Search a Country..." },
@@ -163,11 +159,11 @@ export function AddressForm({
       isInvalid: !!errors.countryId,
       ...commonComboboxProps,
     }),
-    [commonComboboxProps, countries, errors.countryId]
+    [commonComboboxProps, countries, countrySearchParamName, errors.countryId]
   );
   const countryStateComboboxProps: ComboboxWrapperProps = React.useMemo(
     () => ({
-      searchParamName: "countryStateId",
+      searchParamName: countryStateSearchParamName,
       options: countryStates,
       emptyValueText: "Select a State...",
       commandInputProps: { placeholder: "Search a State..." },
@@ -178,6 +174,7 @@ export function AddressForm({
     }),
     [
       commonComboboxProps,
+      countryStateSearchParamName,
       countryStates,
       isCountryStateInvalid,
       isCountryStateSelectorDisabled,
@@ -201,12 +198,14 @@ export function AddressForm({
       format: "#####",
       onValueChange: (...args) => handleInputChange("zipCode", ...args, false),
       "data-invalid": !!errors.zipCode,
+      value: getValues("zipCode"),
       ...commonPatternFormatProps,
       ...register("zipCode"),
     }),
     [
       commonPatternFormatProps,
       errors.zipCode,
+      getValues,
       handleInputChange,
       htmlNamePrefix,
       register,
@@ -230,14 +229,17 @@ export function AddressForm({
       placeholder: "Phone Number",
       type: "tel",
       format: "+1 (###) ###-####",
-      onValueChange: (...args) => handleInputChange("phoneNumber", ...args),
+      onValueChange: (...args) =>
+        handleInputChange("phoneNumber", ...args, false),
       "data-invalid": !!errors.phoneNumber,
+      value: getValues("phoneNumber"),
       ...commonPatternFormatProps,
       ...register("phoneNumber"),
     }),
     [
       commonPatternFormatProps,
       errors.phoneNumber,
+      getValues,
       handleInputChange,
       htmlNamePrefix,
       register,
@@ -296,7 +298,7 @@ export function AddressForm({
         </div>
         <div className="flex flex-1 flex-row flex-wrap md:flex-nowrap gap-4 max-h-fit">
           <ComboboxContextProvider
-            paramName="countryId"
+            paramName={countrySearchParamName}
             onValueChange={onCountryChange}
           >
             <ComboboxLabel
@@ -312,7 +314,7 @@ export function AddressForm({
             </ComboboxLabel>
           </ComboboxContextProvider>
           <ComboboxContextProvider
-            paramName="countryStateId"
+            paramName={countryStateSearchParamName}
             onValueChange={onCountryStateChange}
           >
             <ComboboxLabel

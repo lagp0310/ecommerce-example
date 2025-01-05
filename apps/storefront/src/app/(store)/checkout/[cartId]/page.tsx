@@ -14,6 +14,8 @@ import type {
   BaseAccordionItem,
   CartResponse,
   CartSummaryField,
+  CustomerResponse,
+  FormCustomerAddressResponse,
   GetCartSummaryResponse,
   GetParsedOptionsResponse,
   PaymentMethodsResponse,
@@ -40,11 +42,20 @@ import { allCustomerAddressTypes } from "@/gql/queries/customer-address-type/que
 import { PlaceOrderButtonWrapper } from "@/components/ui/checkout/place-order-button-wrapper";
 import { CashFormContextProvider } from "@/context/cash-form-context";
 import { AdditionalInfoFormContextProvider } from "@/context/additional-info-form-context";
-import { BillingAddressFormContextProvider } from "@/context/billing-address-form-context";
-import { ShippingAddressFormContextProvider } from "@/context/shipping-address-form-context";
+import {
+  BillingAddressFormContextProvider,
+  type Props as BillingAddressContextProps,
+} from "@/context/billing-address-form-context";
+import {
+  ShippingAddressFormContextProvider,
+  type Props as ShippingAddressContextProps,
+} from "@/context/shipping-address-form-context";
 import { DebitCardFormContextProvider } from "@/context/debit-card-form-context";
 import { CreditCardFormContextProvider } from "@/context/credit-card-form-context";
 import { WarnOnModifiedFormContextProvider } from "@/context/warn-on-modified-form-context";
+import { getCustomer as getCustomerQuery } from "@/gql/queries/customer/queries";
+import { getFormCustomerAddress } from "@/gql/queries/customer-address/queries";
+import { AddressType } from "@/types/form/types";
 
 export default async function Checkout({
   params,
@@ -54,16 +65,29 @@ export default async function Checkout({
   searchParams: Promise<{ [key: string]: string | undefined }>;
 }) {
   const { cartId } = await params;
-  const { countryId, countryStateId } = await searchParams;
+  const {
+    billingCountryId,
+    shippingCountryId,
+    billingAddressId,
+    shippingAddressId,
+  } = await searchParams;
 
   // FIXME: The user should have permissions to get this cart.
+  // FIXME: The user should have permissions to get customer/customer addresses objects.
   const [
     cart,
     storePaymentMethods,
     cartSummary,
-    countries,
-    countryStates,
+    billingCountries,
+    shippingCountries,
+    billingCountryStates,
+    shippingCountryStates,
     customerAddressTypes,
+    customer,
+    billingCustomerAddresses,
+    shippingCustomerAddresses,
+    billingAddress,
+    shippingAddress,
   ] = await Promise.all([
     queryGraphql<CartResponse[]>(
       "cartsCollection",
@@ -90,10 +114,19 @@ export default async function Checkout({
     callDatabaseFunction<GetParsedOptionsResponse>(
       "get_parsed_country_options"
     ),
-    !!countryId
+    callDatabaseFunction<GetParsedOptionsResponse>(
+      "get_parsed_country_options"
+    ),
+    !!billingCountryId
       ? callDatabaseFunction<GetParsedOptionsResponse>(
           "get_parsed_country_state_options_with_states",
-          { country_id: countryId, state_ids: availableStateIds }
+          { country_id: billingCountryId, state_ids: availableStateIds }
+        )
+      : [],
+    !!shippingCountryId
+      ? callDatabaseFunction<GetParsedOptionsResponse>(
+          "get_parsed_country_state_options_with_states",
+          { country_id: shippingCountryId, state_ids: availableStateIds }
         )
       : [],
     queryGraphql<AddressTypesResponse[]>(
@@ -102,10 +135,49 @@ export default async function Checkout({
       {},
       "no-cache"
     ),
+    queryGraphql<CustomerResponse[]>(
+      "customerCollection",
+      getCustomerQuery,
+      { filter: { id: { eq: "cc1293d9-9090-4cd5-b8bd-804777d7302a" } } },
+      "no-cache"
+    ),
+    // FIXME: Dynamic ID for customer after login/sign up is ready.
+    callDatabaseFunction<GetParsedOptionsResponse>(
+      "get_parsed_customer_addresses_options",
+      {
+        customer_id: "cc1293d9-9090-4cd5-b8bd-804777d7302a",
+        key_name_prefix: "billing",
+      }
+    ),
+    // FIXME: Dynamic ID for customer after login/sign up is ready.
+    callDatabaseFunction<GetParsedOptionsResponse>(
+      "get_parsed_customer_addresses_options",
+      {
+        customer_id: "cc1293d9-9090-4cd5-b8bd-804777d7302a",
+        key_name_prefix: "shipping",
+      }
+    ),
+    !!billingAddressId
+      ? queryGraphql<FormCustomerAddressResponse[]>(
+          "customerAddressesCollection",
+          getFormCustomerAddress,
+          { filter: { id: { eq: billingAddressId } } },
+          "no-cache"
+        )
+      : null,
+    !!shippingAddressId
+      ? queryGraphql<FormCustomerAddressResponse[]>(
+          "customerAddressesCollection",
+          getFormCustomerAddress,
+          { filter: { id: { eq: shippingAddressId } } },
+          "no-cache"
+        )
+      : null,
   ]);
   const lineItems = cart
     ?.at(0)
     ?.lineItemsCollection?.edges?.map(({ node }) => node);
+  const hasLineItems = Array.isArray(lineItems) && lineItems.length > 0;
   const cartTotalSummary: CartSummaryField[] = getCartSummaryItems(
     cartSummary?.subtotal_result,
     cartSummary?.shipping_result,
@@ -113,17 +185,28 @@ export default async function Checkout({
     cartSummary?.total_result
   );
 
-  const hasLineItems = Array.isArray(lineItems) && lineItems.length > 0;
-
   const paymentMethodFormProps: PaymentMethodSelectorProps = {
     paymentMethods: storePaymentMethods ?? [],
   };
   const checkoutFormProps: CheckoutFormProps = {
-    // FIXME: Dynamic ID for customer after login/sign up is ready.
-    customerId: "cc1293d9-9090-4cd5-b8bd-804777d7302a",
-    customerAddressTypes: customerAddressTypes ?? [],
-    countries: countries ?? [],
-    countryStates: countryStates ?? [],
+    currentBillingAddressId: billingAddressId,
+    billingCustomerAddresses: billingCustomerAddresses?.map(
+      ({ additional_search_params, ...rest }) => ({
+        additionalSearchParams: additional_search_params,
+        ...rest,
+      })
+    ),
+    currentShippingAddressId: shippingAddressId,
+    shippingCustomerAddresses: shippingCustomerAddresses?.map(
+      ({ additional_search_params, ...rest }) => ({
+        additionalSearchParams: additional_search_params,
+        ...rest,
+      })
+    ),
+    billingCountries: billingCountries ?? [],
+    shippingCountries: shippingCountries ?? [],
+    billingCountryStates: billingCountryStates ?? [],
+    shippingCountryStates: shippingCountryStates ?? [],
   };
   const checkoutForms: BaseAccordionItem[] = [
     {
@@ -152,9 +235,30 @@ export default async function Checkout({
     },
   ];
 
+  const billingAddressContextProps: Omit<
+    BillingAddressContextProps,
+    "children"
+  > = {
+    addressTypeId:
+      customerAddressTypes?.find(
+        ({ type }) => type.toLowerCase() === AddressType.BILLING
+      )?.id ?? "",
+    currentValues: !!billingAddressId ? billingAddress?.at(0) : undefined,
+  };
+  const shippingAddressContextProps: Omit<
+    ShippingAddressContextProps,
+    "children"
+  > = {
+    addressTypeId:
+      customerAddressTypes?.find(
+        ({ type }) => type.toLowerCase() === AddressType.SHIPPING
+      )?.id ?? "",
+    currentValues: !!shippingAddressId ? shippingAddress?.at(0) : undefined,
+  };
+
   return (
-    <BillingAddressFormContextProvider>
-      <ShippingAddressFormContextProvider>
+    <BillingAddressFormContextProvider {...billingAddressContextProps}>
+      <ShippingAddressFormContextProvider {...shippingAddressContextProps}>
         <CashFormContextProvider>
           <DebitCardFormContextProvider>
             <CreditCardFormContextProvider>

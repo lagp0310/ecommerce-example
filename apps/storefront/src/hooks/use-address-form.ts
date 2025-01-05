@@ -6,12 +6,29 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import React from "react";
 import { type SubmitHandler, useForm } from "react-hook-form";
 
-export function useAddressForm() {
+export function useAddressForm(
+  addressTypeId: string,
+  currentValues?: AddressForm
+) {
   const [isPending, startTransition] = React.useTransition();
 
-  const { ...form } = useForm<AddressForm>({
+  const { setValue, ...form } = useForm<AddressForm>({
     resolver: zodResolver(addressFormSchema),
+    defaultValues: currentValues,
   });
+
+  React.useEffect(() => {
+    setValue("addressTypeId", addressTypeId);
+  }, [addressTypeId, setValue]);
+  React.useEffect(() => {
+    if (currentValues) {
+      setValue("countryId", currentValues.countryId);
+      setValue("countryStateId", currentValues.countryStateId);
+      setValue("customerId", currentValues.customerId);
+      setValue("phoneNumber", currentValues.phoneNumber);
+      setValue("zipCode", currentValues.zipCode);
+    }
+  }, [currentValues, setValue]);
 
   const onSubmit: SubmitHandler<AddressForm> = React.useCallback(
     async (data) => {
@@ -28,8 +45,8 @@ export function useAddressForm() {
   );
 
   const providerValue = React.useMemo(
-    () => ({ form, onSubmit }),
-    [form, onSubmit]
+    () => ({ form: { setValue, ...form }, onSubmit }),
+    [form, onSubmit, setValue]
   );
 
   return {

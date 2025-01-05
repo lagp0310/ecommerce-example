@@ -56,8 +56,21 @@ export function DropdownSelector({
         {children}
         <SelectContent>
           {options.map(
-            ({ name, value, isDisabled, sortBy, direction }, index) => {
-              const newSearchParams = new URLSearchParams(searchParams);
+            (
+              {
+                name,
+                value,
+                isDisabled,
+                sortBy,
+                direction,
+                additionalSearchParams,
+              },
+              index
+            ) => {
+              const newSearchParams = new URLSearchParams({
+                ...Object.fromEntries(searchParams),
+                ...additionalSearchParams,
+              });
               if (sortBy && direction) {
                 newSearchParams.set("sortBy", sortBy);
                 newSearchParams.set("sortByDirection", direction);

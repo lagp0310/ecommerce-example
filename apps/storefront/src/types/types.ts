@@ -127,6 +127,7 @@ export type BaseSelectOption = {
   isDisabled?: boolean;
   sortBy?: string;
   direction?: SortByDirection;
+  additionalSearchParams?: Record<string, string>;
 };
 
 export type SortByDirection = "asc" | "desc";

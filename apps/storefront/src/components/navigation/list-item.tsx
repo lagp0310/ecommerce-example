@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { NavigationMenuLink } from "./navigation-menu";
+import { NavigationMenuLink } from "@/components/navigation/navigation-menu";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import isURL from "validator/lib/isURL";

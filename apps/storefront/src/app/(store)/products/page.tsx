@@ -153,14 +153,14 @@ export default async function Products({
                 : null,
             ]
               .filter((value) => !!value)
-              .flatMap((value) => value as unknown),
+              .flatMap((value) => value),
           },
           !!tagProductIds
             ? { id: { in: tagProductIds.map(({ id }) => id) } }
             : null,
         ]
           .filter((value) => !!value)
-          .flatMap((value) => value as unknown),
+          .flatMap((value) => value),
       },
       orderBy: {
         [sortBy ?? defaultSortBy]:

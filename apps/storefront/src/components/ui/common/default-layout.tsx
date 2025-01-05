@@ -34,7 +34,7 @@ import {
 } from "@/constants/constants";
 import { NavigationLinksWrapper } from "@/components/navigation/navigation-links-wrapper";
 import { SidebarCartWrapper } from "@/components/ui/cart/sidebar-cart-wrapper";
-import { DropdownSelector } from "./dropdown-selector";
+import { DropdownSelector } from "@/components/ui/common/dropdown-selector";
 import { SelectTrigger, SelectValue } from "@/components/ui/common/select";
 import {
   Tooltip,

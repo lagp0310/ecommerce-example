@@ -25,7 +25,7 @@ import { BannerCountdownWrapper } from "@/components/ui/banner/banner-countdown-
 import firstOfferBanner from "@/public/images/first-offer-banner.png";
 import secondOfferBanner from "@/public/images/second-offer-banner.png";
 import thirdOfferBanner from "@/public/images/third-offer-banner.png";
-import { defaultProductsSearchParams } from "../product/constants";
+import { defaultProductsSearchParams } from "@/constants/product/constants";
 
 export const storeHighlightsToShow = 4;
 export const popularProductsToShow = 10;

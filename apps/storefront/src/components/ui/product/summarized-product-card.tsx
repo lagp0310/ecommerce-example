@@ -7,11 +7,11 @@ import { ProductCard } from "@/components/ui//product/product-card";
 import { Rating } from "@/components/ui/product/rating";
 import { ClientLink } from "@/components/navigation/client-link";
 import { BannerCountdownWrapper } from "@/components/ui/banner/banner-countdown-wrapper";
-import { ProductTag } from "./product-tag";
+import { ProductTag } from "@/components/ui/product/product-tag";
 import {
   ProductPricing,
   type Props as ProductPricingProps,
-} from "./product-pricing";
+} from "@/components/ui/product/product-pricing";
 import Image from "next/image";
 import {
   AddToCartWrapper,

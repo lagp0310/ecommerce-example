@@ -9,7 +9,7 @@ import {
   NavigationMenuLink,
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
-} from "./navigation-menu";
+} from "@/components/navigation/navigation-menu";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { defaultProductsSearchParams } from "@/constants/product/constants";

@@ -24,16 +24,14 @@ export function useShippingAddressForm() {
 
 export type Props = {
   children: React.ReactNode;
-  addressTypeId: string;
   currentValues?: AddressForm;
 };
 
 export function ShippingAddressFormContextProvider({
   children,
-  addressTypeId,
   currentValues,
 }: Props) {
-  const { providerValue } = useAddressForm(addressTypeId, currentValues);
+  const { providerValue } = useAddressForm(currentValues);
 
   return (
     <ShippingAddressFormContext.Provider value={providerValue}>

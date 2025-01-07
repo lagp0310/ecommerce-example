@@ -288,14 +288,12 @@ export type CustomerAddressResponse = Omit<
 };
 export type FormCustomerAddressResponse = Omit<
   CustomerAddressResponse,
-  | "addressType"
   | "countryState"
   | "countryStates"
   | "createdAt"
   | "customerAddressTypes"
   | "updatedAt"
 > & {
-  addressTypeId: string;
   countryStateId: string;
   countryId: string;
   customerId: string;

@@ -12,7 +12,6 @@ import {
 // TODO: Revalidate cache after operations.
 
 export async function saveAddressInformationAction({
-  addressTypeId,
   countryId,
   countryStateId,
   email,
@@ -33,7 +32,6 @@ export async function saveAddressInformationAction({
 
     const customerAddresses = [
       {
-        address_type: addressTypeId,
         first_name: firstName,
         last_name: lastName,
         street_address: streetAddress,
@@ -48,7 +46,6 @@ export async function saveAddressInformationAction({
     ];
 
     await addressFormSchema.parseAsync({
-      addressTypeId,
       countryId,
       countryStateId,
       email,

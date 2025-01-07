@@ -66,42 +66,67 @@ export function CheckoutForm({
     [showShippingAddressForm, setShowShippingAddressForm]
   );
 
-  const billingAddressFormProps: Omit<AddressFormProps, "addressTypeId"> = {
-    ...formProps,
-    countrySearchParamName: "billingCountryId",
-    countryStateSearchParamName: "billingCountryStateId",
-    countries: billingCountries,
-    countryStates: billingCountryStates,
-    htmlNamePrefix: "billing",
-    ...billingContextValue,
-  };
-  const shippingAddressFormProps: Omit<AddressFormProps, "addressTypeId"> = {
-    ...formProps,
-    countrySearchParamName: "shippingCountryId",
-    countryStateSearchParamName: "shippingCountryStateId",
-    countries: shippingCountries,
-    countryStates: shippingCountryStates,
-    htmlNamePrefix: "shipping",
-    ...shippingContextValue,
-  };
+  const billingAddressFormProps: AddressFormProps = React.useMemo(
+    () => ({
+      ...formProps,
+      countrySearchParamName: "billingCountryId",
+      countryStateSearchParamName: "billingCountryStateId",
+      countries: billingCountries,
+      countryStates: billingCountryStates,
+      htmlNamePrefix: "billing",
+      ...billingContextValue,
+    }),
+    [billingContextValue, billingCountries, billingCountryStates, formProps]
+  );
+  const shippingAddressFormProps: AddressFormProps = React.useMemo(
+    () => ({
+      ...formProps,
+      countrySearchParamName: "shippingCountryId",
+      countryStateSearchParamName: "shippingCountryStateId",
+      countries: shippingCountries,
+      countryStates: shippingCountryStates,
+      htmlNamePrefix: "shipping",
+      ...shippingContextValue,
+    }),
+    [formProps, shippingContextValue, shippingCountries, shippingCountryStates]
+  );
 
   const commonAddressSelectorWrapperProps: Omit<
     AddressSelectorWrapperProps,
     "options"
-  > = {
-    useNextLink: true,
-    wrapperClassname: "flex flex-1",
-  };
-  const billingAddressSelectorWrapperProps: AddressSelectorWrapperProps = {
-    options: billingCustomerAddresses,
-    currentValue: currentBillingAddressId,
-    ...commonAddressSelectorWrapperProps,
-  };
-  const shippingAddressSelectorWrapperProps: AddressSelectorWrapperProps = {
-    options: shippingCustomerAddresses,
-    currentValue: currentShippingAddressId,
-    ...commonAddressSelectorWrapperProps,
-  };
+  > = React.useMemo(
+    () => ({
+      useNextLink: true,
+      wrapperClassname: "flex flex-1",
+    }),
+    []
+  );
+  const billingAddressSelectorWrapperProps: AddressSelectorWrapperProps =
+    React.useMemo(
+      () => ({
+        options: billingCustomerAddresses,
+        currentValue: currentBillingAddressId,
+        ...commonAddressSelectorWrapperProps,
+      }),
+      [
+        billingCustomerAddresses,
+        commonAddressSelectorWrapperProps,
+        currentBillingAddressId,
+      ]
+    );
+  const shippingAddressSelectorWrapperProps: AddressSelectorWrapperProps =
+    React.useMemo(
+      () => ({
+        options: shippingCustomerAddresses,
+        currentValue: currentShippingAddressId,
+        ...commonAddressSelectorWrapperProps,
+      }),
+      [
+        commonAddressSelectorWrapperProps,
+        currentShippingAddressId,
+        shippingCustomerAddresses,
+      ]
+    );
 
   return (
     <div className="flex flex-1 flex-col gap-4">

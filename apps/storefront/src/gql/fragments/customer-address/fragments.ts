@@ -41,7 +41,6 @@ export const customerAddressFormFragment = gql`
     phoneNumber: phone_number
     countryId: country
     countryStateId: country_state
-    addressTypeId: address_type
     customerId: customer
   }
 `;

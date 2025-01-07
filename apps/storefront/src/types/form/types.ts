@@ -15,12 +15,6 @@ export const addressFormSchema = z.object({
       invalid_type_error: "Customer must be a string",
     })
     .uuid("Customer is required"),
-  addressTypeId: z
-    .string({
-      required_error: "Address Type is required",
-      invalid_type_error: "Address Type must be a string",
-    })
-    .uuid("Address Type is required"),
   firstName: z
     .string({
       required_error: "First Name is required",

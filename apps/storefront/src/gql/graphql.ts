@@ -193,6 +193,10 @@ export type Mutation = {
   deleteFrombusiness_currencyCollection: Business_CurrencyDeleteResponse;
   /** Deletes zero or more records from the `businesses` collection */
   deleteFrombusinessesCollection: BusinessesDeleteResponse;
+  /** Deletes zero or more records from the `cart_state` collection */
+  deleteFromcart_stateCollection: Cart_StateDeleteResponse;
+  /** Deletes zero or more records from the `cart_states` collection */
+  deleteFromcart_statesCollection: Cart_StatesDeleteResponse;
   /** Deletes zero or more records from the `carts` collection */
   deleteFromcartsCollection: CartsDeleteResponse;
   /** Deletes zero or more records from the `categories` collection */
@@ -259,6 +263,10 @@ export type Mutation = {
   insertIntobusiness_currencyCollection?: Maybe<Business_CurrencyInsertResponse>;
   /** Adds one or more `businesses` records to the collection */
   insertIntobusinessesCollection?: Maybe<BusinessesInsertResponse>;
+  /** Adds one or more `cart_state` records to the collection */
+  insertIntocart_stateCollection?: Maybe<Cart_StateInsertResponse>;
+  /** Adds one or more `cart_states` records to the collection */
+  insertIntocart_statesCollection?: Maybe<Cart_StatesInsertResponse>;
   /** Adds one or more `carts` records to the collection */
   insertIntocartsCollection?: Maybe<CartsInsertResponse>;
   /** Adds one or more `categories` records to the collection */
@@ -323,6 +331,10 @@ export type Mutation = {
   updatebusiness_currencyCollection: Business_CurrencyUpdateResponse;
   /** Updates zero or more records in the `businesses` collection */
   updatebusinessesCollection: BusinessesUpdateResponse;
+  /** Updates zero or more records in the `cart_state` collection */
+  updatecart_stateCollection: Cart_StateUpdateResponse;
+  /** Updates zero or more records in the `cart_states` collection */
+  updatecart_statesCollection: Cart_StatesUpdateResponse;
   /** Updates zero or more records in the `carts` collection */
   updatecartsCollection: CartsUpdateResponse;
   /** Updates zero or more records in the `categories` collection */
@@ -402,6 +414,20 @@ export type MutationDeleteFrombusiness_CurrencyCollectionArgs = {
 export type MutationDeleteFrombusinessesCollectionArgs = {
   atMost?: Scalars['Int']['input'];
   filter?: InputMaybe<BusinessesFilter>;
+};
+
+
+/** The root type for creating and mutating data */
+export type MutationDeleteFromcart_StateCollectionArgs = {
+  atMost?: Scalars['Int']['input'];
+  filter?: InputMaybe<Cart_StateFilter>;
+};
+
+
+/** The root type for creating and mutating data */
+export type MutationDeleteFromcart_StatesCollectionArgs = {
+  atMost?: Scalars['Int']['input'];
+  filter?: InputMaybe<Cart_StatesFilter>;
 };
 
 
@@ -639,6 +665,18 @@ export type MutationInsertIntobusinessesCollectionArgs = {
 
 
 /** The root type for creating and mutating data */
+export type MutationInsertIntocart_StateCollectionArgs = {
+  objects: Array<Cart_StateInsertInput>;
+};
+
+
+/** The root type for creating and mutating data */
+export type MutationInsertIntocart_StatesCollectionArgs = {
+  objects: Array<Cart_StatesInsertInput>;
+};
+
+
+/** The root type for creating and mutating data */
 export type MutationInsertIntocartsCollectionArgs = {
   objects: Array<CartsInsertInput>;
 };
@@ -833,6 +871,22 @@ export type MutationUpdatebusinessesCollectionArgs = {
   atMost?: Scalars['Int']['input'];
   filter?: InputMaybe<BusinessesFilter>;
   set: BusinessesUpdateInput;
+};
+
+
+/** The root type for creating and mutating data */
+export type MutationUpdatecart_StateCollectionArgs = {
+  atMost?: Scalars['Int']['input'];
+  filter?: InputMaybe<Cart_StateFilter>;
+  set: Cart_StateUpdateInput;
+};
+
+
+/** The root type for creating and mutating data */
+export type MutationUpdatecart_StatesCollectionArgs = {
+  atMost?: Scalars['Int']['input'];
+  filter?: InputMaybe<Cart_StatesFilter>;
+  set: Cart_StatesUpdateInput;
 };
 
 
@@ -1107,6 +1161,10 @@ export type Query = {
   business_currencyCollection?: Maybe<Business_CurrencyConnection>;
   /** A pagable collection of type `businesses` */
   businessesCollection?: Maybe<BusinessesConnection>;
+  /** A pagable collection of type `cart_state` */
+  cart_stateCollection?: Maybe<Cart_StateConnection>;
+  /** A pagable collection of type `cart_states` */
+  cart_statesCollection?: Maybe<Cart_StatesConnection>;
   /** A pagable collection of type `carts` */
   cartsCollection?: Maybe<CartsConnection>;
   /** A pagable collection of type `categories` */
@@ -1203,6 +1261,30 @@ export type QueryBusinessesCollectionArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
   orderBy?: InputMaybe<Array<BusinessesOrderBy>>;
+};
+
+
+/** The root type for querying data */
+export type QueryCart_StateCollectionArgs = {
+  after?: InputMaybe<Scalars['Cursor']['input']>;
+  before?: InputMaybe<Scalars['Cursor']['input']>;
+  filter?: InputMaybe<Cart_StateFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<Cart_StateOrderBy>>;
+};
+
+
+/** The root type for querying data */
+export type QueryCart_StatesCollectionArgs = {
+  after?: InputMaybe<Scalars['Cursor']['input']>;
+  before?: InputMaybe<Scalars['Cursor']['input']>;
+  filter?: InputMaybe<Cart_StatesFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<Cart_StatesOrderBy>>;
 };
 
 
@@ -1943,6 +2025,183 @@ export type BusinessesUpdateResponse = {
   records: Array<Businesses>;
 };
 
+export type Cart_State = Node & {
+  __typename?: 'cart_state';
+  cart: Scalars['UUID']['output'];
+  created_at: Scalars['Datetime']['output'];
+  id: Scalars['UUID']['output'];
+  /** Globally Unique Record Identifier */
+  nodeId: Scalars['ID']['output'];
+  state: Scalars['UUID']['output'];
+  updated_at?: Maybe<Scalars['Datetime']['output']>;
+};
+
+export type Cart_StateConnection = {
+  __typename?: 'cart_stateConnection';
+  edges: Array<Cart_StateEdge>;
+  pageInfo: PageInfo;
+};
+
+export type Cart_StateDeleteResponse = {
+  __typename?: 'cart_stateDeleteResponse';
+  /** Count of the records impacted by the mutation */
+  affectedCount: Scalars['Int']['output'];
+  /** Array of records impacted by the mutation */
+  records: Array<Cart_State>;
+};
+
+export type Cart_StateEdge = {
+  __typename?: 'cart_stateEdge';
+  cursor: Scalars['String']['output'];
+  node: Cart_State;
+};
+
+export type Cart_StateFilter = {
+  /** Returns true only if all its inner filters are true, otherwise returns false */
+  and?: InputMaybe<Array<Cart_StateFilter>>;
+  cart?: InputMaybe<UuidFilter>;
+  created_at?: InputMaybe<DatetimeFilter>;
+  id?: InputMaybe<UuidFilter>;
+  nodeId?: InputMaybe<IdFilter>;
+  /** Negates a filter */
+  not?: InputMaybe<Cart_StateFilter>;
+  /** Returns true if at least one of its inner filters is true, otherwise returns false */
+  or?: InputMaybe<Array<Cart_StateFilter>>;
+  state?: InputMaybe<UuidFilter>;
+  updated_at?: InputMaybe<DatetimeFilter>;
+};
+
+export type Cart_StateInsertInput = {
+  cart?: InputMaybe<Scalars['UUID']['input']>;
+  created_at?: InputMaybe<Scalars['Datetime']['input']>;
+  id?: InputMaybe<Scalars['UUID']['input']>;
+  state?: InputMaybe<Scalars['UUID']['input']>;
+  updated_at?: InputMaybe<Scalars['Datetime']['input']>;
+};
+
+export type Cart_StateInsertResponse = {
+  __typename?: 'cart_stateInsertResponse';
+  /** Count of the records impacted by the mutation */
+  affectedCount: Scalars['Int']['output'];
+  /** Array of records impacted by the mutation */
+  records: Array<Cart_State>;
+};
+
+export type Cart_StateOrderBy = {
+  cart?: InputMaybe<OrderByDirection>;
+  created_at?: InputMaybe<OrderByDirection>;
+  id?: InputMaybe<OrderByDirection>;
+  state?: InputMaybe<OrderByDirection>;
+  updated_at?: InputMaybe<OrderByDirection>;
+};
+
+export type Cart_StateUpdateInput = {
+  cart?: InputMaybe<Scalars['UUID']['input']>;
+  created_at?: InputMaybe<Scalars['Datetime']['input']>;
+  id?: InputMaybe<Scalars['UUID']['input']>;
+  state?: InputMaybe<Scalars['UUID']['input']>;
+  updated_at?: InputMaybe<Scalars['Datetime']['input']>;
+};
+
+export type Cart_StateUpdateResponse = {
+  __typename?: 'cart_stateUpdateResponse';
+  /** Count of the records impacted by the mutation */
+  affectedCount: Scalars['Int']['output'];
+  /** Array of records impacted by the mutation */
+  records: Array<Cart_State>;
+};
+
+export type Cart_States = Node & {
+  __typename?: 'cart_states';
+  created_at: Scalars['Datetime']['output'];
+  description?: Maybe<Scalars['String']['output']>;
+  id: Scalars['UUID']['output'];
+  /** Globally Unique Record Identifier */
+  nodeId: Scalars['ID']['output'];
+  state: Scalars['String']['output'];
+  state_code: Scalars['String']['output'];
+  updated_at?: Maybe<Scalars['Datetime']['output']>;
+};
+
+export type Cart_StatesConnection = {
+  __typename?: 'cart_statesConnection';
+  edges: Array<Cart_StatesEdge>;
+  pageInfo: PageInfo;
+};
+
+export type Cart_StatesDeleteResponse = {
+  __typename?: 'cart_statesDeleteResponse';
+  /** Count of the records impacted by the mutation */
+  affectedCount: Scalars['Int']['output'];
+  /** Array of records impacted by the mutation */
+  records: Array<Cart_States>;
+};
+
+export type Cart_StatesEdge = {
+  __typename?: 'cart_statesEdge';
+  cursor: Scalars['String']['output'];
+  node: Cart_States;
+};
+
+export type Cart_StatesFilter = {
+  /** Returns true only if all its inner filters are true, otherwise returns false */
+  and?: InputMaybe<Array<Cart_StatesFilter>>;
+  created_at?: InputMaybe<DatetimeFilter>;
+  description?: InputMaybe<StringFilter>;
+  id?: InputMaybe<UuidFilter>;
+  nodeId?: InputMaybe<IdFilter>;
+  /** Negates a filter */
+  not?: InputMaybe<Cart_StatesFilter>;
+  /** Returns true if at least one of its inner filters is true, otherwise returns false */
+  or?: InputMaybe<Array<Cart_StatesFilter>>;
+  state?: InputMaybe<StringFilter>;
+  state_code?: InputMaybe<StringFilter>;
+  updated_at?: InputMaybe<DatetimeFilter>;
+};
+
+export type Cart_StatesInsertInput = {
+  created_at?: InputMaybe<Scalars['Datetime']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  id?: InputMaybe<Scalars['UUID']['input']>;
+  state?: InputMaybe<Scalars['String']['input']>;
+  state_code?: InputMaybe<Scalars['String']['input']>;
+  updated_at?: InputMaybe<Scalars['Datetime']['input']>;
+};
+
+export type Cart_StatesInsertResponse = {
+  __typename?: 'cart_statesInsertResponse';
+  /** Count of the records impacted by the mutation */
+  affectedCount: Scalars['Int']['output'];
+  /** Array of records impacted by the mutation */
+  records: Array<Cart_States>;
+};
+
+export type Cart_StatesOrderBy = {
+  created_at?: InputMaybe<OrderByDirection>;
+  description?: InputMaybe<OrderByDirection>;
+  id?: InputMaybe<OrderByDirection>;
+  state?: InputMaybe<OrderByDirection>;
+  state_code?: InputMaybe<OrderByDirection>;
+  updated_at?: InputMaybe<OrderByDirection>;
+};
+
+export type Cart_StatesUpdateInput = {
+  created_at?: InputMaybe<Scalars['Datetime']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  id?: InputMaybe<Scalars['UUID']['input']>;
+  state?: InputMaybe<Scalars['String']['input']>;
+  state_code?: InputMaybe<Scalars['String']['input']>;
+  updated_at?: InputMaybe<Scalars['Datetime']['input']>;
+};
+
+export type Cart_StatesUpdateResponse = {
+  __typename?: 'cart_statesUpdateResponse';
+  /** Count of the records impacted by the mutation */
+  affectedCount: Scalars['Int']['output'];
+  /** Array of records impacted by the mutation */
+  records: Array<Cart_States>;
+};
+
 export type Carts = Node & {
   __typename?: 'carts';
   anonymous_id?: Maybe<Scalars['UUID']['output']>;
@@ -2650,23 +2909,11 @@ export type CurrenciesUpdateResponse = {
 export type Customer_Address_Types = Node & {
   __typename?: 'customer_address_types';
   created_at: Scalars['Datetime']['output'];
-  customer_addressesCollection?: Maybe<Customer_AddressesConnection>;
   id: Scalars['UUID']['output'];
   /** Globally Unique Record Identifier */
   nodeId: Scalars['ID']['output'];
   type: Scalars['String']['output'];
   updated_at?: Maybe<Scalars['Datetime']['output']>;
-};
-
-
-export type Customer_Address_TypesCustomer_AddressesCollectionArgs = {
-  after?: InputMaybe<Scalars['Cursor']['input']>;
-  before?: InputMaybe<Scalars['Cursor']['input']>;
-  filter?: InputMaybe<Customer_AddressesFilter>;
-  first?: InputMaybe<Scalars['Int']['input']>;
-  last?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  orderBy?: InputMaybe<Array<Customer_AddressesOrderBy>>;
 };
 
 export type Customer_Address_TypesConnection = {
@@ -2742,7 +2989,6 @@ export type Customer_Address_TypesUpdateResponse = {
 
 export type Customer_Addresses = Node & {
   __typename?: 'customer_addresses';
-  address_type: Scalars['UUID']['output'];
   company_name?: Maybe<Scalars['String']['output']>;
   countries?: Maybe<Countries>;
   country: Scalars['UUID']['output'];
@@ -2750,7 +2996,6 @@ export type Customer_Addresses = Node & {
   country_states?: Maybe<Country_States>;
   created_at: Scalars['Datetime']['output'];
   customer: Scalars['UUID']['output'];
-  customer_address_types?: Maybe<Customer_Address_Types>;
   customers?: Maybe<Customers>;
   email: Scalars['String']['output'];
   first_name: Scalars['String']['output'];
@@ -2785,7 +3030,6 @@ export type Customer_AddressesEdge = {
 };
 
 export type Customer_AddressesFilter = {
-  address_type?: InputMaybe<UuidFilter>;
   /** Returns true only if all its inner filters are true, otherwise returns false */
   and?: InputMaybe<Array<Customer_AddressesFilter>>;
   company_name?: InputMaybe<StringFilter>;
@@ -2809,7 +3053,6 @@ export type Customer_AddressesFilter = {
 };
 
 export type Customer_AddressesInsertInput = {
-  address_type?: InputMaybe<Scalars['UUID']['input']>;
   company_name?: InputMaybe<Scalars['String']['input']>;
   country?: InputMaybe<Scalars['UUID']['input']>;
   country_state?: InputMaybe<Scalars['UUID']['input']>;
@@ -2834,7 +3077,6 @@ export type Customer_AddressesInsertResponse = {
 };
 
 export type Customer_AddressesOrderBy = {
-  address_type?: InputMaybe<OrderByDirection>;
   company_name?: InputMaybe<OrderByDirection>;
   country?: InputMaybe<OrderByDirection>;
   country_state?: InputMaybe<OrderByDirection>;
@@ -2851,7 +3093,6 @@ export type Customer_AddressesOrderBy = {
 };
 
 export type Customer_AddressesUpdateInput = {
-  address_type?: InputMaybe<Scalars['UUID']['input']>;
   company_name?: InputMaybe<Scalars['String']['input']>;
   country?: InputMaybe<Scalars['UUID']['input']>;
   country_state?: InputMaybe<Scalars['UUID']['input']>;

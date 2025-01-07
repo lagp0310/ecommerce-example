@@ -9,6 +9,13 @@ export enum AddressType {
 }
 
 export const addressFormSchema = z.object({
+  id: z
+    .string({
+      required_error: "ID is required",
+      invalid_type_error: "ID must be a string",
+    })
+    .uuid("ID is required")
+    .optional(),
   customerId: z
     .string({
       required_error: "Customer is required",

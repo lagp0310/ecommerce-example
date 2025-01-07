@@ -41,7 +41,7 @@ export function AddressForm({
     register,
     getValues,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, defaultValues },
     setValue,
   },
   onSubmit,
@@ -104,7 +104,14 @@ export function AddressForm({
       ...commonInputProps,
       ...register("firstName"),
     }),
-    [commonInputProps, errors.firstName, htmlNamePrefix, register]
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [
+      commonInputProps,
+      errors.firstName,
+      htmlNamePrefix,
+      register,
+      defaultValues,
+    ]
   );
   const lastNameInputProps: InputProps = React.useMemo(
     () => ({
@@ -116,7 +123,8 @@ export function AddressForm({
       ...commonInputProps,
       ...register("lastName"),
     }),
-    [commonInputProps, errors.lastName, htmlNamePrefix, register]
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [commonInputProps, errors.lastName, htmlNamePrefix, register, defaultValues]
   );
   const companyNameInputProps: InputProps = React.useMemo(
     () => ({
@@ -128,7 +136,14 @@ export function AddressForm({
       ...commonInputProps,
       ...register("companyName"),
     }),
-    [commonInputProps, errors.companyName, htmlNamePrefix, register]
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [
+      commonInputProps,
+      errors.companyName,
+      htmlNamePrefix,
+      register,
+      defaultValues,
+    ]
   );
   const streetAddressInputProps: InputProps = React.useMemo(
     () => ({
@@ -140,7 +155,14 @@ export function AddressForm({
       ...commonInputProps,
       ...register("streetAddress"),
     }),
-    [commonInputProps, errors.streetAddress, htmlNamePrefix, register]
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [
+      commonInputProps,
+      errors.streetAddress,
+      htmlNamePrefix,
+      register,
+      defaultValues,
+    ]
   );
   const commonComboboxProps: Partial<ComboboxWrapperProps> = React.useMemo(
     () => ({
@@ -202,6 +224,7 @@ export function AddressForm({
       ...commonPatternFormatProps,
       ...register("zipCode"),
     }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [
       commonPatternFormatProps,
       errors.zipCode,
@@ -209,6 +232,7 @@ export function AddressForm({
       handleInputChange,
       htmlNamePrefix,
       register,
+      defaultValues,
     ]
   );
   const emailInputProps: InputProps = React.useMemo(
@@ -221,7 +245,8 @@ export function AddressForm({
       ...commonInputProps,
       ...register("email"),
     }),
-    [commonInputProps, errors.email, htmlNamePrefix, register]
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [commonInputProps, errors.email, htmlNamePrefix, register, defaultValues]
   );
   const phoneNumberInputProps: PatternFormatProps = React.useMemo(
     () => ({
@@ -236,6 +261,7 @@ export function AddressForm({
       ...commonPatternFormatProps,
       ...register("phoneNumber"),
     }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [
       commonPatternFormatProps,
       errors.phoneNumber,
@@ -243,6 +269,7 @@ export function AddressForm({
       handleInputChange,
       htmlNamePrefix,
       register,
+      defaultValues,
     ]
   );
 

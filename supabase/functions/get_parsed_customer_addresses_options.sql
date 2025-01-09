@@ -19,6 +19,8 @@ FROM
 WHERE
   customer_addresses.customer = customer_id
 ORDER BY
-  customer_addresses.id;
+  customer_addresses.street_address,
+  customer_addresses.first_name,
+  customer_addresses.last_name;
   END;
 $get_parsed_customer_addresses_options$ language plpgsql;

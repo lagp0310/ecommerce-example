@@ -1,7 +1,10 @@
 "use server";
 
 import { createCartAddress } from "@/gql/mutations/cart-address/mutations";
-import { createCustomerAddress } from "@/gql/mutations/customer-address/mutations";
+import {
+  createCustomerAddress,
+  updateCustomerAddress,
+} from "@/gql/mutations/customer-address/mutations";
 import { mutateGraphql } from "@/lib/server-mutate";
 import { getParsedErrorMessage } from "@/lib/utils";
 import {
@@ -35,8 +38,7 @@ export async function saveAddressInformationAction({
       throw new Error("Address Creation Failed");
     }
 
-    const customerAddresses = [
-      {
+    const customerAddress = {
         first_name: firstName,
         last_name: lastName,
         street_address: streetAddress,
@@ -47,10 +49,10 @@ export async function saveAddressInformationAction({
         customer: customerId,
         email,
         phone_number: phoneNumber,
-      },
-    ];
+    };
 
     await addressFormSchema.parseAsync({
+      id,
       countryId,
       countryStateId,
       email,
@@ -64,34 +66,33 @@ export async function saveAddressInformationAction({
     });
 
     // TODO: Types.
-    // TODO: Update if exists (if id is present).
     let addressResponse;
     if (!id) {
       addressResponse = await mutateGraphql(
         "insertIntoCustomerAddressesCollection",
         createCustomerAddress,
         {
-          customerAddresses,
+          customerAddresses: [customerAddress],
         }
       );
     } else {
       addressResponse = await mutateGraphql(
         "updateCustomerAddressesCollection",
-        createCustomerAddress,
+        updateCustomerAddress,
         {
-          customerAddress: customerAddresses,
+          customerAddress,
           filter: { id: { eq: id } },
         }
       );
     }
 
-    const addressObject = addressResponse?.at(0);
+    const addressId = id ?? addressResponse?.at(0)?.id;
     const cartAddresses = [
-      { cart, address: addressObject?.id, address_type: addressType },
+      { cart, address: addressId, address_type: addressType },
     ];
     await cartAddressFormSchema.parseAsync({
       cart,
-      address: addressObject?.id,
+      address: addressId,
       addressType,
     });
 

@@ -1,7 +1,11 @@
 "use client";
 
 import { useAddressForm } from "@/hooks/use-address-form";
-import type { AddressFormContext, AddressForm } from "@/types/form/types";
+import {
+  type AddressFormContext,
+  type AddressForm,
+  AddressType,
+} from "@/types/form/types";
 import React from "react";
 import { type UseFormReturn } from "react-hook-form";
 
@@ -33,7 +37,11 @@ export function ShippingAddressFormContextProvider({
   addressTypeId,
   currentValues,
 }: Props) {
-  const { providerValue } = useAddressForm(addressTypeId, currentValues);
+  const { providerValue } = useAddressForm(
+    addressTypeId,
+    AddressType.SHIPPING,
+    currentValues
+  );
 
   return (
     <ShippingAddressFormContext.Provider value={providerValue}>

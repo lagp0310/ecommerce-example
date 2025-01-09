@@ -3,15 +3,25 @@
 import { saveAddressInformationAction } from "@/actions/customer-address/actions";
 import { useCart } from "@/context/cart-context";
 import { useCustomer } from "@/context/customer-context";
-import { addressFormSchema, type AddressForm } from "@/types/form/types";
+import {
+  addressFormSchema,
+  AddressType,
+  type AddressForm,
+} from "@/types/form/types";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React from "react";
 import { type SubmitHandler, useForm } from "react-hook-form";
 
 export function useAddressForm(
   addressTypeId: string,
+  addressType: AddressType,
   currentValues?: AddressForm
 ) {
+  const pathname = usePathname();
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
   const { cart } = useCart();
   const { customer } = useCustomer();
   const customerId = React.useMemo(() => customer?.id ?? "", [customer?.id]);
@@ -38,13 +48,26 @@ export function useAddressForm(
             cart: cart?.id ?? "",
             addressType: addressTypeId,
           });
-          console.log(response);
+
+          const addressId = response?.addresses?.at(0)?.id;
+          const updatedSearchParams = new URLSearchParams(searchParams);
+          if (addressId) {
+            const paramName =
+              addressType === AddressType.BILLING
+                ? "billingAddressId"
+                : addressType === AddressType.SHIPPING
+                  ? "shippingAddressId"
+                  : "";
+
+            updatedSearchParams.set(paramName, addressId);
+            router.push(`${pathname}?${updatedSearchParams.toString()}`);
+          }
         });
       } catch (error) {
         throw new Error("Submit error on Address Form");
       }
     },
-    [addressTypeId, cart?.id]
+    [addressType, addressTypeId, cart?.id, pathname, router, searchParams]
   );
 
   const providerValue = React.useMemo(

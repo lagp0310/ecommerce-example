@@ -21,7 +21,7 @@ export const updateCartAddress = gql`
     $cartAddress: cart_addressUpdateInput!
     $filter: cart_addressFilter
   ) {
-    updateCartsCollection: updatecartsCollection(
+    updateCartAddressCollection: updatecart_addressCollection(
       set: $cartAddress
       filter: $filter
     ) {

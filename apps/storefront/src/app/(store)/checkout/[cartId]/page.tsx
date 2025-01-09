@@ -136,7 +136,7 @@ export default async function Checkout({
       "no-cache"
     ),
     queryGraphql<CustomerResponse[]>(
-      "customerCollection",
+      "customersCollection",
       getCustomerQuery,
       { filter: { id: { eq: "cc1293d9-9090-4cd5-b8bd-804777d7302a" } } },
       "no-cache"

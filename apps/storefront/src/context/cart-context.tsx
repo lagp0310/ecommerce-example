@@ -200,19 +200,20 @@ export function CartContextProvider({ children, currentCart = null }: Props) {
         }
 
         const cartId = cartData?.insertIntoCartsCollection?.records?.at(0)?.id;
+        const lineItems = [
+          {
+            cart: cart?.id ?? cartId,
+            quantity: 1,
+            price:
+              typeof product?.discountedPrice === "number"
+                ? product.discountedPrice
+                : product.price,
+            product: product.id,
+          },
+        ];
         const { data: lineItemsData } = await mutateCreateLineItems({
           variables: {
-            lineItems: [
-              {
-                cart: cart?.id ?? cartId,
-                quantity: 1,
-                price:
-                  typeof product?.discountedPrice === "number"
-                    ? product.discountedPrice
-                    : product.price,
-                product: product.id,
-              },
-            ],
+            lineItems,
           },
         });
 
@@ -274,18 +275,19 @@ export function CartContextProvider({ children, currentCart = null }: Props) {
       }
 
       try {
+        const lineItems = {
+          cart: cart?.id,
+          quantity,
+          price:
+            typeof product?.discountedPrice === "number"
+              ? product.discountedPrice
+              : product.price,
+          product: product.id,
+        };
         const { data: lineItemsData } = await mutateUpdateLineItems({
           variables: {
             filter: { id: { eq: lineItemId } },
-            lineItems: {
-              cart: cart?.id,
-              quantity,
-              price:
-                typeof product?.discountedPrice === "number"
-                  ? product.discountedPrice
-                  : product.price,
-              product: product.id,
-            },
+            lineItems,
           },
         });
 

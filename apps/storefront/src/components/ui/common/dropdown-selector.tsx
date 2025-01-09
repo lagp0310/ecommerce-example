@@ -80,7 +80,7 @@ export function DropdownSelector({
                 <Link
                   key={index}
                   href={`${pathname}?${newSearchParams.toString()}`}
-                  className="group/select-link relative flex w-full cursor-pointer items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none hover:bg-gray-50 focus:bg-neutral-100 focus:text-neutral-900 disabled:cursor-not-allowed aria-selected:bg-gray-50 data-[disabled]:pointer-events-none data-[disabled]:opacity-50 dark:focus:bg-neutral-800 dark:focus:text-neutral-50"
+                  className="group/select-link relative flex w-full cursor-pointer items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none hover:bg-green-gray-50 focus:bg-neutral-100 focus:text-neutral-900 disabled:cursor-not-allowed aria-selected:bg-green-gray-50 data-[disabled]:pointer-events-none data-[disabled]:opacity-50 dark:focus:bg-neutral-800 dark:focus:text-neutral-50"
                   aria-selected={currentValue === value}
                 >
                   <span className="absolute left-2 hidden size-3.5 items-center justify-center group-aria-selected/select-link:flex">

@@ -20,10 +20,6 @@ export const customerAddressFragment = gql`
       name
       shortName: short_name
     }
-    customerAddressType: customer_address_types {
-      id
-      type
-    }
     createdAt: created_at
     updatedAt: updated_at
   }

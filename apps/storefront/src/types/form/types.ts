@@ -84,7 +84,7 @@ export const addressFormSchema = z.object({
       required_error: "Phone Number is required",
       invalid_type_error: "Phone Number must be a string",
     })
-    .length(17, "Phone Number must be 17 characters long")
+    .length(10, "Phone Number must be 10 characters long")
     .refine(
       (phoneNumber) => isMobilePhone(phoneNumber, "en-US"),
       "Phone Number is invalid"
@@ -193,3 +193,25 @@ export type CardFormContext = {
   form: UseFormReturn<CardForm>;
   onSubmit: SubmitHandler<CardForm>;
 };
+
+export const cartAddressFormSchema = z.object({
+  cart: z
+    .string({
+      required_error: "Cart ID is required",
+      invalid_type_error: "Cart ID must be a string",
+    })
+    .uuid("Cart ID is required"),
+  address: z
+    .string({
+      required_error: "Address ID is required",
+      invalid_type_error: "Address ID must be a string",
+    })
+    .uuid("Address ID is required"),
+  addressType: z
+    .string({
+      required_error: "Address Type ID is required",
+      invalid_type_error: "Address Type ID must be a string",
+    })
+    .uuid("Address Type ID is required"),
+});
+export type CartAddressForm = z.infer<typeof cartAddressFormSchema>;

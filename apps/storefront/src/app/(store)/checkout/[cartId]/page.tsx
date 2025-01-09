@@ -239,12 +239,20 @@ export default async function Checkout({
     BillingAddressContextProps,
     "children"
   > = {
+    addressTypeId:
+      customerAddressTypes?.find(
+        ({ type }) => type.toLowerCase() === AddressType.BILLING.toLowerCase()
+      )?.id ?? "",
     currentValues: !!billingAddressId ? billingAddress?.at(0) : undefined,
   };
   const shippingAddressContextProps: Omit<
     ShippingAddressContextProps,
     "children"
   > = {
+    addressTypeId:
+      customerAddressTypes?.find(
+        ({ type }) => type.toLowerCase() === AddressType.SHIPPING.toLowerCase()
+      )?.id ?? "",
     currentValues: !!shippingAddressId ? shippingAddress?.at(0) : undefined,
   };
 

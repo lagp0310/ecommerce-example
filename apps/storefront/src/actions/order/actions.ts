@@ -8,8 +8,7 @@ import {
   type OrderForm,
   type SuccessFailureMock,
 } from "@/types/form/types";
-
-// TODO: Revalidate cache after operations.
+import { revalidatePath } from "next/cache";
 
 export async function createOrderAction({
   isSuccess = true,
@@ -28,6 +27,8 @@ export async function createOrderAction({
     );
 
     await orderFormSchema.parseAsync(orderData);
+
+    revalidatePath("/checkout");
 
     return {
       message: "Order Creation Successful",

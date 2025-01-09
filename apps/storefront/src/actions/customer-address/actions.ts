@@ -11,8 +11,7 @@ import {
   type SuccessFailureMock,
   cartAddressFormSchema,
 } from "@/types/form/types";
-
-// TODO: Revalidate cache after operations.
+import { revalidatePath } from "next/cache";
 
 export async function saveAddressInformationAction({
   id,
@@ -104,6 +103,8 @@ export async function saveAddressInformationAction({
       createCartAddress,
       { cartAddresses }
     );
+
+    revalidatePath("/checkout");
 
     return {
       messages: ["Address Creation Successful"],

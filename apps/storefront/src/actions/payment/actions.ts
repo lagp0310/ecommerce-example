@@ -8,8 +8,7 @@ import {
   type CashForm,
   type SuccessFailureMock,
 } from "@/types/form/types";
-
-// TODO: Revalidate cache after operations.
+import { revalidatePath } from "next/cache";
 
 export async function processCashPaymentAction({
   amount,
@@ -23,6 +22,8 @@ export async function processCashPaymentAction({
     }
 
     await cashFormSchema.parseAsync({ amount, ...cashFormRest });
+
+    revalidatePath("/checkout");
 
     return {
       message: "Payment Successful",
@@ -55,6 +56,8 @@ export async function processCardPaymentAction({
     }
 
     await cardFormSchema.parseAsync({ amount, cardNumber, ...cardFormRest });
+
+    revalidatePath("/checkout");
 
     return {
       message: "Payment Successful",

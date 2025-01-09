@@ -39,16 +39,16 @@ export async function saveAddressInformationAction({
     }
 
     const customerAddress = {
-        first_name: firstName,
-        last_name: lastName,
-        street_address: streetAddress,
-        company_name: companyName,
-        country: countryId,
-        country_state: countryStateId,
-        zip_code: zipCode,
-        customer: customerId,
-        email,
-        phone_number: phoneNumber,
+      first_name: firstName,
+      last_name: lastName,
+      street_address: streetAddress,
+      company_name: companyName,
+      country: countryId,
+      country_state: countryStateId,
+      zip_code: zipCode,
+      customer: customerId,
+      email,
+      phone_number: phoneNumber,
     };
 
     await addressFormSchema.parseAsync({

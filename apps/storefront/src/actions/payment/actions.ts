@@ -32,10 +32,10 @@ export async function processCashPaymentAction({
       continue: true,
     };
   } catch (error) {
-    const parsedMessage = getParsedErrorMessage(error, "Payment Failed");
+    const parsedMessages = getParsedErrorMessage(error, "Payment Failed");
 
     return {
-      message: parsedMessage,
+      message: [parsedMessages],
       code: "CASH_PAYMENT_FAILURE",
       continue: false,
     };
@@ -65,10 +65,10 @@ export async function processCardPaymentAction({
       continue: true,
     };
   } catch (error) {
-    const parsedMessage = getParsedErrorMessage(error, "Payment Failed");
+    const parsedMessages = getParsedErrorMessage(error, "Payment Failed");
 
     return {
-      message: parsedMessage,
+      message: [parsedMessages],
       code: "CARD_PAYMENT_FAILURE",
       continue: false,
     };

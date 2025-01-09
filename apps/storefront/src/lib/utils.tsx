@@ -294,11 +294,11 @@ export function getParsedErrorMessage(
     typeof error === "object" &&
     "message" in error &&
     typeof error.message === "string";
-  const parsedMessage = hasErrorMessage
-    ? JSON.parse(error.message as string)
-        ?.map(({ message }: { message: string }) => message)
-        ?.join("\n")
-    : fallbackMessage;
+  const parsedMessages = hasErrorMessage
+    ? JSON.parse(error.message as string)?.map(
+        ({ message }: { message: string }) => message
+      )
+    : [fallbackMessage];
 
-  return parsedMessage;
+  return parsedMessages;
 }

@@ -68,19 +68,19 @@ export async function saveAddressInformationAction({
     );
 
     return {
-      message: "Address Creation Successful",
+      messages: ["Address Creation Successful"],
       code: "ADDRESS_CREATION_SUCCESS",
       addresses: addressCreationResponse,
       continue: true,
     };
   } catch (error) {
-    const parsedMessage = getParsedErrorMessage(
+    const parsedMessages = getParsedErrorMessage(
       error,
       "Address Creation Failed"
     );
 
     return {
-      message: parsedMessage,
+      messages: [parsedMessages],
       code: "ADDRESS_CREATION_FAILURE",
       continue: false,
     };

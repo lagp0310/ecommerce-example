@@ -36,10 +36,13 @@ export async function createOrderAction({
       continue: true,
     };
   } catch (error) {
-    const parsedMessage = getParsedErrorMessage(error, "Order Creation Failed");
+    const parsedMessages = getParsedErrorMessage(
+      error,
+      "Order Creation Failed"
+    );
 
     return {
-      message: parsedMessage,
+      message: [parsedMessages],
       code: "ORDER_CREATION_FAILURE",
       continue: false,
     };

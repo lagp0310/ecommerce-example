@@ -1,9 +1,9 @@
 -- Latest Orders.
 CREATE
 OR REPLACE FUNCTION get_latest_orders (IN rows_limit INTEGER DEFAULT 5) RETURNS TABLE (
-  first_name CHARACTER VARYING,
-  last_name CHARACTER VARYING,
-  email CHARACTER VARYING,
+  first_name TEXT,
+  last_name TEXT,
+  email TEXT,
   result_orders_total NUMERIC
 ) AS $get_latest_orders$
   BEGIN

@@ -1,0 +1,8 @@
+id,type,description
+0e595ed1-a7fc-4f2d-86ea-e43b10be4bac,offer_discount_remark
+2efd2fa5-f9ae-4d70-b64e-a1c4a308770a,header_title_only
+2f3a36a4-ba51-4a26-8b83-e4fdf878bae6,offer_valid_until
+8f70b588-1e6d-4781-aa04-4457e2b1e26e,header_sale
+9188465f-3950-42e5-b197-6d6b78454012,image_discount_remark
+9bf7b891-5f08-4c75-9683-70594facf073,header_sale_remark
+ed539069-05e4-43b8-9bf4-faf68a305c76,offer_price_remark

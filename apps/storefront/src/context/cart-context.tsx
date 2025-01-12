@@ -19,6 +19,7 @@ import {
 } from "@/gql/mutations/line-item/mutations";
 import type {
   CartSummary,
+  ClientCartResponse,
   GetCartSummaryResponse,
   TProduct,
 } from "@/types/types";
@@ -88,7 +89,7 @@ export function CartContextProvider({ children, currentCart = null }: Props) {
   const [lineItems, setLineItems] = React.useState<LineItem[]>([]);
   const [summaryData, setSummaryData] =
     React.useState<CartSummary>(initialCartSummary);
-  const [getCart] = useLazyQuery(getCartQuery);
+  const [getCart] = useLazyQuery<ClientCartResponse>(getCartQuery);
   React.useEffect(() => {
     if (!!cart) {
       return;
@@ -97,21 +98,19 @@ export function CartContextProvider({ children, currentCart = null }: Props) {
     const cartId = window.localStorage.getItem(localStorageCartIdItemName);
     if (typeof cartId === "string" && isUUID(cartId)) {
       getCart({ variables: { filter: { id: { eq: cartId } } } })
-        .then(
-          ({
-            data: {
-              cartsCollection: { edges },
-            },
-          }) => {
-            const cartNode = edges?.at(0)?.node;
-            const lineItemsNodes = (
-              cartNode?.lineItemsCollection?.edges as LineItemEdge[]
-            )?.map(({ node }) => node);
+        .then(({ data }) => {
+          const cartNode = data?.cartsCollection?.edges?.at(0)?.node;
+          const lineItemsNodes = (
+            cartNode?.lineItemsCollection?.edges as LineItemEdge[]
+          )?.map(({ node }) => node);
 
-            setCart(cartNode);
-            setLineItems(lineItemsNodes);
+          if (!cartNode) {
+            throw new Error("Cart is invalid");
           }
-        )
+
+          setCart(cartNode);
+          setLineItems(lineItemsNodes);
+        })
         .catch((error) => {
           throw new Error(error);
         });
@@ -146,6 +145,7 @@ export function CartContextProvider({ children, currentCart = null }: Props) {
       });
   }, [cart, lineItems]);
 
+  // TODO: Types for mutations.
   const [mutateCreateCart, { loading: isCreateCartLoading }] =
     useMutation(createCart);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

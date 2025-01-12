@@ -194,6 +194,12 @@ export type CartResponse = Omit<
 > & {
   lineItemsCollection?: { edges: CartLineItemsCollectionEdge[] };
 };
+export type ClientCartEdgeResponse = {
+  node: CartResponse;
+};
+export type ClientCartResponse = {
+  cartsCollection: { edges: ClientCartEdgeResponse[] };
+};
 export type LineItemWithProduct = Omit<LineItem, "products"> & {
   products: TProduct;
 };

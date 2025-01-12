@@ -8,6 +8,7 @@ import {
   type OrderForm,
   type SuccessFailureMock,
 } from "@/types/form/types";
+import type { OrderCreationResponse } from "@/types/types";
 import { revalidatePath } from "next/cache";
 
 export async function createOrderAction({
@@ -19,8 +20,7 @@ export async function createOrderAction({
       throw new Error("Order Creation Failed");
     }
 
-    // TODO: Types.
-    const orderCreationResponse = await mutateGraphql(
+    const orderCreationResponse = await mutateGraphql<OrderCreationResponse>(
       "insertIntoOrdersCollection",
       createOrder,
       { orders: [orderData] }

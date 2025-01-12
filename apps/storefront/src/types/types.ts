@@ -25,6 +25,8 @@ import type {
   Cart_AddressDeleteResponse as CartAddressDeleteResult,
   Customer_AddressesInsertResponse as CustomerAddressInsertResult,
   Customer_AddressesUpdateResponse as CustomerAddressUpdateResult,
+  OrdersInsertResponse as OrderInsertResult,
+  Orders as Order,
 } from "@/gql/graphql";
 import type { OperationVariables } from "@apollo/client";
 
@@ -356,4 +358,12 @@ export type CartAddressInsertResponse = Omit<
   "records"
 > & {
   records: CartAddressResponse;
+};
+
+export type OrderResponse = Omit<
+  Order,
+  "carts" | "created_at" | "updated_at"
+> & { orderCart: CartResponse; createdAt?: string; updatedAt?: string };
+export type OrderCreationResponse = Omit<OrderInsertResult, "records"> & {
+  records: OrderResponse;
 };

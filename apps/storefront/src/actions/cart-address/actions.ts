@@ -78,11 +78,13 @@ export async function saveCartAddressAction({
           ({ records }) => records
         );
       } else {
-        cartAddressCreationResponse = await mutateGraphql(
-          "insertIntoCartAddressCollection",
-          createCartAddress,
-          { cartAddresses }
-        );
+        cartAddressCreationResponse = (
+          await mutateGraphql<CartAddressInsertResponse>(
+            "insertIntoCartAddressCollection",
+            createCartAddress,
+            { cartAddresses }
+          )
+        )?.map(({ records }) => records);
       }
     }
 

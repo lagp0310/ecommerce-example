@@ -11,7 +11,7 @@ on public.carts
 as PERMISSIVE
 for INSERT
 to public
-using (
+with check (
   true
 );
 create policy "Update Access"
@@ -19,7 +19,7 @@ on public.carts
 as PERMISSIVE
 for UPDATE
 to authenticated
-using (
+with check (
   true
 );
 create policy "Delete Access"

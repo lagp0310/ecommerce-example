@@ -11,7 +11,7 @@ on public.line_items
 as PERMISSIVE
 for INSERT
 to public
-using (
+with check (
   true
 );
 create policy "Update Access"
@@ -19,7 +19,7 @@ on public.line_items
 as PERMISSIVE
 for UPDATE
 to public
-using (
+with check (
   true
 );
 create policy "Delete Access"

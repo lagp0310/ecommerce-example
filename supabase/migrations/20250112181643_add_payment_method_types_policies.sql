@@ -11,7 +11,7 @@ on public.payment_method_types
 as PERMISSIVE
 for INSERT
 to authenticated
-using (
+with check (
   true
 );
 create policy "Update Access"
@@ -19,7 +19,7 @@ on public.payment_method_types
 as PERMISSIVE
 for UPDATE
 to authenticated
-using (
+with check (
   true
 );
 create policy "Delete Access"

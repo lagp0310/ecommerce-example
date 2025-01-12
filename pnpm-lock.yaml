@@ -12,8 +12,8 @@ importers:
         specifier: ^3.2.5
         version: 3.3.3
       supabase:
-        specifier: ^1.223.10
-        version: 1.223.10
+        specifier: ^1.226.4
+        version: 1.226.4
       turbo:
         specifier: ^2.3.0
         version: 2.3.0
@@ -6862,8 +6862,8 @@ packages:
       react: '>=16.9.0'
       react-dom: '>=16.9.0'
 
-  supabase@1.223.10:
-    resolution: {integrity: sha512-a5Wi562n0eiV3w359qiCjewyVad688Z3+JHdvLybdlITrwvNIcR6QYqRR6EzjKY5V/sNCqC+5sNf40wDYAYcHg==}
+  supabase@1.226.4:
+    resolution: {integrity: sha512-qEzoagrqZs5T7sAlfZzehX3PJ13cSBrJVs2vrh6xC+B0VI0wgOBw2gCNRcsOMJMpSr0V1l0XueCiFBWPm2U03w==}
     engines: {npm: '>=8'}
     hasBin: true
 
@@ -15193,7 +15193,7 @@ snapshots:
       react: 19.0.0-rc-66855b96-20241106
       react-dom: 19.0.0-rc-66855b96-20241106(react@19.0.0-rc-66855b96-20241106)
 
-  supabase@1.223.10:
+  supabase@1.226.4:
     dependencies:
       bin-links: 5.0.0
       https-proxy-agent: 7.0.5

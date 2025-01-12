@@ -1,0 +1,1 @@
+grant usage on schema public to anon, authenticated, dashboard_user, postgres, service_role;

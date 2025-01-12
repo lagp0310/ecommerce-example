@@ -1,6 +1,5 @@
 "use server";
 
-import { createCartAddress } from "@/gql/mutations/cart-address/mutations";
 import {
   createCustomerAddress,
   updateCustomerAddress,
@@ -12,9 +11,14 @@ import {
   type CartAddressForm,
   type AddressForm,
   type SuccessFailureMock,
-  cartAddressFormSchema,
 } from "@/types/form/types";
 import { revalidatePath } from "next/cache";
+import { saveCartAddressAction } from "@/actions/cart-address/actions";
+import type {
+  AddressInsertIntoResponse,
+  AddressUpdateFromResponse,
+  CustomerAddressResponse,
+} from "@/types/types";
 
 export async function saveAddressInformationAction({
   id,
@@ -65,45 +69,40 @@ export async function saveAddressInformationAction({
       customerId,
     });
 
-    // TODO: Types.
-    let addressResponse;
+    let addressResponse: CustomerAddressResponse[] | null | undefined;
     if (!id) {
-      addressResponse = await mutateGraphql(
-        "insertIntoCustomerAddressesCollection",
-        createCustomerAddress,
-        {
-          customerAddresses: [customerAddress],
-        }
-      );
+      addressResponse = (
+        await mutateGraphql<AddressInsertIntoResponse>(
+          "insertIntoCustomerAddressesCollection",
+          createCustomerAddress,
+          {
+            customerAddresses: [customerAddress],
+          }
+        )
+      )?.map(({ records }) => records);
     } else {
-      addressResponse = await mutateGraphql(
-        "updateCustomerAddressesCollection",
-        updateCustomerAddress,
-        {
-          customerAddress,
-          filter: { id: { eq: id } },
-        }
-      );
+      addressResponse = (
+        await mutateGraphql<AddressUpdateFromResponse>(
+          "updateCustomerAddressesCollection",
+          updateCustomerAddress,
+          {
+            customerAddress,
+            filter: { id: { eq: id } },
+          }
+        )
+      )?.map(({ records }) => records);
     }
 
     const addressId = id ?? addressResponse?.at(0)?.id;
-    const cartAddresses = [
-      { cart, address: addressId, address_type: addressType },
-    ];
-    await cartAddressFormSchema.parseAsync({
-      cart,
-      address: addressId,
-      addressType,
-    });
-
-    // TODO: Types.
-    // FIXME: If cart contains an address of this type (addressTypeId), we should delete
-    // the cart_address record and create a new one.
-    const cartAddressCreationResponse = await mutateGraphql(
-      "insertIntoCartAddressCollection",
-      createCartAddress,
-      { cartAddresses }
-    );
+    let cartAddressCreationResponse;
+    if (addressId && !id) {
+      cartAddressCreationResponse = await saveCartAddressAction({
+        cart,
+        address: addressId,
+        addressType,
+        revalidate: false,
+      });
+    }
 
     revalidatePath("/checkout");
 
@@ -111,7 +110,7 @@ export async function saveAddressInformationAction({
       messages: ["Address Creation Successful"],
       code: "ADDRESS_CREATION_SUCCESS",
       addresses: addressResponse,
-      cartAddresses: cartAddressCreationResponse,
+      cartAddresses: cartAddressCreationResponse?.cartAddresses,
       continue: true,
     };
   } catch (error) {

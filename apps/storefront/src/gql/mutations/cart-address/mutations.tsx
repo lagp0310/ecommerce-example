@@ -34,3 +34,17 @@ export const updateCartAddress = gql`
   }
   ${cartAddressFragment}
 `;
+
+export const deleteCartAddress = gql`
+  mutation DeleteCartAddress($filter: cart_addressFilter) {
+    deleteFromCartAddressCollection: deleteFromcart_addressCollection(
+      filter: $filter
+    ) {
+      affectedCount
+      records {
+        ...CartAddressFragment
+      }
+    }
+  }
+  ${cartAddressFragment}
+`;

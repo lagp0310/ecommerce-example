@@ -20,6 +20,11 @@ import type {
   Country_States as CountryState,
   Customers as Customer,
   Customer_AddressesEdge as CustomerAddressEdge,
+  Cart_Address as CartAddress,
+  Cart_AddressInsertResponse as CartAddressInsertResult,
+  Cart_AddressDeleteResponse as CartAddressDeleteResult,
+  Customer_AddressesInsertResponse as CustomerAddressInsertResult,
+  Customer_AddressesUpdateResponse as CustomerAddressUpdateResult,
 } from "@/gql/graphql";
 import type { OperationVariables } from "@apollo/client";
 
@@ -181,7 +186,10 @@ export type ProductsResponse = Omit<
 export type CartLineItemsCollectionEdge = Omit<LineItemEdge, "node"> & {
   node: LineItemWithProduct;
 };
-export type CartResponse = Omit<Cart, "line_itemsCollection"> & {
+export type CartResponse = Omit<
+  Cart,
+  "line_itemsCollection" | "cart_addressCollection"
+> & {
   lineItemsCollection?: { edges: CartLineItemsCollectionEdge[] };
 };
 export type LineItemWithProduct = Omit<LineItem, "products"> & {
@@ -286,6 +294,14 @@ export type CustomerAddressResponse = Omit<
   updatedAt?: string;
   zipCode: string;
 };
+export type AddressInsertIntoResponse = Omit<
+  CustomerAddressInsertResult,
+  "records"
+> & { records: CustomerAddressResponse };
+export type AddressUpdateFromResponse = Omit<
+  CustomerAddressUpdateResult,
+  "records"
+> & { records: CustomerAddressResponse };
 export type FormCustomerAddressResponse = Omit<
   CustomerAddressResponse,
   | "countryState"
@@ -317,4 +333,27 @@ export type CustomerResponse = Omit<
   firstName: string;
   lastName: string;
   updatedAt?: string;
+};
+
+export type CartAddressResponse = (Omit<
+  CartAddress,
+  "address_type" | "created_at" | "updated_at"
+> & {
+  addressId: string;
+  addressTypeId: string;
+  cartId: string;
+  createdAt?: string;
+  updatedAt?: string;
+})[];
+export type CartAddressDeleteResponse = Omit<
+  CartAddressDeleteResult,
+  "records"
+> & {
+  records: CartAddressResponse[];
+};
+export type CartAddressInsertResponse = Omit<
+  CartAddressInsertResult,
+  "records"
+> & {
+  records: CartAddressResponse;
 };

@@ -1,3 +1,4 @@
+import { saveCartAddressAction } from "@/actions/cart-address/actions";
 import { BoxIcon } from "@/components/ui/icons/box";
 import { HeadphonesIcon } from "@/components/ui/icons/headphones";
 import { ShoppingBagCheckedIcon } from "@/components/ui/icons/shopping-bag-checked";
@@ -13,6 +14,7 @@ import {
 } from "@/constants/constants";
 import type { Line_Items as LineItem } from "@/gql/graphql";
 import {
+  type CartAddressResponse,
   PaymentMethodEnum,
   type CartSummaryField,
   type ProductsResponse,
@@ -301,4 +303,22 @@ export function getParsedErrorMessage(
     : [fallbackMessage];
 
   return parsedMessages;
+}
+
+export async function updateCartAddress(
+  cartId: string,
+  addressId: string,
+  addressTypeId: string,
+  cartAddress?: CartAddressResponse[] | null
+) {
+  const isCartAddressAssigned =
+    Array.isArray(cartAddress) && cartAddress.length > 0;
+
+  if (!!addressId && !!addressTypeId && !isCartAddressAssigned) {
+    await saveCartAddressAction({
+      cart: cartId,
+      address: addressId,
+      addressType: addressTypeId,
+    });
+  }
 }

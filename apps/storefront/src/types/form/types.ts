@@ -215,3 +215,7 @@ export const cartAddressFormSchema = z.object({
     .uuid("Address Type ID is required"),
 });
 export type CartAddressForm = z.infer<typeof cartAddressFormSchema>;
+
+export type ActionCommonArgs = {
+  revalidate?: boolean;
+};

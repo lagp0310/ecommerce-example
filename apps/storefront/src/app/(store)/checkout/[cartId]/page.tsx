@@ -8,10 +8,11 @@ import { SectionTitle } from "@/components/ui/common/section-title";
 import { getCart as getCartQuery } from "@/gql/queries/cart/queries";
 import { callDatabaseFunction } from "@/lib/call-database-function";
 import { queryGraphql } from "@/lib/server-query";
-import { cn, getCartSummaryItems } from "@/lib/utils";
+import { cn, getCartSummaryItems, updateCartAddress } from "@/lib/utils";
 import type {
   AddressTypesResponse,
   BaseAccordionItem,
+  CartAddressResponse,
   CartResponse,
   CartSummaryField,
   CustomerResponse,
@@ -56,6 +57,7 @@ import { WarnOnModifiedFormContextProvider } from "@/context/warn-on-modified-fo
 import { getCustomer as getCustomerQuery } from "@/gql/queries/customer/queries";
 import { getFormCustomerAddress } from "@/gql/queries/customer-address/queries";
 import { AddressType } from "@/types/form/types";
+import { allCartAddresses } from "@/gql/queries/cart-address/queries";
 
 export default async function Checkout({
   params,
@@ -74,6 +76,9 @@ export default async function Checkout({
 
   // FIXME: The user should have permissions to get this cart.
   // FIXME: The user should have permissions to get customer/customer addresses objects.
+  // FIXME: Try to simplify this. Countries, Country States and Addresses are fetched twice.
+  // Think of a way to avoid filtering or modifying objects or arrays in the frontend and get
+  // the same output here.
   const [
     cart,
     storePaymentMethods,
@@ -88,6 +93,8 @@ export default async function Checkout({
     shippingCustomerAddresses,
     billingAddress,
     shippingAddress,
+    cartBillingAddress,
+    cartShippingAddress,
   ] = await Promise.all([
     queryGraphql<CartResponse[]>(
       "cartsCollection",
@@ -173,7 +180,58 @@ export default async function Checkout({
           "no-cache"
         )
       : null,
+    !!billingAddressId
+      ? queryGraphql<CartAddressResponse[]>(
+          "cartAddressCollection",
+          allCartAddresses,
+          {
+            filter: { cart: { eq: cartId }, address: { eq: billingAddressId } },
+          },
+          "no-cache"
+        )
+      : null,
+    !!shippingAddressId
+      ? queryGraphql<CartAddressResponse[]>(
+          "cartAddressCollection",
+          allCartAddresses,
+          {
+            filter: {
+              cart: { eq: cartId },
+              address: { eq: shippingAddressId },
+            },
+          },
+          "no-cache"
+        )
+      : null,
   ]);
+
+  if (billingAddress) {
+    const billingAddressTypeId = customerAddressTypes?.find(
+      ({ type }) => type.toLowerCase() === AddressType.BILLING.toLowerCase()
+    )?.id;
+    if (!!billingAddressId && !!billingAddressTypeId) {
+      await updateCartAddress(
+        cartId,
+        billingAddressId,
+        billingAddressTypeId,
+        cartBillingAddress
+      );
+    }
+  }
+  if (shippingAddress) {
+    const shippingAddressTypeId = customerAddressTypes?.find(
+      ({ type }) => type.toLowerCase() === AddressType.SHIPPING.toLowerCase()
+    )?.id;
+    if (!!shippingAddressId && !!shippingAddressTypeId) {
+      await updateCartAddress(
+        cartId,
+        shippingAddressId,
+        shippingAddressTypeId,
+        cartShippingAddress
+      );
+    }
+  }
+
   const lineItems = cart
     ?.at(0)
     ?.lineItemsCollection?.edges?.map(({ node }) => node);

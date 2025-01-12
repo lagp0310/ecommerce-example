@@ -1,7 +1,7 @@
 create table
   public.categories (
     id uuid not null default gen_random_uuid (),
-    name character varying not null,
+    name TEXT not null,
     description text null,
     store uuid null,
     image_url text null,

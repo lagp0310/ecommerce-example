@@ -1,8 +1,8 @@
 create table
   public.customers (
     id uuid not null default gen_random_uuid (),
-    first_name character varying not null,
-    last_name character varying not null,
+    first_name TEXT not null,
+    last_name TEXT not null,
     created_at timestamp with time zone not null default (now() at time zone 'utc'::text),
     updated_at timestamp with time zone null,
     birth_date date null,

@@ -1,7 +1,7 @@
 create table
   public.stores (
     id uuid not null default gen_random_uuid (),
-    name character varying not null,
+    name TEXT not null,
     description text null,
     business uuid not null,
     created_at timestamp with time zone not null default (now() at time zone 'utc'::text),

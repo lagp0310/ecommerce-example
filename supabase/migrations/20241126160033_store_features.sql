@@ -1,8 +1,8 @@
 create table
   public.store_features (
     id uuid not null default gen_random_uuid (),
-    title character varying not null,
-    description character varying null,
+    title TEXT not null,
+    description TEXT null,
     icon_name text null,
     created_at timestamp with time zone not null default (now() at time zone 'utc'::text),
     updated_at timestamp with time zone null,

@@ -1,11 +1,11 @@
 create table
   public.image_banners (
     id uuid not null default gen_random_uuid (),
-    title character varying null,
-    header character varying not null,
-    header_remark character varying null,
-    description character varying null,
-    cta_text character varying null,
+    title TEXT null,
+    header TEXT not null,
+    header_remark TEXT null,
+    description TEXT null,
+    cta_text TEXT null,
     cta_url text null,
     banner_type uuid not null,
     created_at timestamp with time zone not null default (now() at time zone 'utc'::text),

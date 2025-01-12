@@ -1,11 +1,11 @@
 create table
   public.currencies (
     id uuid not null default gen_random_uuid (),
-    three_letter_code character varying not null,
+    three_letter_code TEXT not null,
     created_at timestamp with time zone not null default (now() at time zone 'utc'::text),
     updated_at timestamp with time zone null,
-    name character varying not null,
-    numeric_id character varying not null,
+    name TEXT not null,
+    numeric_id TEXT not null,
     symbol text null,
     constraint currencies_pkey primary key (id),
     constraint currencies_three_letter_code_key unique (three_letter_code),

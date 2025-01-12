@@ -1,7 +1,7 @@
 create table
   public.coupon_codes (
     id uuid not null default gen_random_uuid (),
-    code character varying not null,
+    code TEXT not null,
     store uuid not null,
     created_at timestamp with time zone not null default (now() at time zone 'utc'::text),
     updated_at timestamp with time zone null,

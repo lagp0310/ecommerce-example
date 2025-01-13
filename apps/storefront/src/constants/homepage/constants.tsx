@@ -250,10 +250,8 @@ export const popularProductsCarouselProviderProps: CarouselProviderCustomProps =
 export const popularProductsCarouselRendererProps: CarouselRendererProps = {
   mobileMediaQuery: "(max-width: 768px)",
   carouselSliderProps: {
-    className:
-      "h-60 min-[400px]:h-72 min-[500px]:h-80 min-[580px]:h-[350px] sm:h-[300px]",
-    classNameTray:
-      "h-60 min-[400px]:h-72 min-[500px]:h-80 min-[580px]:h-[350px] sm:h-[300px]",
+    className: "h-60 min-[450px]:h-72 min-[580px]:h-[300px]",
+    classNameTray: "h-60 min-[450px]:h-72 min-[580px]:h-[300px]",
   },
 };
 export const hotDealsCarouselProviderProps: CarouselProviderCustomProps = {
@@ -280,10 +278,8 @@ export const hotDealsCarouselProviderProps: CarouselProviderCustomProps = {
 export const hotDealsCarouselRendererProps: CarouselRendererProps = {
   mobileMediaQuery: "(max-width: 768px)",
   carouselSliderProps: {
-    className:
-      "h-60 min-[400px]:h-72 min-[500px]:h-80 min-[580px]:h-[350px] sm:h-[300px]",
-    classNameTray:
-      "h-60 min-[400px]:h-72 min-[500px]:h-80 min-[580px]:h-[350px] sm:h-[300px]",
+    className: "h-60 min-[450px]:h-72 min-[580px]:h-[300px]",
+    classNameTray: "h-60 min-[450px]:h-72 min-[580px]:h-[300px]",
   },
 };
 export const featuredProductsCarouselProviderProps: CarouselProviderCustomProps =
@@ -311,10 +307,8 @@ export const featuredProductsCarouselProviderProps: CarouselProviderCustomProps 
 export const featuredProductsCarouselRendererProps: CarouselRendererProps = {
   mobileMediaQuery: "(max-width: 768px)",
   carouselSliderProps: {
-    className:
-      "h-60 min-[400px]:h-72 min-[500px]:h-80 min-[580px]:h-[350px] sm:h-[300px]",
-    classNameTray:
-      "h-60 min-[400px]:h-72 min-[500px]:h-80 min-[580px]:h-[350px] sm:h-[300px]",
+    className: "h-60 min-[450px]:h-72 min-[580px]:h-[300px]",
+    classNameTray: "h-60 min-[450px]:h-72 min-[580px]:h-[300px]",
   },
 };
 export const testimonialsCarouselProviderProps: CarouselProviderCustomProps = {

@@ -63,7 +63,7 @@ export function ProductCarouselSection({
           </div>
         </div>
       </SectionTitle>
-      <SectionContent className="w-full max-w-7xl md:grid md:grid-cols-3 md:gap-6 lg:grid-cols-5">
+      <SectionContent className="w-full max-w-7xl md:grid md:grid-cols-3 min-[900px]:grid-cols-4 md:gap-6 lg:grid-cols-5">
         <CarouselProvider {...carouselProviderProps}>
           <CarouselRenderer {...carouselRendererProps}>
             {products.map((product, index) => (
@@ -73,7 +73,10 @@ export function ProductCarouselSection({
                 innerClassName="px-1 mx-auto"
                 mobileMediaQuery="(max-width: 768px)"
               >
-                <BasicProductCard product={product} cardClassname="mt-2" />
+                <BasicProductCard
+                  product={product}
+                  cardClassname="mt-2 md:mt-0"
+                />
               </SlideRenderer>
             ))}
           </CarouselRenderer>

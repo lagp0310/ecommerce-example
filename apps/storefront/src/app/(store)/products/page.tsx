@@ -290,7 +290,11 @@ export default async function Products({
               {hasProducts ? (
                 products.map((product, index) => (
                   <div key={index} className="col-span-1 row-span-1">
-                    <BasicProductCard key={index} product={product} />
+                    <BasicProductCard
+                      key={index}
+                      product={product}
+                      imageClassName="max-h-[180px] min-[400px]:max-h-[180px]"
+                    />
                   </div>
                 ))
               ) : (

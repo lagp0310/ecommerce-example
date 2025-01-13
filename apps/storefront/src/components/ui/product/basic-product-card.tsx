@@ -20,6 +20,7 @@ type Props = React.HTMLProps<HTMLDivElement> & {
   product: TProduct;
   shouldShowProductTags?: boolean;
   shouldUseNextLink?: boolean;
+  imageClassName?: string;
 };
 
 export function BasicProductCard({
@@ -41,6 +42,7 @@ export function BasicProductCard({
   },
   shouldShowProductTags = true,
   shouldUseNextLink = true,
+  imageClassName,
 }: Props) {
   const product = {
     id,
@@ -83,7 +85,10 @@ export function BasicProductCard({
           alt={name}
           width={180}
           height={180}
-          className="mt-6 w-full md:mt-2 max-h-[110px] min-[400px]:max-h-[120px] min-[450px]:max-h-[150px] md:h-full md:max-h-full object-contain"
+          className={cn(
+            "mt-6 w-full md:mt-2 max-h-[110px] min-[400px]:max-h-[120px] min-[450px]:max-h-[150px] md:h-full md:max-h-full object-contain",
+            imageClassName
+          )}
         />
       ) : null}
       <div className="flex flex-1 flex-row items-end">

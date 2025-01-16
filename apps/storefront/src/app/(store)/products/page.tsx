@@ -12,6 +12,7 @@ import type {
   GetProductIdsByCategoriesResponse,
   GetProductIdsByTagsResponse,
   GetProductsMaxPriceResponse,
+  ProductPageSearchParams,
   ProductsResponse,
 } from "@/types/types";
 import { DropdownSelector } from "@/components/ui/common/dropdown-selector";
@@ -50,7 +51,7 @@ import type {
 export default async function Products({
   searchParams,
 }: {
-  searchParams: Promise<{ [key: string]: string | undefined }>;
+  searchParams: Promise<ProductPageSearchParams>;
 }) {
   const {
     page,
@@ -62,6 +63,7 @@ export default async function Products({
     minRating,
     tags: tagsSearchParam,
   } = await searchParams;
+
   const [
     categories,
     tags,

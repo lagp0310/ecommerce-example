@@ -373,3 +373,14 @@ export type OrderResponse = Omit<
 export type OrderCreationResponse = Omit<OrderInsertResult, "records"> & {
   records: OrderResponse;
 };
+
+export type ProductPageSearchParams = {
+  categories?: string;
+  maxPrice?: string;
+  minRating?: string;
+  page?: string;
+  perPage?: string;
+  sortBy?: string;
+  sortByDirection?: string;
+  tags?: string;
+};

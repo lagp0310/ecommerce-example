@@ -15,7 +15,7 @@ import {
 import type { TProduct } from "@/types/types";
 import { defaultCurrencySymbol } from "@/constants/constants";
 
-type Props = React.HTMLProps<HTMLDivElement> & {
+export type Props = React.HTMLProps<HTMLDivElement> & {
   cardClassname?: string;
   product: TProduct;
   shouldShowProductTags?: boolean;
@@ -146,7 +146,7 @@ export function BasicProductCard({
             {productNode}
           </ClientLink>
           <div className="relative">
-            <div className="absolute bottom-6 right-3 flex-1 flex-row items-center justify-end">
+            <div className="absolute bottom-3 min-[400px]:bottom-6 right-3 flex-1 flex-row items-center justify-end">
               <AddToCartWrapper {...addToCartWrapperProps}>
                 <ShoppingBagIcon className="size-4 text-gray-900 group-hover:text-white group-disabled:group-hover:text-gray-900" />
               </AddToCartWrapper>

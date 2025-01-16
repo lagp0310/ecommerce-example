@@ -6,7 +6,6 @@ import { DefaultDotGroup } from "@/components/carousel/default-dot-group";
 import { DotsRenderer } from "@/components/carousel/dots-renderer";
 import { SlideRenderer } from "@/components/carousel/slide-renderer";
 import { CategoryCard } from "@/components/ui/category/category-card";
-import { HomepageCustomerTestimonial } from "@/components/ui/customer/homepage-customer-testimonial";
 import { Section } from "@/components/ui/common/section";
 import { SectionContent } from "@/components/ui/common/section-content";
 import { SectionTitle } from "@/components/ui/common/section-title";
@@ -15,12 +14,10 @@ import { StoreHighlights } from "@/components/ui/store/store-highlights";
 import { SummarizedProductCard } from "@/components/ui/product/summarized-product-card";
 import { StoreHighlightIcon } from "@/constants/constants";
 import discountBanner from "@/public/images/discount-banner.png";
-import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/24/outline";
+import { ArrowRightIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import { ButtonNextRenderer } from "@/components/carousel/button-next-renderer";
-import { ButtonBackRenderer } from "@/components/carousel/button-back-renderer";
 import { ProductCarouselSection } from "@/components/ui/product/product-carousel-section";
 import { queryGraphql } from "@/lib/server-query";
 import { allCategories } from "@/gql/queries/category/queries";
@@ -33,7 +30,6 @@ import {
   categoriesCarouselProviderProps,
   categoriesCarouselRendererProps,
   categoriesToShow,
-  customerTestimonial,
   featuredProductsCarouselProviderProps,
   featuredProductsCarouselRendererProps,
   featuredProductsToShow,
@@ -52,9 +48,6 @@ import {
   popularProductsCarouselRendererProps,
   popularProductsToShow,
   storeHighlightsToShow,
-  testimonialsCarouselProviderProps,
-  testimonialsCarouselRendererProps,
-  totalCustomerTestimonials,
 } from "@/constants/homepage/constants";
 import type {
   CategoryResponse,
@@ -386,7 +379,7 @@ export default async function Home() {
           carouselRendererProps={featuredProductsCarouselRendererProps}
           products={featuredProducts}
         />
-        <div className="w-full bg-[#F7F7F7] px-6 py-[60px] xl:px-0">
+        {/* <div className="w-full bg-[#F7F7F7] px-6 py-[60px] xl:px-0">
           <div className="flex flex-1 flex-row md:justify-center">
             <CarouselProvider {...testimonialsCarouselProviderProps}>
               <Section className="flex max-w-7xl flex-1 flex-col gap-y-8">
@@ -432,7 +425,7 @@ export default async function Home() {
               </Section>
             </CarouselProvider>
           </div>
-        </div>
+        </div> */}
         <div className="w-full px-6 xl:px-0">
           <div className="flex flex-1 flex-row md:justify-center">
             <Section className="flex w-full max-w-7xl flex-1 flex-col gap-y-8 pb-[60px]">

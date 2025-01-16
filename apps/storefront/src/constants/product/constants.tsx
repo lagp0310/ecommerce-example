@@ -56,16 +56,15 @@ export const relatedProductsCarouselProviderProps: (
   infinite: true,
   visibleSlides: 2,
   renderInDesktop: true,
-  className:
-    "w-full h-64 min-[420px]:h-72 min-[500px]:h-80 min-[580px]:h-[350px] sm:h-[300px] md:h-64 min-[860px]:h-72 lg:h-80 min-[1100px]:h-[350px] xl:h-80 mb-16",
+  className: "w-full h-[350px] min-[450px]:h-96",
   mobileMediaQuery: "(max-width: 768px)",
   visibleSlidesSm: { mediaQuery: "(max-width: 640px)", visibleSlides: 2 },
   visibleSlidesMd: {
-    mediaQuery: "(min-width: 641px) and (max-width: 768px)",
+    mediaQuery: "(min-width: 641px) and (max-width: 1024px)",
     visibleSlides: 3,
   },
   visibleSlidesLg: {
-    mediaQuery: "(min-width: 769px) and (max-width: 1280px)",
+    mediaQuery: "(min-width: 1025px) and (max-width: 1280px)",
     visibleSlides: 4,
   },
   visibleSlidesXl: {
@@ -77,10 +76,8 @@ export const relatedProductsCarouselRendererProps: CarouselRendererProps = {
   mobileMediaQuery: "(max-width: 768px)",
   renderInDesktop: true,
   carouselSliderProps: {
-    className:
-      "h-64 min-[420px]:h-72 min-[500px]:h-80 min-[580px]:h-[350px] sm:h-[300px] md:h-64 min-[860px]:h-72 lg:h-80 min-[1100px]:h-[350px] xl:h-80",
-    classNameTray:
-      "h-64 min-[420px]:h-72 min-[500px]:h-80 min-[580px]:h-[350px] sm:h-[300px] md:h-64 min-[860px]:h-72 lg:h-80 min-[1100px]:h-[350px] xl:h-80",
+    className: "h-60 min-[400px]:h-64 min-[450px]:h-72",
+    classNameTray: "h-60 min-[400px]:h-64 min-[450px]:h-72",
   },
 };
 

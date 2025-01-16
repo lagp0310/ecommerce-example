@@ -1,16 +1,8 @@
-import { CarouselProvider } from "@/components/carousel/carousel-provider";
-import { CarouselRenderer } from "@/components/carousel/carousel-renderer";
-import { DefaultDotGroup } from "@/components/carousel/default-dot-group";
-import { DotsRenderer } from "@/components/carousel/dots-renderer";
-import { SlideRenderer } from "@/components/carousel/slide-renderer";
-import { Section } from "@/components/ui/common/section";
-import { SectionContent } from "@/components/ui/common/section-content";
-import { SectionTitle } from "@/components/ui/common/section-title";
 import {
   AddToCartWrapper,
   type Props as AddToCartWrapperProps,
 } from "@/components/ui/product/add-to-cart-wrapper";
-import { BasicProductCard } from "@/components/ui/product/basic-product-card";
+import { ProductCarouselSection } from "@/components/ui/product/product-carousel-section";
 import {
   ProductPricing,
   type Props as ProductPricingProps,
@@ -24,7 +16,6 @@ import {
   defaultSortByDirection,
 } from "@/constants/constants";
 import {
-  defaultProductsSearchParams,
   relatedProductsCarouselProviderProps,
   relatedProductsCarouselRendererProps,
   relatedProductsToShow,
@@ -34,14 +25,9 @@ import { env } from "@/lib/env";
 import { queryGraphql } from "@/lib/server-query";
 import { cn, parseProductTags } from "@/lib/utils";
 import type { ProductsResponse, TProduct } from "@/types/types";
-import {
-  ArrowRightIcon,
-  ShoppingBagIcon,
-  StarIcon,
-} from "@heroicons/react/24/outline";
+import { ShoppingBagIcon, StarIcon } from "@heroicons/react/24/outline";
 import { StarIcon as FilledStarIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
-import Link from "next/link";
 import React from "react";
 
 export default async function Product({
@@ -197,55 +183,23 @@ export default async function Product({
           </div>
         </div>
       </div>
-      {/* TODO: We could use the same section component from homepage instead. */}
-      <Section className="flex w-full flex-1 flex-col items-center gap-y-8 px-6 xl:px-0">
-        <SectionTitle className="w-full max-w-7xl">
-          <div className="flex flex-1 flex-row">
-            <h2 className="text-body-xl font-semibold text-gray-900 md:text-heading-5">
-              Related Products
-            </h2>
-            <div className="flex flex-1 flex-row justify-end">
-              <Link
-                href={`/products?${defaultProductsSearchParams.toString()}`}
-                className="flex flex-row items-center justify-end gap-x-2 text-body-medium font-medium text-primary"
-              >
-                View All
-                <ArrowRightIcon className="size-4 text-primary" />
-              </Link>
-            </div>
-          </div>
-        </SectionTitle>
-        <SectionContent className="w-full max-w-7xl">
-          <CarouselProvider
-            {...relatedProductsCarouselProviderProps(
-              relatedProducts?.length ?? 0
-            )}
-          >
-            <CarouselRenderer {...relatedProductsCarouselRendererProps}>
-              {relatedProducts?.map((product, index) => (
-                <SlideRenderer
-                  key={index}
-                  index={index}
-                  innerClassName="px-1 mx-auto"
-                  mobileMediaQuery="(max-width: 768px)"
-                  renderInDesktop
-                >
-                  <BasicProductCard
-                    product={product}
-                    cardClassname="max-w-fit mt-2"
-                  />
-                </SlideRenderer>
-              ))}
-            </CarouselRenderer>
-            <DotsRenderer mobileMediaQuery="(max-width: 768px)" renderInDesktop>
-              <DefaultDotGroup
-                disableActiveDots
-                className="mt-7 flex w-full flex-1 flex-row items-center justify-center gap-x-1"
-              />
-            </DotsRenderer>
-          </CarouselProvider>
-        </SectionContent>
-      </Section>
+      <ProductCarouselSection
+        sectionTitle="Related Products"
+        carouselProviderProps={relatedProductsCarouselProviderProps(
+          relatedProducts?.length ?? 0
+        )}
+        carouselRendererProps={relatedProductsCarouselRendererProps}
+        products={relatedProducts}
+        sectionClassName="w-full max-w-7xl"
+        sectionContentClassName="grid-cols-none grid-rows-none md:block md:grid-cols-none lg:grid-cols-none min-[900px]:grid-cols-none"
+        additionalProductProps={{
+          cardClassname: "mt-2 md:mt-0",
+          imageClassName:
+            "max-h-28 min-[400px]:max-h-32 md:max-h-full md:max-h-44",
+        }}
+        additionalSlideProps={{ renderInDesktop: true }}
+        additionalDotsProps={{ renderInDesktop: true }}
+      />
     </div>
   );
 }

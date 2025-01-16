@@ -137,3 +137,5 @@ export const availableStateIds = [
   "e9036bd6-176d-4af4-9245-89420d00464f",
   "fa474cac-ab81-4a06-a581-ee595bbc6c8c",
 ];
+
+export const maxAllowedLineItemsCount = 9;

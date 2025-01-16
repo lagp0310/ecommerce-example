@@ -31,6 +31,7 @@ import { getCartSummaryItems, lineItemsQuantityCounter } from "@/lib/utils";
 import { CartSummary } from "@/components/ui/cart/cart-summary";
 import { CartSummaryItem } from "@/components/ui/cart/cart-summary-item";
 import type { CartSummaryField } from "@/types/types";
+import { maxAllowedLineItemsCount } from "@/constants/constants";
 
 type Props = {
   sheetProps?: DialogProps;
@@ -94,6 +95,11 @@ export function SidebarCartWrapper({
         : 0,
     [lineItems]
   );
+  const cartProductsCountText = React.useMemo(
+    () =>
+      cartProductsCount > maxAllowedLineItemsCount ? "9+" : cartProductsCount,
+    [cartProductsCount]
+  );
 
   const cartTotalSummary: CartSummaryField[] = React.useMemo(
     () =>
@@ -119,8 +125,8 @@ export function SidebarCartWrapper({
   return (
     <CartSheet {...sheetProps} open={isOpen} onOpenChange={setIsOpen}>
       <div className="relative">
-        <div className="absolute -top-2.5 left-3 flex size-5 flex-1 flex-row items-center justify-center rounded-full bg-primary text-body-tiny font-normal text-white">
-          {cartProductsCount}
+        <div className="absolute -top-2.5 left-3 flex size-5 flex-1 flex-row items-center justify-center rounded-full bg-primary text-[10px] font-normal text-white">
+          {cartProductsCountText}
         </div>
         {sheetTrigger}
       </div>

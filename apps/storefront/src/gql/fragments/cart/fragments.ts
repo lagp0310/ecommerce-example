@@ -14,7 +14,7 @@ export const cartFragment = gql`
       currencyCode: three_letter_code
       symbol
     }
-    lineItemsCollection: line_itemsCollection {
+    lineItemsCollection: line_itemsCollection(orderBy: $lineItemsOrderBy) {
       edges {
         node {
           ...LineItemFragment

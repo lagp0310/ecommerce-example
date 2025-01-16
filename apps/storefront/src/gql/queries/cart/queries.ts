@@ -10,6 +10,7 @@ export const getCart = gql`
     $offset: Int
     $filter: cartsFilter
     $orderBy: [cartsOrderBy!]
+    $lineItemsOrderBy: [line_itemsOrderBy!]
   ) {
     cartsCollection(
       first: $first

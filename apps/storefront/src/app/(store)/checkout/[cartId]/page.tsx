@@ -101,6 +101,7 @@ export default async function Checkout({
       getCartQuery,
       {
         filter: { id: { eq: cartId } },
+        lineItemsOrderBy: { created_at: "AscNullsLast" },
       },
       "no-cache"
     ),

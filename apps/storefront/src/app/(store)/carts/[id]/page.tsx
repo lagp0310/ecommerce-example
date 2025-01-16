@@ -38,6 +38,7 @@ export default async function Cart({
       getCartQuery,
       {
         filter: { id: { eq: cartId } },
+        lineItemsOrderBy: { created_at: "AscNullsLast" },
       },
       "no-cache"
     ),

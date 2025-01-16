@@ -90,15 +90,19 @@ export function CartContextProvider({ children, currentCart = null }: Props) {
   const [summaryData, setSummaryData] =
     React.useState<CartSummary>(initialCartSummary);
   const [getCart] = useLazyQuery<ClientCartResponse>(getCartQuery);
-  React.useEffect(() => {
-    if (!!cart) {
-      return;
-    }
 
+  const refetchCart = React.useCallback(async () => {
     const cartId = window.localStorage.getItem(localStorageCartIdItemName);
     if (typeof cartId === "string" && isUUID(cartId)) {
-      getCart({ variables: { filter: { id: { eq: cartId } } } })
+      getCart({
+        fetchPolicy: "no-cache",
+        variables: {
+          filter: { id: { eq: cartId } },
+          lineItemsOrderBy: { created_at: "AscNullsLast" },
+        },
+      })
         .then(({ data }) => {
+          console.log(data);
           const cartNode = data?.cartsCollection?.edges?.at(0)?.node;
           const lineItemsNodes = (
             cartNode?.lineItemsCollection?.edges as LineItemEdge[]
@@ -115,7 +119,19 @@ export function CartContextProvider({ children, currentCart = null }: Props) {
           throw new Error(error);
         });
     }
-  }, [cart, getCart]);
+  }, [getCart]);
+
+  React.useEffect(() => {
+    if (!!cart) {
+      return;
+    }
+
+    refetchCart()
+      .then(null)
+      .catch((error) => {
+        throw new Error(error);
+      });
+  }, [cart, getCart, refetchCart]);
 
   React.useEffect(() => {
     if (!cart?.id) {
@@ -211,15 +227,13 @@ export function CartContextProvider({ children, currentCart = null }: Props) {
             product: product.id,
           },
         ];
-        const { data: lineItemsData } = await mutateCreateLineItems({
+        await mutateCreateLineItems({
           variables: {
             lineItems,
           },
         });
 
-        const newLineItem =
-          lineItemsData?.insertIntoLineItemsCollection?.records?.at(0);
-        setLineItems((lineItems) => lineItems.concat(newLineItem));
+        await refetchCart();
 
         toast({
           duration: 5000,
@@ -233,7 +247,7 @@ export function CartContextProvider({ children, currentCart = null }: Props) {
         console.error(error);
       }
     },
-    [cart?.id, mutateCreateCart, mutateCreateLineItems, toast]
+    [cart?.id, mutateCreateCart, mutateCreateLineItems, refetchCart, toast]
   );
 
   const handleDeleteLineItem = React.useCallback(
@@ -245,9 +259,7 @@ export function CartContextProvider({ children, currentCart = null }: Props) {
           },
         });
 
-        setLineItems((lineItems) =>
-          lineItems.filter(({ id }) => id != lineItemId)
-        );
+        await refetchCart();
 
         if (showToast) {
           toast({
@@ -259,7 +271,7 @@ export function CartContextProvider({ children, currentCart = null }: Props) {
         console.error(error);
       }
     },
-    [mutateDeleteLineItems, toast]
+    [mutateDeleteLineItems, refetchCart, toast]
   );
 
   const handleUpdateQuantity = React.useCallback(
@@ -284,18 +296,14 @@ export function CartContextProvider({ children, currentCart = null }: Props) {
               : product.price,
           product: product.id,
         };
-        const { data: lineItemsData } = await mutateUpdateLineItems({
+        await mutateUpdateLineItems({
           variables: {
             filter: { id: { eq: lineItemId } },
             lineItems,
           },
         });
 
-        const updatedLineItem =
-          lineItemsData?.updateLineItemsCollection?.records?.at(0);
-        setLineItems((lineItems) =>
-          lineItems.filter(({ id }) => id != lineItemId).concat(updatedLineItem)
-        );
+        await refetchCart();
 
         toast({
           duration: 5000,
@@ -305,7 +313,7 @@ export function CartContextProvider({ children, currentCart = null }: Props) {
         console.error(error);
       }
     },
-    [cart, handleDeleteLineItem, mutateUpdateLineItems, toast]
+    [cart, handleDeleteLineItem, mutateUpdateLineItems, refetchCart, toast]
   );
 
   const isLoading = React.useMemo(

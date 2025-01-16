@@ -102,7 +102,6 @@ export function CartContextProvider({ children, currentCart = null }: Props) {
         },
       })
         .then(({ data }) => {
-          console.log(data);
           const cartNode = data?.cartsCollection?.edges?.at(0)?.node;
           const lineItemsNodes = (
             cartNode?.lineItemsCollection?.edges as LineItemEdge[]

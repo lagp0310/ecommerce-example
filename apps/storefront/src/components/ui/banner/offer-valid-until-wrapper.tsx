@@ -14,6 +14,7 @@ export function OfferValidUntilWrapper({
   ctaText,
   ctaUrl,
   header,
+  validUntil,
 }: Props) {
   return (
     <React.Fragment>
@@ -36,6 +37,7 @@ export function OfferValidUntilWrapper({
         <div className="flex flex-1 flex-row gap-x-2 pb-2">
           <div className="flex flex-1 flex-col gap-y-2">
             <BannerCountdownWrapper
+              validUntil={validUntil}
               className="flex flex-1 flex-row gap-x-4"
               semicolonClasses="font-normal text-body-xxl leading-[120%] text-white/60"
               timeClasses="font-normal text-body-xxl text-white uppercase"

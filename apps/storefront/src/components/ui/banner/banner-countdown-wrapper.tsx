@@ -9,23 +9,21 @@ import { cn } from "@/lib/utils";
 
 dayjs.extend(utcPlugin);
 
-const defaultOfferEndDate = dayjs().add(6, "hours").toDate();
-
 type Props = React.HTMLProps<HTMLDivElement> & {
-  endDate?: Date;
+  validUntil?: string;
   semicolonClasses?: React.HTMLProps<HTMLDivElement>["className"];
   timeClasses?: React.HTMLProps<HTMLSpanElement>["className"];
   timeUnitClasses?: React.HTMLProps<HTMLSpanElement>["className"];
 };
 
 export function BannerCountdownWrapper({
-  endDate = defaultOfferEndDate,
+  validUntil,
   semicolonClasses,
   timeClasses,
   timeUnitClasses,
   ...props
 }: Props) {
-  const countdownObject = useCountdown(endDate);
+  const countdownObject = useCountdown(dayjs(validUntil).toDate());
   const countdownEntries = Object.entries(countdownObject);
   const countdownTimers = Object.keys(countdownObject).length;
 

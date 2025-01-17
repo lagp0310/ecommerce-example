@@ -19,10 +19,13 @@ import { CartProductActions } from "@/components/ui/cart/cart-product-actions";
 import { DeleteProductButton } from "@/components/ui/cart/delete-product-button";
 import Link from "next/link";
 import isURL from "validator/es/lib/isURL";
+import { useCart } from "@/context/cart-context";
 
 type Props = { tableData: LineItemWithProduct[] };
 
 export function CartTableWrapper({ ...props }: Props) {
+  const { getCartLineItemWeight } = useCart();
+
   const columnHelper = React.useMemo(
     () => createColumnHelper<CartTableColumns>(),
     []
@@ -115,11 +118,27 @@ export function CartTableWrapper({ ...props }: Props) {
             refreshAfterUpdate: true,
             hideAddToCart: true,
           };
+          const productWeight = product?.productWeight;
+          const weightUnitObject =
+            productWeight?.edges?.at(0)?.node?.weightUnit;
+          const currentWeight = getCartLineItemWeight(product.id);
+          const hasWeight = !!currentWeight && weightUnitObject;
+          const weightText = hasWeight
+            ? `${currentWeight}${weightUnitObject.unit}`
+            : null;
 
           return (
-            <AddToCartWrapper {...addToCartWrapperProps} product={product}>
-              <ShoppingBagIcon className="size-4 text-gray-900 group-hover:text-white group-disabled:group-hover:text-gray-900" />
-            </AddToCartWrapper>
+            <React.Fragment>
+              {hasWeight ? (
+                <span className="text-body-medium font-normal text-gray-900">
+                  {weightText}
+                </span>
+              ) : (
+                <AddToCartWrapper {...addToCartWrapperProps} product={product}>
+                  <ShoppingBagIcon className="size-4 text-gray-900 group-hover:text-white group-disabled:group-hover:text-gray-900" />
+                </AddToCartWrapper>
+              )}
+            </React.Fragment>
           );
         },
       }),
@@ -131,9 +150,15 @@ export function CartTableWrapper({ ...props }: Props) {
         ),
         cell: ({ row }) => {
           const quantity = row.original.quantity;
+          const weight = row.original.weight;
+          const priceBy = !!weight
+            ? weight
+            : !!quantity
+              ? parseInt(quantity)
+              : 1;
           const { discountedPrice, price, currencies } = row.original.products;
           const finalPrice = discountedPrice ?? price;
-          const productSubtotal = (finalPrice * parseInt(quantity)).toFixed(2);
+          const productSubtotal = (finalPrice * priceBy).toFixed(2);
           const currencyPrefix = currencies?.symbol ?? defaultCurrencySymbol;
           const prefixedSubtotal = `${currencyPrefix}${productSubtotal}`;
 

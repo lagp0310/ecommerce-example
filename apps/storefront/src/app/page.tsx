@@ -153,7 +153,9 @@ export default async function Home() {
         <section className="grid w-full max-w-7xl gap-6 lg:grid-cols-3 lg:grid-rows-2">
           {/* FIXME: While carousels are loaded (client component) the server sends a basic HTML version which is
           a column-based slides. We can improve this by using a loader (skeleton) while the component loads. */}
-          <CarouselProvider {...headerBannerCarouselProviderProps}>
+          <CarouselProvider
+            {...headerBannerCarouselProviderProps(headerBanners?.length ?? 0)}
+          >
             <CarouselRenderer {...headerBannerCarouselRendererProps}>
               {headerBanners?.map(
                 (
@@ -312,7 +314,9 @@ export default async function Home() {
         />
         <Section className="mt-[60px] w-full px-6 md:mt-0 lg:flex lg:flex-1 lg:flex-col lg:items-center lg:gap-y-8 xl:px-0">
           <SectionContent className="w-full max-w-7xl lg:flex lg:flex-1 lg:flex-row lg:gap-x-6">
-            <CarouselProvider {...offerBannersCarouselProviderProps}>
+            <CarouselProvider
+              {...offerBannersCarouselProviderProps(offerBanners?.length ?? 0)}
+            >
               <CarouselRenderer {...offerBannersCarouselRendererProps}>
                 {offerBanners?.map(
                   (

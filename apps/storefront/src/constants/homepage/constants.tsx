@@ -1,5 +1,3 @@
-import { ClientLink } from "@/components/navigation/client-link";
-import { Banner } from "@/components/ui/banner/banner";
 import { BookOffBrandIcon } from "@/components/ui/icons/brands/book-off-brand";
 import { FoodCoUkBrandIcon } from "@/components/ui/icons/brands/food-co-uk-brand";
 import { FoodNetworkBrandIcon } from "@/components/ui/icons/brands/food-network-brand";
@@ -16,16 +14,6 @@ import {
   defaultSlideWidth,
   defaultCarouselInterval,
 } from "@/constants/constants";
-import Image from "next/image";
-import { ArrowRightIcon } from "@heroicons/react/24/outline";
-import headerBigBanner from "@/public/images/header-big-banner.png";
-import headerSecondBanner from "@/public/images/header-second-banner.png";
-import headerThirdBanner from "@/public/images/header-third-banner.png";
-import { BannerCountdownWrapper } from "@/components/ui/banner/banner-countdown-wrapper";
-import firstOfferBanner from "@/public/images/first-offer-banner.png";
-import secondOfferBanner from "@/public/images/second-offer-banner.png";
-import thirdOfferBanner from "@/public/images/third-offer-banner.png";
-import { defaultProductsSearchParams } from "@/constants/product/constants";
 
 export const storeHighlightsToShow = 4;
 export const popularProductsToShow = 10;
@@ -68,108 +56,19 @@ export const brandIcons = [
   />,
 ];
 
-export const headerBanners = [
-  <Banner key={0} className="relative rounded-ten md:col-span-2 md:row-span-2">
-    <Image
-      src={headerBigBanner}
-      alt="Header Banner"
-      placeholder="blur"
-      quality={100}
-      sizes="100vw"
-      className="h-[300px] w-full rounded-ten object-cover sm:h-[400px] lg:h-auto"
-    />
-    <div className="absolute left-0 top-0 size-full rounded-ten bg-gradient-to-br from-black/60 to-black/0"></div>
-    <div className="absolute top-0 flex h-full flex-1 flex-col justify-center gap-y-2 px-6 md:gap-y-7 md:px-12">
-      <h2 className="text-body-xxl font-semibold text-white md:text-heading-2">
-        Fresh and Healthy Organic Food
-      </h2>
-      <div className="flex flex-col gap-y-2 border-l-2 border-primary pl-2">
-        <span className="text-body-small font-medium text-white md:text-body-xl">
-          Sale up to
-          <span className="ml-2 rounded-[5px] bg-warning px-3 py-1 font-semibold uppercase">
-            30% Off
-          </span>
-        </span>
-        <span className="text-body-tiny font-normal text-white md:text-body-small">
-          Free shipping on all your orders
-        </span>
-      </div>
-      <ClientLink
-        href={`/products?${defaultProductsSearchParams.toString()}`}
-        className="group flex max-w-fit flex-row items-center gap-x-2 rounded-full bg-white px-5 py-3 text-body-small font-semibold leading-[120%] text-primary hover:bg-primary hover:text-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none md:text-body-medium"
-      >
-        Shop now
-        <ArrowRightIcon className="size-4 text-primary group-hover:text-white" />
-      </ClientLink>
-    </div>
-  </Banner>,
-  <Banner key={1} className="relative col-span-1 rounded-ten">
-    <div className="absolute left-0 top-0 size-full rounded-ten bg-gradient-to-r from-white/60 via-white/50 to-white/30"></div>
-    <Image
-      src={headerSecondBanner}
-      alt="Second Header Banner"
-      placeholder="blur"
-      quality={100}
-      sizes="100vw"
-      className="h-[300px] w-full rounded-ten object-cover sm:h-[400px] lg:h-auto"
-    />
-    <div className="absolute left-0 top-0 flex h-full flex-1 flex-col justify-center gap-y-6 px-8">
-      <span className="text-body-small font-medium uppercase leading-[100%] text-gray-900">
-        Summer Sale
-      </span>
-      <h5 className="text-heading-5 font-semibold uppercase text-gray-900">
-        75% Off
-      </h5>
-      <span className="text-body-small font-normal text-gray-800">
-        Only Fruits and Vegetables
-      </span>
-      <ClientLink
-        href={`/products?${defaultProductsSearchParams.toString()}`}
-        className="group flex max-w-fit flex-row items-center gap-x-2 rounded-full bg-primary px-5 py-3 text-body-small font-semibold leading-[120%] text-white hover:bg-white hover:text-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none md:text-body-medium"
-      >
-        Shop now
-        <ArrowRightIcon className="size-4 text-white group-hover:text-primary" />
-      </ClientLink>
-    </div>
-  </Banner>,
-  <Banner key={2} className="relative col-span-1 rounded-ten">
-    <Image
-      src={headerThirdBanner}
-      alt="Third Header Banner"
-      placeholder="blur"
-      quality={100}
-      sizes="100vw"
-      className="h-[300px] w-full rounded-ten object-cover sm:h-[400px] lg:h-auto"
-    />
-    <div className="absolute left-0 top-0 size-full rounded-ten bg-green-gray-900/80"></div>
-    <div className="absolute left-0 top-0 flex size-full flex-1 flex-col items-center justify-center gap-y-6 px-6 md:gap-y-8 md:px-12">
-      <span className="text-center text-body-small font-medium uppercase leading-[100%] text-white">
-        Best Deal
-      </span>
-      <h5 className="line-clamp-2 text-center text-body-xxl font-semibold text-white md:text-heading-5">
-        Special Products of the Month
-      </h5>
-      <ClientLink
-        href={`/products?${defaultProductsSearchParams.toString()}`}
-        className="group flex max-w-fit flex-row items-center gap-x-2 rounded-full px-5 py-3 text-body-small font-semibold leading-[120%] text-primary hover:bg-white hover:text-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none md:text-body-medium"
-      >
-        Shop now
-        <ArrowRightIcon className="size-4 text-primary group-hover:text-primary" />
-      </ClientLink>
-    </div>
-  </Banner>,
-];
-export const headerBannerCarouselProviderProps: CarouselProviderCustomProps = {
+export const headerBannerCarouselProviderProps: (
+  totalSlides: number
+) => CarouselProviderCustomProps = (totalSlides) => ({
   naturalSlideHeight: defaultSlideHeight,
   naturalSlideWidth: defaultSlideWidth,
-  totalSlides: headerBanners.length,
+  totalSlides,
   interval: defaultCarouselInterval,
   isPlaying: true,
   infinite: true,
   visibleSlides: 1,
   className: "w-full h-[350px] sm:h-[450px]",
   mobileMediaQuery: "(max-width: 768px)",
-};
+});
 export const headerBannerCarouselRendererProps: CarouselRendererProps = {
   carouselSliderProps: {
     className: "h-80 sm:h-[430px]",
@@ -179,7 +78,7 @@ export const headerBannerCarouselRendererProps: CarouselRendererProps = {
 };
 export const highlightCarouselProviderProps: (
   totalSlides: number
-) => CarouselProviderCustomProps = (totalSlides: number) => ({
+) => CarouselProviderCustomProps = (totalSlides) => ({
   naturalSlideHeight: defaultSlideHeight,
   naturalSlideWidth: defaultSlideWidth,
   totalSlides,
@@ -341,128 +240,19 @@ export const testimonialsCarouselRendererProps: CarouselRendererProps = {
 };
 export const totalCustomerTestimonials = 6;
 
-export const offerBanners = [
-  <Banner
-    key={0}
-    className="relative flex flex-1 flex-col items-center gap-y-4"
-  >
-    <Image
-      src={firstOfferBanner}
-      alt="Offer Banner"
-      placeholder="blur"
-      quality={100}
-      sizes="100vw"
-      className="h-[500px] w-full rounded-ten object-cover lg:h-auto"
-    />
-    <div className="absolute left-0 top-10 flex h-[230px] w-full flex-1 flex-col items-center gap-y-4">
-      <span className="text-body-small font-normal uppercase leading-[100%] text-white">
-        Best Deals
-      </span>
-      <h3 className="text-center text-heading-4 font-semibold text-white md:text-heading-3">
-        Sale of the Month
-      </h3>
-      <div className="flex flex-1 flex-row gap-x-2 pb-2">
-        <div className="flex flex-1 flex-col gap-y-2">
-          <BannerCountdownWrapper
-            className="flex flex-1 flex-row gap-x-4"
-            semicolonClasses="font-normal text-body-xxl leading-[120%] text-white/60"
-            timeClasses="font-normal text-body-xxl text-white uppercase"
-            timeUnitClasses="font-normal text-body-tiny leading-[100%] text-white uppercase"
-          />
-        </div>
-      </div>
-      <div className="flex h-full flex-1 flex-row items-end">
-        <ClientLink
-          href={`${defaultProductsSearchParams.toString()}`}
-          className="group flex max-w-fit flex-row items-center gap-x-2 rounded-full bg-white px-5 py-3 text-body-small font-semibold leading-[120%] text-primary hover:bg-primary hover:text-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none md:text-body-medium"
-        >
-          Shop now{" "}
-          <ArrowRightIcon className="size-4 text-primary group-hover:text-white" />
-        </ClientLink>
-      </div>
-    </div>
-  </Banner>,
-  <Banner
-    key={1}
-    className="relative flex flex-1 flex-col items-center gap-y-4"
-  >
-    <Image
-      src={secondOfferBanner}
-      alt="Offer Banner"
-      placeholder="blur"
-      quality={100}
-      sizes="100vw"
-      className="h-[500px] w-full rounded-ten object-cover lg:h-auto"
-    />
-    <div className="absolute left-0 top-10 flex h-[230px] w-full flex-1 flex-col items-center gap-y-4">
-      <span className="text-body-small font-normal uppercase leading-[100%] text-white">
-        85% Fat Free
-      </span>
-      <h3 className="text-center text-heading-4 font-semibold text-white md:text-heading-3">
-        Low-Fat Meat
-      </h3>
-      <span className="text-white">
-        Starting at <span className="text-warning">$79.99</span>
-      </span>
-      <div className="flex h-full flex-1 flex-row items-end">
-        <ClientLink
-          href={`/products?${defaultProductsSearchParams.toString()}`}
-          className="group flex max-w-fit flex-row items-center gap-x-2 rounded-full bg-white px-5 py-3 text-body-small font-semibold leading-[120%] text-primary hover:bg-primary hover:text-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none md:text-body-medium"
-        >
-          Shop now{" "}
-          <ArrowRightIcon className="size-4 text-primary group-hover:text-white" />
-        </ClientLink>
-      </div>
-    </div>
-  </Banner>,
-  <Banner
-    key={2}
-    className="relative flex flex-1 flex-col items-center gap-y-4"
-  >
-    <Image
-      src={thirdOfferBanner}
-      alt="Offer Banner"
-      placeholder="blur"
-      quality={100}
-      sizes="100vw"
-      className="h-[500px] w-full rounded-ten object-cover lg:h-auto"
-    />
-    <div className="absolute left-0 top-10 flex h-[230px] w-full flex-1 flex-col items-center gap-y-4">
-      <span className="text-body-small font-normal uppercase leading-[100%] text-gray-900">
-        Summer Sale
-      </span>
-      <h3 className="text-center text-heading-4 font-semibold text-gray-900 md:text-heading-3">
-        100% Fresh Fruit
-      </h3>
-      <span className="text-body-xl font-medium text-gray-900">
-        Up to
-        <span className="ml-2 rounded-[5px] bg-gray-900 px-3 py-1 font-semibold uppercase text-[#FCC900]">
-          64% Off
-        </span>
-      </span>
-      <div className="flex h-full flex-1 flex-row items-end">
-        <ClientLink
-          href={`/products?${defaultProductsSearchParams.toString()}`}
-          className="group flex max-w-fit flex-row items-center gap-x-2 rounded-full bg-white px-5 py-3 text-body-small font-semibold leading-[120%] text-primary hover:bg-primary hover:text-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none md:text-body-medium"
-        >
-          Shop now{" "}
-          <ArrowRightIcon className="size-4 text-primary group-hover:text-white" />
-        </ClientLink>
-      </div>
-    </div>
-  </Banner>,
-];
-export const offerBannersCarouselProviderProps: CarouselProviderCustomProps = {
+export const offerBannersCarouselProviderProps: (
+  totalSlides: number
+) => CarouselProviderCustomProps = (totalSlides) => ({
   naturalSlideHeight: defaultSlideHeight,
   naturalSlideWidth: defaultSlideWidth,
-  totalSlides: offerBanners.length,
+  totalSlides,
   interval: defaultCarouselInterval,
   isPlaying: true,
   infinite: true,
   visibleSlides: 1,
   className: "w-full h-[500px]",
   mobileMediaQuery: "(max-width: 1024px)",
-};
+});
 export const offerBannersCarouselRendererProps: CarouselRendererProps = {
   mobileMediaQuery: "(max-width: 1024px)",
   carouselSliderProps: {

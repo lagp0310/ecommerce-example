@@ -9,10 +9,10 @@ import { CategoryCard } from "@/components/ui/category/category-card";
 import { Section } from "@/components/ui/common/section";
 import { SectionContent } from "@/components/ui/common/section-content";
 import { SectionTitle } from "@/components/ui/common/section-title";
-import { StoreHighlight } from "@/components/ui/store/store-highlight";
-import { StoreHighlights } from "@/components/ui/store/store-highlights";
+import { StoreFeature } from "@/components/ui/store/store-feature";
+import { StoreFeatures } from "@/components/ui/store/store-features";
 import { SummarizedProductCard } from "@/components/ui/product/summarized-product-card";
-import { StoreHighlightIcon } from "@/constants/constants";
+import { StoreFeatureIcon } from "@/constants/constants";
 import { ArrowRightIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import Link from "next/link";
@@ -27,7 +27,7 @@ import {
   cn,
   getHeaderBannerWrapper,
   getOfferBannerWrapper,
-  getStoreHighlightsIcon,
+  getStoreFeaturesIcon,
   parseProductTags,
 } from "@/lib/utils";
 import {
@@ -50,7 +50,7 @@ import {
   popularProductsCarouselProviderProps,
   popularProductsCarouselRendererProps,
   popularProductsToShow,
-  storeHighlightsToShow,
+  storeFeaturesToShow,
 } from "@/constants/homepage/constants";
 import type {
   CategoryResponse,
@@ -71,7 +71,7 @@ export default async function Home() {
     headerBanners,
     offerBanners,
     imageBanners,
-    storeHighlights,
+    storeFeatures,
     popularProductsResult,
     hotDealsProductsResult,
     featuredProductsResult,
@@ -105,7 +105,7 @@ export default async function Home() {
       "storeFeaturesCollection",
       allStoreFeatures,
       {
-        first: storeHighlightsToShow,
+        first: storeFeaturesToShow,
         filter: { store: { eq: env.NEXT_PUBLIC_STORE_ID } },
         orderBy: { render_order: "AscNullsFirst" },
       }
@@ -200,12 +200,12 @@ export default async function Home() {
         </section>
       </div>
       <div className="flex flex-1 px-6 md:justify-center xl:px-0">
-        <StoreHighlights className="relative flex max-w-7xl flex-1 flex-col items-center justify-center rounded-lg p-6 shadow-[0px_8px_40px_0px_rgba(0,38,3,0.08)] md:flex-row md:flex-wrap md:gap-y-6 md:p-10 lg:flex-nowrap lg:items-start">
+        <StoreFeatures className="relative flex max-w-7xl flex-1 flex-col items-center justify-center rounded-lg p-6 shadow-[0px_8px_40px_0px_rgba(0,38,3,0.08)] md:flex-row md:flex-wrap md:gap-y-6 md:p-10 lg:flex-nowrap lg:items-start">
           <CarouselProvider
-            {...highlightCarouselProviderProps(storeHighlights?.length ?? 0)}
+            {...highlightCarouselProviderProps(storeFeatures?.length ?? 0)}
           >
             <CarouselRenderer {...highlightCarouselRendererProps}>
-              {storeHighlights?.map(
+              {storeFeatures?.map(
                 ({ id, description, iconName, title }, index) => (
                   <SlideRenderer
                     key={id}
@@ -214,9 +214,9 @@ export default async function Home() {
                     innerClassName="!h-16"
                     mobileMediaQuery="(max-width: 768px)"
                   >
-                    <StoreHighlight className="flex w-full flex-1 flex-row justify-center gap-x-4 md:basis-1/2">
+                    <StoreFeature className="flex w-full flex-1 flex-row justify-center gap-x-4 md:basis-1/2">
                       {typeof iconName === "string"
-                        ? getStoreHighlightsIcon(iconName as StoreHighlightIcon)
+                        ? getStoreFeaturesIcon(iconName as StoreFeatureIcon)
                         : null}
                       <div className="flex flex-1 flex-col gap-y-2">
                         <h3 className="text-body-medium font-semibold text-gray-900">
@@ -226,7 +226,7 @@ export default async function Home() {
                           {description}
                         </p>
                       </div>
-                    </StoreHighlight>
+                    </StoreFeature>
                   </SlideRenderer>
                 )
               )}
@@ -238,7 +238,7 @@ export default async function Home() {
               />
             </DotsRenderer>
           </CarouselProvider>
-        </StoreHighlights>
+        </StoreFeatures>
       </div>
       <div className="mt-[60px] flex flex-1 flex-col gap-y-[60px] md:items-center">
         <Section className="flex w-full flex-1 flex-col items-center gap-y-8 px-6 xl:px-0">

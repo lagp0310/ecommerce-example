@@ -14,7 +14,7 @@ import {
   daysTransform,
   minutesTransform,
   secondsTransform,
-  StoreHighlightIcon,
+  StoreFeatureIcon,
   defaultMaxProductPrice,
   defaultCurrencySymbol,
 } from "@/constants/constants";
@@ -167,15 +167,15 @@ export function updateSearchParam(
   return newSearchParams;
 }
 
-export function getStoreHighlightsIcon(icon: StoreHighlightIcon) {
+export function getStoreFeaturesIcon(icon: StoreFeatureIcon) {
   switch (icon) {
-    case StoreHighlightIcon.TRUCK_ICON:
+    case StoreFeatureIcon.TRUCK_ICON:
       return <TruckIcon className="size-10 text-primary" />;
-    case StoreHighlightIcon.HEADPHONES_ICON:
+    case StoreFeatureIcon.HEADPHONES_ICON:
       return <HeadphonesIcon className="size-10 text-primary" />;
-    case StoreHighlightIcon.SHOPPING_BAG_CHECKED_ICON:
+    case StoreFeatureIcon.SHOPPING_BAG_CHECKED_ICON:
       return <ShoppingBagCheckedIcon className="size-10 text-primary" />;
-    case StoreHighlightIcon.BOX_ICON:
+    case StoreFeatureIcon.BOX_ICON:
       return <BoxIcon className="size-10 text-primary" />;
     default:
       return null;

@@ -15,7 +15,7 @@ import {
   defaultCarouselInterval,
 } from "@/constants/constants";
 
-export const storeHighlightsToShow = 4;
+export const storeFeaturesToShow = 4;
 export const popularProductsToShow = 10;
 export const hotDealsProductsToShow = 12;
 export const featuredProductsToShow = 10;

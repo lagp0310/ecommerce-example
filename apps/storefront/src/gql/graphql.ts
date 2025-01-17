@@ -3818,8 +3818,9 @@ export type Line_Items = Node & {
   price?: Maybe<Scalars['Float']['output']>;
   product: Scalars['UUID']['output'];
   products?: Maybe<Products>;
-  quantity: Scalars['BigInt']['output'];
+  quantity?: Maybe<Scalars['BigInt']['output']>;
   updated_at?: Maybe<Scalars['Datetime']['output']>;
+  weight?: Maybe<Scalars['Float']['output']>;
 };
 
 export type Line_ItemsConnection = {
@@ -3858,6 +3859,7 @@ export type Line_ItemsFilter = {
   product?: InputMaybe<UuidFilter>;
   quantity?: InputMaybe<BigIntFilter>;
   updated_at?: InputMaybe<DatetimeFilter>;
+  weight?: InputMaybe<FloatFilter>;
 };
 
 export type Line_ItemsInsertInput = {
@@ -3869,6 +3871,7 @@ export type Line_ItemsInsertInput = {
   product?: InputMaybe<Scalars['UUID']['input']>;
   quantity?: InputMaybe<Scalars['BigInt']['input']>;
   updated_at?: InputMaybe<Scalars['Datetime']['input']>;
+  weight?: InputMaybe<Scalars['Float']['input']>;
 };
 
 export type Line_ItemsInsertResponse = {
@@ -3888,6 +3891,7 @@ export type Line_ItemsOrderBy = {
   product?: InputMaybe<OrderByDirection>;
   quantity?: InputMaybe<OrderByDirection>;
   updated_at?: InputMaybe<OrderByDirection>;
+  weight?: InputMaybe<OrderByDirection>;
 };
 
 export type Line_ItemsUpdateInput = {
@@ -3899,6 +3903,7 @@ export type Line_ItemsUpdateInput = {
   product?: InputMaybe<Scalars['UUID']['input']>;
   quantity?: InputMaybe<Scalars['BigInt']['input']>;
   updated_at?: InputMaybe<Scalars['Datetime']['input']>;
+  weight?: InputMaybe<Scalars['Float']['input']>;
 };
 
 export type Line_ItemsUpdateResponse = {

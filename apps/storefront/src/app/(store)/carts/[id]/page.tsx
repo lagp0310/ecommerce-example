@@ -83,45 +83,52 @@ export default async function Cart({
             <div className="flex flex-1 flex-col gap-y-2 rounded-ten border border-gray-100 p-6 md:hidden">
               {hasLineItems ? (
                 <React.Fragment>
-                  {lineItems.map(({ products: product, id, ...lineItem }) => {
-                    if (!product) {
-                      return null;
+                  {lineItems.map(
+                    ({ products: product, id, weight, ...lineItem }) => {
+                      if (!product) {
+                        return null;
+                      }
+
+                      const hasWeight = typeof weight === "number";
+
+                      const cartProductProps: CartProductProps = {
+                        lineItem: {
+                          id,
+                          weight,
+                          ...lineItem,
+                        },
+                        product,
+                        actions: (
+                          <React.Fragment>
+                            {!hasWeight ? (
+                              <AddToCartWrapper
+                                {...addToCartWrapperProps}
+                                product={product}
+                              >
+                                Add to Cart
+                                <ShoppingBagIcon className="size-5 group-hover:text-primary group-disabled:text-white" />
+                              </AddToCartWrapper>
+                            ) : null}
+                            <DeleteProductButton
+                              className="group -mr-2 rounded-full border-none p-2 hover:bg-gray-100/50 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
+                              lineItemId={id}
+                              refreshAfterDelete
+                            />
+                          </React.Fragment>
+                        ),
+                      };
+
+                      return (
+                        <div
+                          key={id}
+                          className="group/cart-product flex flex-col"
+                        >
+                          <BasicCartProduct {...cartProductProps} />
+                          <div className="mt-1 w-full border-t border-gray-100/50 group-last/cart-product:hidden"></div>
+                        </div>
+                      );
                     }
-
-                    const cartProductProps: CartProductProps = {
-                      lineItem: {
-                        id,
-                        ...lineItem,
-                      },
-                      product,
-                      actions: (
-                        <React.Fragment>
-                          <AddToCartWrapper
-                            {...addToCartWrapperProps}
-                            product={product}
-                          >
-                            Add to Cart
-                            <ShoppingBagIcon className="size-5 group-hover:text-primary group-disabled:text-white" />
-                          </AddToCartWrapper>
-                          <DeleteProductButton
-                            className="group -mr-2 rounded-full border-none p-2 hover:bg-gray-100/50 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
-                            lineItemId={id}
-                            refreshAfterDelete
-                          />
-                        </React.Fragment>
-                      ),
-                    };
-
-                    return (
-                      <div
-                        key={id}
-                        className="group/cart-product flex flex-col"
-                      >
-                        <BasicCartProduct {...cartProductProps} />
-                        <div className="mt-1 w-full border-t border-gray-100/50 group-last/cart-product:hidden"></div>
-                      </div>
-                    );
-                  })}
+                  )}
                 </React.Fragment>
               ) : (
                 <span className="text-body-medium font-normal text-gray-900">

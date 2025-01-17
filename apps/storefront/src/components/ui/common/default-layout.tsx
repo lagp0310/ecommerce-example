@@ -140,7 +140,7 @@ export function DefaultLayout({ children }: Props) {
                   <HeartIcon className="h-6 w-6 text-gray-900" />
                 </Button> */}
                 <SidebarCartWrapper />
-                <TooltipProvider delayDuration={100}>
+                {/* <TooltipProvider delayDuration={100}>
                   <Tooltip>
                     <TooltipTrigger>
                       <UserIcon className="size-6 text-gray-900" />
@@ -151,7 +151,7 @@ export function DefaultLayout({ children }: Props) {
                       </p>
                     </TooltipContent>
                   </Tooltip>
-                </TooltipProvider>
+                </TooltipProvider> */}
               </div>
             </div>
           </Navbar>

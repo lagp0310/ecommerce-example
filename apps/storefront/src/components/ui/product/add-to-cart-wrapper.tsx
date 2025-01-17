@@ -124,7 +124,7 @@ export function AddToCartWrapper({
       ) : null}
       {!hasAllCounterProps && hideAddToCart ? (
         <React.Fragment>
-          <Skeleton className="h-[30px] w-full" />
+          <Skeleton className="h-[45px] w-full" />
         </React.Fragment>
       ) : null}
       {hasAllCounterProps ? (

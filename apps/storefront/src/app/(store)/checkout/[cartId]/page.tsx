@@ -56,7 +56,7 @@ import { CreditCardFormContextProvider } from "@/context/credit-card-form-contex
 import { WarnOnModifiedFormContextProvider } from "@/context/warn-on-modified-form-context";
 import { getCustomer as getCustomerQuery } from "@/gql/queries/customer/queries";
 import { getFormCustomerAddress } from "@/gql/queries/customer-address/queries";
-import { AddressType } from "@/types/form/types";
+import { AddressType } from "@/types/types";
 import { allCartAddresses } from "@/gql/queries/cart-address/queries";
 
 export default async function Checkout({

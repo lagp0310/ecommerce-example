@@ -1,6 +1,6 @@
 "use client";
 
-import type { CustomOnValueChange } from "@/types/form/types";
+import type { CustomOnValueChange } from "@/types/types";
 import React from "react";
 import type {
   PathValue,

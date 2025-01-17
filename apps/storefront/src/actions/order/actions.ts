@@ -7,7 +7,7 @@ import {
   orderFormSchema,
   type OrderForm,
   type SuccessFailureMock,
-} from "@/types/form/types";
+} from "@/types/types";
 import type { OrderCreationResponse } from "@/types/types";
 import { revalidatePath } from "next/cache";
 

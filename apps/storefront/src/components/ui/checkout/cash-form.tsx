@@ -6,7 +6,7 @@ import { Input } from "@/components/form/input";
 import { Label } from "@/components/form/label";
 import { useCart } from "@/context/cart-context";
 import { useCashForm } from "@/context/cash-form-context";
-import { type CashForm } from "@/types/form/types";
+import { type CashForm } from "@/types/types";
 import React from "react";
 import {
   type NumberFormatValues,

@@ -5,7 +5,7 @@ import {
   type AddressFormContext,
   type AddressForm,
   AddressType,
-} from "@/types/form/types";
+} from "@/types/types";
 import React from "react";
 import { type UseFormReturn } from "react-hook-form";
 

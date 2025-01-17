@@ -8,7 +8,7 @@ import {
 } from "@/components/form/textarea";
 import { cn } from "@/lib/utils";
 import React from "react";
-import { type AdditionalInfoForm } from "@/types/form/types";
+import { type AdditionalInfoForm } from "@/types/types";
 import { FieldError } from "@/components/form/field-error";
 import { useAdditionalInfoForm } from "@/context/additional-info-form-context";
 

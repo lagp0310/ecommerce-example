@@ -7,7 +7,7 @@ import {
   type CardForm,
   type CashForm,
   type SuccessFailureMock,
-} from "@/types/form/types";
+} from "@/types/types";
 import { revalidatePath } from "next/cache";
 
 export async function processCashPaymentAction({

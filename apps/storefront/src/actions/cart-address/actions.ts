@@ -13,7 +13,7 @@ import {
   type CartAddressForm,
   type SuccessFailureMock,
   cartAddressFormSchema,
-} from "@/types/form/types";
+} from "@/types/types";
 import type {
   CartAddressDeleteResponse,
   CartAddressInsertResponse,

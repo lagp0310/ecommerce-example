@@ -11,7 +11,7 @@ import {
   type CartAddressForm,
   type AddressForm,
   type SuccessFailureMock,
-} from "@/types/form/types";
+} from "@/types/types";
 import { revalidatePath } from "next/cache";
 import { saveCartAddressAction } from "@/actions/cart-address/actions";
 import type {

@@ -10,7 +10,7 @@ import type {
   CardFormInputKeys,
   CardForm,
   CardFormContext,
-} from "@/types/form/types";
+} from "@/types/types";
 import React from "react";
 import { PatternFormat, type PatternFormatProps } from "react-number-format";
 

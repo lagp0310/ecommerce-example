@@ -17,7 +17,7 @@ import type {
   AddressForm,
   AddressFormComboboxKeys,
   AddressFormInputKeys,
-} from "@/types/form/types";
+} from "@/types/types";
 import { FieldError } from "@/components/form/field-error";
 import { useFormUtils } from "@/hooks/use-form-utils";
 import { Button } from "@/components/ui/common/button";

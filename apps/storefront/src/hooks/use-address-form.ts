@@ -7,7 +7,7 @@ import {
   addressFormSchema,
   AddressType,
   type AddressForm,
-} from "@/types/form/types";
+} from "@/types/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React from "react";

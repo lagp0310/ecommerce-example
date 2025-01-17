@@ -1,7 +1,7 @@
 "use client";
 
 import { processCardPaymentAction } from "@/actions/payment/actions";
-import { type CardForm, cardFormSchema } from "@/types/form/types";
+import { type CardForm, cardFormSchema } from "@/types/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import React from "react";
 import { type SubmitHandler, useForm } from "react-hook-form";

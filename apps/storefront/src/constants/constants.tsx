@@ -101,7 +101,7 @@ export const productsSortByOptions: BaseSelectOption[] = [
   },
 ];
 
-export enum StoreHighlightIcon {
+export enum StoreFeatureIcon {
   TRUCK_ICON = "TruckIcon",
   HEADPHONES_ICON = "HeadphonesIcon",
   SHOPPING_BAG_CHECKED_ICON = "ShoppingBagCheckedIcon",

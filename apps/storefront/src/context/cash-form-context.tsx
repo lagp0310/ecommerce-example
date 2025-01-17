@@ -1,7 +1,7 @@
 "use client";
 
 import { processCashPaymentAction } from "@/actions/payment/actions";
-import { type CashForm, cashFormSchema } from "@/types/form/types";
+import { type CashForm, cashFormSchema } from "@/types/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import React from "react";
 import {

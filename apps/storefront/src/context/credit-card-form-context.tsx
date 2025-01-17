@@ -1,7 +1,7 @@
 "use client";
 
 import { useCardForm } from "@/hooks/use-card-form";
-import type { CardForm, CardFormContext } from "@/types/form/types";
+import type { CardForm, CardFormContext } from "@/types/types";
 import React from "react";
 import { type UseFormReturn } from "react-hook-form";
 

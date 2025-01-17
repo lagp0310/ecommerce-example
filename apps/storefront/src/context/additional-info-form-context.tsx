@@ -3,7 +3,7 @@
 import {
   type AdditionalInfoForm,
   additionalInfoFormSchema,
-} from "@/types/form/types";
+} from "@/types/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import React from "react";
 import { useForm, type UseFormReturn } from "react-hook-form";

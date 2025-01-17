@@ -12,7 +12,7 @@ import { SectionTitle } from "@/components/ui/common/section-title";
 import { StoreFeature } from "@/components/ui/store/store-feature";
 import { StoreFeatures } from "@/components/ui/store/store-features";
 import { SummarizedProductCard } from "@/components/ui/product/summarized-product-card";
-import { StoreFeatureIcon } from "@/constants/constants";
+import { StoreFeatureIcon } from "@/types/types";
 import { ArrowRightIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import Link from "next/link";

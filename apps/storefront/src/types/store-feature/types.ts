@@ -9,3 +9,10 @@ export type StoreFeature = {
 export type StoreFeatureResponse = Omit<StoreFeatureResult, "icon_name"> & {
   iconName?: string;
 };
+
+export enum StoreFeatureIcon {
+  TRUCK_ICON = "TruckIcon",
+  HEADPHONES_ICON = "HeadphonesIcon",
+  SHOPPING_BAG_CHECKED_ICON = "ShoppingBagCheckedIcon",
+  BOX_ICON = "BoxIcon",
+}

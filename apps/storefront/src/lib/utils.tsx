@@ -14,7 +14,6 @@ import {
   daysTransform,
   minutesTransform,
   secondsTransform,
-  StoreFeatureIcon,
   defaultMaxProductPrice,
   defaultCurrencySymbol,
 } from "@/constants/constants";
@@ -27,6 +26,7 @@ import {
   type TProduct,
   type HeaderBannerResponse,
   OfferBannerResponse,
+  StoreFeatureIcon,
 } from "@/types/types";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";

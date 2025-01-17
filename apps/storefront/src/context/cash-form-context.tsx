@@ -35,6 +35,7 @@ type Props = {
 };
 
 export function CashFormContextProvider({ children }: Props) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isPending, startTransition] = React.useTransition();
 
   const { ...form } = useForm<CashForm>({

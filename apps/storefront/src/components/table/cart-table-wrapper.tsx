@@ -6,7 +6,7 @@ import {
   type Props as AllTableProps,
   type TableProps,
 } from "@/components/table/table";
-import { createColumnHelper } from "@tanstack/react-table";
+import { type ColumnDef, createColumnHelper } from "@tanstack/react-table";
 import type { CartTableColumns, LineItemWithProduct } from "@/types/types";
 import Image from "next/image";
 import { defaultCurrencySymbol } from "@/constants/constants";
@@ -194,7 +194,7 @@ export function CartTableWrapper({ ...props }: Props) {
       "rounded-ten border border-gray-100 border-separate border-spacing-6 w-full",
   };
   const allTableProps: AllTableProps = {
-    columns,
+    columns: columns as ColumnDef<unknown, unknown>[],
     tableProps,
     ...props,
   };

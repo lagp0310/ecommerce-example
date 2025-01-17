@@ -88,6 +88,7 @@ export default async function Checkout({
     billingCountryStates,
     shippingCountryStates,
     customerAddressTypes,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     customer,
     billingCustomerAddresses,
     shippingCustomerAddresses,

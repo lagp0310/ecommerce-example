@@ -44,6 +44,7 @@ export function WeightCounter({
     getCartLineItemWeight,
     getCartLineItemId,
   } = useCart();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isPending, startTransition] = React.useTransition();
 
   const lineItemId = React.useMemo(

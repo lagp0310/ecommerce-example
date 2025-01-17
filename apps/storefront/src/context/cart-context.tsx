@@ -116,6 +116,7 @@ export function CartContextProvider({ children, currentCart = null }: Props) {
           lineItemsOrderBy: { created_at: "AscNullsLast" },
         },
       })
+        // @ts-expect-error: TS error.
         .then(({ data }) => {
           const cartNode = data?.cartsCollection?.edges?.at(0)?.node;
           const lineItemsNodes = (

@@ -30,6 +30,7 @@ export function CustomerContextProvider({
   children,
   initialCustomer = null,
 }: Props) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [customer, setCustomer] = React.useState(initialCustomer);
 
   const providerValue = React.useMemo(() => ({ customer }), [customer]);

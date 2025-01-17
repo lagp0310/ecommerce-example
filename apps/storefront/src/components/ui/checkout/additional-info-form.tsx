@@ -45,9 +45,9 @@ export function AdditionalInfoForm({ className, ...props }: Props) {
         <div className="flex flex-1 flex-row gap-4">
           <Label
             htmlFor="order-notes"
-            className="flex flex-col gap-y-2 w-full cursor-pointer"
+            className="flex w-full cursor-pointer flex-col gap-y-2"
           >
-            <span className="font-normal text-body-small text-gray-900">
+            <span className="text-body-small font-normal text-gray-900">
               {`Order Notes (Optional)`}
             </span>
             <Textarea {...textareaProps} />

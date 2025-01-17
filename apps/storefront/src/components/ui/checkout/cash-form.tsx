@@ -118,12 +118,12 @@ export function CashForm({ htmlNamePrefix }: Props) {
       className="flex flex-1 flex-col gap-4"
     >
       <div className="flex flex-1 flex-col gap-4">
-        <div className="flex flex-1 flex-row flex-wrap md:flex-nowrap gap-4">
+        <div className="flex flex-1 flex-row flex-wrap gap-4 md:flex-nowrap">
           <Label
             htmlFor={`${htmlNamePrefix}-first-name`}
-            className="flex flex-col gap-y-2 cursor-pointer w-full md:w-fit"
+            className="flex w-full cursor-pointer flex-col gap-y-2 md:w-fit"
           >
-            <span className="font-normal text-body-small text-gray-900">
+            <span className="text-body-small font-normal text-gray-900">
               {`I'll pay...`}
               <span className="text-danger"> *</span>
             </span>
@@ -132,9 +132,9 @@ export function CashForm({ htmlNamePrefix }: Props) {
           </Label>
           <Label
             htmlFor={`${htmlNamePrefix}-change`}
-            className="flex flex-col gap-y-2 w-full md:w-fit"
+            className="flex w-full flex-col gap-y-2 md:w-fit"
           >
-            <span className="font-normal text-body-small text-gray-900">
+            <span className="text-body-small font-normal text-gray-900">
               {`Your change`}
             </span>
             <NumericFormat {...changeProps} />

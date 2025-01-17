@@ -181,7 +181,7 @@ export function WeightCounter({
         className="flex flex-1 flex-row gap-4"
       >
         <div className="flex flex-1 flex-col gap-4">
-          <div className="flex flex-1 flex-col flex-wrap md:flex-nowrap gap-4">
+          <div className="flex flex-1 flex-col flex-wrap gap-4 md:flex-nowrap">
             <NumericFormat {...weightProps} />
             <FieldError error={errors.weight} />
           </div>

@@ -125,12 +125,12 @@ export function CardForm({
       className="flex flex-1 flex-col gap-4"
     >
       <div className="flex flex-1 flex-col gap-4">
-        <div className="flex flex-1 flex-row flex-wrap md:flex-nowrap gap-4">
+        <div className="flex flex-1 flex-row flex-wrap gap-4 md:flex-nowrap">
           <Label
             htmlFor={`${htmlNamePrefix}-first-name`}
-            className="flex flex-col gap-y-2 w-full cursor-pointer"
+            className="flex w-full cursor-pointer flex-col gap-y-2"
           >
-            <span className="font-normal text-body-small text-gray-900">
+            <span className="text-body-small font-normal text-gray-900">
               First Name<span className="text-danger"> *</span>
             </span>
             <Input {...firstNameInputProps} />
@@ -138,21 +138,21 @@ export function CardForm({
           </Label>
           <Label
             htmlFor={`${htmlNamePrefix}-last-name`}
-            className="flex flex-col gap-y-2 w-full cursor-pointer"
+            className="flex w-full cursor-pointer flex-col gap-y-2"
           >
-            <span className="font-normal text-body-small text-gray-900">
+            <span className="text-body-small font-normal text-gray-900">
               Last Name<span className="text-danger"> *</span>
             </span>
             <Input {...lastNameInputProps} />
             <FieldError error={errors.lastName} />
           </Label>
         </div>
-        <div className="flex flex-1 flex-row flex-wrap md:flex-nowrap gap-4">
+        <div className="flex flex-1 flex-row flex-wrap gap-4 md:flex-nowrap">
           <Label
             htmlFor={`${htmlNamePrefix}-card-number`}
-            className="flex flex-col gap-y-2 w-full cursor-pointer"
+            className="flex w-full cursor-pointer flex-col gap-y-2"
           >
-            <span className="font-normal text-body-small text-gray-900">
+            <span className="text-body-small font-normal text-gray-900">
               Card Number<span className="text-danger"> *</span>
             </span>
             <PatternFormat {...cardNumberProps} />
@@ -160,9 +160,9 @@ export function CardForm({
           </Label>
           <Label
             htmlFor={`${htmlNamePrefix}-cvc`}
-            className="flex flex-col gap-y-2 w-full cursor-pointer"
+            className="flex w-full cursor-pointer flex-col gap-y-2"
           >
-            <span className="font-normal text-body-small text-gray-900">
+            <span className="text-body-small font-normal text-gray-900">
               CVC<span className="text-danger"> *</span>
             </span>
             <PatternFormat {...cvcProps} />

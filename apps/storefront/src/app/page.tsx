@@ -375,7 +375,7 @@ export default async function Home() {
                   </div>
                 </div>
               </SectionTitle>
-              <SectionContent className="grid w-full max-w-7xl md:grid-cols-3 min-[900px]:grid-cols-4 md:gap-6 lg:grid-cols-5">
+              <SectionContent className="grid w-full max-w-7xl md:grid-cols-3 md:gap-6 min-[900px]:grid-cols-4 lg:grid-cols-5">
                 <CarouselProvider {...hotDealsCarouselProviderProps}>
                   <CarouselRenderer {...hotDealsCarouselRendererProps}>
                     {hotDealsProducts?.map((product, index) => (

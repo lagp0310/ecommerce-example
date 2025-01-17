@@ -181,7 +181,7 @@ export default async function Product({
                 {description}
               </p>
             </div>
-            <div className="flex h-[45px] flex-row items-center gap-3 pb-5 mt-3">
+            <div className="mt-3 flex h-[45px] flex-row items-center gap-3 pb-5">
               {!!product ? (
                 <React.Fragment>
                   {hasWeight ? (

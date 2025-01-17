@@ -279,12 +279,12 @@ export function AddressForm({
       className="flex flex-1 flex-col gap-4"
     >
       <div className="flex flex-1 flex-col gap-4">
-        <div className="flex flex-1 flex-row flex-wrap md:flex-nowrap gap-4">
+        <div className="flex flex-1 flex-row flex-wrap gap-4 md:flex-nowrap">
           <Label
             htmlFor={`${htmlNamePrefix}-first-name`}
-            className="flex flex-col gap-y-2 w-full cursor-pointer"
+            className="flex w-full cursor-pointer flex-col gap-y-2"
           >
-            <span className="font-normal text-body-small text-gray-900">
+            <span className="text-body-small font-normal text-gray-900">
               First Name<span className="text-danger"> *</span>
             </span>
             <Input {...firstNameInputProps} />
@@ -292,9 +292,9 @@ export function AddressForm({
           </Label>
           <Label
             htmlFor={`${htmlNamePrefix}-last-name`}
-            className="flex flex-col gap-y-2 w-full cursor-pointer"
+            className="flex w-full cursor-pointer flex-col gap-y-2"
           >
-            <span className="font-normal text-body-small text-gray-900">
+            <span className="text-body-small font-normal text-gray-900">
               Last Name<span className="text-danger"> *</span>
             </span>
             <Input {...lastNameInputProps} />
@@ -302,9 +302,9 @@ export function AddressForm({
           </Label>
           <Label
             htmlFor={`${htmlNamePrefix}-company-name`}
-            className="flex flex-col gap-y-2 w-full cursor-pointer"
+            className="flex w-full cursor-pointer flex-col gap-y-2"
           >
-            <span className="font-normal text-body-small text-gray-900">
+            <span className="text-body-small font-normal text-gray-900">
               {`Company Name (Optional)`}
             </span>
             <Input {...companyNameInputProps} />
@@ -314,26 +314,26 @@ export function AddressForm({
         <div className="flex flex-1 flex-row gap-4">
           <Label
             htmlFor={`${htmlNamePrefix}-street-address`}
-            className="flex flex-col gap-y-2 w-full cursor-pointer"
+            className="flex w-full cursor-pointer flex-col gap-y-2"
           >
-            <span className="font-normal text-body-small text-gray-900">
+            <span className="text-body-small font-normal text-gray-900">
               Street Address<span className="text-danger"> *</span>
             </span>
             <Input {...streetAddressInputProps} />
             <FieldError error={errors.streetAddress} />
           </Label>
         </div>
-        <div className="flex flex-1 flex-row flex-wrap md:flex-nowrap gap-4 max-h-fit">
+        <div className="flex max-h-fit flex-1 flex-row flex-wrap gap-4 md:flex-nowrap">
           <ComboboxContextProvider
             paramName={countrySearchParamName}
             onValueChange={onCountryChange}
           >
             <ComboboxLabel
               htmlFor={`${htmlNamePrefix}-country`}
-              className="flex flex-col gap-y-2 w-full cursor-pointer"
+              className="flex w-full cursor-pointer flex-col gap-y-2"
               aria-required
             >
-              <span className="font-normal text-body-small text-gray-900">
+              <span className="text-body-small font-normal text-gray-900">
                 Country<span className="text-danger"> *</span>
               </span>
               <CheckoutComboboxWrapper {...countryComboboxProps} />
@@ -346,12 +346,12 @@ export function AddressForm({
           >
             <ComboboxLabel
               htmlFor={`${htmlNamePrefix}-state`}
-              className="flex flex-col gap-y-2 w-full cursor-pointer"
+              className="flex w-full cursor-pointer flex-col gap-y-2"
               disabled={isCountryStateSelectorDisabled}
               aria-disabled={isCountryStateSelectorDisabled}
               aria-required
             >
-              <span className="font-normal text-body-small text-gray-900">
+              <span className="text-body-small font-normal text-gray-900">
                 State<span className="text-danger"> *</span>
               </span>
               <CheckoutComboboxWrapper {...countryStateComboboxProps} />
@@ -362,21 +362,21 @@ export function AddressForm({
           </ComboboxContextProvider>
           <Label
             htmlFor={`${htmlNamePrefix}-zip-code`}
-            className="flex flex-col gap-y-2 w-full cursor-pointer"
+            className="flex w-full cursor-pointer flex-col gap-y-2"
           >
-            <span className="font-normal text-body-small text-gray-900">
+            <span className="text-body-small font-normal text-gray-900">
               ZIP Code<span className="text-danger"> *</span>
             </span>
             <PatternFormat {...zipCodeInputProps} />
             <FieldError error={errors.zipCode} />
           </Label>
         </div>
-        <div className="flex flex-1 flex-row flex-wrap md:flex-nowrap gap-4">
+        <div className="flex flex-1 flex-row flex-wrap gap-4 md:flex-nowrap">
           <Label
             htmlFor={`${htmlNamePrefix}-email`}
-            className="flex flex-col gap-y-2 w-full cursor-pointer"
+            className="flex w-full cursor-pointer flex-col gap-y-2"
           >
-            <span className="font-normal text-body-small text-gray-900">
+            <span className="text-body-small font-normal text-gray-900">
               Email<span className="text-danger"> *</span>
             </span>
             <Input {...emailInputProps} />
@@ -384,9 +384,9 @@ export function AddressForm({
           </Label>
           <Label
             htmlFor={`${htmlNamePrefix}-phone-number`}
-            className="flex flex-col gap-y-2 w-full cursor-pointer"
+            className="flex w-full cursor-pointer flex-col gap-y-2"
           >
-            <span className="font-normal text-body-small text-gray-900">
+            <span className="text-body-small font-normal text-gray-900">
               Phone Number<span className="text-danger"> *</span>
             </span>
             <PatternFormat {...phoneNumberInputProps} />
@@ -397,7 +397,7 @@ export function AddressForm({
       <div className="flex flex-row justify-end">
         <Button
           type="submit"
-          className="mt-3 p-3 flex flex-row items-center justify-center gap-x-2 rounded-full bg-primary text-body-small font-semibold leading-6 text-white border border-primary hover:bg-white hover:text-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
+          className="mt-3 flex flex-row items-center justify-center gap-x-2 rounded-full border border-primary bg-primary p-3 text-body-small font-semibold leading-6 text-white hover:bg-white hover:text-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
         >
           Continue
         </Button>

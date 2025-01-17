@@ -134,10 +134,10 @@ export function CheckoutForm({
       <AddressForm {...billingAddressFormProps} />
       <Label
         htmlFor="ship-different-address"
-        className="flex flex-row gap-2 w-fit items-center"
+        className="flex w-fit flex-row items-center gap-2"
       >
         <Checkbox {...checkboxProps} />
-        <span className="font-normal text-body-small text-gray-900 w-fit align-middle leading-normal">
+        <span className="w-fit align-middle text-body-small font-normal leading-normal text-gray-900">
           Ship to a different address
         </span>
       </Label>

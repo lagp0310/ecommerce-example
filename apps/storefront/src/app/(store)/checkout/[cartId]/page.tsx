@@ -331,7 +331,7 @@ export default async function Checkout({
                           Checkout
                         </h5>
                         <div className="flex flex-1 flex-col gap-6 lg:flex-row">
-                          <div className="w-full flex flex-1 basis-2/3 flex-col">
+                          <div className="flex w-full flex-1 basis-2/3 flex-col">
                             {checkoutForms.map(
                               (
                                 {
@@ -352,7 +352,7 @@ export default async function Checkout({
                                     defaultValue={
                                       !initiallyCollapsed ? name : undefined
                                     }
-                                    className="group/checkout-forms border border-gray-100 rounded-ten p-6 my-4 first:mt-0 last:mb-0"
+                                    className="group/checkout-forms my-4 rounded-ten border border-gray-100 p-6 first:mt-0 last:mb-0"
                                   >
                                     <AccordionItem
                                       value={name}
@@ -362,7 +362,7 @@ export default async function Checkout({
                                         className="p-0"
                                         actionClassName="hidden"
                                       >
-                                        <h6 className="ml-1 text-left text-body-xxl font-semibold text-gray-900 align-middle">
+                                        <h6 className="ml-1 text-left align-middle text-body-xxl font-semibold text-gray-900">
                                           {name}
                                         </h6>
                                       </AccordionTrigger>
@@ -447,7 +447,7 @@ export default async function Checkout({
                                 }
                               )}
                             </div>
-                            <PlaceOrderButtonWrapper className="mt-3 py-3 flex flex-1 flex-row items-center justify-center gap-x-2 rounded-full bg-primary text-body-small font-semibold leading-6 text-white border border-primary hover:bg-white hover:text-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none">
+                            <PlaceOrderButtonWrapper className="mt-3 flex flex-1 flex-row items-center justify-center gap-x-2 rounded-full border border-primary bg-primary py-3 text-body-small font-semibold leading-6 text-white hover:bg-white hover:text-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none">
                               Place Order
                             </PlaceOrderButtonWrapper>
                           </CartSummary>

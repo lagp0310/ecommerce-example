@@ -34,7 +34,7 @@ export function PaymentMethodSelector({ paymentMethods }: Props) {
                 setCurrentValue(getPaymentMethodValue(value))
               }
               defaultValue={defaultRadioValue}
-              className="flex flex-row flex-wrap md:flex-nowrap gap-4"
+              className="flex flex-row flex-wrap gap-4 md:flex-nowrap"
             >
               {paymentMethods.map(
                 ({ id, paymentMethodTypes: { type, description } }) => {
@@ -50,7 +50,7 @@ export function PaymentMethodSelector({ paymentMethods }: Props) {
                       />
                       <Label
                         htmlFor={id}
-                        className="flex flex-1 flex-row items-center font-normal text-body-small text-gray-900 hover:cursor-pointer"
+                        className="flex flex-1 flex-row items-center text-body-small font-normal text-gray-900 hover:cursor-pointer"
                       >
                         {radioText}
                       </Label>

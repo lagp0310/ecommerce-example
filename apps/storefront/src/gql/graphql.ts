@@ -3569,6 +3569,7 @@ export type Header_Banners = Node & {
   cta_url?: Maybe<Scalars['String']['output']>;
   description?: Maybe<Scalars['String']['output']>;
   id: Scalars['UUID']['output'];
+  image_url: Scalars['String']['output'];
   /** Globally Unique Record Identifier */
   nodeId: Scalars['ID']['output'];
   store: Scalars['UUID']['output'];
@@ -3609,6 +3610,7 @@ export type Header_BannersFilter = {
   cta_url?: InputMaybe<StringFilter>;
   description?: InputMaybe<StringFilter>;
   id?: InputMaybe<UuidFilter>;
+  image_url?: InputMaybe<StringFilter>;
   nodeId?: InputMaybe<IdFilter>;
   /** Negates a filter */
   not?: InputMaybe<Header_BannersFilter>;
@@ -3629,6 +3631,7 @@ export type Header_BannersInsertInput = {
   cta_url?: InputMaybe<Scalars['String']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['UUID']['input']>;
+  image_url?: InputMaybe<Scalars['String']['input']>;
   store?: InputMaybe<Scalars['UUID']['input']>;
   subtitle?: InputMaybe<Scalars['String']['input']>;
   subtitle_complement?: InputMaybe<Scalars['String']['input']>;
@@ -3652,6 +3655,7 @@ export type Header_BannersOrderBy = {
   cta_url?: InputMaybe<OrderByDirection>;
   description?: InputMaybe<OrderByDirection>;
   id?: InputMaybe<OrderByDirection>;
+  image_url?: InputMaybe<OrderByDirection>;
   store?: InputMaybe<OrderByDirection>;
   subtitle?: InputMaybe<OrderByDirection>;
   subtitle_complement?: InputMaybe<OrderByDirection>;
@@ -3667,6 +3671,7 @@ export type Header_BannersUpdateInput = {
   cta_url?: InputMaybe<Scalars['String']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['UUID']['input']>;
+  image_url?: InputMaybe<Scalars['String']['input']>;
   store?: InputMaybe<Scalars['UUID']['input']>;
   subtitle?: InputMaybe<Scalars['String']['input']>;
   subtitle_complement?: InputMaybe<Scalars['String']['input']>;
@@ -4009,6 +4014,7 @@ export type Offer_Banners = Node & {
   cta_url?: Maybe<Scalars['String']['output']>;
   header: Scalars['String']['output'];
   id: Scalars['UUID']['output'];
+  image_url: Scalars['String']['output'];
   /** Globally Unique Record Identifier */
   nodeId: Scalars['ID']['output'];
   store: Scalars['UUID']['output'];
@@ -4049,6 +4055,7 @@ export type Offer_BannersFilter = {
   cta_url?: InputMaybe<StringFilter>;
   header?: InputMaybe<StringFilter>;
   id?: InputMaybe<UuidFilter>;
+  image_url?: InputMaybe<StringFilter>;
   nodeId?: InputMaybe<IdFilter>;
   /** Negates a filter */
   not?: InputMaybe<Offer_BannersFilter>;
@@ -4069,6 +4076,7 @@ export type Offer_BannersInsertInput = {
   cta_url?: InputMaybe<Scalars['String']['input']>;
   header?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['UUID']['input']>;
+  image_url?: InputMaybe<Scalars['String']['input']>;
   store?: InputMaybe<Scalars['UUID']['input']>;
   subtitle?: InputMaybe<Scalars['String']['input']>;
   subtitle_remark?: InputMaybe<Scalars['String']['input']>;
@@ -4092,6 +4100,7 @@ export type Offer_BannersOrderBy = {
   cta_url?: InputMaybe<OrderByDirection>;
   header?: InputMaybe<OrderByDirection>;
   id?: InputMaybe<OrderByDirection>;
+  image_url?: InputMaybe<OrderByDirection>;
   store?: InputMaybe<OrderByDirection>;
   subtitle?: InputMaybe<OrderByDirection>;
   subtitle_remark?: InputMaybe<OrderByDirection>;
@@ -4107,6 +4116,7 @@ export type Offer_BannersUpdateInput = {
   cta_url?: InputMaybe<Scalars['String']['input']>;
   header?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['UUID']['input']>;
+  image_url?: InputMaybe<Scalars['String']['input']>;
   store?: InputMaybe<Scalars['UUID']['input']>;
   subtitle?: InputMaybe<Scalars['String']['input']>;
   subtitle_remark?: InputMaybe<Scalars['String']['input']>;

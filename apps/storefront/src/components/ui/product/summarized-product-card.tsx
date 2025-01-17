@@ -173,7 +173,7 @@ export function SummarizedProductCard({
       ) : (
         productPresentation
       )}
-      {productActions}
+      {/* {productActions} */}
       {shouldUseNextLink ? (
         <ClientLink
           href={`/products/${slug}`}

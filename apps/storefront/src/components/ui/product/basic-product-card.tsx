@@ -145,13 +145,13 @@ export function BasicProductCard({
           <ClientLink href={`/products/${slug}`} className="col-span-1">
             {productNode}
           </ClientLink>
-          <div className="relative">
+          {/* <div className="relative">
             <div className="absolute bottom-3 min-[400px]:bottom-6 right-3 flex-1 flex-row items-center justify-end">
               <AddToCartWrapper {...addToCartWrapperProps}>
                 <ShoppingBagIcon className="size-4 text-gray-900 group-hover:text-white group-disabled:group-hover:text-gray-900" />
               </AddToCartWrapper>
             </div>
-          </div>
+          </div> */}
         </div>
       ) : (
         productNode

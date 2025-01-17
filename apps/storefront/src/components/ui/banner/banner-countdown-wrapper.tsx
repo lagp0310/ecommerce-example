@@ -17,7 +17,7 @@ type Props = React.HTMLProps<HTMLDivElement> & {
 };
 
 export function BannerCountdownWrapper({
-  validUntil,
+  validUntil = dayjs().add(6, "days").toString(),
   semicolonClasses,
   timeClasses,
   timeUnitClasses,

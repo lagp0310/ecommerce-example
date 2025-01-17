@@ -23,10 +23,10 @@ export function SidebarLinksWrapper() {
         title: "Products",
         url: `/products?${defaultProductsSearchParams.toString()}`,
       },
-      {
-        title: "About Us",
-        url: "/about-us",
-      },
+      // {
+      //   title: "About Us",
+      //   url: "/about-us",
+      // },
     ],
     []
   );

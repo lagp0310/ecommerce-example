@@ -1,0 +1,1 @@
+alter table public.line_items alter column quantity drop not null;

@@ -1,4 +1,4 @@
-export * from "@/types/carousel/types";
+export * from "@/types/ui/carousel/types";
 export * from "@/types/cart/types";
 export * from "@/types/category/types";
 export * from "@/types/currency/types";

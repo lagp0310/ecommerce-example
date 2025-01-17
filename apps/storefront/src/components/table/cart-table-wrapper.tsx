@@ -186,7 +186,7 @@ export function CartTableWrapper({ ...props }: Props) {
         },
       }),
     ],
-    [columnHelper]
+    [columnHelper, getCartLineItemWeight]
   );
 
   const tableProps: TableProps = {

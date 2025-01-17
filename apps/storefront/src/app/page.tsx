@@ -13,7 +13,6 @@ import { StoreHighlight } from "@/components/ui/store/store-highlight";
 import { StoreHighlights } from "@/components/ui/store/store-highlights";
 import { SummarizedProductCard } from "@/components/ui/product/summarized-product-card";
 import { StoreHighlightIcon } from "@/constants/constants";
-import discountBanner from "@/public/images/discount-banner.png";
 import { ArrowRightIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import Link from "next/link";
@@ -24,7 +23,13 @@ import { allCategories } from "@/gql/queries/category/queries";
 import { env } from "@/lib/env";
 import { allStoreFeatures } from "@/gql/queries/store-feature/queries";
 import { allProducts } from "@/gql/queries/product/queries";
-import { getStoreHighlightsIcon, parseProductTags } from "@/lib/utils";
+import {
+  cn,
+  getHeaderBannerWrapper,
+  getOfferBannerWrapper,
+  getStoreHighlightsIcon,
+  parseProductTags,
+} from "@/lib/utils";
 import {
   brandIcons,
   categoriesCarouselProviderProps,
@@ -35,13 +40,11 @@ import {
   featuredProductsToShow,
   headerBannerCarouselProviderProps,
   headerBannerCarouselRendererProps,
-  headerBanners,
   highlightCarouselProviderProps,
   highlightCarouselRendererProps,
   hotDealsCarouselProviderProps,
   hotDealsCarouselRendererProps,
   hotDealsProductsToShow,
-  offerBanners,
   offerBannersCarouselProviderProps,
   offerBannersCarouselRendererProps,
   popularProductsCarouselProviderProps,
@@ -51,19 +54,53 @@ import {
 } from "@/constants/homepage/constants";
 import type {
   CategoryResponse,
+  HeaderBannerResponse,
+  ImageBannerResponse,
+  OfferBannerResponse,
   ProductsResponse,
   StoreFeatureResponse,
 } from "@/types/types";
 import { defaultProductsSearchParams } from "@/constants/product/constants";
+import { allHeaderBanners } from "@/gql/queries/header-banner/queries";
+import { allImageBanners } from "@/gql/queries/image-banner/queries";
+import { allOfferBanners } from "@/gql/queries/offer-banner/queries";
+import { ImageBannerWrapper } from "@/components/ui/banner/image-banner-wrapper";
 
 export default async function Home() {
   const [
+    headerBanners,
+    offerBanners,
+    imageBanners,
     storeHighlights,
     popularProductsResult,
     hotDealsProductsResult,
     featuredProductsResult,
     categories,
   ] = await Promise.all([
+    queryGraphql<HeaderBannerResponse[]>(
+      "headerBannersCollection",
+      allHeaderBanners,
+      {
+        filter: { store: { eq: env.NEXT_PUBLIC_STORE_ID } },
+        orderBy: { created_at: "AscNullsLast" },
+      }
+    ),
+    queryGraphql<OfferBannerResponse[]>(
+      "offerBannersCollection",
+      allOfferBanners,
+      {
+        filter: { store: { eq: env.NEXT_PUBLIC_STORE_ID } },
+        orderBy: { created_at: "AscNullsLast" },
+      }
+    ),
+    queryGraphql<ImageBannerResponse[]>(
+      "imageBannersCollection",
+      allImageBanners,
+      {
+        filter: { store: { eq: env.NEXT_PUBLIC_STORE_ID } },
+        orderBy: { created_at: "AscNullsLast" },
+      }
+    ),
     queryGraphql<StoreFeatureResponse[]>(
       "storeFeaturesCollection",
       allStoreFeatures,
@@ -104,6 +141,8 @@ export default async function Home() {
     }),
   ]);
 
+  const imageBanner = imageBanners?.at(0);
+
   const popularProducts = parseProductTags(popularProductsResult);
   const hotDealsProducts = parseProductTags(hotDealsProductsResult);
   const featuredProducts = parseProductTags(featuredProductsResult);
@@ -116,15 +155,38 @@ export default async function Home() {
           a column-based slides. We can improve this by using a loader (skeleton) while the component loads. */}
           <CarouselProvider {...headerBannerCarouselProviderProps}>
             <CarouselRenderer {...headerBannerCarouselRendererProps}>
-              {headerBanners.map((bannerNode, index) => (
-                <SlideRenderer
-                  key={index}
-                  index={index}
-                  mobileMediaQuery="(max-width: 768px)"
-                >
-                  {bannerNode}
-                </SlideRenderer>
-              ))}
+              {headerBanners?.map(
+                (
+                  {
+                    id,
+                    bannerType: { type, ...bannerTypeRest },
+                    ...bannerRest
+                  },
+                  index
+                ) => (
+                  <SlideRenderer
+                    key={id}
+                    index={index}
+                    mobileMediaQuery="(max-width: 768px)"
+                  >
+                    <Banner
+                      className={cn({
+                        "relative rounded-ten md:col-span-2 md:row-span-2":
+                          type === "header_sale_remark",
+                        "relative col-span-1 rounded-ten":
+                          type === "header_sale" ||
+                          type === "header_title_only",
+                      })}
+                    >
+                      {getHeaderBannerWrapper(type, {
+                        id,
+                        bannerType: { type, ...bannerTypeRest },
+                        ...bannerRest,
+                      })}
+                    </Banner>
+                  </SlideRenderer>
+                )
+              )}
             </CarouselRenderer>
             <DotsRenderer mobileMediaQuery="(max-width: 768px)">
               <DefaultDotGroup
@@ -252,16 +314,31 @@ export default async function Home() {
           <SectionContent className="w-full max-w-7xl lg:flex lg:flex-1 lg:flex-row lg:gap-x-6">
             <CarouselProvider {...offerBannersCarouselProviderProps}>
               <CarouselRenderer {...offerBannersCarouselRendererProps}>
-                {offerBanners.map((bannerNode, index) => (
-                  <SlideRenderer
-                    key={index}
-                    index={index}
-                    innerClassName="px-1 mx-auto"
-                    mobileMediaQuery="(max-width: 1024px)"
-                  >
-                    {bannerNode}
-                  </SlideRenderer>
-                ))}
+                {offerBanners?.map(
+                  (
+                    {
+                      id,
+                      bannerType: { type, ...bannerTypeRest },
+                      ...bannerRest
+                    },
+                    index
+                  ) => (
+                    <SlideRenderer
+                      key={id}
+                      index={index}
+                      innerClassName="px-1 mx-auto"
+                      mobileMediaQuery="(max-width: 1024px)"
+                    >
+                      <Banner className="relative flex flex-1 flex-col items-center gap-y-4">
+                        {getOfferBannerWrapper(type, {
+                          id,
+                          bannerType: { type, ...bannerTypeRest },
+                          ...bannerRest,
+                        })}
+                      </Banner>
+                    </SlideRenderer>
+                  )
+                )}
               </CarouselRenderer>
               <DotsRenderer
                 mobileMediaQuery="(max-width: 1024px)"
@@ -339,46 +416,14 @@ export default async function Home() {
             </Section>
           </div>
         </div>
-        <div className="w-full">
-          <Section className="flex flex-1 flex-row justify-center px-6 xl:px-0">
-            <Banner className="relative flex max-w-7xl flex-1 flex-col items-end gap-y-4 rounded-ten">
-              <div className="absolute top-0 flex h-[250px] w-full rounded-ten bg-gradient-to-r from-black/60 to-black/0 md:hidden"></div>
-              <Image
-                src={discountBanner}
-                alt="Offer Banner"
-                placeholder="blur"
-                quality={100}
-                sizes="100vw"
-                className="h-[250px] w-full rounded-ten object-cover md:h-[300px] lg:h-auto"
-              />
-              <div className="absolute left-6 flex h-full flex-col items-start justify-center gap-y-2 md:right-12 md:gap-y-4">
-                <span className="text-body-medium font-normal uppercase leading-[100%] text-white">
-                  Summer Sale
-                </span>
-                <h3 className="text-body-xxl font-semibold text-warning md:text-heading-1">
-                  37%{" "}
-                  <span className="font-normal uppercase text-white">Off</span>
-                </h3>
-                <p className="text-body-small font-normal text-white md:text-body-medium">
-                  Free Shipping and 30 days money-back guarantee.
-                </p>
-                <Link
-                  href={`/products?${defaultProductsSearchParams.toString()}`}
-                  className="group flex max-w-fit flex-row items-center gap-x-2 rounded-full bg-primary px-5 py-3 text-body-small font-semibold leading-[120%] text-white hover:bg-white hover:text-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none md:text-body-medium"
-                >
-                  Shop now{" "}
-                  <ArrowRightIcon className="size-4 text-white group-hover:text-primary" />
-                </Link>
-              </div>
-            </Banner>
-          </Section>
-        </div>
+        {!!imageBanner ? <ImageBannerWrapper {...imageBanner} /> : null}
         <ProductCarouselSection
           sectionTitle="Featured Products"
           carouselProviderProps={featuredProductsCarouselProviderProps}
           carouselRendererProps={featuredProductsCarouselRendererProps}
           products={featuredProducts}
         />
+        {/* TODO: Pending feature. */}
         {/* <div className="w-full bg-[#F7F7F7] px-6 py-[60px] xl:px-0">
           <div className="flex flex-1 flex-row md:justify-center">
             <CarouselProvider {...testimonialsCarouselProviderProps}>

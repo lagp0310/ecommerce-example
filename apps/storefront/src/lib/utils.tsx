@@ -1,4 +1,10 @@
 import { saveCartAddressAction } from "@/actions/cart-address/actions";
+import { HeaderSaleRemarkWrapper } from "@/components/ui/banner/header-sale-remark-wrapper";
+import { HeaderSaleWrapper } from "@/components/ui/banner/header-sale-wrapper";
+import { HeaderTitleOnlyWrapper } from "@/components/ui/banner/header-title-only-wrapper";
+import { OfferDiscountRemarkWrapper } from "@/components/ui/banner/offer-discount-remark-wrapper";
+import { OfferPriceRemarkWrapper } from "@/components/ui/banner/offer-price-remark-wrapper";
+import { OfferValidUntilWrapper } from "@/components/ui/banner/offer-valid-until-wrapper";
 import { BoxIcon } from "@/components/ui/icons/box";
 import { HeadphonesIcon } from "@/components/ui/icons/headphones";
 import { ShoppingBagCheckedIcon } from "@/components/ui/icons/shopping-bag-checked";
@@ -19,6 +25,8 @@ import {
   type CartSummaryField,
   type ProductsResponse,
   type TProduct,
+  type HeaderBannerResponse,
+  OfferBannerResponse,
 } from "@/types/types";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
@@ -327,5 +335,39 @@ export async function updateCartAddress(
       address: addressId,
       addressType: addressTypeId,
     });
+  }
+}
+
+export function getHeaderBannerWrapper(
+  type: string,
+  banner: HeaderBannerResponse
+) {
+  if (type === "header_sale_remark") {
+    return <HeaderSaleRemarkWrapper {...banner} />;
+  }
+
+  if (type === "header_sale") {
+    return <HeaderSaleWrapper {...banner} />;
+  }
+
+  if (type === "header_title_only") {
+    return <HeaderTitleOnlyWrapper {...banner} />;
+  }
+}
+
+export function getOfferBannerWrapper(
+  type: string,
+  banner: OfferBannerResponse
+) {
+  if (type === "offer_valid_until") {
+    return <OfferValidUntilWrapper {...banner} />;
+  }
+
+  if (type === "offer_price_remark") {
+    return <OfferPriceRemarkWrapper {...banner} />;
+  }
+
+  if (type === "offer_discount_remark") {
+    return <OfferDiscountRemarkWrapper {...banner} />;
   }
 }

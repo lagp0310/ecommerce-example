@@ -212,7 +212,14 @@ export function getPricingSliderProps(
 }
 
 export function lineItemsQuantityCounter(previous: number, current: LineItem) {
-  const currentQuantity = parseInt(current.quantity);
+  if (
+    typeof current?.quantity !== "number" &&
+    typeof current?.weight === "number"
+  ) {
+    return previous + 1;
+  }
+
+  const currentQuantity = parseInt(current?.quantity ?? "0");
 
   if (!currentQuantity || isNaN(currentQuantity)) {
     throw new Error(

@@ -27,6 +27,8 @@ import type {
   Customer_AddressesUpdateResponse as CustomerAddressUpdateResult,
   OrdersInsertResponse as OrderInsertResult,
   Orders as Order,
+  Weight_Units as WeightUnit,
+  Weight_UnitsEdge as WeightUnitEdge,
 } from "@/gql/graphql";
 import type { OperationVariables } from "@apollo/client";
 
@@ -143,15 +145,26 @@ export type BaseSelectOption = {
 
 export type SortByDirection = "asc" | "desc";
 
+export type ProductWeightUnit = Omit<
+  WeightUnit,
+  "plural_name" | "singular_name"
+> & { pluralName: string; singularName: string };
+export type ProductWeightUnitEdge = Omit<WeightUnitEdge, "node"> & {
+  node: { id: string; weightUnit: ProductWeightUnit };
+};
+
 export type TProduct = Omit<
   ProductResponse,
-  "image_url" | "discounted_price"
+  "image_url" | "discounted_price" | "product_weightsCollection"
 > & {
   discountedPrice?: number;
   imageUrl?: string;
   generalTags?: ProductTag[];
   discountTags?: ProductTag[];
   totalRatings?: number;
+  productWeight?: {
+    edges: ProductWeightUnitEdge[];
+  };
 };
 
 export type BaseOperationVariables = OperationVariables;
@@ -384,3 +397,8 @@ export type ProductPageSearchParams = {
   sortByDirection?: string;
   tags?: string;
 };
+
+export type LineItemInput = Pick<
+  LineItem,
+  "cart" | "comment" | "price" | "product" | "weight"
+> & { quantity?: number };

@@ -11,6 +11,10 @@ import { ProductTag } from "@/components/ui/product/product-tag";
 import { ProductTitle } from "@/components/ui/product/product-title";
 import { Rating } from "@/components/ui/product/rating";
 import {
+  WeightCounter,
+  type Props as WeightCounterProps,
+} from "@/components/ui/product/weight-counter";
+import {
   defaultCurrencySymbol,
   defaultSortBy,
   defaultSortByDirection,
@@ -63,7 +67,11 @@ export default async function Product({
     generalTags,
     discountTags,
     description,
+    productWeight,
   } = product as TProduct;
+  const weightUnitObject = productWeight?.edges?.at(0)?.node?.weightUnit;
+  const hasWeight =
+    !!productWeight && Array.isArray(productWeight.edges) && !!weightUnitObject;
 
   const relatedProductsResult = await queryGraphql<ProductsResponse[]>(
     "productsCollection",
@@ -103,6 +111,10 @@ export default async function Product({
       "font-normal leading-[150%] text-body-xl text-gray-300":
         !!discountedPrice,
     }),
+  };
+
+  const weightCounterProps: Omit<WeightCounterProps, "product"> = {
+    className: "mt-3",
   };
 
   return (
@@ -169,12 +181,21 @@ export default async function Product({
                 {description}
               </p>
             </div>
-            <div className="flex h-[45px] flex-row items-center gap-3 pb-5">
+            <div className="flex h-[45px] flex-row items-center gap-3 pb-5 mt-3">
               {!!product ? (
-                <AddToCartWrapper {...addToCartWrapperProps} product={product}>
-                  Add to Cart
-                  <ShoppingBagIcon className="size-5 group-hover:text-primary group-disabled:text-white" />
-                </AddToCartWrapper>
+                <React.Fragment>
+                  {hasWeight ? (
+                    <WeightCounter product={product} {...weightCounterProps} />
+                  ) : (
+                    <AddToCartWrapper
+                      product={product}
+                      {...addToCartWrapperProps}
+                    >
+                      Add to Cart
+                      <ShoppingBagIcon className="size-5 group-hover:text-primary group-disabled:text-white" />
+                    </AddToCartWrapper>
+                  )}
+                </React.Fragment>
               ) : null}
               {/* <Button className="h-[50px] w-[50px] group flex flex-row items-center justify-center rounded-full bg-gray-50 hover:bg-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none">
                 <HeartIcon className="size-5 text-gray-900 group-hover:text-white" />

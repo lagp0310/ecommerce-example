@@ -33,6 +33,19 @@ export const productFragment = gql`
         }
       }
     }
+    productWeight: product_weightsCollection {
+      edges {
+        node {
+          id
+          weightUnit: weight_units {
+            id
+            unit
+            singularName: singular_name
+            pluralName: plural_name
+          }
+        }
+      }
+    }
     createdAt: created_at
   }
 `;

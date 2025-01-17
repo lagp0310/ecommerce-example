@@ -14,6 +14,7 @@ import {
 import Image from "next/image";
 import { Line_Items as LineItem } from "@/gql/graphql";
 import { defaultCurrencySymbol } from "@/constants/constants";
+import { WeightUnit } from "@/types/form/weight/types";
 
 export type Props = React.HTMLProps<HTMLDivElement> & {
   actionsProps?: CartProductActionsProps;
@@ -25,7 +26,7 @@ export type Props = React.HTMLProps<HTMLDivElement> & {
 
 export function BasicCartProduct({
   actionsProps,
-  lineItem: { quantity },
+  lineItem: { quantity, weight },
   product: { slug, name, price, currencies, discountedPrice, imageUrl },
   toggleSidebar,
   actions,
@@ -37,7 +38,9 @@ export function BasicCartProduct({
   const productPricingProps: ProductPricingProps = {
     className:
       "flex flex-row items-center gap-x-1 text-body-small md:text-body-medium",
-    quantity: parseInt(quantity),
+    quantity: !!quantity ? parseInt(quantity) : null,
+    weight,
+    weightUnit: WeightUnit.KG,
     quantityClasses: "flex",
     price,
     discountedPrice,

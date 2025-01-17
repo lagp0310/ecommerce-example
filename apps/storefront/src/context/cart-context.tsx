@@ -21,6 +21,7 @@ import type {
   CartSummary,
   ClientCartResponse,
   GetCartSummaryResponse,
+  LineItemInput,
   TProduct,
 } from "@/types/types";
 import isUUID from "validator/es/lib/isUUID";
@@ -34,11 +35,21 @@ type CartContext = {
   lineItems: LineItem[];
   cartSummary: CartSummary;
   getCartLineItemId: (productId: string) => string | null;
-  handleAddToCart: (product: TProduct) => Promise<void>;
+  getCartLineItemWeight: (productId: string) => number | null;
+  handleAddToCart: (
+    product: TProduct,
+    quantity?: number | null,
+    weight?: number
+  ) => Promise<void>;
   handleUpdateQuantity: (
     lineItemId: string,
     product: TProduct,
     quantity: number
+  ) => Promise<void>;
+  handleUpdateWeight: (
+    lineItemId: string,
+    product: TProduct,
+    weight: number
   ) => Promise<void>;
   handleDeleteLineItem: (
     lineItemId: string,
@@ -58,8 +69,12 @@ const CartContext = React.createContext<CartContext>({
   getCartLineItemId: () => {
     return null;
   },
+  getCartLineItemWeight: () => {
+    return null;
+  },
   handleAddToCart: async () => {},
   handleUpdateQuantity: async () => {},
+  handleUpdateWeight: async () => {},
   handleDeleteLineItem: async () => {},
   isCreateCartLoading: false,
   isUpdateCartLoading: false,
@@ -187,38 +202,65 @@ export function CartContextProvider({ children, currentCart = null }: Props) {
     },
     [lineItems]
   );
+  const getCartLineItemWeight = React.useCallback(
+    (productId: string) => {
+      if (!lineItems) {
+        return null;
+      }
+
+      const lineItemWeight = lineItems.find(
+        ({ products }) => products?.id === productId
+      )?.weight;
+
+      return lineItemWeight ?? null;
+    },
+    [lineItems]
+  );
+
+  const createLocalCart = React.useCallback(async () => {
+    if (!!cart) {
+      return cart;
+    }
+
+    const localStorageCartId = window.localStorage.getItem(
+      localStorageCartIdItemName
+    );
+
+    if (!localStorageCartId) {
+      // FIXME: Add customer (id) on variables when login is ready.
+      const { data: cartDataResponse } = await mutateCreateCart({
+        variables: {
+          carts: {
+            // FIXME: Get env from validated file.
+            store: process.env.NEXT_PUBLIC_STORE_ID,
+            currency: defaultCurrencyId,
+          },
+        },
+      });
+
+      const cartObject =
+        cartDataResponse?.insertIntoCartsCollection?.records?.at(0);
+      if (!!cartObject) {
+        setCart(cartObject);
+        window.localStorage.setItem(localStorageCartIdItemName, cartObject?.id);
+      }
+
+      return cartDataResponse;
+    }
+
+    return null;
+  }, [cart, mutateCreateCart]);
 
   const handleAddToCart = React.useCallback(
-    async (product: TProduct) => {
+    async (product: TProduct, quantity: number | null = 1, weight?: number) => {
       try {
-        const localStorageCartId = window.localStorage.getItem(
-          localStorageCartIdItemName
-        );
-
-        let cartData;
-        if (!localStorageCartId) {
-          // FIXME: Add customer (id) on variables when login is ready.
-          const { data: cartDataResponse } = await mutateCreateCart({
-            variables: {
-              carts: {
-                // FIXME: Get env from validated file.
-                store: process.env.NEXT_PUBLIC_STORE_ID,
-                currency: defaultCurrencyId,
-              },
-            },
-          });
-          cartData = cartDataResponse;
-
-          const cartObject =
-            cartData?.insertIntoCartsCollection?.records?.at(0);
-          setCart(cartObject);
-        }
-
+        const cartData = await createLocalCart();
         const cartId = cartData?.insertIntoCartsCollection?.records?.at(0)?.id;
         const lineItems = [
           {
             cart: cart?.id ?? cartId,
-            quantity: 1,
+            quantity,
+            weight,
             price:
               typeof product?.discountedPrice === "number"
                 ? product.discountedPrice
@@ -238,15 +280,11 @@ export function CartContextProvider({ children, currentCart = null }: Props) {
           duration: 5000,
           description: `Added ${product.name} to Cart!`,
         });
-
-        if (!localStorageCartId) {
-          window.localStorage.setItem(localStorageCartIdItemName, cartId);
-        }
       } catch (error) {
         console.error(error);
       }
     },
-    [cart?.id, mutateCreateCart, mutateCreateLineItems, refetchCart, toast]
+    [cart?.id, createLocalCart, mutateCreateLineItems, refetchCart, toast]
   );
 
   const handleDeleteLineItem = React.useCallback(
@@ -273,6 +311,44 @@ export function CartContextProvider({ children, currentCart = null }: Props) {
     [mutateDeleteLineItems, refetchCart, toast]
   );
 
+  const updateLineItem = React.useCallback(
+    async (
+      lineItemId: string,
+      lineItem: LineItemInput,
+      numericValue: number,
+      removeIfZero = true
+    ) => {
+      if (!cart) {
+        throw new Error(
+          "Cannot update line items as cart is null or undefined"
+        );
+      }
+
+      if (numericValue <= 0 && removeIfZero) {
+        return handleDeleteLineItem(lineItemId);
+      }
+
+      try {
+        await mutateUpdateLineItems({
+          variables: {
+            filter: { id: { eq: lineItemId } },
+            lineItems: lineItem,
+          },
+        });
+
+        await refetchCart();
+
+        toast({
+          duration: 5000,
+          description: "Updated Product",
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    [cart, handleDeleteLineItem, mutateUpdateLineItems, refetchCart, toast]
+  );
+
   const handleUpdateQuantity = React.useCallback(
     async (lineItemId: string, product: TProduct, quantity: number) => {
       if (!cart) {
@@ -281,12 +357,8 @@ export function CartContextProvider({ children, currentCart = null }: Props) {
         );
       }
 
-      if (quantity === 0) {
-        return handleDeleteLineItem(lineItemId);
-      }
-
       try {
-        const lineItems = {
+        const lineItem = {
           cart: cart?.id,
           quantity,
           price:
@@ -295,24 +367,40 @@ export function CartContextProvider({ children, currentCart = null }: Props) {
               : product.price,
           product: product.id,
         };
-        await mutateUpdateLineItems({
-          variables: {
-            filter: { id: { eq: lineItemId } },
-            lineItems,
-          },
-        });
 
-        await refetchCart();
-
-        toast({
-          duration: 5000,
-          description: "Quantity Updated",
-        });
+        await updateLineItem(lineItemId, lineItem, quantity);
       } catch (error) {
         console.error(error);
       }
     },
-    [cart, handleDeleteLineItem, mutateUpdateLineItems, refetchCart, toast]
+    [cart, updateLineItem]
+  );
+
+  const handleUpdateWeight = React.useCallback(
+    async (lineItemId: string, product: TProduct, weight: number) => {
+      if (!cart) {
+        throw new Error(
+          "Cannot update line items as cart is null or undefined"
+        );
+      }
+
+      try {
+        const lineItem = {
+          cart: cart?.id,
+          weight,
+          price:
+            typeof product?.discountedPrice === "number"
+              ? product.discountedPrice
+              : product.price,
+          product: product.id,
+        };
+
+        await updateLineItem(lineItemId, lineItem, weight);
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    [cart, updateLineItem]
   );
 
   const isLoading = React.useMemo(
@@ -337,8 +425,10 @@ export function CartContextProvider({ children, currentCart = null }: Props) {
       lineItems,
       cartSummary: summaryData,
       getCartLineItemId,
+      getCartLineItemWeight,
       handleAddToCart,
       handleUpdateQuantity,
+      handleUpdateWeight,
       handleDeleteLineItem,
       isCreateCartLoading,
       isUpdateCartLoading,
@@ -352,8 +442,10 @@ export function CartContextProvider({ children, currentCart = null }: Props) {
       lineItems,
       summaryData,
       getCartLineItemId,
+      getCartLineItemWeight,
       handleAddToCart,
       handleUpdateQuantity,
+      handleUpdateWeight,
       handleDeleteLineItem,
       isCreateCartLoading,
       isUpdateCartLoading,

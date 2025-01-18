@@ -7,6 +7,9 @@ import type {
 } from "@/types/types";
 import { CurrencyDollarIcon, LanguageIcon } from "@heroicons/react/24/outline";
 
+// TODO: Refactor into multiple files. The last time I tried the build was not successful
+// so be careful with this refactor.
+
 export const defaultAvatarImageWidth = 200;
 export const defaultAvatarImageHeight = 200;
 

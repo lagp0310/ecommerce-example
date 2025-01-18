@@ -2,14 +2,17 @@ import React from "react";
 import {
   defaultCarouselInterval,
   defaultMaxProductPrice,
+  defaultProductsShowPerPage,
   defaultSlideHeight,
   defaultSlideWidth,
+  defaultSortBy,
+  defaultSortByDirection,
   maxProductRating,
 } from "@/constants/constants";
 import type {
   CarouselProviderCustomProps,
   CarouselRendererProps,
-  ProductFilter,
+  BaseAccordionItem,
 } from "@/types/types";
 import {
   Categories as Category,
@@ -33,7 +36,10 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/common/accordion";
-import { CategoryFilterItemWrapper } from "@/components/ui/category/category-filter-item-wrapper";
+import {
+  CategoryFilterItemWrapper,
+  type Props as CategoryFilterItemProps,
+} from "@/components/ui/category/category-filter-item-wrapper";
 
 export const categoriesToShow = 30;
 export const productsToShow = 20;
@@ -50,16 +56,15 @@ export const relatedProductsCarouselProviderProps: (
   infinite: true,
   visibleSlides: 2,
   renderInDesktop: true,
-  className:
-    "w-full h-64 min-[420px]:h-72 min-[500px]:h-80 min-[580px]:h-[350px] sm:h-[300px] md:h-64 min-[860px]:h-72 lg:h-80 min-[1100px]:h-[350px] xl:h-80 mb-16",
+  className: "w-full h-[350px] min-[450px]:h-96",
   mobileMediaQuery: "(max-width: 768px)",
   visibleSlidesSm: { mediaQuery: "(max-width: 640px)", visibleSlides: 2 },
   visibleSlidesMd: {
-    mediaQuery: "(min-width: 641px) and (max-width: 768px)",
+    mediaQuery: "(min-width: 641px) and (max-width: 1024px)",
     visibleSlides: 3,
   },
   visibleSlidesLg: {
-    mediaQuery: "(min-width: 769px) and (max-width: 1280px)",
+    mediaQuery: "(min-width: 1025px) and (max-width: 1280px)",
     visibleSlides: 4,
   },
   visibleSlidesXl: {
@@ -71,10 +76,8 @@ export const relatedProductsCarouselRendererProps: CarouselRendererProps = {
   mobileMediaQuery: "(max-width: 768px)",
   renderInDesktop: true,
   carouselSliderProps: {
-    className:
-      "h-64 min-[420px]:h-72 min-[500px]:h-80 min-[580px]:h-[350px] sm:h-[300px] md:h-64 min-[860px]:h-72 lg:h-80 min-[1100px]:h-[350px] xl:h-80",
-    classNameTray:
-      "h-64 min-[420px]:h-72 min-[500px]:h-80 min-[580px]:h-[350px] sm:h-[300px] md:h-64 min-[860px]:h-72 lg:h-80 min-[1100px]:h-[350px] xl:h-80",
+    className: "h-60 min-[400px]:h-64 min-[450px]:h-72",
+    classNameTray: "h-60 min-[400px]:h-64 min-[450px]:h-72",
   },
 };
 
@@ -96,7 +99,7 @@ export const getProductFilters: (
   minRating?: number | null,
   categoriesSearchParam?: string,
   tagsSearchParam?: string
-) => ProductFilter[] = (
+) => BaseAccordionItem[] = (
   categories,
   tags,
   maxProductsPrice,
@@ -113,17 +116,19 @@ export const getProductFilters: (
             id,
             categoriesSearchParam
           );
+          const itemProps: CategoryFilterItemProps = {
+            categoryId: id,
+            checked: isChecked,
+            "aria-checked": isChecked,
+            htmlFor: id,
+            wrapperClassName: cn("order-none", { "order-1": !isChecked }),
+            className:
+              "flex flex-1 flex-row items-center justify-start gap-x-1 text-body-small font-normal text-gray-900",
+          };
 
           return (
             <React.Suspense key={id}>
-              <CategoryFilterItemWrapper
-                categoryId={id}
-                checked={isChecked}
-                aria-checked={isChecked}
-                htmlFor={id}
-                wrapperClassName={cn("order-none", { "order-1": !isChecked })}
-                className="flex flex-1 flex-row items-center justify-start gap-x-1 text-body-small font-normal text-gray-900"
-              >
+              <CategoryFilterItemWrapper {...itemProps}>
                 {name}
                 {/* <span className="text-body-small font-normal text-gray-500">{`(${numberOfItems})`}</span> */}
               </CategoryFilterItemWrapper>
@@ -254,7 +259,7 @@ export const getProductFilters: (
 ];
 
 export const filterComponents = (
-  filters: ProductFilter[],
+  filters: BaseAccordionItem[],
   accordionRootClassName = "hidden lg:grid"
 ) => (
   <React.Fragment>
@@ -302,3 +307,10 @@ export const filterComponents = (
     )}
   </React.Fragment>
 );
+
+export const defaultProductsSearchParams = new URLSearchParams({
+  page: "1",
+  perPage: defaultProductsShowPerPage.toString(),
+  sortBy: defaultSortBy,
+  sortByDirection: defaultSortByDirection,
+});

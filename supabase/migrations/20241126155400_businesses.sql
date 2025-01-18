@@ -1,7 +1,7 @@
 create table
   public.businesses (
     id uuid not null default gen_random_uuid (),
-    name character varying not null,
+    name TEXT not null,
     description text null,
     created_at timestamp with time zone not null default (now() at time zone 'utc'::text),
     updated_at timestamp with time zone null,

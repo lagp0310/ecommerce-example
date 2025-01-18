@@ -1,3 +1,10 @@
+import { saveCartAddressAction } from "@/actions/cart-address/actions";
+import { HeaderSaleRemarkWrapper } from "@/components/ui/banner/header-sale-remark-wrapper";
+import { HeaderSaleWrapper } from "@/components/ui/banner/header-sale-wrapper";
+import { HeaderTitleOnlyWrapper } from "@/components/ui/banner/header-title-only-wrapper";
+import { OfferDiscountRemarkWrapper } from "@/components/ui/banner/offer-discount-remark-wrapper";
+import { OfferPriceRemarkWrapper } from "@/components/ui/banner/offer-price-remark-wrapper";
+import { OfferValidUntilWrapper } from "@/components/ui/banner/offer-valid-until-wrapper";
 import { BoxIcon } from "@/components/ui/icons/box";
 import { HeadphonesIcon } from "@/components/ui/icons/headphones";
 import { ShoppingBagCheckedIcon } from "@/components/ui/icons/shopping-bag-checked";
@@ -7,10 +14,20 @@ import {
   daysTransform,
   minutesTransform,
   secondsTransform,
-  StoreHighlightIcon,
   defaultMaxProductPrice,
+  defaultCurrencySymbol,
 } from "@/constants/constants";
-import type { ProductsResponse, TProduct } from "@/types/types";
+import type { Line_Items as LineItem } from "@/gql/graphql";
+import {
+  type CartAddressResponse,
+  PaymentMethodEnum,
+  type CartSummaryField,
+  type ProductsResponse,
+  type TProduct,
+  type HeaderBannerResponse,
+  OfferBannerResponse,
+  StoreFeatureIcon,
+} from "@/types/types";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -42,30 +59,54 @@ export function parseRemainingTime(countDown: number) {
   };
 }
 
+// TODO: Parse should be done in the backend to send ready to render
+// data to the frontend.
 export function parseProductTags(
   productsCollection?: ProductsResponse[] | null
 ) {
   if (!productsCollection) return [];
 
-  return productsCollection.map(
-    ({ productTagsCollection, ...productRest }) => ({
-      generalTags: productTagsCollection?.edges
-        ?.filter(({ node: { isGeneralTag } }) => isGeneralTag)
-        .map(({ node: { id, tag, tagTypes } }) => ({
+  return productsCollection.map(({ allTags, ...productRest }) => ({
+    generalTags: allTags?.edges
+      ?.filter(
+        ({
+          node: {
+            productTags: { isGeneralTag },
+          },
+        }) => isGeneralTag
+      )
+      .map(
+        ({
+          node: {
+            productTags: { id, tag, tagTypes },
+          },
+        }) => ({
           id,
           tag,
           type: tagTypes?.type,
-        })),
-      discountTags: productTagsCollection?.edges
-        ?.filter(({ node: { isDiscountTag } }) => isDiscountTag)
-        .map(({ node: { id, tag, tagTypes } }) => ({
+        })
+      ),
+    discountTags: allTags?.edges
+      ?.filter(
+        ({
+          node: {
+            productTags: { isDiscountTag },
+          },
+        }) => isDiscountTag
+      )
+      .map(
+        ({
+          node: {
+            productTags: { id, tag, tagTypes },
+          },
+        }) => ({
           id,
           tag,
           type: tagTypes?.type,
-        })),
-      ...productRest,
-    })
-  ) as TProduct[];
+        })
+      ),
+    ...productRest,
+  })) as TProduct[];
 }
 
 export function isRecordIdInSearchParamArray(
@@ -126,15 +167,15 @@ export function updateSearchParam(
   return newSearchParams;
 }
 
-export function getStoreHighlightsIcon(icon: StoreHighlightIcon) {
+export function getStoreFeaturesIcon(icon: StoreFeatureIcon) {
   switch (icon) {
-    case StoreHighlightIcon.TRUCK_ICON:
+    case StoreFeatureIcon.TRUCK_ICON:
       return <TruckIcon className="size-10 text-primary" />;
-    case StoreHighlightIcon.HEADPHONES_ICON:
+    case StoreFeatureIcon.HEADPHONES_ICON:
       return <HeadphonesIcon className="size-10 text-primary" />;
-    case StoreHighlightIcon.SHOPPING_BAG_CHECKED_ICON:
+    case StoreFeatureIcon.SHOPPING_BAG_CHECKED_ICON:
       return <ShoppingBagCheckedIcon className="size-10 text-primary" />;
-    case StoreHighlightIcon.BOX_ICON:
+    case StoreFeatureIcon.BOX_ICON:
       return <BoxIcon className="size-10 text-primary" />;
     default:
       return null;
@@ -176,4 +217,157 @@ export function getPricingSliderProps(
     defaultValue: [maxPrice ?? maxProductsPrice ?? defaultMaxProductPrice],
     max: maxProductsPrice,
   };
+}
+
+export function lineItemsQuantityCounter(previous: number, current: LineItem) {
+  if (
+    typeof current?.quantity !== "number" &&
+    typeof current?.weight === "number"
+  ) {
+    return previous + 1;
+  }
+
+  const currentQuantity = parseInt(current?.quantity ?? "0");
+
+  if (!currentQuantity || isNaN(currentQuantity)) {
+    throw new Error(
+      `Number '${current.quantity}' could not be parsed to integer`
+    );
+  }
+
+  return previous + currentQuantity;
+}
+
+export function getNonNullURLParams(
+  currentParams: Record<string, string | undefined>
+) {
+  const nonNullSearchParams = Object.fromEntries(
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    Object.entries(currentParams).filter(([_, value]) => !!value)
+  ) as { [key: string]: string };
+  const paginationSearchParams = new URLSearchParams(nonNullSearchParams);
+
+  return paginationSearchParams;
+}
+
+export function getCartSummaryItems(
+  subtotal = 0,
+  shipping = 0,
+  taxes = 0,
+  total = 0,
+  currencySymbol = defaultCurrencySymbol
+): CartSummaryField[] {
+  return [
+    {
+      name: "subtotal",
+      label: "Subtotal",
+      currencySymbol,
+      value: subtotal,
+    },
+    {
+      name: "shipping",
+      label: "Shipping",
+      currencySymbol,
+      value: shipping,
+    },
+    {
+      name: "taxes",
+      label: "Taxes",
+      currencySymbol,
+      value: taxes,
+    },
+    {
+      name: "total",
+      label: "Total",
+      currencySymbol,
+      value: total,
+    },
+  ];
+}
+
+export function getPaymentMethodValue(value?: string) {
+  if (!value) {
+    return null;
+  }
+
+  switch (value) {
+    case "Cash":
+      return PaymentMethodEnum.CASH;
+    case "Credit Card":
+      return PaymentMethodEnum.CREDIT_CARD;
+    case "Debit Card":
+      return PaymentMethodEnum.DEBIT_CARD;
+    default:
+      throw new Error(`'${value}' payment method is not in enum`);
+  }
+}
+
+export function getParsedErrorMessage(
+  error: unknown,
+  fallbackMessage = "Request failed"
+) {
+  const hasErrorMessage =
+    !!error &&
+    typeof error === "object" &&
+    "message" in error &&
+    typeof error.message === "string";
+  const parsedMessages = hasErrorMessage
+    ? JSON.parse(error.message as string)?.map(
+        ({ message }: { message: string }) => message
+      )
+    : [fallbackMessage];
+
+  return parsedMessages;
+}
+
+export async function updateCartAddress(
+  cartId: string,
+  addressId: string,
+  addressTypeId: string,
+  cartAddress?: CartAddressResponse[] | null
+) {
+  const isCartAddressAssigned =
+    Array.isArray(cartAddress) && cartAddress.length > 0;
+
+  if (!!addressId && !!addressTypeId && !isCartAddressAssigned) {
+    await saveCartAddressAction({
+      cart: cartId,
+      address: addressId,
+      addressType: addressTypeId,
+    });
+  }
+}
+
+export function getHeaderBannerWrapper(
+  type: string,
+  banner: HeaderBannerResponse
+) {
+  if (type === "header_sale_remark") {
+    return <HeaderSaleRemarkWrapper {...banner} />;
+  }
+
+  if (type === "header_sale") {
+    return <HeaderSaleWrapper {...banner} />;
+  }
+
+  if (type === "header_title_only") {
+    return <HeaderTitleOnlyWrapper {...banner} />;
+  }
+}
+
+export function getOfferBannerWrapper(
+  type: string,
+  banner: OfferBannerResponse
+) {
+  if (type === "offer_valid_until") {
+    return <OfferValidUntilWrapper {...banner} />;
+  }
+
+  if (type === "offer_price_remark") {
+    return <OfferPriceRemarkWrapper {...banner} />;
+  }
+
+  if (type === "offer_discount_remark") {
+    return <OfferDiscountRemarkWrapper {...banner} />;
+  }
 }

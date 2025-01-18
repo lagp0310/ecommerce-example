@@ -1,9 +1,12 @@
 import { cn } from "@/lib/utils";
+import { WeightUnit } from "@/types/form/weight/types";
 import React from "react";
 
-type Props = React.HTMLProps<HTMLDivElement> & {
+export type Props = React.HTMLProps<HTMLDivElement> & {
   currencySymbol: string;
-  quantity?: number;
+  quantity?: number | null;
+  weight?: number | null;
+  weightUnit?: WeightUnit | null;
   price: number;
   discountedPrice?: number | null;
   priceClasses?: string;
@@ -15,6 +18,8 @@ type Props = React.HTMLProps<HTMLDivElement> & {
 export function ProductPricing({
   currencySymbol,
   quantity,
+  weight,
+  weightUnit,
   price,
   discountedPrice,
   priceClasses,
@@ -23,15 +28,17 @@ export function ProductPricing({
   showFinalPriceOnly = false,
   ...props
 }: Props) {
+  const weightOrQuantity = weight ?? quantity;
+
   return (
     <div {...props}>
-      {typeof quantity === "number" ? (
+      {!!weightOrQuantity ? (
         <span
           className={cn(
             "hidden font-normal text-body-small text-gray-500",
             quantityClasses
           )}
-        >{`${quantity} x`}</span>
+        >{`${weightOrQuantity}${weightUnit} x`}</span>
       ) : null}
       {!!discountedPrice ? (
         <span

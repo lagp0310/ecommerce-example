@@ -8,8 +8,9 @@ import type { TProduct } from "@/types/types";
 import { useCart } from "@/context/cart-context";
 import isUUID from "validator/es/lib/isUUID";
 import { cn } from "@/lib/utils";
+import { Skeleton } from "@/components/ui/common/skeleton";
 
-type Props = Omit<React.HTMLProps<HTMLButtonElement>, "type"> & {
+export type Props = Omit<React.HTMLProps<HTMLButtonElement>, "type"> & {
   type?: "button" | "reset" | "submit";
 } & {
   wrapperClassName?: string;
@@ -18,6 +19,8 @@ type Props = Omit<React.HTMLProps<HTMLButtonElement>, "type"> & {
   countClassName?: string;
   minusClassName?: string;
   moreClassName?: string;
+  refreshAfterUpdate?: boolean;
+  hideAddToCart?: boolean;
 };
 
 export function AddToCartWrapper({
@@ -28,6 +31,8 @@ export function AddToCartWrapper({
   countClassName,
   minusClassName,
   moreClassName,
+  refreshAfterUpdate = false,
+  hideAddToCart = false,
   ...buttonProps
 }: Props) {
   const { cart, lineItems, getCartLineItemId, handleAddToCart, isLoading } =
@@ -63,45 +68,68 @@ export function AddToCartWrapper({
     [isLoading, wasGetLineItemIdSuccessful]
   );
 
+  const counterProps = React.useMemo(
+    () => ({
+      lineItemId,
+      product,
+      className: cn(
+        "hidden min-[1080px]:flex flex-row gap-3 items-center justify-center",
+        counterWrapperClassName
+      ),
+      countClassName: cn(
+        "font-normal text-body-medium text-gray-900 w-full min-w-[12px] text-center",
+        countClassName
+      ),
+      minusChildren: (
+        <MinusIcon className="size-4 text-gray-900 group-hover/minus-button:text-white group-disabled/minus-button:text-gray-900" />
+      ),
+      moreChildren: (
+        <PlusIcon className="size-4 text-gray-900 group-hover/more-button:text-white group-disabled/more-button:text-gray-900" />
+      ),
+      minusClassName,
+      moreClassName,
+      disabled: isActionDisabled,
+      refreshAfterUpdate,
+    }),
+    [
+      countClassName,
+      counterWrapperClassName,
+      isActionDisabled,
+      lineItemId,
+      minusClassName,
+      moreClassName,
+      product,
+      refreshAfterUpdate,
+    ]
+  );
+  const allButtonProps = React.useMemo(
+    () => ({
+      className:
+        "group flex flex-1 flex-row items-center justify-center gap-x-2 rounded-full bg-primary text-body-small font-semibold leading-6 text-white hover:border hover:border-primary hover:bg-white hover:text-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none",
+      onClick: () => handleAddToCart(product),
+      disabled: isActionDisabled,
+      ...buttonProps,
+    }),
+    [buttonProps, handleAddToCart, isActionDisabled, product]
+  );
+
   return (
     <div
       className={cn(wrapperClassName, {
         "w-full": !lineItemId,
       })}
     >
-      {!showCounter ? (
-        <Button
-          className="group flex flex-1 flex-row items-center justify-center gap-x-2 rounded-full bg-primary text-body-small font-semibold leading-6 text-white hover:border hover:border-primary hover:bg-white hover:text-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
-          onClick={() => handleAddToCart(product)}
-          disabled={isActionDisabled}
-          {...buttonProps}
-        >
-          {children}
-        </Button>
+      {!showCounter && !hideAddToCart ? (
+        <Button {...allButtonProps}>{children}</Button>
+      ) : null}
+      {!hasAllCounterProps && hideAddToCart ? (
+        <React.Fragment>
+          <Skeleton className="h-[45px] w-full" />
+        </React.Fragment>
       ) : null}
       {hasAllCounterProps ? (
-        <Counter
-          // @ts-expect-error: lineItemId is validated above
-          lineItemId={lineItemId}
-          product={product}
-          className={cn(
-            "hidden min-[1080px]:flex flex-row gap-3 items-center justify-center",
-            counterWrapperClassName
-          )}
-          countClassName={cn(
-            "font-normal text-body-medium text-gray-900 w-full min-w-[12px] text-center",
-            countClassName
-          )}
-          minusChildren={
-            <MinusIcon className="size-4 text-gray-900 group-hover/minus-button:text-white group-disabled/minus-button:text-gray-900" />
-          }
-          moreChildren={
-            <PlusIcon className="size-4 text-gray-900 group-hover/more-button:text-white group-disabled/more-button:text-gray-900" />
-          }
-          minusClassName={minusClassName}
-          moreClassName={moreClassName}
-          disabled={isActionDisabled}
-        />
+        // @ts-expect-error: lineItemId is validated above in hasAllCounterProps
+        <Counter {...counterProps} />
       ) : null}
     </div>
   );

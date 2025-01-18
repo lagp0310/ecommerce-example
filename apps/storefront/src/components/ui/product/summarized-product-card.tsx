@@ -1,16 +1,18 @@
 import { cn } from "@/lib/utils";
 import type { TProduct } from "@/types/types";
-import { ShoppingBagIcon, StarIcon } from "@heroicons/react/24/outline";
+import { StarIcon } from "@heroicons/react/24/outline";
 import { StarIcon as FilledStarIcon } from "@heroicons/react/24/solid";
 import React from "react";
 import { ProductCard } from "@/components/ui//product/product-card";
 import { Rating } from "@/components/ui/product/rating";
 import { ClientLink } from "@/components/navigation/client-link";
 import { BannerCountdownWrapper } from "@/components/ui/banner/banner-countdown-wrapper";
-import { ProductTag } from "./product-tag";
-import { ProductPricing } from "./product-pricing";
+import { ProductTag } from "@/components/ui/product/product-tag";
+import {
+  ProductPricing,
+  type Props as ProductPricingProps,
+} from "@/components/ui/product/product-pricing";
 import Image from "next/image";
-import { AddToCartWrapper } from "@/components/ui/product/add-to-cart-wrapper";
 import { defaultCurrencySymbol } from "@/constants/constants";
 
 type Props = {
@@ -22,7 +24,7 @@ type Props = {
 
 export function SummarizedProductCard({
   product: {
-    id,
+    // id,
     slug,
     name,
     price,
@@ -33,66 +35,71 @@ export function SummarizedProductCard({
     totalRatings,
     generalTags,
     discountTags,
-    ...restProduct
+    // ...restProduct
   },
   shouldShowProductTags = true,
   shouldUseNextLink = true,
   productCardClassName,
 }: Props) {
-  const product = {
-    id,
-    slug,
-    name,
-    price,
-    discountedPrice,
-    currencies,
-    imageUrl,
-    rating,
-    totalRatings,
-    generalTags,
-    discountTags,
-    ...restProduct,
-  };
+  // const product = {
+  //   id,
+  //   slug,
+  //   name,
+  //   price,
+  //   discountedPrice,
+  //   currencies,
+  //   imageUrl,
+  //   rating,
+  //   totalRatings,
+  //   generalTags,
+  //   discountTags,
+  //   ...restProduct,
+  // };
   const allTags = generalTags?.concat(discountTags ?? []);
   const shouldShowTags =
     Array.isArray(allTags) && allTags.length > 0 && shouldShowProductTags;
-  const productActions = (
-    <div className="flex h-[45px] w-full flex-row items-center justify-center gap-x-2">
-      {/* <Button className="group flex size-8 flex-row items-center justify-center rounded-full bg-gray-50 hover:bg-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none">
-        <HeartIcon className="size-4 text-gray-900 group-hover:text-white" />
-      </Button> */}
-      <AddToCartWrapper
-        product={product}
-        className="group flex h-[45px] w-full flex-1 flex-row items-center justify-center gap-x-2 rounded-full bg-primary text-body-small font-semibold leading-6 text-white hover:border hover:border-primary hover:bg-white hover:text-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
-        minusClassName="disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:border-gray-100 rounded-full border border-gray-100 p-2 flex flex-1 flex-row items-center justify-center group/minus-button hover:border-transparent hover:bg-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
-        moreClassName="disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:border-gray-100 rounded-full border border-gray-100 p-2 flex flex-1 flex-row items-center justify-center group/more-button hover:border-transparent hover:bg-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
-      >
-        Add to Cart
-        <ShoppingBagIcon className="size-4 group-hover:text-primary group-disabled:group-hover:text-white" />
-      </AddToCartWrapper>
-    </div>
-  );
+  // const addToCartWrapperProps: AddToCartWrapperProps = {
+  //   product,
+  //   className:
+  //     "group flex h-[45px] w-full flex-1 flex-row items-center justify-center gap-x-2 rounded-full bg-primary text-body-small font-semibold leading-6 text-white hover:border hover:border-primary hover:bg-white hover:text-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none",
+  //   minusClassName:
+  //     "disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:border-gray-100 rounded-full border border-gray-100 p-2 flex flex-1 flex-row items-center justify-center group/minus-button hover:border-transparent hover:bg-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none",
+  //   moreClassName:
+  //     "disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:border-gray-100 rounded-full border border-gray-100 p-2 flex flex-1 flex-row items-center justify-center group/more-button hover:border-transparent hover:bg-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none",
+  // };
+  // const productActions = (
+  //   <div className="flex h-[45px] w-full flex-row items-center justify-center gap-x-2">
+  //     {/* <Button className="group flex size-8 flex-row items-center justify-center rounded-full bg-gray-50 hover:bg-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none">
+  //       <HeartIcon className="size-4 text-gray-900 group-hover:text-white" />
+  //     </Button> */}
+  //     <AddToCartWrapper {...addToCartWrapperProps}>
+  //       Add to Cart
+  //       <ShoppingBagIcon className="size-4 group-hover:text-primary group-disabled:group-hover:text-white" />
+  //     </AddToCartWrapper>
+  //   </div>
+  // );
+  const productPricingProps: ProductPricingProps = {
+    className: "flex flex-row gap-x-2",
+    price,
+    discountedPrice,
+    currencySymbol: currencies?.symbol ?? defaultCurrencySymbol,
+    discountedPriceClasses: cn({
+      "text-body-xxl font-medium text-gray-900 truncate line-clamp-1":
+        !discountedPrice,
+    }),
+    priceClasses: cn({
+      "text-body-xxl font-normal text-gray-400 leading-[150%] line-through truncate line-clamp-1":
+        discountedPrice,
+      "text-body-medium font-medium text-gray-900 truncate line-clamp-1":
+        !discountedPrice,
+    }),
+  };
   const productData = (
     <React.Fragment>
       <span className="line-clamp-2 truncate text-body-large font-normal text-hard-primary">
         {name}
       </span>
-      <ProductPricing
-        className="flex flex-row gap-x-2"
-        price={price}
-        discountedPrice={discountedPrice}
-        currencySymbol={currencies?.symbol ?? defaultCurrencySymbol}
-        discountedPriceClasses={cn({
-          "text-body-xxl font-medium text-gray-900 truncate line-clamp-1":
-            !discountedPrice,
-        })}
-        priceClasses={cn({
-          "text-body-xxl font-normal text-gray-400 leading-[150%] line-through truncate line-clamp-1":
-            discountedPrice,
-          "text-body-medium font-medium text-gray-900 truncate line-clamp-1":
-            !discountedPrice,
-        })}
-      />
+      <ProductPricing {...productPricingProps} />
       {typeof rating === "number" ? (
         <div className="flex flex-row items-center gap-x-1">
           <Rating
@@ -162,7 +169,7 @@ export function SummarizedProductCard({
       ) : (
         productPresentation
       )}
-      {productActions}
+      {/* {productActions} */}
       {shouldUseNextLink ? (
         <ClientLink
           href={`/products/${slug}`}

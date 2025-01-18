@@ -1,4 +1,4 @@
-import { ShoppingBagIcon, StarIcon } from "@heroicons/react/24/outline";
+import { StarIcon } from "@heroicons/react/24/outline";
 import { StarIcon as FilledStarIcon } from "@heroicons/react/24/solid";
 import React from "react";
 import { ProductCard } from "@/components/ui/product/product-card";
@@ -8,22 +8,22 @@ import { ProductTag } from "@/components/ui/product/product-tag";
 import { ProductPricing } from "@/components/ui/product/product-pricing";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
-import { AddToCartWrapper } from "@/components/ui/product/add-to-cart-wrapper";
 import type { TProduct } from "@/types/types";
 import { defaultCurrencySymbol } from "@/constants/constants";
 
-type Props = React.HTMLProps<HTMLDivElement> & {
+export type Props = React.HTMLProps<HTMLDivElement> & {
   cardClassname?: string;
   product: TProduct;
   shouldShowProductTags?: boolean;
   shouldUseNextLink?: boolean;
+  imageClassName?: string;
 };
 
 export function BasicProductCard({
   className,
   cardClassname = "",
   product: {
-    id,
+    // id,
     slug,
     name,
     price,
@@ -34,32 +34,33 @@ export function BasicProductCard({
     totalRatings,
     generalTags,
     discountTags,
-    ...restProduct
+    // ...restProduct
   },
   shouldShowProductTags = true,
   shouldUseNextLink = true,
+  imageClassName,
 }: Props) {
-  const product = {
-    id,
-    slug,
-    name,
-    price,
-    discountedPrice,
-    currencies,
-    imageUrl,
-    rating,
-    totalRatings,
-    generalTags,
-    discountTags,
-    ...restProduct,
-  };
+  // const product = {
+  //   id,
+  //   slug,
+  //   name,
+  //   price,
+  //   discountedPrice,
+  //   currencies,
+  //   imageUrl,
+  //   rating,
+  //   totalRatings,
+  //   generalTags,
+  //   discountTags,
+  //   ...restProduct,
+  // };
   const allTags = generalTags?.concat(discountTags ?? []);
   const shouldShowTags =
     Array.isArray(allTags) && allTags.length > 0 && shouldShowProductTags;
   const productNode = (
     <ProductCard
       className={cn(
-        "relative col-span-1 flex flex-1 flex-col justify-center gap-y-[6px] rounded-[5px] border border-gray-100 bg-white p-3 hover:border-soft-primary/45 hover:shadow-[0px_0px_12px_0px_rgba(132,209,135,0.32)] hover:shadow-soft-primary/60 motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none",
+        "relative h-full col-span-1 flex flex-1 flex-col justify-center gap-y-[6px] rounded-[5px] border border-gray-100 bg-white p-3 hover:border-soft-primary/45 hover:shadow-[0px_0px_12px_0px_rgba(132,209,135,0.32)] hover:shadow-soft-primary/60 motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none",
         className
       )}
     >
@@ -80,10 +81,13 @@ export function BasicProductCard({
           alt={name}
           width={180}
           height={180}
-          className="mt-6 w-full md:mt-2"
+          className={cn(
+            "mt-6 w-full md:mt-2 max-h-[110px] min-[400px]:max-h-[120px] min-[450px]:max-h-[150px] md:h-full md:max-h-full object-contain",
+            imageClassName
+          )}
         />
       ) : null}
-      <div className="flex flex-1 flex-row">
+      <div className="flex flex-1 flex-row items-end">
         <div className="flex flex-1 flex-col">
           <span className="line-clamp-1 truncate text-body-small font-normal text-gray-700">
             {name}
@@ -114,6 +118,17 @@ export function BasicProductCard({
     </ProductCard>
   );
 
+  // const addToCartWrapperProps: AddToCartWrapperProps = {
+  //   product,
+  //   className:
+  //     "group flex size-8 flex-row items-center justify-center rounded-full bg-gray-50 hover:bg-primary disabled:cursor-not-allowed disabled:opacity-50 disabled:transition-none disabled:hover:bg-gray-50 motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none",
+  //   counterWrapperClassName: "gap-2",
+  //   minusClassName:
+  //     "disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:border-gray-100 rounded-full border border-gray-100 p-2 flex flex-1 flex-row items-center justify-center group/minus-button hover:border-transparent hover:bg-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none",
+  //   moreClassName:
+  //     "disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:border-gray-100 rounded-full border border-gray-100 p-2 flex flex-1 flex-row items-center justify-center group/more-button hover:border-transparent hover:bg-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none",
+  // };
+
   return (
     <React.Fragment>
       {shouldUseNextLink ? (
@@ -126,17 +141,13 @@ export function BasicProductCard({
           <ClientLink href={`/products/${slug}`} className="col-span-1">
             {productNode}
           </ClientLink>
-          <div className="absolute bottom-4 right-3 flex-1 flex-row items-center justify-end">
-            <AddToCartWrapper
-              product={product}
-              className="group flex size-8 flex-row items-center justify-center rounded-full bg-gray-50 hover:bg-primary disabled:cursor-not-allowed disabled:opacity-50 disabled:transition-none disabled:hover:bg-gray-50 motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
-              counterWrapperClassName="gap-2"
-              minusClassName="disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:border-gray-100 rounded-full border border-gray-100 p-2 flex flex-1 flex-row items-center justify-center group/minus-button hover:border-transparent hover:bg-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
-              moreClassName="disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-transparent disabled:hover:border-gray-100 rounded-full border border-gray-100 p-2 flex flex-1 flex-row items-center justify-center group/more-button hover:border-transparent hover:bg-primary motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
-            >
-              <ShoppingBagIcon className="size-4 text-gray-900 group-hover:text-white group-disabled:group-hover:text-gray-900" />
-            </AddToCartWrapper>
-          </div>
+          {/* <div className="relative">
+            <div className="absolute bottom-3 min-[400px]:bottom-6 right-3 flex-1 flex-row items-center justify-end">
+              <AddToCartWrapper {...addToCartWrapperProps}>
+                <ShoppingBagIcon className="size-4 text-gray-900 group-hover:text-white group-disabled:group-hover:text-gray-900" />
+              </AddToCartWrapper>
+            </div>
+          </div> */}
         </div>
       ) : (
         productNode

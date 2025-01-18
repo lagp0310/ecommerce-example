@@ -10,6 +10,7 @@ export const lineItemFragment = gql`
       ...ProductFragment
     }
     price
+    weight
   }
   ${productFragment}
 `;

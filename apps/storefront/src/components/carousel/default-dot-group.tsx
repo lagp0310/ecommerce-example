@@ -4,7 +4,7 @@ import React from "react";
 import { type DotGroupProps, Dot, DotGroup } from "pure-react-carousel";
 import { cn } from "@/lib/utils";
 
-type Props = Omit<DotGroupProps, "renderDots">;
+export type Props = Omit<DotGroupProps, "renderDots">;
 
 export function DefaultDotGroup({ ...props }: Props) {
   return (

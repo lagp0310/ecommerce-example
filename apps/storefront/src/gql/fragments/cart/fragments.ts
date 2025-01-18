@@ -1,18 +1,10 @@
 import { gql } from "@apollo/client";
+import { lineItemFragment } from "@/gql/fragments/line-item/fragments";
 
 export const cartFragment = gql`
   fragment CartFragment on carts {
     id
     anonymousId: anonymous_id
-    createdAt: created_at
-    updatedAt: updated_at
-    customers {
-      id
-      firstName: first_name
-      lastName: last_name
-      billingAddress: billing_address
-      shippingAddress: shipping_address
-    }
     stores {
       id
       name
@@ -22,5 +14,15 @@ export const cartFragment = gql`
       currencyCode: three_letter_code
       symbol
     }
+    lineItemsCollection: line_itemsCollection(orderBy: $lineItemsOrderBy) {
+      edges {
+        node {
+          ...LineItemFragment
+        }
+      }
+    }
+    createdAt: created_at
+    updatedAt: updated_at
   }
+  ${lineItemFragment}
 `;

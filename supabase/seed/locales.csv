@@ -1,0 +1,564 @@
+id,locale,locale_name
+00ab8719-268a-42ed-9cdb-a2e69d4e45ff,sr_ME,Serbian (Montenegro)
+00b7d540-7d19-4d3b-958e-bea1e4a92867,en_GG,English (Guernsey)
+0121982a-9efc-4af6-b830-8bdd33af4876,yo,Yoruba
+018e576a-e792-4773-9086-c90b898ba448,hy,Armenian
+018ecac7-86a0-4fff-800c-647c2a3584f4,en_IN,English (India)
+01d536f7-219b-4bd5-b7d7-fe15d58d5d02,bs_Cyrl_BA,"Bosnian (Cyrillic, Bosnia & Herzegovina)"
+024ed1a4-f20f-4f67-b400-4f602238ad1b,ar_SA,Arabic (Saudi Arabia)
+02b96de7-b6c8-4ab4-88b1-a8aa3efb412b,en_PG,English (Papua New Guinea)
+03302a1f-7a57-49bc-af65-1c41a34b51a8,ta_SG,Tamil (Singapore)
+036acb0f-0a45-4655-b4fd-aa990808845d,ee,Ewe
+03793f11-6a86-4693-b3de-875068fed33c,es_AR,Spanish (Argentina)
+03897543-5166-47cf-8171-ea4f92b5e63e,ff_MR,Fulah (Mauritania)
+03f00c16-fc8b-48e3-9a89-920b455650d7,fr_CH,French (Switzerland)
+049a4821-1966-42b3-a681-d9a83228e89d,fr,French
+0551c8fc-0ac1-4baa-9097-1628cd4b6f14,fr_LU,French (Luxembourg)
+05eb4691-4c36-4329-b279-81a3e5728c54,dz,Dzongkha
+0617f743-b3cf-4445-8af4-5d49d1cac14b,en_TO,English (Tonga)
+065de7f9-e10a-4bc0-a08e-c8f6fd213231,ar_TN,Arabic (Tunisia)
+0681b7be-5ea2-4bf9-bfeb-8c282ed14b69,zu_ZA,Zulu (South Africa)
+068da07b-1653-4ab1-bdc7-3ad2abca2ac9,az_Latn_AZ,"Azerbaijani (Latin, Azerbaijan)"
+07097040-1409-4165-ad3b-5d0831a36ca5,en_CX,English (Christmas Island)
+075b8eef-db5d-418c-b1d9-42cabcef913a,et_EE,Estonian (Estonia)
+07cc1875-0df7-40e3-a106-5925fefd7411,ka_GE,Georgian (Georgia)
+07f5cda7-0115-46f5-82e5-ac097a77bfe5,nl_AW,Dutch (Aruba)
+082d646b-46c3-4913-bc02-49e0aaec285b,nl_BQ,Dutch (Caribbean Netherlands)
+08494b35-e9e2-4fe0-ad01-dbd0f788fb06,be_BY,Belarusian (Belarus)
+08e9b424-ffa4-446f-b8d5-d1bbd42c0112,fr_PM,French (St. Pierre & Miquelon)
+090e88d2-087c-483b-8fd5-72c330db3dd4,zh_Hans,Chinese (Simplified)
+09344b9b-aeb0-4248-a1a1-8c9af93ac807,om_KE,Oromo (Kenya)
+0986ca07-3951-4b0e-8da9-42b5d8e03efe,da_GL,Danish (Greenland)
+09d5617a-8dba-4ddb-84b7-10e3c3b204fa,is_IS,Icelandic (Iceland)
+09f7b30e-86ac-419d-afb5-d7adc1d46859,en_BB,English (Barbados)
+0a78726d-08dc-4bc1-862d-3b94a87de325,en_IM,English (Isle of Man)
+0bdb799f-3fc8-412e-85f3-ff0f28532668,ta_LK,Tamil (Sri Lanka)
+0be0530e-643e-458e-9462-296f79b68c99,yo_BJ,Yoruba (Benin)
+0bf91287-5fd2-41a6-a5a1-8d267eec2ae1,qu_PE,Quechua (Peru)
+0c6b643c-faff-4db1-a73b-d54a12990bd8,az,Azerbaijani
+0c756c25-b714-4b50-9140-b761d82b75b1,as,Assamese
+0cef040a-9463-429e-b088-42d29ea1bc3d,ru_KG,Russian (Kyrgyzstan)
+0d429f70-d042-456b-931f-cb936d5e541c,is,Icelandic
+0e4f6871-907e-4f09-9a5c-8d815eef14ed,az_Latn,Azerbaijani (Latin)
+0e952b0c-780f-4e64-8868-08735a7ea1bf,es_HN,Spanish (Honduras)
+0eaa45fc-2b74-4dd4-914c-57be3fc85f18,os_GE,Ossetic (Georgia)
+0ef94061-a909-41f2-88a5-2333b5f3e5bb,ak_GH,Akan (Ghana)
+0f0b2e3c-c2d0-4289-8e46-02b3f0c5ea4b,tr,Turkish
+0fc443df-66ef-4802-a570-3639b2690b72,fr_BJ,French (Benin)
+0fd98b65-f962-4f78-b07c-1f6879eb8166,ml,Malayalam
+101d5128-a1f8-414c-9cd2-d8b331c1a494,sr_Cyrl_RS,"Serbian (Cyrillic, Serbia)"
+11178436-1bae-4337-b98d-547276513b40,sq_AL,Albanian (Albania)
+11f56d60-81bd-4e73-8a5a-a5e5ca753bee,en_MH,English (Marshall Islands)
+12433d5e-4518-4ca2-ae5a-b8eb69013e68,cs_CZ,Czech (Czech Republic)
+1385c1c6-b26d-452c-a0b2-293a7995170c,bm,Bambara
+138f9e04-eea9-4971-863e-e3782b0823fc,ti,Tigrinya
+140f3be7-bbab-4a25-9760-232baa41686e,nl_SX,Dutch (Sint Maarten)
+141c7dc7-0a52-4ca3-88f6-7645ca5067fd,bo_CN,Tibetan (China)
+14212944-fce4-4faf-af04-1801e8b4c9d5,pa_IN,Punjabi (India)
+1431e88c-68b3-4e5a-988c-b4e29d0e8366,en_CK,English (Cook Islands)
+144caa9e-20ff-44c5-aa42-b616323bcbdd,ms_Latn_MY,"Malay (Latin, Malaysia)"
+14bb8eb2-78e7-493f-8788-0f772208521a,ar_YE,Arabic (Yemen)
+14ddf623-9454-4285-97f4-0bbe16b97ac5,fy_NL,Western Frisian (Netherlands)
+1562667c-5ed9-44c6-a4cd-9e5d648a381e,es_PE,Spanish (Peru)
+156713dc-32b8-471c-9512-973911edb54e,mr,Marathi
+161fed07-9b9e-4d73-b5af-6a06fb0ae21e,az_Cyrl_AZ,"Azerbaijani (Cyrillic, Azerbaijan)"
+1671903d-cf11-4587-8211-9fc610d80fd8,my,Burmese
+16b9d804-eddf-488e-8bd2-04d123909ebc,de_DE,German (Germany)
+1731fcaf-00a1-41db-a359-54040e2f8d12,zh_MO,Chinese (Macau SAR China)
+1784e679-c128-473d-8e85-d04fb497b49c,ja,Japanese
+17d8d8be-8ce6-4b39-9b67-7e7ad7242804,yi,Yiddish
+17d9926c-60fd-4e36-8fc2-253a046cbb0a,km,Khmer
+17f9be25-60e3-4383-a1b5-f6556f56b37c,fr_MA,French (Morocco)
+18c0a160-0f11-4234-b827-a407d5afcfb8,lo,Lao
+18ccf6a8-89f4-4f04-afa4-b1824b3de4a3,en_SC,English (Seychelles)
+19808808-a515-49a1-9254-b7b51ddfcc9e,ms_SG,Malay (Singapore)
+1a093cb5-15c2-4827-bbe3-33338041d973,kk_Cyrl_KZ,"Kazakh (Cyrillic, Kazakhstan)"
+1a278b03-1163-42ff-90f5-c48c3fb0b1d2,zh_Hans_CN,"Chinese (Simplified, China)"
+1a5e19e4-eb29-46c7-8dfe-9b932856c758,it,Italian
+1a806a6e-c6ec-40c0-ba91-d518c04d5ca4,ar_SS,Arabic (South Sudan)
+1a8c20aa-62c6-4c0f-a079-930d3b4ce44c,ee_TG,Ewe (Togo)
+1ab5f601-a1ec-4f80-ba1a-5edb4b490005,fr_BE,French (Belgium)
+1b51c49e-32ca-4421-879e-c034c093c0d1,sg_CF,Sango (Central African Republic)
+1b9d617c-793d-442b-b42b-b2d451477183,sr_Cyrl_BA,"Serbian (Cyrillic, Bosnia & Herzegovina)"
+1ba50afc-9d3b-4f4b-b11e-cfdcc72a3e61,ta_IN,Tamil (India)
+1bcdd2f1-fbfe-4ed2-afdb-ea7ab782b06d,en_SD,English (Sudan)
+1be86700-e285-4c20-9f3f-c50644dcf3b1,en_KI,English (Kiribati)
+1cccbf2d-cea7-4e2d-94eb-9fcc36bd0d4c,be,Belarusian
+1cda671a-ac3f-41cd-b812-1bd32ab5f828,fr_GQ,French (Equatorial Guinea)
+1f9e163b-bccd-4c37-b0b4-fc27f28f6e44,nl_SR,Dutch (Suriname)
+1fbcbe12-3467-4a7a-8c7b-d6b09a043412,de_LI,German (Liechtenstein)
+206626fa-0ad0-43a1-8ee8-69e0c8856d41,en_ER,English (Eritrea)
+208edd22-a14e-439b-891c-6e2ab5b99a97,en_AU,English (Australia)
+20f0a170-1020-4a3a-af82-cd6ac11c88ac,es_GT,Spanish (Guatemala)
+215a4c76-ca21-42d8-a8aa-c120d22bce7e,lt,Lithuanian
+21a422f3-4989-4209-a1bd-0b59685ff77e,en_IO,English (British Indian Ocean Territory)
+224b15d9-0a8a-4fc5-8d87-00b47864d792,nb_NO,Norwegian Bokmål (Norway)
+224b50d5-cfc9-414f-a378-cb0a4bf04ee1,ms_Latn,Malay (Latin)
+225564cf-9f36-403b-b8d1-24fc06a82010,es_CO,Spanish (Colombia)
+2303c761-86b5-4c6c-a7c9-a43ea93f32b0,zh_Hans_SG,"Chinese (Simplified, Singapore)"
+23a137f8-0a10-412c-84b7-c71749f7990c,fr_MC,French (Monaco)
+23d088ac-d51c-4957-8b60-96b847711b7c,pt_AO,Portuguese (Angola)
+242634e1-10ac-47dd-a603-56be4ea56e39,pl,Polish
+25074cd1-049d-421a-9282-3df0aeedda8a,zh_Hant_HK,"Chinese (Traditional, Hong Kong SAR China)"
+257e33e4-55c2-43b5-bfa9-698895c426c3,az_AZ,Azerbaijani (Azerbaijan)
+259be2b6-f142-4611-a88a-7d06f87001fd,en_BZ,English (Belize)
+25c64a44-3cbe-46c8-974a-eed3ff7b6e09,pt_GW,Portuguese (Guinea-Bissau)
+2614aa5e-7fd0-473c-89e8-035f835cf0ac,hr,Croatian
+2677f0bd-51e4-4079-a07a-15b2bdd2275a,sq_XK,Albanian (Kosovo)
+2703719e-0b73-4087-a74c-882378c747ef,fr_RW,French (Rwanda)
+2719b1d4-d051-49e5-9706-2107e4550159,en_BM,English (Bermuda)
+2746c32d-e9a0-4423-a6ff-71cccb383290,fr_GA,French (Gabon)
+2756f51e-9a96-40d0-b71b-60cec4f45a0c,fr_RE,French (Réunion)
+27864370-0716-43fe-93cf-0519bc8a78c2,fr_TD,French (Chad)
+27c4454c-7904-48ba-9bbd-6f41038578af,mn_Cyrl_MN,"Mongolian (Cyrillic, Mongolia)"
+2813584c-a8da-431c-b988-42c565dd78eb,th_TH,Thai (Thailand)
+283369e2-3a93-40df-b941-4969be356e54,en_NG,English (Nigeria)
+2a842f95-298e-4274-8354-767e626729ae,en_GY,English (Guyana)
+2b02fe36-9cb2-4caa-9598-e02a66f08951,ug,Uyghur
+2b6b9cb6-63f8-4a78-a122-e0345a367174,bo,Tibetan
+2b70fe1f-91bc-4c35-ac43-972b237e6019,ne_NP,Nepali (Nepal)
+2bd7c235-732e-45fe-ae47-8c8238062d7f,sw,Swahili
+2bed42f9-ccdd-4436-86e6-6332ef550bbb,ln,Lingala
+2d2a1cea-a9a0-4479-b3c2-3add47571efc,fr_ML,French (Mali)
+2d35e74c-d897-4e8c-9a3c-52cdffc16687,qu_BO,Quechua (Bolivia)
+2d3c2407-0034-4987-95fa-b9b83e74c206,sr_Latn_BA,"Serbian (Latin, Bosnia & Herzegovina)"
+2d811844-4941-4eaa-832f-169fe637be9a,so,Somali
+2dbe6028-5f95-489a-b118-9e1693e4087f,sn,Shona
+2f7fcf94-ea2c-4bbc-b123-b6eca384d4d2,he_IL,Hebrew (Israel)
+2fbdb553-956a-4e1a-a56b-4a4609366b34,uz_UZ,Uzbek (Uzbekistan)
+30080a6b-1051-417f-aca5-36c7293b4eb5,ee_GH,Ewe (Ghana)
+30137b95-0527-40bc-b489-af4576e45c10,en_UG,English (Uganda)
+30c3cd06-a4c5-4458-8a45-f8622f683a10,nd,North Ndebele
+30d18aef-0218-4a27-831a-8e3d4ae70797,kn_IN,Kannada (India)
+31934fa6-9b0c-4a03-8ee9-8faeb9ac00a7,qu_EC,Quechua (Ecuador)
+3235aee7-8f5f-4481-b216-20a0fba38a2e,ms_MY,Malay (Malaysia)
+327ed3c5-1fbf-4621-9c58-157a8b881e10,sr_RS,Serbian (Serbia)
+3333f583-b7ef-4352-977d-855c0912164c,sr_Latn_XK,"Serbian (Latin, Kosovo)"
+33ee8866-62fb-40e6-874e-91612f85ffc7,en_MY,English (Malaysia)
+33fbf5b8-1481-426b-a0a2-f2518c19ad3a,ky_KG,Kyrgyz (Kyrgyzstan)
+34752ba5-d888-490f-a83a-00a50c977047,en_BE,English (Belgium)
+34a35a76-e782-4632-b88f-d72c0c787bd5,ti_ET,Tigrinya (Ethiopia)
+34e06a6a-7ee5-42f1-b348-bc22cc87e07f,fy,Western Frisian
+34e3fff1-b657-466d-b6c8-1a11bcc4711a,hr_HR,Croatian (Croatia)
+3519a08f-2764-4c05-84dd-0d0a42f836be,to_TO,Tongan (Tonga)
+35679065-71a5-4470-a9bd-6407a354c042,ja_JP,Japanese (Japan)
+35cd1df6-ddd1-42a7-a64c-7a5322830d8e,mn_Cyrl,Mongolian (Cyrillic)
+3640ffe1-abfb-41b9-bb18-f13ee1a20bbc,sk_SK,Slovak (Slovakia)
+365cb618-af05-49a0-b7e0-ea16a4ba9b06,th,Thai
+371c6eb2-095a-4636-8c1e-fb4bc314c764,ar_KM,Arabic (Comoros)
+372e64c3-1be6-4218-9594-65735060961b,fr_FR,French (France)
+374fde59-8961-4b53-b019-5ec045f3e104,sq_MK,Albanian (Macedonia)
+378a7f10-412b-4598-8f44-01fa571cdfc9,or_IN,Oriya (India)
+3831b081-2c8d-47f3-ad81-b8534f9c347f,en_IE,English (Ireland)
+389f0638-7eeb-49d7-ba46-7f2733e883a6,cs,Czech
+38a1fdeb-4d9f-4a05-93af-135c982cbb91,pl_PL,Polish (Poland)
+3932352e-4be6-48eb-ae20-0e01e340be56,bs,Bosnian
+395ee34b-1dbe-4440-9602-8b9d1f63fef6,fr_BI,French (Burundi)
+399c100b-cccf-4734-a2b2-100743eaf8a2,ar_MA,Arabic (Morocco)
+39bd85ba-7def-45d0-8865-a25deab8ea19,sh_BA,Serbo-Croatian (Bosnia & Herzegovina)
+3a479e7a-87cf-4560-8cec-5761c6a17d72,uz_Cyrl,Uzbek (Cyrillic)
+3ac5a79c-1c15-45f2-b33b-c85a769238b8,gu,Gujarati
+3b2d616f-6bfb-49e6-9d2a-cf30fb6adf2e,my_MM,Burmese (Myanmar (Burma))
+3b8889d6-6e60-4b83-b3b9-3b03469bd093,bn_IN,Bengali (India)
+3c02ff1b-162a-4e8b-81a3-cb9470d31fc4,sh,Serbo-Croatian
+3c796428-3f39-48d2-a9d9-2740ca594b74,mt,Maltese
+3ce3a40c-ccc5-4d12-8794-0ac664ac1521,kk,Kazakh
+3d577395-2ab1-47c8-b2ce-6a870fc4cb63,rw_RW,Kinyarwanda (Rwanda)
+3d972ea6-9a30-4216-bc59-ea49d40af5a9,en_VU,English (Vanuatu)
+3dd4f557-98ec-45b4-a90b-e99b720a592a,ug_Arab_CN,"Uyghur (Arabic, China)"
+3f3e73dd-e18f-4c76-9967-40db281a1307,nb,Norwegian Bokmål
+40de1936-2725-4cbb-a37c-365f743f69d2,en_GU,English (Guam)
+410705b2-678b-4e14-a0f5-651e22bfd666,fr_MQ,French (Martinique)
+411e4503-a327-47c2-89ba-eaf680eaffb8,ar_SO,Arabic (Somalia)
+4181e5e3-d6a2-4f03-a933-31f26a89eabe,en_NA,English (Namibia)
+419d7406-b74c-4ea1-b134-45712fe517e7,ta_MY,Tamil (Malaysia)
+41e4140c-e4ab-4603-909a-bd93ab8b7c97,es_CR,Spanish (Costa Rica)
+41ef99bc-9488-4d60-b1a0-7a67acee5885,en_GI,English (Gibraltar)
+429fa07e-0a51-408a-a420-dc8254ae05b5,tr_CY,Turkish (Cyprus)
+42bbcf93-7cbd-42a2-a014-bf49b09b4f21,en_JE,English (Jersey)
+42d35f4f-c1e8-462e-9fa8-df6a06d75623,tl_PH,Tagalog (Philippines)
+43e519f0-49e0-49f2-8f80-181d5a23f891,ps,Pashto
+45330dd1-37c4-4cdd-8e14-5574294b6ce7,en_CA,English (Canada)
+45a0c9e4-11b6-4d7d-9f35-644e27c724c8,ro,Romanian
+46551972-e832-4014-91be-2c55ef67ec40,bg_BG,Bulgarian (Bulgaria)
+465591ad-4a2f-44c2-8523-dc0f9cf719d5,ln_CD,Lingala (Congo - Kinshasa)
+47539b23-5eb7-4eb7-abee-c95cd9eeb406,es_ES,Spanish (Spain)
+478d86b9-0cf5-452a-931d-676516efa3cc,en_PR,English (Puerto Rico)
+47d88712-3a0a-41b0-a9c2-a91d7c2daefc,ha_Latn_NE,"Hausa (Latin, Niger)"
+49cc3851-2928-47af-9eab-e1bd3d0613f2,sr_Cyrl_XK,"Serbian (Cyrillic, Kosovo)"
+4adbc94d-4272-44d3-b9af-244a9ca77e73,el_GR,Greek (Greece)
+4b5a8b89-a7cd-4219-9dc1-60c0584f170a,fr_GF,French (French Guiana)
+4c5edc8d-c5a4-4ff5-8751-cf239b5fab9c,ii_CN,Sichuan Yi (China)
+4c65d694-8f04-43a1-a5c1-32b4a06fad92,fr_NE,French (Niger)
+4d9d4bad-ceb6-407f-8063-192dddac5853,mn_MN,Mongolian (Mongolia)
+4dd51279-99a8-4f37-993f-0cd81b52f23c,uz_Arab,Uzbek (Arabic)
+4de74712-06ec-419b-ad36-8f83fa7d42ab,sn_ZW,Shona (Zimbabwe)
+4e81dd35-2e62-4a3f-91db-3e3de013f164,ca_ES,Catalan (Spain)
+4e87d1d4-55e5-4b29-876a-97df01d4124d,nl_NL,Dutch (Netherlands)
+4e9d3cb5-348b-4b75-a84c-0b2151c0f5b2,en_AS,English (American Samoa)
+4f5ecf12-726b-4472-a460-adc1f19db21a,fr_TG,French (Togo)
+4f8b61a4-cd6e-40da-89d9-f46c0cc58d5a,en_GM,English (Gambia)
+4f8e0879-0648-4457-a276-18c456a0decd,bm_Latn,Bambara (Latin)
+4f925c79-92bb-495d-862d-c5730f851e16,ti_ER,Tigrinya (Eritrea)
+50310151-ac82-4efb-ab8b-f919ea52486c,de,German
+50fd5bbf-981c-4f5c-9caf-2801a20c4876,da_DK,Danish (Denmark)
+5327f735-d8ef-4031-bc4c-698b2bc645c2,sr_Cyrl,Serbian (Cyrillic)
+53344943-a8c9-4bce-885d-a519a375d69e,or,Oriya
+53887bb9-5baa-41f7-ab53-f1aedca73bed,es_US,Spanish (United States)
+53d448c2-5051-40d8-b6d7-bd39c8e18637,ca_FR,Catalan (France)
+55623973-908c-4146-864f-3109d84b6c4b,en_TK,English (Tokelau)
+55790127-30db-4bae-8b4e-b59d11701f47,ru_MD,Russian (Moldova)
+569d13b0-443b-44b2-9d44-1bac22af2cae,en_MT,English (Malta)
+570f6e9e-ac4d-4f66-8be2-4d605a1fc24c,en_TC,English (Turks & Caicos Islands)
+57335241-80b7-49f6-91ca-5bd864a0e95b,fr_CG,French (Congo - Brazzaville)
+5767645b-4cf9-42ce-b292-87a2f99d97ea,mk,Macedonian
+579e05b6-01df-4a16-941b-2431ab7b107c,de_CH,German (Switzerland)
+582db07c-378c-4216-a071-5f202da46fdb,es_DO,Spanish (Dominican Republic)
+5896cd3e-b9d2-4609-961e-10250ea859f5,mt_MT,Maltese (Malta)
+592fb035-beda-4392-914a-acdbd830e307,eo,Esperanto
+5a127d1a-eba0-45f9-bc7f-58fd624a9a2b,am,Amharic
+5ac6f2fa-f106-475b-9aa1-dc395485700d,fa_IR,Persian (Iran)
+5af2bfc9-a850-4d8d-bd2f-01650c671073,ak,Akan
+5b13033d-fdbf-4957-86e9-2a5ff8c348fb,os_RU,Ossetic (Russia)
+5bb9c972-8af1-4d9d-b71d-00cd557b98a6,eu,Basque
+5c1006e1-1c2f-4ae7-b515-6118e98777f8,es_MX,Spanish (Mexico)
+5c3c498e-aeaf-424d-97cc-d54a0ddf9d77,pt_CV,Portuguese (Cape Verde)
+5d8868d3-b05e-4da4-8d8b-339464cbc1a1,ar_OM,Arabic (Oman)
+5d8f62ed-e311-420b-b6ae-c4b12cc837a1,ar_AE,Arabic (United Arab Emirates)
+5e89eeb2-4b2c-4839-8c62-a59f982fdb5c,ky,Kyrgyz
+6050f3d3-4744-4156-8c66-dcba6836e8c5,ks_IN,Kashmiri (India)
+6055c0f2-3c86-4918-bdca-dee1a26a2aad,sr_Latn_RS,"Serbian (Latin, Serbia)"
+60799a54-c14b-4a8d-acd4-766b21571532,lt_LT,Lithuanian (Lithuania)
+61bdf01b-a1eb-4de5-bc49-c8c93c46cb11,hi,Hindi
+6268645f-e57a-42aa-9f09-6fe6ec7c744e,en_AG,English (Antigua & Barbuda)
+62b5b0c7-4893-4db5-9de8-901fd88ce541,uk_UA,Ukrainian (Ukraine)
+63b4e305-da53-49ee-ac3d-36480e01c67a,nn,Norwegian Nynorsk
+644f6b24-8797-4a26-98aa-0058ae6dac0b,si_LK,Sinhala (Sri Lanka)
+648e6099-582a-4164-bd3f-1020023d557b,uz_AF,Uzbek (Afghanistan)
+65404ac9-c2aa-4dfc-a579-47f4b61370da,en_MO,English (Macau SAR China)
+66189766-2f55-4524-a907-d59f6f263204,en_GH,English (Ghana)
+662dbbbb-9446-4998-8a40-d155891eabcc,ar_QA,Arabic (Qatar)
+66cd30b3-fdfe-4cd1-9e40-f93a6a66fb68,kk_Cyrl,Kazakh (Cyrillic)
+6782df31-863b-4dde-924d-b993e13e3820,en_BS,English (Bahamas)
+6790267e-fe46-4f52-9640-d6ccb5122ded,fr_MU,French (Mauritius)
+67c8cd37-75da-4847-a250-2e7290c63dff,eu_ES,Basque (Spain)
+67f960f0-5f21-48bd-a85b-2f062ae37550,en_CM,English (Cameroon)
+68f9ee17-c3f7-4b69-8064-393795914019,mg_MG,Malagasy (Madagascar)
+690a3945-ded3-443e-9129-04be1b7d36b4,ru_BY,Russian (Belarus)
+6962e545-6c1b-4968-911e-aacb7ff943a8,zh_HK,Chinese (Hong Kong SAR China)
+69d2bcfa-a032-4e2a-a533-9651ce2732e1,mn,Mongolian
+69d6c48c-4777-4d64-b67c-70247df60bf7,mr_IN,Marathi (India)
+6a23045c-25c4-4ea7-bc17-eb91f5429068,ar_BH,Arabic (Bahrain)
+6a69c328-4515-477e-8f44-436ed7889754,fr_SN,French (Senegal)
+6acf3c7b-dbb0-4be3-a2b4-1e0f15017fe3,lb_LU,Luxembourgish (Luxembourg)
+6b58b7aa-52d2-4cdf-b0aa-abcd8725eb47,bs_Latn,Bosnian (Latin)
+6be16cbc-e51c-46c0-8117-28eb3a4a54c0,ms_Latn_BN,"Malay (Latin, Brunei)"
+6be1a02a-f6c6-49b9-bfbd-6d36b7ebf0d1,no,Norwegian
+6d3871d4-0f87-4228-ba49-e70aa0f84920,en_SL,English (Sierra Leone)
+6d989e24-62af-40b3-a21d-b2dc254443ba,uk,Ukrainian
+6d9ca232-61d4-4bc2-8b7f-e82e88d86d55,en_CC,English (Cocos (Keeling) Islands)
+6dc58c96-bb8f-4de7-ab53-d1b9063cc425,en_HK,English (Hong Kong SAR China)
+6e0809a7-b2a5-4fa8-888c-a4ce9c08a4f4,zh_Hant_MO,"Chinese (Traditional, Macau SAR China)"
+6e41d28e-e5f5-46fd-9c1f-36f460657e53,nd_ZW,North Ndebele (Zimbabwe)
+6e44c8a8-a02a-4af2-af7b-11224f10d195,so_KE,Somali (Kenya)
+6e6a3227-71e2-49e6-92f2-55d28028224e,qu,Quechua
+6ea2824c-b18e-4846-83b2-38f3d483fbf6,om,Oromo
+6f4cae31-253e-475c-9673-9da41e8edc1c,fr_NC,French (New Caledonia)
+6fb9293d-f34f-42fe-9e10-f4e6eb7582af,ne,Nepali
+6fecfac5-385c-42d2-86ac-d80159c56e6b,lo_LA,Lao (Laos)
+702def76-1b6c-4abe-ba05-dec5f08f5be7,ar_DZ,Arabic (Algeria)
+710b8b67-bd6e-4dd5-8084-bdda4d9288c9,ki_KE,Kikuyu (Kenya)
+7180be36-a3fe-41b6-8d5f-97b30fd216fe,en_VG,English (British Virgin Islands)
+7209610d-b441-4336-ba87-8e7e9eebf69a,en_VI,English (U.S. Virgin Islands)
+729e14bf-b23e-43d6-91ab-f1388e03693b,en_UM,English (U.S. Outlying Islands)
+74170e04-35e1-4f85-9459-c121efc6468e,es_GQ,Spanish (Equatorial Guinea)
+746d22f3-c495-4a40-9ab8-5acbba6e9471,fr_VU,French (Vanuatu)
+752d88f8-a236-47b4-9d55-6dcf72fd61a6,ff,Fulah
+7538007b-fb6a-4f68-888f-f0b0b9a35846,ro_RO,Romanian (Romania)
+75ce4fa5-c954-4c61-a05a-bbca617a14e2,sw_TZ,Swahili (Tanzania)
+764d0fb5-0f94-4d79-9672-350ce55a944b,ks,Kashmiri
+768f657d-2b47-4cb0-a1f5-800c0f509e12,pt_MO,Portuguese (Macau SAR China)
+76c922ea-d4db-47e7-9008-a249fd4ee39f,es_CL,Spanish (Chile)
+77930994-44fe-48fa-b887-7edf86451f4e,ks_Arab,Kashmiri (Arabic)
+78016144-b97d-41bc-804a-232ac002b454,zh_Hans_HK,"Chinese (Simplified, Hong Kong SAR China)"
+7836810b-ecb3-4b16-9b73-8fd4fb9fa46c,uz_Cyrl_UZ,"Uzbek (Cyrillic, Uzbekistan)"
+78afd2db-9a13-4f3b-a1bb-2775ec7fdfd8,so_ET,Somali (Ethiopia)
+7946c590-9470-4484-a0a8-fba11fb3ac3a,es_SV,Spanish (El Salvador)
+79933ef2-a8f7-4106-a832-25e342ebdf62,om_ET,Oromo (Ethiopia)
+79ffdbc7-0d66-44f0-bd85-1ce816cded33,to,Tongan
+7a7076d8-d85b-49d2-8826-00a869a35514,pa_PK,Punjabi (Pakistan)
+7b1b75e1-000c-433f-9969-1fd3526a72b1,ar_SY,Arabic (Syria)
+7b4941ce-7174-42f7-8ceb-fe17308d4fb0,as_IN,Assamese (India)
+7b5300e5-1e45-4be4-9af7-5b560735dc67,ro_MD,Romanian (Moldova)
+7bd66bb6-c874-4ac4-aacf-12447f2f4c19,en_TT,English (Trinidad & Tobago)
+7d14bd9c-f83d-4950-83e8-94af7b7ffa10,bo_IN,Tibetan (India)
+7d34df9f-e958-4f62-b620-535d426a6d02,ca_AD,Catalan (Andorra)
+7e127bde-2e04-439d-af76-81b3aeab45d7,ru_UA,Russian (Ukraine)
+7e3d13ad-3535-4c21-95b7-508bd5dcc3b0,lu_CD,Luba-Katanga (Congo - Kinshasa)
+7e842b61-6046-4f74-81bc-4fd151e9ef4a,rn_BI,Rundi (Burundi)
+7ef5cf5c-3de6-45e2-983a-3362c375ffb1,ar_PS,Arabic (Palestinian Territories)
+7fa4c406-6e69-4823-98d4-fb6ab80baa8d,os,Ossetic
+804f75b2-3d14-4ac3-bd1c-dccd86ed8e23,fr_CF,French (Central African Republic)
+807eb42a-331b-411a-a745-a1184fd22eff,ur_PK,Urdu (Pakistan)
+81151d85-5601-4b97-b006-783e94889429,bn_BD,Bengali (Bangladesh)
+821a9cb3-e5fd-465a-bbf9-51696015387f,de_BE,German (Belgium)
+83381160-239e-4ae1-879e-fa76fe3b80ea,en_ZA,English (South Africa)
+837da215-c385-4c99-b1d6-24be420e3ea1,en_MW,English (Malawi)
+83ff65db-2f0d-4b67-bb46-14dd7edadb54,ar_EG,Arabic (Egypt)
+84129744-a486-46c3-9520-5cfcfdfcd179,en_WS,English (Samoa)
+8441b0e1-0289-4277-9404-7bdbef7a44c4,el_CY,Greek (Cyprus)
+84d1a354-afc3-4a21-bfa0-5dfc51b3524e,es_PY,Spanish (Paraguay)
+84f33485-1131-4399-9c4b-2ace7ba44755,fr_MF,French (St. Martin)
+84fdc6cf-ab03-490e-b45e-c798fcfaac5e,kw,Cornish
+85212ed8-28ba-466b-ac82-2bad038c7484,rn,Rundi
+858710cb-95f3-475e-b29e-c8aea36c4ae1,af,Afrikaans
+85eaa79c-0631-4c3a-b968-7983e97911be,es_NI,Spanish (Nicaragua)
+860c6e12-f809-4723-a71f-7615ee83bd90,en_SG,English (Singapore)
+8613cb53-1b28-40b9-a3ab-e80ced867bac,en_VC,English (St. Vincent & Grenadines)
+8743d749-3ca2-4a49-a8ce-0224649ff49d,en_FK,English (Falkland Islands)
+8785dd7b-82be-4954-b27e-c6eb0aa6faf1,ru,Russian
+884b10ee-1ae0-4192-b0f7-f8c233601505,fr_DZ,French (Algeria)
+88a2f914-64d0-4d50-a81e-ac06c6056c43,pa_Guru_IN,"Punjabi (Gurmukhi, India)"
+89815a19-c34f-4d72-8369-6214b7e84f21,te_IN,Telugu (India)
+8a39b960-ab3b-40f8-89f4-b73b9457babe,en_NF,English (Norfolk Island)
+8a3e61f6-fb15-4651-9d4a-4fb5c86cb595,en_LR,English (Liberia)
+8ae03688-5dd4-4fad-a8e3-7edef46ab44c,en_PK,English (Pakistan)
+8afe70be-ee0d-403e-9d2d-7836ed8c5e92,ms_Latn_SG,"Malay (Latin, Singapore)"
+8b2982c3-936b-4bad-90d8-b4df6aad8c3e,pt,Portuguese
+8d18518e-3218-4fdb-9318-3f37056318f9,ta,Tamil
+8d873277-cf3b-45d1-8f22-6ecd554025aa,da,Danish
+8db0a5e1-b890-4c4c-8195-512702ca185d,gl,Galician
+8e62d763-2a3b-4a15-9691-087d7c834726,nl_BE,Dutch (Belgium)
+8ea62aee-dde8-405e-a55e-d728d2b79bb0,en_SX,English (Sint Maarten)
+8eb8250f-e0ce-4679-9673-d9d9342b7b24,ru_RU,Russian (Russia)
+8ef1d3c7-4cf5-4145-a036-7d9c05a4172f,uz,Uzbek
+8f158900-6966-4383-a20b-9e80414e5e07,ig_NG,Igbo (Nigeria)
+8fd14c03-2264-40ab-ae51-b210a914df4d,en_GB,English (United Kingdom)
+8fe10d48-5632-4223-9100-68fcbfb3e7fd,el,Greek
+908200e6-d941-46b5-b16f-3059a1ff51b5,en_SZ,English (Swaziland)
+919850f1-1a54-4470-9fab-4d8fbd1f50b6,uz_Arab_AF,"Uzbek (Arabic, Afghanistan)"
+92f8bafc-275b-4fd0-ba53-923fd089db44,he,Hebrew
+931632e0-3bac-45d3-8648-568993771067,lg_UG,Ganda (Uganda)
+93455891-835a-4c25-b637-55002278ee5a,fr_DJ,French (Djibouti)
+934722df-1d07-44f3-8432-17df5bcbd73f,sq,Albanian
+93686efd-0da0-49aa-804a-f7615c9b9f4b,sv_SE,Swedish (Sweden)
+95cbe244-15ee-4887-9123-3239673bc7e9,sr,Serbian
+9631fb8a-7581-4a79-8861-da3f09621cb0,te,Telugu
+974a414e-35c5-4615-88ae-5a77ff19c35b,ff_GN,Fulah (Guinea)
+974d5f6e-2946-4a35-b75b-0a5f7499ec9a,ml_IN,Malayalam (India)
+978b239b-d7d6-4700-b3c2-9b66805a34ee,ga_IE,Irish (Ireland)
+983ea68c-5105-490e-9dd5-61471585d38b,cy_GB,Welsh (United Kingdom)
+98c5d9dc-cc44-40b1-a9b9-d575ede4ed75,fr_TN,French (Tunisia)
+99203541-e03e-406f-af00-a70375b2d54e,ar_MR,Arabic (Mauritania)
+996379b7-0dd2-465e-97c7-fbfad5bc8b5b,en_RW,English (Rwanda)
+99fc55e5-4354-4091-b08d-b2db2c0a030f,ar,Arabic
+9a053f3b-1e06-440a-ac73-38f8cfad039c,fa_AF,Persian (Afghanistan)
+9a3616be-a761-4d22-80fa-fe260f603350,sr_XK,Serbian (Kosovo)
+9b884d6f-425e-4c09-8cde-56227d7fe6f8,pt_PT,Portuguese (Portugal)
+9c659f9b-d268-4f70-945c-07f848a7218c,nl,Dutch
+9c69d5cb-74d5-4b91-a517-03522817cc8b,ff_SN,Fulah (Senegal)
+9d12109c-0573-4663-97ae-2a999a814b1a,fr_CM,French (Cameroon)
+9dd0d2a0-a2e7-4788-8ee6-8d305905938b,en_GD,English (Grenada)
+9e1e7ac2-36c0-4611-9801-d5796f8d3619,gd,Scottish Gaelic
+9ea2a15d-ac5d-460c-94ad-83ebe43ba9dc,zh,Chinese
+9eff7efe-2ca6-46c5-b00f-e0242e3fa41a,ar_SD,Arabic (Sudan)
+9f07a1ca-bcb8-4df7-a059-82109d4dbc3e,lb,Luxembourgish
+9f3a9ccd-8fd9-4f1f-b75b-203cc620b761,pa_Guru,Punjabi (Gurmukhi)
+9f4a2d50-5b29-4dc1-a755-00f586cebe99,en_KN,English (St. Kitts & Nevis)
+9f6f4f11-2b38-47bf-9220-305f3a868d53,it_SM,Italian (San Marino)
+a073d953-bbd4-4a2f-955b-5e0afe39083d,ar_EH,Arabic (Western Sahara)
+a094704a-3933-4911-9d9d-cff895e739d0,fr_BL,French (St. Barthélemy)
+a0ec7b88-7234-474e-84d2-33513e439ec2,fr_GN,French (Guinea)
+a1204008-743d-4979-8a03-14544a5b1601,bs_Latn_BA,"Bosnian (Latin, Bosnia & Herzegovina)"
+a16288ce-5ab8-4b13-bdf6-2be42d1e94c2,hi_IN,Hindi (India)
+a2af3719-ebe3-4c63-aa0a-a1e164d0be12,fr_CD,French (Congo - Kinshasa)
+a381a84d-186e-4cde-b7c3-a086796f03ac,ug_Arab,Uyghur (Arabic)
+a3b6d9b5-a0a0-43e9-a851-2305d0bf1f73,sv_FI,Swedish (Finland)
+a42d3028-8c92-4f7b-9648-34cb3c3b998c,kk_KZ,Kazakh (Kazakhstan)
+a4aeb86e-c80a-49aa-987d-f1c3dd6dd290,gv,Manx
+a4c138ca-30f8-45c8-a9dd-60242a54ac16,ff_CM,Fulah (Cameroon)
+a54c95f0-cb61-4e93-8010-70da5b306b7f,ha_GH,Hausa (Ghana)
+a730a960-08e4-4084-be52-5039f9c4a487,es_IC,Spanish (Canary Islands)
+a890aa58-6885-4378-bb3e-b8a9f1032940,ki,Kikuyu
+a89fcf4c-380d-494d-b156-3fab3f8a795d,en_FJ,English (Fiji)
+a8a5cdd6-9d67-4891-9d3a-0f21a28859e0,hu,Hungarian
+a8f5ce0b-da17-42f2-bdcf-2e19b7cfc2fe,id_ID,Indonesian (Indonesia)
+a974635d-9226-4016-943d-8f63953e7d2f,kw_GB,Cornish (United Kingdom)
+ac41750e-5507-44b8-b680-f060330bba37,ar_IL,Arabic (Israel)
+ac5262c7-5310-452c-834f-4be2484341e8,fo_FO,Faroese (Faroe Islands)
+ad3c7cb9-0e3e-431a-8ae8-e3775fe4c788,nn_NO,Norwegian Nynorsk (Norway)
+aed82b78-a3fe-4363-80b6-c3a85e107703,fr_BF,French (Burkina Faso)
+af0a299c-cc97-440a-993d-0fe7cf2df819,en_MP,English (Northern Mariana Islands)
+afbe3419-8877-4834-a481-92cff50c1f20,ca,Catalan
+b00adfa7-f380-4df2-aeb3-23aee48279fe,sr_BA,Serbian (Bosnia & Herzegovina)
+b0242efe-9619-45eb-836d-1d9f98a1a1bb,ln_CG,Lingala (Congo - Brazzaville)
+b1342a7e-bc47-4776-8120-4b0f8592ec42,bs_Cyrl,Bosnian (Cyrillic)
+b135f18b-f0ec-470b-8871-0c1e425a5c5f,en_NZ,English (New Zealand)
+b1633315-3980-4402-82c2-ca21281e652f,bn,Bengali
+b30def3c-0b6c-4163-a14e-23917225d982,fi,Finnish
+b45cbdd7-b445-4b81-b519-d3b8d7124b2b,tr_TR,Turkish (Turkey)
+b471273c-ecac-45f5-9619-90f323bd13b5,ur,Urdu
+b796d0d7-1de0-4fb8-9de4-6f7f9487e8f3,fr_GP,French (Guadeloupe)
+b7aa643f-5001-4ca9-8f3a-d1f4f8427447,en,English
+b8767a8a-4229-4b48-abe6-0bb5cfa54d71,hu_HU,Hungarian (Hungary)
+b8eeaa9d-eecf-458a-862e-48afe10358f1,sk,Slovak
+b9f0414b-b6d6-4eca-a4c8-aa42c7d494ab,pt_ST,Portuguese (São Tomé & Príncipe)
+ba68e068-b332-4382-b56e-1393b89ba631,bg,Bulgarian
+ba76411b-87b4-4f0a-b1ce-67c19fad2c94,ha_NG,Hausa (Nigeria)
+ba7f6a7f-0427-42c4-b8c5-e1c4951034c2,en_ZW,English (Zimbabwe)
+bad57f59-6e1e-42a9-b2b4-c2190e9819df,en_ZM,English (Zambia)
+baf04b84-49d7-4972-ad62-63d7d8c26469,ar_DJ,Arabic (Djibouti)
+bb1ffdf5-5ae5-45e1-a579-c9734f843200,ga,Irish
+bbc5b62f-12ed-4b03-bb43-a5359a588ed0,se_NO,Northern Sami (Norway)
+bbe258eb-b9a3-4c09-b8b0-8ab40012a94a,fr_MR,French (Mauritania)
+bc0652cf-bd76-4aa6-83e8-935a40697c71,sw_UG,Swahili (Uganda)
+bc3fdec3-eeb4-4881-83eb-8e8fae163540,gu_IN,Gujarati (India)
+bd182a3b-0d81-4e51-a206-d378a3633193,kl,Kalaallisut
+bd77ea59-befa-46ec-ad1b-f113bd425905,fr_SY,French (Syria)
+bd860b07-942a-4f21-bf12-93cbf26bbd6c,ar_LY,Arabic (Libya)
+be017dbd-f32d-4783-9f08-e02b3d0317a2,ha_Latn_NG,"Hausa (Latin, Nigeria)"
+bf13f163-bad8-4522-be01-0ef8e3573066,zh_CN,Chinese (China)
+bf4d44d9-2f49-4450-88b0-a6696ef80e5b,vi_VN,Vietnamese (Vietnam)
+c0754a47-c580-4a17-9c07-f04b6c3798ba,ii,Sichuan Yi
+c1b4f840-4f74-4d6c-a327-e2540d0db0bf,zu,Zulu
+c1f2ea7f-9ea1-4663-9b18-9c162292c57f,se_FI,Northern Sami (Finland)
+c267e582-a591-44ef-a927-a1682bcaec99,ca_IT,Catalan (Italy)
+c293b0fc-05b4-4b46-b3cb-2911555788e4,bs_BA,Bosnian (Bosnia & Herzegovina)
+c29e9394-8b10-4507-817c-998343f75e33,zh_Hant_TW,"Chinese (Traditional, Taiwan)"
+c2b27af4-807f-46f8-9305-9df120b8b8d4,ur_IN,Urdu (India)
+c31e0bfe-e259-4d25-aa59-b617c517b882,fi_FI,Finnish (Finland)
+c3587ce2-8381-444b-8a8c-48629e7bfafc,rw,Kinyarwanda
+c3a8f86f-7b59-45bb-8d93-1b2d1747a14f,fr_PF,French (French Polynesia)
+c4a2a40f-045b-4271-81e3-ff72fd6aa474,zh_TW,Chinese (Taiwan)
+c4f84444-76c5-43dc-8840-a2ddc0fe77b7,en_FM,English (Micronesia)
+c57d4cbb-f82d-4a35-8950-a27ea2c6a174,ko_KR,Korean (South Korea)
+c5e628e6-38a4-4ac6-854c-bf798510c468,es_PA,Spanish (Panama)
+c6e8b01e-d9ac-4ea7-9919-a3f85c0b1ede,rm_CH,Romansh (Switzerland)
+c714907c-965f-4bbb-80f0-fb9a93f8776c,kn,Kannada
+c72f0205-d813-4fa1-b2c4-82c151e54093,en_MU,English (Mauritius)
+c7cfe56e-1d30-4e0e-b549-5211d1f9f7a7,en_BW,English (Botswana)
+c866ee21-fef4-4b88-98b4-e1152d99030f,cy,Welsh
+c86e7ec1-fe52-4988-bac1-764a80331999,fr_KM,French (Comoros)
+c879ddcb-1a71-4470-8c6b-29a125fd81d2,en_SH,English (St. Helena)
+c8b5b5c2-be4c-4e71-9354-782b3055becd,en_DM,English (Dominica)
+c8d4c695-53c6-4c42-b8a5-bb02015d0b2b,ru_KZ,Russian (Kazakhstan)
+c97b783e-6c49-4375-b568-4bb11d40ba76,es_PH,Spanish (Philippines)
+ca505c6e-50da-4186-841f-90d8f2744d85,it_CH,Italian (Switzerland)
+ca63cac3-d43f-4c8b-9e38-be4f9280b011,pt_BR,Portuguese (Brazil)
+cb2527f6-ae42-4cae-b4f2-6054673d5eb3,sl_SI,Slovenian (Slovenia)
+cc1377aa-5170-49a4-b970-d26518eccb83,es_CU,Spanish (Cuba)
+cc1b5743-173c-499d-a761-056ef1216e5e,uz_Latn,Uzbek (Latin)
+ccea7bfb-3c03-4ec7-9273-329ee497c896,se,Northern Sami
+cced2c9e-0a26-4773-963a-b08687ca3efc,lv_LV,Latvian (Latvia)
+ccf6a613-c6b0-4b7a-9295-90b7a0123370,es_EC,Spanish (Ecuador)
+cd957c94-4da7-4602-aab5-bbc423718bd0,es,Spanish
+ce1146d8-afb9-4eb2-81ea-9263bc37fbb0,km_KH,Khmer (Cambodia)
+ce8bd810-5452-4d4a-8a9f-2475230c62df,pt_MZ,Portuguese (Mozambique)
+cee41a9b-0224-46fc-b3ef-911994612cce,nl_CW,Dutch (Curaçao)
+cfa71597-26a2-4948-996f-f00c2a6edb13,gl_ES,Galician (Spain)
+d0082158-3bee-483d-bb13-f461b7269858,et,Estonian
+d01acff4-8f47-4331-85e1-c938a9fbcb2b,zh_Hans_MO,"Chinese (Simplified, Macau SAR China)"
+d04e21e3-d93b-46b4-a578-2bd7d43f8ec8,hy_AM,Armenian (Armenia)
+d070272f-c5fb-497b-b946-0ebfe5e2a4af,ar_TD,Arabic (Chad)
+d27968ed-1959-4332-830a-3d53b3292340,en_JM,English (Jamaica)
+d2c0b9b3-ebea-4a61-9fb8-7bfb1a0c9156,es_VE,Spanish (Venezuela)
+d2f93a14-4011-4bc9-964f-92add4b2dbea,ar_JO,Arabic (Jordan)
+d3401545-a16d-4dba-9e7a-a26378a751e2,dz_BT,Dzongkha (Bhutan)
+d357b6e0-a86f-436e-ad53-7c84061b5595,fr_MG,French (Madagascar)
+d364c1d3-4f5d-4bbe-a185-94557099600d,en_SB,English (Solomon Islands)
+d3c3a4ad-82d7-4488-854d-2a479daa4786,ha_Latn_GH,"Hausa (Latin, Ghana)"
+d3e96f4a-f0f7-4cfc-99b9-147e1769f317,sw_KE,Swahili (Kenya)
+d416871e-42e5-40cd-89d3-55d2e3be4873,pa_Arab_PK,"Punjabi (Arabic, Pakistan)"
+d41cf488-be96-4948-ab4f-f720ed96202d,no_NO,Norwegian (Norway)
+d4edf473-85b0-4f80-ac5c-0bf9eaaaf3f3,sg,Sango
+d53de3f0-d375-4fe3-9617-004bec3059e3,yo_NG,Yoruba (Nigeria)
+d5f4654a-ec30-4a8a-ba48-ee1dfc76fb15,ps_AF,Pashto (Afghanistan)
+d63df6c5-6e9f-4393-afec-dd5836fa2611,hr_BA,Croatian (Bosnia & Herzegovina)
+d65523f0-7916-4649-b775-6f7df5d82f7d,sr_Cyrl_ME,"Serbian (Cyrillic, Montenegro)"
+d66bf8f4-ac57-4fbb-aaa9-747b05791d00,de_LU,German (Luxembourg)
+d6b8ae0b-5d39-4293-a365-43e65004b73c,en_LC,English (St. Lucia)
+d7270e5a-f416-4ed9-9d81-10cb6d84e6ae,ky_Cyrl_KG,"Kyrgyz (Cyrillic, Kyrgyzstan)"
+d736e34d-4fb5-4557-9da7-880cf47a77db,en_MS,English (Montserrat)
+d78e2eb9-e92e-4676-a8af-2a1d0b0a683e,en_TZ,English (Tanzania)
+d832106f-71c5-4045-9824-5a6f390c0576,ar_KW,Arabic (Kuwait)
+d8554cf9-2056-4e38-b525-bc8271af9637,ko,Korean
+d92e896d-9778-4937-b115-dbc35e72f96e,pa_Arab,Punjabi (Arabic)
+d962239c-ac46-43c4-b979-33b0f6acd8a6,ar_LB,Arabic (Lebanon)
+db485daf-5aad-4f85-ad52-d94cdbc26cc4,so_DJ,Somali (Djibouti)
+db8b3529-38fe-40de-aadc-3172085e71ff,en_MG,English (Madagascar)
+dc2c0218-dad6-4500-bbbf-12ba720508d1,so_SO,Somali (Somalia)
+dc86d7b3-cf2d-472d-a48f-9707e2f55155,it_IT,Italian (Italy)
+df759017-9b21-40b8-90fd-96060b48587f,lu,Luba-Katanga
+dfb8dac7-8dba-4cfb-bd68-aa6e7e34736c,ne_IN,Nepali (India)
+dfe539fe-4575-478e-92c2-4a2906e19b42,zh_Hant,Chinese (Traditional)
+e008cb66-05c5-46e0-96d2-9eed7d6c8b5e,si,Sinhala
+e03792f6-3c0d-4963-b8d0-941397074a6d,fr_SC,French (Seychelles)
+e0b065cc-d058-4d9e-adfd-0f1aaf1a9b3b,nb_SJ,Norwegian Bokmål (Svalbard & Jan Mayen)
+e124ef9a-1e42-47bf-80e1-36aad0be05e1,sl,Slovenian
+e1bc9591-44db-471b-8e54-3b17722fc992,vi,Vietnamese
+e1e8a29a-5ed8-4adc-9f37-194d01160010,en_KE,English (Kenya)
+e238c6aa-c32f-41c0-a00e-370dae7ae815,ka,Georgian
+e23bc0a7-1e89-4ffe-8c07-1c8c845bf697,en_NR,English (Nauru)
+e2a06457-50b7-479e-bd6c-aa25106a3a8b,en_PW,English (Palau)
+e30308e5-d823-433a-8047-3241859340b1,zh_SG,Chinese (Singapore)
+e37b80da-a81a-4b1b-a82b-0b0c7f7a7110,mg,Malagasy
+e39e8bdf-211f-4b3c-9ed5-552ddccbf837,es_UY,Spanish (Uruguay)
+e44456ef-e719-495b-bdb7-dbf60ad33f15,ln_CF,Lingala (Central African Republic)
+e4473a2e-51bc-49d2-a2a1-e7df7045071d,sv,Swedish
+e4d9ff2e-d9c1-41da-9aa3-afd7444de7e5,es_EA,Spanish (Ceuta & Melilla)
+e5a88a1e-e1fa-4533-950e-dc9d1e814975,af_ZA,Afrikaans (South Africa)
+e5e4a806-0b94-44ef-b46c-ed754d16abee,en_TV,English (Tuvalu)
+e67820b8-af55-4536-958e-7f550c35bb5d,am_ET,Amharic (Ethiopia)
+e71541a9-02e1-49ab-b765-ac1671840a92,en_PN,English (Pitcairn Islands)
+e78e43cf-226c-49ea-8c95-71982563c82b,sv_AX,Swedish (Åland Islands)
+e79846c3-a6e7-4aa5-aa40-ab33bde69b6b,az_Cyrl,Azerbaijani (Cyrillic)
+e8394e08-7a92-4bbe-887d-4f97253c6398,en_PH,English (Philippines)
+e85bb22d-bee0-414c-8c3d-ba2bd5ca9185,ko_KP,Korean (North Korea)
+e887fa3b-2c6b-43e5-ada3-1adaa3d9a3d7,mk_MK,Macedonian (Macedonia)
+e995be1e-99a4-447d-af70-4cbb195c75cc,en_SS,English (South Sudan)
+e9d1909b-7119-4e78-b284-bd8888cbde55,gd_GB,Scottish Gaelic (United Kingdom)
+e9dab571-e0c7-411c-b27d-3e54fae30af0,en_NU,English (Niue)
+e9f530c1-201e-4164-b91f-7ed45c336a21,sr_Latn,Serbian (Latin)
+ea1bb9d3-2ac9-4665-beb0-d51b32786eb6,kl_GL,Kalaallisut (Greenland)
+eabe932d-c514-4dbb-957e-42849cc3da52,pa,Punjabi
+ead9b469-8092-4def-bbe5-a3e3250cd744,uz_Latn_UZ,"Uzbek (Latin, Uzbekistan)"
+ebb287b4-44c8-451d-95ab-0756b1bd454e,ha_NE,Hausa (Niger)
+ec1b7360-dec5-4ff8-92b8-2ed52249dd26,es_PR,Spanish (Puerto Rico)
+ec81b5e9-b1d4-4b2a-93ff-3c4560863890,fr_CA,French (Canada)
+ecb4e0cb-4653-4004-85c2-d9e7dfe97f95,pt_TL,Portuguese (Timor-Leste)
+ece3ac0c-87e2-4f05-a39c-2d6ad1d18e4a,ug_CN,Uyghur (China)
+ecfec666-5c61-4890-98bf-b684e086cc63,de_AT,German (Austria)
+edb5c558-e70b-4b78-8487-d9ed4ced7190,br,Breton
+ee42825c-bbbe-4a4f-979f-b996701afb0b,ha_Latn,Hausa (Latin)
+eed02209-04ef-4a1a-889c-91bdf3e02b52,ha,Hausa
+eefd1924-fab8-4568-ad7a-ce7752066095,tl,Tagalog
+ef4ed330-96cb-4fa4-a666-c3acefc96c3f,ar_IQ,Arabic (Iraq)
+ef602877-b207-471b-97bb-4a983cf90948,sr_Latn_ME,"Serbian (Latin, Montenegro)"
+f0728b28-d77a-49d7-9e1a-7bc37688bbb6,fa,Persian
+f0cdec6e-4c94-4452-b725-d5ad7b166ffb,rm,Romansh
+f0fef0b7-bab5-4684-be42-5f6b1affdaf0,ms,Malay
+f116d22d-cfc3-4f45-a503-634a26cb6ff0,en_KY,English (Cayman Islands)
+f1d4b4d8-4314-44fd-a192-176dd2d2fa40,fo,Faroese
+f2d728c2-8db0-43bb-862f-e44ea75a9552,lg,Ganda
+f3455c2e-a8ba-44d6-a8e9-e08bca317137,bm_Latn_ML,"Bambara (Latin, Mali)"
+f529a112-ca93-4fbd-8ce5-907c67c76555,fr_HT,French (Haiti)
+f5da6c85-0d14-44cb-98d1-4ea337469a58,en_LS,English (Lesotho)
+f643d546-d9f1-4214-82eb-65db0e2da1e1,es_BO,Spanish (Bolivia)
+f654ffad-d53e-4af4-bb27-da549636171a,fr_YT,French (Mayotte)
+f6b8b8df-04d5-469c-b3a4-63273321aceb,ln_AO,Lingala (Angola)
+f7195673-6a86-4d5c-a540-2763f7a34e5e,fr_WF,French (Wallis & Futuna)
+f74b87f6-4cb2-4cd0-a7c6-77a665e20d26,fr_CI,French (Côte d’Ivoire)
+f89c1900-de8e-4d69-a8f2-f213c78e72fb,se_SE,Northern Sami (Sweden)
+f89d6517-7f39-48ff-bca2-642f2923876f,lv,Latvian
+f8a508ed-7f92-4bc9-a369-c810d0d50e09,en_US,English (United States)
+f8e56ead-6826-43e9-a7fd-bd0d6ace4697,ar_ER,Arabic (Eritrea)
+f9d6fef7-1499-4c13-9afa-7e21cf4b8767,en_DG,English (Diego Garcia)
+fb0bb728-c312-48df-9932-3ce66197d70a,br_FR,Breton (France)
+fb6529d1-27c8-474b-a546-bf79d6b56989,ky_Cyrl,Kyrgyz (Cyrillic)
+fc189907-3b4b-4cbf-bb5e-590cc8be9f00,af_NA,Afrikaans (Namibia)
+fcca8098-4bad-45ab-a46f-e5722e4999e4,en_AI,English (Anguilla)
+fcd0d29b-1d7c-434b-b5eb-8ca2a13dfcad,ig,Igbo
+fdbcaf78-8b6d-4cc9-a409-f45de5d27a51,ks_Arab_IN,"Kashmiri (Arabic, India)"
+fdf1b501-bf22-43f8-881c-a0276c5c5bed,id,Indonesian
+ff194927-19aa-4de5-bd2c-bd41c510db2c,ms_BN,Malay (Brunei)
+ff560c2f-701e-438f-a16c-eb20c6ba3396,gv_IM,Manx (Isle of Man)

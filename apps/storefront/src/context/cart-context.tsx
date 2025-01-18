@@ -17,21 +17,39 @@ import {
   deleteLineItems,
   updateLineItems,
 } from "@/gql/mutations/line-item/mutations";
-import type { TProduct } from "@/types/types";
+import type {
+  CartSummary,
+  ClientCartResponse,
+  GetCartSummaryResponse,
+  LineItemInput,
+  TProduct,
+} from "@/types/types";
 import isUUID from "validator/es/lib/isUUID";
 import { getCart as getCartQuery } from "@/gql/queries/cart/queries";
-import { allLineItems } from "@/gql/queries/line-item/queries";
 import { useToast } from "@/hooks/use-toast";
+import { dataProviderClient } from "@/providers/data/data-provider.client";
+import { initialCartSummary } from "@/constants/cart/constants";
 
 type CartContext = {
   cart: Cart | null;
   lineItems: LineItem[];
+  cartSummary: CartSummary;
   getCartLineItemId: (productId: string) => string | null;
-  handleAddToCart: (product: TProduct) => Promise<void>;
+  getCartLineItemWeight: (productId: string) => number | null;
+  handleAddToCart: (
+    product: TProduct,
+    quantity?: number | null,
+    weight?: number
+  ) => Promise<void>;
   handleUpdateQuantity: (
     lineItemId: string,
     product: TProduct,
     quantity: number
+  ) => Promise<void>;
+  handleUpdateWeight: (
+    lineItemId: string,
+    product: TProduct,
+    weight: number
   ) => Promise<void>;
   handleDeleteLineItem: (
     lineItemId: string,
@@ -47,11 +65,16 @@ type CartContext = {
 const CartContext = React.createContext<CartContext>({
   cart: null,
   lineItems: [],
+  cartSummary: initialCartSummary,
   getCartLineItemId: () => {
+    return null;
+  },
+  getCartLineItemWeight: () => {
     return null;
   },
   handleAddToCart: async () => {},
   handleUpdateQuantity: async () => {},
+  handleUpdateWeight: async () => {},
   handleDeleteLineItem: async () => {},
   isCreateCartLoading: false,
   isUpdateCartLoading: false,
@@ -79,49 +102,81 @@ export function CartContextProvider({ children, currentCart = null }: Props) {
   const { toast } = useToast();
   const [cart, setCart] = React.useState(currentCart);
   const [lineItems, setLineItems] = React.useState<LineItem[]>([]);
-  const [getCart] = useLazyQuery(getCartQuery);
-  const [getLineItems] = useLazyQuery(allLineItems);
+  const [summaryData, setSummaryData] =
+    React.useState<CartSummary>(initialCartSummary);
+  const [getCart] = useLazyQuery<ClientCartResponse>(getCartQuery);
+
+  const refetchCart = React.useCallback(async () => {
+    const cartId = window.localStorage.getItem(localStorageCartIdItemName);
+    if (typeof cartId === "string" && isUUID(cartId)) {
+      getCart({
+        fetchPolicy: "no-cache",
+        variables: {
+          filter: { id: { eq: cartId } },
+          lineItemsOrderBy: { created_at: "AscNullsLast" },
+        },
+      })
+        // @ts-expect-error: TS error.
+        .then(({ data }) => {
+          const cartNode = data?.cartsCollection?.edges?.at(0)?.node;
+          const lineItemsNodes = (
+            cartNode?.lineItemsCollection?.edges as LineItemEdge[]
+          )?.map(({ node }) => node);
+
+          if (!cartNode) {
+            throw new Error("Cart is invalid");
+          }
+
+          setCart(cartNode);
+          setLineItems(lineItemsNodes);
+        })
+        .catch((error) => {
+          throw new Error(error);
+        });
+    }
+  }, [getCart]);
+
   React.useEffect(() => {
     if (!!cart) {
       return;
     }
 
-    const cartId = window.localStorage.getItem(localStorageCartIdItemName);
-    if (typeof cartId === "string" && isUUID(cartId)) {
-      getCart({ variables: { filter: { id: { eq: cartId } } } })
-        .then(
-          ({
-            data: {
-              cartsCollection: { edges },
-            },
-          }) => {
-            const cartNode = edges?.at(0)?.node;
-            setCart(cartNode);
-          }
-        )
-        .catch((error) => {
-          throw new Error(error);
-        });
+    refetchCart()
+      .then(null)
+      .catch((error) => {
+        throw new Error(error);
+      });
+  }, [cart, getCart, refetchCart]);
 
-      getLineItems({ variables: { filter: { cart: { eq: cartId } } } })
-        .then(
-          ({
-            data: {
-              lineItemsCollection: { edges },
-            },
-          }) => {
-            const lineItemsNode = (edges as LineItemEdge[])?.map(
-              ({ node }) => node
-            );
-            setLineItems(lineItemsNode);
-          }
-        )
-        .catch((error) => {
-          throw new Error(error);
-        });
+  React.useEffect(() => {
+    if (!cart?.id) {
+      return;
     }
-  }, [cart, getCart, getLineItems]);
 
+    dataProviderClient
+      .rpc("get_cart_summary_data", {
+        cart_id: cart?.id,
+      })
+      .then(({ data, error }) => {
+        if (error) {
+          throw new Error(error?.message);
+        }
+        if (!data) {
+          throw new Error("Summary cart data is empty");
+        }
+
+        const { subtotal_result, shipping_result, taxes_result, total_result } =
+          data as GetCartSummaryResponse;
+        setSummaryData({
+          subtotal: subtotal_result,
+          shipping: shipping_result,
+          taxes: taxes_result,
+          total: total_result,
+        });
+      });
+  }, [cart, lineItems]);
+
+  // TODO: Types for mutations.
   const [mutateCreateCart, { loading: isCreateCartLoading }] =
     useMutation(createCart);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -136,7 +191,9 @@ export function CartContextProvider({ children, currentCart = null }: Props) {
 
   const getCartLineItemId = React.useCallback(
     (productId: string) => {
-      if (!lineItems) return null;
+      if (!lineItems) {
+        return null;
+      }
 
       const lineItemId = lineItems.find(
         ({ products }) => products?.id === productId
@@ -146,63 +203,89 @@ export function CartContextProvider({ children, currentCart = null }: Props) {
     },
     [lineItems]
   );
+  const getCartLineItemWeight = React.useCallback(
+    (productId: string) => {
+      if (!lineItems) {
+        return null;
+      }
+
+      const lineItemWeight = lineItems.find(
+        ({ products }) => products?.id === productId
+      )?.weight;
+
+      return lineItemWeight ?? null;
+    },
+    [lineItems]
+  );
+
+  const createLocalCart = React.useCallback(async () => {
+    if (!!cart) {
+      return cart;
+    }
+
+    const localStorageCartId = window.localStorage.getItem(
+      localStorageCartIdItemName
+    );
+
+    if (!localStorageCartId) {
+      // FIXME: Add customer (id) on variables when login is ready.
+      const { data: cartDataResponse } = await mutateCreateCart({
+        variables: {
+          carts: {
+            // FIXME: Get env from validated file.
+            store: process.env.NEXT_PUBLIC_STORE_ID,
+            currency: defaultCurrencyId,
+          },
+        },
+      });
+
+      const cartObject =
+        cartDataResponse?.insertIntoCartsCollection?.records?.at(0);
+      if (!!cartObject) {
+        setCart(cartObject);
+        window.localStorage.setItem(localStorageCartIdItemName, cartObject?.id);
+      }
+
+      return cartDataResponse;
+    }
+
+    return null;
+  }, [cart, mutateCreateCart]);
 
   const handleAddToCart = React.useCallback(
-    async (product: TProduct) => {
+    async (product: TProduct, quantity: number | null = 1, weight?: number) => {
       try {
-        const localStorageCartId = window.localStorage.getItem(
-          localStorageCartIdItemName
-        );
-
-        let cartData;
-        if (!localStorageCartId) {
-          // FIXME: Add customer (id) on variables when login is ready.
-          const { data: cartDataResponse } = await mutateCreateCart({
-            variables: {
-              cart: {
-                // FIXME: Get env from validated file.
-                store: process.env.NEXT_PUBLIC_STORE_ID,
-                currency: defaultCurrencyId,
-              },
-            },
-          });
-          cartData = cartDataResponse;
-        }
-
+        const cartData = await createLocalCart();
         const cartId = cartData?.insertIntoCartsCollection?.records?.at(0)?.id;
-        const { data: lineItemsData } = await mutateCreateLineItems({
+        const lineItems = [
+          {
+            cart: cart?.id ?? cartId,
+            quantity,
+            weight,
+            price:
+              typeof product?.discountedPrice === "number"
+                ? product.discountedPrice
+                : product.price,
+            product: product.id,
+          },
+        ];
+        await mutateCreateLineItems({
           variables: {
-            lineItems: [
-              {
-                cart: cart?.id ?? cartId,
-                quantity: 1,
-                price:
-                  typeof product?.discountedPrice === "number"
-                    ? product.discountedPrice
-                    : product.price,
-                product: product.id,
-              },
-            ],
+            lineItems,
           },
         });
 
-        const newLineItem =
-          lineItemsData?.insertIntoLineItemsCollection?.records?.at(0);
-        setLineItems((lineItems) => lineItems.concat(newLineItem));
+        await refetchCart();
 
         toast({
           duration: 5000,
           description: `Added ${product.name} to Cart!`,
         });
-
-        if (!localStorageCartId) {
-          window.localStorage.setItem(localStorageCartIdItemName, cartId);
-        }
       } catch (error) {
         console.error(error);
       }
     },
-    [cart?.id, mutateCreateCart, mutateCreateLineItems, toast]
+    [cart?.id, createLocalCart, mutateCreateLineItems, refetchCart, toast]
   );
 
   const handleDeleteLineItem = React.useCallback(
@@ -214,9 +297,7 @@ export function CartContextProvider({ children, currentCart = null }: Props) {
           },
         });
 
-        setLineItems((lineItems) =>
-          lineItems.filter(({ id }) => id != lineItemId)
-        );
+        await refetchCart();
 
         if (showToast) {
           toast({
@@ -228,7 +309,45 @@ export function CartContextProvider({ children, currentCart = null }: Props) {
         console.error(error);
       }
     },
-    [mutateDeleteLineItems, toast]
+    [mutateDeleteLineItems, refetchCart, toast]
+  );
+
+  const updateLineItem = React.useCallback(
+    async (
+      lineItemId: string,
+      lineItem: LineItemInput,
+      numericValue: number,
+      removeIfZero = true
+    ) => {
+      if (!cart) {
+        throw new Error(
+          "Cannot update line items as cart is null or undefined"
+        );
+      }
+
+      if (numericValue <= 0 && removeIfZero) {
+        return handleDeleteLineItem(lineItemId);
+      }
+
+      try {
+        await mutateUpdateLineItems({
+          variables: {
+            filter: { id: { eq: lineItemId } },
+            lineItems: lineItem,
+          },
+        });
+
+        await refetchCart();
+
+        toast({
+          duration: 5000,
+          description: "Updated Product",
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    [cart, handleDeleteLineItem, mutateUpdateLineItems, refetchCart, toast]
   );
 
   const handleUpdateQuantity = React.useCallback(
@@ -239,41 +358,50 @@ export function CartContextProvider({ children, currentCart = null }: Props) {
         );
       }
 
-      if (quantity === 0) {
-        return handleDeleteLineItem(lineItemId);
-      }
-
       try {
-        const { data: lineItemsData } = await mutateUpdateLineItems({
-          variables: {
-            filter: { id: { eq: lineItemId } },
-            lineItems: {
-              cart: cart?.id,
-              quantity,
-              price:
-                typeof product?.discountedPrice === "number"
-                  ? product.discountedPrice
-                  : product.price,
-              product: product.id,
-            },
-          },
-        });
+        const lineItem = {
+          cart: cart?.id,
+          quantity,
+          price:
+            typeof product?.discountedPrice === "number"
+              ? product.discountedPrice
+              : product.price,
+          product: product.id,
+        };
 
-        const updatedLineItem =
-          lineItemsData?.updateLineItemsCollection?.records?.at(0);
-        setLineItems((lineItems) =>
-          lineItems.filter(({ id }) => id != lineItemId).concat(updatedLineItem)
-        );
-
-        toast({
-          duration: 5000,
-          description: "Quantity Updated",
-        });
+        await updateLineItem(lineItemId, lineItem, quantity);
       } catch (error) {
         console.error(error);
       }
     },
-    [cart, handleDeleteLineItem, mutateUpdateLineItems, toast]
+    [cart, updateLineItem]
+  );
+
+  const handleUpdateWeight = React.useCallback(
+    async (lineItemId: string, product: TProduct, weight: number) => {
+      if (!cart) {
+        throw new Error(
+          "Cannot update line items as cart is null or undefined"
+        );
+      }
+
+      try {
+        const lineItem = {
+          cart: cart?.id,
+          weight,
+          price:
+            typeof product?.discountedPrice === "number"
+              ? product.discountedPrice
+              : product.price,
+          product: product.id,
+        };
+
+        await updateLineItem(lineItemId, lineItem, weight);
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    [cart, updateLineItem]
   );
 
   const isLoading = React.useMemo(
@@ -296,9 +424,12 @@ export function CartContextProvider({ children, currentCart = null }: Props) {
     () => ({
       cart,
       lineItems,
+      cartSummary: summaryData,
       getCartLineItemId,
+      getCartLineItemWeight,
       handleAddToCart,
       handleUpdateQuantity,
+      handleUpdateWeight,
       handleDeleteLineItem,
       isCreateCartLoading,
       isUpdateCartLoading,
@@ -310,9 +441,12 @@ export function CartContextProvider({ children, currentCart = null }: Props) {
     [
       cart,
       lineItems,
+      summaryData,
       getCartLineItemId,
+      getCartLineItemWeight,
       handleAddToCart,
       handleUpdateQuantity,
+      handleUpdateWeight,
       handleDeleteLineItem,
       isCreateCartLoading,
       isUpdateCartLoading,

@@ -9,7 +9,10 @@ import {
 } from "@/constants/constants";
 import { BasicProductCard } from "@/components/ui/product/basic-product-card";
 import type {
+  GetProductIdsByCategoriesResponse,
+  GetProductIdsByTagsResponse,
   GetProductsMaxPriceResponse,
+  ProductPageSearchParams,
   ProductsResponse,
 } from "@/types/types";
 import { DropdownSelector } from "@/components/ui/common/dropdown-selector";
@@ -24,7 +27,7 @@ import {
 } from "@/components/ui/pagination/pagination";
 import { FiltersDialogWrapper } from "@/components/ui/product/filters-dialog-wrapper";
 import { DialogHeader, DialogTitle } from "@/components/ui/common/dialog";
-import { parseProductTags } from "@/lib/utils";
+import { getNonNullURLParams, parseProductTags } from "@/lib/utils";
 import { allCategories } from "@/gql/queries/category/queries";
 import { queryGraphql } from "@/lib/server-query";
 import { env } from "@/lib/env";
@@ -48,24 +51,26 @@ import type {
 export default async function Products({
   searchParams,
 }: {
-  searchParams: Promise<{ [key: string]: string | undefined }>;
+  searchParams: Promise<ProductPageSearchParams>;
 }) {
+  const {
+    page,
+    perPage,
+    sortBy,
+    sortByDirection,
+    categories: categoriesSearchParam,
+    maxPrice,
+    minRating,
+    tags: tagsSearchParam,
+  } = await searchParams;
+
   const [
-    {
-      page,
-      perPage,
-      sortBy,
-      sortByDirection,
-      categories: categoriesSearchParam,
-      maxPrice,
-      minRating,
-      tags: tagsSearchParam,
-    },
     categories,
     tags,
     productsMaxPriceResponse,
+    categoryProductIds,
+    tagProductIds,
   ] = await Promise.all([
-    searchParams,
     queryGraphql<Category[]>("categoriesCollection", allCategories, {
       first: categoriesToShow,
       filter: { store: { eq: env.NEXT_PUBLIC_STORE_ID } },
@@ -80,13 +85,48 @@ export default async function Products({
         store_id: env.NEXT_PUBLIC_STORE_ID,
       }
     ),
+    !!categoriesSearchParam
+      ? callDatabaseFunction<GetProductIdsByCategoriesResponse>(
+          "get_product_ids_by_category_ids",
+          {
+            store_id: env.NEXT_PUBLIC_STORE_ID,
+            category_ids: categoriesSearchParam.split(","),
+          }
+        )
+      : null,
+    !!tagsSearchParam
+      ? callDatabaseFunction<GetProductIdsByTagsResponse>(
+          "get_product_ids_by_tags",
+          {
+            store_id: env.NEXT_PUBLIC_STORE_ID,
+            tag_ids: tagsSearchParam.split(","),
+          }
+        )
+      : null,
   ]);
   const maxProductsPrice = productsMaxPriceResponse?.result_max_price;
 
   if (!page || !perPage || !sortBy || !sortByDirection || !maxPrice) {
-    redirect(
-      `/products?page=1&perPage=${perPage || defaultProductsShowPerPage}&sortBy=${defaultSortBy}&sortByDirection=${defaultSortByDirection}&maxPrice=${maxPrice ?? maxProductsPrice ?? defaultMaxProductPrice}`
-    );
+    const updatedSearchParams = new URLSearchParams({
+      page: "1",
+      perPage: (perPage ?? defaultProductsShowPerPage).toString(),
+      sortBy: defaultSortBy,
+      sortByDirection: sortByDirection ?? defaultSortByDirection,
+      maxPrice: (
+        maxPrice ??
+        maxProductsPrice ??
+        defaultMaxProductPrice
+      ).toString(),
+    });
+
+    if (!!categoriesSearchParam) {
+      updatedSearchParams.set("categories", categoriesSearchParam);
+    }
+    if (!!tagsSearchParam) {
+      updatedSearchParams.set("tags", tagsSearchParam);
+    }
+
+    redirect(`/products?${updatedSearchParams.toString()}`);
   }
 
   const productsResult = await queryGraphql<ProductsResponse[]>(
@@ -96,25 +136,33 @@ export default async function Products({
       first: productsToShow,
       offset: ((!!page ? parseInt(page) : 1) - 1) * productsToShow,
       filter: {
-        store: { eq: env.NEXT_PUBLIC_STORE_ID },
-        available_quantity: { gt: 0 },
-        price: {
-          lte:
-            !!maxPrice && !isNaN(parseInt(maxPrice))
-              ? parseInt(maxPrice)
-              : (maxProductsPrice ?? defaultMaxProductPrice),
-        },
-        rating: { gte: parseInt(minRating ?? "0") },
         or: [
-          categoriesSearchParam
-            ?.split(",")
-            ?.map((value: string) => ({ categories: { contains: [value] } })),
-          tagsSearchParam
-            ?.split(",")
-            ?.map((value: string) => ({ tags: { contains: [value] } })),
+          {
+            and: [
+              { store: { eq: env.NEXT_PUBLIC_STORE_ID } },
+              { available_quantity: { gt: 0 } },
+              {
+                price: {
+                  lte:
+                    !!maxPrice && !isNaN(parseInt(maxPrice))
+                      ? parseInt(maxPrice)
+                      : (maxProductsPrice ?? defaultMaxProductPrice),
+                },
+              },
+              { rating: { gte: parseInt(minRating ?? "0") } },
+              !!categoryProductIds
+                ? { id: { in: categoryProductIds.map(({ id }) => id) } }
+                : null,
+            ]
+              .filter((value) => !!value)
+              .flatMap((value) => value),
+          },
+          !!tagProductIds
+            ? { id: { in: tagProductIds.map(({ id }) => id) } }
+            : null,
         ]
           .filter((value) => !!value)
-          .flatMap((value) => value as unknown),
+          .flatMap((value) => value),
       },
       orderBy: {
         [sortBy ?? defaultSortBy]:
@@ -131,18 +179,46 @@ export default async function Products({
   const totalPages = Math.ceil(productsCount / defaultProductsShowPerPage);
   const isPreviousButtonDisabled = parseInt(page) === 1;
   const isNextButtonDisabled = parseInt(page) === totalPages;
-  const previousHref =
-    parseInt(page) === 1
-      ? `/products?page=${page}&perPage=${perPage || defaultProductsShowPerPage}`
-      : `/products?page=${parseInt(page) - 1}&perPage=${perPage || defaultProductsShowPerPage}`;
-  const nextHref =
-    parseInt(page) === totalPages
-      ? `/products?page=${page}&perPage=${perPage || defaultProductsShowPerPage}`
-      : `/products?page=${parseInt(page) - 1}&perPage=${perPage || defaultProductsShowPerPage}`;
+  const commonSearchParams = {
+    perPage: (perPage || defaultProductsShowPerPage).toString(),
+    sortBy,
+    sortByDirection,
+    maxPrice,
+    minRating,
+    categories: categoriesSearchParam,
+    tags: tagsSearchParam,
+  };
+  const previousPageSearchParams = getNonNullURLParams({
+    page: (parseInt(page) - 1).toString(),
+    ...commonSearchParams,
+  });
+  const nextPageSearchParams = getNonNullURLParams({
+    page: (parseInt(page) + 1).toString(),
+    ...commonSearchParams,
+  });
+  const previousHref = `/products?${previousPageSearchParams.toString()}`;
+  const nextHref = `/products?${nextPageSearchParams.toString()}`;
   if (productsCount > 0 && currentPage > totalPages) {
-    redirect(
-      `/products?page=1&perPage=${perPage || defaultProductsShowPerPage}&sortBy=${defaultSortBy}&sortByDirection=${defaultSortByDirection}&maxPrice=${maxPrice ?? maxProductsPrice ?? defaultMaxProductPrice}`
-    );
+    const updatedSearchParams = new URLSearchParams({
+      page: "1",
+      perPage: (perPage ?? defaultProductsShowPerPage).toString(),
+      sortBy: defaultSortBy,
+      sortByDirection: sortByDirection ?? defaultSortByDirection,
+      maxPrice: (
+        maxPrice ??
+        maxProductsPrice ??
+        defaultMaxProductPrice
+      ).toString(),
+    });
+
+    if (!!categoriesSearchParam) {
+      updatedSearchParams.set("categories", categoriesSearchParam);
+    }
+    if (!!tagsSearchParam) {
+      updatedSearchParams.set("tags", tagsSearchParam);
+    }
+
+    redirect(`/products?${updatedSearchParams.toString()}`);
   }
 
   const filters = getProductFilters(
@@ -170,7 +246,7 @@ export default async function Products({
             <div className="w-full">
               <FiltersDialogWrapper
                 wrapperClassname="flex flex-1 lg:hidden relative"
-                contentClassname="rounded-[10px] max-w-[80vw] sm:max-w-[70vw] md:max-w-[60vw] overflow-y-auto max-h-[90vh]"
+                contentClassname="rounded-ten max-w-[80vw] sm:max-w-[70vw] md:max-w-[60vw] overflow-y-auto max-h-[90vh]"
               >
                 <DialogHeader>
                   <DialogTitle>Filters</DialogTitle>
@@ -216,7 +292,11 @@ export default async function Products({
               {hasProducts ? (
                 products.map((product, index) => (
                   <div key={index} className="col-span-1 row-span-1">
-                    <BasicProductCard key={index} product={product} />
+                    <BasicProductCard
+                      key={index}
+                      product={product}
+                      imageClassName="max-h-[180px] min-[400px]:max-h-[180px]"
+                    />
                   </div>
                 ))
               ) : (
@@ -257,39 +337,61 @@ export default async function Products({
                         totalPages > maxPagesToShow
                           ? maxPagesToShow
                           : totalPages,
-                    }).map((_value, index) => (
-                      <React.Fragment key={index}>
-                        <PaginationItem
-                          key={index}
-                          className="group/page-item rounded-full hover:bg-primary hover:text-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
-                        >
-                          <PaginationLink
-                            href={`/products?page=${index + 1}&perPage=${perPage || defaultProductsShowPerPage}`}
-                            className="flex size-9 flex-1 flex-row items-center justify-center rounded-full bg-white p-0 text-body-medium font-normal text-gray-600 group-hover/page-item:bg-primary group-hover/page-item:font-semibold group-hover/page-item:text-white"
+                    }).map((_value, index) => {
+                      const commonSearchParams = {
+                        perPage: (
+                          perPage || defaultProductsShowPerPage
+                        ).toString(),
+                        sortBy,
+                        sortByDirection,
+                        maxPrice,
+                        minRating,
+                        categories: categoriesSearchParam,
+                        tags: tagsSearchParam,
+                      };
+                      const paginationSearchParams = getNonNullURLParams({
+                        page: (index + 1).toString(),
+                        ...commonSearchParams,
+                      });
+                      const totalPagesSearchParams = getNonNullURLParams({
+                        page: totalPages.toString(),
+                        ...commonSearchParams,
+                      });
+
+                      return (
+                        <React.Fragment key={index}>
+                          <PaginationItem
+                            key={index}
+                            className="group/page-item rounded-full hover:bg-primary hover:text-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
                           >
-                            {index + 1}
-                          </PaginationLink>
-                        </PaginationItem>
-                        {index === maxPagesToShow - 1 ? (
-                          <React.Fragment>
-                            <PaginationItem>
-                              <PaginationEllipsis className="flex flex-1 flex-row items-center justify-center" />
-                            </PaginationItem>
-                            <PaginationItem
-                              key={index}
-                              className="group/page-item rounded-full hover:bg-primary hover:text-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
+                            <PaginationLink
+                              href={`/products?${paginationSearchParams.toString()}`}
+                              className="flex size-9 flex-1 flex-row items-center justify-center rounded-full bg-white p-0 text-body-medium font-normal text-gray-600 group-hover/page-item:bg-primary group-hover/page-item:font-semibold group-hover/page-item:text-white"
                             >
-                              <PaginationLink
-                                href={`/products?page=${totalPages}&perPage=${perPage || defaultProductsShowPerPage}`}
-                                className="flex size-9 flex-1 flex-row items-center justify-center rounded-full bg-white p-0 text-body-medium font-normal text-gray-600 group-hover/page-item:bg-primary group-hover/page-item:font-semibold group-hover/page-item:text-white"
+                              {index + 1}
+                            </PaginationLink>
+                          </PaginationItem>
+                          {index === maxPagesToShow - 1 ? (
+                            <React.Fragment>
+                              <PaginationItem>
+                                <PaginationEllipsis className="flex flex-1 flex-row items-center justify-center" />
+                              </PaginationItem>
+                              <PaginationItem
+                                key={index}
+                                className="group/page-item rounded-full hover:bg-primary hover:text-white motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
                               >
-                                {totalPages}
-                              </PaginationLink>
-                            </PaginationItem>
-                          </React.Fragment>
-                        ) : null}
-                      </React.Fragment>
-                    ))}
+                                <PaginationLink
+                                  href={`/products?${totalPagesSearchParams.toString()}`}
+                                  className="flex size-9 flex-1 flex-row items-center justify-center rounded-full bg-white p-0 text-body-medium font-normal text-gray-600 group-hover/page-item:bg-primary group-hover/page-item:font-semibold group-hover/page-item:text-white"
+                                >
+                                  {totalPages}
+                                </PaginationLink>
+                              </PaginationItem>
+                            </React.Fragment>
+                          ) : null}
+                        </React.Fragment>
+                      );
+                    })}
                     <PaginationItem
                       className="group/next-button rounded-full border border-neutral-100 hover:bg-primary hover:text-white aria-disabled:cursor-not-allowed aria-disabled:border-neutral-50 aria-disabled:bg-white aria-disabled:hover:bg-none motion-safe:transition motion-safe:duration-100 motion-safe:ease-linear motion-reduce:transition-none"
                       aria-disabled={isNextButtonDisabled}

@@ -18,7 +18,7 @@ import {
   currencyName,
 } from "@/constants/constants";
 import { SidebarLinksWrapper } from "@/components/ui/common/sidebar-menu-links-wrapper";
-import { DropdownSelector } from "./dropdown-selector";
+import { DropdownSelector } from "@/components/ui/common/dropdown-selector";
 import { SelectTrigger, SelectValue } from "@/components/ui/common/select";
 
 export function AppSidebar() {

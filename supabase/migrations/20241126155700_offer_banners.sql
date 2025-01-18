@@ -1,12 +1,12 @@
 create table
   public.offer_banners (
     id uuid not null default gen_random_uuid (),
-    title character varying null,
-    header character varying not null,
-    cta_text character varying null,
+    title TEXT null,
+    header TEXT not null,
+    cta_text TEXT null,
     cta_url text null,
-    subtitle character varying null,
-    subtitle_remark character varying null,
+    subtitle TEXT null,
+    subtitle_remark TEXT null,
     valid_until timestamp with time zone null,
     banner_type uuid not null,
     created_at timestamp with time zone not null default (now() at time zone 'utc'::text),

@@ -2,7 +2,7 @@
 
 import React from "react";
 import { useIsMobile } from "@/hooks/use-is-mobile";
-import { Carousel } from "./carousel";
+import { Carousel } from "@/components/carousel/carousel";
 import { CarouselRendererProps } from "@/types/types";
 import { defaultMobileMediaQuery } from "@/constants/constants";
 

@@ -9,11 +9,10 @@ import NextTopLoader from "nextjs-toploader";
 import { ApolloWrapper } from "@/context/apollo-context";
 import { CartContextProvider } from "@/context/cart-context";
 import { Toaster } from "@/components/ui/common/toaster";
+import { CustomerContextProvider } from "@/context/customer-context";
 
 validateEnvs();
 
-// TODO: Code refactor. Check all components and pages to see how to
-// improve the code.
 // FIXME: Render carousel provider on desktop too so we avoid errors when changing
 // resolutions from desktop to mobile.
 
@@ -37,9 +36,11 @@ export default function RootLayout({
       <body className={`${poppins.className} antialiased`}>
         <NextTopLoader />
         <ApolloWrapper>
-          <CartContextProvider>
-            <DefaultLayout>{children}</DefaultLayout>
-          </CartContextProvider>
+          <CustomerContextProvider>
+            <CartContextProvider>
+              <DefaultLayout>{children}</DefaultLayout>
+            </CartContextProvider>
+          </CustomerContextProvider>
         </ApolloWrapper>
         <Toaster />
       </body>

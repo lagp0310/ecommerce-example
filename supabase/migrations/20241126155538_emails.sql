@@ -1,8 +1,8 @@
 create table
   public.emails (
     id uuid not null default gen_random_uuid (),
-    email character varying not null,
-    customer uuid null,
+    email TEXT not null,
+    customer uuid not null,
     created_at timestamp with time zone not null default (now() at time zone 'utc'::text),
     updated_at timestamp with time zone null,
     constraint emails_pkey primary key (id),

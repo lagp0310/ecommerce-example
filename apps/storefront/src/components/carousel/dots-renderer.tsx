@@ -4,7 +4,7 @@ import React from "react";
 import { useIsMobile } from "@/hooks/use-is-mobile";
 import { defaultMobileMediaQuery } from "@/constants/constants";
 
-type Props = React.PropsWithChildren<React.HTMLProps<HTMLDivElement>> & {
+export type Props = React.PropsWithChildren<React.HTMLProps<HTMLDivElement>> & {
   renderInDesktop?: boolean;
   mobileMediaQuery?: string;
 };

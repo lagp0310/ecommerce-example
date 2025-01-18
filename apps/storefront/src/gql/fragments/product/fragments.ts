@@ -18,15 +18,30 @@ export const productFragment = gql`
     }
     imageUrl: image_url
     rating
-    productTagsCollection: product_tagsCollection {
+    allTags: product_tagCollection {
       edges {
         node {
           id
-          tag
-          isGeneralTag: is_general_tag
-          isDiscountTag: is_discount_tag
-          tagTypes: tag_types {
-            type
+          productTags: product_tags {
+            tag
+            isGeneralTag: is_general_tag
+            isDiscountTag: is_discount_tag
+            tagTypes: tag_types {
+              type
+            }
+          }
+        }
+      }
+    }
+    productWeight: product_weightsCollection {
+      edges {
+        node {
+          id
+          weightUnit: weight_units {
+            id
+            unit
+            singularName: singular_name
+            pluralName: plural_name
           }
         }
       }
